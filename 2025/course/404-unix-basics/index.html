@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2025/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unix Basics · ArchiDep</title>
+<meta name="description" content="Learn the basics of Unix and Unix-like operating systems like Linux, and how to manage them from the command line." />
+<link rel="canonical" href="https://archidep.ch/2025/course/404-unix-basics/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Unix Basics" />
+<meta property="og:description" content="Learn the basics of Unix and Unix-like operating systems like Linux, and how to manage them from the command line." />
+<meta property="og:url" content="https://archidep.ch/2025/course/404-unix-basics/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2025/assets/theme/theme-84f7fae67955e098c398122bb3f153ab.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2025/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2025/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2025/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2025-2026</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/404-unix-basics/subject.md">Rev: 638e0fe498e6767a8830e8c2202e554666c3e772</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2025/course/404-unix-basics/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-subject">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Unix Basics
+</h1>
+
+      <div class="my-4"><p>Learn the basics of Unix and Unix-like operating systems like Linux, and how to
+manage them from the command line.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#file-system">File system</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#case-sensitivity">Case-sensitivity</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#file-hierarchy">File hierarchy</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#inspecting-volumes">Inspecting volumes</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#common-unix-directories">Common Unix directories</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#unix-file-types">Unix file types</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#unix-users">Unix users</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#user-access">User access</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#permissions">Permissions</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#user-categories">User categories</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#checking-file-permissions">Checking file permissions</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#administrative-access">Administrative access</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-sudo-command">The <code>sudo</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-sudoers-file">The sudoers file</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-su-command">The <code>su</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#performing-tasks-as-another-user">Performing tasks as another user</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#performing-administrative-tasks-as-root">Performing administrative tasks as root</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#user-database-files">User database files</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-etcpasswd-file">The <code>/etc/passwd</code> file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-etcgroup-file">The <code>/etc/group</code> file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-shadow-files">The shadow files</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#user-management">User management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#types-of-users">Types of users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#creating-a-login-user">Creating a login user</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-login-user">Checking the created login user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#creating-a-system-user">Creating a system user</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-system-user">Checking the created system user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#difference-between-login-and-system-users">Difference between login and system users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-useful-user-management-commands">Other useful user management commands</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#permission-management">Permission management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-chown-command">The <code>chown</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-chmod-command">The <code>chmod</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#symbolic-mode">Symbolic mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#using-symbolic-mode">Using symbolic mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#octal-mode">Octal mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#using-octal-mode">Using octal mode</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#welcome-to-the-future">Welcome to the future</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      
+
+      <div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>In many respects, the basics of Unix are the same for the original Unix
+operating system and Unix-like operating systems derived from Unix like Linux or
+macOS. From here on, when we refer to “Unix”, we will in fact be talking about
+all Unix and Unix-like systems in general.</p></div></div>
+<h2 id="file-system">File system<a href="#file-system" aria-label="Link to heading 'File system'" data-heading-content="File system" class="anchor"></a></h2>
+<p>The <strong>file system</strong> controls how data is stored and retrieved. Without it,
+information on a storage medium such as a hard drive would be one large body of
+data, with no way to tell where one piece of information stops and the next
+begins.</p>
+<p>Various file systems exist:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operating system or device type</th>
+<th align="left">Common file systems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Linux</td>
+<td align="left">ext2, ext3, ext4</td>
+</tr>
+<tr>
+<td align="left">macOS</td>
+<td align="left">HFS, APFS</td>
+</tr>
+<tr>
+<td align="left">Windows</td>
+<td align="left">NTFS</td>
+</tr>
+<tr>
+<td align="left">USB</td>
+<td align="left">FAT, exFAT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="case-sensitivity">Case-sensitivity<a href="#case-sensitivity" aria-label="Link to heading 'Case-sensitivity'" data-heading-content="Case-sensitivity" class="anchor"></a></h3>
+<p>One of the differences between file systems is how they would treat these file
+names:</p>
+<ul>
+<li><code>a-file.txt</code></li>
+<li><code>A-file.txt</code></li>
+<li><code>A-fIlE.txt</code></li>
+<li><code>A-FILE.txt</code></li>
+</ul>
+<p>When you use macOS or Windows, your file system is probably <a href="https://en.wikipedia.org/wiki/Hierarchical_File_System_(Apple)" target="_blank" rel="noopener noreferrer">HFS</a>,
+<a href="https://en.wikipedia.org/wiki/Apple_File_System" target="_blank" rel="noopener noreferrer">APFS</a> or <a href="https://en.wikipedia.org/wiki/NTFS" target="_blank" rel="noopener noreferrer">NTFS</a>. These file systems are <strong>case-insensitive</strong>,
+meaning that the four file names above represent the same file. You <strong>cannot
+create both <code>a-file.txt</code> and <code>A-FILE.txt</code> in the same directory</strong>. As far as the
+file system is concerned, that’s the same file.</p>
+<p>When you use Linux, your file system is probably in the <a href="https://en.wikipedia.org/wiki/Extended_file_system" target="_blank" rel="noopener noreferrer">Extended File System
+(ext)</a> family. It is a <strong>case-sensitive</strong> file system. The four names above
+represent <strong>4 different files</strong>.</p>
+<p>It is important to know this difference when you are transferring files between
+different file systems.</p>
+<h3 id="file-hierarchy">File hierarchy<a href="#file-hierarchy" aria-label="Link to heading 'File hierarchy'" data-heading-content="File hierarchy" class="anchor"></a></h3>
+<p>In Unix systems, the file system is said to be <strong>rooted</strong>, meaning that there is
+<strong>always one root</strong>, denoted by the path <code>/</code>.</p>
+<p>Separate volumes such as disk partitions, removable media and network shares
+belong to the same file hierarchy (unlike Windows for example, where each drive
+has a letter that is the root of its file system tree).</p>
+<p>Such volumes can be <strong>mounted</strong> on a directory, causing the volume’s file system
+tree to appear as that directory in the larger tree.</p>
+<h4 id="inspecting-volumes">Inspecting volumes<a href="#inspecting-volumes" aria-label="Link to heading 'Inspecting volumes'" data-heading-content="Inspecting volumes" class="anchor"></a></h4>
+<p>The <code>df</code> (<strong>d</strong>isk <strong>f</strong>ree) shows you all volumes and the available space on each of them
+(the <code>-h</code> option displays size in a human-readable format instead of the raw number of bytes):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Filesystem</span>      <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">tmpfs</span>            <span class="l-variable-parameter">99M</span>  <span class="l-variable-parameter">608K</span>   <span class="l-variable-parameter">98M</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/run</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">/dev/sda1</span>       <span class="l-variable-parameter">9.7G</span>  <span class="l-variable-parameter">1.4G</span>  <span class="l-variable-parameter">8.3G</span>  <span class="l-variable-parameter">15%</span> <span class="l-variable-parameter">/</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev/shm</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">5.0M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">5.0M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/run/lock</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/sys/fs/cgroup</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">/dev/sdb1</span>        <span class="l-variable-parameter">50G</span>   <span class="l-variable-parameter">19G</span>   <span class="l-variable-parameter">28G</span>  <span class="l-variable-parameter">41%</span> <span class="l-variable-parameter">/network-drive</span>
+</div></code></pre>
+<p>You can see that <strong>there is only one root (<code>/</code>)</strong>,
+and that all other volumes are <strong>mounted</strong> somewhere in the file hierarchy.</p>
+<p>For example, the last line represents a network drive mounted under the
+<code>/network-drive</code> directory.</p>
+<p>Mounted volumes are defined in the <a href="https://en.wikipedia.org/wiki/Fstab" target="_blank" rel="noopener noreferrer"><code>/etc/fstab</code> file (<strong>f</strong>ile <strong>s</strong>ystems
+<strong>tab</strong>le)</a>.</p>
+<h4 id="common-unix-directories">Common Unix directories<a href="#common-unix-directories" aria-label="Link to heading 'Common Unix directories'" data-heading-content="Common Unix directories" class="anchor"></a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Directory</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>/bin</code></td>
+<td align="left">Fundamental binaries like <code>ls</code> or <code>cp</code></td>
+</tr>
+<tr>
+<td align="left"><code>/boot</code></td>
+<td align="left">Files required to successfully boot</td>
+</tr>
+<tr>
+<td align="left"><code>/dev</code></td>
+<td align="left">Devices, i.e. file representations of (pseudo-)peripherals</td>
+</tr>
+<tr>
+<td align="left"><code>/etc</code></td>
+<td align="left">System-wide configuration files</td>
+</tr>
+<tr>
+<td align="left"><code>/home</code></td>
+<td align="left">User home directories</td>
+</tr>
+<tr>
+<td align="left"><code>/lib</code></td>
+<td align="left">Shared libraries needed by programs in <code>/bin</code></td>
+</tr>
+<tr>
+<td align="left"><code>/media</code></td>
+<td align="left">Default mount point for removable devices (USB, etc)</td>
+</tr>
+<tr>
+<td align="left"><code>/opt</code></td>
+<td align="left">Locally installed software</td>
+</tr>
+<tr>
+<td align="left"><code>/root</code></td>
+<td align="left">Home directory of the <code>root</code> superuser</td>
+</tr>
+<tr>
+<td align="left"><code>/sbin</code></td>
+<td align="left">System binaries (for system administration)</td>
+</tr>
+<tr>
+<td align="left"><code>/tmp</code></td>
+<td align="left">Temporary files not expected to survive a reboot</td>
+</tr>
+<tr>
+<td align="left"><code>/usr</code></td>
+<td align="left">Non-system-critical executables, libraries and resources</td>
+</tr>
+<tr>
+<td align="left"><code>/var</code></td>
+<td align="left">Variable files (e.g. lock/log files, databases)</td>
+</tr>
+</tbody>
+</table>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>From <a href="https://en.wikipedia.org/wiki/Unix_filesystem#Conventional_directory_layout" target="_blank" rel="noopener noreferrer">Unix Filesystem Conventional Directory Layout</a>.</p></div></div>
+<h3 id="unix-file-types">Unix file types<a href="#unix-file-types" aria-label="Link to heading 'Unix file types'" data-heading-content="Unix file types" class="anchor"></a></h3>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Everything_is_a_file" target="_blank" rel="noopener noreferrer">“Everything is a file.”</a></p>
+</blockquote>
+<p>Unix systems have regular files and directories like most other systems. But in
+addition to these, it represents various other things as files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">File</td>
+<td align="left">A regular file</td>
+</tr>
+<tr>
+<td align="left">Directory</td>
+<td align="left">A directory containing any number of files</td>
+</tr>
+<tr>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Symbolic_link" target="_blank" rel="noopener noreferrer">Symbolic link</a></td>
+<td align="left">A reference to another file</td>
+</tr>
+<tr>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Named_pipe" target="_blank" rel="noopener noreferrer">Named pipe</a></td>
+<td align="left">A connector from the output of one process to the input of another</td>
+</tr>
+<tr>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreferrer">Socket</a></td>
+<td align="left">A bidirectional endpoint for inter-process communication</td>
+</tr>
+<tr>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Device_file" target="_blank" rel="noopener noreferrer">Device</a></td>
+<td align="left">Representations of physical or logical peripherals (e.g. hard drive)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="unix-users">Unix users<a href="#unix-users" aria-label="Link to heading 'Unix users'" data-heading-content="Unix users" class="anchor"></a></h2>
+<p>Unix operating systems like Linux are multi-user systems, meaning that more than
+one user can have access to the system at the same time.</p>
+<p>A <strong>user</strong> is <strong>any entity that uses the system</strong>. This may be:</p>
+<ul>
+<li>A <strong>person</strong>, like Alice or Bob</li>
+<li>A <strong>system service</strong>, like a MySQL database or an SSH server</li>
+</ul>
+<p>A Unix system maintains a list of user accounts representing these people and
+system services, each with a different <strong>name</strong> such as <code>alice</code>, <code>bob</code> or
+<code>sshd</code>. Each of these user accounts is also identified by a <strong>numerical user ID
+(or UID)</strong>.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Note that one person may have multiple user accounts on a Unix system, as long
+as they each have a different name.</p></div></div>
+<h3 id="user-access">User access<a href="#user-access" aria-label="Link to heading 'User access'" data-heading-content="User access" class="anchor"></a></h3>
+<p>Managing users is done for the purpose of security by limiting access in certain
+ways, such as file permissions.</p>
+<p>The <strong>superuser</strong>, named <code>root</code>, has complete access to the system and its
+configuration. It is intended for administrative use only.</p>
+<p>Unix also has the notion of <strong>groups</strong>. Much like a user account, a group is
+identified by a <strong>name</strong> and by a <strong>numerical group ID (or GID)</strong>. Each user
+belongs to a <strong>main group</strong>, and can also be <strong>added to other groups</strong>, which
+grants that user all privileges assigned to each group.</p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>A Unix system usually creates a main group for each user, with the same name as
+the user. For example, user <code>alice</code> has the <code>alice</code> group as its main group.</p>
+<p>This provides a quick way of giving <code>bob</code> access to <code>alice</code>’s files by adding
+him to the <code>alice</code> group, if necessary.</p></div><div><div class="w-full p-4 dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-zinc-500/50">
+  <img src='images/users-groups-b05e601d2e7869555880beed1a7e1b56.png' />
+</div></div></div>
+<h3 id="permissions">Permissions<a href="#permissions" aria-label="Link to heading 'Permissions'" data-heading-content="Permissions" class="anchor"></a></h3>
+<p>Someone who logs in on a Unix system can use any file their user account is
+permitted to access. The system determines whether or not a user or group can
+access a file based on the permissions assigned to it.</p>
+<p>There are <strong>three different permissions</strong> for files and directories. They are
+represented by one character:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Permission</th>
+<th align="left">For files</th>
+<th align="left">For directories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>r</code></td>
+<td align="left"><strong>Read</strong> the contents of the file</td>
+<td align="left"><strong>List</strong> the directory</td>
+</tr>
+<tr>
+<td align="left"><code>w</code></td>
+<td align="left"><strong>Write</strong> to the file (modify it)</td>
+<td align="left"><strong>Create</strong> or <strong>delete</strong> files in the directory</td>
+</tr>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left"><strong>Execute</strong> the file (if it’s a binary or a script)</td>
+<td align="left"><strong>Traverse</strong> the directory (to access a subdirectory)</td>
+</tr>
+</tbody>
+</table>
+<p>The symbol <code>-</code> (a hyphen) indicates that no access is permitted.</p>
+<h4 id="user-categories">User categories<a href="#user-categories" aria-label="Link to heading 'User categories'" data-heading-content="User categories" class="anchor"></a></h4>
+<p>Each of the three permissions are assigned to three different categories of
+users:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Category</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>owner</code></td>
+<td align="left">The <strong>user</strong> who owns the file</td>
+</tr>
+<tr>
+<td align="left"><code>group</code></td>
+<td align="left">The <strong>group</strong> that owns the file (any user in that group)</td>
+</tr>
+<tr>
+<td align="left"><code>other</code></td>
+<td align="left">Any other user with access to the system</td>
+</tr>
+</tbody>
+</table>
+<h4 id="checking-file-permissions">Checking file permissions<a href="#checking-file-permissions" aria-label="Link to heading 'Checking file permissions'" data-heading-content="Checking file permissions" class="anchor"></a></h4>
+<p>When you run the <code>ls</code> command with the <code>-l</code> option (<strong>l</strong>ong format), you can
+see more information about files, including their <strong>type and permissions</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">2</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span>  <span class="l-number">7</span> <span class="l-variable-parameter">12:16</span> <span class="l-variable-parameter">some-directory</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">-rwxr-x---</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">vip</span>   <span class="l-number">755</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-executable</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">-rw-r-----</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">321</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-file</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">39</span>  <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-link</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">some-file</span>
+</div></code></pre>
+<p>Column 1 represents the permissions assigned to the file, while columns 3 and 4
+represent their ownership. The first 10-letter column can be separated into one
+letter for the type of file, and three 3-letter groups for owner, group and
+other permissions respectively:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">TYPE  OWNER PERM  GROUP PERM  OTHER PERM  OWNER  GROUP
+</div><div class="l-line" data-line="2">d     rwx         r-x         r-x         root   root  ... some-directory
+</div><div class="l-line" data-line="3">-     rwx         r-x         ---         root   vip   ... some-executable
+</div><div class="l-line" data-line="4">-     rw-         r--         ---         bob    bob   ... some-file
+</div><div class="l-line" data-line="5">l     rwx         rwx         rwx         bob    bob   ... some-link -&gt; some-file
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <a href="https://en.wikipedia.org/wiki/Unix_file_types" target="_blank" rel="noopener noreferrer">file types</a> you will most often handle are <code>-</code> for files,
+<code>d</code> for <strong>d</strong>irectories and <code>l</code> for <strong>l</strong>inks. There are others like <code>p</code> for
+<a href="https://en.wikipedia.org/wiki/Named_pipe" target="_blank" rel="noopener noreferrer">named <strong>p</strong>ipes</a>, <code>s</code> for <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreferrer"><strong>s</strong>ockets</a> and <code>b</code>
+or <code>c</code> for <strong>b</strong>lock or <strong>c</strong>haracter <a href="https://en.wikipedia.org/wiki/Device_file" target="_blank" rel="noopener noreferrer">device files</a>, but they
+are outside the scope of this course.</p></div></div>
+<h2 id="administrative-access">Administrative access<a href="#administrative-access" aria-label="Link to heading 'Administrative access'" data-heading-content="Administrative access" class="anchor"></a></h2>
+<p>Many administrative tasks such as installing packages, managing users or
+changing file permissions can only be performed by the <code>root</code> user.</p>
+<p>If you have the <code>root</code> user’s password (or an authorized public key), you can
+<strong>log in as root</strong> directly. But <strong>you should avoid it</strong> as often as possible.</p>
+<p>It is <strong>dangereous to log in as <code>root</code></strong>. One wrong move and you could
+irreversibly damage the system. For example:</p>
+<ul>
+<li>Delete a system-critical file or files</li>
+<li>Change permissions on system-critical executables</li>
+<li>Lock yourself out of the system (e.g. by disabling SSH on a server)</li>
+</ul>
+<h3 id="the-sudo-command">The <code>sudo</code> command<a href="#the-sudo-command" aria-label="Link to heading 'The sudo command'" data-heading-content="The sudo command" class="anchor"></a></h3>
+<p>The <code>sudo</code> command (which means “<strong>s</strong>uper<strong>u</strong>ser <strong>do</strong>”) offers another
+approach to give users administrative access.</p>
+<p>When <strong>trusted users</strong> precede an administrative command with <code>sudo</code>, they are
+prompted for <strong>their own password</strong>. Once authenticated, the administrative
+command is <strong>executed as if by the <code>root</code> user</strong>.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/root</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/root&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">-la</span> <span class="l-variable-parameter">/root</span>
+</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">jde:</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">drwx------</span>  <span class="l-number">4</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:53</span> <span class="l-variable-parameter">.</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">24</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:44</span> <span class="l-variable-parameter">..</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">-rw-------</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">137</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">11</span> <span class="l-variable-parameter">09:51</span> <span class="l-variable-parameter">.bash_history</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">-rw-r--r--</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">3106</span> <span class="l-variable-parameter">Apr</span>  <span class="l-number">9</span> <span class="l-variable-parameter">11:10</span> <span class="l-variable-parameter">.bashrc</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">...</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Only trusted users can use <code>sudo</code>. Unauthorized usage will be
+<a href="https://xkcd.com/838/" target="_blank" rel="noopener noreferrer">reported</a>. The relevant logs can be checked with <code>sudo journalctl $(which sudo)</code> (if you are a trusted user).</p></div></div>
+<h4 id="the-sudoers-file">The sudoers file<a href="#the-sudoers-file" aria-label="Link to heading 'The sudoers file'" data-heading-content="The sudoers file" class="anchor"></a></h4>
+<p>The <code>/etc/sudoers</code> file defines which users are trusted to use <code>sudo</code>. This is a
+classic example (the basic syntax is <a href="http://toroid.org/sudoers-syntax" target="_blank" rel="noopener noreferrer">described here</a>):</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Defaults        env_reset
+</div><div class="l-line" data-line="2">Defaults        secure_path=&quot;/usr/local/sbin:/usr/local/bin:...&quot;
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">root    ALL=(ALL:ALL) ALL
+</div><div class="l-line" data-line="5">%admin  ALL=(ALL) ALL
+</div><div class="l-line" data-line="6">%sudo   ALL=(ALL:ALL) ALL
+</div></code></pre>
+<p>This configuration allows members of the <code>sudo</code> group to execute any command
+(i.e. they are trusted users).</p>
+<div class="callout callout-danger group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>NEVER EVER edit this file by hand</strong>, as you will break the <code>sudo</code> command if
+you introduce syntax errors into the file. Use the <code>visudo</code> command which will
+not let you save unless the file is valid.</p>
+<p>With these defaults settings common to most Unix systems, you can simply add a
+user to the <code>sudo</code> group to make them trusted <code>sudo</code> users.</p></div></div></div>
+<h3 id="the-su-command">The <code>su</code> command<a href="#the-su-command" aria-label="Link to heading 'The su command'" data-heading-content="The su command" class="anchor"></a></h3>
+<p>The <code>su</code> command (which means “<strong>s</strong>witch <strong>u</strong>ser”) is also a common
+administrative tool. As its name indicates, it can be used to log in as another
+user. If you are a trusted sudoer, you can use it to become another user:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">bob</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/home/alice</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/home/alice&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-function-call">*</span>$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-string-special-path">su</span> <span class="l-string-special-path">-l</span> <span class="l-string-special-path">alice</span>
+</div><div class="l-line" data-line="8"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">bob:</span>
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">alice</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-l</code> option of the <code>su</code> command makes sure you get a <strong>login shell</strong>, i.e.
+an environment similar to what you get when actually logging in. If you don’t
+use it, you will have a minimal shell environment that might be missing some
+things.</p></div></div>
+<h4 id="performing-tasks-as-another-user">Performing tasks as another user<a href="#performing-tasks-as-another-user" aria-label="Link to heading 'Performing tasks as another user'" data-heading-content="Performing tasks as another user" class="anchor"></a></h4>
+<p>The previous <code>su</code> command opens a new shell in which you are logged in as <code>alice</code>.
+You can do whatever you need to do with the files accessible only to <code>alice</code>,
+then go back to your previous shell with <code>exit</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/home/alice</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">total</span> <span class="l-number">20</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">drwxr-x---</span> <span class="l-number">2</span> <span class="l-variable-parameter">alice</span> <span class="l-variable-parameter">alice</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">16:35</span> <span class="l-variable-parameter">.</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">6</span> <span class="l-variable-parameter">root</span>  <span class="l-variable-parameter">root</span>  <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">16:35</span> <span class="l-variable-parameter">..</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">-rw-r--r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">alice</span> <span class="l-variable-parameter">alice</span>  <span class="l-number">220</span> <span class="l-variable-parameter">Apr</span>  <span class="l-number">4</span> <span class="l-variable-parameter">18:30</span> <span class="l-variable-parameter">.bash_logout</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="7">
+</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">~/bar.txt</span>
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/home/alice/bar.txt</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">foo</span>
+</div><div class="l-line" data-line="12">
+</div><div class="l-line" data-line="13">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
+</div><div class="l-line" data-line="14">
+</div><div class="l-line" data-line="15">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
+</div><div class="l-line" data-line="16"><span class="l-function-call">bob</span>
+</div></code></pre>
+<h4 id="performing-administrative-tasks-as-root">Performing administrative tasks as root<a href="#performing-administrative-tasks-as-root" aria-label="Link to heading 'Performing administrative tasks as root'" data-heading-content="Performing administrative tasks as root" class="anchor"></a></h4>
+<p>You can also use the <code>su</code> command to log in as <code>root</code>.
+You can perform any necessary administrative tasks without <code>sudo</code> (since you are <code>root</code>),
+then again go back to your previous shell with <code>exit</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; sudo su -l root
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$&gt; whoami
+</div><div class="l-line" data-line="4">root
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$&gt; journalctl <span class="l-punctuation-special">$(</span><span class="l-function-call">which</span> <span class="l-variable-parameter">sudo</span><span class="l-punctuation-special">)</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="8">
+</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
+</div><div class="l-line" data-line="10">
+</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">bob</span>
+</div></code></pre>
+<div class="callout callout-danger group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>As mentioned before, be careful not to break the system when you are <code>root</code>.</p></div></div></div>
+<h3 id="user-database-files">User database files<a href="#user-database-files" aria-label="Link to heading 'User database files'" data-heading-content="User database files" class="anchor"></a></h3>
+<p>These files define what user accounts and groups are available on a Unix system:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File</th>
+<th align="left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>/etc/passwd</code></td>
+<td align="left">List of user accounts, as well as their primary group, home directory and default shell (it originally also contained user passwords, hence the name)</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/shadow</code></td>
+<td align="left">Hashes of user passwords (more secure than storing them in word-readable <code>/etc/passwd</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/group</code></td>
+<td align="left">List of groups and their members</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/gshadow</code></td>
+<td align="left">Hashes of group passwords (optional), group administrators</td>
+</tr>
+</tbody>
+</table>
+<p>You should <strong>never edit these files by hand</strong>.</p>
+<p>Unix systems provide various <strong>system administration commands</strong> for this
+purpose, such as <code>useradd</code>, <code>passwd</code> and <code>groupadd</code> for Linux.</p>
+<h4 id="the-etcpasswd-file">The <code>/etc/passwd</code> file<a href="#the-etcpasswd-file" aria-label="Link to heading 'The /etc/passwd file'" data-heading-content="The /etc/passwd file" class="anchor"></a></h4>
+<p>Each line in <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s2-acctsgrps-files.html" target="_blank" rel="noopener noreferrer"><code>/etc/passwd</code></a> defines a user account, with data
+separated by semicolons:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">jde:x:500:500:jde:/home/jde:/bin/bash
+</div></code></pre>
+<ul>
+<li><strong>Username</strong> (<code>jde</code>) - The name of the user account (used to log in)</li>
+<li><strong>Password</strong> (<code>x</code>) - User password (or <code>x</code> if it is stored in <code>/etc/shadow</code>)</li>
+<li><strong>User ID (UID)</strong> (<code>500</code>) - The numerical equivalent of the username</li>
+<li><strong>Group ID (GID)</strong> (<code>500</code>) - The numerical equivalent of the user’s primary
+group name (often the same as the UID for most users, on a Unix system with
+default settings)</li>
+<li><strong>GECOS</strong> (<code>jde</code>) - Historical field used to store extra information (usually
+the user’s full name)</li>
+<li><strong>Home directory</strong> (<code>/home/jde</code>) - Absolute path to the user’s home directory</li>
+<li><strong>Shell</strong> (<code>/bin/bash</code>) - The program automatically launched whenever the user
+logs in (e.g. on a terminal or through SSH)</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Changing the shell can be used to prevent some users, like system users, from
+logging in (e.g. by using <code>/bin/false</code> or <code>/usr/sbin/nologin</code>).</p></div></div>
+<h4 id="the-etcgroup-file">The <code>/etc/group</code> file<a href="#the-etcgroup-file" aria-label="Link to heading 'The /etc/group file'" data-heading-content="The /etc/group file" class="anchor"></a></h4>
+<p>Each line in <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s3-acctspgrps-group.html" target="_blank" rel="noopener noreferrer"><code>/etc/group</code></a> defines a group, also semicolon-separated:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">vip:x:512:bob,eve
+</div></code></pre>
+<ul>
+<li><strong>Group name</strong> (<code>vip</code>) - The name of the group</li>
+<li><strong>Group password</strong> (<code>x</code>) - Optional group password (or <code>x</code> if the password is
+stored in <code>/etc/gshadow</code>); if specified, allows users not part of the group to
+join it with the correct password</li>
+<li><strong>Group ID (GID)</strong> (<code>512</code>) - The numerical equivalent of the group name</li>
+<li><strong>Member list</strong> (<code>bob,eve</code>) - A comma-separated list of the users belonging to the group</li>
+</ul>
+<h4 id="the-shadow-files">The shadow files<a href="#the-shadow-files" aria-label="Link to heading 'The shadow files'" data-heading-content="The shadow files" class="anchor"></a></h4>
+<p>Both <code>/etc/passwd</code> and <code>/etc/group</code> must be <strong>readable by anyone</strong> on a Unix
+system, because they are used by many programs to perform the translation from
+username to UID and from group name to GID.</p>
+<p>It is therefore bad practice to store passwords in these files, even encrypted
+or hashed. Any user might copy them and attempt a brute-force attack (which
+could be done on a separate, dedicated infrastructure).</p>
+<p>Therefore, the corresponding shadow files exist:</p>
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s3-acctsgrps-shadow.html" target="_blank" rel="noopener noreferrer"><code>/etc/shadow</code></a> stores password hashes for user accounts, and
+other security-related data such as password expiration dates.</li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s3-acctsgrps-gshadow.html" target="_blank" rel="noopener noreferrer"><code>/etc/gshadow</code></a> stores password hashes for groups, and other
+security-related data such as who is the group administrator.</li>
+</ul>
+<p>These files are only readable by the <code>root</code> user (or any user that belongs to
+the <code>root</code> or <code>shadow</code> groups).</p>
+<h2 id="user-management">User management<a href="#user-management" aria-label="Link to heading 'User management'" data-heading-content="User management" class="anchor"></a></h2>
+<p>The following commands can be used to create, modify and delete users:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>useradd</code></td>
+<td align="left">Create a user account (and by default, a corresponding group)</td>
+</tr>
+<tr>
+<td align="left"><code>usermod</code></td>
+<td align="left">Modify an existing user account</td>
+</tr>
+<tr>
+<td align="left"><code>passwd</code></td>
+<td align="left">Change (or set) a user’s password</td>
+</tr>
+<tr>
+<td align="left"><code>userdel</code></td>
+<td align="left">Delete a user account</td>
+</tr>
+<tr>
+<td align="left"><code>deluser</code></td>
+<td align="left">Friendlier frontend to the <code>userdel</code> command. Delete a user account or remove a user from a group</td>
+</tr>
+<tr>
+<td align="left"><code>groupadd</code></td>
+<td align="left">Create a new group</td>
+</tr>
+<tr>
+<td align="left"><code>groupmod</code></td>
+<td align="left">Modify an existing group</td>
+</tr>
+<tr>
+<td align="left"><code>groupdel</code></td>
+<td align="left">Delete a group</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>man &lt;command&gt;</code> to read their manual, e.g. <code>man useradd</code>.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Note that these commands are specific to <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a>. They might differ
+slightly in other Linux distributions or other Unix systems.</p></div></div>
+<h3 id="types-of-users">Types of users<a href="#types-of-users" aria-label="Link to heading 'Types of users'" data-heading-content="Types of users" class="anchor"></a></h3>
+<p>As we said at the beginning of this section, a user can be a <strong>login user</strong>
+representing a person or a <strong>system user</strong> generally representing a service.</p>
+<p>You may wonder why we even need system users? In Unix systems, users are the
+fundamental access control mechanism, so we need system users to limit the
+permissions of people using the system, but also of services running on that
+system. For example:</p>
+<ul>
+<li>Alice should not be able to access Bob’s files without his permission, and
+vice-versa.</li>
+<li>A database server like MySQL needs to access some files for storage, but it
+doesn’t need to access Alice’s or Bob’s files. It also doesn’t need to be able
+to log in since it’s a service and not a person.</li>
+</ul>
+<h3 id="creating-a-login-user">Creating a login user<a href="#creating-a-login-user" aria-label="Link to heading 'Creating a login user'" data-heading-content="Creating a login user" class="anchor"></a></h3>
+<p>To create a <strong>login user</strong> (e.g. a user that can be used by an actual person to
+log in to the machine), you will need to use the <code>useradd</code> and <code>passwd</code>
+commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">useradd</span> <span class="l-variable-parameter">-m</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/bin/bash</span> <span class="l-variable-parameter">jde</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">passwd</span> <span class="l-variable-parameter">jde</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">UNIX</span> <span class="l-variable-parameter">password:</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Retype</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">UNIX</span> <span class="l-variable-parameter">password:</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">passwd:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">updated</span> <span class="l-variable-parameter">successfully</span>
+</div></code></pre>
+<p>The <code>-m</code> option to the <code>useradd</code> command instructs it to also create a ho<strong>m</strong>e
+directory for the user, which by default will be <code>/home/jde</code> in this case.</p>
+<p>The <code>-s</code> option specifies the user’s login <strong>s</strong>hell. Since it defaults to a
+simple <a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener noreferrer">Bourne shell</a> (<code>/bin/sh</code>) on most systems, in this example we use
+the more advanced <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash shell</a> (<code>/bin/bash</code>) for the user’s convenience.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>It is possible to give an encrypted <strong>p</strong>assword directly to the <code>useradd</code>
+command with the <code>-p</code> option instead of using <code>passwd</code>, but it’s bad practice
+because running commands can be seen by other users with <code>ps</code>.</p></div></div>
+<h4 id="checking-the-created-login-user">Checking the created login user<a href="#checking-the-created-login-user" aria-label="Link to heading 'Checking the created login user'" data-heading-content="Checking the created login user" class="anchor"></a></h4>
+<p>You can see the newly created user (and corresponding group)
+by looking at the last line of the relevant user database files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/passwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">jde:x:1004:1004::/home/jde:/bin/bash</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/group</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">jde:x:1004:</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="404-unix-basics:tail-and-uid-range"><div class="icon image"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-404-unix-basics:tail-and-uid-range" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>tail</code> command displays the last 10 lines of a file. With the <code>-n</code> option
+(<strong>n</strong>umber) set to 1, it only displays the last line.</p>
+<p>Note that on a typical Linux system, regular users will have UIDs starting at
+1000 and incremented every time a new user is created. This is defined by the
+<code>UID_MIN</code> and <code>UID_MAX</code> options in the <code>/etc/login.defs</code> file.</p></div><label for="callout-404-unix-basics:tail-and-uid-range" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-404-unix-basics:tail-and-uid-range" class="less join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Wonderful!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="creating-a-system-user">Creating a system user<a href="#creating-a-system-user" aria-label="Link to heading 'Creating a system user'" data-heading-content="Creating a system user" class="anchor"></a></h3>
+<p>To create a <strong>system user</strong> (e.g. a technical user that will need to run an
+application or service, but does not need to log in), the <code>useradd</code> command is
+sufficient:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">useradd</span> <span class="l-variable-parameter">--system</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/usr/sbin/nologin</span> <span class="l-variable-parameter">myapp</span>
+</div></code></pre>
+<p>The user is created a bit differently with the <code>--system</code> option. Notably, the
+UID is chosen in a different range, to help quickly differentiate system users
+from login users.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can also add the <code>-m</code> (ho<strong>m</strong>e) option if necessary. Some applications or
+services might expect the user to have a home directory.</p></div></div>
+<h4 id="checking-the-created-system-user">Checking the created system user<a href="#checking-the-created-system-user" aria-label="Link to heading 'Checking the created system user'" data-heading-content="Checking the created system user" class="anchor"></a></h4>
+<p>Check the user database files again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/passwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">myapp:x:999:999::/home/myapp:/usr/sbin/nologin</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/group</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">myapp:x:999:</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="404-unix-basics:system-user-home-and-uid-range"><div class="icon image"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-404-unix-basics:system-user-home-and-uid-range" type="checkbox" class="peer hidden" /><div class="content"><p>Note that a home directory is configured even if it wasn’t created. This is not
+an issue.</p>
+<p>System users use a different UID range by default, specified by the
+<code>SYS_UID_MIN</code> and <code>SYS_UID_MAX</code> options in the <code>/etc/login.defs</code> file. On
+Ubuntu, for example, it will start at 999 and be decremented by 1 for each new
+user.</p></div><label for="callout-404-unix-basics:system-user-home-and-uid-range" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-404-unix-basics:system-user-home-and-uid-range" class="less join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f31f-030fc6691abd2ab36c1d90407e02505e.svg" alt="🌟" width="20" height="20" /></span> Awesome!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>You can try to use <code>su</code> to try to switch to that user.
+It won’t work:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">su</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">myapp</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">No</span> <span class="l-variable-parameter">directory,</span> <span class="l-variable-parameter">logging</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">HOME=/</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">This</span> <span class="l-variable-parameter">account</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">currently</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">available.</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you really need to log in as that user for administative purposes, the <code>su</code>
+command allows you to change the shell. For this example, the command would be
+<code>sudo su -l -s /bin/bash myapp</code>.</p></div></div>
+<h3 id="difference-between-login-and-system-users">Difference between login and system users<a href="#difference-between-login-and-system-users" aria-label="Link to heading 'Difference between login and system users'" data-heading-content="Difference between login and system users" class="anchor"></a></h3>
+<p>There is <strong>no fundamental difference between a login and a system user</strong>.
+It’s simply an organizational distinction to make life easier for system administrators.</p>
+<ul>
+<li>Both login and system users are stored in the same user database files with
+the same format.</li>
+<li>A login user can log in because it has a password and a login shell.</li>
+<li>A system user has no password and no login shell and therefore cannot log in.</li>
+<li>A system user has a UID in a different range by default. (This difference can
+be utilized by the GUI, for example to omit system users when populating a
+username dropdown list at login.)</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can even transform a login user into a system user and vice-versa through
+judicious use of the <code>usermod</code> command.</p></div></div>
+<h3 id="other-useful-user-management-commands">Other useful user management commands<a href="#other-useful-user-management-commands" aria-label="Link to heading 'Other useful user management commands'" data-heading-content="Other useful user management commands" class="anchor"></a></h3>
+<p>Here’s a few command examples for common administrative tasks:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Example</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>usermod -a -G vip jde</code></td>
+<td align="left">Add (<strong>a</strong>ppend) user <code>jde</code> to <strong>g</strong>roup <code>vip</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>deluser jde vip</code></td>
+<td align="left">Remove user <code>jde</code> from group <code>vip</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>userdel -r jde</code></td>
+<td align="left"><strong>R</strong>emove user <code>jde</code> and its home directory</td>
+</tr>
+<tr>
+<td align="left"><code>passwd --lock jde</code></td>
+<td align="left">Lock the password for user <code>jde</code> (note that it may still be possible for that user to log in using other authentication methods, such as a public key)</td>
+</tr>
+<tr>
+<td align="left"><code>usermod --shell /usr/sbin/nologin jde</code></td>
+<td align="left">Lock user <code>jde</code> out of the system (note that this will not disconnect the user if already connected, but it prevents future logins)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="permission-management">Permission management<a href="#permission-management" aria-label="Link to heading 'Permission management'" data-heading-content="Permission management" class="anchor"></a></h2>
+<p>The following commands can be used to change the permissions or ownership of
+files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>chmod</code></td>
+<td align="left"><strong>Ch</strong>ange the <strong>mod</strong>e (another name for file permissions) of a file or files</td>
+</tr>
+<tr>
+<td align="left"><code>chown</code></td>
+<td align="left"><strong>Ch</strong>ange the <strong>own</strong>er (and optionally the group) of a file or files</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>man &lt;command&gt;</code> to read their manual, e.g. <code>man chmod</code>.</p>
+<h3 id="the-chown-command">The <code>chown</code> command<a href="#the-chown-command" aria-label="Link to heading 'The chown command'" data-heading-content="The chown command" class="anchor"></a></h3>
+<p>The <a href="https://linux.die.net/man/1/chown" target="_blank" rel="noopener noreferrer"><code>chown</code> command</a> is quite simple to use. The following command
+changes the owner of <code>file.txt</code> to <code>alice</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">alice</span> <span class="l-variable-parameter">file.txt</span>
+</div></code></pre>
+<p>The following command changes the owner of <code>file.txt</code> to <code>bob</code> and its group to
+<code>vip</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">bob:vip</span> <span class="l-variable-parameter">file.txt</span>
+</div></code></pre>
+<p>You can also recursively (with the <code>-R</code> option) change the owner and group of a
+directory and all its files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">bob:bob</span> <span class="l-variable-parameter">/home/bob</span>
+</div></code></pre>
+<div class="callout callout-danger group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Be <strong>EXTREMELY CAREFUL when changing ownership recursively</strong>. Changing the
+ownership of system-critical files may break your system. <strong>Make sure you typed
+the correct path.</strong></p></div></div></div>
+<h3 id="the-chmod-command">The <code>chmod</code> command<a href="#the-chmod-command" aria-label="Link to heading 'The chmod command'" data-heading-content="The chmod command" class="anchor"></a></h3>
+<p>The <a href="https://linux.die.net/man/1/chmod" target="_blank" rel="noopener noreferrer"><code>chmod</code> command</a> is used to change file permissions and is a little
+more complicated. It has two syntaxes to specify which permissions you want:
+<strong>symbolic mode</strong> and <strong>octal mode</strong>.</p>
+<p>With <strong>symbolic mode</strong>, you specify which permissions you want with letters
+similar to those shown by <code>ls -l</code>, and you have more control over which specific
+permissions you want to add or remove:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">ug+x</span> <span class="l-variable-parameter">script.sh</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">a-w</span> <span class="l-variable-parameter">readonly.txt</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">o-rwx</span> <span class="l-variable-parameter">secret.txt</span>
+</div></code></pre>
+<p>With <strong>octal mode</strong>, you specify all of a file’s permissions at once.
+You cannot add or remove a specific permission without also setting the others:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">executable.sh</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span>
+</div></code></pre>
+<h4 id="symbolic-mode">Symbolic mode<a href="#symbolic-mode" aria-label="Link to heading 'Symbolic mode'" data-heading-content="Symbolic mode" class="anchor"></a></h4>
+<p>The symbolic syntax of the <code>chmod</code> command is:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">chmod [reference...][operator][permission...] file
+</div></code></pre>
+<p>Specify one or more references (<code>[reference...]</code>) to select user categories:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Reference</th>
+<th align="left">Category</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left">User</td>
+<td align="left">The user who owns the file (the owner)</td>
+</tr>
+<tr>
+<td align="left"><code>g</code></td>
+<td align="left">Group</td>
+<td align="left">The group that owns the file</td>
+</tr>
+<tr>
+<td align="left"><code>o</code></td>
+<td align="left">Others</td>
+<td align="left">Any other user with access to the system</td>
+</tr>
+<tr>
+<td align="left"><code>a</code></td>
+<td align="left">All</td>
+<td align="left">All three of the above, same as <code>ugo</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use one of the available operators (<code>[operator]</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>+</code></td>
+<td align="left">Add permissions to the specified category of users</td>
+</tr>
+<tr>
+<td align="left"><code>-</code></td>
+<td align="left">Remove permissions from the specified category of users</td>
+</tr>
+<tr>
+<td align="left"><code>=</code></td>
+<td align="left">Set the exact permissions for the specified category of users</td>
+</tr>
+</tbody>
+</table>
+<h4 id="using-symbolic-mode">Using symbolic mode<a href="#using-symbolic-mode" aria-label="Link to heading 'Using symbolic mode'" data-heading-content="Using symbolic mode" class="anchor"></a></h4>
+<p>The symbolic syntax basically allows you to specify:</p>
+<ul>
+<li>What category or categories of users you want to change permissions for (<code>u</code>,
+<code>g</code>, <code>o</code> or <code>a</code>)</li>
+<li>What kind of change you want to do (<code>+</code>, <code>-</code> or <code>=</code>)</li>
+<li>What permission(s) you want to change (<code>r</code> for read, <code>w</code> for write or <code>x</code> for
+execution/traversal)</li>
+</ul>
+<p>For example, the following command adds read and write permissions to <code>u</code> (the
+owner of the file):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">u+rw</span> <span class="l-variable-parameter">file.txt</span>
+</div></code></pre>
+<p>The following command sets the permissions for <code>g</code> (the group of the file) to
+read and execute:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">g=rx</span> <span class="l-variable-parameter">file.txt</span>
+</div></code></pre>
+<h4 id="octal-mode">Octal mode<a href="#octal-mode" aria-label="Link to heading 'Octal mode'" data-heading-content="Octal mode" class="anchor"></a></h4>
+<p>Unix file permissions can be represented in <a href="https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation" target="_blank" rel="noopener noreferrer">octal (base-8) notation</a>:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Octal</th>
+<th align="left">Permissions</th>
+<th align="left">Text</th>
+<th align="left">Binary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">7</td>
+<td align="left">read, write and execute</td>
+<td align="left"><code>rwx</code></td>
+<td align="left">111</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">read and write</td>
+<td align="left"><code>rw-</code></td>
+<td align="left">110</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">read and execute</td>
+<td align="left"><code>r-x</code></td>
+<td align="left">101</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><strong>read only</strong></td>
+<td align="left"><code>r--</code></td>
+<td align="left">100</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">write and execute</td>
+<td align="left"><code>-wx</code></td>
+<td align="left">011</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><strong>write only</strong></td>
+<td align="left"><code>-w-</code></td>
+<td align="left">010</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left"><strong>execute only</strong></td>
+<td align="left"><code>--x</code></td>
+<td align="left">001</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">none</td>
+<td align="left"><code>---</code></td>
+<td align="left">000</td>
+</tr>
+</tbody>
+</table>
+<p>You can represent an entire file’s permissions with 3 octal digits:</p>
+<ul>
+<li><code>755</code> is equivalent to <code>rwxr-xr-x</code>.</li>
+<li><code>751</code> is equivalent to <code>rwxr-x--x</code>.</li>
+<li><code>640</code> is equivalent to <code>rw-r-----</code>.</li>
+</ul>
+<h4 id="using-octal-mode">Using octal mode<a href="#using-octal-mode" aria-label="Link to heading 'Using octal mode'" data-heading-content="Using octal mode" class="anchor"></a></h4>
+<p>The octal syntax does not allow you to make a granular change to a specific
+permission (e.g. <code>u+x</code>). However, it does allow you to easily change an entire
+file’s permissions in one command.</p>
+<p>For example, the following command sets permissions <code>rwxr-xr-x</code> to <code>script.sh</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">script.sh</span>
+</div></code></pre>
+<p>The following command sets permissions <code>rw-r-----</code> to <code>secret.txt</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span>
+</div></code></pre>
+<h2 id="welcome-to-the-future">Welcome to the future<a href="#welcome-to-the-future" aria-label="Link to heading 'Welcome to the future'" data-heading-content="Welcome to the future" class="anchor"></a></h2>
+<p>Some of the commands mentioned in this course may be older than you, although
+they are regularly updated. But new command line tools are also being developed
+today:</p>
+<ul>
+<li>The <a href="https://github.com/muesli/duf" target="_blank" rel="noopener noreferrer"><code>duf</code> command</a> is a modern alternative to <code>df</code> to list free disk
+space, written in <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">Rust</a>, a modern systems programming language.</li>
+</ul>
+<h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux - Introduction to System Administration</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Security_Guide/" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux - Security Guide</a></li>
+</ul>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#file-system">File system</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#case-sensitivity">Case-sensitivity</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#file-hierarchy">File hierarchy</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#inspecting-volumes">Inspecting volumes</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#common-unix-directories">Common Unix directories</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#unix-file-types">Unix file types</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#unix-users">Unix users</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#user-access">User access</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#permissions">Permissions</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#user-categories">User categories</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#checking-file-permissions">Checking file permissions</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#administrative-access">Administrative access</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-sudo-command">The <code>sudo</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-sudoers-file">The sudoers file</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-su-command">The <code>su</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#performing-tasks-as-another-user">Performing tasks as another user</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#performing-administrative-tasks-as-root">Performing administrative tasks as root</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#user-database-files">User database files</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-etcpasswd-file">The <code>/etc/passwd</code> file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-etcgroup-file">The <code>/etc/group</code> file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-shadow-files">The shadow files</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#user-management">User management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#types-of-users">Types of users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#creating-a-login-user">Creating a login user</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-login-user">Checking the created login user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#creating-a-system-user">Creating a system user</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-system-user">Checking the created system user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#difference-between-login-and-system-users">Difference between login and system users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-useful-user-management-commands">Other useful user management commands</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#permission-management">Permission management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-chown-command">The <code>chown</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-chmod-command">The <code>chmod</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#symbolic-mode">Symbolic mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#using-symbolic-mode">Using symbolic mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#octal-mode">Octal mode</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#using-octal-mode">Using octal mode</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#welcome-to-the-future">Welcome to the future</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-404-unix-basics-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/404-unix-basics/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done course-item-current">
+        <a href="/2025/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2025/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@638e0fe</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

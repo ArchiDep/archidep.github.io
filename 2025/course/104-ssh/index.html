@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2025/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secure Shell (SSH) · ArchiDep</title>
+<meta name="description" content="Learn about the SSH cryptographic network protocol and how to use the SSH command line tool to connect to other computers." />
+<link rel="canonical" href="https://archidep.ch/2025/course/104-ssh/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Secure Shell (SSH)" />
+<meta property="og:description" content="Learn about the SSH cryptographic network protocol and how to use the SSH command line tool to connect to other computers." />
+<meta property="og:url" content="https://archidep.ch/2025/course/104-ssh/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2025/assets/theme/theme-84f7fae67955e098c398122bb3f153ab.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2025/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2025/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2025/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2025-2026</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/104-ssh/subject.md">Rev: 638e0fe498e6767a8830e8c2202e554666c3e772</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2025/course/104-ssh/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-subject">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Secure Shell (SSH)
+</h1>
+
+      <div class="my-4"><p>Learn about the SSH cryptographic network protocol and how to use the SSH command line tool to connect to other computers.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-ssh-command">The <code>ssh</code> command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#ssh-known-hosts">SSH known hosts</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#are-you-really-the-ssh-server-im-looking-for">Are you really the SSH server I’m looking for?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#how-can-i-solve-this-problem">How can I solve this problem?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#known-hosts-file">Known hosts file</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#adding-public-keys-to-the-known-hosts-file">Adding public keys to the known hosts file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#preventing-future-man-in-the-middle-attacks">Preventing future man-in-the-middle attacks</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#password-authentication">Password authentication</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#logging-in-with-ssh">Logging in with SSH</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#typing-commands-while-connected-through-ssh">Typing commands while connected through SSH</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#disconnecting">Disconnecting</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#where-am-i">Where am I?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#logging-in-or-running-a-command">Logging in or running a command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#public-key-authentication">Public key authentication</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-does-it-work">How does it work?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-does-public-key-authentication-work">How does public key authentication work?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-multiple-keys">Using multiple keys</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#key-management">Key management</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#key-protection">Key protection</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#ssh-for-other-network-services">SSH for other network services</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-birth-or-death-of-an-ssh-connection">The birth (or death) of an SSH connection</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2025/course/104-ssh/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2025/course/104-ssh/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2025/course/104-ssh/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <p><strong>You will need</strong></p>
+<ul>
+<li>A Unix CLI</li>
+</ul>
+<p><strong>Recommended reading</strong></p>
+<ul>
+<li><a href="/2025/course/101-command-line/">Command Line Introduction</a></li>
+</ul>
+<h2 id="the-ssh-command">The <code>ssh</code> command<a href="#the-ssh-command" aria-label="Link to heading 'The ssh command'" data-heading-content="The ssh command" class="anchor"></a></h2>
+<p>The <code>ssh</code> command is available on most Unix-like systems (e.g. Linux &amp; macOS)
+and in Unix shells on Windows (e.g. Git Bash or WSL). Its basic syntax is:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ssh [user@]hostname [command]
+</div></code></pre>
+<p>Here’s a few examples:</p>
+<ul>
+<li><code>ssh example.com</code> - Connect to the SSH server at <code>example.com</code> and log in
+(with the same username as in your current shell).</li>
+<li><code>ssh jde@example.com</code> - Connect to the SSH server at <code>example.com</code> and log in
+as user <code>jde</code>.</li>
+<li><code>ssh jde@192.168.50.4 hostname</code> - Run the <code>hostname</code> command as user <code>jde</code>
+on the SSH server at <code>192.168.50.4</code>.</li>
+</ul>
+<p>Run <code>man ssh</code> to see available options (or just <code>ssh</code> in Git Bash).</p>
+<h2 id="ssh-known-hosts">SSH known hosts<a href="#ssh-known-hosts" aria-label="Link to heading 'SSH known hosts'" data-heading-content="SSH known hosts" class="anchor"></a></h2>
+<p>When you connect to an SSH server for the first time, you will most likely get a
+message similar to this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">example.com</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;example.com (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span>&#39;t be established.
+</div><div class="l-line" data-line="3">ECDSA key fingerprint is SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI=
+</div><div class="l-line" data-line="4">Are you sure you want to continue connecting (yes/no)?
+</div></code></pre>
+<p>What does this mean? <em>I thought SSH was <strong>secure</strong>?</em></p>
+<h3 id="are-you-really-the-ssh-server-im-looking-for">Are you really the SSH server I’m looking for?<a href="#are-you-really-the-ssh-server-im-looking-for" aria-label="Link to heading 'Are you really the SSH server I’m looking for?'" data-heading-content="Are you really the SSH server I’m looking for?" class="anchor"></a></h3>
+<p>As we’ve seen, when SSH establishes a secure channel, a Diffie-Hellman
+asymmetric key exchange will occur to agree on a secret symmetric encryption
+key. To secure this exchange, the server will perform an asymmetric digital
+signature so that no attacker can impersonate the server.</p>
+<p>To verify the signature, <strong>your SSH client will ask the server for its public
+key</strong>. <strong>This is where a man-in-the-middle attack is possible.</strong> SSH warns you
+that someone is sending you a public key, but it has no way of verifying whether
+it’s actually the server’s public key, or whether it’s the public key of an
+attacker performing a man-in-the-middle attack.</p>
+<p>Basically, <strong>SSH makes the following guarantee</strong>:</p>
+<ul>
+<li>Once you have established a secure channel to a given server, no third party
+can decrypt your communications. Forward secrecy is also guaranteed in the
+event your credentials are compromised in the future.</li>
+</ul>
+<p><strong>SSH does not guarantee</strong> that:</p>
+<ul>
+<li>You are connecting to the correct server. You may be connecting to an
+attacker’s server.</li>
+</ul>
+<h4 id="how-can-i-solve-this-problem">How can I solve this problem?<a href="#how-can-i-solve-this-problem" aria-label="Link to heading 'How can I solve this problem?'" data-heading-content="How can I solve this problem?" class="anchor"></a></h4>
+<p>If you are using SSH to transmit sensitive data, <strong>you should check that the
+server’s public key is the correct one before connecting.</strong></p>
+<p>One way to do this is to use the <strong>key fingerprint</strong> that is shown to you when
+first connecting. The key fingerprint is a <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener noreferrer">cryptographic hash</a> of the
+public key:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">ECDSA</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">fingerprint</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI=</span>
+</div></code></pre>
+<p>Some services that allow you to connect over SSH, like GitHub, <a href="https://docs.github.com/en/github/authenticating-to-github/githubs-ssh-key-fingerprints" target="_blank" rel="noopener noreferrer">publish their
+SSH key fingerprints on their website</a> so that users may
+check them. In other cases, the key may be physically transmitted to you, or
+dictated over the phone.</p>
+<p>You should <strong>check that both fingerprints match</strong> before proceeding with the
+connection. If it does not, either you typed the wrong server address, or an
+attacker may be trying to hack your connection.</p>
+<h3 id="known-hosts-file">Known hosts file<a href="#known-hosts-file" aria-label="Link to heading 'Known hosts file'" data-heading-content="Known hosts file" class="anchor"></a></h3>
+<p>If you accept the connection, SSH will save the server’s address and public key
+in its <strong>known hosts file</strong>. You can see the contents of this file with the
+following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/known_hosts</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">example.com,192.168.50.4</span> <span class="l-variable-parameter">ecdsa-sha2-nistp256</span> <span class="l-variable-parameter">eTJtK2wrRzhW5RQzUHprbFJa...</span>
+</div></code></pre>
+<p>The format of each line in this file is <code>[domain],[ipaddr] algorithm pubkey</code>.</p>
+<p>The line above means that when SSH connects to <code>example.com</code> at IP address
+<code>192.168.50.4</code>, it expects the server to send this specific public key
+(<code>eTJtK2wrRzhW5RQzUHprbFJa...</code>) using the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank" rel="noopener noreferrer">ECDSA</a> algorithm.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>ECDSA is another asymmetric algorithm like RSA, although ECDSA is based on
+<a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography" target="_blank" rel="noopener noreferrer">elliptic curve cryptography</a> while RSA is based on prime
+numbers.</p></div></div>
+<h4 id="adding-public-keys-to-the-known-hosts-file">Adding public keys to the known hosts file<a href="#adding-public-keys-to-the-known-hosts-file" aria-label="Link to heading 'Adding public keys to the known hosts file'" data-heading-content="Adding public keys to the known hosts file" class="anchor"></a></h4>
+<p>Another solution to SSH man-in-the-middle attacks when first connecting is to
+put the server’s public key in the known hosts file yourself.</p>
+<p>If you have previously obtained the server’s public key (the full key, not just
+the fingerprint), you can <strong>add it to the known hosts file</strong> before attempting
+to connect.</p>
+<p>If you do that, SSH will consider that the server is already a <em>known host</em>, and
+will not prompt you to accept the public key.</p>
+<h4 id="preventing-future-man-in-the-middle-attacks">Preventing future man-in-the-middle attacks<a href="#preventing-future-man-in-the-middle-attacks" aria-label="Link to heading 'Preventing future man-in-the-middle attacks'" data-heading-content="Preventing future man-in-the-middle attacks" class="anchor"></a></h4>
+<p>The known hosts file has another purpose. Once SSH knows to expect a specific
+public key for a given domain or IP address, it will warn you if that public key
+changes:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; ssh 192.168.50.4
+</div><div class="l-line" data-line="2">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</div><div class="l-line" data-line="3">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+</div><div class="l-line" data-line="4">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</div><div class="l-line" data-line="5">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+</div><div class="l-line" data-line="6">Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+</div><div class="l-line" data-line="7">It is also possible that a host key has just been changed.
+</div><div class="l-line" data-line="8">The fingerprint for the ECDSA key sent by the remote host is
+</div><div class="l-line" data-line="9">SHA256:FUwFoK/hcqRAvJgDFmljwOur8t/mhfbm4tfIxdaVTQ==.
+</div><div class="l-line" data-line="10">Please contact your system administrator.
+</div><div class="l-line" data-line="11">Add correct host key in /path/to/.ssh/known_hosts to get rid of this message.
+</div><div class="l-line" data-line="12">Offending ECDSA key in /path/to/.ssh/known_hosts:33
+</div><div class="l-line" data-line="13">ECDSA host key for 192.168.50.4 has changed and you have requested strict checking.
+</div><div class="l-line" data-line="14">Host key verification failed.
+</div></code></pre>
+<p>As the message mentions, either the server changed its SSH key pair, or <strong>an
+attacker may be intercepting your communications</strong>.</p>
+<p>If you’re sure it’s not an attack, for example if you know the server actually
+changed its key pair, you can eliminate this warning by putting the correct
+public key in the known hosts file (or by removing the offending line).</p>
+<h2 id="password-authentication">Password authentication<a href="#password-authentication" aria-label="Link to heading 'Password authentication'" data-heading-content="Password authentication" class="anchor"></a></h2>
+<p>Establishing a secure channel is one thing, but that only ensures an attacker
+cannot intercept communications. Once the channel is established, you must still
+<strong>authenticate</strong>, i.e. <strong>prove that you are in fact the user you are attempting
+to log in as</strong>.</p>
+<p>How you authenticate depends on how the SSH server is configured. <strong>Password
+authentication</strong> is one method. When enabled, the SSH server will prompt you for
+the correct password; in this example, the password of the user named <code>jde</code> in
+the server’s user database:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;192.168.50.4 (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span><span class="l-string">&#39;t be established.</span>
+</div><div class="l-line" data-line="4"><span class="l-string">ECDSA key fingerprint is SHA256:E4GYJCEoz+G5wv+EdkPyRLytgP7aTj9BS9lr1d38Xg==.</span>
+</div><div class="l-line" data-line="5"><span class="l-string">Are you sure you want to continue connecting (yes/no)? yes</span>
+</div><div class="l-line" data-line="6"><span class="l-string">Warning: Permanently added &#39;</span><span class="l-variable-parameter">192.168.50.4</span><span class="l-string">&#39; (ECDSA) to the list of known hosts.</span>
+</div><div class="l-line" data-line="7"><span class="l-string"></span>
+</div><div class="l-line" data-line="8"><span class="l-string">jde@192.168.50.4&#39;</span><span class="l-variable-parameter">s</span> <span class="l-variable-parameter">password:</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Most SSH clients will not display anything while you type your password. Simply
+press <code>Enter</code> when you’re done to submit it.</p></div></div>
+<h2 id="logging-in-with-ssh">Logging in with SSH<a href="#logging-in-with-ssh" aria-label="Link to heading 'Logging in with SSH'" data-heading-content="Logging in with SSH" class="anchor"></a></h2>
+<p>If you run the <code>ssh</code> command with no extra arguments and authenticate with your
+password, <strong>SSH will run the default <a href="https://en.wikipedia.org/wiki/Shell_(computing)" target="_blank" rel="noopener noreferrer">shell</a></strong> configured for that user,
+typically <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a> on Linux servers:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
+</div><div class="l-line" data-line="2"><span class="l-variable">jde</span><span class="l-function-call">@192.168.50.4</span>&#39;s password:
+</div><div class="l-line" data-line="3">Welcome to Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0-33-generic x86_64)
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">  System information as of Wed Oct 21 04:29:00 UTC 2015
+</div><div class="l-line" data-line="6">  ...
+</div><div class="l-line" data-line="7">
+</div><div class="l-line" data-line="8">$
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Note that you may have a different command line prompt once you are connected,
+in this example <code>$</code> instead of <code>$&gt;</code>.</p></div></div>
+<h3 id="typing-commands-while-connected-through-ssh">Typing commands while connected through SSH<a href="#typing-commands-while-connected-through-ssh" aria-label="Link to heading 'Typing commands while connected through SSH'" data-heading-content="Typing commands while connected through SSH" class="anchor"></a></h3>
+<p>You are now <strong>connected to a Bash shell running on the server</strong>. Anything you
+type is encrypted through SSH’s secure channel and interpreted by that shell.
+Any data that Bash outputs is also encrypted, sent back through the channel and
+displayed in your terminal.</p>
+<p class='center'><img class='w90' src='images/ssh-channel-and-processes-0dde495cd849034036fe7cbea6ab701a.jpg' /></p>
+<h3 id="disconnecting">Disconnecting<a href="#disconnecting" aria-label="Link to heading 'Disconnecting'" data-heading-content="Disconnecting" class="anchor"></a></h3>
+<p>Disconnect with the command <code>exit</code> (or with <code>Ctrl-D</code> on Linux or macOS). You
+should be back to the shell running on your local computer, with your usual
+prompt:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span> <span class="l-variable">exit</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">192.168.50.4</span> <span class="l-variable-parameter">closed.</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span>
+</div></code></pre>
+<h3 id="where-am-i">Where am I?<a href="#where-am-i" aria-label="Link to heading 'Where am I?'" data-heading-content="Where am I?" class="anchor"></a></h3>
+<p>Sometimes, you might forget what shell your terminal is connected to. Is it a
+shell on your local machine or one running on the server?</p>
+<p>If you’re not sure, the <code>hostname</code> command may help you. It prints the network
+name of the current machine:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
+</div><div class="l-line" data-line="5"><span class="l-variable">jde</span><span class="l-function-call">@192.168.50.4</span>&#39;s password:
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">$ hostname
+</div><div class="l-line" data-line="8">example.com
+</div></code></pre>
+<p>In this example, the local computer is named <code>MyComputer.local</code>, while the
+server is named <code>example.com</code>.</p>
+<p>As you can see, the <code>hostname</code> command returns different results before and
+after connecting to the server with SSH, because it’s running on your local
+machine the first time, but is running on the server the second time.</p>
+<h2 id="logging-in-or-running-a-command">Logging in or running a command<a href="#logging-in-or-running-a-command" aria-label="Link to heading 'Logging in or running a command'" data-heading-content="Logging in or running a command" class="anchor"></a></h2>
+<p>When you execute <code>ssh</code> with the <code>[command]</code> option, it will execute the command
+and close the connection as soon as that command is done.</p>
+<p>Run this from your local shell:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span> <span class="l-string-special-path">echo</span> <span class="l-string-special-path">Hello</span> <span class="l-string-special-path">World</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">MyComputer.local</span>
+</div></code></pre>
+<p>As you can see, you are still in your local shell.
+The connection was closed as soon as the <code>echo</code> command completed.</p>
+<h2 id="public-key-authentication">Public key authentication<a href="#public-key-authentication" aria-label="Link to heading 'Public key authentication'" data-heading-content="Public key authentication" class="anchor"></a></h2>
+<p>Password authentication works, but it has some drawbacks:</p>
+<ul>
+<li>Attackers may try to <a href="https://en.wikipedia.org/wiki/Brute-force_attack" target="_blank" rel="noopener noreferrer">brute force</a> your password.</li>
+<li>If an attacker succeeds in performing a man-in-the-middle attack (for example
+if you forget to check the public key the first time you connect), he may
+steal your password.</li>
+<li>If the server is compromised, an attacker may modify the SSH server to steal
+your password.</li>
+</ul>
+<p>As explained earlier, SSH uses asymmetric cryptography (among other techniques)
+to establish its secure channel. It’s <strong>also possible to use asymmetric
+cryptography to authenticate</strong>.</p>
+<h3 id="how-does-it-work">How does it work?<a href="#how-does-it-work" aria-label="Link to heading 'How does it work?'" data-heading-content="How does it work?" class="anchor"></a></h3>
+<p>If you have a <strong>private-public key pair</strong>, you can <strong>give your public key to the
+server</strong>. Using <strong>your private key</strong>, your SSH client <strong>can prove to the SSH
+server that you are the owner of that public key</strong>.</p>
+<p>This has advantages over password authentication:</p>
+<ul>
+<li>It’s virtually impossible to <a href="https://en.wikipedia.org/wiki/Brute-force_attack" target="_blank" rel="noopener noreferrer">brute-force</a> (it is larger and
+probably has much more <a href="https://en.wikipedia.org/wiki/Password_strength#Entropy_as_a_measure_of_password_strength" target="_blank" rel="noopener noreferrer">entropy</a> than your password).</li>
+<li>Your private key will not be compromised by a man-in-the-middle attack or if
+the server is compromised, as it is never transmitted to the server, only used
+to solve mathematical problems based on the public key.</li>
+</ul>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Note that <strong>public key authentication is only as secure as the file containing
+your private key</strong>. If you publish that file anywhere or allow your local
+machine to be compromised, the attacker will be able to impersonate you on any
+server or service where you put your public key.</p></div></div>
+<h3 id="how-does-public-key-authentication-work">How does public key authentication work?<a href="#how-does-public-key-authentication-work" aria-label="Link to heading 'How does public key authentication work?'" data-heading-content="How does public key authentication work?" class="anchor"></a></h3>
+<p>To authenticate you, the server will need your <strong>public key</strong>. That way, you
+will be able to prove, using your <strong>private key</strong>, that you are the owner of
+that public key.</p>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Remember, <strong>your private key MUST remain private</strong> (i.e. the <code>id_ed25519</code> file).
+You should <strong>never</strong> give it to any person, server or web service. Only give
+your public key (i.e. the <code>id_ed25519.pub</code> file).</p></div></div></div>
+<h3 id="using-multiple-keys">Using multiple keys<a href="#using-multiple-keys" aria-label="Link to heading 'Using multiple keys'" data-heading-content="Using multiple keys" class="anchor"></a></h3>
+<p>You may have multiple key pairs.</p>
+<p>Some key pairs may have been generated by other programs or web services. For
+example, some Git user interfaces generate a key pair to access GitHub, or
+Amazon Web Services’s Elastic Compute Cloud (EC2) generates key pairs to give
+you access to their virtual machines.</p>
+<p>Having multiple key pairs may be part of a security strategy to limit the access
+an attacker might gain if one of them is compromised.</p>
+<p>To generate a key with a custom name, use the <code>-f</code> (<strong>f</strong>ile) option when
+generating the key with the <code>ssh-keygen</code> command. To use a specific key pair,
+use the <code>ssh</code> command’s <code>-i</code> (<strong>i</strong>dentity) option, which allows you to choose
+the private key file you want to use:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">custom_key</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">-i</span> <span class="l-variable-parameter">~/.ssh/custom_key</span> <span class="l-variable-parameter">jde@192.168.50.4</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>It is the private key file you want to use with the <code>-i</code> option, not the public
+key, as the private key is the one your SSH client will use to prove that it
+owns the public key.</p></div></div>
+<h3 id="key-management">Key management<a href="#key-management" aria-label="Link to heading 'Key management'" data-heading-content="Key management" class="anchor"></a></h3>
+<p>A few tips on managing your key pairs:</p>
+<ul>
+<li>
+<p>You may disseminate your <strong>public key</strong> freely to authenticate to other
+computers or services.</p>
+</li>
+<li>
+<p><strong>NEVER give your private key to anyone</strong>.</p>
+</li>
+<li>
+<p>Conversely, you may copy your private key to another computer of yours if you
+want it to have the same access to other computers or services.</p>
+</li>
+<li>
+<p><strong>Back up your private and public key files</strong> (<code>id_rsa</code> and <code>id_rsa.pub</code>) to
+avoid having to regenerate a pair if you lose your computer or switch to
+another computer. (If you create a new key pair, you will have to replace the
+old public key with the new one everywhere you used it.)</p>
+</li>
+<li>
+<p>Use <a href="https://www.ssh.com/academy/ssh/copy-id" target="_blank" rel="noopener noreferrer">the <code>ssh-copy-id</code> command</a> to copy your public key to other
+computers to use public key authentication instead of password authentication.</p>
+<p><em>You will see how to do that in the SSH exercises.</em></p>
+</li>
+<li>
+<p>For web services using public key authentication (e.g. GitHub), you usually
+have to manually copy the public key file’s contents (<code>id_rsa.pub</code>) and
+provide it to them in your account’s settings.</p>
+</li>
+</ul>
+<h3 id="key-protection">Key protection<a href="#key-protection" aria-label="Link to heading 'Key protection'" data-heading-content="Key protection" class="anchor"></a></h3>
+<p>It’s good practice to <a href="https://learn.microsoft.com/en-us/azure/devops/repos/git/gcm-ssh-passphrase?view=azure-devops" target="_blank" rel="noopener noreferrer">protect your private key with a
+<strong>passphrase</strong></a>. You can enter a passphrase when generating
+your key pair with the <code>ssh-keygen</code> command. You can also <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases" target="_blank" rel="noopener noreferrer">add a passphrase to
+an existing key</a> later.</p>
+<ul>
+<li>
+<p><strong>Without a passphrase, anyone who gains access to your computer has the
+potential to copy your private key.</strong> For example, family members,
+coworkers, system administrators and hostile actors could gain access.</p>
+</li>
+<li>
+<p>The <strong>downside</strong> to using a passphrase is that <strong>you need to enter it every
+time you use SSH</strong>. You can temporarily cache your passphrase using
+<a href="https://www.cyberciti.biz/faq/how-to-use-ssh-agent-for-authentication-on-linux-unix/" target="_blank" rel="noopener noreferrer">ssh-agent</a> so you don’t have to enter it every time you connect.</p>
+<p class='center'><img class='w70' src='images/ssh-agent-358700b6487e2e77c4dfc5772eb3da28.png' /></p>
+</li>
+<li>
+<p><strong>If a private key is compromised</strong> (e.g. your computer is hacked or stolen),
+you should <strong>remove the corresponding public key</strong> from computers and web
+services you have copied it to.</p>
+</li>
+</ul>
+<h2 id="ssh-for-other-network-services">SSH for other network services<a href="#ssh-for-other-network-services" aria-label="Link to heading 'SSH for other network services'" data-heading-content="SSH for other network services" class="anchor"></a></h2>
+<p>As mentioned initially, SSH is a network protocol. It can be used not only for
+command line login, but to secure other network services.</p>
+<p>A few examples are:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Secure_copy" target="_blank" rel="noopener noreferrer"><strong>S</strong>ecure <strong>C</strong>o<strong>p</strong>y (<code>scp</code>)</a> - A means of securely transferring
+computer files between a local and remote host.</li>
+<li><a href="https://en.wikipedia.org/wiki/Rsync" target="_blank" rel="noopener noreferrer">rsync</a> - Utility for efficiently transferring and synchronizing files
+across computer systems.</li>
+<li><a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">SSH File Transfer Protocol (SFTP)</a> - Network protocol that provides
+file access, file transfer and file management.</li>
+<li><a href="https://git-scm.com" target="_blank" rel="noopener noreferrer">Git</a> - Version control system that can use SSH (among other protocols)
+to transfer versioned data.</li>
+</ul>
+<h2 id="the-birth-or-death-of-an-ssh-connection">The birth (or death) of an SSH connection<a href="#the-birth-or-death-of-an-ssh-connection" aria-label="Link to heading 'The birth (or death) of an SSH connection'" data-heading-content="The birth (or death) of an SSH connection" class="anchor"></a></h2>
+<p><img src="images/ssh-connection-e54dc4d3445badca47f379ddfb57fb49.png" alt="The birth (or death) of an SSH connection" /></p>
+<ul>
+<li><a href="./images/ssh-connection-f37f07b58a14a34163dce271450916ed.pdf">PDF version</a></li>
+<li><a href="./images/ssh-connection-e54dc4d3445badca47f379ddfb57fb49.png">PNG version</a></li>
+</ul>
+<h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
+<ul>
+<li><a href="https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work" target="_blank" rel="noopener noreferrer">How does SSH Work</a></li>
+<li><a href="https://www.cheapsslshop.com/blog/demystifying-symmetric-and-asymmetric-methods-of-encryption" target="_blank" rel="noopener noreferrer">Demystifying Symmetric and Asymmetric Methods of Encryption</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process" target="_blank" rel="noopener noreferrer">Understanding the SSH Encryption and Connection Process</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank" rel="noopener noreferrer">Diffie-Hellman Key Exchange</a></li>
+<li><a href="https://www.onebigfluke.com/2013/11/public-key-crypto-math-explained.html" target="_blank" rel="noopener noreferrer">Simplest Explanation of the Math Behind Public Key Cryptography</a></li>
+<li><a href="https://books.google.ch/books/about/SSH_The_Secure_Shell_The_Definitive_Guid.html?id=9FSaScltd-kC&amp;redir_esc=y" target="_blank" rel="noopener noreferrer">SSH, The Secure Shell: The Definitive Guide</a></li>
+<li><a href="https://serverfault.com/a/935667" target="_blank" rel="noopener noreferrer">SSH Authentication Sequence and Key Files</a></li>
+</ul>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-ssh-command">The <code>ssh</code> command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#ssh-known-hosts">SSH known hosts</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#are-you-really-the-ssh-server-im-looking-for">Are you really the SSH server I’m looking for?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#how-can-i-solve-this-problem">How can I solve this problem?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#known-hosts-file">Known hosts file</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#adding-public-keys-to-the-known-hosts-file">Adding public keys to the known hosts file</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#preventing-future-man-in-the-middle-attacks">Preventing future man-in-the-middle attacks</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#password-authentication">Password authentication</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#logging-in-with-ssh">Logging in with SSH</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#typing-commands-while-connected-through-ssh">Typing commands while connected through SSH</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#disconnecting">Disconnecting</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#where-am-i">Where am I?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#logging-in-or-running-a-command">Logging in or running a command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#public-key-authentication">Public key authentication</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-does-it-work">How does it work?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-does-public-key-authentication-work">How does public key authentication work?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-multiple-keys">Using multiple keys</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#key-management">Key management</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#key-protection">Key protection</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#ssh-for-other-network-services">SSH for other network services</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-birth-or-death-of-an-ssh-connection">The birth (or death) of an SSH connection</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-104-ssh-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-104-ssh-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/104-ssh/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
+        <a href="/2025/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2025/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@638e0fe</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

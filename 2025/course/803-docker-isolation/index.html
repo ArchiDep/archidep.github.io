@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2025/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Docker Isolation · ArchiDep</title>
+<meta name="description" content="Learn about Docker container isolation mechanisms as it pertains to networking and storage." />
+<link rel="canonical" href="https://archidep.ch/2025/course/803-docker-isolation/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Docker Isolation" />
+<meta property="og:description" content="Learn about Docker container isolation mechanisms as it pertains to networking and storage." />
+<meta property="og:url" content="https://archidep.ch/2025/course/803-docker-isolation/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2025/assets/theme/theme-84f7fae67955e098c398122bb3f153ab.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2025/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2025/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2025/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2025-2026</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/803-docker-isolation/subject.md">Rev: 638e0fe498e6767a8830e8c2202e554666c3e772</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2025/course/803-docker-isolation/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-subject">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Docker Isolation
+</h1>
+
+      <div class="my-4"><p>Learn about Docker container isolation mechanisms as it pertains to networking
+and storage.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#docker-networks">Docker networks</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-default-bridge-network">The default bridge network</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-isolated-networks">Create isolated networks</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#automating-network-creation">Automating network creation</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#persistent-storage">Persistent storage</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#container-file-system-isolation">Container file system isolation</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-bind-mounts">Using bind mounts</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      
+
+      <h2 id="docker-networks">Docker networks<a href="#docker-networks" aria-label="Link to heading 'Docker networks'" data-heading-content="Docker networks" class="anchor"></a></h2>
+<p><a href="https://docs.docker.com/engine/network/" target="_blank" rel="noopener noreferrer">Docker networking</a> allows containers to communicate with
+each other and with external services outside of Docker.</p>
+<p>You can list the available Docker networks on your system using the command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">ls</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">NETWORK</span> <span class="l-variable-parameter">ID</span>     <span class="l-variable-parameter">NAME</span>      <span class="l-variable-parameter">DRIVER</span>    <span class="l-variable-parameter">SCOPE</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">4fbcb80199ab</span>   <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">0dca506f97c0</span>   <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">d54b832d124f</span>   <span class="l-variable-parameter">none</span>      <span class="l-variable-parameter">null</span>      <span class="l-variable-parameter">local</span>
+</div></code></pre>
+<p>There are 3 networks available out of the box in a fresh Docker installation:</p>
+<ul>
+<li>The <a href="https://docs.docker.com/engine/network/drivers/bridge/" target="_blank" rel="noopener noreferrer"><code>bridge</code> network</a> is the <strong>default network for
+containers</strong>. It provides network isolation between the host system and the
+containers, while allowing communication between containers on the same bridge
+network.</li>
+<li>The <a href="https://docs.docker.com/engine/network/drivers/host/" target="_blank" rel="noopener noreferrer"><code>host</code> network</a> removes network isolation between
+the container and the host system. Containers using the host network share the
+host’s network stack and can directly access the host’s network interfaces.</li>
+<li>The <a href="https://docs.docker.com/engine/network/drivers/none/" target="_blank" rel="noopener noreferrer"><code>none</code> network</a> disables all networking for the
+container.</li>
+</ul>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>There are other types of <a href="https://docs.docker.com/engine/network/drivers/" target="_blank" rel="noopener noreferrer">Docker network drivers</a>, but
+these are the most commonly used on a development machine. The others are
+outside the scope of this course.</p></div></div>
+<h3 id="the-default-bridge-network">The default bridge network<a href="#the-default-bridge-network" aria-label="Link to heading 'The default bridge network'" data-heading-content="The default bridge network" class="anchor"></a></h3>
+<p>Let’s demonstrate how the default bridge network works.</p>
+<p>You may remember that before you started deployment exercises, you <a href="/2025/course/409-tcp/#establish-a-bi-directional-tcp-connection">established
+a bi-directional TCP connection between servers using the <code>nc</code> (<strong>n</strong>et<strong>c</strong>at)
+command</a>. Let’s do the same
+between containers.</p>
+<p>Run an container from the Ubuntu base image, naming it <code>nc-server</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">nc-server</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">ubuntu:noble</span>
+</div></code></pre>
+<p>Your prompt should have changed to reflect that you are now inside the
+container.</p>
+<p>Install netcat in this container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">update</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">netcat-openbsd</span>
+</div></code></pre>
+<p>You should now be able to run the <code>nc</code> command like you did in the TCP exercise
+(but from inside the container):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-l</span> <span class="l-number">3000</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This starts netcat in <strong>l</strong>istening mode (with the <code>-l</code> option) on TCP port
+<code>3000</code>. It now waits for a TCP client to connect on that port.</p></div></div>
+<p>Leave this running and open a new terminal window. In the new terminal, inspect
+the <code>nc-server</code> container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">inspect</span> <span class="l-variable-parameter">nc-server</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3">  <span class="l-string">&quot;Networks&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="4">    <span class="l-string">&quot;bridge&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="5">      <span class="l-string">&quot;IPAMConfig&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="6">      <span class="l-string">&quot;Links&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="7">      <span class="l-string">&quot;Aliases&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="8">      <span class="l-string">&quot;MacAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;92:6b:1c:1c:18:13&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="9">      <span class="l-string">&quot;DriverOpts&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="10">      <span class="l-string">&quot;GwPriority&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="11">      <span class="l-string">&quot;NetworkID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;58a6dc73cfa3ff37e7...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="12">      <span class="l-string">&quot;EndpointID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;146ed4bb30b95ff2a...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="13">      <span class="l-string">&quot;Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.17.0.1&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="14">      <span class="l-string">&quot;IPAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.17.0.2&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="15">      <span class="l-string">&quot;IPPrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">16,</span>
+</div><div class="l-line" data-line="16">      <span class="l-string">&quot;IPv6Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="17">      <span class="l-string">&quot;GlobalIPv6Address&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="18">      <span class="l-string">&quot;GlobalIPv6PrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="19">      <span class="l-string">&quot;DNSNames&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null</span>
+</div><div class="l-line" data-line="20">    <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="21">  <span class="l-string">}</span><span class="l-string">,</span>
+</div><div class="l-line" data-line="22"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>The output is a JSON object with a lot of information about the container.
+Somewhere in there, you should see the <code>Networks</code> property, indicating that the
+container is connected to the <code>bridge</code> network. You should also see the
+container’s IP address on that network, in this example: <code>172.17.0.2</code> (it might
+be another address on your machine). Copy this address.</p>
+<p>Now run a second container from the same base image, naming it <code>nc-client</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">nc-client</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">ubuntu:noble</span>
+</div></code></pre>
+<p>Again, your prompt should have changed to reflect that you are now inside the
+new container.</p>
+<p>Install netcat in this container as well:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">update</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">netcat-openbsd</span>
+</div></code></pre>
+<p>From this new container, use netcat to connect to the <code>nc-server</code> container
+using its IP address on the bridge network:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">172.17.0.2</span> <span class="l-number">3000</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Make sure to use the same IP address as shown in the output of the <code>docker inspect nc-server</code> command you ran earlier.</p></div></div>
+<p>You should now have a bi-directional TCP connection open between the two
+containers. Type something in the <code>nc-client</code> container terminal:</p>
+<p><img src="./images/nc-client-hello-e62008aa34f7f51e9694bbfbbcd26583.png" alt="Netcat client: type hello" /></p>
+<p>You should see the message appear in the <code>nc-server</code> container terminal as soon
+as you press Enter:</p>
+<p><img src="./images/nc-client-enter-c34f8558cfa5d4ddf5737fa4b726d9c4.png" alt="Netcat client: press enter" /></p>
+<p>Similarly, if you type something in the <code>nc-server</code> container terminal:</p>
+<p><img src="./images/nc-server-world-8788085f9b789472007dbca06bba4b39.png" alt="Netcat server: type world" /></p>
+<p>You should see the message appear in the <code>nc-client</code> container terminal as soon
+as you press Enter:</p>
+<p><img src="./images/nc-server-enter-282c9dea0c10cc28c0c1f5f26273695b.png" alt="Netcat server: press enter" /></p>
+<p>This demonstrates that <strong>the two containers can communicate with each other over
+the default bridge network</strong>.</p>
+<p>Indeed, if you inspect the <code>nc-client</code> container from a third terminal window,
+you should see that it is also connected to the <code>bridge</code> network, with its own
+IP address (<code>172.17.0.3</code> in this example):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">inspect</span> <span class="l-variable-parameter">nc-client</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3">  <span class="l-string">&quot;Networks&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="4">    <span class="l-string">&quot;bridge&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="5">      <span class="l-string">&quot;IPAMConfig&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="6">      <span class="l-string">&quot;Links&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="7">      <span class="l-string">&quot;Aliases&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="8">      <span class="l-string">&quot;MacAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;0a:6c:41:11:c4:e9&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="9">      <span class="l-string">&quot;DriverOpts&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="10">      <span class="l-string">&quot;GwPriority&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="11">      <span class="l-string">&quot;NetworkID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;58a6dc73cfa3ff37e7...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="12">      <span class="l-string">&quot;EndpointID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;77d30c2e90d76910f...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="13">      <span class="l-string">&quot;Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.17.0.1&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="14">      <span class="l-string">&quot;IPAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.17.0.3&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="15">      <span class="l-string">&quot;IPPrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">16,</span>
+</div><div class="l-line" data-line="16">      <span class="l-string">&quot;IPv6Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="17">      <span class="l-string">&quot;GlobalIPv6Address&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="18">      <span class="l-string">&quot;GlobalIPv6PrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="19">      <span class="l-string">&quot;DNSNames&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null</span>
+</div><div class="l-line" data-line="20">    <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="21">  <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="22"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>This is the architecture of what you have just set up:</p>
+<p><img src="./images/nc-bridge-architecture-adb808db1c50e1d6a24cbe5fb42aa753.png" alt="Diagram" /></p>
+<div class="flex items-center gap-2">
+  <a href="./images/nc-bridge-architecture-adbff2e5b06fbb955db26234159648a0.pdf" download="Docker Netcat Bridge Architecture" class="tooltip" data-tip="Download PDF"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+  />
+</svg>
+  </a>
+  <a href="./images/nc-bridge-architecture-adb808db1c50e1d6a24cbe5fb42aa753.png" download="Docker Netcat Bridge Architecture" class="tooltip" data-tip="Download PNG"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+  />
+</svg>
+  </a>
+</div>
+<p>Great! Now stop both netcat containers by pressing <code>Ctrl+C</code> and then running
+<code>exit</code> in each terminal.</p>
+<h3 id="create-isolated-networks">Create isolated networks<a href="#create-isolated-networks" aria-label="Link to heading 'Create isolated networks'" data-heading-content="Create isolated networks" class="anchor"></a></h3>
+<p>You can create your own isolated Docker networks using the <code>docker network create &lt;name&gt;</code> command. Let’s create two networks named <code>net1</code> and <code>net2</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docket</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">create</span> <span class="l-variable-parameter">net1</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">cff44c36cd81b29908cf1a06fd6011cf67d8ffe841af1eb550250e433cfc2fa3</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">create</span> <span class="l-variable-parameter">net2</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">36677fbfb79571eab4ba1541758bf9cce8461dc7c9ec0f1e4e3f03bbbb39e328</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The network IDs returned by the commands will be different on your machine.</p></div></div>
+<p>Run <code>docker network ls</code> again to check that the new networks were created:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">ls</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">NETWORK</span> <span class="l-variable-parameter">ID</span>     <span class="l-variable-parameter">NAME</span>      <span class="l-variable-parameter">DRIVER</span>    <span class="l-variable-parameter">SCOPE</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">58a6dc73cfa3</span>   <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">0dca506f97c0</span>   <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">10e2717736fa</span>   <span class="l-variable-parameter">net1</span>      <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">36677fbfb795</span>   <span class="l-variable-parameter">net2</span>      <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">d54b832d124f</span>   <span class="l-variable-parameter">none</span>      <span class="l-variable-parameter">null</span>      <span class="l-variable-parameter">local</span>
+</div></code></pre>
+<p>As you can see, Docker creates networks with the <code>bridge</code> driver by default. But
+these are not the same network as the default <code>bridge</code> network: they are
+<strong>isolated</strong> from it and from each other.</p>
+<p>Let’s demonstrate that. Run a new <code>nc-server</code> container again, but this time
+attach it to the <code>net1</code> network using the <code>--network &lt;name&gt;</code> option instead of
+leaving it on the default bridge network:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">nc-server</span> <span class="l-variable-parameter">--network</span> <span class="l-variable-parameter">net1</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">ubuntu:noble</span>
+</div></code></pre>
+<p>Install netcat in this container, and run it in listening mode on port 3000 as
+before:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">update</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">netcat-openbsd</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-l</span> <span class="l-number">3000</span>
+</div></code></pre>
+<p>In another terminal, run a new <code>nc-client</code> container, this time attaching it to
+the <code>net2</code> network:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">nc-client</span> <span class="l-variable-parameter">--network</span> <span class="l-variable-parameter">net2</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">ubuntu:noble</span>
+</div></code></pre>
+<p>Install netcat in this new container as well:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">update</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">netcat-openbsd</span>
+</div></code></pre>
+<p>Now open a third terminal and inspect the <code>nc-server</code> container to get its IP
+address on the <code>net1</code> network:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">inspect</span> <span class="l-variable-parameter">nc-server</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3">  <span class="l-string">&quot;Networks&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="4">    <span class="l-string">&quot;net1&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="5">      <span class="l-string">&quot;IPAMConfig&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="6">      <span class="l-string">&quot;Links&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="7">      <span class="l-string">&quot;Aliases&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="8">      <span class="l-string">&quot;MacAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;52:e7:07:9b:1a:f5&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="9">      <span class="l-string">&quot;DriverOpts&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="10">      <span class="l-string">&quot;GwPriority&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="11">      <span class="l-string">&quot;NetworkID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;10e2717736fa2d7a3a...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="12">      <span class="l-string">&quot;EndpointID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;2cd905711f423d477...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="13">      <span class="l-string">&quot;Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.18.0.1&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="14">      <span class="l-string">&quot;IPAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.18.0.2&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="15">      <span class="l-string">&quot;IPPrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">16,</span>
+</div><div class="l-line" data-line="16">      <span class="l-string">&quot;IPv6Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="17">      <span class="l-string">&quot;GlobalIPv6Address&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="18">      <span class="l-string">&quot;GlobalIPv6PrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="19">      <span class="l-string">&quot;DNSNames&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">[</span>
+</div><div class="l-line" data-line="20">        <span class="l-string">&quot;nc-server&quot;</span><span class="l-string">,</span>
+</div><div class="l-line" data-line="21">        <span class="l-string">&quot;1a5eca960467&quot;</span>
+</div><div class="l-line" data-line="22">      <span class="l-function-call">]</span>
+</div><div class="l-line" data-line="23">    <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="24">  <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="25"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>As you can see, Docker indicates that the container is connected to the <code>net1</code>
+network instead of the <code>bridge</code> network. In this example, its IP address is
+<code>172.18.0.2</code> (it might be different on your machine). Copy this address.</p>
+<p>From the <code>nc-client</code> container terminal, try to connect to the <code>nc-server</code>
+container using its IP address on the <code>net1</code> network:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">172.18.0.2</span> <span class="l-number">3000</span>
+</div></code></pre>
+<p>You can try typing something in the <code>nc-client</code> container terminal and pressing
+Enter, or the other way around, but it won’t work this time—nothing will appear
+in the other terminal:</p>
+<p><img src="./images/nc-isolated-036628d3c4fc01f4647483ab5efb0062.png" alt="Netcat isolated" /></p>
+<div class="callout callout-more group/callout" data-callout="803-docker-isolation:netcat-wait"><div class="icon image"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-803-docker-isolation:netcat-wait" type="checkbox" class="peer hidden" /><div class="content"><p>By default, netcat will not fail or show any error message if it cannot connect
+to the server. If you want to see an error, stop the <code>nc</code> command with <code>Ctrl-C</code>
+in the <code>nc-client</code> container, and re-run the command with the additional <code>-w 3</code>
+option to <strong>w</strong>ait at most 3 seconds for a connection before giving up:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-w</span> <span class="l-number">3</span> <span class="l-variable-parameter">172.18.0.2</span> <span class="l-number">3000</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-comment"># 3 seconds later...</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
+</div><div class="l-line" data-line="5"><span class="l-number">1</span>
+</div></code></pre>
+<p>Netcat will exit with a non-zero status code to indicate that it could not
+connect.</p></div><label for="callout-803-docker-isolation:netcat-wait" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-803-docker-isolation:netcat-wait" class="less join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Amazing!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>These two containers <strong>cannot communicate with each other</strong>. Indeed, if you
+inspect the <code>nc-client</code> container from another terminal window, you should see
+that it’s connected to the <code>net2</code> network, with its own IP address (<code>172.19.0.2</code>
+in this example):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">inspect</span> <span class="l-variable-parameter">nc-client</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3">  <span class="l-string">&quot;Networks&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="4">    <span class="l-string">&quot;net2&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="5">      <span class="l-string">&quot;IPAMConfig&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="6">      <span class="l-string">&quot;Links&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="7">      <span class="l-string">&quot;Aliases&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="8">      <span class="l-string">&quot;MacAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;7a:df:a1:99:26:af&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="9">      <span class="l-string">&quot;DriverOpts&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">null,</span>
+</div><div class="l-line" data-line="10">      <span class="l-string">&quot;GwPriority&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="11">      <span class="l-string">&quot;NetworkID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;36677fbfb79571eab4...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="12">      <span class="l-string">&quot;EndpointID&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;3af04b372fc784400...&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="13">      <span class="l-string">&quot;Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.19.0.1&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="14">      <span class="l-string">&quot;IPAddress&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;172.19.0.2&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="15">      <span class="l-string">&quot;IPPrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">16,</span>
+</div><div class="l-line" data-line="16">      <span class="l-string">&quot;IPv6Gateway&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="17">      <span class="l-string">&quot;GlobalIPv6Address&quot;</span><span class="l-string">:</span> <span class="l-string">&quot;&quot;</span><span class="l-variable-parameter">,</span>
+</div><div class="l-line" data-line="18">      <span class="l-string">&quot;GlobalIPv6PrefixLen&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">0,</span>
+</div><div class="l-line" data-line="19">      <span class="l-string">&quot;DNSNames&quot;</span><span class="l-string">:</span> <span class="l-variable-parameter">[</span>
+</div><div class="l-line" data-line="20">        <span class="l-string">&quot;nc-client&quot;</span><span class="l-string">,</span>
+</div><div class="l-line" data-line="21">        <span class="l-string">&quot;e6f6bf404361&quot;</span>
+</div><div class="l-line" data-line="22">      <span class="l-function-call">]</span>
+</div><div class="l-line" data-line="23">    <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="24">  <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="25"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>You learned about the concept of <a href="/2025/course/408-unix-networking/slides/#/11">IP subnets and netmasks</a> when we covered Unix networking.</p>
+<p>Look at the <code>IPPrefixLen</code> property in the JSON description of both containers,
+which defines the netmask: it is <code>16</code> in both examples above, meaning the first
+16 bits of each IP address define the subnet. In other words: the first half of
+each adress is the subnet, since IPv4 addresses have 32 bits. This means that:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Container</th>
+<th align="left">IP address</th>
+<th align="left">Netmask</th>
+<th align="left">CIDR</th>
+<th align="left">Subnet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>nc-server</code></td>
+<td align="left"><code>172.18.0.2</code></td>
+<td align="left">16 bits</td>
+<td align="left"><code>/16</code></td>
+<td align="left"><code>172.18.X.Y</code></td>
+</tr>
+<tr>
+<td align="left"><code>nc-client</code></td>
+<td align="left"><code>172.19.0.2</code></td>
+<td align="left">16 bits</td>
+<td align="left"><code>/16</code></td>
+<td align="left"><code>172.19.X.Y</code></td>
+</tr>
+</tbody>
+</table>
+<p>This is what the architecture now looks like:</p>
+<p><img src="./images/nc-isolated-architecture-87b3bffd24c1139035b3e0cf6e1a9e8a.png" alt="Diagram" /></p>
+<div class="flex items-center gap-2">
+  <a href="./images/nc-isolated-architecture-59938a76e9978ad6e1224e96976daa56.pdf" download="Docker Netcat Isolated Architecture" class="tooltip" data-tip="Download PDF"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+  />
+</svg>
+  </a>
+  <a href="./images/nc-isolated-architecture-87b3bffd24c1139035b3e0cf6e1a9e8a.png" download="Docker Netcat Isolated Architecture" class="tooltip" data-tip="Download PNG"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+  />
+</svg>
+  </a>
+</div>
+<p>Both containers are in different, isolated subnets managed by Docker. The
+<code>nc-client</code> container can only reach IP addresses in the <code>172.19.X.Y</code> subnet,
+while the <code>nc-server</code> container can only reach IP addresses in the <code>172.18.X.Y</code>
+subnet. This is why they cannot communicate with each other.</p>
+<h3 id="automating-network-creation">Automating network creation<a href="#automating-network-creation" aria-label="Link to heading 'Automating network creation'" data-heading-content="Automating network creation" class="anchor"></a></h3>
+<p>You will generally want to create isolated networks for your applications in
+production for more isolation and thus increased security. You can do this
+manually as shown above, but it’s more common to automate this using Compose
+files. We will see how to do this when we learn about <a href="/2025/course/804-docker-compose/">Docker Compose</a> next.</p>
+<h2 id="persistent-storage">Persistent storage<a href="#persistent-storage" aria-label="Link to heading 'Persistent storage'" data-heading-content="Persistent storage" class="anchor"></a></h2>
+<p>There are two main ways to persist data in Docker:</p>
+<ul>
+<li>Using <a href="https://docs.docker.com/engine/storage/bind-mounts/" target="_blank" rel="noopener noreferrer">bind mounts</a> to mount a directory from the host
+machine into the container.</li>
+<li>Using <a href="https://docs.docker.com/engine/storage/volumes/" target="_blank" rel="noopener noreferrer">volumes</a>, which are managed by Docker (stored in a
+specific location on the host machine by default).</li>
+</ul>
+<p>We will first demonstrate that data created inside a container is lost when the
+container is removed, and then we will see how to persist data using both bind
+mounts and volumes.</p>
+<h3 id="container-file-system-isolation">Container file system isolation<a href="#container-file-system-isolation" aria-label="Link to heading 'Container file system isolation'" data-heading-content="Container file system isolation" class="anchor"></a></h3>
+<p>As you learned in the previous <a href="/2025/course/801-docker/">Docker</a> lesson, the file system of a container is a thin writable layer over its
+image’s read-only layers. This means that any data created or modified inside a
+container is lost when the container is removed.</p>
+<p>Let’s demonstrate this. Run a new container from the official <code>nginx</code> image:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">3000:80</span> <span class="l-variable-parameter">nginx:1.29</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-d</code> (or <code>--detach</code>) option runs the container in the background. The
+<code>--name</code> option gives the container a name for easier reference. The <code>-p</code> (or
+<code>--publish</code>) option maps port <code>3000</code> on the host machine to port <code>80</code> in the
+container.</p></div></div>
+<p>You should see this container running with <code>docker ps</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">ps</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">CONTAINER</span> <span class="l-variable-parameter">ID</span>   <span class="l-variable-parameter">IMAGE</span>        <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">CREATED</span>         <span class="l-variable-parameter">STATUS</span>        <span class="l-variable-parameter">PORTS</span>                                     <span class="l-variable-parameter">NAMES</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">b720d8b8d7d7</span>   <span class="l-variable-parameter">nginx:1.29</span>   <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-number">2</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">1</span> <span class="l-variable-parameter">second</span>   <span class="l-variable-parameter">0.0.0.0:3000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string">[</span><span class="l-string">::</span><span class="l-string">]</span><span class="l-string">:3000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>   <span class="l-string-special-path">web</span>
+</div></code></pre>
+<p>Since you have published its main port, you should also be able to access this
+nginx server in your browser at <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a>:</p>
+<p><img src="./images/docker-nginx-ede38348f5830fa2c89d1cc00b0ce34a.png" alt="Docker nginx" /></p>
+<p>Great! You have nginx running in a container on your machine.</p>
+<p>Let’s make a small change. Start a shell session inside the running <code>web</code>
+container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-builtin">exec</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">/bin/bash</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>docker exec</code> subcommand executes a command in a running container. The <code>-i</code>
+(or <code>--interactive</code>) option keeps standard input open, and the <code>-t</code> (or <code>--tty</code>)
+option allocates a pseudo-TTY (terminal). Both options are needed to run an
+interactive shell session.</p></div></div>
+<p>Your prompt should have changed to reflect that you are now inside the
+container.</p>
+<p>Let’s investigate a bit. We know that the main nginx configuration file is
+generally located at <code>/etc/nginx/nginx.conf</code>. Let’s see what’s in it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span>@b720d8b8d7d7:/# cat /etc/nginx/nginx.conf
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">user  nginx;
+</div><div class="l-line" data-line="4">worker_processes  auto;
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">events {
+</div><div class="l-line" data-line="7">    worker_connections  1024;
+</div><div class="l-line" data-line="8"><span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10"><span class="l-function-call">http</span> <span class="l-variable-parameter">{</span>
+</div><div class="l-line" data-line="11">    <span class="l-function-call">include</span>       <span class="l-variable-parameter">/etc/nginx/mime.types</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="12">    <span class="l-function-call">default_type</span>  <span class="l-variable-parameter">application/octet-stream</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="13">
+</div><div class="l-line" data-line="14">    <span class="l-function-call">log_format</span>  <span class="l-variable-parameter">main</span>  <span class="l-string">&#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span>
+</div><div class="l-line" data-line="15">                      <span class="l-string">&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span>
+</div><div class="l-line" data-line="16">                      <span class="l-string">&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="17">
+</div><div class="l-line" data-line="18">    <span class="l-function-call">access_log</span>  <span class="l-variable-parameter">/var/log/nginx/access.log</span>  <span class="l-variable-parameter">main</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="19">
+</div><div class="l-line" data-line="20">    <span class="l-function-call">sendfile</span>        <span class="l-variable-parameter">on</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="21">    <span class="l-comment">#tcp_nopush     on;</span>
+</div><div class="l-line" data-line="22">
+</div><div class="l-line" data-line="23">    <span class="l-function-call">keepalive_timeout</span>  <span class="l-number">65</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="24">
+</div><div class="l-line" data-line="25">    <span class="l-comment">#gzip  on;</span>
+</div><div class="l-line" data-line="26">
+</div><div class="l-line" data-line="27">    <span class="l-function-call">include</span> <span class="l-variable-parameter">/etc/nginx/conf.d/*.conf</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="28"><span class="l-function-call">}</span>
+</div></code></pre>
+<p>The line that interests us most is the <a href="https://nginx.org/en/docs/ngx_core_module.html#include" target="_blank" rel="noopener noreferrer"><code>include</code> directive</a> at
+the end:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">    include /etc/nginx/conf.d/*.conf;
+</div></code></pre>
+<p>This tells nginx to include any configuration files located in the
+<code>/etc/nginx/conf.d/</code> directory.</p>
+<div class="callout callout-more group/callout" data-callout="803-docker-isolation:docker-nginx-simple-config"><div class="icon image"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-803-docker-isolation:docker-nginx-simple-config" type="checkbox" class="peer hidden" /><div class="content"><p>Note that this is a simpler nginx configuration than what you find when you
+install nginx on a regular server <a href="/2025/course/509-reverse-proxy/#includes">like you did when you learned about reverse
+proxying</a>.</p>
+<p>There are no <code>sites-available</code> or <code>sites-enabled</code> directories here, for example;
+only <code>conf.d</code>. Containers are intended to be minimal, so they often have simpler
+configurations than a full-fledged installation.</p>
+<p>Additionally, containers are also supposed to be ephemeral: you are not supposed
+to modify running containers directly in production, so the rationale for the
+<code>sites-available</code> and <code>sites-enabled</code> directories, i.e. to be able to quickly
+disable/enable sites, does not apply here. The Docker way would be to build a
+new image with the desired configuration changes instead, or to use a reverse
+proxy that is aware of Docker and able to re-configure itself automatically,
+like <a href="https://traefik.io" target="_blank" rel="noopener noreferrer">Traefik</a> or <a href="https://caddyserver.com" target="_blank" rel="noopener noreferrer">Caddy</a>.</p></div><label for="callout-803-docker-isolation:docker-nginx-simple-config" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-803-docker-isolation:docker-nginx-simple-config" class="less join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Fabulous!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>So let’s see what’s in this <code>conf.d</code> directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@b720d8b8d7d7:/#</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">/etc/nginx/conf.d</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">default.conf</span>
+</div></code></pre>
+<p>Just one site configuration file: <code>default.conf</code>. Let’s see what’s in it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span>@b720d8b8d7d7:/# cat /etc/nginx/conf.d/default.conf
+</div><div class="l-line" data-line="2">server {
+</div><div class="l-line" data-line="3">    listen       80;
+</div><div class="l-line" data-line="4">    listen  [::]:80;
+</div><div class="l-line" data-line="5">    server_name  localhost;
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">    #access_log  /var/log/nginx/host.access.log  main;
+</div><div class="l-line" data-line="8">
+</div><div class="l-line" data-line="9">    location / {
+</div><div class="l-line" data-line="10">        root   /usr/share/nginx/html;
+</div><div class="l-line" data-line="11">        index  index.html index.htm;
+</div><div class="l-line" data-line="12">    <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="13">
+</div><div class="l-line" data-line="14">    #error_page  404              /404.html;
+</div><div class="l-line" data-line="15">
+</div><div class="l-line" data-line="16">    # redirect server error pages to the static page /50x.html
+</div><div class="l-line" data-line="17">    #
+</div><div class="l-line" data-line="18">    error_page   500 502 503 504  /50x.html;
+</div><div class="l-line" data-line="19">    location = /50x.html {
+</div><div class="l-line" data-line="20">        root   /usr/share/nginx/html;
+</div><div class="l-line" data-line="21">    <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="22">
+</div><div class="l-line" data-line="23">    <span class="l-function-call">...</span>
+</div><div class="l-line" data-line="24"><span class="l-function-call">}</span>
+</div></code></pre>
+<p>This is a simple site configuration that serves static files, similar to <a href="/2025/course/510-nginx-static-deployment/">the
+one you created during the nginx static site deployment exercise</a>:</p>
+<ul>
+<li>The <a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#root" target="_blank" rel="noopener noreferrer"><code>root</code> directive</a> specifies the directory where the static
+files are located: the <code>/usr/share/nginx/html</code> directory inside the container.</li>
+<li>The <a href="https://nginx.org/en/docs/http/ngx_http_index_module.html" target="_blank" rel="noopener noreferrer"><code>index</code> directive</a> specifies the default files to serve when
+a directory is requested: <code>index.html</code> or <code>index.htm</code>.</li>
+</ul>
+<p>So let’s look at that <code>index.html</code> file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span>@b720d8b8d7d7:/# cat /usr/share/nginx/html/index.html
+</div><div class="l-line" data-line="2">&lt;!DOCTYPE html&gt;
+</div><div class="l-line" data-line="3">&lt;html&gt;
+</div><div class="l-line" data-line="4">&lt;head&gt;
+</div><div class="l-line" data-line="5">&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+</div><div class="l-line" data-line="6">&lt;style&gt;
+</div><div class="l-line" data-line="7">html { color-scheme: light dark; <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">body</span> <span class="l-variable-parameter">{</span> <span class="l-variable-parameter">width:</span> <span class="l-variable-parameter">35em</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">margin:</span> <span class="l-number">0</span> <span class="l-variable-parameter">auto</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">font-family:</span> <span class="l-variable-parameter">Tahoma,</span> <span class="l-variable-parameter">Verdana,</span> <span class="l-variable-parameter">Arial,</span> <span class="l-variable-parameter">sans-serif</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">}</span>
+</div><div class="l-line" data-line="10"><span class="l-operator">&lt;</span><span class="l-string-special-path">/style</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="11"><span class="l-operator">&lt;</span><span class="l-string-special-path">/head</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="12"><span class="l-operator">&lt;</span><span class="l-string-special-path">body</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="13"><span class="l-operator">&lt;</span><span class="l-string-special-path">h1</span><span class="l-operator">&gt;</span><span class="l-string-special-path">Welcome</span> <span class="l-function-call">to</span> <span class="l-variable-parameter">nginx!</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/h1</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="14"><span class="l-operator">&lt;</span><span class="l-string-special-path">p</span><span class="l-operator">&gt;</span><span class="l-string-special-path">If</span> <span class="l-string-special-path">you</span> <span class="l-string-special-path">see</span> <span class="l-string-special-path">this</span> <span class="l-string-special-path">page,</span> <span class="l-string-special-path">the</span> <span class="l-string-special-path">nginx</span> <span class="l-string-special-path">web</span> <span class="l-string-special-path">server</span> <span class="l-string-special-path">is</span> <span class="l-string-special-path">successfully</span> <span class="l-string-special-path">installed</span> <span class="l-string-special-path">and</span>
+</div><div class="l-line" data-line="15"><span class="l-function-call">working.</span> <span class="l-variable-parameter">Further</span> <span class="l-variable-parameter">configuration</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">required.</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/p</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="16">
+</div><div class="l-line" data-line="17"><span class="l-operator">&lt;</span><span class="l-string-special-path">p</span><span class="l-operator">&gt;</span><span class="l-string-special-path">For</span> <span class="l-string-special-path">online</span> <span class="l-string-special-path">documentation</span> <span class="l-string-special-path">and</span> <span class="l-string-special-path">support</span> <span class="l-string-special-path">please</span> <span class="l-string-special-path">refer</span> <span class="l-string-special-path">to</span>
+</div><div class="l-line" data-line="18"><span class="l-operator">&lt;</span><span class="l-string-special-path">a</span> <span class="l-variable">href</span><span class="l-operator">=</span><span class="l-string">&quot;http://nginx.org/&quot;</span><span class="l-operator">&gt;</span><span class="l-string-special-path">nginx.org</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/a</span><span class="l-operator">&gt;</span><span class="l-string-special-path">.</span><span class="l-operator">&lt;</span><span class="l-string-special-path">br/</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="19"><span class="l-string-special-path">Commercial</span> <span class="l-function-call">support</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">available</span> <span class="l-variable-parameter">at</span>
+</div><div class="l-line" data-line="20"><span class="l-operator">&lt;</span><span class="l-string-special-path">a</span> <span class="l-variable">href</span><span class="l-operator">=</span><span class="l-string">&quot;http://nginx.com/&quot;</span><span class="l-operator">&gt;</span><span class="l-string-special-path">nginx.com</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/a</span><span class="l-operator">&gt;</span><span class="l-string-special-path">.</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/p</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="21">
+</div><div class="l-line" data-line="22"><span class="l-operator">&lt;</span><span class="l-string-special-path">p</span><span class="l-operator">&gt;</span><span class="l-operator">&lt;</span><span class="l-string-special-path">em</span><span class="l-operator">&gt;</span><span class="l-string-special-path">Thank</span> <span class="l-function-call">you</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">using</span> <span class="l-variable-parameter">nginx.</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/em</span><span class="l-operator">&gt;</span><span class="l-operator">&lt;</span><span class="l-string-special-path">/p</span><span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="23"><span class="l-operator">&lt;</span><span class="l-string-special-path">/body</span><span class="l-operator">&gt;</span><span class="l-string-special-path"></span>
+</div><div class="l-line" data-line="24"><span class="l-operator">&lt;</span><span class="l-string-special-path">/html</span><span class="l-operator">&gt;</span>
+</div></code></pre>
+<p>Great! You’ve found the HTML for the default nginx welcome page that you see in
+your browser:</p>
+<p><img src="./images/docker-nginx-ede38348f5830fa2c89d1cc00b0ce34a.png" alt="Docker nginx" /></p>
+<p>Now let’s modify this file to see what happens. Of course, Docker images are
+minimal, so you don’t even have a text editor installed by default. Install your
+favorite command line editor:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@b720d8b8d7d7:/#</span> <span class="l-variable-parameter">apt</span> <span class="l-variable-parameter">update</span>
+</div><div class="l-line" data-line="2"><span class="l-variable">root</span><span class="l-function-call">@b720d8b8d7d7:/#</span> <span class="l-variable-parameter">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">nano</span>  <span class="l-comment"># or vim</span>
+</div></code></pre>
+<p>Now open the <code>index.html</code> file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@b720d8b8d7d7:/#</span> <span class="l-variable-parameter">nano</span> <span class="l-variable-parameter">/usr/share/nginx/html/index.html</span>  <span class="l-comment"># or vim</span>
+</div></code></pre>
+<p>Modify this line:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>To this:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx in a container!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Save with <code>Ctrl-X</code>, then <code>Y</code>, then <code>Enter</code> if you are using nano. Save with
+<code>Esc</code>, then <code>:wq</code>, then <code>Enter</code> if you are using Vim.</p></div></div>
+<p>Now exit the container shell:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@b720d8b8d7d7:/#</span> <span class="l-variable-parameter">exit</span>
+</div></code></pre>
+<p>Reload the page in your browser at
+<a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a>. You should see the updated
+welcome message:</p>
+<p><img src="./images/docker-nginx-modified-66c0f71961043f05fc59a52e37755c70.png" alt="Docker nginx modified" /></p>
+<p>Amazing! You have successfully modified a file inside a running container.</p>
+<p>Going back to what we discussed about layers in the previous lesson, you have
+modified the thin writable layer of the container at the top of the Union File
+System:</p>
+<p><img src="./images/docker-nginx-layers-4aecbd80917422e58924cbb1326991fa.jpg" alt="Docker thin writable layer" /></p>
+<p>Now stop the <code>web</code> container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">stop</span> <span class="l-variable-parameter">web</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">web</span>
+</div></code></pre>
+<p>Confirm the container is no longer running:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">ps</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">CONTAINER</span> <span class="l-variable-parameter">ID</span>   <span class="l-variable-parameter">IMAGE</span>     <span class="l-variable-parameter">COMMAND</span>   <span class="l-variable-parameter">CREATED</span>   <span class="l-variable-parameter">STATUS</span>    <span class="l-variable-parameter">PORTS</span>     <span class="l-variable-parameter">NAMES</span>
+</div></code></pre>
+<p>Stopping the container has stopped the nginx server that was running in it, so
+you should no longer be able to access it in your browser:</p>
+<p><img src="./images/docker-nginx-connection-refused-da139f29dc8a63eea8b3f1bb168d115c.png" alt="Docker nginx connection refused" /></p>
+<p>Start the container again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">start</span> <span class="l-variable-parameter">web</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">web</span>
+</div></code></pre>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> again in your browser:</p>
+<p><img src="./images/docker-nginx-modified-66c0f71961043f05fc59a52e37755c70.png" alt="Docker nginx modified" /></p>
+<p>Yay! The modified welcome message is still there. This is because the thin
+writable layer of the container is preserved when the container is stopped, so
+your changes are still there.</p>
+<p>Run a second container named <code>web2</code> based on the same official <code>nginx</code> image:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">web2</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">3001:80</span> <span class="l-variable-parameter">nginx:1.29</span>
+</div></code></pre>
+<p>You should have two containers running, one exposed on port 3000 and the other
+on port 3001:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">ps</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">CONTAINER</span> <span class="l-variable-parameter">ID</span>   <span class="l-variable-parameter">IMAGE</span>        <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>         <span class="l-variable-parameter">PORTS</span>                                     <span class="l-variable-parameter">NAMES</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">d85ff1b3ecf4</span>   <span class="l-variable-parameter">nginx:1.29</span>   <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">0.0.0.0:3001-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string">[</span><span class="l-string">::</span><span class="l-string">]</span><span class="l-string">:3001-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>   <span class="l-string-special-path">web2</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">b720d8b8d7d7</span>   <span class="l-variable-parameter">nginx:1.29</span>   <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-number">49</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">0.0.0.0:3000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string">[</span><span class="l-string">::</span><span class="l-string">]</span><span class="l-string">:3000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>   <span class="l-string-special-path">web</span>
+</div></code></pre>
+<p>Now visit both <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> and
+<a href="http://localhost:3001" target="_blank" rel="noopener noreferrer">http://localhost:3001</a> in your browser. You should see
+the modified welcome message on port 3000, since it’s served by the <code>web</code>
+container that you modified earlier; and the original welcome message on port
+3001, since it’s served by the fresh <code>web2</code> container that you just created and
+never modified:</p>
+<p><img src="./images/docker-nginx-two-containers-9407b70dba2f81292659069186d9b0dd.png" alt="Docker nginx two containers" /></p>
+<p>This shows you that <strong>each container has its own isolated file system</strong>. Changes
+made in one container do not affect other containers, even if they are based on
+the same image.</p>
+<p>At a lower level, each container has its own thin writable layer on top of the
+same read-only image layers:</p>
+<p><img src="./images/docker-nginx-sharing-layers-0b4a2a850415115f629464df861b2de6.jpg" alt="Docker shared layers" /></p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>If you want to take this demonstration a step further, start a shell session
+into the new <code>web2</code> container and make a different change to the welcome page,
+then see the effect in your browser. You will see that the changes you make in
+the <code>web</code> container do not affect the <code>web2</code> container, and vice versa.</p></div></div>
+<p>Stop and remove both containers:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">stop</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">web2</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">web</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">web2</span>
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">web2</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">web</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">web2</span>
+</div></code></pre>
+<p>Now you haven’t just stopped the containers, you have also removed them. Re-run
+the <code>web</code> container with the same command as before:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">3000:80</span> <span class="l-variable-parameter">nginx:1.29</span>
+</div></code></pre>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser again:</p>
+<p><img src="./images/docker-nginx-ede38348f5830fa2c89d1cc00b0ce34a.png" alt="Docker nginx" /></p>
+<p>You are seeing the original welcome message again. This is because when you
+removed the <code>web</code> container, its thin writable layer was permanently deleted by
+the Docker daemon. It only existed as long as the container existed.</p>
+<p>When you just re-ran the container, a new and <strong>empty</strong> thin writable layer was
+created on top of the same read-only image layers, so any changes you had
+previously made were lost.</p>
+<p>Stop and remove the <code>web</code> container again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">web</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">web</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-f</code> (or <code>--force</code>) option of the <code>docker rm</code> subcommand forces the removal
+of a running container by stopping it first.</p></div></div>
+<p>One way to persist data beyond the lifetime of a container, as we’ve already
+seen in the previous lesson, is to <a href="/2025/course/801-docker/#commit-a-containers-state-to-an-image-manually">create an image from the modified container
+using <code>docker commit</code></a>. This persists the thin
+writable layer of the container as a new read-only image layer. You can then run
+new containers from that image, where the changes will be present.</p>
+<p>This works, and is the basis of how Docker images are built with Dockerfiles as
+you’ve previously seen. It is a good way to persist:</p>
+<ul>
+<li>The code of an application that you intend to containerize (e.g. the code of
+the FibScale application you copied with a <code>COPY</code> instruction in the
+Dockerfile).</li>
+<li>Dependencies required by that application (e.g. the Ruby gems that you
+installed for the FibScale application with the <code>bundle install</code> command).</li>
+<li>System packages and libraries required by that application (e.g. the base
+Ubuntu image and any additional packages you might install with <code>apt</code>).</li>
+</ul>
+<p>All of these are things that you want to bake into Docker images so that new
+containers can be started from those images with the basics already in place.
+<strong>However, this is not the recommended way to persist data</strong> in Docker,
+especially these types of data:</p>
+<ul>
+<li>Application data, such as database files.</li>
+<li>User-generated content, such as uploaded files.</li>
+<li>Configuration files that may change frequently (and may contain sensitive
+data).</li>
+</ul>
+<p>For these types of data, it’s better to use bind mounts or volumes, which we
+will see next.</p>
+<h3 id="using-bind-mounts">Using bind mounts<a href="#using-bind-mounts" aria-label="Link to heading 'Using bind mounts'" data-heading-content="Using bind mounts" class="anchor"></a></h3>
+<p><a href="https://docs.docker.com/engine/storage/bind-mounts/" target="_blank" rel="noopener noreferrer">Docker bind mounts</a> allow you to mount a directory from the
+host machine (the machine running the Docker daemon) into a container. This way,
+any data created or modified in that directory inside the container is actually
+stored on the host machine, and thus persists beyond the lifetime of the
+container.</p>
+<p>Let’s create a directory for this demonstration:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">docker-bind-mount-demo</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">docker-bind-mount-demo</span>
+</div></code></pre>
+<p>Use your favorite editor to create an <code>index.html</code> file in this directory with
+the following content:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-constant"><span class="l-tag-delimiter">&lt;!</span>DOCTYPE html<span class="l-punctuation-bracket">&gt;</span></span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">html</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="3">  <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">head</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="4">    <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">title</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">title</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="5">    <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">style</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="6">      <span class="l-tag">html</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="7">        <span class="l-property">color-scheme</span><span class="l-punctuation-delimiter">:</span> light dark<span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="8">      <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="9">      <span class="l-tag">body</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="10">        <span class="l-property">width</span><span class="l-punctuation-delimiter">:</span> <span class="l-number">35<span class="l-string">em</span></span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="11">        <span class="l-property">margin</span><span class="l-punctuation-delimiter">:</span> <span class="l-number">0</span> auto<span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="12">        <span class="l-property">font-family</span><span class="l-punctuation-delimiter">:</span> Tahoma<span class="l-punctuation-delimiter">,</span> Verdana<span class="l-punctuation-delimiter">,</span> Arial<span class="l-punctuation-delimiter">,</span> sans-serif<span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="13">      <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="14">    <span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">style</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="15">  <span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">head</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="16">  <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">body</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="17">    <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="18">    <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">p</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="19">      The nginx web server is successfully installed and running in a Docker
+</div><div class="l-line" data-line="20">      container.
+</div><div class="l-line" data-line="21">    <span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">p</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="22">    <span class="l-punctuation-bracket">&lt;</span><span class="l-tag">p</span><span class="l-punctuation-bracket">&gt;</span><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">em</span><span class="l-punctuation-bracket">&gt;</span>Thank you for using my container.<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">em</span><span class="l-punctuation-bracket">&gt;</span><span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">p</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="23">  <span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">body</span><span class="l-punctuation-bracket">&gt;</span>
+</div><div class="l-line" data-line="24"><span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">html</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>You should now have a directory with an <code>index.html</code> file in it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">index.html</span>
+</div></code></pre>
+<p>Now run a new <code>web</code> container
+Now run a new container from the official <code>nginx</code> image, this time using the
+<code>-v</code> (or <code>--volume</code>) option to create a bind mount that mounts the current
+directory from the host machine into the container at the path
+<code>/usr/share/nginx/html</code>, where nginx serves its static files from:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">3000:80</span> <span class="l-variable-parameter">-v</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PWD</span>:/usr/share/nginx/html&quot;</span> <span class="l-variable-parameter">nginx:1.29</span>
+</div></code></pre>
+<p>The new <code>-v</code> (or <code>--volume</code>) option creates a <strong>bind mount</strong> from the current
+directory on the host machine to the <code>/usr/share/nginx/html</code> directory inside
+the container (expressed as <code>&lt;host-path&gt;:&lt;container-path&gt;</code>).</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>$PWD</code> environment variable, meaning <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory,
+contains the absolute path of the current directory on a Unix system.</p></div></div>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser and you
+should see the welcome page you just created:</p>
+<p><img src="./images/docker-nginx-bind-mount-966550fa4b321495e0a30a85758e8152.png" alt="Docker nginx bind mount" /></p>
+<p>Note that this welcome page is different from the default one you saw earlier.
+This is because nginx is now serving the <code>index.html</code> file from the bind mount
+you created, which is located on your host machine.</p>
+<p>Run a shell session inside the running <code>web</code> container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-builtin">exec</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">/bin/bash</span>
+</div></code></pre>
+<p>Your prompt should have changed to reflect that you are now inside the
+container. Install your favorite command line editor again (remember, this is a
+brand new container):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@556448e19250:/#</span> <span class="l-variable-parameter">apt</span> <span class="l-variable-parameter">update</span>
+</div><div class="l-line" data-line="2"><span class="l-variable">root</span><span class="l-function-call">@556448e19250:/#</span> <span class="l-variable-parameter">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">nano</span>  <span class="l-comment"># or vim</span>
+</div></code></pre>
+<p>Edit the <code>index.html</code> file in the container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@556448e19250:/#</span> <span class="l-variable-parameter">nano</span> <span class="l-variable-parameter">/usr/share/nginx/html/index.html</span>  <span class="l-comment"># or vim</span>
+</div></code></pre>
+<p>Modify this line:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>To this:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx modified!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser again. You
+should see the updated welcome message:</p>
+<p><img src="./images/docker-nginx-bind-mount-modified-a1ee0dafec4ac910f5846f8ad7cf7651.png" alt="Docker nginx bind mount modified" /></p>
+<p>Great! You have successfully modified a file inside the container that is part of
+a bind mount. Now exit the container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">root</span><span class="l-function-call">@556448e19250:/#</span> <span class="l-variable-parameter">exit</span>
+</div></code></pre>
+<p>Now check the <code>index.html</code> file on your host machine in the current directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">index.html</span>
+</div></code></pre>
+<p>You should see the modified title:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx modified!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>Amazing! This shows you what a bind mount is: the <code>/usr/share/nginx/html</code>
+directory inside the container is currently mapped by the Docker daemon to the
+current directory on the host machine. Any changes made to files in this
+directory inside the container will actually be made to the files on the host
+machine, and vice versa.</p>
+<p>Modify the <code>index.html</code> file again, but this time do so on your machine (not
+inside the container), using your favorite editor (command line or not).</p>
+<p>Modify this line:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx modified!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>To this:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx modified again!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser again. You
+should see the updated welcome message:</p>
+<p><img src="./images/docker-nginx-bind-mount-modified-again-6f542ddf0eda5bd7eefbfbf9714ec7ad.png" alt="Docker nginx bind mount modified again" /></p>
+<p>This demonstrates that changes made to files in the bind mount directory on the
+host machine are immediately reflected inside the container.</p>
+<p>Indeed, you can display the contents of the <code>index.html</code> file from inside the
+container again to confirm that the changes you made on the host machine are
+also visible from inside the container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-builtin">exec</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">cat</span> <span class="l-variable-parameter">/usr/share/nginx/html/index.html</span>
+</div></code></pre>
+<p>You should see the modified title:</p>
+<pre class="lumis"><code class="language-html" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>Welcome to nginx modified again!<span class="l-punctuation-bracket">&lt;/</span><span class="l-tag">h1</span><span class="l-punctuation-bracket">&gt;</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="803-docker-isolation:docker-bind-mount-unix"><div class="icon image"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-803-docker-isolation:docker-bind-mount-unix" type="checkbox" class="peer hidden" /><div class="content"><p>Note that a bind mount is not a copy. Instead, the directory on the host machine
+is directly mounted into the container as a traditional Unix mount, much like an
+external hard drive or network drive would be mounted. You are actually seeing
+the same directory from both the host machine and the container. This is
+magically handled for you by the Docker daemon using the <code>-v/--volume</code> option.</p>
+<p>You can confirm this using the <a href="/2025/course/404-unix-basics/#inspecting-volumes"><code>df</code> command you previously used to inspect disk
+usage when learning about Unix basics</a>. If you run this
+command inside the container, you should see that the <code>/usr/share/nginx/html</code>
+directory is a separate mount:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-builtin">exec</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">df</span> <span class="l-variable-parameter">-h</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Filesystem</span>            <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">overlay</span>               <span class="l-variable-parameter">911G</span>  <span class="l-variable-parameter">6.7G</span>  <span class="l-variable-parameter">858G</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">tmpfs</span>                  <span class="l-variable-parameter">64M</span>     <span class="l-number">0</span>   <span class="l-variable-parameter">64M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">shm</span>                    <span class="l-variable-parameter">64M</span>     <span class="l-number">0</span>   <span class="l-variable-parameter">64M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev/shm</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">/dev/vda1</span>             <span class="l-variable-parameter">911G</span>  <span class="l-variable-parameter">6.7G</span>  <span class="l-variable-parameter">858G</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/etc/hosts</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/run/host_mark/Users</span>  <span class="l-variable-parameter">927G</span>  <span class="l-variable-parameter">684G</span>  <span class="l-variable-parameter">244G</span>  <span class="l-variable-parameter">74%</span> <span class="l-variable-parameter">/usr/share/nginx/html</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">tmpfs</span>                 <span class="l-variable-parameter">3.9G</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">3.9G</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/proc/scsi</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">tmpfs</span>                 <span class="l-variable-parameter">3.9G</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">3.9G</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/sys/firmware</span>
+</div></code></pre>
+<p>Additionally, the indicated <code>Size</code>, <code>Used</code> and <code>Avail</code> values for the
+<code>/usr/share/nginx/html</code> mount should match those of your own host machine (at
+least on Unix systems).</p></div><label for="callout-803-docker-isolation:docker-bind-mount-unix" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-803-docker-isolation:docker-bind-mount-unix" class="less join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2025/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>Now stop and remove the <code>web</code> container:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">web</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">web</span>
+</div></code></pre>
+<p>Confirm that the container is no longer running:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">ps</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">CONTAINER</span> <span class="l-variable-parameter">ID</span>   <span class="l-variable-parameter">IMAGE</span>     <span class="l-variable-parameter">COMMAND</span>   <span class="l-variable-parameter">CREATED</span>   <span class="l-variable-parameter">STATUS</span>    <span class="l-variable-parameter">PORTS</span>     <span class="l-variable-parameter">NAMES</span>
+</div></code></pre>
+<p>Confirm that the container has been completely removed by listing all
+containers (including stopped ones):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">ps</span> <span class="l-variable-parameter">-a</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">CONTAINER</span> <span class="l-variable-parameter">ID</span>   <span class="l-variable-parameter">IMAGE</span>     <span class="l-variable-parameter">COMMAND</span>   <span class="l-variable-parameter">CREATED</span>   <span class="l-variable-parameter">STATUS</span>    <span class="l-variable-parameter">PORTS</span>     <span class="l-variable-parameter">NAMES</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2025/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You might see container from previous Docker experiments in the list, but the
+<code>web</code> container you just removed should no longer be there.</p></div></div>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser again. You
+should no longer be able to access the nginx server, since the container has
+been removed:</p>
+<p><img src="./images/docker-nginx-connection-refused-da139f29dc8a63eea8b3f1bb168d115c.png" alt="Docker nginx connection refused" /></p>
+<p>Re-run the <code>web</code> container with the same command as before, including the bind
+mount:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">web</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">3000:80</span> <span class="l-variable-parameter">-v</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PWD</span>:/usr/share/nginx/html&quot;</span> <span class="l-variable-parameter">nginx:1.29</span>
+</div></code></pre>
+<p>Visit <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser again. You
+should still see the modified welcome message:</p>
+<p><img src="./images/docker-nginx-bind-mount-modified-again-6f542ddf0eda5bd7eefbfbf9714ec7ad.png" alt="Docker nginx bind mount modified again" /></p>
+<p>Great! You’ve learned a way to persist data beyond the lifetime of a container
+using bind mounts.</p>
+<p>When you remove a container that has a bind mount, the thin writable layer of
+the container is deleted, as before, but the bind mount is separate from that
+layer. The data in the bind mount directory on the host machine remains intact.</p>
+<p>This means that when you run a fresh new container with an empty thin writable
+layer, but with the same bind mount, the data in the bind mount directory is
+still there and accessible from the new container, since it exists on your host
+machine, independent of the container’s lifecycle.</p>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#docker-networks">Docker networks</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-default-bridge-network">The default bridge network</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-isolated-networks">Create isolated networks</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#automating-network-creation">Automating network creation</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#persistent-storage">Persistent storage</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#container-file-system-isolation">Container file system isolation</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-bind-mounts">Using bind mounts</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-803-docker-isolation-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/803-docker-isolation/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2025/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2025/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2025/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2025/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2025/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2025/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2025/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done course-item-current">
+        <a href="/2025/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2025/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2025/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2025/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2025/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2025/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@638e0fe</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

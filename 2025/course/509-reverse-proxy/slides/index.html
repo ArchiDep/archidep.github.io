@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reverse Proxying · ArchiDep</title>
+<meta name="description" content="Slides for the Reverse Proxying chapter of the ArchiDep course." />
+<link rel="canonical" href="https://archidep.ch/2025/course/509-reverse-proxy/slides/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Reverse Proxying" />
+<meta property="og:description" content="Slides for the Reverse Proxying chapter of the ArchiDep course." />
+<meta property="og:url" content="https://archidep.ch/2025/course/509-reverse-proxy/slides/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2025/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
+    <link rel="stylesheet" href="/2025/assets/theme/slides-776bcf557667dc089a682843ebf70abf.css">
+    <script defer src="/2025/assets/course/slides-mermaid-a65afe425c6ae7f615bd2d58b4a99c21.js">
+    </script>
+  </head>
+  <body data-theme="light">
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template># Reverse Proxying
+
+Architecture & Deployment <!-- .element: class="subtitle" -->
+
+---
+
+## What is a proxy?
+
+<img class='w70' src='images/proxy-db3c45efb3710346ed3485e759574ccd.png' />
+
+A [**proxy server**](https://en.wikipedia.org/wiki/Proxy_server) is a computer or application that acts as an
+**intermediary** for requests from clients seeking resources from other servers.
+
+---
+
+## Types of proxy servers
+
+There are 3 main kinds:
+
+- [**Tunneling proxy**](https://en.wikipedia.org/wiki/Tunneling_protocol) or [**gateway**](https://en.wikipedia.org/wiki/Gateway_(telecommunications))
+- [**Forward proxy**](https://en.wikipedia.org/wiki/Open_proxy)
+- [**Reverse proxy**](https://en.wikipedia.org/wiki/Reverse_proxy)
+
+---
+
+## Tunneling proxy
+
+<img class='w-8/10' src='images/tunneling-proxy-3fb613e320e151bb1108a9624d957038.png' />
+
+A [tunneling proxy](https://en.wikipedia.org/wiki/Tunneling_protocol) can pass **unmodified requests and
+responses** from one network to another.
+
+**Notes:**
+
+It can also be used to encapsulate a protocol into another, such as running IPv6
+over IPv4. For example, an SSH connection may be relayed by a proxy server to a
+different target server. The proxy server simply passes the packets through,
+with no ability to compromise the security of the communication.
+
+[**Virtual private networks (VPN)**](https://en.wikipedia.org/wiki/Virtual_private_network) use tunneling protocols, usually with
+an additional layer of encryption.
+
+---
+
+## Forward proxy
+
+<p class='center'><img class='w80' src='images/forward-proxy-d75dc66d6fc473f039d180e86b81f240.jpg' /></p>
+
+A **forward proxy** retrieves data from a server on behalf of a client. It is
+said to be [**open**](https://en.wikipedia.org/wiki/Open_proxy) if it is accessible by any Internet user.
+
+---
+
+### Anonymous forward proxy
+
+<img class="w-1/2" src='images/anonymous-proxy-7698cfff02f97a761b37b3c23eda5487.png' />
+
+Conceals the identity of the client.
+
+**Notes:**
+
+An **anonymous forward proxy** reveals its identity as a server but conceals
+that of the client. Since the target server does not know who the original
+client is, it can be used to protect privacy. [VPNs](https://en.wikipedia.org/wiki/Virtual_private_network) are often used in
+combination with this type of proxy server.
+
+---
+
+### Transparent forward proxy
+
+<img class="w-1/2" src='images/open-proxy-bc55d2b76d5f7fce594825e0ac3e59e1.png' />
+
+Identifies both itself and the original client.
+
+**Notes:**
+
+A **transparent forward proxy** identifies both itself and the original client
+through the use of HTTP headers. It can be used to cache websites. Schools often
+use this kind of proxy to restrict access to particular websites (e.g.
+Facebook).
+
+When many clients go through the same forward proxy server, its IP address may
+get banned, since the target server only sees one computer (the proxy) making
+too many requests at the same time.
+
+---
+
+## Reverse proxy
+
+<p class='center'><img class='w80' src='images/reverse-proxy-823968d4d88d93fb9688b19bf060fc03.jpg' /></p>
+
+A [**reverse proxy**](https://en.wikipedia.org/wiki/Reverse_proxy) is an **internal-facing proxy** used to
+control and protect access to servers in a **private network**.
+
+**Notes:**
+
+A reverse proxy **appears to clients to be an ordinary server**, but actually
+**transmit their requests to** one or more **other servers in an internal
+private network** which handle the requests.
+
+---
+
+### Hiding internal architecture
+
+<img class='w100' src='images/reverse-proxy-internal-network-5241596f1335e3044ab694b63d56a9e7.png' />
+
+The client only sees the proxy server.
+
+**Notes:**
+
+The response from the private server is returned as if it was coming from the
+proxy server itself, leaving the client with no knowledge of the structure of
+the internal network.
+
+---
+
+## Why use a reverse proxy?
+
+<!-- slide-front-matter class: center, middle -->
+
+<img class='w50' src='images/proxy-word-cloud-1cc666506f2d9aff164230d653f0a5f9.jpg' />
+
+---
+
+### Hiding internal architecture
+
+![Hiding internal architecture](images/reverse-proxy-hide-origin-605ceb64a71bb0e1c7e5ec6f8de04986.gif)
+
+Reverse proxies can **hide the existence and characteristics of an internal
+network's private servers**.
+
+**Notes:**
+
+Since the client only sees the proxy server, it is unaware of the complexity of
+the internal architecture and does not have to worry about it.
+
+In a scenario where you have only a single public IP address available, a
+reverse proxy allows you to make multiple private servers accessible on that IP
+address through the proxy server.
+
+---
+
+### Hiding multi-component websites
+
+<img class='w-7/10' src='images/reverse-proxy-cors-883356cc82485f4dd1ba7e19eaa9c446.jpg' />
+
+**Notes:**
+
+Modern websites can be complex applications, often with a **separate frontend
+and backend** developed by different teams with different technologies. Putting
+a reverse proxy in front can make it **appear as one single website** on a
+single domain name, avoiding [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) issues.
+
+---
+
+### SSL termination or authentication
+
+![SSL terminal with a reverse proxy](images/reverse-proxy-ssl-290fe79e666280db241fbe35dbdb0b2a.png)
+
+A reverse proxy can be the **secure endpoint** with all the SSL certificates,
+then **forwarding unencrypted requests** to other servers in the private
+network.
+
+**Notes:**
+
+Managing SSL certificates to provide websites over HTTPS is rather complex. It
+can be hard to configure some frameworks or tools to ensure they are only using
+secure communications.
+
+Similarly, a reverse proxy could also require **authentication** before letting
+a client access an insecure application, adding security without having to
+modify the application itself.
+
+---
+
+### Scalability
+
+<img class="w-6/10" src="./images/horizontal-vs-vertical-scaling-8828b46a8aca59b23a7c4cb62c4cfc93.png" alt="Horizontal vs. vertical scaling" />
+
+[Scalability](https://en.wikipedia.org/wiki/Scalability) is the capability of a computer system to handle a
+growing amount of work (e.g. client requests).
+
+**Notes:**
+
+There are [2 broad ways](https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling) of adding more
+resources for a particular application.
+
+**Vertical scaling** consists in using a more powerful computer, with more CPU,
+RAM, throughput, etc. The added power will allow the server to serve more
+clients.
+
+**Horizontal scaling** means adding more computers to handle the same work. For
+example, 3 instances of a web application can probably handle 3 times as many
+clients at the same time. Computers or applications can be combined in
+[clusters](https://en.wikipedia.org/wiki/Computer_cluster) to improve performance.
+
+---
+
+#### Load balancing
+
+<img class='w-8/10' src='images/load-balancing-28d845628084ea1bd89adb5665be6149.png' />
+
+A common function of reverse proxies is to perform [**load
+balancing**](https://en.wikipedia.org/wiki/Load_balancing_(computing)), i.e. the distribution of workloads across multiple
+servers to achieve **horizontal scaling**.
+
+**Notes:**
+
+As multiple clients arrive simultaneously, the reverse proxy will distribute
+requests to different servers, spreading the load between them.
+
+---
+
+### Other uses
+
+- [Web acceleration](https://en.wikipedia.org/wiki/Web_accelerator)
+- On-the-fly compression
+- Spoon-feeding
+- [Denial-of-service (DoS)](https://en.wikipedia.org/wiki/Denial-of-service_attack) protection
+- [A/B testing](https://en.wikipedia.org/wiki/A/B_testing)
+
+**Notes:**
+
+- [Web acceleration](https://en.wikipedia.org/wiki/Web_accelerator) is the caching of static content and
+  dynamic content to reduce load on internal servers.
+- Optimize content by transparently compressing it to speed up loading times.
+- _Spoon-feeding_ is a technique where the reverse proxy temporarily stores a
+  dynamically generated page, then serves it to the client a little bit at a
+  time. This avoids the internal server having to wait for slow clients such as
+  mobile applications.
+- And [more](https://en.wikipedia.org/wiki/Reverse_proxy#Uses_of_reverse_proxies)
+
+---
+
+## nginx
+
+<!-- .element: class="hidden" -->
+
+<img class='w-7/10' src='images/nginx-55ab74f0ce45070ee12eb647f77ab2e1.png' />
+
+---
+
+### What is nginx?
+
+<img class='w-8/10' src='images/apache-vs-nginx-3c299c6c8944a3f3c70dbce49d6748a0.png' />
+
+[nginx](http://nginx.org/) is a concurrent of the well-known [Apache HTTP server](https://httpd.apache.org/)
+developed in 2004 to solve the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem).
+
+**Notes:**
+
+[nginx](http://nginx.org/) is an HTTP and reverse proxy server used by more than 25% of the
+busiest sites in December 2018. It was developed to solve the [C10k
+problem](https://en.wikipedia.org/wiki/C10k_problem), i.e. the capability of a computer system to handle ten thousand
+concurrent connections, thanks to its [event-driven
+architecture](https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/). It also has [many other
+features](http://nginx.org/en/#basic_http_features) to serve modern web applications.
+
+---
+
+#### Apache vs. nginx
+
+<p class='center'><img class='w60' src='images/nginx-market-share-1a98886b4be2b0260d963ce219954e9e.png' /></p>
+
+**Notes:**
+
+Although Apache is still used to serve more websites, nginx leads the pack in
+web performance, and is used more for the busiest websites.
+
+[ab-testing]: https://en.wikipedia.org/wiki/A/B_testing
+[apache]: https://httpd.apache.org/
+[c10k]: https://en.wikipedia.org/wiki/C10k_problem
+[cluster]: https://en.wikipedia.org/wiki/Computer_cluster
+[cors]: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+[digital-ocean]: https://www.digitalocean.com/
+[dos]: https://en.wikipedia.org/wiki/Denial-of-service_attack
+[gateway]: https://en.wikipedia.org/wiki/Gateway_(telecommunications)
+[horizontal-and-vertical-scaling]: https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling
+[load-balancing]: https://en.wikipedia.org/wiki/Load_balancing_(computing)
+[nginx]: http://nginx.org/
+[nginx-directive-index]: http://nginx.org/en/docs/http/ngx_http_index_module.html#index
+[nginx-directive-listen]: http://nginx.org/en/docs/http/ngx_http_core_module.html#listen
+[nginx-directive-location]: http://nginx.org/en/docs/http/ngx_http_core_module.html#location
+[nginx-directive-root]: http://nginx.org/en/docs/http/ngx_http_core_module.html#root
+[nginx-directives]: http://nginx.org/en/docs/dirindex.html
+[nginx-docs]: http://nginx.org/en/docs/
+[nginx-features]: http://nginx.org/en/#basic_http_features
+[nginx-include]: http://nginx.org/en/docs/ngx_core_module.html#include
+[nginx-performance]: https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/
+[nginx-server-names]: http://nginx.org/en/docs/http/server_names.html
+[nginx-signals]: http://nginx.org/en/docs/control.html
+[nginx-upstream]: http://nginx.org/en/docs/http/ngx_http_upstream_module.html
+[open-proxy]: https://en.wikipedia.org/wiki/Open_proxy
+[proxy]: https://en.wikipedia.org/wiki/Proxy_server
+[reverse-proxy]: https://en.wikipedia.org/wiki/Reverse_proxy
+[reverse-proxy-uses]: https://en.wikipedia.org/wiki/Reverse_proxy#Uses_of_reverse_proxies
+[scalability]: https://en.wikipedia.org/wiki/Scalability
+[tunneling-proxy]: https://en.wikipedia.org/wiki/Tunneling_protocol
+[vpn]: https://en.wikipedia.org/wiki/Virtual_private_network
+[web-acceleration]: https://en.wikipedia.org/wiki/Web_accelerator
+[weighted-round-robin]: https://en.wikipedia.org/wiki/Weighted_round_robin
+</textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="/2025/assets/course/slides-c1641cf2dc6d08dbd2c1c7f09e1287fe.js">
+    </script>
+
+    <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
+      <a id="heig-vd-logo" href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
+      </a>
+
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/509-reverse-proxy/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+
+      <a id="download-pdf" href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-509-reverse-proxy-slides.pdf" class="print:hidden tooltip" data-tip="Download PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+
+      <a href="https://archidep.ch/2025/course/509-reverse-proxy/slides/" class="tooltip print:hidden" data-tip="Go to the live site.">
+  <span class="badge badge-warning badge-sm">Backup copy</span>
+</a>
+    </div>
+
+    <div id="footer" class="tooltip absolute bottom-4 left-1/4 right-1/4 z-10 text-center font-meta text-sm opacity-25 hover:opacity-100">
+      <div class="tooltip-content">
+        <ul class="list-none m-0 p-0 flex flex-col gap-1">
+          <li>Architecture &amp; Deployment 2025-2026</li>
+          <li class="text-xs">
+            v0.1.0 on branch main
+          </li>
+          
+          <li class="text-xs">
+            Rev: 638e0fe498e6767a8830e8c2202e554666c3e772
+          </li>
+        </ul>
+      </div>
+      <a href="https://archidep.ch" class="!no-underline hover:!underline">
+        ArchiDep 25-26 main@638e0fe
+      </a>
+    </div>
+  </body>
+</html>

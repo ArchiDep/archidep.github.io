@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secure Shell (SSH) · ArchiDep</title>
+<meta name="description" content="Slides for the Secure Shell (SSH) chapter of the ArchiDep course." />
+<link rel="canonical" href="https://archidep.ch/2025/course/104-ssh/slides/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Secure Shell (SSH)" />
+<meta property="og:description" content="Slides for the Secure Shell (SSH) chapter of the ArchiDep course." />
+<meta property="og:url" content="https://archidep.ch/2025/course/104-ssh/slides/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2025/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
+    <link rel="stylesheet" href="/2025/assets/theme/slides-776bcf557667dc089a682843ebf70abf.css">
+    <script defer src="/2025/assets/course/slides-mermaid-a65afe425c6ae7f615bd2d58b4a99c21.js">
+    </script>
+  </head>
+  <body data-theme="light">
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template># Secure Shell (SSH)
+
+Architecture & Deployment <!-- .element: class="subtitle" -->
+
+---
+
+## What is SSH?
+
+SSH is a **cryptographic network protocol** for operating network services
+**securely over an unsecured network**.
+
+---
+
+### What is it used for?
+
+<div class="flex flex-col gap-4">
+  <div class="flex justify-center items-center gap-2">
+    <iconify-icon icon="fluent:window-text-24-regular" noobserver></iconify-icon> Command line login
+  </div>
+  <div class="flex justify-center items-center gap-2">
+    <iconify-icon icon="cib:git" noobserver></iconify-icon> Git
+  </div>
+  <div class="flex justify-center items-center gap-2">
+    <iconify-icon icon="fluent:folder-arrow-up-24-regular" noobserver></iconify-icon> FTP
+  </div>
+</div>
+
+---
+
+### How does it work?
+
+SSH is a **client-server** protocol.
+
+<pre class="mermaid loading">
+
+architecture-beta
+
+    service sshcl1(fluent:window-text-24-regular)[SSH Client]
+    service sshcl2(fluent:window-text-24-regular)[SSH Client]
+    service sshcl3(fluent:window-text-24-regular)[SSH Client]
+    service sshsrv(fluent:server-24-regular)[SSH Server]
+
+    sshcl1:R --> L:sshsrv
+    sshcl2:L --> R:sshsrv
+    sshcl3:R --> T:sshsrv
+
+</pre>
+
+**Notes:**
+
+Using an SSH client, a user (or application) on machine A can connect to an SSH
+server running on machine B, either to log in (with a command line shell) or to
+execute programs.
+
+---
+
+### How is it secure?
+
+1. SSH establishes a **secure channel**.
+2. It then requires **authentication**.
+
+**Notes:**
+
+Note that steps 1 and 2 are **separate and unrelated processes**.
+
+---
+
+### Step 1: the secure channel
+
+<div class="grid grid-cols-12">
+  <div class="col-span-4 flex flex-col justify-center items-end">
+    <div class="flex flex-col items-center">
+      <iconify-icon icon="fluent:laptop-24-regular" noobserver width="160" height="160"></iconify-icon>
+      <span class="text-3xl">SSH Client</span>
+    </div>
+  </div>
+  <div class="col-span-4 flex flex-col justify-center items-center">
+    <img src='images/ssh-secure-channel-establishment-ccf574cd5ea0332158caf25b0e29ec9c.png' width="250" />
+  </div>
+  <div class="col-span-4 flex flex-col justify-center items-start">
+    <div class="flex flex-col items-center">
+      <iconify-icon icon="fluent:server-24-regular" noobserver width="160" height="160"></iconify-icon>
+      <span class="text-3xl">SSH Server</span>
+    </div>
+  </div>
+</div>
+
+_This is done for you and (mostly) automatic._
+
+**Notes:**
+
+SSH establishes a **secure channel** between client and server using various
+**cryptographic techniques**. This is handled automatically by the SSH client
+and server.
+
+---
+
+### Step 2: authentication
+
+<div class="grid grid-cols-12">
+  <div class="col-span-5">
+    <div class="size-full flex flex-col justify-center items-end">
+      <div class="chat chat-start">
+        <div class="chat-header">1. SSH Client</div>
+        <div class="chat-bubble chat-bubble-primary min-h-0 text-[1rem]">Hi, I'd like to log in as user "bob".</div>
+      </div>
+      <iconify-icon icon="fluent:laptop-24-regular" noobserver width="160" height="160"></iconify-icon>
+      <div class="chat chat-start">
+        <div class="chat-header">3. SSH Client</div>
+        <div class="chat-bubble chat-bubble-info min-h-0 text-[1rem]">Here's bob's password.</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-2">
+    <div class="size-full flex justify-center items-center">
+      <img src='images/ssh-secure-channel-establishment-ccf574cd5ea0332158caf25b0e29ec9c.png' width="250" class='opacity-65' />
+    </div>
+  </div>
+  <div class="col-span-5">
+    <div class="size-full flex flex-col justify-center items-start">
+      <div class="chat chat-end">
+        <div class="chat-header">2. SSH Server</div>
+        <div class="chat-bubble chat-bubble-error min-h-0 text-[1rem]">Oh yeah? How do I know you're bob?</div>
+      </div>
+      <iconify-icon icon="fluent:server-24-regular" noobserver width="160" height="160"></iconify-icon>
+      <div class="chat chat-end">
+        <div class="chat-header">4. SSH Server</div>
+        <div class="chat-bubble chat-bubble-success min-h-0 text-[1rem]">Go right ahead.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+**Notes:**
+
+The user or service that wants to connect to the SSH server must
+**authenticate** to gain access, for example with a password.
+
+---
+
+### Security through cryptography
+
+- [Symmetric encryption](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)
+- [Asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
+  - Key exchange
+  - Digital signatures
+- [Hash-based Message Authentication Codes (HMAC)](https://en.wikipedia.org/wiki/HMAC)
+
+**Notes:**
+
+SSH establishes a **secure channel** between two computers **over an insecure
+network** (e.g. a local network or the Internet). Establishing and using this
+secure channel requires a combination of various cryptographic techniques.
+
+---
+
+### Symmetric encryption
+
+![Symmetric Encryption](images/symmetric-encryption-2d165ada50005fd31b648b2499e07f7c.png)
+
+**Notes:**
+
+[Symmetric-key algorithms](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) can be used to encrypt
+communications between two or more parties using a **shared secret**. [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+is one such algorithm.
+
+**Assuming all parties possess the secret key**, they can encrypt data, send it
+over an insecure network, and decrypt it on the other side. An attacker who
+intercepts the data **cannot decrypt it without the key** (unless a weakness is
+found in the algorithm or [its implementation](https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma#Operating_shortcomings)).
+
+--v
+
+#### Example: symmetric encryption with AES
+
+```bash
+# Create a "plaintext" file
+$> cd /path/to/projects
+$> mkdir aes-example
+$> cd aes-example
+$> echo 'too many secrets' > plaintext.txt
+```
+
+```bash
+# Encrypt the plaintext
+$> cat plaintext.txt | openssl aes-256-cbc > ciphertext.aes
+enter aes-256-cbc encryption password:
+Verifying - enter aes-256-cbc encryption password:
+```
+
+**Notes:**
+
+Create a [**plaintext**](https://en.wikipedia.org/wiki/Plaintext) file containing the words "too many
+secrets".
+
+You may encrypt that file with the [OpenSSL library](https://www.openssl.org) (installed on most
+computers). Executing the example command pipeline will prompt you for an
+encryption key.
+
+--v
+
+#### Example: symmetric decryption with AES
+
+```bash
+# Decrypt the ciphertext
+$> cat ciphertext.aes | openssl aes-256-cbc -d
+enter aes-256-cbc decryption password:
+too many secrets
+```
+
+**Notes:**
+
+The resulting [**ciphertext**](https://en.wikipedia.org/wiki/Ciphertext) stored in the `ciphertext.aes` file
+cannot be decrypted without the key. Executing the example command pipeline
+and entering the same key as before when prompted will decrypt it.
+
+The `-d` option makes the command **d**ecrypt the provided contents instead of
+encrypting it.
+
+---
+
+### Symmetric encryption over an insecure network
+
+- **Both parties must have the key**
+- It used to be **physically transferred**
+
+**Notes:**
+
+For example in the form of the codebooks used to operate the German [Enigma
+machine](https://en.wikipedia.org/wiki/Enigma_machine#Operation) during World War II. But that is **impractical for modern
+computer networks**.
+
+---
+
+### Man-in-the-middle attack (MitM)
+
+![Man-in-the-middle attack (MitM)](images/symmetric-encryption-insecure-network-3a14358d7aec4dcdf4ad30e83d4ea20e.png)
+
+**Notes:**
+
+**Sending the key over the insecure network risks it being
+compromised** by a [Man-in-the-Middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+
+---
+
+### Asymmetric cryptography
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <strong class="text-2xl">Encryption</strong>
+    <img src='images/asymmetric-cryptography-encryption-78420544a91597c245abbf39d384154a.png' />
+  </div>
+  <div>
+    <strong class="text-2xl">Key exchange</strong>
+    <img src='images/asymmetric-cryptography-key-exchange-73047fcb5ffb521b51dad148fe9cf2ae.png' />
+  </div>
+  <div>
+    <strong class="text-2xl">Digital Signatures</strong>
+    <img src='images/asymmetric-cryptography-signature-53307e4123ac1eeebd2bf48ff18f7828.png' />
+  </div>
+</div>
+
+**Notes:**
+
+[Public-key or asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography) is any cryptographic system that
+uses pairs of keys: **public keys** which may be disseminated widely, while
+**private keys** which are known only to the owner. It has several use cases:
+
+- Encrypting and decrypting data.
+- Securely exchanging shared secret keys.
+- Verifying identity and protecting against tampering.
+
+---
+
+### The properties of an asymmetric key pair
+
+- **Quick & easy to generate a key pair**
+- **Too slow & hard to find the private key from the public key**
+- The private key can solve mathematicalsproblems based on the public key,
+  **proving ownership of that key** _(but not the other way around)_
+
+**Notes:**
+
+There is a mathematical relationship between a public and private key, based on
+problems that currently admit no efficient solution such as [integer
+factorization](https://en.wikipedia.org/wiki/Integer_factorization), [discrete logarithm](https://en.wikipedia.org/wiki/Discrete_logarithm)
+and [elliptic curve](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography) relationships.
+
+Here's a [mathematical example](https://www.onebigfluke.com/2013/11/public-key-crypto-math-explained.html) based on integer factorization,
+a problem that is computationally economical in one direction (multiplication)
+but very computationally expensive in the other (factorization).
+
+Effective security only requires keeping the private key private; **the public
+key can be openly distributed without compromising security**.
+
+---
+
+### Asymmetric encryption
+
+![Asymmetric encryption](images/asymmetric-encryption-b90a7b4c34e8de8d73a7300efa8b363f.png)
+
+**Notes:**
+
+One use case of asymmetric cryptography is **asymmetric encryption**, where the
+**sender encrypts a message with the recipient's public key**. The message can
+only be **decrypted by the recipient using the matching private key**.
+
+--v
+
+#### Example: generate an asymmetric RSA key pair
+
+```bash
+$> cd /path/to/projects
+$> mkdir rsa-example
+$> cd rsa-example
+
+# Generate a private key
+$> openssl genrsa -out private.pem 2048
+Generating RSA private key, 2048 bit long modulus
+.............++++++
+.................................++++++
+e is 65537 (0x10001)
+
+# Generate public key from the private key (quick & easy)
+$> openssl rsa -in private.pem \
+   -out public.pem -outform PEM -pubout
+writing RSA key
+```
+
+**Notes:**
+
+Let's try encryption with [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) this time, an asymmetric algorithm. To do
+that, we need to generate a **key pair, i.e. a private and public key**. The
+example commands will generate first a private key in a file named
+`private.pem`, then a corresponding public key in a file named `public.pem`.
+
+By convention, we use the `.pem` extension after the [Privacy-Enhanced Mail
+(PEM) format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail), a de facto standard format to store cryptographic data.
+
+--v
+
+#### Example: asymmetric encryption with RSA
+
+```bash
+# Create a plaintext
+$> echo 'too many secrets' > plaintext.txt
+
+# Encrypt the plaintext with the public key
+$> openssl pkeyutl -encrypt -in plaintext.txt \
+   -inkey public.pem -pubin -out ciphertext.rsa
+
+# See what's there
+$> ls
+ciphertext.rsa plaintext.txt private.pem public.pem
+```
+
+**Notes:**
+
+You can create a plain text and **encrypt it with the public key** using the
+OpenSSL library.
+
+The example command will read the plaintext file `plaintext.txt` specified with
+the `-in` (**in**put) option. It will also read the public key in the
+`public.pem` file with the `-inkey` (**in**put **key**) and `-pubin` (**pub**lic
+**in**) options.
+
+It will then write the encrypted ciphertext to the `ciphertext.rsa` file with
+the `-out` (**out**put) option.
+
+In addition to your key pair, you should have two additional files containing
+the plaintext and ciphertext:
+
+--v
+
+#### Example: asymmetric decryption with RSA
+
+```bash
+# Decrypt the ciphertext with the private key
+$> openssl pkeyutl -decrypt \
+   -inkey private.pem -in ciphertext.rsa
+too many secrets
+
+# It does not work with the public key
+$> openssl pkeyutl -decrypt \
+  -inkey public.pem -in ciphertext.rsa
+unable to load Private Key [...]
+
+# It does not work either with another private key
+$> openssl genrsa -out hacker-private.pem 1024
+$> openssl pkeyutl -decrypt \
+   -inkey hacker-private.pem -in ciphertext.rsa
+RSA operation error [...]
+```
+
+**Notes:**
+
+The ciphertext can be **decrypted with the corresponding private key**. Note
+that you **cannot decrypt the ciphertext using the public key**. Of course, a
+hacker using **another private key cannot decrypt it either**.
+
+Hence, you can encrypt data and send it to another party provided that you have
+their public key. **No single shared key needs to be exchanged** (the private
+key remains a secret known only to the recipient).
+
+---
+
+### Asymmetric encryption and forward secrecy
+
+![Forward Secrecy](images/asymmetric-encryption-forward-secrecy-727b7278f275de08cf0ef6da3e34f47e.png)
+
+**Notes:**
+
+Asymmetric encryption protects data sent over an insecure network from
+attackers, but **only as long as the private keys remain private**. It does not
+provide **forward secrecy**, meaning that if the private keys are compromised in
+the future, all data encrypted in the past is also compromised.
+
+---
+
+### Symmetric vs. asymmetric encryption
+
+<table class="text-4xl">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Pros</th>
+      <th>Cons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Symmetric encryption</th>
+      <td><strong class="text-success">Fast</strong>, can be implemented in <strong class="text-success">hardware</strong></td>
+      <td><span class="text-error">Must send key, no forward secrecy</span></td>
+    </tr>
+    <tr>
+      <th>Asymmetric encryption</th>
+      <td><strong class="text-success">No shared key</strong></td>
+      <td><span class="text-error">Slow, no forward secrecy</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+**Notes:**
+
+So far we learned that:
+
+- Symmetric encryption works but provides no solution to the problem of securely
+  transmitting the shared secret key.
+- Asymmetric encryption works even better as it does not require a shared secret
+  key, but it does not provide forward secrecy.
+
+Additionally, it's important to note that **symmetric encryption is much faster
+than asymmetric encryption**.
+
+--v
+
+### Symmetric encryption in hardware
+
+![Hardware Security Module](images/hsm-bfb6ae167743664f91fac98f63651796.jpg)
+
+**Notes:**
+
+Symmetric encryption is also less complex and can easily be implemented as
+hardware (most modern processors support hardware-accelerated AES encryption).
+
+This is a [hardware security module](https://en.wikipedia.org/wiki/Hardware_security_module), a physical computing device that
+safeguards and manages secrets, performs encryption and decryption functions for
+digital signatures, strong authentication and other cryptographic functions
+
+---
+
+### What can we do?
+
+It would be nice if we could share a **fast symmetric encryption key**...
+without actually sharing it.
+
+<img class='w100' src='images/asymmetric-cryptography-key-exchange-73047fcb5ffb521b51dad148fe9cf2ae.png' />
+
+**Notes:**
+
+<!-- slide-column -->
+
+Ideally, we would want to be able to share a fast symmetric encryption key
+without transmitting it physically or over the network. This is where asymmetric
+cryptography comes to the rescue again. Encryption is not all it can do; it can
+also do **key exchange**.
+
+The [Diffie-Hellman Key Exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange), invented in 1976 by Whitfield Diffie and
+Martin Hellman, was one of the first public key exchange protocols allowing
+users to **securely exchange secret keys** even if an attacker is monitoring the
+communication channel.
+
+---
+
+#### Diffie-Hellman key exchange
+
+<img src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png" alt="Diffie-Hellman Key Exchange" class="w-1/3" />
+
+**Notes:**
+
+This conceptual diagram illustrates the general idea behind the protocol:
+
+- Alice and Bob choose a **random, public starting color** (yellow) together.
+- Then they each separately choose a **secret color known only to themselves**
+  (orange and blue-green).
+- Then they **mix their own secret color with the mutually shared color**
+  (resulting in orange-tan and light-blue) and **publicly exchange** the two
+  mixed colors.
+- Finally, Alice and Bob **mix the color he or she received** from each other
+  **with his or her own private color** (yellow-brown).
+
+The result is a final color mixture that is **identical to the partner's final
+color mixture**, and which was never shared publicly. When using large numbers
+rather than colors, it would be computationally difficult for a third party to
+determine the secret numbers.
+
+---
+
+### Man-in-the-Middle attack on Diffie-Hellman
+
+![Man-in-the-Middle Attack on Diffie-Hellman](images/diffie-hellman-mitm-8233fe2d3b8dde3ace31ff991907917f.png)
+
+**Notes:**
+
+The Diffie-Hellman key exchange solves the problem of transmitting the shared
+secret key over the network by computing it using asymmetric cryptography. It is
+therefore never transmitted.
+
+However, **a Man-in-the-Middle attack is still possible** if the attacker can
+position himself between the two parties to **intercept and relay all
+communications**.
+
+---
+
+### Asymmetric digital signature
+
+![Digital Signatures with Asymmetric Cryptography](images/asymmetric-cryptography-signature-53307e4123ac1eeebd2bf48ff18f7828.png)
+
+**Notes:**
+
+One of the other main uses of asymmetric cryptography is performing **digital
+signatures**. A signature proves that the message came from a particular sender.
+
+- Assuming **Alice wants to send a message to Bob**, she can **use her private
+  key to create a digital signature based on the message**, and send both the
+  message and the signature to Bob.
+- Anyone with **Alice's public key can prove that Alice sent that message**
+  (only the corresponding private key could have generated a valid signature for
+  that message).
+- **The message cannot be tampered with without detection**, as the digital
+  signature will no longer be valid (since it based on both the private key and
+  the message).
+
+Note that a digital signature **does not provide confidentiality**. Although the
+message is protected from tampering, it is **not encrypted**.
+
+--v
+
+#### Example: digital signature with RSA
+
+```bash
+# Create a message file
+$> echo "Hello Bob, I like you" > message.txt
+
+# Create a digital signature for
+# that message with the private key
+$> openssl dgst -sha256 -sign private.pem \
+   -out signature.rsa message.txt
+
+# See the signature (base64-encoded)
+$> openssl base64 -in signature.rsa
+```
+
+**Notes:**
+
+In the same directory as the previous example (asymmetric encryption with RSA),
+create a `message.txt` file with the message that we want to digitally sign.
+
+The example OpenSSL command will use the private key file `private.pem` (from
+the previous example) and generate a digital signature based on the message file
+`message.txt`. The signature will be stored in the file `signature.rsa`.
+
+If you open the file, you can see that it's simply binary data. You can see it
+base64-encoded with the second example command.
+
+--v
+
+#### Example: verifying a digital signature with RSA
+
+```bash
+$> openssl dgst -sha256 -verify public.pem \
+   -signature signature.rsa message.txt
+Verified OK
+
+# Modify the message...
+
+$> openssl dgst -sha256 -verify public.pem \
+   -signature signature.rsa message.txt
+Verification Failure
+```
+
+**Notes:**
+
+The example command uses the public key to check that the signature is valid for
+the message. If you modify the message file and run the command again, it will
+detect that the digital signature no longer matches the message:
+
+---
+
+### Cryptographic hash functions & MACs
+
+<img src="images/hash-eef497ed0f870ab9829fbd42c5c1bc3a.png" alt="Cryptographic Hash Functions" class="w-1/2" />
+
+**Notes:**
+
+A [cryptographic hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) is a [hash function](https://en.wikipedia.org/wiki/Hash_function) that
+has the following properties:
+
+- The same message always results in the same hash (deterministic).
+- Computing the hash value of any message is quick.
+- It is infeasible to generate a message from its hash value except by trying
+  all possible messages (one-way).
+
+- A small change to a message should change the hash value so extensively that
+  the new hash value appears uncorrelated with the old hash value.
+- It is infeasible to find two different messages with the same hash value
+  (collisions).
+
+SSH uses [Message Authentication Codes (MAC)](https://en.wikipedia.org/wiki/Message_authentication_code), which are based on
+cryptographic hash functions, to protect both the data integrity and
+authenticity of all messages sent through the secure channel.
+
+---
+
+### Combining it all together in SSH
+
+![SSH Cryptography](images/ssh-crypto-0eaf4d5135f57bd506602d3cf0d6d6a6.png)
+
+**Notes:**
+
+SSH uses most of the previous cryptographic techniques we've seen together to
+achieve as secure a channel as possible.
+
+---
+
+#### Man-in-the-Middle attack on SSH
+
+![Man-in-the-Middle Attack on SSH](images/ssh-mitm-eb64f4dc68e7aea1f6f5933de8313e17.png)
+
+---
+
+#### Threats countered
+
+- Eavesdropping
+- Connection hijacking
+- DNS an IP spoofing
+- Man-in-the-Middle attack
+
+<div class="mt-4 text-warning italic">
+  As long as you <strong class="text-error screen:animate-pulse">check the public key</strong>!
+</div>
+
+**Notes:**
+
+SSH counters the following threats:
+
+- **Eavesdropping:** an attacker can intercept but not decrypt communications
+  going through SSH's secure channel.
+- **Connection hijacking:** an active attacker can hijack TCP connections due to
+  a weakness in TCP. SSH's integrity checking detects this and shuts down the
+  connection without using the corrupted data.
+- **DNS and IP spoofing:** an attacker may hack your naming service to direct
+  you to the wrong machine.
+- **Man-in-the-Middle attack:** an attacker may intercept all traffic between
+  you and the real target machine.
+
+The last two are countered by the asymmetric digital signature performed by the
+server on the DH key exchange, **as long as the client actually checks the
+server-supplied public key**. Otherwise, there is no guarantee that the server
+is genuine.
+
+---
+
+#### Threats not countered
+
+- Password cracking <span class="text-xl italic">([common passwords](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords): 123456, password, qwerty1)</span>
+- IP/TCP denial of service
+- Traffic analysis
+- Carelessness and coffee spills <div class="inline-block ml-2 emoji-container size-10"><img class="emoji" src="/2025/assets/emoji/2615-2e081ee00be98dbfc615fa5d5dc249b1.svg" alt="☕" width="20" height="20" /></div>
+- Genius mathematicians <span class="text-xl italic">(did you see [Sneakers](https://en.wikipedia.org/wiki/Sneakers_(1992_film))?)</span>
+
+![Flawless Security](images/xkcd-security-92c6a7138946479fc7ad02aa28d539a0.png)
+
+**Notes:**
+
+SSH does not counter the following threats:
+
+- **Password cracking:** if password authentication is enabled, a weak password
+  might be easily brute-forced or obtained through [side-channel
+  attacks](https://en.wikipedia.org/wiki/Cryptanalysis#Side-channel_attacks). Consider using public key authentication instead to
+  mitigate some of these risks.
+
+- **IP/TCP denial of service:** since SSH operates on top of TCP, it is
+  vulnerable to attacks against weaknesses in TCP and IP, such as [SYN
+  flood](https://en.wikipedia.org/wiki/SYN_flood).
+- **Traffic analysis:** although the encrypted traffic cannot be read, an
+  attacker can still glean a great deal of information by simply analyzing the
+  amount of data, the source and target addresses, and the timing.
+- **Carelessness and coffee spills:** SSH doesn't protect you if you write your
+  password on a post-it note and paste it on your computer screen.
+- **Genius mathematicians:** did you see [Sneakers](https://en.wikipedia.org/wiki/Sneakers_(1992_film))?
+
+[aes]: https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+[authorized_keys]: https://www.ssh.com/ssh/authorized_keys/openssh
+[bash]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+[brute-force]: https://en.wikipedia.org/wiki/Brute-force_attack
+[ciphertext]: https://en.wikipedia.org/wiki/Ciphertext
+[dh]: https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange
+[discrete-logarithm]: https://en.wikipedia.org/wiki/Discrete_logarithm
+[ecdsa]: https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+[elliptic-curve]: https://en.wikipedia.org/wiki/Elliptic-curve_cryptography
+[enigma]: https://en.wikipedia.org/wiki/Enigma_machine#Operation
+[enigma-operating-shortcomings]: https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma#Operating_shortcomings
+[entropy]: https://en.wikipedia.org/wiki/Password_strength#Entropy_as_a_measure_of_password_strength
+[forward-secrecy]: https://en.wikipedia.org/wiki/Forward_secrecy
+[github-fingerprints]: https://docs.github.com/en/github/authenticating-to-github/githubs-ssh-key-fingerprints
+[git]: https://git-scm.com
+[hash]: https://en.wikipedia.org/wiki/Cryptographic_hash_function
+[hash-non-crypto]: https://en.wikipedia.org/wiki/Hash_function
+[hmac]: https://en.wikipedia.org/wiki/HMAC
+[hsm]: https://en.wikipedia.org/wiki/Hardware_security_module
+[integer-factorization]: https://en.wikipedia.org/wiki/Integer_factorization
+[key-exchange]: https://en.wikipedia.org/wiki/Key_exchange
+[mac]: https://en.wikipedia.org/wiki/Message_authentication_code
+[mitm]: https://en.wikipedia.org/wiki/Man-in-the-middle_attack
+[openssl]: https://www.openssl.org
+[pem]: https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail
+[plaintext]: https://en.wikipedia.org/wiki/Plaintext
+[pubkey]: https://en.wikipedia.org/wiki/Public-key_cryptography
+[pubkey-math]: https://www.onebigfluke.com/2013/11/public-key-crypto-math-explained.html
+[rsa]: https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+[rsync]: https://en.wikipedia.org/wiki/Rsync
+[scp]: https://en.wikipedia.org/wiki/Secure_copy
+[sftp]: https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol
+[shell]: https://en.wikipedia.org/wiki/Shell_(computing)
+[side-channel]: https://en.wikipedia.org/wiki/Cryptanalysis#Side-channel_attacks
+[sneakers]: https://en.wikipedia.org/wiki/Sneakers_(1992_film)
+[ssh-agent]: https://www.cyberciti.biz/faq/how-to-use-ssh-agent-for-authentication-on-linux-unix/
+[ssh-copy-id]: https://www.ssh.com/academy/ssh/copy-id
+[ssh-passphrase]: https://learn.microsoft.com/en-us/azure/devops/repos/git/gcm-ssh-passphrase?view=azure-devops
+[ssh-passphrase-add]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases
+[symmetric-encryption]: https://en.wikipedia.org/wiki/Symmetric-key_algorithm
+[syn-flood]: https://en.wikipedia.org/wiki/SYN_flood
+</textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="/2025/assets/course/slides-c1641cf2dc6d08dbd2c1c7f09e1287fe.js">
+    </script>
+
+    <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
+      <a id="heig-vd-logo" href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
+      </a>
+
+      <a href="https://github.com/ArchiDep/website/blob/638e0fe498e6767a8830e8c2202e554666c3e772/course/chapters/104-ssh/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+
+      <a id="download-pdf" href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2025/archidep-104-ssh-slides.pdf" class="print:hidden tooltip" data-tip="Download PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+
+      <a href="https://archidep.ch/2025/course/104-ssh/slides/" class="tooltip print:hidden" data-tip="Go to the live site.">
+  <span class="badge badge-warning badge-sm">Backup copy</span>
+</a>
+    </div>
+
+    <div id="footer" class="tooltip absolute bottom-4 left-1/4 right-1/4 z-10 text-center font-meta text-sm opacity-25 hover:opacity-100">
+      <div class="tooltip-content">
+        <ul class="list-none m-0 p-0 flex flex-col gap-1">
+          <li>Architecture &amp; Deployment 2025-2026</li>
+          <li class="text-xs">
+            v0.1.0 on branch main
+          </li>
+          
+          <li class="text-xs">
+            Rev: 638e0fe498e6767a8830e8c2202e554666c3e772
+          </li>
+        </ul>
+      </div>
+      <a href="https://archidep.ch" class="!no-underline hover:!underline">
+        ArchiDep 25-26 main@638e0fe
+      </a>
+    </div>
+  </body>
+</html>
