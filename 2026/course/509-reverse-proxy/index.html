@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reverse Proxying · ArchiDep</title>
+<meta name="description" content="Learn what a reverse proxy is, and put it in practice using nginx. You will need A Unix CLI A server with an Ubuntu operating system and a public IP address Recommended reading Unix Administration Unix Networking" />
+<link rel="canonical" href="https://archidep.ch/2026/course/509-reverse-proxy/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Reverse Proxying" />
+<meta property="og:description" content="Learn what a reverse proxy is, and put it in practice using nginx. You will need A Unix CLI A server with an Ubuntu operating system and a public IP address Recommended reading Unix Administration Unix Networking" />
+<meta property="og:url" content="https://archidep.ch/2026/course/509-reverse-proxy/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/509-reverse-proxy/subject.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/509-reverse-proxy/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-subject">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Reverse Proxying
+</h1>
+
+      <div class="my-4"><p>Learn what a reverse proxy is, and put it in practice using nginx.</p>
+<p><strong>You will need</strong></p>
+<ul>
+<li>A Unix CLI</li>
+<li>A server with an Ubuntu operating system and a public IP address</li>
+</ul>
+<p><strong>Recommended reading</strong></p>
+<ul>
+<li><a href="/2026/course/404-unix-basics/">Unix Administration</a></li>
+<li><a href="/2026/course/408-unix-networking/">Unix Networking</a></li>
+</ul></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#installing-nginx">Installing nginx</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#making-sure-its-working">Making sure it’s working</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nginx-configuration">Nginx configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-main-configuration-file">The main configuration file</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#includes">Includes</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sites-available-vs-sites-enabled"><code>sites-available</code> vs. <code>sites-enabled</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reloading-nginxs-configuration">Reloading nginx’s configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#common-nginx-directives">Common nginx directives</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nginx-configuration-examples">nginx configuration examples</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-to-use-these-examples">How to use these examples</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#static-website-configuration">Static website configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reverse-proxy-configuration">Reverse proxy configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#load-balancing-configuration">Load balancing configuration</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/509-reverse-proxy/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/509-reverse-proxy/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/509-reverse-proxy/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <h2 id="installing-nginx">Installing nginx<a href="#installing-nginx" aria-label="Link to heading 'Installing nginx'" data-heading-content="Installing nginx" class="anchor"></a></h2>
+<p><img src="images/nginx-install-85cec457dc769d90716c4f4379bd93d6.png" alt="Installing nginx" /></p>
+<p>It’s as simple as installing it with APT:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">nginx</span>
+</div></code></pre>
+<h3 id="making-sure-its-working">Making sure it’s working<a href="#making-sure-its-working" aria-label="Link to heading 'Making sure it’s working'" data-heading-content="Making sure it’s working" class="anchor"></a></h3>
+<p>APT should automatically launch nginx, which will start listening on port 80 right away.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ss</span> <span class="l-function-call">-tlpn</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">State</span>  <span class="l-variable-parameter">Recv-Q</span> <span class="l-variable-parameter">Send-Q</span> <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">128</span>          <span class="l-variable-parameter">0.0.0.0:</span>`<span class="l-number">80</span>`   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;`<span class="l-function-call">nginx</span>`&quot;</span>,...<span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">128</span>             <span class="l-variable-parameter">[</span><span class="l-variable-parameter">::</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:</span>`<span class="l-number">80</span>`   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;`<span class="l-function-call">nginx</span>`&quot;</span>,...<span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>You can check that the service is running with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">nginx</span>
+</div></code></pre>
+<p>You should be able to access your server’s public IP address in a browser and see nginx’s welcome message:</p>
+<img class='w100' src='images/nginx-welcome-5afb49a932a985de062ae5d9ffbc8501.png' />
+<h2 id="nginx-configuration">Nginx configuration<a href="#nginx-configuration" aria-label="Link to heading 'Nginx configuration'" data-heading-content="Nginx configuration" class="anchor"></a></h2>
+<p>Nginx stores its configuration in the <code>/etc/nginx</code> directory.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-number">-1</span> <span class="l-variable-parameter">/etc/nginx</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">conf.d</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">fastcgi.conf</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">fastcgi_params</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">koi-utf</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">koi-win</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">mime.types</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">modules-available</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">modules-enabled</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">nginx.conf</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">proxy_params</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">scgi_params</span>
+</div><div class="l-line" data-line="13"><span class="l-function-call">sites-available</span>
+</div><div class="l-line" data-line="14"><span class="l-function-call">sites-enabled</span>
+</div><div class="l-line" data-line="15"><span class="l-function-call">snippets</span>
+</div><div class="l-line" data-line="16"><span class="l-function-call">uwsgi_params</span>
+</div><div class="l-line" data-line="17"><span class="l-function-call">win-utf</span>
+</div></code></pre>
+<p>The most important files are:</p>
+<ul>
+<li><code>nginx.conf</code> is the main configuration file. Everything starts from there.</li>
+<li><code>conf.d</code> is a directory to store reusable configuration fragments.</li>
+<li><code>sites-available</code> is a directory where website configuration files are stored.</li>
+<li><code>sites-enabled</code> is a directory containing symbolic links to the configurations
+in <code>sites-available</code>.</li>
+</ul>
+<h3 id="the-main-configuration-file">The main configuration file<a href="#the-main-configuration-file" aria-label="Link to heading 'The main configuration file'" data-heading-content="The main configuration file" class="anchor"></a></h3>
+<p>The main <code>/etc/nginx/nginx.conf</code> file is a tree-like structure formed of
+<strong>contexts</strong> delimited by braces (<code>{</code> and <code>}</code>). Each context contains
+configuration related to a specific area of concern.</p>
+<p>The basic structure is as follows:</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Main context: global nginx options</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-keyword">events</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="4">  <span class="l-comment"># Events context: connection handling options</span>
+</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-keyword">http</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="8">  <span class="l-comment"># HTTP context: web server &amp; reverse proxy configuration</span>
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10">  <span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="11">    <span class="l-comment"># Server context: website configuration</span>
+</div><div class="l-line" data-line="12">  <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="13">
+</div><div class="l-line" data-line="14">  <span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="15">    <span class="l-comment"># Another server...</span>
+</div><div class="l-line" data-line="16">  <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="17"><span class="l-punctuation-bracket">}</span>
+</div></code></pre>
+<p>These contexts can contain a number of <a href="http://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a>.</p>
+<h3 id="includes">Includes<a href="#includes" aria-label="Link to heading 'Includes'" data-heading-content="Includes" class="anchor"></a></h3>
+<p>Nginx has an <a href="http://nginx.org/en/docs/ngx_core_module.html#include" target="_blank" rel="noopener noreferrer"><code>include</code> directive</a> which allows you to split the
+configuration into several files instead of having one big file. As you can see,
+nginx already includes several other files out of the box:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; grep include /etc/nginx/nginx.conf
+</div><div class="l-line" data-line="2">include /etc/nginx/modules-enabled/*.conf;
+</div><div class="l-line" data-line="3">include /etc/nginx/mime.types;
+</div><div class="l-line" data-line="4">include /etc/nginx/conf.d/*.conf;
+</div><div class="l-line" data-line="5">include /etc/nginx/sites-enabled/*;
+</div></code></pre>
+<p>The most important include is <code>/etc/nginx/sites-enabled/*</code>. Any file in there
+will be loaded in the <code>http</code> context, which means they a good place to define
+<code>server</code> contexts in.</p>
+<h3 id="sites-available-vs-sites-enabled"><code>sites-available</code> vs. <code>sites-enabled</code><a href="#sites-available-vs-sites-enabled" aria-label="Link to heading 'sites-available vs. sites-enabled'" data-heading-content="sites-available vs. sites-enabled" class="anchor"></a></h3>
+<p>By convention, nginx has two directories for website configuration files:</p>
+<ul>
+<li>
+<p><strong><code>sites-available</code></strong> contains the actual configuration files. For example,
+you could create a file at <code>/etc/nginx/sites-available/example-site</code> to
+configure nginx to serve your website.</p>
+<p>This directory is <strong>not</strong> included by nginx, so configuration files in it are
+not automatically picked up.</p>
+</li>
+<li>
+<p><strong><code>sites-enabled</code></strong> contains <strong>symbolic links</strong> to the configuration files in
+<code>sites-available</code>.</p>
+<p>This directory is included by nginx. Configuration files in it (or links to
+configuration files) are automatically loaded.</p>
+</li>
+</ul>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">/etc/nginx/sites-enabled/example -&gt; /etc/nginx/sites-available/example
+</div></code></pre>
+<p>Things are set up like this so that you can work on configuration files in
+<code>sites-available</code> but not actually enable them until you put the symbolic link
+in <code>sites-enabled</code>. It also allows you to <strong>quickly disable</strong> a website without
+deleting its configuration file.</p>
+<p>For example, you could quickly disable a site by deleting its symbolic link:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/example</span>
+</div></code></pre>
+<p>And re-enable it whenever you want by re-creating the link:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Create a symbolic link in sites-enabled, pointing to sites-available:</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/example</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/</span>
+</div></code></pre>
+<p>All this without touching the actual configuration file:
+<code>/etc/nginx/sites-available/example</code>.</p>
+<h3 id="reloading-nginxs-configuration">Reloading nginx’s configuration<a href="#reloading-nginxs-configuration" aria-label="Link to heading 'Reloading nginx’s configuration'" data-heading-content="Reloading nginx’s configuration" class="anchor"></a></h3>
+<p>When you put new symbolic links in <code>sites-enabled</code>, or modify configurations in
+<code>sites-available</code>, nginx will not automatically reload them.</p>
+<p>You can restart nginx, which will make it reload the configuration, but you can
+also tell it to <strong>reload its configuration without shutting down</strong>. Nginx reacts
+to <a href="http://nginx.org/en/docs/control.html" target="_blank" rel="noopener noreferrer">some Unix signals</a> in certain ways. Notably, it reloads its
+configuration when receiving a <code>HUP</code> signal.</p>
+<p>You can send the signal to the nginx master process yourself with the <code>kill</code>
+command, or you can simply reload the associated systemd service, which will
+send the signal for you:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">reload</span> <span class="l-variable-parameter">nginx</span>
+</div></code></pre>
+<h3 id="common-nginx-directives">Common nginx directives<a href="#common-nginx-directives" aria-label="Link to heading 'Common nginx directives'" data-heading-content="Common nginx directives" class="anchor"></a></h3>
+<p>Nginx has many <a href="http://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a> that can be put in various contexts.</p>
+<p>These are the most commonly used ones in the <code>server</code> context,
+used to serve websites (static or dynamic):</p>
+<table>
+<thead>
+<tr>
+<th align="left">Directive</th>
+<th align="left">Example value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="noopener noreferrer"><code>listen</code></a></td>
+<td align="left"><code>80</code>, <code>localhost:8000</code></td>
+<td align="left">Port (and optional address) on which to listen and accept requests from.</td>
+</tr>
+<tr>
+<td align="left"><a href="http://nginx.org/en/docs/http/server_names.html" target="_blank" rel="noopener noreferrer"><code>server_name</code></a></td>
+<td align="left"><code>example.com, www.example.com</code></td>
+<td align="left">Comma-separated list of domain names. Determine which <code>server</code> block handles client requests.</td>
+</tr>
+<tr>
+<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#root" target="_blank" rel="noopener noreferrer"><code>root</code></a></td>
+<td align="left"><code>/home/jde/www/site</code>, <code>/var/www/site</code></td>
+<td align="left">The root directory for requests.</td>
+</tr>
+<tr>
+<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_index_module.html#index" target="_blank" rel="noopener noreferrer"><code>index</code></a></td>
+<td align="left"><code>index.html</code></td>
+<td align="left">Define files that will be used as an index, i.e. served by default if there is no URL path.</td>
+</tr>
+<tr>
+<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer"><code>location</code></a></td>
+<td align="left"><code>/api</code>, <code>~* \.jpg$</code></td>
+<td align="left">Vary configuration based on the URL.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nginx-configuration-examples">nginx configuration examples<a href="#nginx-configuration-examples" aria-label="Link to heading 'nginx configuration examples'" data-heading-content="nginx configuration examples" class="anchor"></a></h2>
+<!-- slide-front-matter class: center, middle -->
+<img class='w80' src='images/nginx-configuration-e45594b310b0abfe2ed494ea3b93ac1d.png' />
+<h3 id="how-to-use-these-examples">How to use these examples<a href="#how-to-use-these-examples" aria-label="Link to heading 'How to use these examples'" data-heading-content="How to use these examples" class="anchor"></a></h3>
+<p>Each of the following examples can be put in a separate file in the <code>/etc/nginx/sites-available</code> directory:</p>
+<ul>
+<li>
+<p>Copy a website configuration example.</p>
+</li>
+<li>
+<p>Save it in <code>/etc/nginx/sites-available/example</code>. (Replace <code>example</code> with
+whatever name you want to name your site.)</p>
+</li>
+<li>
+<p>Create a symbolic link to it in <code>/etc/nginx/sites-enabled</code> with this command
+(this is one command on 3 lines):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> \
+</div><div class="l-line" data-line="2">     <span class="l-variable-parameter">/etc/nginx/sites-available/example</span> \
+</div><div class="l-line" data-line="3">     <span class="l-variable-parameter">/etc/nginx/sites-enabled/example</span>
+</div></code></pre>
+</li>
+<li>
+<p>Check that you have not made a mistake:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
+</div></code></pre>
+</li>
+<li>
+<p>Instruct nginx to reload its configuration with this command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">nginx</span> <span class="l-variable-parameter">reload</span>
+</div></code></pre>
+</li>
+</ul>
+<h3 id="static-website-configuration">Static website configuration<a href="#static-website-configuration" aria-label="Link to heading 'Static website configuration'" data-heading-content="Static website configuration" class="anchor"></a></h3>
+<p>This configuration tells nginx to serve the static files in the directory
+<code>/home/jde/example</code> when a request arrives on port 80 for the domain
+<code>example.com</code>. This demonstrates nginx’s capabilities as a basic <strong>web server</strong>.</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="2">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="3">  <span class="l-keyword">server_name</span> <span class="l-variable">example.com</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/home/jde/example</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="5">  <span class="l-keyword">index</span> <span class="l-variable">index.html</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">  <span class="l-comment"># Instruct the browser to cache images, icons,</span>
+</div><div class="l-line" data-line="8">  <span class="l-comment"># video, audio, HTC, etc for 30 days.</span>
+</div><div class="l-line" data-line="9">  <span class="l-keyword">location</span> <span class="l-operator">~*</span> <span class="l-string-special">\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ </span><span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="10">    <span class="l-keyword">access_log</span> <span class="l-boolean">off</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="11">    <span class="l-keyword">add_header</span> <span class="l-variable">Cache-Control</span> <span class="l-string">&quot;max-age=2592000&quot;</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="12">  <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="13"><span class="l-punctuation-bracket">}</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>Cache-Control</code> header is sent to the client’s browser to tell it that these
+media files (<code>jpg</code>, <code>png</code>, etc) can be cached, i.e. there’s no need to
+redownload them the next time.</p></div></div>
+<h3 id="reverse-proxy-configuration">Reverse proxy configuration<a href="#reverse-proxy-configuration" aria-label="Link to heading 'Reverse proxy configuration'" data-heading-content="Reverse proxy configuration" class="anchor"></a></h3>
+<p>This configuration tells nginx to forward any request on port 80 for the domain
+<code>dynamic.example.com</code> to the application or server at address
+<code>http://127.0.0.1:3000</code>, making it behave as a <strong>reverse proxy</strong>.</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="2">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="3">  <span class="l-keyword">server_name</span> <span class="l-variable">dynamic.example.com</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/path/to/static/files</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">  <span class="l-comment"># Proxy requests for dynamic content to another server/application.</span>
+</div><div class="l-line" data-line="7">  <span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="8">    <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://127.0.0.1:3000</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="9">  <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="10"><span class="l-punctuation-bracket">}</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>In this example, the <code>proxy_pass</code> address is a local address, but it could well
+be the IP address of another server in an internal network.</p></div></div>
+<h3 id="load-balancing-configuration">Load balancing configuration<a href="#load-balancing-configuration" aria-label="Link to heading 'Load balancing configuration'" data-heading-content="Load balancing configuration" class="anchor"></a></h3>
+<p>This configuration tells nginx to perform <strong>load balancing</strong> on incoming
+requests on port 80 for the domain <code>big.example.com</code>. With the <a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer"><code>upstream</code>
+directive</a>, it defines a cluster of 4 servers among which to
+distribute the load.</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Cluster of applications or servers to handle requests.</span>
+</div><div class="l-line" data-line="2"><span class="l-keyword">upstream</span> <span class="l-variable">big_server_com</span> <span class="l-variable">{</span>
+</div><div class="l-line" data-line="3">  <span class="l-variable">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.3<span class="l-variable">:8000</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span>
+</div><div class="l-line" data-line="4">  <span class="l-keyword">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.3<span class="l-variable">:8001</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span>
+</div><div class="l-line" data-line="5">  <span class="l-keyword">server</span> <span class="l-number">10.192</span>.67.3<span class="l-variable">:8000</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># separate server</span>
+</div><div class="l-line" data-line="6">  <span class="l-keyword">server</span> <span class="l-number">10.192</span>.56.<span class="l-number">1</span>2<span class="l-variable">:8001</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># separate server</span>
+</div><div class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="8">
+</div><div class="l-line" data-line="9">server <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="10">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="11">  <span class="l-keyword">server_name</span> <span class="l-variable">big.example.com</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="12">
+</div><div class="l-line" data-line="13">  <span class="l-comment"># Proxy requests to the cluster.</span>
+</div><div class="l-line" data-line="14">  <span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="15">    <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://big_server_com</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="16">  <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="17"><span class="l-punctuation-bracket">}</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>By default, nginx uses a <a href="https://en.wikipedia.org/wiki/Weighted_round_robin" target="_blank" rel="noopener noreferrer">weighted round robin</a> algorithm
+to decide to which server each request is proxied. A <code>weight</code> parameter can be
+specified to direct more requests to specific servers.</p></div></div>
+<h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Proxy_server" target="_blank" rel="noopener noreferrer">Proxy server</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Tunneling_protocol" target="_blank" rel="noopener noreferrer">Tunneling proxy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Open_proxy" target="_blank" rel="noopener noreferrer">Open proxy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Reverse_proxy" target="_blank" rel="noopener noreferrer">Reverse proxy</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener noreferrer">Load balancing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scalability" target="_blank" rel="noopener noreferrer">Scalability</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="http://nginx.org/en/docs/" target="_blank" rel="noopener noreferrer">Nginx Documentation</a>
+<ul>
+<li><a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener noreferrer">Nginx Beginner’s Guide</a></li>
+</ul>
+</li>
+<li><a href="https://www.digitalocean.com/" target="_blank" rel="noopener noreferrer">Digital Ocean</a>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04" target="_blank" rel="noopener noreferrer">How to Install Nginx on Ubuntu 18.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts" target="_blank" rel="noopener noreferrer">Understanding the Nginx Configuration File Structure and Configuration Contexts</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#installing-nginx">Installing nginx</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#making-sure-its-working">Making sure it’s working</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nginx-configuration">Nginx configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-main-configuration-file">The main configuration file</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#includes">Includes</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sites-available-vs-sites-enabled"><code>sites-available</code> vs. <code>sites-enabled</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reloading-nginxs-configuration">Reloading nginx’s configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#common-nginx-directives">Common nginx directives</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nginx-configuration-examples">nginx configuration examples</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-to-use-these-examples">How to use these examples</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#static-website-configuration">Static website configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reverse-proxy-configuration">Reverse proxy configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#load-balancing-configuration">Load balancing configuration</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-509-reverse-proxy-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-509-reverse-proxy-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/509-reverse-proxy/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done course-item-current">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

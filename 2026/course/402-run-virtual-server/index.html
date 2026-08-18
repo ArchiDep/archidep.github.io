@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Run your own virtual server on Microsoft Azure · ArchiDep</title>
+<meta name="description" content="This guide describes how to run a virtual server appropriate for the Media Engineering Architecture &amp; Deployment course on the Microsoft Azure cloud platform." />
+<link rel="canonical" href="https://archidep.ch/2026/course/402-run-virtual-server/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Run your own virtual server on Microsoft Azure" />
+<meta property="og:description" content="This guide describes how to run a virtual server appropriate for the Media Engineering Architecture &amp; Deployment course on the Microsoft Azure cloud platform." />
+<meta property="og:url" content="https://archidep.ch/2026/course/402-run-virtual-server/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/402-run-virtual-server/exercise.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/402-run-virtual-server/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Run your own virtual server on Microsoft Azure
+</h1>
+
+      <div class="my-4"><p>This guide describes how to run a virtual server appropriate for the Media
+Engineering Architecture &amp; Deployment course on the <a href="https://azure.microsoft.com" target="_blank" rel="noopener noreferrer">Microsoft
+Azure</a> cloud platform.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#apply-to-azure-for-students"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Apply to Azure for Students</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#get-your-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Get your public SSH key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#skip-the-disk-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip the disk settings</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#configure-open-ports"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure open ports</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#skip-advanced-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip advanced settings</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#review-your-monthly-cost"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Review your monthly cost</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create your server</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#optionally-get-your-machines-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> (Optionally) get your machine’s public SSH key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#configure-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your virtual server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#connect-to-your-new-virtual-machine-over-ssh"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to your new virtual machine over SSH</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#give-the-teacher-access-to-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give the teacher access to your virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#change-the-hostname-of-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change the hostname of your virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reboot-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Reboot the server</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#add-swap-space-to-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add swap space to your virtual server</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#register-your-azure-vm-with-us"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Register your Azure VM with us</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#i-forgot-to-open-some-or-all-of-the-ports-in-the-firewall"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I forgot to open some (or all) of the ports in the firewall</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#azure-complains-that-my-rsa-key-is-too-short"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Azure complains that my RSA key is too short</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      <div class="pt-2 sticky top-0 z-10">
+        <div class="cloud-server-data not-prose xl:hidden" data-mode="creation" data-layout="horizontal">
+        </div>
+      </div>
+
+      
+
+<h2 id="legend">
+  <img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend
+</h2>
+
+<p>Parts of this exercise are annotated with the following icons:</p>
+
+<ul class="legend">
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A task you MUST perform to complete the exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional step that you may perform to make sure that
+    everything is working correctly, or to set up additional tools that are not required but can
+    help you
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Advanced tips on how to go further (or
+    challenges!)
+  </li>
+  <li><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> The end of the exercise</li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> The architecture of the software you ran or
+    deployed during this exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting tips: how to fix common problems you might
+    encounter
+  </li>
+</ul>
+
+      <h2 id="apply-to-azure-for-students"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Apply to Azure for Students<a href="#apply-to-azure-for-students" aria-label="Link to heading 'Apply to Azure for Students'" data-heading-content="Apply to Azure for Students" class="anchor"></a></h2>
+<p>Apply to <a href="https://azure.microsoft.com/en-us/free/students/" target="_blank" rel="noopener noreferrer">Azure for Students</a>
+<strong>with your <code>@hes-so.ch</code> email address</strong>, which will provide you with free
+Azure resources as a student.</p>
+<p><img src="images/azure-for-students-signup-3117c16722c70639df940a8e56c52589.png" alt="Azure for Students Landing Page" /></p>
+<h2 id="get-your-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Get your public SSH key<a href="#get-your-public-ssh-key" aria-label="Link to heading 'Get your public SSH key'" data-heading-content="Get your public SSH key" class="anchor"></a></h2>
+<p>You can display your public SSH key in your terminal with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/id_ed25519.pub</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you have an older SSH client, you may want to try displaying the contents of
+<code>~/.ssh/id_rsa.pub</code> instead.</p></div></div>
+<h2 id="launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server<a href="#launch-a-virtual-server" aria-label="Link to heading 'Launch a virtual server'" data-heading-content="Launch a virtual server" class="anchor"></a></h2>
+<p>Once you have your Azure account, you can launch the virtual server you will be
+using for the rest of the course.</p>
+<p>Access the <a href="https://portal.azure.com" target="_blank" rel="noopener noreferrer">Azure portal</a> and go to the <strong>Virtual machines</strong>
+section:</p>
+<p><img src="images/azure-portal-menu-9ee5b60d34d823db772a02bb1d9b548e.png" alt="Azure Portal" /></p>
+<p>Create a new virtual machine, i.e. a new virtual server in the Microsoft Azure
+infrastructure:</p>
+<p><img src="images/azure-create-vm-0dbbb7e0325bda54389ad5c65403742e.png" alt="Azure: Create a new virtual machine" /></p>
+<h3 id="configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings<a href="#configure-basic-settings" aria-label="Link to heading 'Configure basic settings'" data-heading-content="Configure basic settings" class="anchor"></a></h3>
+<p>In the <strong>Basics</strong> settings, configure the <strong>virtual machine details</strong> (the
+machine’s name, region, image and size):</p>
+<p><img src="images/azure-vm-instance-details-0b37d191a3b93d13eaa8540698bc76ed.png" alt="Azure: VM instance details" /></p>
+<div class="callout callout-danger group/callout animate"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>Make sure to select the <code>Ubuntu 24.04</code> image and the <code>B1s</code> size.</strong> If you
+select a VM size that is too expensive, <strong>YOU WILL RUN OUT OF FREE CREDITS
+BEFORE THE END OF THE COURSE</strong> You will then have pay <img class="emoji" src="/2026/assets/emoji/1f4b8-aff6d39f4947f22f042e67ac21a9dc7a.svg" alt="💸" width="20" height="20" /> for a new VM and will
+have to reinstall your VM from scratch (including all deployment exercises you
+may already have completed).</p></div></div></div>
+<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If the correct size is not selected, you can select it from the complete list of
+VM sizes. If you cannot select the <code>B1s</code> size, try selecting another
+availability zone (or another region that is not too expensive).</p>
+<p><img src="images/azure-vm-size-d633d23a65dd971033b25ba93e4a9f8a.png" alt="Azure: virtual machine size" /></p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>As a student, you are not allowed to run your virtual machine in any region.
+Choose one of the regions that are recommended for you (these may be different
+for each student):</p>
+<p><img src="images/azure-vm-recommended-regions-3b9562118eb04fa3b1dae464880cf804.png" alt="Azure: recommended regions" /></p>
+<p>In general, choosing a region closer to where you are (or where your customers
+are) will reduce latency, and the North/West European regions are among the
+cheapest.</p></div></div>
+<h4 id="configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account<a href="#configure-your-administrator-account" aria-label="Link to heading 'Configure your administrator account'" data-heading-content="Configure your administrator account" class="anchor"></a></h4>
+<p>Under the <strong>Administrator account</strong> settings, configure your username.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Replace <code>jde</code> with the username you have selected for the course.</p></div></div></div>
+<p><img src="images/azure-vm-admin-settings-d34e27c9b130b67fd28ea75c55f14eae.png" alt="Azure: VM SSH admin settings" /></p>
+<p>Select <strong>SSH public key</strong> authentication, set the source to <strong>Use existing
+public key</strong>, and paste your public SSH key (the one you copied earlier) in the
+text area.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><strong>Your Unix username MUST NOT</strong> contain spaces, accented characters (e.g. é),
+hyphens (-) or dots (.). If you use the same name later in the course as a
+subdomain, it <strong>MUST NOT</strong> contain any underscores (_). We suggest you choose a
+name that starts with a letter (a-z) and contains only alphanumeric characters
+(a-z and 0-9).</p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Choose a username that is simple to type because you will need to type it often.
+If necessary, you can <a href="../../cheatsheets/sysadmin/#how-do-i-change-my-username-usermod">change it later</a>.</p></div></div>
+<h4 id="make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open<a href="#make-sure-the-ssh-port-is-open" aria-label="Link to heading 'Make sure the SSH port is open'" data-heading-content="Make sure the SSH port is open" class="anchor"></a></h4>
+<p>Under inbound port rules, make sure the SSH (22) port is allowed:</p>
+<p><img src="images/azure-vm-inbound-port-rules-27428f549f0f53ab1804c1f6d1399758.png" alt="Azure: VM inbount port rules" /></p>
+<p>Next, go to the <strong>Disks</strong> settings (<strong>DO NOT</strong> create the machine just yet):</p>
+<p><img src="images/azure-vm-go-to-disks-10fc1e3eec490fdb333ef829325bdf18.png" alt="Azure: Go to disks" /></p>
+<h3 id="skip-the-disk-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip the disk settings<a href="#skip-the-disk-settings" aria-label="Link to heading 'Skip the disk settings'" data-heading-content="Skip the disk settings" class="anchor"></a></h3>
+<p>Keep the default <strong>Disks</strong> settings and go to the <strong>Networking</strong> settings:</p>
+<p><img src="images/azure-vm-go-to-networking-7094f11fb283e22db89d20fef21b15d2.png" alt="Azure: Go to disks" /></p>
+<h3 id="configure-open-ports"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure open ports<a href="#configure-open-ports" aria-label="Link to heading 'Configure open ports'" data-heading-content="Configure open ports" class="anchor"></a></h3>
+<p>In the <strong>Networking</strong> settings, select the <strong>Advanced</strong> security group option,
+and create a new security group:</p>
+<p><img src="images/azure-vm-networking-1-06a5efb3e5d151c06f5420f23d34922b.png" alt="Azure: VM networking" /></p>
+<p>Add two inbound rules, one for <strong>HTTP</strong> and one for <strong>HTTPS</strong>:</p>
+<p><img src="images/azure-vm-http-f4fad465fe7009280f6b3bcd64267e15.png" alt="Azure: VM HTTP Ports" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You will also have to name them. You can simply name them “HTTP” and “HTTPS”.</p></div></div>
+<p>Add two other inbound rules, one for <strong>port 3000</strong> and one for <strong>port 3001</strong>:</p>
+<p><img src="images/azure-vm-custom-port-81519d1503847ad46fb5c1c95ba07fbc.png" alt="Azure: VM Custom Ports" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can simply name those rules “Port3000” and “Port3001”.</p></div></div>
+<p>The final security group settings should look something like this:</p>
+<p><img src="images/azure-vm-security-group-20a79cd0e17451b74d679690fc0d32a8.png" alt="Azure: VM Security Group" /></p>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:azure-firewall"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:azure-firewall" type="checkbox" class="peer hidden" /><div class="content"><p>What you are doing here is configuring the Azure firewall to allow incoming
+traffic to your virtual server on specific ports. If you do not do this, it will
+not be reachable from outside the Azure network.</p>
+<p>For example, for a web application running on your virtual server to be
+reachable, ports 80 (HTTP) and 443 (HTTPS) must accept incoming requests. Port
+22 is for SSH connections. Ports 3000 and 3001 will be used in various
+exercises.</p></div><label for="callout-402-run-virtual-server:azure-firewall" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:azure-firewall" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="skip-advanced-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip advanced settings<a href="#skip-advanced-settings" aria-label="Link to heading 'Skip advanced settings'" data-heading-content="Skip advanced settings" class="anchor"></a></h3>
+<p>Keep the default <strong>Management, Monitoring, Advanced</strong> and <strong>Tags</strong> settings.</p>
+<h3 id="review-your-monthly-cost"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Review your monthly cost<a href="#review-your-monthly-cost" aria-label="Link to heading 'Review your monthly cost'" data-heading-content="Review your monthly cost" class="anchor"></a></h3>
+<p>Review your estimated monthly cost:</p>
+<p><img src="images/azure-vm-estimated-monthly-cost-3f716e16dff41fabde345821e26dee06.png" alt="Azure: VM Estimated monthly cost" /></p>
+<p>You might not see the estimated monthly cost, but you should always see the
+hourly cost:</p>
+<p><img src="images/azure-vm-price-a2dffde08c49a4915218e1280a0f7c33.png" alt="Azure: VM Hourly cost" /></p>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Your estimated monthly cost <strong>MUST BE UNDER $20/month OR UNDER $0.025/hour.</strong> If
+it is higher, you have probably selected the wrong region, or a VM size that is
+not the recommended one and that is too expensive for the credits you have at
+your disposal for this course.</p></div></div></div>
+<h3 id="create-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create your server<a href="#create-your-server" aria-label="Link to heading 'Create your server'" data-heading-content="Create your server" class="anchor"></a></h3>
+<p>Double-check that you are launching one virtual machine of size <code>B1s</code> (<strong>1 X
+Standard B1s</strong>).</p>
+<p><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /> Create your virtual machine!</p>
+<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If Azure tells you that you cannot create a virtual machine in the region you
+have selected, go back to the <a href="#configure-basic-settings">basic
+settings</a> and find a region that works.
+<strong>Make sure to re-check your estimated monthly cost afterwards.</strong></p></div></div>
+<p>Once your deployment is complete, go to the virtual machine source:</p>
+<p><img src="images/azure-vm-deployment-complete-36fd6086b7015e210d7ea9e1c85ebf87.png" alt="Azure: VM deployment complete" /></p>
+<p>Find your machine’s public IP address in the virtual machine’s information:</p>
+<p><img src="images/azure-vm-overview-4e805fcb1d3b2161e21ef170aad52f47.png" alt="Azure: VM dashboard" /></p>
+<h2 id="optionally-get-your-machines-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> (Optionally) get your machine’s public SSH key<a href="#optionally-get-your-machines-public-ssh-key" aria-label="Link to heading '(Optionally) get your machine’s public SSH key'" data-heading-content="(Optionally) get your machine’s public SSH key" class="anchor"></a></h2>
+<p>When you connect to your virtual machine over SSH for the first time, you will
+get the usual warning that its authenticity cannot be verified:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">The authenticity of host &#39;20.71.227.143 (20.71.227.143)&#39; can&#39;t be established.
+</div><div class="l-line" data-line="2">ECDSA key fingerprint is SHA256:0TORCgUgzrPGeDHzV5fGAarkpGpc5Nbkhb7q2dbG0OA.
+</div><div class="l-line" data-line="3">Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</div></code></pre>
+<p>To protect yourself from <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank" rel="noopener noreferrer">man-in-the-middle attacks</a>,
+you can obtain the SSH host key fingerprints from your virtual machine before
+attempting to connect. That way, you will be able to see if the key fingerprint
+in the warning matches one of your virtual machine’s keys.</p>
+<p>To do this, you need to install the <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli" target="_blank" rel="noopener noreferrer">Azure CLI</a>. Once you
+have it installed and have logged in, you can run the following command (adapt
+the resource group and name options to your configuration if necessary):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">az</span> <span class="l-function-call">vm</span> <span class="l-variable-parameter">run-command</span> <span class="l-variable-parameter">invoke</span> \
+</div><div class="l-line" data-line="2">     <span class="l-variable-parameter">--resource-group</span> <span class="l-variable-parameter">ArchiDep_group</span> \
+</div><div class="l-line" data-line="3">     <span class="l-variable-parameter">--name</span> <span class="l-variable-parameter">ArchiDep</span> \
+</div><div class="l-line" data-line="4">     <span class="l-variable-parameter">--command-id</span> <span class="l-variable-parameter">RunShellScript</span> \
+</div><div class="l-line" data-line="5">     <span class="l-variable-parameter">--scripts</span> <span class="l-string">&quot;find /etc/ssh -name &#39;*.pub&#39; -exec ssh-keygen -l -f {} \;&quot;</span>
+</div></code></pre>
+<p>After a while, it should print the response:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">{
+</div><div class="l-line" data-line="2">  &quot;value&quot;: [
+</div><div class="l-line" data-line="3">    {
+</div><div class="l-line" data-line="4">      &quot;code&quot;: &quot;ProvisioningState/succeeded&quot;,
+</div><div class="l-line" data-line="5">      &quot;displayStatus&quot;: &quot;Provisioning succeeded&quot;,
+</div><div class="l-line" data-line="6">      &quot;level&quot;: &quot;Info&quot;,
+</div><div class="l-line" data-line="7">      &quot;message&quot;: &quot;Enable succeeded: \n[stdout]\n256 SHA256:IKNmtqj1OKCP4gyErlaQkBbn26gB0ofV3fLkw14yokg root@ArchiDep (ED25519)\n1024 SHA256:mUJQmHnMkGeqbxrRjRrBCJYzxyFYIlwKx/R54eLi4ds root@ArchiDep (DSA)\n3072 SHA256:RGxd9jZfWrUUynsVNGmngD78AaZGcQNT4iHjwX6cK2c root@ArchiDep (RSA)\n256 SHA256:0TORCgUgzrPGeDHzV5fGAarkpGpc5Nbkhb7q2dbG0OA root@ArchiDep (ECDSA)\n\n[stderr]\n&quot;,
+</div><div class="l-line" data-line="8">      &quot;time&quot;: null
+</div><div class="l-line" data-line="9">    }
+</div><div class="l-line" data-line="10">  ]
+</div><div class="l-line" data-line="11">}
+</div></code></pre>
+<p>Your machine’s public key fingerprints are in the <code>message</code> property, separated
+by encoded new lines (<code>\n</code>).</p>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:azure-fingerprint"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:azure-fingerprint" type="checkbox" class="peer hidden" /><div class="content"><p>You can skip this step if you consider the risk and impact of an attack low
+enough. Understand that if you simply answer “yes” when the SSH client warns
+you, you are exposing yourself to a potential man-in-the-middle attack. In all
+likelihood, no one is trying to hack your Azure virtual machine for this course,
+but the possibility exists.</p>
+<p>Since you are using public key authentication and not password authentication,
+your credentials should not be compromised (you will not send a password and
+your private key will not leave your computer). However, anything you do on
+that server could potentially be read and modified by an attacker if he
+manages to intercept the initial connection.</p></div><label for="callout-402-run-virtual-server:azure-fingerprint" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:azure-fingerprint" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="configure-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your virtual server<a href="#configure-your-virtual-server" aria-label="Link to heading 'Configure your virtual server'" data-heading-content="Configure your virtual server" class="anchor"></a></h2>
+<p>You will now connect to your Azure virtual machine and configure some things for
+purposes of the course.</p>
+<h3 id="connect-to-your-new-virtual-machine-over-ssh"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to your new virtual machine over SSH<a href="#connect-to-your-new-virtual-machine-over-ssh" aria-label="Link to heading 'Connect to your new virtual machine over SSH'" data-heading-content="Connect to your new virtual machine over SSH" class="anchor"></a></h3>
+<p>Connect to your virtual machine using the <code>ssh &lt;username&gt;@&lt;host&gt;</code> command,
+replacing <code>&lt;username&gt;</code> with the username you chose for the course (the one you
+used for the machine’s administrator account), and <code>&lt;host&gt;</code> with the IP address
+you copied from the virtual machine’s information.</p>
+<div
+  class="archidep-randomize"
+  data-regexp="(?<username>[a-z][a-z0-9]+)@(?<ipAddress>[a-z0-9]+(?:\.[a-z0-9]+){3})"
+  data-template="<username>@<ipAddress>"></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@87.65.43.210</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You should be able to connect without a password. This works because
+you gave your public SSH key to Azure when creating your virtual server. It
+was automatically put in your user’s <code>~/.ssh/authorized_keys</code> file when the
+server was launched, which allows you to authenticate using your private SSH
+key.</p></div></div>
+<h3 id="give-the-teacher-access-to-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give the teacher access to your virtual machine<a href="#give-the-teacher-access-to-your-virtual-machine" aria-label="Link to heading 'Give the teacher access to your virtual machine'" data-heading-content="Give the teacher access to your virtual machine" class="anchor"></a></h3>
+<p>Once you are connected, run the following command to give the teacher access to
+your virtual machine (<strong>be sure to copy the whole line</strong>):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB1TC4ygWjzpRemdOyrtqQYmOARxMMks71fUduU1Og+i archidep&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">--append</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/.ssh/authorized_keys&quot;</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This adds the teacher’s public SSH key to your user’s <code>~/.ssh/authorized_keys</code>,
+allowing the teachers to also authenticate to your virtual server with their
+private SSH key to help debug issues.</p></div></div>
+<h3 id="change-the-hostname-of-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change the hostname of your virtual machine<a href="#change-the-hostname-of-your-virtual-machine" aria-label="Link to heading 'Change the hostname of your virtual machine'" data-heading-content="Change the hostname of your virtual machine" class="anchor"></a></h3>
+<p>Configure the hostname for your virtual machine. You have chosen a username
+(e.g. <code>jde</code>) and have been assigned a domain for the course (e.g.
+<code>archidep2.ch</code>). Use a combination of both as the hostname for your server.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>For example, if your usename is <code>jde</code> and your assigned domain is
+<code>archidep2.ch</code>, your hostname should be <code>jde.archidep2.ch</code>. Make sure not to
+pick the same username/domain combination as someone else in the class.</p></div></div>
+<div
+  class="archidep-randomize"
+  data-regexp="(?<username>[a-z][a-z0-9]+)\.(?<domain>archidep[0-9]\.ch)"
+  data-template="<username>.<domain>"></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">hostname</span> <span class="l-variable-parameter">jde.archidep2.ch</span>
+</div></code></pre>
+<p>Also save your new hostname to the <code>/etc/hostname</code> file so that it will persist
+when you reboot the server:</p>
+<div
+  class="archidep-randomize"
+  data-regexp="(?<username>[a-z][a-z0-9]+)\.(?<domain>archidep[0-9]\.ch)"
+  data-template="<username>.<domain>"></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;jde.archidep2.ch&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">/etc/hostname</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:hostname"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:hostname" type="checkbox" class="peer hidden" /><div class="content"><p>The hostname is the name of your virtual server. It can be any URL. It often
+identifies a machine in an organization with the format
+<code>&lt;machine-name&gt;.&lt;organization&gt;.&lt;tld&gt;</code> (e.g. <code>unix-box.google.com</code>).</p>
+<p>For the purposes of this course, we will be using prepared domains such as
+<code>archidep2.ch</code>, so it makes sense to use a subdomain corresponding to yourself
+(<code>jde.archidep2.ch</code>) as the hostname.</p></div><label for="callout-402-run-virtual-server:hostname" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:hostname" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44f-9fa091f676e4451ee5946fed948cb8fe.svg" alt="👏" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="reboot-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Reboot the server<a href="#reboot-the-server" aria-label="Link to heading 'Reboot the server'" data-heading-content="Reboot the server" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">reboot</span>
+</div></code></pre>
+<p><strong>Once the server has restarted</strong> (it might take a couple of minutes), check
+that you can still connect:</p>
+<div
+  class="archidep-randomize"
+  data-regexp="(?<username>[a-z][a-z0-9]+)@(?<ipAddress>[a-z0-9]+(?:\.[a-z0-9]+){3})"
+  data-template="<username>@<ipAddress>"></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@87.65.43.210</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Welcome</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">Ubuntu</span> <span class="l-variable-parameter">24.04</span> <span class="l-variable-parameter">LTS</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>Also check that your hostname is correct:</p>
+<div
+  class="archidep-randomize"
+  data-regexp="(?<username>[a-z][a-z0-9]+)\.(?<domain>archidep[0-9]\.ch)"
+  data-template="<username>.<domain>"
+  data-tooltip="false"></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">jde.archidep2.ch</span>
+</div></code></pre>
+<h3 id="add-swap-space-to-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add swap space to your virtual server<a href="#add-swap-space-to-your-virtual-server" aria-label="Link to heading 'Add swap space to your virtual server'" data-heading-content="Add swap space to your virtual server" class="anchor"></a></h3>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:swap-space"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:swap-space" type="checkbox" class="peer hidden" /><div class="content"><p>The cloud servers used in this course do not have enough memory (RAM) to
+run/compile many things at once. But you can easily add <strong>swap space</strong> to solve
+this issue.</p>
+<p>Swap space in Linux is used when there is no more available physical memory
+(RAM). If the system needs more memory resources and the RAM is full, inactive
+pages in memory are moved to the swap space (on disk).</p></div><label for="callout-402-run-virtual-server:swap-space" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:swap-space" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f31f-030fc6691abd2ab36c1d90407e02505e.svg" alt="🌟" width="20" height="20" /></span> Awesome!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>Adding 2 gigabytes of swap space should be enough for our purposes.</p>
+<p>Run the following commands to make sure you disable any previous swap file you
+might have created during the exercises:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># (It&#39;s okay if this command produces an error.)</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">swapoff</span> <span class="l-variable-parameter">/swapfile</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/swapfile</span>
+</div></code></pre>
+<p>Use the following commands to create and mount a 2-gigabyte swap file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">fallocate</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">2G</span> <span class="l-variable-parameter">/swapfile</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">600</span> <span class="l-variable-parameter">/swapfile</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">mkswap</span> <span class="l-variable-parameter">/swapfile</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Setting</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">swapspace</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">1,</span> <span class="l-variable-parameter">size</span> <span class="l-variable-parameter">=</span> <span class="l-number">2</span> <span class="l-variable-parameter">GiB</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-number">2147479552</span> <span class="l-variable-parameter">bytes</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">no</span> <span class="l-variable-parameter">label,</span> <span class="l-variable-parameter">UUID=3c263053-41cc-4757-0000-13de0644cf97</span>
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">swapon</span> <span class="l-variable-parameter">/swapfile</span>
+</div></code></pre>
+<p>You can verify that the swap space is correctly mounted by displaying available
+memory with the <code>free -h</code> command. You should see the <code>Swap</code> line indicating the
+amount of swap space you have added:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-h</span>
+</div><div class="l-line" data-line="2">              <span class="l-function-call">total</span>        <span class="l-variable-parameter">used</span>        <span class="l-variable-parameter">free</span>      <span class="l-variable-parameter">shared</span>  <span class="l-variable-parameter">buff/cache</span>   <span class="l-variable-parameter">available</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Mem:</span>          <span class="l-variable-parameter">914Mi</span>       <span class="l-variable-parameter">404Mi</span>       <span class="l-variable-parameter">316Mi</span>        <span class="l-variable-parameter">31Mi</span>       <span class="l-variable-parameter">193Mi</span>       <span class="l-variable-parameter">331Mi</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Swap:</span>         <span class="l-variable-parameter">2.0Gi</span>       <span class="l-variable-parameter">200Mi</span>       <span class="l-variable-parameter">1.8Gi</span>
+</div></code></pre>
+<p>This swap space is temporary by default and will only last until your reboot
+your server. To make it permanent, you must tell your server to mount it on
+boot.</p>
+<p>You can see the currently configured mounts with this command (the output may
+not be exactly the same):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/fstab</span>
+</div><div class="l-line" data-line="2"><span class="l-comment"># CLOUD_IMG: This file was created/modified by the Cloud Image build process</span>
+</div><div class="l-line" data-line="3"><span class="l-constant">UUID</span><span class="l-operator">=</span><span class="l-string">b1983cef-43a3-46ac-0000-b5e06a61c9fd</span>       <span class="l-function-call">/</span>        <span class="l-variable-parameter">ext4</span>   <span class="l-variable-parameter">defaults,discard</span>        <span class="l-number">0</span> <span class="l-number">1</span>
+</div><div class="l-line" data-line="4"><span class="l-constant">UUID</span><span class="l-operator">=</span><span class="l-string">0BC7-0000</span>  <span class="l-function-call">/boot/efi</span>       <span class="l-variable-parameter">vfat</span>    <span class="l-variable-parameter">umask=0077</span>      <span class="l-number">0</span> <span class="l-number">1</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">/dev/disk/cloud/azure_resource-part1</span>    <span class="l-variable-parameter">/mnt</span>    <span class="l-variable-parameter">auto</span>    <span class="l-variable-parameter">defaults,nofail,x-systemd.requires=cloud-init.service,comment=cloudconfig</span>       <span class="l-number">0</span>       <span class="l-number">2</span>
+</div></code></pre>
+<div class="callout callout-danger group/callout animate"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>BE VERY CAREFUL TO EXECUTE THE FOLLOWING COMMAND EXACTLY AS IS.</strong> Corrupting
+your <code>/etc/fstab</code> file can prevent your server from rebooting.</p></div></div></div>
+<p>To make the swap space permanent, execute the following command to add the
+appropriate line to your server’s <code>/etc/fstab</code> file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;/swapfile none swap sw 0 0&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">-a</span> <span class="l-variable-parameter">/etc/fstab</span>
+</div></code></pre>
+<p>This line tells your server to mount the swap file you have created as swap
+space on boot. You should see the new line at the end of the <code>/etc/fstab</code> file
+if you display its contents again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/fstab</span>
+</div><div class="l-line" data-line="2"><span class="l-comment"># CLOUD_IMG: This file was created/modified by the Cloud Image build process</span>
+</div><div class="l-line" data-line="3"><span class="l-constant">UUID</span><span class="l-operator">=</span><span class="l-string">b1983cef-43a3-46ac-0000-b5e06a61c9fd</span>       <span class="l-function-call">/</span>        <span class="l-variable-parameter">ext4</span>   <span class="l-variable-parameter">defaults,discard</span>        <span class="l-number">0</span> <span class="l-number">1</span>
+</div><div class="l-line" data-line="4"><span class="l-constant">UUID</span><span class="l-operator">=</span><span class="l-string">0BC7-08EF</span>  <span class="l-function-call">/boot/efi</span>       <span class="l-variable-parameter">vfat</span>    <span class="l-variable-parameter">umask=0077</span>      <span class="l-number">0</span> <span class="l-number">1</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">/dev/disk/cloud/azure_resource-part1</span>    <span class="l-variable-parameter">/mnt</span>    <span class="l-variable-parameter">auto</span>    <span class="l-variable-parameter">defaults,nofail,x-systemd.requires=cloud-init.service,comment=cloudconfig</span>       <span class="l-number">0</span>       <span class="l-number">2</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">/swapfile</span> <span class="l-variable-parameter">none</span> <span class="l-variable-parameter">swap</span> <span class="l-variable-parameter">sw</span> <span class="l-number">0</span> <span class="l-number">0</span>
+</div></code></pre>
+<p>You can run the following command to check that you did not make any mistakes.
+It’s okay if you have a couple of warnings about the swap file. These are
+expected since you’ve just added it and have not rebooted yet.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">findmnt</span> <span class="l-variable-parameter">--verify</span> <span class="l-variable-parameter">--verbose</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/</span>
+</div><div class="l-line" data-line="3">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span> <span class="l-function-call">target</span> <span class="l-variable-parameter">exists</span>
+</div><div class="l-line" data-line="4">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">FS</span> <span class="l-variable-parameter">options:</span> <span class="l-variable-parameter">discard,commit=30,errors=remount-ro</span>
+</div><div class="l-line" data-line="5">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-constant">UUID</span><span class="l-operator">=</span><span class="l-string">bf171e20-4158-4861-0000-1443ece8c413</span> <span class="l-function-call">translated</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">/dev/sda1</span>
+</div><div class="l-line" data-line="6">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-builtin">source</span> <span class="l-variable-parameter">/dev/sda1</span> <span class="l-variable-parameter">exists</span>
+</div><div class="l-line" data-line="7">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">FS</span> <span class="l-variable-parameter">type</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">ext4</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">none</span>
+</div><div class="l-line" data-line="10">   <span class="l-punctuation-bracket">[</span>W<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">non-bind</span> <span class="l-variable-parameter">mount</span> <span class="l-variable-parameter">source</span> <span class="l-variable-parameter">/swapfile</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">directory</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">regular</span> <span class="l-variable-parameter">file</span>
+</div><div class="l-line" data-line="11">   <span class="l-punctuation-bracket">[</span> <span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">FS</span> <span class="l-variable-parameter">type</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">swap</span>
+</div><div class="l-line" data-line="12">   <span class="l-punctuation-bracket">[</span>W<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">your</span> <span class="l-variable-parameter">fstab</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">modified,</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">systemd</span> <span class="l-variable-parameter">still</span> <span class="l-variable-parameter">uses</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">old</span> <span class="l-variable-parameter">version</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="13">       <span class="l-function-call">use</span> <span class="l-string">&#39;systemctl daemon-reload&#39;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">reload</span>
+</div><div class="l-line" data-line="14">
+</div><div class="l-line" data-line="15"><span class="l-number">0</span> <span class="l-variable-parameter">parse</span> <span class="l-variable-parameter">errors,</span> <span class="l-number">0</span> <span class="l-variable-parameter">errors,</span> <span class="l-number">2</span> <span class="l-variable-parameter">warnings</span>
+</div></code></pre>
+<p><strong>IF everything looks ok</strong>, reboot your server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">reboot</span>
+</div></code></pre>
+<p>Reconnect to your server over SSH and run the <code>free -h</code> command again. The swap
+space should still be enabled after reboot:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-h</span>
+</div><div class="l-line" data-line="2">              <span class="l-function-call">total</span>        <span class="l-variable-parameter">used</span>        <span class="l-variable-parameter">free</span>      <span class="l-variable-parameter">shared</span>  <span class="l-variable-parameter">buff/cache</span>   <span class="l-variable-parameter">available</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Mem:</span>          <span class="l-variable-parameter">914Mi</span>       <span class="l-variable-parameter">404Mi</span>       <span class="l-variable-parameter">316Mi</span>        <span class="l-variable-parameter">31Mi</span>       <span class="l-variable-parameter">193Mi</span>       <span class="l-variable-parameter">331Mi</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Swap:</span>         <span class="l-variable-parameter">2.0Gi</span>       <span class="l-variable-parameter">200Mi</span>       <span class="l-variable-parameter">1.8Gi</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can also see the currently available swap space and how much is used with
+the <code>htop</code> command which shows it as the <code>Swp</code> bar at the top (you can quit it
+with <code>q</code> once it is open). For more information, see the <a href="https://man7.org/linux/man-pages/man5/fstab.5.html" target="_blank" rel="noopener noreferrer">fstab Linux
+manpage</a>.</p></div></div>
+<h2 id="register-your-azure-vm-with-us"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Register your Azure VM with us<a href="#register-your-azure-vm-with-us" aria-label="Link to heading 'Register your Azure VM with us'" data-heading-content="Register your Azure VM with us" class="anchor"></a></h2>
+<p>Make a note of your virtual server’s public IP address (the same IP address you
+used to connect to it with the <code>ssh</code> command).</p>
+<p>Also run the following command <strong>while connected to your server with SSH</strong> to
+obtain your server’s SSH host key fingerprints:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-call">/etc/ssh</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.pub&quot;</span> <span class="l-variable-parameter">-exec</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">-lf</span> <span class="l-variable-parameter">{</span><span class="l-variable-parameter">}</span> <span class="l-variable-parameter">\;</span>
+</div></code></pre>
+<p>Just one more step, go back to the dashboard and:</p>
+<a href="/app?server=ready" class="btn btn-primary btn-xl">
+  <span class="flex items-center gap-2">
+    <span><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span>
+    <span class="font-title">Register you virtual server</span>
+  </span>
+</a>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" type="checkbox" class="peer hidden" /><div class="content"><p>When connecting to your server, we will match the public SSH key fingerprint it
+provides against the keys you are providing us to make sure we are connecting to
+your server and not an attacker’s (man-in-the-middle).</p>
+<p>The command above does a few things:</p>
+<ul>
+<li>The first <code>find</code> command finds all files named <code>*.pub</code> in the <code>/etc/ssh</code>
+directory, which contains the configuration files for the SSH server running
+on your virtual server. These will be the public SSH host keys of your server,
+i.e. the keys it uses to sign the Diffie-Helmann key exchange parameters
+during the establishment of the SSH secure tunnel.</li>
+<li>The <code>-exec</code> option of the <code>find</code> command executes a command for each file that
+was found, with <code>{}</code> being the path to the file and <code>\;</code> a marker to mark the
+end of the command to execute.</li>
+<li>For each public SSH host key file, the <code>ssh-keygen -lf &lt;file&gt;</code> command is
+executed. The <code>ssh-keygen</code> command can not only generate new keys, but with
+the <code>-l</code> option, it can also show the fingerprints of the file specified with
+the <code>-f</code> (<strong>f</strong>ile) option.</li>
+</ul>
+<p>Basically, the entire command will print the fingerprints of all public SSH host
+keys on your server.</p></div><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44f-9fa091f676e4451ee5946fed948cb8fe.svg" alt="👏" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
+<p>You have used a popular Infrastructure-as-a-Service (IaaS) cloud service
+(Microsoft Azure) to set up a virtual machine for your own use. You are renting
+this virtual machine for a monthly fee (using your free education credits).</p>
+<p>You have used what you have learned about the command line and SSH to connect to
+this virtual machine and perform some basic setup steps in preparation for
+future deployment exercises.</p>
+<h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
+<p>Here’s a few tips about some problems you may encounter during this exercise.</p>
+<h3 id="i-forgot-to-open-some-or-all-of-the-ports-in-the-firewall"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I forgot to open some (or all) of the ports in the firewall<a href="#i-forgot-to-open-some-or-all-of-the-ports-in-the-firewall" aria-label="Link to heading 'I forgot to open some (or all) of the ports in the firewall'" data-heading-content="I forgot to open some (or all) of the ports in the firewall" class="anchor"></a></h3>
+<p>If you did not open the correct ports (80, 443, 3000 and 3001) during the initial
+configuration of your virtual server, you can go back to its network settings
+at any time and add the missing rules.</p>
+<p><img src="images/azure-vm-fix-network-settings-33c2e7817d3382eee36f8cba6043c798.png" alt="Azure: fix VM networks settings" /></p>
+<p>As a reminder, you need to add inbound rules to open the following ports (if you
+haven’t already):</p>
+<ul>
+<li><strong>Service:</strong> HTTP, <strong>Action:</strong> Allow, <strong>Name:</strong> HTTP</li>
+<li><strong>Service:</strong> HTTPS, <strong>Action:</strong> Allow, <strong>Name:</strong> HTTPS</li>
+<li><strong>Service:</strong> Custom, <strong>Destination port ranges:</strong> 3000, <strong>Protocol:</strong> TCP,
+<strong>Action:</strong> Allow, <strong>Name:</strong> Port3000</li>
+<li><strong>Service:</strong> Custom, <strong>Destination port ranges:</strong> 3001, <strong>Protocol:</strong> TCP,
+<strong>Action:</strong> Allow, <strong>Name:</strong> Port3001</li>
+</ul>
+<h3 id="azure-complains-that-my-rsa-key-is-too-short"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Azure complains that my RSA key is too short<a href="#azure-complains-that-my-rsa-key-is-too-short" aria-label="Link to heading 'Azure complains that my RSA key is too short'" data-heading-content="Azure complains that my RSA key is too short" class="anchor"></a></h3>
+<p>Azure requires that <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys#supported-ssh-key-formats" target="_blank" rel="noopener noreferrer">SSH keys of type RSA have at least 2048
+bits</a>. If your existing key is not accepted by Azure when
+pasting it in the administrator account settings of your virtual server later,
+you may need to generate a new one with enough bits:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ssh-keygen -m PEM -t rsa -b 4096
+</div></code></pre>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>ATTENTION!</strong> If you already have an RSA key, this command will ask you if you
+want to overwrite it with the new one. If you do, the old key will be
+<strong>PERMANENTLY LOST</strong>. (You will need to put your public key on GitHub again and
+everywhere else you may have used it.)</p></div></div></div>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#apply-to-azure-for-students"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Apply to Azure for Students</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#get-your-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Get your public SSH key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#skip-the-disk-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip the disk settings</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#configure-open-ports"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure open ports</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#skip-advanced-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Skip advanced settings</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#review-your-monthly-cost"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Review your monthly cost</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create your server</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#optionally-get-your-machines-public-ssh-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> (Optionally) get your machine’s public SSH key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#configure-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your virtual server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#connect-to-your-new-virtual-machine-over-ssh"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to your new virtual machine over SSH</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#give-the-teacher-access-to-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give the teacher access to your virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#change-the-hostname-of-your-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change the hostname of your virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reboot-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Reboot the server</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#add-swap-space-to-your-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add swap space to your virtual server</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#register-your-azure-vm-with-us"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Register your Azure VM with us</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#i-forgot-to-open-some-or-all-of-the-ports-in-the-firewall"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I forgot to open some (or all) of the ports in the firewall</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#azure-complains-that-my-rsa-key-is-too-short"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Azure complains that my RSA key is too short</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-402-run-virtual-server-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/402-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      <div class="cloud-server-data" data-mode="creation">
+      </div>
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done course-item-current">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

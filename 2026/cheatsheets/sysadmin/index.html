@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Administation Cheatsheet · ArchiDep</title>
+<meta name="description" content="This cheatsheet is designed to help students in this course quickly find and remember key sysadmin commands and concepts. Use it as a handy reference to make your work with servers and system administration tasks easier." />
+<link rel="canonical" href="https://archidep.ch/2026/cheatsheets/sysadmin/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="System Administation Cheatsheet" />
+<meta property="og:description" content="This cheatsheet is designed to help students in this course quickly find and remember key sysadmin commands and concepts. Use it as a handy reference to make your work with servers and system administration tasks easier." />
+<meta property="og:url" content="https://archidep.ch/2026/cheatsheets/sysadmin/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/cheatsheets/sysadmin/cheatsheet.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/cheatsheets/sysadmin/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-cheatsheet">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  System Administation Cheatsheet
+</h1>
+
+      <div class="my-4"><p>This cheatsheet is designed to help students in this course quickly find and
+remember key sysadmin commands and concepts. Use it as a handy reference to make
+your work with servers and system administration tasks easier.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#the-basics">The basics</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-connect-to-my-server-with-ssh-ssh">How do I connect to my server with SSH? (<code>ssh</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#who-am-i-whoami--id">Who am I? (<code>whoami</code> &amp; <code>id</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-password-passwd">How do I change my password? (<code>passwd</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#whats-happening">What’s happening?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#wheres-all-my-cpu-andor-memory-gone-htop-or-btm">Where’s all my CPU and/or memory gone? (<code>htop</code> or <code>btm</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#whats-running-ps-or-procs">What’s running? (<code>ps</code> or <code>procs</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-much-disk-space-is-left-df-or-duf">How much disk space is left? (<code>df</code> or <code>duf</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#administration">Administration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-changes-to-my-systemd-service-are-not-taken-into-account-systemctl-daemon-reload">The changes to my systemd service are not taken into account! (<code>systemctl daemon-reload</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#installing--upgrading">Installing &amp; upgrading</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-know-what-is-installed-apt-list">How do I know what is installed? (<code>apt list</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-find-new-stuff-to-install-apt-search-apt-info-apt-show">How do I find new stuff to install? (<code>apt search</code>, <code>apt info</code>, <code>apt show</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-install-stuff-apt-install">How do I install stuff? (<code>apt install</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-keep-my-server-up-to-date-apt-update-apt-upgrade--apt-full-upgrade">How do I keep my server up-to-date? (<code>apt update</code>, <code>apt upgrade</code> &amp; <code>apt full-upgrade</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#daemons-using-outdated-libraries">Daemons using outdated libraries</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#system-restart-required">System restart required</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-get-rid-of-stuff-apt-remove--apt-autoremove">How do I get rid of stuff? (<code>apt remove</code> &amp; <code>apt autoremove</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-about-apt-get-and-apt-cache">What about <code>apt-get</code> and <code>apt-cache</code>?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#my-post-receive-git-hook-is-not-executing">My <code>post-receive</code> Git hook is not executing!</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      
+
+      <h2 id="the-basics">The basics<a href="#the-basics" aria-label="Link to heading 'The basics'" data-heading-content="The basics" class="anchor"></a></h2>
+<p>A few basic and/or essential commands.</p>
+<h3 id="how-do-i-connect-to-my-server-with-ssh-ssh">How do I connect to my server with SSH? (<code>ssh</code>)<a href="#how-do-i-connect-to-my-server-with-ssh-ssh" aria-label="Link to heading 'How do I connect to my server with SSH? (ssh)'" data-heading-content="How do I connect to my server with SSH? (ssh)" class="anchor"></a></h3>
+<p>Connect to the server at the IP address <code>W.X.Y.Z</code> as the <code>jde</code> user:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@W.X.Y.Z</span>
+</div></code></pre>
+<p>Connect to the server at the domain <code>example.com</code> as the <code>jde</code> user:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@example.com</span>
+</div></code></pre>
+<h3 id="who-am-i-whoami--id">Who am I? (<code>whoami</code> &amp; <code>id</code>)<a href="#who-am-i-whoami--id" aria-label="Link to heading 'Who am I? (whoami &amp; id)'" data-heading-content="Who am I? (whoami &amp; id)" class="anchor"></a></h3>
+<p>If you don’t remember who you are currently logged in (and have forgotten that this information is generally displayed at the very start of your prompt), you can use the <code>whoami</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">jde</span>
+</div></code></pre>
+<p>You can also use the <code>id</code> command which also shows the GID (<strong>g</strong>roup <strong>ID</strong>) of your user’s main group, and also the other groups your user may belong to:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">id</span>
+</div><div class="l-line" data-line="2"><span class="l-variable">uid</span><span class="l-operator">=</span><span class="l-number">1000</span><span class="l-punctuation-bracket">(</span>jde<span class="l-punctuation-bracket">)</span> <span class="l-variable">gid</span><span class="l-operator">=</span><span class="l-number">1000</span><span class="l-punctuation-bracket">(</span>jde<span class="l-punctuation-bracket">)</span> <span class="l-variable">groups</span><span class="l-operator">=</span><span class="l-number">1000</span><span class="l-punctuation-bracket">(</span>jde<span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span><span class="l-function-call">,4</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">adm</span><span class="l-punctuation-bracket">)</span><span class="l-function-call">,24</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">cdrom</span><span class="l-punctuation-bracket">)</span><span class="l-function-call">,27</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">sudo</span><span class="l-punctuation-bracket">)</span><span class="l-function-call">,30</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">dip</span><span class="l-punctuation-bracket">)</span><span class="l-function-call">,105</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">lxd</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<h3 id="how-do-i-change-my-password-passwd">How do I change my password? (<code>passwd</code>)<a href="#how-do-i-change-my-password-passwd" aria-label="Link to heading 'How do I change my password? (passwd)'" data-heading-content="How do I change my password? (passwd)" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">passwd</span>
+</div></code></pre>
+<h2 id="whats-happening">What’s happening?<a href="#whats-happening" aria-label="Link to heading 'What’s happening?'" data-heading-content="What’s happening?" class="anchor"></a></h2>
+<p>These commands allow you to see (and control) what is happening on your server.</p>
+<h3 id="wheres-all-my-cpu-andor-memory-gone-htop-or-btm">Where’s all my CPU and/or memory gone? (<code>htop</code> or <code>btm</code>)<a href="#wheres-all-my-cpu-andor-memory-gone-htop-or-btm" aria-label="Link to heading 'Where’s all my CPU and/or memory gone? (htop or btm)'" data-heading-content="Where’s all my CPU and/or memory gone? (htop or btm)" class="anchor"></a></h3>
+<p>Run <code>htop</code> to see an interactive summary of the state of your server:</p>
+<p><img src="images/htop-f4e97797b4b055fb1f71c1c0e3db7636.png" alt="htop" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Exit with <code>q</code> (<strong>q</strong>uit) or <code>Ctrl-C</code>.</p></div></div>
+<p>Install <a href="https://github.com/ClementTsang/bottom" target="_blank" rel="noopener noreferrer">bottom</a> and run <code>btm</code> for a more complete and modern alternative:</p>
+<p><img src="images/btm-238fdb3c8599e1faf1b405e3bf79b54c.png" alt="btm" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Exit with <code>q</code> (<strong>q</strong>uit) or <code>Ctrl-C</code>.</p></div></div>
+<h3 id="whats-running-ps-or-procs">What’s running? (<code>ps</code> or <code>procs</code>)<a href="#whats-running-ps-or-procs" aria-label="Link to heading 'What’s running? (ps or procs)'" data-heading-content="What’s running? (ps or procs)" class="anchor"></a></h3>
+<p>Run <code>ps</code> (<strong>p</strong>rocess <strong>s</strong>tatus) to list running interactive processes that belong to your user:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span>
+</div><div class="l-line" data-line="2">    <span class="l-function-call">PID</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
+</div><div class="l-line" data-line="3">   <span class="l-number">9909</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">bash</span>
+</div><div class="l-line" data-line="4">   <span class="l-number">9936</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span>
+</div></code></pre>
+<p>Add the <code>-f</code> (<strong>f</strong>ull format) option for more information on these processes:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">soy</span>         <span class="l-number">9909</span>    <span class="l-number">9908</span>  <span class="l-number">0</span> <span class="l-variable-parameter">23:40</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">soy</span>         <span class="l-number">9937</span>    <span class="l-number">9909</span>  <span class="l-number">0</span> <span class="l-variable-parameter">23:44</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span>
+</div></code></pre>
+<p>Add the <code>-e</code> (<strong>e</strong>very) option to include every process, not just yours:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>           <span class="l-number">1</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:04</span> <span class="l-variable-parameter">/sbin/init</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">root</span>           <span class="l-number">2</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">kthreadd</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">root</span>           <span class="l-number">3</span>       <span class="l-number">2</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">pool_workqueue_release</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">root</span>           <span class="l-number">4</span>       <span class="l-number">2</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">kworker/R-rcu_g</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">root</span>           <span class="l-number">5</span>       <span class="l-number">2</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">kworker/R-rcu_p</span><span class="l-variable-parameter">]</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Add the <code>--forest</code> option to see the hierarchical relationship between parent processes and their children.</p></div></div>
+<p>Pipe this through <code>grep</code> to find specific processes:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">ssh</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">root</span>        <span class="l-number">1074</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Oct06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>        <span class="l-number">8852</span>    <span class="l-number">1074</span>  <span class="l-number">0</span> <span class="l-variable-parameter">22:27</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">soy</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">soy</span>         <span class="l-number">8985</span>    <span class="l-number">8852</span>  <span class="l-number">0</span> <span class="l-variable-parameter">22:27</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">soy@pts/0</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">root</span>        <span class="l-number">9791</span>    <span class="l-number">1074</span>  <span class="l-number">0</span> <span class="l-variable-parameter">23:40</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">soy</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">soy</span>         <span class="l-number">9908</span>    <span class="l-number">9791</span>  <span class="l-number">0</span> <span class="l-variable-parameter">23:40</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">soy@pts/1</span>
+</div></code></pre>
+<p>Install <a href="https://github.com/dalance/procs" target="_blank" rel="noopener noreferrer">procs</a> if you want a modern alternative to <code>ps</code>. Running <code>procs</code> is equivalent to <code>ps -ef</code> but it is also interactive:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"> <span class="l-function-call">PID:▲</span> <span class="l-variable-parameter">User</span>            <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">TTY</span>   <span class="l-variable-parameter">CPU</span> <span class="l-variable-parameter">MEM</span> <span class="l-variable-parameter">CPU</span> <span class="l-variable-parameter">Time</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">Command</span>
+</div><div class="l-line" data-line="2">                       <span class="l-function-call">│</span>       <span class="l-variable-parameter">[</span><span class="l-variable-parameter">%</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">%</span><span class="l-variable-parameter">]</span>          <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="3"> <span class="l-number">1</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">1.6</span> <span class="l-variable-parameter">00:00:04</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">systemd</span>
+</div><div class="l-line" data-line="4"> <span class="l-number">2</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">kthreadd</span>
+</div><div class="l-line" data-line="5"> <span class="l-number">3</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">pool_workqueue_release</span>
+</div><div class="l-line" data-line="6"> <span class="l-number">4</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">kworker/R-rcu_g</span>
+</div><div class="l-line" data-line="7"> <span class="l-number">5</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">kworker/R-rcu_p</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Exit with <code>q</code> (<strong>q</strong>uit).</p></div></div>
+<p>Running <code>procs --tree</code> is equivalent to running <code>ps -ef --forest</code> but it is also interactive:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">procs</span> <span class="l-function-call">--tree</span>
+</div><div class="l-line" data-line="2">             <span class="l-function-call">PID</span>     <span class="l-variable-parameter">User</span>            <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">TTY</span>   <span class="l-variable-parameter">CPU</span> <span class="l-variable-parameter">MEM</span> <span class="l-variable-parameter">CPU</span> <span class="l-variable-parameter">Time</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">Command</span>
+</div><div class="l-line" data-line="3">                                     <span class="l-function-call">│</span>       <span class="l-variable-parameter">[</span><span class="l-variable-parameter">%</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">%</span><span class="l-variable-parameter">]</span>          <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="4"> <span class="l-function-call">├┬─────────</span> <span class="l-number">1</span>       <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">1.6</span> <span class="l-variable-parameter">00:00:04</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">systemd</span>
+</div><div class="l-line" data-line="5"> <span class="l-function-call">│├─────────</span> <span class="l-number">129</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">2.1</span> <span class="l-variable-parameter">00:00:01</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">systemd-journal</span>
+</div><div class="l-line" data-line="6"> <span class="l-function-call">│├┬────────</span> <span class="l-number">195</span>     <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">3.2</span> <span class="l-variable-parameter">00:00:07</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">multipathd</span>
+</div><div class="l-line" data-line="7"> <span class="l-function-call">││├────────</span> <span class="l-variable-parameter">[</span><span class="l-number">201</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">3.2</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">multipathd</span>
+</div><div class="l-line" data-line="8"> <span class="l-function-call">││├────────</span> <span class="l-variable-parameter">[</span><span class="l-number">203</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">root</span>            <span class="l-variable-parameter">│</span>       <span class="l-variable-parameter">0.0</span> <span class="l-variable-parameter">3.2</span> <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">multipathd</span>
+</div></code></pre>
+<h3 id="how-much-disk-space-is-left-df-or-duf">How much disk space is left? (<code>df</code> or <code>duf</code>)<a href="#how-much-disk-space-is-left-df-or-duf" aria-label="Link to heading 'How much disk space is left? (df or duf)'" data-heading-content="How much disk space is left? (df or duf)" class="anchor"></a></h3>
+<p>List storage devices, mounts and available space with <code>df</code> (<strong>d</strong>isk <strong>f</strong>ree):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Filesystem</span>      <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/dev/root</span>        <span class="l-variable-parameter">29G</span>  <span class="l-variable-parameter">3.8G</span>   <span class="l-variable-parameter">25G</span>  <span class="l-variable-parameter">14%</span> <span class="l-variable-parameter">/</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">422M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">422M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev/shm</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">169M</span>  <span class="l-variable-parameter">1.7M</span>  <span class="l-variable-parameter">167M</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/run</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">5.0M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">5.0M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/run/lock</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">efivarfs</span>        <span class="l-variable-parameter">128K</span>   <span class="l-variable-parameter">35K</span>   <span class="l-variable-parameter">89K</span>  <span class="l-variable-parameter">29%</span> <span class="l-variable-parameter">/sys/firmware/efi/efivars</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">/dev/sda16</span>      <span class="l-variable-parameter">881M</span>   <span class="l-variable-parameter">59M</span>  <span class="l-variable-parameter">761M</span>   <span class="l-variable-parameter">8%</span> <span class="l-variable-parameter">/boot</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">/dev/sda15</span>      <span class="l-variable-parameter">105M</span>  <span class="l-variable-parameter">6.1M</span>   <span class="l-variable-parameter">99M</span>   <span class="l-variable-parameter">6%</span> <span class="l-variable-parameter">/boot/efi</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">/dev/sdb1</span>       <span class="l-variable-parameter">3.9G</span>   <span class="l-variable-parameter">28K</span>  <span class="l-variable-parameter">3.7G</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/mnt</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">tmpfs</span>            <span class="l-variable-parameter">85M</span>   <span class="l-variable-parameter">12K</span>   <span class="l-variable-parameter">85M</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/run/user/1000</span>
+</div></code></pre>
+<p>You can also install <a href="https://github.com/muesli/duf" target="_blank" rel="noopener noreferrer">duf</a> if you want a modern alternative to the <code>df</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">duf</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">╭──────────────────────────────────────────────────────────────────────────────────────────╮</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">│</span> <span class="l-number">4</span> <span class="l-variable-parameter">local</span> <span class="l-variable-parameter">devices</span>                                                                          <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">├────────────┬────────┬───────┬────────┬───────────────────────────────┬──────┬────────────┤</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">│</span> <span class="l-variable-parameter">MOUNTED</span> <span class="l-variable-parameter">ON</span> <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">SIZE</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">USED</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">AVAIL</span> <span class="l-variable-parameter">│</span>              <span class="l-variable-parameter">USE%</span>             <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">TYPE</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">FILESYSTEM</span> <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">├────────────┼────────┼───────┼────────┼───────────────────────────────┼──────┼────────────┤</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">│</span> <span class="l-variable-parameter">/</span>          <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">28.0G</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">3.8G</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">24.2G</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">##..................</span><span class="l-variable-parameter">]</span>  <span class="l-variable-parameter">13.5%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">ext4</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">/dev/root</span>  <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">│</span> <span class="l-variable-parameter">/boot</span>      <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">880.4M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">58.5M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">760.2M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">#...................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">6.6%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">ext4</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">/dev/sda16</span> <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">│</span> <span class="l-variable-parameter">/boot/efi</span>  <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">104.3M</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">6.1M</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">98.2M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">#...................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">5.8%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">vfat</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">/dev/sda15</span> <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">│</span> <span class="l-variable-parameter">/mnt</span>       <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">3.9G</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">28.0K</span> <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">3.6G</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">....................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">0.0%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">ext4</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">/dev/sdb1</span>  <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">╰────────────┴────────┴───────┴────────┴───────────────────────────────┴──────┴────────────╯</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</span>
+</div><div class="l-line" data-line="13"><span class="l-function-call">│</span> <span class="l-number">7</span> <span class="l-variable-parameter">special</span> <span class="l-variable-parameter">devices</span>                                                                                           <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="14"><span class="l-function-call">├───────────────────────────┬────────┬───────┬────────┬───────────────────────────────┬──────────┬────────────┤</span>
+</div><div class="l-line" data-line="15"><span class="l-function-call">│</span> <span class="l-variable-parameter">MOUNTED</span> <span class="l-variable-parameter">ON</span>                <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">SIZE</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">USED</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">AVAIL</span> <span class="l-variable-parameter">│</span>              <span class="l-variable-parameter">USE%</span>             <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">TYPE</span>     <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">FILESYSTEM</span> <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="16"><span class="l-function-call">├───────────────────────────┼────────┼───────┼────────┼───────────────────────────────┼──────────┼────────────┤</span>
+</div><div class="l-line" data-line="17"><span class="l-function-call">│</span> <span class="l-variable-parameter">/dev</span>                      <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">418.7M</span> <span class="l-variable-parameter">│</span>    <span class="l-variable-parameter">0B</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">418.7M</span> <span class="l-variable-parameter">│</span>                               <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">devtmpfs</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">devtmpfs</span>   <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="18"><span class="l-function-call">│</span> <span class="l-variable-parameter">/dev/shm</span>                  <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">421.4M</span> <span class="l-variable-parameter">│</span>    <span class="l-variable-parameter">0B</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">421.4M</span> <span class="l-variable-parameter">│</span>                               <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>    <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>      <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="19"><span class="l-function-call">│</span> <span class="l-variable-parameter">/run</span>                      <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">168.6M</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">1.6M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">166.9M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">....................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">1.0%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>    <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>      <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="20"><span class="l-function-call">│</span> <span class="l-variable-parameter">/run/lock</span>                 <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">5.0M</span> <span class="l-variable-parameter">│</span>    <span class="l-variable-parameter">0B</span> <span class="l-variable-parameter">│</span>   <span class="l-variable-parameter">5.0M</span> <span class="l-variable-parameter">│</span>                               <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>    <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>      <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="21"><span class="l-function-call">│</span> <span class="l-variable-parameter">/run/snapd/ns</span>             <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">168.6M</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">1.6M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">166.9M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">....................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">1.0%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>    <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>      <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="22"><span class="l-function-call">│</span> <span class="l-variable-parameter">/run/user/1000</span>            <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">84.3M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">12.0K</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">84.3M</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">....................</span><span class="l-variable-parameter">]</span>   <span class="l-variable-parameter">0.0%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>    <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">tmpfs</span>      <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="23"><span class="l-function-call">│</span> <span class="l-variable-parameter">/sys/firmware/efi/efivars</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">128.0K</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">34.4K</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">88.6K</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">#####...............</span><span class="l-variable-parameter">]</span>  <span class="l-variable-parameter">26.9%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">efivarfs</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">efivarfs</span>   <span class="l-variable-parameter">│</span>
+</div><div class="l-line" data-line="24"><span class="l-function-call">╰───────────────────────────┴────────┴───────┴────────┴───────────────────────────────┴──────────┴────────────╯</span>
+</div></code></pre>
+<h2 id="administration">Administration<a href="#administration" aria-label="Link to heading 'Administration'" data-heading-content="Administration" class="anchor"></a></h2>
+<p>You must be an administrator (have <code>sudo</code> access) to perform the following operations.</p>
+<h3 id="how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)<a href="#how-do-i-change-my-username-usermod" aria-label="Link to heading 'How do I change my username? (usermod)'" data-heading-content="How do I change my username? (usermod)" class="anchor"></a></h3>
+<p>The following command renames the <code>oldname</code> user account into <code>newname</code> and also renames the user’s home directory at the same time:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">usermod</span> <span class="l-variable-parameter">--login</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">--home</span> <span class="l-variable-parameter">/home/newname</span> <span class="l-variable-parameter">--move-home</span> <span class="l-variable-parameter">oldname</span>
+</div></code></pre>
+<p>You also have to rename the associated group:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">groupmod</span> <span class="l-variable-parameter">--new-name</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">oldname</span>
+</div></code></pre>
+<h3 id="how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)<a href="#how-do-i-create-another-user-useradd" aria-label="Link to heading 'How do I create another user? (useradd)'" data-heading-content="How do I create another user? (useradd)" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">useradd</span> <span class="l-function-call">--create-home</span> <span class="l-variable-parameter">--shell</span> <span class="l-variable-parameter">/bin/bash</span> <span class="l-variable-parameter">jane_doe</span>
+</div></code></pre>
+<h3 id="how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)<a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill" aria-label="Link to heading 'How do I find and kill a naughty process? (ps, kill)'" data-heading-content="How do I find and kill a naughty process? (ps, kill)" class="anchor"></a></h3>
+<p>You might need this if you lost your SSH connection after you launched a process which listens on a port, e.g. 3000. If the process still runs, the port is no longer available. This could happen, for example, in the <a href="../../course/410-sftp-deployment/">“Deploy a PHP application with SFTP” exercise</a>.</p>
+<p>Find the process with <code>ps</code> and <code>grep</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">php</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">root</span>     <span class="l-number">20942</span>     <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Dec06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:24</span> <span class="l-variable-parameter">php-fpm:</span> <span class="l-variable-parameter">master</span> <span class="l-variable-parameter">process</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">/etc/php/7.2/fpm/php-fpm.conf</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">www-data</span> <span class="l-number">20960</span> <span class="l-number">20942</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Dec06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">php-fpm:</span> <span class="l-variable-parameter">pool</span> <span class="l-variable-parameter">www</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">www-data</span> <span class="l-number">20961</span> <span class="l-number">20942</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Dec06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">php-fpm:</span> <span class="l-variable-parameter">pool</span> <span class="l-variable-parameter">www</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">jde</span>      <span class="l-number">26378</span> <span class="l-number">26365</span>  <span class="l-number">0</span> <span class="l-variable-parameter">10:02</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">php</span> <span class="l-variable-parameter">-S</span> <span class="l-variable-parameter">0.0.0.0:3000</span>
+</div></code></pre>
+<p>In this example based on the <a href="../../course/410-sftp-deployment/">“Deploy a PHP application with SFTP”exercise</a>, the process that interests you is the fourth one, which was launched by the <code>php -S 0.0.0.0:3000</code> command as shown in the last column, and has the Process ID <code>26378</code>. The other PHP processes are unrelated to what you were doing, so you should not touch them.</p>
+<p>Now that you have the ID of the naughty process, you can kill it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-number">26378</span>
+</div></code></pre>
+<p>If you check the list of processes again, it should no longer be there. If it does not want to die, you can kill it more violently:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-KILL</span> <span class="l-number">26378</span>
+</div></code></pre>
+<h3 id="the-changes-to-my-systemd-service-are-not-taken-into-account-systemctl-daemon-reload">The changes to my systemd service are not taken into account! (<code>systemctl daemon-reload</code>)<a href="#the-changes-to-my-systemd-service-are-not-taken-into-account-systemctl-daemon-reload" aria-label="Link to heading 'The changes to my systemd service are not taken into account! (systemctl daemon-reload)'" data-heading-content="The changes to my systemd service are not taken into account! (systemctl daemon-reload)" class="anchor"></a></h3>
+<p>Every time you change a systemd unit file, you must tell systemd to reload its configuration with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">systemctl</span> <span class="l-variable-parameter">daemon-reload</span>
+</div></code></pre>
+<p>You should also restart your service. Assuming it is defined by the file <code>/etc/systemd/system/foo.service</code>, you can do so with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">foo</span>
+</div></code></pre>
+<h3 id="my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)<a href="#my-systemd-service-is-not-working-systemctl-status--journalctl" aria-label="Link to heading 'My systemd service is not working! (systemctl status &amp; journalctl)'" data-heading-content="My systemd service is not working! (systemctl status &amp; journalctl)" class="anchor"></a></h3>
+<p>Assuming your service is defined by the file <code>/etc/systemd/system/foo.service</code>, you should first check its status with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">foo</span>
+</div></code></pre>
+<p>This shows you whether your service is active (running) and whether it is enabled (to restart at boot). When there is a problem, it may also show you the error that caused the service to fail to start.</p>
+<p>If you cannot find a clear problem from the status information, you should look
+at the system logs for that service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">foo</span>
+</div></code></pre>
+<p>Not all services log there, however. If <code>journalctl</code> displays no log entries, you should look in the standard Linux log directory <code>/var/log</code> for a file or a directory named after your service. For example, nginx stores its error logs in
+<code>/var/log/nginx/error.log</code> by default.</p>
+<p>If your service cannot start, you should be able to find an error from one of these sources.</p>
+<h3 id="list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints<a href="#list-a-servers-ssh-host-key-fingerprints" aria-label="Link to heading 'List a server’s SSH host key fingerprints'" data-heading-content="List a server’s SSH host key fingerprints" class="anchor"></a></h3>
+<p>If you need to see the fingerprints of a server’s SSH public keys (e.g. to check
+the key in an SSH client’s initial connection warning), run the following
+command on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">find</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.pub&quot;</span> <span class="l-variable-parameter">-exec</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">{</span><span class="l-variable-parameter">}</span> <span class="l-variable-parameter">\;</span>
+</div></code></pre>
+<h2 id="installing--upgrading">Installing &amp; upgrading<a href="#installing--upgrading" aria-label="Link to heading 'Installing &amp; upgrading'" data-heading-content="Installing &amp; upgrading" class="anchor"></a></h2>
+<p>You must be an administrator (have <code>sudo</code> access) to perform some of the following operations.</p>
+<h3 id="how-do-i-know-what-is-installed-apt-list">How do I know what is installed? (<code>apt list</code>)<a href="#how-do-i-know-what-is-installed-apt-list" aria-label="Link to heading 'How do I know what is installed? (apt list)'" data-heading-content="How do I know what is installed? (apt list)" class="anchor"></a></h3>
+<p>List all installed packages:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--installed</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Listing...</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">accountsservice/bionic,now</span> <span class="l-variable-parameter">0.6.45-1ubuntu1</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">acl/bionic,now</span> <span class="l-variable-parameter">2.2.52-3build1</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">acpid/bionic,now</span> <span class="l-variable-parameter">1:2.0.28-1ubuntu1</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>Find something more specific by piping through <code>grep</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--installed</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">ssh</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">libssh-4/noble,now</span> <span class="l-variable-parameter">0.10.6-2build2</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed,automatic</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">openssh-client/noble-updates,now</span> <span class="l-variable-parameter">1:9.6p1-3ubuntu13.5</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed,automatic</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">openssh-server/noble-updates,now</span> <span class="l-variable-parameter">1:9.6p1-3ubuntu13.5</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">openssh-sftp-server/noble-updates,now</span> <span class="l-variable-parameter">1:9.6p1-3ubuntu13.5</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">ssh-import-id/noble,now</span> <span class="l-variable-parameter">5.11-0ubuntu2</span> <span class="l-variable-parameter">all</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">installed</span><span class="l-variable-parameter">]</span>
+</div></code></pre>
+<h3 id="how-do-i-find-new-stuff-to-install-apt-search-apt-info-apt-show">How do I find new stuff to install? (<code>apt search</code>, <code>apt info</code>, <code>apt show</code>)<a href="#how-do-i-find-new-stuff-to-install-apt-search-apt-info-apt-show" aria-label="Link to heading 'How do I find new stuff to install? (apt search, apt info, apt show)'" data-heading-content="How do I find new stuff to install? (apt search, apt info, apt show)" class="anchor"></a></h3>
+<p>Search for packages by name:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">search</span> <span class="l-variable-parameter">tldr</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Sorting...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Full</span> <span class="l-variable-parameter">Text</span> <span class="l-variable-parameter">Search...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6"><span class="l-function-call">tealdeer/noble</span> <span class="l-variable-parameter">1.6.1-4build2</span> <span class="l-variable-parameter">amd64</span>
+</div><div class="l-line" data-line="7">  <span class="l-function-call">simplified,</span> <span class="l-variable-parameter">example</span> <span class="l-variable-parameter">based</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">community-driven</span> <span class="l-variable-parameter">man</span> <span class="l-variable-parameter">pages</span>
+</div></code></pre>
+<p>Find out more about a package with <code>apt info</code> or <code>apt show</code> (equivalent):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">info</span> <span class="l-variable-parameter">tealdeer</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Package:</span> <span class="l-variable-parameter">tealdeer</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Version:</span> <span class="l-variable-parameter">1.6.1-4build2</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Installed-Size:</span> <span class="l-variable-parameter">3,124</span> <span class="l-variable-parameter">kB</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">Depends:</span> libc6 <span class="l-punctuation-bracket">(</span><span class="l-operator">&gt;</span><span class="l-string-special-path">=</span> <span class="l-function-call">2.34</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">libgcc-s1</span> <span class="l-punctuation-bracket">(</span><span class="l-operator">&gt;</span><span class="l-string-special-path">=</span> <span class="l-function-call">4.2</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">libssl3t64</span> <span class="l-punctuation-bracket">(</span><span class="l-operator">&gt;</span><span class="l-string-special-path">=</span> <span class="l-function-call">3.0.0</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">Homepage:</span> <span class="l-variable-parameter">https://github.com/dbrgn/tealdeer/</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">Description:</span> <span class="l-variable-parameter">simplified,</span> <span class="l-variable-parameter">example</span> <span class="l-variable-parameter">based</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">community-driven</span> <span class="l-variable-parameter">man</span> <span class="l-variable-parameter">pages</span>
+</div><div class="l-line" data-line="10"> <span class="l-function-call">tealdeer</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">very</span> <span class="l-variable-parameter">fast</span> <span class="l-variable-parameter">CLI</span> <span class="l-variable-parameter">implementation</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">tldr,</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">collaborative</span>
+</div><div class="l-line" data-line="11"> <span class="l-function-call">cheatsheets</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">console</span> <span class="l-variable-parameter">commands.</span>
+</div><div class="l-line" data-line="12"> <span class="l-function-builtin">.</span>
+</div><div class="l-line" data-line="13"> <span class="l-function-call">The</span> <span class="l-variable-parameter">executable</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">named</span> <span class="l-variable-parameter">tldr.</span>
+</div></code></pre>
+<h3 id="how-do-i-install-stuff-apt-install">How do I install stuff? (<code>apt install</code>)<a href="#how-do-i-install-stuff-apt-install" aria-label="Link to heading 'How do I install stuff? (apt install)'" data-heading-content="How do I install stuff? (apt install)" class="anchor"></a></h3>
+<p>Install a new package:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">cowsay</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">package</span> <span class="l-variable-parameter">lists...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Building</span> <span class="l-variable-parameter">dependency</span> <span class="l-variable-parameter">tree</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">state</span> <span class="l-variable-parameter">information...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">The</span> <span class="l-variable-parameter">following</span> <span class="l-variable-parameter">NEW</span> <span class="l-variable-parameter">packages</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">installed:</span>
+</div><div class="l-line" data-line="6">  <span class="l-function-call">cowsay</span>
+</div><div class="l-line" data-line="7"><span class="l-number">0</span> <span class="l-variable-parameter">upgraded,</span> <span class="l-number">1</span> <span class="l-variable-parameter">newly</span> <span class="l-variable-parameter">installed,</span> <span class="l-number">0</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">remove</span> <span class="l-variable-parameter">and</span> <span class="l-number">4</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">upgraded.</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">Need</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">get</span> <span class="l-variable-parameter">17.7</span> <span class="l-variable-parameter">kB</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">archives.</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">After</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">operation,</span> <span class="l-variable-parameter">89.1</span> <span class="l-variable-parameter">kB</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">additional</span> <span class="l-variable-parameter">disk</span> <span class="l-variable-parameter">space</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">used.</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>More complex packages will list their dependencies and ask you to confirm that you really want to install everything.</p></div></div>
+<p>If the package provides a command, you can then use it to make sure your installation worked. In this example, the (very useful) <code>cowsay</code> command was installed:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cowsay</span> <span class="l-function-call">hello</span>
+</div><div class="l-line" data-line="2"> <span class="l-function-call">_______</span>
+</div><div class="l-line" data-line="3"><span class="l-operator">&lt;</span> <span class="l-string-special-path">hello</span> <span class="l-operator">&gt;</span>
+</div><div class="l-line" data-line="4"> <span class="l-string-special-path">-------</span>
+</div><div class="l-line" data-line="5">        \   <span class="l-function-call">^__^</span>
+</div><div class="l-line" data-line="6">         \  <span class="l-punctuation-bracket">(</span><span class="l-function-call">oo</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span><span class="l-function-call">\_______</span>
+</div><div class="l-line" data-line="7">            <span class="l-punctuation-bracket">(</span><span class="l-function-call">__</span><span class="l-punctuation-bracket">)</span>\       <span class="l-punctuation-bracket">)</span>\/\
+</div><div class="l-line" data-line="8">                <span class="l-operator">||</span><span class="l-function-call">----w</span> <span class="l-operator">|</span>
+</div><div class="l-line" data-line="9">                <span class="l-operator">|</span><span class="l-operator">|</span>     <span class="l-operator">||</span><span class="l-function-call"></span>
+</div></code></pre>
+<h3 id="how-do-i-keep-my-server-up-to-date-apt-update-apt-upgrade--apt-full-upgrade">How do I keep my server up-to-date? (<code>apt update</code>, <code>apt upgrade</code> &amp; <code>apt full-upgrade</code>)<a href="#how-do-i-keep-my-server-up-to-date-apt-update-apt-upgrade--apt-full-upgrade" aria-label="Link to heading 'How do I keep my server up-to-date? (apt update, apt upgrade &amp; apt full-upgrade)'" data-heading-content="How do I keep my server up-to-date? (apt update, apt upgrade &amp; apt full-upgrade)" class="anchor"></a></h3>
+<p>You might have noticed that the <code>list</code> and <code>show</code> commands are quite fast. That’s because they <strong>don’t fetch any data from the network</strong>: the package lists and package information are stored locally on the computer.</p>
+<p>Of course, <strong>this local information becomes out of date</strong> as new package versions are released to the official package repositories. You can update your local information with <code>apt update</code> (which requires superuser privileges):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">update</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hit:1</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble</span> <span class="l-variable-parameter">InRelease</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Get:2</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-updates</span> <span class="l-variable-parameter">InRelease</span> <span class="l-variable-parameter">[</span><span class="l-number">126</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Hit:3</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-backports</span> <span class="l-variable-parameter">InRelease</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Get:4</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-security</span> <span class="l-variable-parameter">InRelease</span> <span class="l-variable-parameter">[</span><span class="l-number">126</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">Get:5</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-updates/main</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">Packages</span> <span class="l-variable-parameter">[</span><span class="l-number">538</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">Get:6</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-updates/main</span> <span class="l-variable-parameter">Translation-en</span> <span class="l-variable-parameter">[</span><span class="l-number">132</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">Get:7</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-security/main</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">Packages</span> <span class="l-variable-parameter">[</span><span class="l-number">382</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">Get:8</span> <span class="l-variable-parameter">http://azure.archive.ubuntu.com/ubuntu</span> <span class="l-variable-parameter">noble-security/main</span> <span class="l-variable-parameter">Translation-en</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">84.0</span> <span class="l-variable-parameter">kB</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">Fetched</span> <span class="l-variable-parameter">1,388</span> <span class="l-variable-parameter">kB</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">1s</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">1,855</span> <span class="l-variable-parameter">kB/s</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">package</span> <span class="l-variable-parameter">lists...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">Building</span> <span class="l-variable-parameter">dependency</span> <span class="l-variable-parameter">tree...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="13"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">state</span> <span class="l-variable-parameter">information...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="14"><span class="l-number">2</span> <span class="l-variable-parameter">packages</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">upgraded.</span> <span class="l-variable-parameter">Run</span> <span class="l-string">&#39;apt list --upgradable&#39;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">see</span> <span class="l-variable-parameter">them.</span>
+</div></code></pre>
+<p>You now have up-to-date information about all available packages. You can list available upgrades with the <code>apt list</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--upgradable</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Listing...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">cloud-init/noble-updates</span> <span class="l-variable-parameter">24.3.1-0ubuntu0~24.04.2</span> <span class="l-variable-parameter">all</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">upgradable</span> <span class="l-variable-parameter">from:</span> <span class="l-variable-parameter">24.2-0ubuntu1~24.04.2</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">mdadm/noble-updates</span> <span class="l-variable-parameter">4.3-1ubuntu2.1</span> <span class="l-variable-parameter">amd64</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">upgradable</span> <span class="l-variable-parameter">from:</span> <span class="l-variable-parameter">4.3-1ubuntu2</span><span class="l-variable-parameter">]</span>
+</div></code></pre>
+<p>When you have packages to upgrade, you could of course manually <code>apt install</code> each of them, but there are also two helpful commands that can do it for you:</p>
+<ul>
+<li>
+<p><code>apt upgrade</code></p>
+<p>This command will upgrade all packages that have ne versions, installing any new dependencies that may be required.</p>
+<p>However, it will behave conservatively and <strong>never remove packages that are currently installed</strong>. This is to avoid problems in case new versions of your installed packages have widely different dependencies.</p>
+</li>
+<li>
+<p><code>apt full-upgrade</code></p>
+<p>This command will do the same as <code>apt upgrade</code>, but in addition, it will automatically remove any packages that were dependencies of previous versions of your packages but are no longer needed by the new versions.</p>
+</li>
+</ul>
+<p>The second command is “more dangerous” as you have to make sure that none of the removed packages will impact your computer. Use it with caution.</p>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>A word of caution:</strong> do not install or upgrade packages without at least a basic understanding of what they do and how they might be used by your operating system and applications. Otherwise you risk breaking your system.</p></div></div></div>
+<h4 id="daemons-using-outdated-libraries">Daemons using outdated libraries<a href="#daemons-using-outdated-libraries" aria-label="Link to heading 'Daemons using outdated libraries'" data-heading-content="Daemons using outdated libraries" class="anchor"></a></h4>
+<p>When you install or upgrade a package, it <em>may</em> prompt you to reboot and/or to
+restart outdated daemons (i.e. background services):</p>
+<p><img src="./images/apt-outdated-daemons-73d5df93734348995c328521d8d77af8.png" alt="Restart outdated daemons" /></p>
+<p>Simply select “Ok” by pressing the Tab key, then press Enter to confirm.</p>
+<div class="callout callout-more group/callout" data-callout="cheatsheets-sysadmin:upgrade-restart"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-cheatsheets-sysadmin:upgrade-restart" type="checkbox" class="peer hidden" /><div class="content"><p>This happens either because you have installed a new background service, or because your Linux distribution uses <a href="https://wiki.debian.org/UnattendedUpgrades" target="_blank" rel="noopener noreferrer">unattended upgrades</a>: a tool that automatically installs daily security upgrades on your server without human intervention. Sometimes, some of the background services running on your server need to be restarted for upgrades to be applied. Rebooting your server would also have the effect of restarting these services and applying the security upgrades.</p></div><label for="callout-cheatsheets-sysadmin:upgrade-restart" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-cheatsheets-sysadmin:upgrade-restart" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f60e-5f80f04e6ee97feebdd00feff92ced82.svg" alt="😎" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h4 id="system-restart-required">System restart required<a href="#system-restart-required" aria-label="Link to heading 'System restart required'" data-heading-content="System restart required" class="anchor"></a></h4>
+<p>Some packages can be upgraded in place. Other packages may <strong>require the
+computer to be restarted</strong> for the upgrade to take effect.</p>
+<p>When that is the case, there will be a warning on the shell every time you
+connect:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@archidep.ch</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Welcome</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">Ubuntu</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">****</span> <span class="l-variable-parameter">System</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">required</span> <span class="l-variable-parameter">***</span>
+</div></code></pre>
+<p>This means that the upgrade process will only be complete once you restart the
+computer with <code>sudo reboot</code>.</p>
+<h3 id="how-do-i-get-rid-of-stuff-apt-remove--apt-autoremove">How do I get rid of stuff? (<code>apt remove</code> &amp; <code>apt autoremove</code>)<a href="#how-do-i-get-rid-of-stuff-apt-remove--apt-autoremove" aria-label="Link to heading 'How do I get rid of stuff? (apt remove &amp; apt autoremove)'" data-heading-content="How do I get rid of stuff? (apt remove &amp; apt autoremove)" class="anchor"></a></h3>
+<p>Uninstall a package:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">remove</span> <span class="l-variable-parameter">cowsay</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">package</span> <span class="l-variable-parameter">lists...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Building</span> <span class="l-variable-parameter">dependency</span> <span class="l-variable-parameter">tree...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">state</span> <span class="l-variable-parameter">information...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">The</span> <span class="l-variable-parameter">following</span> <span class="l-variable-parameter">packages</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">REMOVED:</span>
+</div><div class="l-line" data-line="6">  <span class="l-function-call">cowsay</span>
+</div><div class="l-line" data-line="7"><span class="l-number">0</span> <span class="l-variable-parameter">upgraded,</span> <span class="l-number">0</span> <span class="l-variable-parameter">newly</span> <span class="l-variable-parameter">installed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">remove</span> <span class="l-variable-parameter">and</span> <span class="l-number">2</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">upgraded.</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">After</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">operation,</span> <span class="l-variable-parameter">93.2</span> <span class="l-variable-parameter">kB</span> <span class="l-variable-parameter">disk</span> <span class="l-variable-parameter">space</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">freed.</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">Do</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">continue?</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Y/n</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">y</span>
+</div><div class="l-line" data-line="10"><span class="l-punctuation-bracket">(</span><span class="l-function-call">Reading</span> <span class="l-variable-parameter">database</span> <span class="l-variable-parameter">...</span> <span class="l-number">64682</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">directories</span> <span class="l-variable-parameter">currently</span> <span class="l-variable-parameter">installed.</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">Removing</span> cowsay <span class="l-punctuation-bracket">(</span><span class="l-function-call">3.03+dfsg2-8</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">...</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">Processing</span> <span class="l-variable-parameter">triggers</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">man-db</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">2.12.0-4build2</span><span class="l-punctuation-bracket">)</span> ...
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This command will uninstall binaries but not configuration files. Use <code>apt purge &lt;name&gt;...</code> to also remove the configuration files.</p></div></div>
+<p>The <code>apt autoremove</code> command cleans up packages that were previously required but are no longer useful. Most of the time, there will probably be nothing to
+remove:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">autoremove</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">package</span> <span class="l-variable-parameter">lists...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Building</span> <span class="l-variable-parameter">dependency</span> <span class="l-variable-parameter">tree...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Reading</span> <span class="l-variable-parameter">state</span> <span class="l-variable-parameter">information...</span> <span class="l-variable-parameter">Done</span>
+</div><div class="l-line" data-line="5"><span class="l-number">0</span> <span class="l-variable-parameter">upgraded,</span> <span class="l-number">0</span> <span class="l-variable-parameter">newly</span> <span class="l-variable-parameter">installed,</span> <span class="l-number">0</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">remove</span> <span class="l-variable-parameter">and</span> <span class="l-number">2</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">upgraded.</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>It’s good practice to run <code>apt autoremove</code> after an upgrade and reboot, to make sure there are no unused packages taking up space on the computer.</p></div></div>
+<h3 id="what-about-apt-get-and-apt-cache">What about <code>apt-get</code> and <code>apt-cache</code>?<a href="#what-about-apt-get-and-apt-cache" aria-label="Link to heading 'What about apt-get and apt-cache?'" data-heading-content="What about apt-get and apt-cache?" class="anchor"></a></h3>
+<p>The <code>apt</code> command is actually a higher-level frontend to the older and lower-level <code>apt-get</code> and <code>apt-cache</code> commands. <code>apt</code> is simpler to use, but you will find many examples of these older commands on the Internet.</p>
+<p>These are mostly equivalent commands:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>apt</code> command</th>
+<th align="left">older equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>apt list</code></td>
+<td align="left"><code>dpkg -l</code></td>
+</tr>
+<tr>
+<td align="left"><code>apt search</code></td>
+<td align="left"><code>apt-cache search</code></td>
+</tr>
+<tr>
+<td align="left"><code>apt install</code></td>
+<td align="left"><code>apt-get install</code></td>
+</tr>
+<tr>
+<td align="left"><code>apt update</code></td>
+<td align="left"><code>apt-get update</code></td>
+</tr>
+<tr>
+<td align="left"><code>apt upgrade</code></td>
+<td align="left"><code>apt-get upgrade</code></td>
+</tr>
+<tr>
+<td align="left"><code>apt full-upgrade</code></td>
+<td align="left"><code>apt-get dist-upgrade</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="my-post-receive-git-hook-is-not-executing">My <code>post-receive</code> Git hook is not executing!<a href="#my-post-receive-git-hook-is-not-executing" aria-label="Link to heading 'My post-receive Git hook is not executing!'" data-heading-content="My post-receive Git hook is not executing!" class="anchor"></a></h2>
+<p>When you push to a remote (<code>foo</code> in this example), you may get this message:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">foo</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Everything</span> <span class="l-variable-parameter">up-to-date</span>
+</div></code></pre>
+<p>This means that you have no new commits to push. Therefore the <code>post-receive</code> hook is not triggered since nothing new was received by the repository on the server.</p>
+<p>You need to make and commit a change before you push, so that new commits will be sent.</p>
+<p>If you have no changes to make and just want to test your hook, you may also create an empty commit with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">git</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">--allow-empty</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Test hook&quot;</span>
+</div></code></pre>
+<p>This will give you a new commit to push without actually making a change.</p>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#the-basics">The basics</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-connect-to-my-server-with-ssh-ssh">How do I connect to my server with SSH? (<code>ssh</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#who-am-i-whoami--id">Who am I? (<code>whoami</code> &amp; <code>id</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-password-passwd">How do I change my password? (<code>passwd</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#whats-happening">What’s happening?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#wheres-all-my-cpu-andor-memory-gone-htop-or-btm">Where’s all my CPU and/or memory gone? (<code>htop</code> or <code>btm</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#whats-running-ps-or-procs">What’s running? (<code>ps</code> or <code>procs</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-much-disk-space-is-left-df-or-duf">How much disk space is left? (<code>df</code> or <code>duf</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#administration">Administration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-changes-to-my-systemd-service-are-not-taken-into-account-systemctl-daemon-reload">The changes to my systemd service are not taken into account! (<code>systemctl daemon-reload</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#installing--upgrading">Installing &amp; upgrading</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-know-what-is-installed-apt-list">How do I know what is installed? (<code>apt list</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-find-new-stuff-to-install-apt-search-apt-info-apt-show">How do I find new stuff to install? (<code>apt search</code>, <code>apt info</code>, <code>apt show</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-install-stuff-apt-install">How do I install stuff? (<code>apt install</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-keep-my-server-up-to-date-apt-update-apt-upgrade--apt-full-upgrade">How do I keep my server up-to-date? (<code>apt update</code>, <code>apt upgrade</code> &amp; <code>apt full-upgrade</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#daemons-using-outdated-libraries">Daemons using outdated libraries</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#system-restart-required">System restart required</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-get-rid-of-stuff-apt-remove--apt-autoremove">How do I get rid of stuff? (<code>apt remove</code> &amp; <code>apt autoremove</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-about-apt-get-and-apt-cache">What about <code>apt-get</code> and <code>apt-cache</code>?</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#my-post-receive-git-hook-is-not-executing">My <code>post-receive</code> Git hook is not executing!</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-sysadmin.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/cheatsheets/sysadmin/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="course-item-current">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Command Line · ArchiDep</title>
+<meta name="description" content="Learn what a command line interface is and learn the basics of navigating and manipulating your filesystem in a Unix shell." />
+<link rel="canonical" href="https://archidep.ch/2026/course/101-command-line/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Command Line" />
+<meta property="og:description" content="Learn what a command line interface is and learn the basics of navigating and manipulating your filesystem in a Unix shell." />
+<meta property="og:url" content="https://archidep.ch/2026/course/101-command-line/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/101-command-line/subject.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/101-command-line/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-subject">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Command Line
+</h1>
+
+      <div class="my-4"><p>Learn what a command line interface is and learn the basics of navigating and
+manipulating your filesystem in a Unix shell.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#back-to-the-command-line">Back to the command line</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#what-is-a-command-line-interface-cli">What is a Command Line Interface (CLI)?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#why-use-it">Why use it?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#open-a-cli">Open a CLI</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#install-wsl-windows-users-only">Install WSL (Windows users only)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-to-use-the-cli">How to use the CLI</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#work-in-progress">Work in progress…</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#writing-commands">Writing commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#options-vs-values">Options vs. values</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#options-with-values">Options with values</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#naming-things-when-using-cli">Naming things when using CLI</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#auto-completion">Auto-completion</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#getting-help">Getting help</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#interactive-help-pages">Interactive help pages</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#unix-command-syntax">Unix Command Syntax</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#using-the-filesystem">Using the filesystem</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-pwd-command">The <code>pwd</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-ls-command">The <code>ls</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-cd-command">The <code>cd</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#absolute-paths">Absolute paths</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the--path">The <code>.</code> path</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the--path-1">The <code>..</code> path</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#path-reference">Path reference</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#your-projects-directory">Your projects directory</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-mkdir-command">The <code>mkdir</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-touch-command">The <code>touch</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-echo-command">The <code>echo</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-cat-command">The <code>cat</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#stopping-running-commands">Stopping running commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows-users">Windows users</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#vim">Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#why">WHY?!</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nano">Nano</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#an-alternative-to-vim">An alternative to Vim</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#editing-files-with-nano">Editing files with nano</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#saving-files">Saving files</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#confirming-the-filename">Confirming the filename</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#setting-nano-as-the-default-editor">Setting nano as the default editor</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-path-variable">The <code>PATH</code> variable</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#understanding-the-path">Understanding the <code>PATH</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#finding-commands">Finding commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-non-system-commands">Using non-system commands</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#custom-command-example">Custom command example</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#executing-a-command-in-a-directory-thats-not-in-the-path">Executing a command in a directory that’s not in the <code>PATH</code></a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#updating-the-path-variable">Updating the <code>PATH</code> variable</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#does-it-work">Does it work?</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#what-have-i-done">What have I done?</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#unleash-your-terminal">Unleash your terminal</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#oh-my-zsh">Oh My Zsh</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-tools-for-the-command-line-lover">Other tools for the command line lover</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/101-command-line/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/101-command-line/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/101-command-line/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <h2 id="back-to-the-command-line">Back to the command line<a href="#back-to-the-command-line" aria-label="Link to heading 'Back to the command line'" data-heading-content="Back to the command line" class="anchor"></a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Command-line_interface" target="_blank" rel="noopener noreferrer">Command line interfaces</a> are still in wide use today.</p>
+<h3 id="what-is-a-command-line-interface-cli">What is a Command Line Interface (CLI)?<a href="#what-is-a-command-line-interface-cli" aria-label="Link to heading 'What is a Command Line Interface (CLI)?'" data-heading-content="What is a Command Line Interface (CLI)?" class="anchor"></a></h3>
+<p>A CLI is a tool that allows you to use your computer by <strong>writing</strong> what you
+want to do (i.e. <strong>commands</strong>), instead of clicking on things.</p>
+<p>It’s been installed on computers for a long time, but it has evolved <a href="https://github.com/readme/featured/future-of-the-command-line" target="_blank" rel="noopener noreferrer">“a
+little”</a> since then. It usually looks
+something like this:</p>
+<p><img src="images/cli-6ed6f0795d1128baf09640536dbc7d35.jpg" alt="CLI" /></p>
+<h3 id="why-use-it">Why use it?<a href="#why-use-it" aria-label="Link to heading 'Why use it?'" data-heading-content="Why use it?" class="anchor"></a></h3>
+<p>A CLI is not very user-friendly or visually appealing but it has several advantages:</p>
+<ul>
+<li>It requires very <strong>few resources</strong> (e.g. memory),
+which is convenient where resources are scarce
+(e.g. embedded systems, web servers).</li>
+<li>It can be easily <strong>automated</strong> through scripting.</li>
+<li>Is is ultimately <strong>more powerful and efficient</strong> than any GUI for many computing tasks.</li>
+</ul>
+<p>For these reasons, a lot of tools, <strong>especially development tools</strong>,
+don’t have any GUI and are only usable through a CLI.
+Or they have a limited GUI that does not have as many options as the CLI.</p>
+<p><strong>Thus, using a CLI is a requirement for any developer today.</strong></p>
+<h3 id="open-a-cli">Open a CLI<a href="#open-a-cli" aria-label="Link to heading 'Open a CLI'" data-heading-content="Open a CLI" class="anchor"></a></h3>
+<p><strong>CLIs are available on every operating system.</strong></p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>On <strong>Unix-like</strong> systems <em>(like macOS or Linux)</em>, it’s an application called the <strong>Terminal</strong>.</p>
+<p>You can use it right away, as it’s the <em>de-facto</em> standard.</p></div><div><p>On <strong>Windows</strong>, the default CLI is called <strong>cmd</strong> (or <strong>Invite de commandes</strong> in
+French) However, it does not use the same syntax as Unix-like CLIs <em>(plus, it’s
+bad)</em>.</p>
+<p>You also have <a href="https://en.wikipedia.org/wiki/PowerShell" target="_blank" rel="noopener noreferrer">PowerShell</a> which is
+better, but is not a Unix-like CLI either.</p>
+<p><strong>You’ll need to install an alternative.</strong></p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Software terminals are an emulation of old physical terminals like <a href="https://en.wikipedia.org/wiki/Teleprinter" target="_blank" rel="noopener noreferrer">TTYs</a>
+or the <a href="https://en.wikipedia.org/wiki/VT100" target="_blank" rel="noopener noreferrer">VT100</a>. You will still find references to the term “TTY” in the
+documentation of some modern command line tools.</p></div></div>
+<h3 id="install-wsl-windows-users-only">Install WSL (Windows users only)<a href="#install-wsl-windows-users-only" aria-label="Link to heading 'Install WSL (Windows users only)'" data-heading-content="Install WSL (Windows users only)" class="anchor"></a></h3>
+<p>You’re going to install the <a href="https://learn.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener noreferrer"><strong>Windows Subsystem for Linux (WSL)</strong></a>, a tool
+that allows you to run a Linux environment on your Windows machine, without
+using a virtual machine or setting up a dual boot.</p>
+<p><img src="images/wsl-ubuntu-1b8529312470f0a8396621a602cf809e.jpg" alt="WSL" /></p>
+<p>Follow <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener noreferrer">the installation instructions for the WSL</a>. The default
+Linux distribution installed will be Ubuntu, which is perfect for the purposes
+of this course.</p>
+<p>It will ask you for a <strong>username</strong> and a <strong>password</strong>. We suggest you use the
+same username as for the rest of the course, and that you use the same password
+as your Windows user account’s.</p>
+<h2 id="how-to-use-the-cli">How to use the CLI<a href="#how-to-use-the-cli" aria-label="Link to heading 'How to use the CLI'" data-heading-content="How to use the CLI" class="anchor"></a></h2>
+<p>When you open the CLI you will find a blank screen that looks like this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span>
+</div></code></pre>
+<p>These symbols represent <strong>the prompt</strong> and are used to indicate that you have
+the lead. <strong>The computer is waiting for you to type something</strong> for it to
+execute.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The prompt is not always <code>$&gt;</code>.</p>
+<p>For example, on earlier macOS versions, it used to be <code>bash3.2$</code>, indicating the
+name of the shell (<a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>) and its version.</p>
+<p>On more recent macOS versions using <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">the Z shell (Zsh)</a>, the prompt might
+indicate your computer’s name, your username and the current directory, e.g.
+<code>MyComputer:~ root#</code>.</p>
+<div class="grid grid-cols-2 gap-4">
+  <div><img src='images/bash-prompt-7544c889f1b342a65a29bb0c91c2acd3.png' class="w-full !my-0" /></div>
+  <div><img src='images/zsh-prompt-4aa933cbf0cd8cc05474fcfed6bb166d.png' class="w-full !my-0" /></div>
+</div></div></div>
+<p><strong>For consistency, we will always use <code>$&gt;</code> to represent the prompt.</strong></p>
+<h3 id="work-in-progress">Work in progress…<a href="#work-in-progress" aria-label="Link to heading 'Work in progress…'" data-heading-content="Work in progress…" class="anchor"></a></h3>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>When the computer is working, the prompt disappear and you no longer have
+control.</p>
+<p><img src="images/sleep-45db509c448d9163a31754a1298d7d43.png" alt="Sleep" /></p></div><div><p>When the computer is done working, it will indicate that you are back in control
+by showing the prompt again.</p>
+<p><img src="images/sleep-done-da07c31d8690ce1a51aae9336483c345.png" alt="Sleep done" /></p></div></div>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The <code>sleep</code> command tells the computer to do nothing for the specified number
+of seconds.</p></div></div>
+<h3 id="writing-commands">Writing commands<a href="#writing-commands" aria-label="Link to heading 'Writing commands'" data-heading-content="Writing commands" class="anchor"></a></h3>
+<p>A command is a <strong>word</strong> that you have to type in the CLI that will <strong>tell the computer what to do</strong>.</p>
+<p>The syntax for using commands looks like this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">name</span> <span class="l-function-call">arg1</span> <span class="l-variable-parameter">arg2</span> <span class="l-variable-parameter">arg3</span> <span class="l-variable-parameter">...</span>
+</div></code></pre>
+<p>Note the use of <strong>spaces</strong> to separate the differents <strong>arguments</strong> of a command.</p>
+<ul>
+<li><code>name</code> represents the <strong>command</strong> you want to execute.</li>
+<li><code>arg1 arg2 arg3 ...</code> represent the <strong>arguments of the command</strong>, each of them <strong>separated by a space</strong>.</li>
+</ul>
+<h3 id="options-vs-values">Options vs. values<a href="#options-vs-values" aria-label="Link to heading 'Options vs. values'" data-heading-content="Options vs. values" class="anchor"></a></h3>
+<p>There are two types of arguments to use with a command (if needed):</p>
+<p><strong>Options</strong> usually specify <strong>how</strong> the command will behave.
+By convention, they are preceded by <code>-</code> or <code>--</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span>
+</div></code></pre>
+<p>We use the <code>ls</code> command to <strong>l</strong>i<strong>s</strong>t the content of the current directory.
+The options tell <code>ls</code> <strong>how</strong> it should do so:</p>
+<ul>
+<li><code>-a</code> tells it to print <strong>a</strong>ll elements (including hidden ones).</li>
+<li><code>-l</code> tells it to print elements in a <strong>l</strong>ist format, rather than on one line.</li>
+</ul>
+<p><strong>Values</strong> not preceded by anything usually specify <strong>what</strong> will be used by the
+command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman</span>
+</div></code></pre>
+<p>Here, we use the <code>cd</code> command to move to another directory (or <strong>c</strong>hange
+<strong>d</strong>irectory).</p>
+<p>And the argument <code>/Users/Batman</code> tells the command <strong>what</strong> directory we want to
+move to.</p>
+<h4 id="options-with-values">Options with values<a href="#options-with-values" aria-label="Link to heading 'Options with values'" data-heading-content="Options with values" class="anchor"></a></h4>
+<p><strong>Values</strong> can also be linked to an option:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tar</span> <span class="l-function-call">-c</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">compressed.tar.gz</span> <span class="l-variable-parameter">file-to-compress</span>
+</div></code></pre>
+<p>The <a href="https://en.wikipedia.org/wiki/Tar_(computing)" target="_blank" rel="noopener noreferrer"><code>tar</code> (<strong>t</strong>ape <strong>ar</strong>chive)</a> command bundles and compresses files. In
+this example, it takes <strong>three options</strong>:</p>
+<ul>
+<li><code>-c</code> tells it to <strong>c</strong>ompress (instead of uncompressing).</li>
+<li><code>-v</code> tells it to be <strong>v</strong>erbose (print more information to the CLI).</li>
+<li><code>-f</code> tells it where to store the compressed <strong>f</strong>ile; this is followed
+<strong>immediately</strong> by <code>compressed.tar.gz</code> which is the <strong>value</strong> of that option.</li>
+</ul>
+<p>It then takes <strong>one value</strong>:</p>
+<ul>
+<li><code>file-to-compress</code> is the file (or directory) to compress</li>
+</ul>
+<p>There are two values in this example: one linked to the <code>-f</code> option, and one
+used by the overall command.</p>
+<h3 id="naming-things-when-using-cli">Naming things when using CLI<a href="#naming-things-when-using-cli" aria-label="Link to heading 'Naming things when using CLI'" data-heading-content="Naming things when using CLI" class="anchor"></a></h3>
+<p>You should avoid the following characters in directories and file names you want to manipulate with the CLI:</p>
+<ul>
+<li><strong>spaces</strong> <em>(they’re used to separate arguments in command)</em>.</li>
+<li><strong>accents</strong> (e.g. <code>é</code>, <code>à</code>, <code>ç</code>, etc).</li>
+</ul>
+<p>They can cause <strong>errors</strong> in some scripts or tools, and will inevitably complicate using the CLI.
+If you have a <code>Why So Serious</code> directory, this <strong>WILL NOT work</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why</span> <span class="l-variable-parameter">So</span> <span class="l-variable-parameter">Serious</span>
+</div></code></pre>
+<p>This command will be interpreted as a call to the <code>ls</code> command with <strong>three arguments</strong>: <code>Why</code>, <code>So</code> and <code>Serious</code>.</p>
+<p>You <strong>can</strong> use arguments containing spaces, but you have to <strong>escape</strong> them first, either with <strong>quotation marks</strong> or <strong>backslashes</strong>:</p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-string">&quot;Why So Serious&quot;</span>
+</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why\ So\ Serious</span>
+</div></code></pre></div></div>
+<h3 id="auto-completion">Auto-completion<a href="#auto-completion" aria-label="Link to heading 'Auto-completion'" data-heading-content="Auto-completion" class="anchor"></a></h3>
+<p>It’s not fun to type directory names, especially when they have spaces you must escape in them,
+so the CLI has <strong>auto-completion</strong>. Type the first few characters of the file or directory you
+need, then hit the <code>Tab</code> key:</p>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+  <div class="grow">
+    <img src='images/auto-complete-ac30bdedb4c1c7032c1f20da32f51570.png' class="w-full !m-0" />
+  </div>
+  <kbd class="kbd shrink-0 hidden sm:inline-flex animate-pulse">- Tab -></kbd>
+  <kbd class="kbd shrink-0 sm:hidden animate-pulse">v Tab v</kbd>
+  <div class="grow">
+    <img src='images/auto-complete-tab-a0eaeeaad704df7855ec49fa11d6f1e9.png' class="w-full !m-0" />
+  </div>
+</div>
+<p>If there are multiple files or directories that begin with the <strong>same characters</strong>,
+pressing <code>Tab</code> will not display anything.
+You need hit <code>Tab</code> <strong>a second time</strong> to display the list of available choices:</p>
+<p><img src="images/auto-complete-multiple-565b8af39d5e699ef46c5d39be5069d0.png" alt="Multiple Files Autocompletion" /></p>
+<p>You can type just enough characters so that the CLI can determine which one you want (in this case <code>c</code> or <code>w</code>),
+then hit <code>Tab</code> again to get the full path.</p>
+<h3 id="getting-help">Getting help<a href="#getting-help" aria-label="Link to heading 'Getting help'" data-heading-content="Getting help" class="anchor"></a></h3>
+<p>You can get help on most advanced commands by executing them with the <code>--help</code> option.
+As the option’s name implies, it’s designed to <strong>give you some help</strong> on how to use the command:</p>
+<p><img src="images/tar-help-b2921c1d3db943a4fb9e48c438cb2314.png" alt="Tar Command Help" /></p>
+<p>Some commands don’t have the <code>--help</code> option, but there are alternative sources
+of information depending on what operating system you’re on:</p>
+<ul>
+<li>On Linux or macOS, use <code>man ls</code> to display the <strong>manual</strong> for the <code>ls</code> command.</li>
+<li>On Windows, use <code>help cd</code> to display help for the <code>cd</code> command;
+you can also type <code>help</code> to list available commands (only system commands).</li>
+<li>If you have <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js and npm</a> installed, there is also <a href="https://tldr.sh" target="_blank" rel="noopener noreferrer">tldr
+pages</a>: a cross-platform tool that provides simplified and
+community-driven manual pages.</li>
+</ul>
+<h4 id="interactive-help-pages">Interactive help pages<a href="#interactive-help-pages" aria-label="Link to heading 'Interactive help pages'" data-heading-content="Interactive help pages" class="anchor"></a></h4>
+<p>Some help pages or commands will take over the screen to display their content, hiding the prompt and previous interactions.</p>
+<p>Usually, it means that there is content that takes more than one screen to be shown.
+You can “scroll” up and down line-by-line using the arrow keys or the <code>Enter</code> key.</p>
+<p>To quit these interactive documentations, use the <code>q</code> (<strong>q</strong>uit) key.</p>
+<p><img src="images/interactive-help-152db2c40aa2d4305fb4504103fb3c1e.png" alt="Interactive Help" /></p>
+<h4 id="unix-command-syntax">Unix Command Syntax<a href="#unix-command-syntax" aria-label="Link to heading 'Unix Command Syntax'" data-heading-content="Unix Command Syntax" class="anchor"></a></h4>
+<p>When reading a command’s manual or documentation,
+you may find some strange syntax that make little sense to you, like:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">-L</span><span class="l-operator">|</span><span class="l-punctuation-bracket">[</span><span class="l-operator">-P</span> <span class="l-string">[</span><span class="l-string">-e</span><span class="l-punctuation-bracket">]</span><span class="l-function-call">] [</span><span class="l-variable-parameter">-@</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">dir</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">ls</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">file</span> <span class="l-variable-parameter">...</span><span class="l-variable-parameter">]</span>
+</div></code></pre>
+<p>Here are some explanations:</p>
+<ul>
+<li><code>[]</code>: Whatever’s inside is <strong>optional</strong> (ex: <code>[-e]</code>).</li>
+<li><code>|</code>: You have to <strong>choose between</strong> options (ex: <code>-L|-P</code>).</li>
+<li><code>...</code>: Whatever’s before can be <strong>repeated</strong> (ex: <code>[file ...]</code>).</li>
+</ul>
+<p>Depending on the documentation, you will also see symbols like this:</p>
+<ul>
+<li><code>&lt;value&gt;</code></li>
+<li><code>--option=VALUE</code></li>
+</ul>
+<p><strong>DON’T WRITE <code>&lt;value&gt;</code> or <code>VALUE</code></strong>.
+Replace it by an appropriate value for that option or argument.</p>
+<h2 id="using-the-filesystem">Using the filesystem<a href="#using-the-filesystem" aria-label="Link to heading 'Using the filesystem'" data-heading-content="Using the filesystem" class="anchor"></a></h2>
+<h3 id="the-pwd-command">The <code>pwd</code> command<a href="#the-pwd-command" aria-label="Link to heading 'The pwd command'" data-heading-content="The pwd command" class="anchor"></a></h3>
+<p>When you open a CLI, it places you in your <strong>home directory</strong>. From there you
+can navigate your filesystem to go to other directories <em>(more on that later)</em>.</p>
+<p>But first, you might want to check <strong>where</strong> you currently are.
+Use the <code>pwd</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p><code>pwd</code> means “<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory”: it gives you the absolute
+path to the directory you’re currently in.</p></div></div>
+<h3 id="the-ls-command">The <code>ls</code> command<a href="#the-ls-command" aria-label="Link to heading 'The ls command'" data-heading-content="The ls command" class="anchor"></a></h3>
+<p>Now that you know where you are, you might want to know <strong>what your current directory is containing</strong>.</p>
+<p>Use the <code>ls</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p><code>ls</code> means “<strong>l</strong>i<strong>s</strong>t”: it lists the contents of a directory.</p></div></div>
+<p>By default, <code>ls</code> doesn’t list <strong>hidden elements</strong>.
+By convention in Unix-like systems, files that start with <code>.</code> (a dot) are hidden.</p>
+<p>If you want it to do that, you need to pass the <code>-a</code> (<strong>a</strong>ll) option:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files,</span> <span class="l-variable-parameter">including</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">hidden</span> <span class="l-variable-parameter">ones</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<h3 id="the-cd-command">The <code>cd</code> command<a href="#the-cd-command" aria-label="Link to heading 'The cd command'" data-heading-content="The cd command" class="anchor"></a></h3>
+<p>It’s time to go out a little and move to another directory.</p>
+<p>Suppose you have a <code>Documents</code> directory in your home directory, that contains
+another directory <code>TopSecret</code> where you want to go. Use the <code>cd</code> (<strong>c</strong>hange
+<strong>d</strong>irectory) command, passing it as argument <strong>the path to the directory</strong> you
+want to go to:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman/Documents/TopSecret</span>
+</div></code></pre>
+<p>This is a <strong>relative path</strong>: it is relative to the current working directory.</p>
+<h4 id="absolute-paths">Absolute paths<a href="#absolute-paths" aria-label="Link to heading 'Absolute paths'" data-heading-content="Absolute paths" class="anchor"></a></h4>
+<p>You can also go to a specific directory anywhere on your filesystem like this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Documents</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">/Users/Batman/Documents</span>
+</div></code></pre>
+<p>This is an <strong>absolute path</strong> because it starts with a <code>/</code> character. It starts
+at the root of your filesystem so it does not matter where you are now.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You also have <strong>auto-completion</strong> with the <code>cd</code> command. Hit the <code>Tab</code> key after
+entering some letters.</p></div></div>
+<h4 id="the--path">The <code>.</code> path<a href="#the--path" aria-label="Link to heading 'The . path'" data-heading-content="The . path" class="anchor"></a></h4>
+<p>The <code>.</code> path represents the current directory. The following commands are
+strictly equivalent:</p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span>
+</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">./Documents/TopSecret</span>
+</div></code></pre></div></div>
+<p>You can also <em>not go anywhere</em>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-builtin">.</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
+</div></code></pre>
+<p>Or compress the current directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">tar</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/somewhere/compressed.tar.gz</span> <span class="l-variable-parameter">.</span>
+</div></code></pre>
+<p>This does not seem very useful now, but it will be in further tutorials.</p>
+<h4 id="the--path-1">The <code>..</code> path<a href="#the--path-1" aria-label="Link to heading 'The .. path'" data-heading-content="The .. path" class="anchor"></a></h4>
+<p>To go up into the parent directory, use the <code>..</code> path (<strong>don’t forget the space between <code>cd</code> and <code>..</code></strong>):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman/Documents</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">..</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
+</div></code></pre>
+<p>You can also drag and drop a directory from your Explorer or your Finder to the CLI to see its absolute path automaticaly written:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">Drag</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">drop</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">directory</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">Explorer/Finder,</span> <span class="l-variable-parameter">and...</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Pictures/</span>
+</div></code></pre>
+<p>At any time and from anywhere, you can return to your <strong>home directory</strong> with
+the <code>cd</code> command, without any argument or with a <code>~</code> (tilde):</p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span>
+</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span>
+</div></code></pre></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To type the <code>~</code> character, use this combination:</p>
+<ul>
+<li><code>AltGr-^</code> on <strong>Windows</strong></li>
+<li><code>Alt-N</code> on <strong>Mac</strong></li>
+</ul></div></div>
+<h4 id="path-reference">Path reference<a href="#path-reference" aria-label="Link to heading 'Path reference'" data-heading-content="Path reference" class="anchor"></a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Path</th>
+<th align="left">Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>.</code></td>
+<td align="left">The current directory.</td>
+</tr>
+<tr>
+<td align="left"><code>..</code></td>
+<td align="left">The parent directory.</td>
+</tr>
+<tr>
+<td align="left"><code>foo/bar</code></td>
+<td align="left">The file/directory <code>bar</code> inside the directory <code>foo</code> in the current directory. This is a <strong>relative path</strong>.</td>
+</tr>
+<tr>
+<td align="left"><code>./foo/bar</code></td>
+<td align="left"><em>Same as the above</em></td>
+</tr>
+<tr>
+<td align="left"><code>/foo/bar</code></td>
+<td align="left">The file/directory <code>bar</code> inside the directory <code>foo</code> at the root of your filesystem. This is an <strong>absolute path</strong>.</td>
+</tr>
+<tr>
+<td align="left"><code>~</code></td>
+<td align="left">Your home directory. This is an <strong>absolute path</strong>.</td>
+</tr>
+<tr>
+<td align="left"><code>~/foo/bar</code></td>
+<td align="left">The file/directory <code>bar</code> inside the directory <code>foo</code> in your home directory. This is an <strong>absolute path</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="your-projects-directory">Your projects directory<a href="#your-projects-directory" aria-label="Link to heading 'Your projects directory'" data-heading-content="Your projects directory" class="anchor"></a></h4>
+<p>Throughout this course, you will often see the following command (<em>or something resembling it</em>):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
+</div></code></pre>
+<p>This means that you use <strong>the path to the directory in which you store your projects</strong>.
+For example, on John Doe’s macOS system, it could be <code>/Users/jde/Projects</code>.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Do not actually write <code>/path/to/projects</code>. It will obviously fail, unless you
+happen to have a <code>path</code> directory that contains a <code>to</code> directory that contains a
+<code>projects</code> directory…</p></div></div>
+<div class="callout callout-danger group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p><strong>Windows users:</strong> if your username contains <strong>spaces</strong> or <strong>accents</strong>, you
+should <strong>NOT</strong> store your projects under your home directory. You should find a
+path elsewhere on your filesystem. This will save you <strong>a lot of needless pain
+and suffering</strong>.</p></div></div></div>
+<h3 id="the-mkdir-command">The <code>mkdir</code> command<a href="#the-mkdir-command" aria-label="Link to heading 'The mkdir command'" data-heading-content="The mkdir command" class="anchor"></a></h3>
+<p>You can create directories with the CLI.</p>
+<p>Use the <code>mkdir</code> (<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory) command to create a new directory in the current directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">BatmobileSchematics</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">BatmobileSchematics</span>
+</div></code></pre>
+<p>You can also create a directory elsewhere:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">~/Documents/TopSecret/BatmobileSchematics</span>
+</div></code></pre>
+<p>This will only work if all directories down to <code>TopSecret</code> already exist. To
+automatically create all intermediate directories, add the <code>-p</code> (<strong>p</strong>arents)
+option:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/Documents/TopSecret/BatmobileSchematics</span>
+</div></code></pre>
+<h3 id="the-touch-command">The <code>touch</code> command<a href="#the-touch-command" aria-label="Link to heading 'The touch command'" data-heading-content="The touch command" class="anchor"></a></h3>
+<p>The <code>touch</code> command updates the last modification date of a file.
+It also has the useful property of creating the file if it doesn’t exist.</p>
+<p>Hence, it’s a <strong>quick way to create an empty file</strong> in the CLI:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">foo.txt</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">foo.txt</span>
+</div></code></pre>
+<h3 id="the-echo-command">The <code>echo</code> command<a href="#the-echo-command" aria-label="Link to heading 'The echo command'" data-heading-content="The echo command" class="anchor"></a></h3>
+<p>The <code>echo</code> command simply <strong>echo</strong>es its arguments back to you:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<p>This seems useless, but can be quite powerful when combined with Unix features like <a href="https://en.wikipedia.org/wiki/Redirection_(computing)" target="_blank" rel="noopener noreferrer">redirection</a>.
+For example, you can <strong>redirect the output to a file</strong>.</p>
+<p>The <code>&gt;</code> operator means <em>”<strong>write</strong> the output of the previous command into a file”</em>.
+This allows you to quickly create a simple text file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">bar.txt</span>
+</div></code></pre>
+<p>If the file already exists, it is overwritten.
+You can also use the <code>&gt;&gt;</code> operator, which means <em>”<strong>append</strong> the output of the previous command to the end of a file”</em>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">bar</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">bar.txt</span>
+</div></code></pre>
+<h3 id="the-cat-command">The <code>cat</code> command<a href="#the-cat-command" aria-label="Link to heading 'The cat command'" data-heading-content="The cat command" class="anchor"></a></h3>
+<p>The <code>cat</code> command can display one file or con<strong>cat</strong>enate multiple files in the CLI.
+For example, this displays the contents of the previous example’s file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">foo</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">bar</span>
+</div></code></pre>
+<p>This creates a new <code>hello.txt</code> file and displays the result of concatenating the two files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.txt</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span> <span class="l-variable-parameter">hello.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">foo</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">bar</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">World</span>
+</div></code></pre>
+<h3 id="stopping-running-commands">Stopping running commands<a href="#stopping-running-commands" aria-label="Link to heading 'Stopping running commands'" data-heading-content="Stopping running commands" class="anchor"></a></h3>
+<p>Sometimes a command will take too long to execute.</p>
+<p>As an example, run this command which will wait one hour before exiting:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span>
+</div></code></pre>
+<p>As you can see, the command keeps executing and you <strong>no longer have a prompt</strong>.
+Anything you type is ignored, as it is no longer interpreted by the shell,
+but by the <code>sleep</code> command instead (which doesn’t do anything with it).</p>
+<p>By convention in Unix shells, you can always terminate a running command by
+typing <code>Ctrl-C</code> (press the <strong>C</strong> key while holding the <strong>C</strong>on<strong>tr</strong>o<strong>l</strong> key).</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Note that <code>Ctrl-C</code> <strong>forces termination</strong> of a running command. It might not
+have finished what it was doing.</p></div></div>
+<h3 id="windows-users">Windows users<a href="#windows-users" aria-label="Link to heading 'Windows users'" data-heading-content="Windows users" class="anchor"></a></h3>
+<p>This is how you reference or use your <strong>drives</strong> (<code>C:</code>, <code>D:</code>, etc) in the
+Windows Subsystem for Linux (WSL):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/c/foo/bar</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/d/foo</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>If you are using Git Bash, it’s <code>/c</code> instead of <code>/mnt/c</code>.</p></div></div>
+<p><strong>Copy/Paste</strong></p>
+<p>Since <code>Ctrl-C</code> is used to stop the current process, it <strong>can’t</strong> be used as a
+shortcut to copy things from the CLI. Instead, the <strong>W</strong>indows <strong>S</strong>ubsystem for
+<strong>L</strong>inux (WSL) has two custom shortcuts:</p>
+<ul>
+<li><code>Shift-Ctrl-C</code> to <strong>copy</strong> things from the CLI</li>
+<li><code>Shift-Ctrl-P</code> to <strong>paste</strong> things to the CLI</li>
+</ul>
+<h2 id="vim">Vim<a href="#vim" aria-label="Link to heading 'Vim'" data-heading-content="Vim" class="anchor"></a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" rel="noopener noreferrer"><strong>Vim</strong></a> is an infamous CLI editor originally developed in 1976 (WHAT?!)
+for the Unix operating system.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The name comes from “<strong>vi</strong> i<strong>m</strong>proved”, because Vim is an improved clone of
+an earlier editor: <a href="https://en.wikipedia.org/wiki/Vi_(text_editor)" target="_blank" rel="noopener noreferrer">vi</a> (from <strong>vi</strong>sual).</p></div></div>
+<h3 id="why">WHY?!<a href="#why" aria-label="Link to heading 'WHY?!'" data-heading-content="WHY?!" class="anchor"></a></h3>
+<p>Why would you need to learn it?</p>
+<p>Sometimes it’s just the <strong>only editor you have</strong> (e.g. on a server).
+Also <strong>some developer tools might open Vim</strong> for user input.</p>
+<p>If this happens (<em>and it will</em>), there’s <strong>one</strong> imperative rule to follow:</p>
+<p><strong>DO NOT PANIC!</strong></p>
+<p>Open a file by running the <code>vim</code> command with the path to the file you want to
+create/edit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">vim</span> <span class="l-variable-parameter">test.txt</span>
+</div></code></pre>
+<h3 id="how-vim-works">How Vim works<a href="#how-vim-works" aria-label="Link to heading 'How Vim works'" data-heading-content="How Vim works" class="anchor"></a></h3>
+<p>Vim can be unsettling at first, until you know how it works.</p>
+<p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim.
+You control Vim by <strong>typing</strong>.</p>
+<p>The first thing to understand whith Vim is that it has <em>3 modes</em>:</p>
+<ul>
+<li><strong>Normal</strong> mode (the one you’re in when Vim starts).</li>
+<li><strong>Command</strong> mode (the one to use to save and/or quit).</li>
+<li><strong>Insert</strong> mode (the one to use to insert text).</li>
+</ul>
+<p>To go into each mode use this keys:</p>
+<table>
+<thead>
+<tr>
+<th align="left">From</th>
+<th align="left">Type</th>
+<th align="left">To go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Normal</td>
+<td align="left"><code>:</code></td>
+<td align="left">Command</td>
+</tr>
+<tr>
+<td align="left">Normal</td>
+<td align="left"><code>i</code></td>
+<td align="left">Insert</td>
+</tr>
+<tr>
+<td align="left">Command/Insert</td>
+<td align="left"><code>Esc</code></td>
+<td align="left">Normal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="normal-mode">Normal mode<a href="#normal-mode" aria-label="Link to heading 'Normal mode'" data-heading-content="Normal mode" class="anchor"></a></h3>
+<p>The <strong>Normal</strong> mode of Vim is the one you’re in when it starts.
+In this mode, you can move the cursor around with the arrow keys.</p>
+<p>You can also use some commands to interact with the text:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left">Delete the character under the cursor</td>
+</tr>
+<tr>
+<td align="left"><code>dw</code></td>
+<td align="left">Delete a word, with the cursor standing before the first letter</td>
+</tr>
+<tr>
+<td align="left"><code>dd</code></td>
+<td align="left">Delete the complete line the cursor is on</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left">Undo the last command</td>
+</tr>
+<tr>
+<td align="left"><code>:</code></td>
+<td align="left">Enter <strong>Command</strong> mode (to save and/or quit)</td>
+</tr>
+<tr>
+<td align="left"><code>i</code></td>
+<td align="left">Enter <strong>Insert</strong> mode (to type text)</td>
+</tr>
+</tbody>
+</table>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>At anytime, you can hit the <code>Esc</code> key to go back to the <strong>Normal</strong> mode.</p></div></div>
+<h3 id="command-mode">Command mode<a href="#command-mode" aria-label="Link to heading 'Command mode'" data-heading-content="Command mode" class="anchor"></a></h3>
+<p>The <strong>Command</strong> mode, which you can only access from the <strong>Normal</strong> mode,
+is the one you’ll mostly use to save and/or quit.</p>
+<p>To enter the <strong>Command</strong> mode, hit the <code>:</code> key.
+From there, you can use some commands:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>q</code></td>
+<td align="left"><strong>Q</strong>uit Vim (will fail if you have unsaved modifications)</td>
+</tr>
+<tr>
+<td align="left"><code>w</code></td>
+<td align="left"><strong>W</strong>rite (save) the file and all its modifications</td>
+</tr>
+<tr>
+<td align="left"><code>q!</code></td>
+<td align="left">Force (<strong>!</strong>) Vim to <strong>q</strong>uit (any unsaved modification will be lost)</td>
+</tr>
+<tr>
+<td align="left"><code>wq</code> or <code>x</code></td>
+<td align="left"><strong>W</strong>rite and <strong>q</strong>uit, i.e. save the file then quit Vim.</td>
+</tr>
+</tbody>
+</table>
+<!-- TODO: add link http://www.openvim.com/ -->
+<h2 id="nano">Nano<a href="#nano" aria-label="Link to heading 'Nano'" data-heading-content="Nano" class="anchor"></a></h2>
+<div class="flex justify-center">
+  <img src='images/nano-931874628c2fd20c9bb50c34c82b404e.jpg' class="!m-0" />
+</div>
+<blockquote>
+<p>Nano: a simpler CLI editor to keep your sanity.</p>
+</blockquote>
+<h3 id="an-alternative-to-vim">An alternative to Vim<a href="#an-alternative-to-vim" aria-label="Link to heading 'An alternative to Vim'" data-heading-content="An alternative to Vim" class="anchor"></a></h3>
+<p>If Vim is a bit too much for you, <a href="https://en.wikipedia.org/wiki/GNU_nano" target="_blank" rel="noopener noreferrer">nano</a> is another CLI editor that is
+much simpler to use and is also usually installed on most Unix-like systems (and
+in Git Bash).</p>
+<p>You can open a file with nano in much the same way as Vim, using the <code>nano</code>
+command instead:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.txt</span>
+</div></code></pre>
+<h3 id="editing-files-with-nano">Editing files with nano<a href="#editing-files-with-nano" aria-label="Link to heading 'Editing files with nano'" data-heading-content="Editing files with nano" class="anchor"></a></h3>
+<p>Editing files is much more straightforward and intuitive with nano. Once the
+file is open, you can simply type your text and move around with arrow keys:</p>
+<p><img src="images/nano-7b9102d73cdd72c1e0cdc826607543fe.png" alt="Nano" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Nano also helpfully prints its main keyboard shortcuts at the bottom of the
+window. The most important one is <code>^X</code> for Exit. In keyboard shortcut parlance,
+the <code>^</code> symbol always represents the control key.</p></div></div>
+<p>So, <strong>to exit from nano, type <code>Ctrl-X</code></strong>.</p>
+<h4 id="saving-files">Saving files<a href="#saving-files" aria-label="Link to heading 'Saving files'" data-heading-content="Saving files" class="anchor"></a></h4>
+<p>When you exit nano with <code>Ctrl-X</code>, it will ask you whether you want to save your
+changes:</p>
+<p><img src="images/nano-save-037da32262fbc35f70e75ebaaaf41778.png" alt="Nano Save" /></p>
+<p>Press the <code>y</code> key to save or the <code>n</code> key to discard your changes.</p>
+<h4 id="confirming-the-filename">Confirming the filename<a href="#confirming-the-filename" aria-label="Link to heading 'Confirming the filename'" data-heading-content="Confirming the filename" class="anchor"></a></h4>
+<p>When saving changes, nano will always ask you to <strong>confirm the filename</strong> where
+the changes should be saved:</p>
+<p><img src="images/nano-filename-209a588010095db32640dbff746001bd.png" alt="Nano Filename" /></p>
+<p>As you can see, it tells you the name of the file you opened. Now you can:</p>
+<ul>
+<li>Simply press <code>Enter</code> to save the file.</li>
+<li>Or, change the name to save your changes to another file (and keep the
+unmodified original).</li>
+</ul>
+<h3 id="setting-nano-as-the-default-editor">Setting nano as the default editor<a href="#setting-nano-as-the-default-editor" aria-label="Link to heading 'Setting nano as the default editor'" data-heading-content="Setting nano as the default editor" class="anchor"></a></h3>
+<p>Editing the shell configuration will depend on your shell: for Zsh (the default
+terminal shell on macOS) or Bash shell (the default in Git Bash and most Linux
+systems), you have to set the <code>$EDITOR</code> environment variable. You can do that by
+adding the following line to your <strong><code>~/.zshrc</code> or <code>~/.bash_profile</code> file</strong>
+depending on which shell you are using:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">export EDITOR=nano
+</div></code></pre>
+<p>Remember that you must <strong>relaunch your terminal</strong> for this change to take
+effect.</p>
+<p>If you are unsure of what shell you are using, type in the following
+command. The output will display the name of your current shell.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-number">0</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">bash</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Now that you know how to use nano, you can edit your Bash profile file with the
+following command: <code>nano ~/.bash_profile</code>.</p></div></div>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>On Ubuntu, you can list available editors and choose the default one with the
+following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span>
+</div></code></pre></div></div>
+<h2 id="the-path-variable">The <code>PATH</code> variable<a href="#the-path-variable" aria-label="Link to heading 'The PATH variable'" data-heading-content="The PATH variable" class="anchor"></a></h2>
+<p>When you type a command in the CLI, it will try to see <strong>if it knows this
+command</strong> by looking in some directories to see if there is an <strong>executable file
+that matches the command name</strong>.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rubbish</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">bash:</span> <span class="l-variable-parameter">rubbish:</span> <span class="l-variable-parameter">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found</span>
+</div></code></pre>
+<p>This means that the CLI failed to find the executable named <code>rubbish</code> in any of
+the directories where it looked.</p>
+<p>The list of the directories (and their paths) in which the CLI searches is
+stored in the <code>PATH</code> environment variable, each of them being separated with a
+<code>:</code>.</p>
+<p>You can print the content of your <code>PATH</code> variable to see this list:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span>
+</div></code></pre>
+<h3 id="understanding-the-path">Understanding the <code>PATH</code><a href="#understanding-the-path" aria-label="Link to heading 'Understanding the PATH'" data-heading-content="Understanding the PATH" class="anchor"></a></h3>
+<p>Assuming your <code>PATH</code> looks like this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span>
+</div></code></pre>
+<p>What happens when you run the following command?</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span>
+</div></code></pre>
+<ol>
+<li>The shell will look in the <code>/usr/local/bin</code> directory. <em>There is no
+executable named <code>ls</code> there, moving on…</em></li>
+<li>The shell will look in the <code>/bin</code> directory. <strong>There is an executable named
+<code>ls</code> there!</strong> Execute it with arguments <code>-a</code> and <code>-l</code>.</li>
+<li>We’re done here. No need to look at the rest of the <code>PATH</code>. If there happens
+to be an <code>ls</code> executable in the <code>/custom/dir</code> directory, it will <strong>not be
+used</strong>.</li>
+</ol>
+<h3 id="finding-commands">Finding commands<a href="#finding-commands" aria-label="Link to heading 'Finding commands'" data-heading-content="Finding commands" class="anchor"></a></h3>
+<p>You can check where a command is with the <code>which</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">ls</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/bin/ls</span>
+</div></code></pre>
+<p>If there are multiple versions of a command in your <code>PATH</code>, you can add the <code>-a</code>
+option to list them <strong>a</strong>ll:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">git</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/opt/homebrew/bin/git</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/usr/bin/git</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Remember, the shell will use the first one it finds, so in this example it
+would use <code>/opt/homebrew/bin/git</code> if you type <code>git</code>, completely ignoring
+<code>/usr/bin/git</code>.</p></div></div>
+<h3 id="using-non-system-commands">Using non-system commands<a href="#using-non-system-commands" aria-label="Link to heading 'Using non-system commands'" data-heading-content="Using non-system commands" class="anchor"></a></h3>
+<p>Many development tools you install come with executables that you can run from the CLI (e.g. Git, Node.js, MongoDB).</p>
+<p>Some of these tools will install their executable in a <strong>standard directory</strong> like <code>/usr/local/bin</code>, which is already in your <code>PATH</code>.
+Once you’ve installed them, you can simply run their new commands.
+Git and Node.js, for example, do this.</p>
+<p>However, sometimes you’re downloading only an executable and saving it in a directory somewhere that is <strong>not in the <code>PATH</code></strong>.</p>
+<h4 id="custom-command-example">Custom command example<a href="#custom-command-example" aria-label="Link to heading 'Custom command example'" data-heading-content="Custom command example" class="anchor"></a></h4>
+<p>Run the following commands to download a simple Hello World shell script and make it into an executable:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/hello-program/bin</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-o</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span> <span class="l-variable-parameter">https://gist.githubusercontent.com/AlphaHydrae/8e09bf8790cbd6e3c7d9974988da3c28/raw/74372a1be35e973897c0a1fc946f3d18012a860c/hello.sh</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The <code>curl</code> command is used to download the script file, and the <code>chmod</code> command
+to make that file executable.</p></div></div>
+<p>You should now be able to find it in the <code>~/hello-program/bin</code> directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/hello-program/bin</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">hello</span>
+</div></code></pre>
+<p>It’s now installed, we can find it using the CLI, but it still cannot be run. Why?</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found:</span> <span class="l-variable-parameter">hello</span>
+</div></code></pre>
+<h4 id="executing-a-command-in-a-directory-thats-not-in-the-path">Executing a command in a directory that’s not in the <code>PATH</code><a href="#executing-a-command-in-a-directory-thats-not-in-the-path" aria-label="Link to heading 'Executing a command in a directory that’s not in the PATH'" data-heading-content="Executing a command in a directory that’s not in the PATH" class="anchor"></a></h4>
+<p>You can run a command from anywhere by writing <strong>the absolute path to the executable</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<p>You can also <strong>manually go to the directory</strong> containing the executable and <strong>run the command there</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/hello-program/bin</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>When the first word on the CLI starts with <code>/</code>, <code>~/</code>, <code>./</code> or <code>../</code>, the shell
+interprets it as a file path. Instead of looking for a command in the <code>PATH</code>,
+it simply executes that file.</p></div></div>
+<p>But, ideally, you want to be able to <strong>just type <code>hello</code></strong>, and have the script be executed.
+For this, you need to <strong>add the directory containing the executable</strong> to your <code>PATH</code> variable.</p>
+<h3 id="updating-the-path-variable">Updating the <code>PATH</code> variable<a href="#updating-the-path-variable" aria-label="Link to heading 'Updating the PATH variable'" data-heading-content="Updating the PATH variable" class="anchor"></a></h3>
+<p>To add a new path in your <code>PATH</code> variable, you have to edit a special file, used
+by your CLI interpreter (shell). This file depends upon the shell you are using:</p>
+<table>
+<thead>
+<tr>
+<th align="left">CLI</th>
+<th align="left">File to edit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Git Bash</td>
+<td align="left"><code>~/.bash_profile</code></td>
+</tr>
+<tr>
+<td align="left">Terminal / <a href="http://zsh.sourceforge.net/" target="_blank" rel="noopener noreferrer">Zsh</a></td>
+<td align="left"><code>~/.zshrc</code></td>
+</tr>
+</tbody>
+</table>
+<p>Open the adequate file (<code>.bash_profile</code> for this example) from the CLI with
+<code>nano</code> or your favorite editor if it can display hidden files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.bash_profile</span>
+</div></code></pre>
+<p>Add this line at the bottom of your file (use <code>i</code> to enter <strong>insert</strong> mode if
+using Vim):</p>
+<pre class="lumis"><code class="language-vim" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">export</span> PATH=&quot;$HOME/hello-program/bin:$PATH&quot;
+</div></code></pre>
+<p>If you’re in Vim, press <code>Esc</code> when you’re done typing, then <code>:wq</code> and <code>Enter</code> to
+save and quit. If you’re in nano, press <code>Ctrl-X</code>, then answer <code>Yes</code> and confirm
+the filename.</p>
+<h4 id="does-it-work">Does it work?<a href="#does-it-work" aria-label="Link to heading 'Does it work?'" data-heading-content="Does it work?" class="anchor"></a></h4>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Remember to <strong>close and re-open your CLI</strong> to have the shell reload its
+configuration file.</p></div></div>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div class="order-1 md:order-none flex items-end"><p>You should now be able to run the Hello World shell script as a command simply
+by typing <code>hello</code>:</p></div><div class="order-3 md:order-none flex items-end"><p>You don’t even have to be in the correct directory:</p></div><div class="order-2 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre></div><div class="order-4 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/jde</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre></div></div>
+<p>And your CLI knows where it is:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">hello</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin/hello</span>
+</div></code></pre>
+<p>It knows this because the directory containing the script is now in your PATH:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span>
+</div></code></pre>
+<h4 id="what-have-i-done">What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h4>
+<p>You have <strong>added a directory to the <code>PATH</code></strong>:</p>
+<pre class="lumis"><code class="language-vim" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">export</span> PATH=&quot;~/hello-program/bin:$PATH&quot;
+</div></code></pre>
+<p>This line says:</p>
+<ul>
+<li>Modify the <code>PATH</code> variable.</li>
+<li>In it, put the new directory <code>~/hello-program/bin</code> and the previous value of the <code>PATH</code>, separated by <code>:</code>.</li>
+</ul>
+<p>The next time you run a command, your shell will <strong>first look</strong> in this directory for executables, then in the <strong>rest of the <code>PATH</code></strong>.</p>
+<p><strong>Common mistakes</strong></p>
+<ul>
+<li>What you must put in the <code>PATH</code> is <strong>NOT</strong> the path to the executable,
+but the path to the <strong>directory containing the executable</strong>.</li>
+<li>You must re-open your CLI for the change to take effect:
+the shell configuration file (e.g. <code>~/.bash_profile</code>) is only applied when the shell starts.</li>
+</ul>
+<h2 id="unleash-your-terminal">Unleash your terminal<a href="#unleash-your-terminal" aria-label="Link to heading 'Unleash your terminal'" data-heading-content="Unleash your terminal" class="anchor"></a></h2>
+<img class='w100' src='images/unleash-your-terminal-2529d0e7a3738449255d0c415f2bbdd3.png' />
+<h3 id="oh-my-zsh">Oh My Zsh<a href="#oh-my-zsh" aria-label="Link to heading 'Oh My Zsh'" data-heading-content="Oh My Zsh" class="anchor"></a></h3>
+<p>Command-line shells have been worked on for a very long time. Modern shells
+such as the <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">Z shell (Zsh)</a> have a whole community that created many
+plugins to simplify your daily command-line work.</p>
+<p>On macOS or Linux, you may want to install <a href="https://ohmyz.sh" target="_blank" rel="noopener noreferrer">Oh My Zsh</a> to fully
+unleash the power of your Terminal. It has <a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins" target="_blank" rel="noopener noreferrer">plugins</a> to
+integrate with Homebrew, Git, various programming languages like Ruby, PHP, Go,
+and much more.</p>
+<p>On Windows, you may want to <a href="https://learn.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener noreferrer">install the Windows Subsystem for Linux</a> so
+you can install a Linux distribution like Ubuntu. You can then <a href="http://kevinprogramming.com/using-zsh-in-windows-terminal/" target="_blank" rel="noopener noreferrer">install Zsh and
+Oh My Zsh as well</a>.</p>
+<h3 id="other-tools-for-the-command-line-lover">Other tools for the command line lover<a href="#other-tools-for-the-command-line-lover" aria-label="Link to heading 'Other tools for the command line lover'" data-heading-content="Other tools for the command line lover" class="anchor"></a></h3>
+<ul>
+<li><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener noreferrer"><code>bat</code></a>: a <code>cat</code> clone with wings</li>
+<li><a href="https://github.com/tldr-pages/tldr" target="_blank" rel="noopener noreferrer"><code>tldr</code></a>: better <code>man</code> pages</li>
+<li><a href="https://junegunn.github.io/fzf/" target="_blank" rel="noopener noreferrer"><code>fzf</code></a> to quickly find files</li>
+<li><a href="https://beyondgrep.com" target="_blank" rel="noopener noreferrer"><code>ack</code></a> to search for text in files (<code>grep</code>
+alternative)</li>
+<li><a href="https://rsync.samba.org" target="_blank" rel="noopener noreferrer"><code>rsync</code></a> for incremental file transfers (<code>cp</code> &amp;
+<code>scp</code> alternative)</li>
+</ul>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>A Terminal <a href="https://en.wikipedia.org/wiki/Multiplexer" target="_blank" rel="noopener noreferrer">multiplexer</a> like:</p>
+<ul>
+<li><a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener noreferrer">tmux</a></li>
+<li><a href="https://www.gnu.org/software/screen/" target="_blank" rel="noopener noreferrer">screen</a></li>
+<li><a href="https://zellij.dev" target="_blank" rel="noopener noreferrer">zellij</a> <img class="emoji" src="/2026/assets/emoji/1f499-e37c985edda06b7d5f4559bc838c1bde.svg" alt="💙" width="20" height="20" /></li>
+</ul></div><div><p><img src="images/terminal-multiplexer-022fccd37223c3a300a00974d89b988b.png" alt="Terminal multiplexer" /></p></div></div>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#back-to-the-command-line">Back to the command line</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#what-is-a-command-line-interface-cli">What is a Command Line Interface (CLI)?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#why-use-it">Why use it?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#open-a-cli">Open a CLI</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#install-wsl-windows-users-only">Install WSL (Windows users only)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-to-use-the-cli">How to use the CLI</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#work-in-progress">Work in progress…</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#writing-commands">Writing commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#options-vs-values">Options vs. values</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#options-with-values">Options with values</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#naming-things-when-using-cli">Naming things when using CLI</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#auto-completion">Auto-completion</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#getting-help">Getting help</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#interactive-help-pages">Interactive help pages</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#unix-command-syntax">Unix Command Syntax</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#using-the-filesystem">Using the filesystem</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-pwd-command">The <code>pwd</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-ls-command">The <code>ls</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-cd-command">The <code>cd</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#absolute-paths">Absolute paths</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the--path">The <code>.</code> path</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the--path-1">The <code>..</code> path</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#path-reference">Path reference</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#your-projects-directory">Your projects directory</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-mkdir-command">The <code>mkdir</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-touch-command">The <code>touch</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-echo-command">The <code>echo</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-cat-command">The <code>cat</code> command</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#stopping-running-commands">Stopping running commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows-users">Windows users</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#vim">Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#why">WHY?!</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#nano">Nano</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#an-alternative-to-vim">An alternative to Vim</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#editing-files-with-nano">Editing files with nano</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#saving-files">Saving files</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#confirming-the-filename">Confirming the filename</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#setting-nano-as-the-default-editor">Setting nano as the default editor</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-path-variable">The <code>PATH</code> variable</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#understanding-the-path">Understanding the <code>PATH</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#finding-commands">Finding commands</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#using-non-system-commands">Using non-system commands</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#custom-command-example">Custom command example</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#executing-a-command-in-a-directory-thats-not-in-the-path">Executing a command in a directory that’s not in the <code>PATH</code></a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#updating-the-path-variable">Updating the <code>PATH</code> variable</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#does-it-work">Does it work?</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#what-have-i-done">What have I done?</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#unleash-your-terminal">Unleash your terminal</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#oh-my-zsh">Oh My Zsh</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-tools-for-the-command-line-lover">Other tools for the command line lover</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

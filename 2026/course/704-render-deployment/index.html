@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deploy web applications with a database to Render · ArchiDep</title>
+<meta name="description" content="The goal of this exercise is to deploy the same PHP Todolist application as in previous exercises, but this time on the Render Platform-as-a-service (PaaS) cloud instead of your own server in the Infrastructure-as-a-Service (IaaS) Microsoft Azure Web Services cloud. This illustrates the difference between the two cloud service models. This guide assumes that you are familiar with Git and that you have a basic understanding of what a Platform-as-a-Service is. Work on your local machine, NOT your cloud server. The goal of this exercise is to deploy on Render, not your own server, to illustrate the difference between Platform-as-a-Service (PaaS) and Infrastructure-as-a-Service (IaaS)." />
+<link rel="canonical" href="https://archidep.ch/2026/course/704-render-deployment/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Deploy web applications with a database to Render" />
+<meta property="og:description" content="The goal of this exercise is to deploy the same PHP Todolist application as in previous exercises, but this time on the Render Platform-as-a-service (PaaS) cloud instead of your own server in the Infrastructure-as-a-Service (IaaS) Microsoft Azure Web Services cloud. This illustrates the difference between the two cloud service models. This guide assumes that you are familiar with Git and that you have a basic understanding of what a Platform-as-a-Service is. Work on your local machine, NOT your cloud server. The goal of this exercise is to deploy on Render, not your own server, to illustrate the difference between Platform-as-a-Service (PaaS) and Infrastructure-as-a-Service (IaaS)." />
+<meta property="og:url" content="https://archidep.ch/2026/course/704-render-deployment/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/704-render-deployment/exercise.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/704-render-deployment/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Deploy web applications with a database to Render
+</h1>
+
+      <div class="my-4"><p>The goal of this exercise is to deploy the same <a href="https://github.com/ArchiDep/php-todo-ex" target="_blank" rel="noopener noreferrer">PHP Todolist</a> application
+as in previous exercises, but this time on the Render Platform-as-a-service
+(PaaS) cloud instead of your own server in the Infrastructure-as-a-Service
+(IaaS) Microsoft Azure Web Services cloud. This illustrates the difference
+between the two cloud service models.</p>
+<p>This guide assumes that you are familiar with <a href="/2026/course/201-git/slides/">Git</a> and that you have a basic understanding of
+what a Platform-as-a-Service is.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>Work on your local machine, NOT your cloud server</strong>. The goal of this exercise
+is to deploy on <a href="https://render.com" target="_blank" rel="noopener noreferrer">Render</a>, not your own server, to illustrate the
+difference between Platform-as-a-Service (PaaS) and Infrastructure-as-a-Service
+(IaaS).</p></div></div></div></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#macos">macOS</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows">Windows</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#getting-your-todolist-fork-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Getting your Todolist fork up-to-date.</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#add-the-upstream-as-a-remote"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add the upstream as a remote</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#fetch-data-from-upstream"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Fetch data from upstream</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#push-the-new-branch-to-github"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Push the new branch to GitHub</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#create-and-configure-a-postgresql-database-on-render"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create and configure a PostgreSQL Database on Render</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-render-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a Render account</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-a-postgresql-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a PostgreSQL instance</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#connect-to-the-database-and-create-tables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to the database and create tables</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a web service</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#define-environment-variables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Define environment variables</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#deploy-the-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the web service</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      
+
+<h2 id="legend">
+  <img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend
+</h2>
+
+<p>Parts of this exercise are annotated with the following icons:</p>
+
+<ul class="legend">
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A task you MUST perform to complete the exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional step that you may perform to make sure that
+    everything is working correctly, or to set up additional tools that are not required but can
+    help you
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Advanced tips on how to go further (or
+    challenges!)
+  </li>
+  <li><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> The end of the exercise</li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> The architecture of the software you ran or
+    deployed during this exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting tips: how to fix common problems you might
+    encounter
+  </li>
+</ul>
+
+      <h2 id="install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL<a href="#install-postgresql" aria-label="Link to heading 'Install PostgreSQL'" data-heading-content="Install PostgreSQL" class="anchor"></a></h2>
+<p>PostgreSQL is a relational database management system that is very similar to
+MySQL. We use it here because we can deploy it with one click on Render. Other
+benefits of using PostgreSQL are performance, concurrency and SQL language
+support. You will need to install PostgreSQL on your own machine in order to
+access the remote instance hosted on Render using the <code>psql</code> command-line
+interface. The installation procedure differs on macOS and Windows.</p>
+<h3 id="macos">macOS<a href="#macos" aria-label="Link to heading 'macOS'" data-heading-content="macOS" class="anchor"></a></h3>
+<p>To install PostgreSQL, you will be using <a href="https://brew.sh/" target="_blank" rel="noopener noreferrer">Homebrew</a>, the leading
+package manager for Mac. You may install it directly from your terminal, by
+entering:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/bin/bash</span> <span class="l-function-call">-c</span> <span class="l-string">&quot;<span class="l-punctuation-special">$(</span><span class="l-function-call">curl</span> <span class="l-variable-parameter">-fsSL</span> <span class="l-variable-parameter">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span class="l-punctuation-special">)</span>&quot;</span>
+</div></code></pre>
+<p>Once this is done, you can easily install packages by writing <code>brew install</code>
+followed by the name of the package:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">postgresql@18</span>
+</div></code></pre>
+<p>Check that you have access to the <code>psql</code> command by entering:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">18.x</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<h3 id="windows">Windows<a href="#windows" aria-label="Link to heading 'Windows'" data-heading-content="Windows" class="anchor"></a></h3>
+<p>Open your WSL terminal and install PostgreSQL with APT:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql-client-16</span>
+</div></code></pre>
+<p>Check that you have access to the <code>psql</code> command by entering:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">16.x</span>
+</div></code></pre>
+<h2 id="getting-your-todolist-fork-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Getting your Todolist fork up-to-date.<a href="#getting-your-todolist-fork-up-to-date" aria-label="Link to heading 'Getting your Todolist fork up-to-date.'" data-heading-content="Getting your Todolist fork up-to-date." class="anchor"></a></h2>
+<p>When you started working on the Todolist application, you forked an existing
+codebase from a GitHub repository. While you were working on your configuration,
+the team with access to the original repository implemented the changes
+necessary for a PaaS deployment in a branch called <code>docker-postgres</code>.</p>
+<p>By default, your fork does not track changes from the original repo, which is
+also commonly referred to as the <strong>upstream</strong>. Let’s reconfigure our repository
+so that it can fetch data from there.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you do not remember where the Todolist repository is stored on your local
+machine, you can simply clone it again from GitHub by running <code>git clone git@github.com:JohnDoe/php-todo-ex.git</code>. Don’t forget to replace <code>JohnDoe</code> with
+your GitHub username.</p></div></div>
+<h3 id="add-the-upstream-as-a-remote"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add the upstream as a remote<a href="#add-the-upstream-as-a-remote" aria-label="Link to heading 'Add the upstream as a remote'" data-heading-content="Add the upstream as a remote" class="anchor"></a></h3>
+<p>From the terminal, move into your repository and add the upstream repository as
+a remote (this time, leave <code>ArchiDep</code> in the URL, you <em>want</em> to use the
+original URL and not your own):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">php-todo-ex</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">upstream</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Unlike the <a href="/2026/course/602-git-automated-deployment/">automated deployment exercise</a>, you will not be pushing to
+this remote. You couldn’t anyway, as you are not a collaborator on the upstream
+repository so you do not have the right to push. Instead, you will use it to
+fetch up-to-date code from a branch.</p></div></div>
+<h3 id="fetch-data-from-upstream"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Fetch data from upstream<a href="#fetch-data-from-upstream" aria-label="Link to heading 'Fetch data from upstream'" data-heading-content="Fetch data from upstream" class="anchor"></a></h3>
+<p>Fetch all commits from the upstream repository:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">upstream</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Enumerating</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">11,</span> <span class="l-variable-parameter">done.</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Counting</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Compressing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">6/6</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Total</span> <span class="l-number">11</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, reused <span class="l-number">11</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">pack-reused</span> <span class="l-number">0</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">Unpacking</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">3.20</span> <span class="l-variable-parameter">KiB</span> <span class="l-operator">|</span> <span class="l-function-call">545.00</span> <span class="l-variable-parameter">KiB/s,</span> <span class="l-variable-parameter">done.</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">From</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span>
+</div><div class="l-line" data-line="8"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/docker-postgres</span>
+</div><div class="l-line" data-line="9"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span>            <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/main</span>
+</div></code></pre>
+<p>As you can see, this gives you access to upstream branches, including one called
+<code>upstream/docker-postgres</code>. With the next command you will copy the content of
+that upstream branch into your own branch.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">upstream/docker-postgres</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;upstream/docker-postgres&#39;</span><span class="l-variable-parameter">.</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Switched</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span>
+</div></code></pre>
+<p>This command will create a new branch in <strong>your</strong> local repository, based on the
+contents of the upstream branch. This command automatically switches you to the
+new branch. If you browse through the project in a code editor or by using
+<code>cat</code>, you should now be able to see changes to <code>todolist.sql</code>, as well as a
+mysterious new <code>Dockerfile</code>.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Docker is a tool designed to make it easier to create, deploy, and run
+applications by using containers. Containers allow a developer to package up
+an application with all of the parts it needs, such as libraries and other
+dependencies, and ship it all out as one package. A Dockerfile is a text file
+that contains instructions for how to build a Docker image. We will learn more
+about Docker later in the course, and you can of course learn more <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">on the
+Docker website</a>.</p></div></div>
+<h3 id="push-the-new-branch-to-github"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Push the new branch to GitHub<a href="#push-the-new-branch-to-github" aria-label="Link to heading 'Push the new branch to GitHub'" data-heading-content="Push the new branch to GitHub" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">docker-postgres</span>
+</div></code></pre>
+<p>You can go check on GitHub whether your new branch has been pushed, by
+displaying the branch dropdown:</p>
+<p><img src="./images/render-database-branch-4bd160d0cef8ba7d63c16f50d8873748.png" alt="Check branch is on GitHub" /></p>
+<p><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /> Let’s note that this whole step has nothing to do with PaaS deployments in
+and of themselves. It is just a corollary of some code changes that had to be
+made for the Todolist to work with PostgreSQL and Docker.</p>
+<h2 id="create-and-configure-a-postgresql-database-on-render"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create and configure a PostgreSQL Database on Render<a href="#create-and-configure-a-postgresql-database-on-render" aria-label="Link to heading 'Create and configure a PostgreSQL Database on Render'" data-heading-content="Create and configure a PostgreSQL Database on Render" class="anchor"></a></h2>
+<p>Instead of manually configuring a Linux server, you will be provisioning a
+couple of services on Render. The first is a PostgreSQL Database.</p>
+<h3 id="create-a-render-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a Render account<a href="#create-a-render-account" aria-label="Link to heading 'Create a Render account'" data-heading-content="Create a Render account" class="anchor"></a></h3>
+<p>Start by creating a <a href="https://dashboard.render.com/register" target="_blank" rel="noopener noreferrer">new Render account</a>. If you choose to
+register using GitHub, you will be able to skip linking these two accounts
+together later:</p>
+<p><img src="./images/render-signup-603b7fe75e932ffb49872a467d75b789.png" alt="Create a new Render account" /></p>
+<h3 id="create-a-postgresql-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a PostgreSQL instance<a href="#create-a-postgresql-instance" aria-label="Link to heading 'Create a PostgreSQL instance'" data-heading-content="Create a PostgreSQL instance" class="anchor"></a></h3>
+<p>Sign-in to your Render account and click the <strong>new PostgreSQL</strong> button:</p>
+<p><img src="./images/render-database-postgres-create-110a8a10cbe487a52dbf6013a013bf81.png" alt="Create PostgreSQL" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>You can only have 1 active PostgreSQL deployment in the free Render tier. If you
+want more, you gotta pay.</p></div></div>
+<p>This will take you to the following setup page, where you will need to
+configure:</p>
+<ul>
+<li>A name for your deployment</li>
+<li>A name for the database</li>
+<li>A username</li>
+<li>The region where the database is deployed (pick the one closest to your
+customers).</li>
+</ul>
+<p><strong>A password will be automatically generated for you.</strong></p>
+<p><img src="./images/render-database-postgres-configure-f26ea48485a2c5b087feaa20022255c1.png" alt="Configure PostgreSQL" /></p>
+<p>When you are done, click <strong>Create Database</strong> and your PostgreSQL database will
+be provisioned automatically. Be patient, this process can take a few minutes.
+Once it is deployed you will be taken to a page with information pertaining to
+your new database and you should see the following:</p>
+<p><img src="./images/render-database-postgres-created-6e4c56ca1dc556b678fb8a17f832dedf.png" alt="PostgreSQL Deployed" /></p>
+<h3 id="connect-to-the-database-and-create-tables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to the database and create tables<a href="#connect-to-the-database-and-create-tables" aria-label="Link to heading 'Connect to the database and create tables'" data-heading-content="Connect to the database and create tables" class="anchor"></a></h3>
+<p>At this point, you have a database. Congratulations. But you still need to set
+its tables up. As you did in the first Todolist tutorial, you will be running
+the <code>todolist.sql</code> script on the database, albeit remotely.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The script is a bit different than the previous one because of two factors.
+First, we are using PostgreSQL instead of MySQL. Second, we do not need to
+create a database. As a matter of fact, this script is a bit simpler than the
+previous one.</p></div></div>
+<p>Go back to your terminal and make sure you are in your repository and on the
+<code>docker-postgres</code> branch:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">--show-current</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">docker-postgres</span>
+</div></code></pre>
+<p>If not, check out the correct branch with the <code>git switch docker-postgres</code>
+command.</p>
+<p>Next, connect to your PostgreSQL database from the command line. On the Render
+dashboard, you should be able to see a <strong>Connections</strong> section. This is where
+all the connection information to your database lives. You will need this
+information more than once, so keep this tab open.</p>
+<p>The information you need to connect to the database shell is located in the
+<strong>PSQL Command</strong> field. You can display or copy the contents of this field by
+clicking the icons to the left of the hidden characters.</p>
+<p><img src="./images/render-database-postgres-connections-4391083c307e362101ba0f3164df62e8.png" alt="PostgreSQL Connection Information" /></p>
+<p>Copy and paste the command in your terminal. This will connect you directly to
+the remote database deployed by Render.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">PGPASSWORD=your_password</span> <span class="l-function-call">psql</span> <span class="l-variable-parameter">-h</span> <span class="l-variable-parameter">your_host.frankfurt-postgres.render.com</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">your_user</span> <span class="l-variable-parameter">your_database</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">14.6</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">server</span> <span class="l-variable-parameter">15.1</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">WARNING:</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16,</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16.</span>
+</div><div class="l-line" data-line="4">         <span class="l-function-call">Some</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">features</span> <span class="l-variable-parameter">might</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">work.</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">SSL</span> connection <span class="l-punctuation-bracket">(</span><span class="l-function-call">protocol:</span> <span class="l-variable-parameter">TLSv1.3,</span> <span class="l-variable-parameter">cipher:</span> <span class="l-variable-parameter">TLS_AES_128_GCM_SHA256,</span> <span class="l-variable-parameter">bits:</span> <span class="l-variable-parameter">128,</span> <span class="l-variable-parameter">compression:</span> <span class="l-variable-parameter">off</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">Type</span> <span class="l-string">&quot;help&quot;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">help.</span>
+</div><div class="l-line" data-line="7">
+</div><div class="l-line" data-line="8"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span>
+</div></code></pre>
+<p>You can now execute the <code>todolist.sql</code> file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span> <span class="l-function-call">\i</span> <span class="l-variable-parameter">todolist.sql</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can make sure the script worked by displaying all the <code>todo</code> table’s
+columns:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span> <span class="l-function-call">\d+</span> <span class="l-variable-parameter">todo</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>            <span class="l-function-call">Type</span>             <span class="l-operator">|</span>             <span class="l-function-call">Default</span>              <span class="l-operator">|</span> <span class="l-function-call">Storage</span>  <span class="l-operator">|</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">------------+-----------------------------+----------------------------------+----------</span>
+</div><div class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">integer</span>                     <span class="l-operator">|</span> <span class="l-function-call">nextval</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;todo_id_seq&#39;</span><span class="l-string">::regclass</span><span class="l-punctuation-bracket">)</span> <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
+</div><div class="l-line" data-line="6"> <span class="l-function-call">title</span>      <span class="l-operator">|</span> <span class="l-function-call">character</span> varying<span class="l-punctuation-bracket">(</span><span class="l-number">2048</span><span class="l-punctuation-bracket">)</span>     <span class="l-operator">|</span><span class="l-function-call"></span>                                  <span class="l-operator">|</span> <span class="l-function-call">extended</span> <span class="l-operator">|</span>
+</div><div class="l-line" data-line="7"> <span class="l-function-call">done</span>       <span class="l-operator">|</span> <span class="l-function-call">boolean</span>                     <span class="l-operator">|</span> <span class="l-function-builtin">false</span>                            <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
+</div><div class="l-line" data-line="8"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">without</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span> <span class="l-function-call">CURRENT_TIMESTAMP</span>                <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
+</div><div class="l-line" data-line="9">
+</div></code></pre></div></div>
+<p>Now quit the PostgreSQL shell by entering <code>\q</code>.</p>
+<h2 id="deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application<a href="#deploy-the-application" aria-label="Link to heading 'Deploy the application'" data-heading-content="Deploy the application" class="anchor"></a></h2>
+<p>Now that you have a database in place, it is time to deploy the web application
+itself.</p>
+<h3 id="create-a-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a web service<a href="#create-a-web-service" aria-label="Link to heading 'Create a web service'" data-heading-content="Create a web service" class="anchor"></a></h3>
+<p>From your Render dashboard, hover over the bluish <strong>“New”</strong> button and select
+<strong>Web Service</strong>.</p>
+<p><img src="./images/render-service-add-0033b90b17f9960e2eaabcb1970f1c0c.png" alt="Create a new Render web service" /></p>
+<p>Render web services need to be connected to a Git repository hosted either on
+GitHub or GitLab. This step will allow you to automate deployments from your
+codebase. Instead of manually setting up hooks like in the <a href="/2026/course/602-git-automated-deployment/">Automated Deployment
+exercise</a>, you will
+rely on Render to take care of this for you.</p>
+<div class="callout callout-more group/callout" data-callout="704-render-deployment:what-is-gitlab"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-704-render-deployment:what-is-gitlab" type="checkbox" class="peer hidden" /><div class="content"><p>Similar to GitHub, <a href="https://about.gitlab.com/" target="_blank" rel="noopener noreferrer">GitLab</a> is also a version control platform that
+allows developers to manage and track changes to their codebase. They both use
+the Git version control system. Although they share the majority of their
+feature sets, GitLab can be self-hosted, which means that you can install and
+run it on your own servers. This can be useful for organizations that want to
+have more control over their infrastructure or that have specific security or
+compliance requirements.</p></div><label for="callout-704-render-deployment:what-is-gitlab" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-704-render-deployment:what-is-gitlab" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>If you are signed up using GitHub, you should see a list of all the repositories
+that can be used to create a web service. If not, you will need to follow the
+procedure to link your GitHub account to Render. Choose the appropriate
+repository for the purposes of this deployment and click <strong>connect</strong>.</p>
+<p><img src="./images/render-service-connect-repo-87ae21a47347592d46397de4be5c2f46.png" alt="Connect GitHub repository to Render" /></p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>As you can see, you can connect any public Git repository to Render by entering
+an URL in the field.</p></div></div>
+<p>Once you have connected the repository, you will need to configure the
+deployment. Make sure you set the following basic options up:</p>
+<ul>
+<li>A name for your web service.</li>
+<li>The region where the service is deployed (pick the one closest to your
+customers).</li>
+<li>The branch from your repository that should be deployed (<code>docker-postgres</code>).</li>
+<li>The runtime environment (should automagically have Docker selected).</li>
+<li>The pricing tier.</li>
+</ul>
+<p><img src="./images/render-service-configure-6b95e9f4ab2a8eadd07425195097e9cf.png" alt="Render web service configuration" /></p>
+<h3 id="define-environment-variables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Define environment variables<a href="#define-environment-variables" aria-label="Link to heading 'Define environment variables'" data-heading-content="Define environment variables" class="anchor"></a></h3>
+<p>In addition to these basic options, we will directly set up our environment
+variables on this page. Scroll down a bit and click the <strong>Advanced</strong> button.
+From there, you can add an arbitrary amount of envionment variables. You will
+use the following ones to connect your application to the PostgreSQL database
+you created earlier. All of the values can be found in the connection panel of
+your database’s dashboard:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Environment variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>DB_HOST</code></td>
+<td align="left">The host at which the PostgreSQL database can be reached.</td>
+</tr>
+<tr>
+<td align="left"><code>DB_PORT</code></td>
+<td align="left">The port at which the PostgreSQL database can be reached.</td>
+</tr>
+<tr>
+<td align="left"><code>DB_NAME</code></td>
+<td align="left">The name of the PostgreSQL database.</td>
+</tr>
+<tr>
+<td align="left"><code>DB_USER</code></td>
+<td align="left">The PostgreSQL user to connect as.</td>
+</tr>
+<tr>
+<td align="left"><code>DB_PASS</code></td>
+<td align="left">The password of the PostgreSQL user.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./images/render-service-variables-0e6bbdaed8f7fe9bb8d8005f6f538f00.png" alt="Render Environment Variables" /></p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You can also store secret files (like .env or .npmrc files and private keys) in
+Render. These files can be accessed during builds and in your code just like
+regular files. You can upload them right in this configuration panel or from the
+service’s dashboard, post-deployment.</p></div></div>
+<h3 id="deploy-the-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the web service<a href="#deploy-the-web-service" aria-label="Link to heading 'Deploy the web service'" data-heading-content="Deploy the web service" class="anchor"></a></h3>
+<p>Once you are done configuring your deployment, you may click the <strong>Create Web
+Service</strong> button at the bottom of the page. This will take you to the deployment
+page, where you will be able to follow along the logs and discover the domain
+Render has attributed to your app.</p>
+<p><img src="./images/render-service-deploy-ae352eaa11231f03c411907ee223bf31.png" alt="Render Environment Variables" /></p>
+<p>Once the deployment has succeeded, you will be able to visit the todolist at the
+URL provided by Render. You may also use a custom domain by following <a href="https://render.com/docs/custom-domains" target="_blank" rel="noopener noreferrer">this
+tutorial</a>.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><strong>This is a free service, so there are some obvious limitations.</strong></p>
+<p>First, deploys are slooooooow. Second, bandwidth and running hours are
+limited. Third, your service will shut down if there is no activity for more
+than 15 minutes: This can cause a response delay of up to 30 seconds for the
+first request that comes in after a period of inactivity.</p>
+<p>Learn more about the limits of free Render accounts <a href="https://render.com/docs/free#free-web-services" target="_blank" rel="noopener noreferrer">here</a>.</p></div></div>
+<h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
+<p>A whole lot! By using Render, GitHub and Docker, you automated a bunch of things
+that were done manually in the previous exercises. Here’s what was configured
+for you:</p>
+<ul>
+<li>Process management with Docker &amp; PHP-FPM</li>
+<li>Reverse proxying with nginx</li>
+<li>TLS/SSL encryption with Let’s Encrypt</li>
+<li>Automated deployment</li>
+</ul>
+<p>But this isn’t magic, it’s building of the work of others:</p>
+<ul>
+<li>First, there’s the Dockerfile. It may not seem like a whole lot, but if you
+look at the first line, you might notice that we are importing something from
+<a href="https://github.com/richarvey/nginx-php-fpm" target="_blank" rel="noopener noreferrer"><code>richarvey/nginx-php-fpm</code></a>. This is actually a popular (and
+fairly complex) Dockerfile build by somebody else. This is what automatically
+sets up PHP-FPM and nginx for us.</li>
+<li>Second, there’s Render: despite its limitations in the free tier, we are
+getting free hosting, automated deployments and encryption.</li>
+<li>Finally, there’s GitHub whose API allows the connection between your repo and
+Render to be very very easily configured.</li>
+</ul>
+<p>Most of the technology and software that we have used throughout this course has
+been made possible by the contributions of others in the open community.
+Consider how you can contribute to open source projects by submitting code,
+writing documentation or reporting bugs and issues.</p>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#macos">macOS</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows">Windows</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#getting-your-todolist-fork-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Getting your Todolist fork up-to-date.</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#add-the-upstream-as-a-remote"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add the upstream as a remote</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#fetch-data-from-upstream"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Fetch data from upstream</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#push-the-new-branch-to-github"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Push the new branch to GitHub</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#create-and-configure-a-postgresql-database-on-render"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create and configure a PostgreSQL Database on Render</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-render-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a Render account</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-a-postgresql-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a PostgreSQL instance</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#connect-to-the-database-and-create-tables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to the database and create tables</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a web service</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#define-environment-variables"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Define environment variables</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#deploy-the-web-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the web service</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-704-render-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/704-render-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done course-item-current">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

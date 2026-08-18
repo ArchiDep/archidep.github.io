@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Horizontally scale a web application with nginx as a load balancer · ArchiDep</title>
+<meta name="description" content="The goal of this exercise is to show how a web application can be scaled to handle a growing amount of work by using systemd unit templates and configuring nginx as a load balancer. This guide assumes that you are familiar with reverse proxying, that you have nginx installed and running on a server, and that you have a DNS wildcard entry preconfigured to make various subdomains (e.g. *.jde.archidep.ch in this guide) point to that server. Connect to your cloud server with SSH for this exercise." />
+<link rel="canonical" href="https://archidep.ch/2026/course/515-fibscale-deployment/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Horizontally scale a web application with nginx as a load balancer" />
+<meta property="og:description" content="The goal of this exercise is to show how a web application can be scaled to handle a growing amount of work by using systemd unit templates and configuring nginx as a load balancer. This guide assumes that you are familiar with reverse proxying, that you have nginx installed and running on a server, and that you have a DNS wildcard entry preconfigured to make various subdomains (e.g. *.jde.archidep.ch in this guide) point to that server. Connect to your cloud server with SSH for this exercise." />
+<meta property="og:url" content="https://archidep.ch/2026/course/515-fibscale-deployment/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/515-fibscale-deployment/exercise.md">Rev: dc7e82f74ae618099eabc534a9acae14ff7ac98f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/515-fibscale-deployment/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
+  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+  Horizontally scale a web application with nginx as a load balancer
+</h1>
+
+      <div class="my-4"><p>The goal of this exercise is to show how a web application can be
+<a href="https://en.wikipedia.org/wiki/Scalability" target="_blank" rel="noopener noreferrer">scaled</a> to handle a growing amount of work by using systemd unit
+templates and configuring nginx as a <a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener noreferrer">load balancer</a>.</p>
+<p>This guide assumes that you are familiar with <a href="/2026/course/509-reverse-proxy/">reverse proxying</a>, that you have nginx installed and
+running on a server, and that you have a DNS wildcard entry preconfigured to
+make various subdomains (e.g. <code>*.jde.archidep.ch</code> in this guide) point to that
+server.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this exercise.</p></div></div></div></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#artificially-slow-down-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Artificially slow down the application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#load-testing-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load testing the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#deploy-a-locust-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy a Locust instance</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#start-load-testing-the-application-with-a-small-number-of-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Start load testing the application with a small number of users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#increase-the-load"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Increase the load</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-to-do"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> What to do?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#horizontally-scale-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Horizontally scale the FibScale application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#transform-the-fibscale-systemd-unit-into-a-template"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Transform the FibScale systemd unit into a template</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#load-test-the-new-fibscale-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load-test the new FibScale service</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#spin-up-more-instance-of-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Spin up more instance of the FibScale application</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#configure-nginx-to-balance-the-load-among-the-available-fibscale-instances"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure nginx to balance the load among the available FibScale instances</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#not-the-solution-to-all-your-problems"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Not the solution to all your problems</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      <div class="pt-2 sticky top-0 z-10">
+        <div class="cloud-server-data not-prose xl:hidden" data-mode="details" data-layout="horizontal">
+        </div>
+      </div>
+
+      
+
+<h2 id="legend">
+  <img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend
+</h2>
+
+<p>Parts of this exercise are annotated with the following icons:</p>
+
+<ul class="legend">
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A task you MUST perform to complete the exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional step that you may perform to make sure that
+    everything is working correctly, or to set up additional tools that are not required but can
+    help you
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Advanced tips on how to go further (or
+    challenges!)
+  </li>
+  <li><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> The end of the exercise</li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> The architecture of the software you ran or
+    deployed during this exercise
+  </li>
+  <li>
+    <img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting tips: how to fix common problems you might
+    encounter
+  </li>
+</ul>
+
+      <h2 id="requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements<a href="#requirements" aria-label="Link to heading 'Requirements'" data-heading-content="Requirements" class="anchor"></a></h2>
+<p>The application you will deploy is <a href="https://github.com/ArchiDep/fibscale" target="_blank" rel="noopener noreferrer">FibScale</a>, a web application that
+computes <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank" rel="noopener noreferrer">Fibonacci numbers</a>.</p>
+<p>The following requirements should be installed on your server:</p>
+<ul>
+<li>
+<p><a href="https://www.ruby-lang.org" target="_blank" rel="noopener noreferrer">Ruby</a> 3.2+ and compilation tools</p>
+<p>You can install those by running the following commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">update</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">ruby-full</span> <span class="l-variable-parameter">build-essential</span>
+</div></code></pre>
+</li>
+<li>
+<p><a href="https://bundler.io" target="_blank" rel="noopener noreferrer">Bundler</a>, a command-line tool that downloads Ruby gems (i.e.
+packages)</p>
+<p>Once your have Ruby installed, you can install Bundler with the <code>gem</code> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">gem</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">bundler</span>
+</div></code></pre>
+</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can check that everything has been correctly installed with the following
+commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Ruby 3.x will be installed by default on Ubuntu 24.04:</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ruby</span> <span class="l-function-call">--version</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">ruby</span> 3.x.y <span class="l-punctuation-bracket">(</span><span class="l-function-call">202v-wx-yz</span> <span class="l-variable-parameter">revision</span> <span class="l-number">0000000000</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">[</span>x86_64-linux-gnu<span class="l-punctuation-bracket">]</span>
+</div></code></pre></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Bundler is Ruby’s package manager much like Composer for PHP or npm
+for Node.js.</p></div></div>
+<h2 id="deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application<a href="#deploy-the-application" aria-label="Link to heading 'Deploy the application'" data-heading-content="Deploy the application" class="anchor"></a></h2>
+<p>Let’s start by deploying the application and seeing it in action. Clone the
+repository on your server and install the required dependencies:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-builtin">cd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">git</span> <span class="l-variable-parameter">clone</span> <span class="l-variable-parameter">https://github.com/ArchiDep/fibscale.git</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">fibscale</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">bundle</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">--local</span> <span class="l-variable-parameter">deployment</span> <span class="l-string">&#39;true&#39;</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">bundle</span> <span class="l-variable-parameter">install</span>
+</div></code></pre>
+<p>Create a systemd unit file named <code>/etc/systemd/system/fibscale.service</code> (e.g.
+with <code>nano</code>) to execute the application:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">[Unit]
+</div><div class="l-line" data-line="2">Description=Fibonacci calculator
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">[Service]
+</div><div class="l-line" data-line="5">ExecStart=/usr/local/bin/bundle exec ruby fibscale.rb
+</div><div class="l-line" data-line="6">WorkingDirectory=/home/jde/fibscale
+</div><div class="l-line" data-line="7">Environment=&quot;FIBSCALE_PORT=4202&quot;
+</div><div class="l-line" data-line="8">User=jde
+</div><div class="l-line" data-line="9">Restart=on-failure
+</div><div class="l-line" data-line="10">
+</div><div class="l-line" data-line="11">[Install]
+</div><div class="l-line" data-line="12">WantedBy=multi-user.target
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your username in the <code>WorkingDirectory</code> and <code>User</code> options.</p></div></div>
+<p>Enable and start your new service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">fibscale</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">fibscale</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can check that it is running with <code>sudo systemctl status fibscale</code>.</p></div></div>
+<p>Create the nginx site configuration <code>/etc/nginx/sites-available/fibscale</code> (e.g.
+with <code>nano</code>) to expose this component:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">server {
+</div><div class="l-line" data-line="2">  listen 80;
+</div><div class="l-line" data-line="3">  server_name fibscale.jde.archidep.ch;
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">  location / {
+</div><div class="l-line" data-line="6">    proxy_pass http://127.0.0.1:4202;
+</div><div class="l-line" data-line="7">  }
+</div><div class="l-line" data-line="8">}
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your name and <code>archidep.ch</code> with your assigned domain in the
+<code>server_name</code> directive.</p></div></div>
+<p>Enable that configuration with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/fibscale</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/fibscale</span>
+</div></code></pre>
+<p>Check and reload nginx’s configuration:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
+</div></code></pre>
+<p>You should now be able to access the FibScale application at
+http://fibscale.jde.archidep.ch and see how it works.</p>
+<p><img src="./images/fibscale-9b54e8c975d42c1c33745e016d8a9dbb.png" alt="FibScale application" /></p>
+<p>As you can see, FibScale will compute Fibonacci numbers using various
+algorithms, and display how much time each computation took.</p>
+<p><img src="./images/fibscale-fib-5-9c603c1aa4338ba10c077d6a50b1f2b8.png" alt="FibScale application with number 5" /></p>
+<div class="callout callout-more group/callout" data-callout="515-fibscale-deployment:fibscale-why-iterative-faster"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-515-fibscale-deployment:fibscale-why-iterative-faster" type="checkbox" class="peer hidden" /><div class="content"><p>Why is the iterative algorithm much faster for larger numbers? For those
+interested in programming, FibScale implements two algorithms to compute
+Fibonacci numbers:</p>
+<ul>
+<li>The naive <a href="https://github.com/ArchiDep/fibscale/blob/d62a2c5015202f1097c7995b2463c7b498c6827d/fibscale.rb#L140-L151" target="_blank" rel="noopener noreferrer">recursive
+algorithm</a>.</li>
+<li>The <a href="https://github.com/ArchiDep/fibscale/blob/d62a2c5015202f1097c7995b2463c7b498c6827d/fibscale.rb#L153-L163" target="_blank" rel="noopener noreferrer">iterative
+algorithm</a>.</li>
+</ul>
+<p>We call the recursive algorithm “naive” because although it is an easier
+implementation to understand and implement, it has <strong>exponential <a href="https://en.wikipedia.org/wiki/Time_complexity" target="_blank" rel="noopener noreferrer">time
+complexity</a></strong> (and <a href="https://en.wikipedia.org/wiki/Space_complexity" target="_blank" rel="noopener noreferrer">space complexity</a>) of
+<code>O(2^n)</code> because each function call produces two <a href="https://en.wikipedia.org/wiki/Recursion" target="_blank" rel="noopener noreferrer">recursive</a> function
+calls. This means that it takes exponentially more time and memory to compute
+Fibonacci numbers as you increase the number. This is why FibScale will refuse
+to compute a Fibonacci number higher than 40 with the recursive algorithm
+because that might hog your server’s CPU for too long or exhaust its memory.</p>
+<p>The iterative algorithm uses a smarter implementation that avoids the
+exponential time complexity of the naive recursive algorithm by remembering each
+computed Fibonacci number as it moves along. This algorithm has a time
+complexity of <code>O(n)</code>, meaning the time increase is linear instead of
+exponential. Since it uses a fixed number of variables and does not use
+recursion, it has a space complexity of <code>O(1)</code>, meaning it consumes a fixed
+amount of memory regardless of which Fibonacci number you are computing.</p>
+<p>Read the articles <a href="https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/" target="_blank" rel="noopener noreferrer">Program for Fibonacci
+numbers</a> and
+<a href="https://www.scaler.com/topics/fibonacci-series-in-c/" target="_blank" rel="noopener noreferrer">Fibonacci series in C</a>
+for more detailed explanations.</p></div><label for="callout-515-fibscale-deployment:fibscale-why-iterative-faster" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-515-fibscale-deployment:fibscale-why-iterative-faster" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/2728-e820a306c732b90515989dada9995a97.svg" alt="✨" width="20" height="20" /></span> Fabulous!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="artificially-slow-down-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Artificially slow down the application<a href="#artificially-slow-down-the-application" aria-label="Link to heading 'Artificially slow down the application'" data-heading-content="Artificially slow down the application" class="anchor"></a></h2>
+<p>To better show the benefits of scaling, we will configure the FibScale
+application to simulate each computation being very slow. As you can see in <a href="https://github.com/ArchiDep/fibscale#configuration" target="_blank" rel="noopener noreferrer">its
+documentation</a>, you can do that by setting the
+<code>$FIBSCALE_DELAY</code> environment variable to a number of seconds. Each computation
+will be artificially delayed by that amount of time.</p>
+<p>Once our application is slower, we will see how we can use horizontal scaling to
+make it faster.</p>
+<div class="callout callout-more group/callout" data-callout="515-fibscale-deployment:fibscale-why-not-high-fib"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-515-fibscale-deployment:fibscale-why-not-high-fib" type="checkbox" class="peer hidden" /><div class="content"><p>Why not compute a very high Fibonacci number instead of adding a fake delay? If
+you have played with FibScale, you may have noticed that the higher the
+Fibonacci number you try to compute, the more time it takes with the recursive
+algorithm. For example, computing the 37th Fibonacci number with the recursive
+algorithm usually takes more than 3 seconds with the Azure servers recommended
+for this course.</p>
+<p>Why then introduce an artificial delay instead of simply computing a high
+Fibonacci number?</p>
+<p>Because scaling an application is a complex task and you may not do it the same
+way depending on the cause of the slowdown (e.g. CPU-bound or I/O-bound). If we
+slow down the computation by consuming more CPU (i.e. computing a high Fibonacci
+number), we may hit the limits of our server’s CPU(s) too quickly. By
+artificially slowing down computation without consuming more CPU or other
+resources, we can simplify the demonstration and concentrate on configuring load
+balancing with nginx.</p>
+<p>For more information, see <a href="#not-the-solution-to-all-your-problems">the additional explanations at the end of the
+exercise</a>.</p></div><label for="callout-515-fibscale-deployment:fibscale-why-not-high-fib" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-515-fibscale-deployment:fibscale-why-not-high-fib" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Wonderful!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>Add the following line to the <code>[Service]</code> section of the
+<code>/etc/systemd/system/fibscale.service</code> systemd unit file:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Environment=&quot;FIBSCALE_DELAY=1&quot;
+</div></code></pre>
+<p>Reload the systemd configuration and restart your service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">daemon-reload</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">fibscale</span>
+</div></code></pre>
+<p>Test the application at http://fibscale.jde.archidep.ch again and
+observe that every computation now takes at least one second.</p>
+<p><img src="./images/fibscale-slow-c88a8f08c8f71426959c53eeb14f7c83.png" alt="Slow FibScale application" /></p>
+<p>We now have a simulation of a slow application. Or do we? As the saying goes:</p>
+<ul>
+<li><strong>Don’t guess, measure!</strong></li>
+</ul>
+<h2 id="load-testing-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load testing the application<a href="#load-testing-the-application" aria-label="Link to heading 'Load testing the application'" data-heading-content="Load testing the application" class="anchor"></a></h2>
+<p>You will use <a href="https://locust.io" target="_blank" rel="noopener noreferrer">Locust</a>, an open source <a href="https://en.wikipedia.org/wiki/Load_testing" target="_blank" rel="noopener noreferrer">load testing</a> tool
+written in Python, and use it to measure the performance of the FibScale
+application. <strong>Load testing</strong> is the process of putting demand on a system and
+measuring its response time and error rate. In this case, we will simulate
+multiple users trying to use FibScale concurrently, and see how much time it
+takes for each user to get a response.</p>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Do not stray too far from the instructions below when load testing when it comes
+to the number of users. You are going to simulate many users sending requests to
+your application concurrently. If you simulate too many users, you may bring
+down your server, or your test may easily be misconstrued as a <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener noreferrer">DoS attack</a>
+by the Azure cloud. Your server may end up being blacklisted.</p></div></div></div>
+<h3 id="deploy-a-locust-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy a Locust instance<a href="#deploy-a-locust-instance" aria-label="Link to heading 'Deploy a Locust instance'" data-heading-content="Deploy a Locust instance" class="anchor"></a></h3>
+<p>To install Locust, you need <a href="https://www.python.org" target="_blank" rel="noopener noreferrer">Python</a> 3 and <a href="https://pypi.org/project/pip/" target="_blank" rel="noopener noreferrer">pip</a>, a Python package
+manager, installed on your server. You can do that with the following commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">python3</span> <span class="l-variable-parameter">python3-pip</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>APT may tell you that these packages are already installed. That’s fine.</p></div></div>
+<p>You can then install Locust with pip:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">python3-locust</span>
+</div></code></pre>
+<p>This will add the <code>locust</code> command to your system:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">locust</span> <span class="l-function-call">-V</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">locust</span>  <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">/usr/lib/python3/dist-packages/locust</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">python</span> <span class="l-variable-parameter">3.12.3</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<p>To use Locust, you would normally <a href="http://docs.locust.io/en/stable/writing-a-locustfile.html" target="_blank" rel="noopener noreferrer">write a locustfile</a> describing a
+load testing scenario, i.e. users and their behavior as they access your
+application. Fortunately for you, the FibScale application already comes with
+a <a href="https://github.com/ArchiDep/fibscale/blob/main/locustfile.py" target="_blank" rel="noopener noreferrer">pre-configured locustfile</a> which simulates a user that
+requests the computation of the 100th Fibonacci number every second.</p>
+<p>As <a href="http://docs.locust.io/en/stable/quickstart.html" target="_blank" rel="noopener noreferrer">Locust’s documentation</a> states, you simply need to
+run the <code>locust</code> command in a directory containing a locustfile named
+<code>locustfile.py</code>, and Locust will be ready to run your load testing scenario.</p>
+<p>Let’s create a systemd unit file named
+<code>/etc/systemd/system/fibscale-locust.service</code> that does just that:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">[Unit]
+</div><div class="l-line" data-line="2">Description=Locust instance to test FibScale
+</div><div class="l-line" data-line="3">After=fibscale.service
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">[Service]
+</div><div class="l-line" data-line="6">ExecStart=/usr/bin/locust
+</div><div class="l-line" data-line="7">WorkingDirectory=/home/jde/fibscale
+</div><div class="l-line" data-line="8">User=jde
+</div><div class="l-line" data-line="9">Restart=on-failure
+</div><div class="l-line" data-line="10">
+</div><div class="l-line" data-line="11">[Install]
+</div><div class="l-line" data-line="12">WantedBy=multi-user.target
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your name in the <code>WorkingDirectory</code> and <code>User</code> options.</p></div></div>
+<p>Enable and start your new service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">fibscale-locust</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">fibscale-locust</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can check that it is running with <code>sudo systemctl status fibscale-locust</code>.</p></div></div>
+<p>Create the nginx site configuration file
+<code>/etc/nginx/sites-available/fibscale-locust</code> to expose Locust, which listens on
+port 8089 by default:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">server {
+</div><div class="l-line" data-line="2">  listen 80;
+</div><div class="l-line" data-line="3">  server_name locust.fibscale.jde.archidep.ch;
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">  location / {
+</div><div class="l-line" data-line="6">    proxy_pass http://127.0.0.1:8089;
+</div><div class="l-line" data-line="7">  }
+</div><div class="l-line" data-line="8">}
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your name and <code>archidep.ch</code> with your assigned domain in the
+<code>server_name</code> directive.</p></div></div>
+<p>Enable that configuration with the following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/fibscale-locust</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/fibscale-locust</span>
+</div></code></pre>
+<p>Check and reload nginx’s configuration:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
+</div></code></pre>
+<p>You should now be able to access Locust at
+http://locust.fibscale.jde.archidep.ch.</p>
+<h3 id="start-load-testing-the-application-with-a-small-number-of-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Start load testing the application with a small number of users<a href="#start-load-testing-the-application-with-a-small-number-of-users" aria-label="Link to heading 'Start load testing the application with a small number of users'" data-heading-content="Start load testing the application with a small number of users" class="anchor"></a></h3>
+<p>The <strong>Host</strong> field tells Locust what the base URL for the load testing scenario
+is. Enter the address of FibScale: <code>http://fibscale.jde.archidep.ch</code>. Set the
+<strong>Number of users</strong> to 1 and the <strong>Ramp Up</strong> to 1 for now, and run the scenario.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your name and <code>archidep.ch</code> with your assigned domain in the
+<strong>Host</strong> field.</p></div></div>
+<p><img src="./images/fibscale-locust-1-user-73fe828b6335f3ed8ebf4afbd58f62c2.png" alt="Configure Locust with 1 user" /></p>
+<p>The <strong>Statistics</strong> tab shows basic numbers about the number of requests made (in
+total and per second) and how much time they take</p>
+<p><img src="./images/fibscale-locust-statistics-55d73990a6308a347853c72d63cc0698.png" alt="Locust statistics" /></p>
+<p>The <strong>Charts</strong> tab is more interesting: it shows the same information as line
+charts.</p>
+<p><img src="./images/fibscale-locust-1-user-charts-7f61698fedc5fbe1b6c15f753ed1c113.png" alt="Locust charts" /></p>
+<p>You should quickly see the number of <strong>r</strong>equests <strong>p</strong>er <strong>s</strong>econd (RPS)
+stabilizing at ~0.5, which is what we would expect with 1 user: the user
+requests the computation of the 100th Fibonacci number, which takes about 1
+second with our artificial delay in place, and we can see that in the response
+time chart. Then the user waits 1 second before repeating the request as defined
+by the load testing scenario. Our single users ends up making 1 request every 2
+seconds, which is 0.5 RPS.</p>
+<p>Click the <strong>Edit</strong> button in the top bar and change the <strong>Number of users</strong> to 2
+without changing the ramp up.</p>
+<p><img src="./images/fibscale-locust-2-users-aba10654837f7ad358789c95da15a41b.png" alt="Configure Locust with 2 users" /></p>
+<p>With 2 users making a request every 2 seconds each, you should see the number of
+requests per seconds stabilizing at ~1. Everything is as we expect so far.</p>
+<p><img src="./images/fibscale-locust-2-users-charts-55cb2894d0a69336aebdff219f8b1bc4.png" alt="Locust charts with 2 users" /></p>
+<h3 id="increase-the-load"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Increase the load<a href="#increase-the-load" aria-label="Link to heading 'Increase the load'" data-heading-content="Increase the load" class="anchor"></a></h3>
+<p>Now change the <strong>Number of users</strong> to 10 and leave the <strong>Ramp Up</strong> to 1. This
+will add 8 more users to our existing 2.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <strong>Ramp Up</strong> is the number of new users added every second, meaning that it
+will take 8 seconds (1 per new user) to reach our target number of 10 users
+starting from the 2 we already have.</p></div></div>
+<p><img src="./images/fibscale-locust-10-users-879cb4ae1975f6bdd02eb41ff156bdc5.png" alt="Configure Locust with 10 users" /></p>
+<p>The number of requests per second should remain unchanged while the response
+time should increase to ~9 seconds.</p>
+<p><img src="./images/fibscale-locust-10-users-charts-334c76ce1b0f42784e7f63e222a8de8b.png" alt="Locust charts with 10 users" /></p>
+<p>Try computing a Fibonacci number yourself again. You will have to wait a while
+for a result because the application is busy responding to the simulated Locust
+users.</p>
+<p>Why is that?</p>
+<p>The FibScale application has been deliberately implemented so that it runs in a
+single execution thread on one CPU core, meaning <strong>it can only serve one request
+at a time</strong>. As soon as the computation of a Fibonacci number starts for one of
+our users, the 9 other users have to wait until that is done. Then the
+computation starts for the second user, and the remaining users have to wait in
+line again.</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">computation 1  --1s--
+</div><div class="l-line" data-line="2">computation 2        --1s--
+</div><div class="l-line" data-line="3">computation 3              --1s--
+</div><div class="l-line" data-line="4">computation 4                    --1s--
+</div><div class="l-line" data-line="5">computation 5                          --1s--
+</div><div class="l-line" data-line="6">computation 6                                --1s--
+</div><div class="l-line" data-line="7">computation 7                                      --1s--
+</div><div class="l-line" data-line="8">computation 8                                            --1s--
+</div><div class="l-line" data-line="9">computation 9                                                  --1s--
+</div><div class="l-line" data-line="10">               ------------------------------------------------------ 9s total
+</div></code></pre>
+<p>In the end , each user ends up waiting for about 9 seconds before getting a
+response.</p>
+<p>You may now <strong>stop</strong> the load testing scenario.</p>
+<p><img src="./images/fibscale-locust-10-users-stop-6f6f672729ea7dc4d5639fa182854414.png" alt="Stop the Locust test" /></p>
+<h2 id="what-to-do"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> What to do?<a href="#what-to-do" aria-label="Link to heading 'What to do?'" data-heading-content="What to do?" class="anchor"></a></h2>
+<p>Our application is far too slow and the user experience is horrible. We have to
+speed it up!</p>
+<p>Let’s assume that:</p>
+<ul>
+<li>We don’t know Ruby and cannot find a way to speed up the application by
+changing its implementation.</li>
+<li>The slowness is not caused by a lack of resources on the server (CPU, memory
+or I/O performance).</li>
+</ul>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>These assumptions do not necessarily represent a real-world scenario, but since
+they are true for this exercise, it will allow us to perform scaling on our
+single server.</p></div></div>
+<p>If we have resources to spare on the server, and one instance of the FibScale
+application cannot serve enough users at the same time, let’s <strong>spin up more
+instances</strong> and see what happens.</p>
+<h2 id="horizontally-scale-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Horizontally scale the FibScale application<a href="#horizontally-scale-the-fibscale-application" aria-label="Link to heading 'Horizontally scale the FibScale application'" data-heading-content="Horizontally scale the FibScale application" class="anchor"></a></h2>
+<p>First, stop and disable the <code>fibscale</code> service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">systemctl</span> <span class="l-variable-parameter">stop</span> <span class="l-variable-parameter">fibscale</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">sudo</span> <span class="l-variable-parameter">systemctl</span> <span class="l-variable-parameter">disable</span> <span class="l-variable-parameter">fibscale</span>
+</div></code></pre>
+<p>To run multiple instances of FibScale, you could create separate systemd
+services, but systemd also supports <strong>unit templates</strong>, i.e. units that can be
+started multiple times based on a template.</p>
+<h3 id="transform-the-fibscale-systemd-unit-into-a-template"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Transform the FibScale systemd unit into a template<a href="#transform-the-fibscale-systemd-unit-into-a-template" aria-label="Link to heading 'Transform the FibScale systemd unit into a template'" data-heading-content="Transform the FibScale systemd unit into a template" class="anchor"></a></h3>
+<p>To turn the <code>fibscale</code> service into a template, you must rename the
+<code>fibscale.service</code> file to <code>fibscale@.service</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">mv</span> <span class="l-variable-parameter">/etc/systemd/system/fibscale.service</span> <span class="l-variable-parameter">/etc/systemd/system/fibscale@.service</span>
+</div></code></pre>
+<p>When a template is started, it will have access to the <strong>instance parameter</strong>
+named <code>%i</code>. You can use that parameter in the template definition, e.g. to
+pass it to the application or change the port the application listens on.</p>
+<p>Modify <code>/etc/systemd/system/fibscale@.service</code> as follows:</p>
+<ul>
+<li>Remove the <code>[Install]</code> section and the <code>WantedBy</code> option it contains. We will
+no longer start the <code>fibscale</code> service directly once it is a template.</li>
+<li>Add the <code>%i</code> parameter at the end of the description.</li>
+<li>Add the <code>%i</code> parameter at the end of the <code>ExecStart</code> command to pass it to the
+FibScale application.</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>As you can see in <a href="https://github.com/ArchiDep/fibscale#configuration" target="_blank" rel="noopener noreferrer">FibScale’s documentation</a>, passing an
+integer to the application will change the color of its navbar to help identify
+different instances.</p></div></div>
+<ul>
+<li>Change the value of the <code>$FIBSCALE_PORT</code> environment variable from the fixed
+port <code>4202</code> to the dynamic port <code>4200%i</code>. Since we intend on running multiple
+instances of the FibScale application, they need to listen on different ports
+(e.g. 42001, 42002).</li>
+<li>Add a <code>PartOf=fibscales.target</code> option to the <code>[Unit]</code> section. A systemd
+<strong>target</strong> is a group of units. This <code>fibscales.target</code> group does not exist
+yet, but we will soon create it.</li>
+</ul>
+<p>The new version of the service template should look something like this:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">[Unit]
+</div><div class="l-line" data-line="2">Description=Fibonacci calculator instance %i
+</div><div class="l-line" data-line="3">PartOf=fibscales.target
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">[Service]
+</div><div class="l-line" data-line="6">ExecStart=/usr/local/bin/bundle exec ruby fibscale.rb %i
+</div><div class="l-line" data-line="7">WorkingDirectory=/home/jde/fibscale
+</div><div class="l-line" data-line="8">Environment=&quot;FIBSCALE_PORT=4200%i&quot;
+</div><div class="l-line" data-line="9">Environment=&quot;FIBSCALE_DELAY=1&quot;
+</div><div class="l-line" data-line="10">User=jde
+</div><div class="l-line" data-line="11">Restart=on-failure
+</div></code></pre>
+<p>Let’s now create the systemd target file <code>/etc/systemd/system/fibscales.target</code>
+file with the following contents:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">[Unit]
+</div><div class="l-line" data-line="2">Description=Fibonacci calculator cluster
+</div><div class="l-line" data-line="3">Requires=fibscale@1.service
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">[Install]
+</div><div class="l-line" data-line="6">WantedBy=multi-user.target
+</div></code></pre>
+<p>This will run <strong>one instance</strong> of our templated <code>fibscale@</code> unit with the
+instance parameter <code>1</code>, resulting in a service named <strong><code>fibscale@1</code></strong>.</p>
+<p>Enable and start the target just like you would a service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">fibscales.target</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">fibscales.target</span>
+</div></code></pre>
+<p>You can check the status of a target like you would a service:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">fibscales.target</span>
+</div></code></pre>
+<p>You can also check the status of each individual instance:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">fibscale@1</span>
+</div></code></pre>
+<p>Now that FibScale is up and running again, update the nginx site configuration
+file <code>/etc/nginx/sites-available/fibscale</code> to support multiple FibScale
+instances. There is only one for now, but we will add more soon enough.</p>
+<p>You need to define an <a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer">nginx <strong>upstream</strong></a> which is a group of
+servers, basically a list of addresses where our FibScale applications can be
+reached. We only have one service running for now, <code>fibscale@1</code>. Since the
+instance parameter <code>%i</code> has the value <code>1</code> and we set the value of the
+<code>$FIBSCALE_PORT</code> environment variable to <code>4200%i</code>, that instance of the service
+listens on port <code>42001</code>. Let’s define that upstream and <strong>update the
+<code>proxy_pass</code> directive</strong> to point to it:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1"># Group of FibScale applications.
+</div><div class="l-line" data-line="2">upstream fibscale {
+</div><div class="l-line" data-line="3">  server 127.0.0.1:42001;
+</div><div class="l-line" data-line="4">}
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">server {
+</div><div class="l-line" data-line="7">  listen 80;
+</div><div class="l-line" data-line="8">  server_name fibscale.jde.archidep.ch;
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10">  location / {
+</div><div class="l-line" data-line="11">    # Proxy to the upstream.
+</div><div class="l-line" data-line="12">    proxy_pass http://fibscale;
+</div><div class="l-line" data-line="13">  }
+</div><div class="l-line" data-line="14">}
+</div></code></pre>
+<p>Test and reload nginx’s configuration:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
+</div></code></pre>
+<p>Access the FibScale application at http://fibscale.jde.archidep.ch again,
+and note that the navbar has changed color (because of the instance parameter
+passed as argument).</p>
+<p><img src="./images/fibscale-color-14e2cabbe7a30447dd716c442553e678.png" alt="FibScale instance 1" /></p>
+<h3 id="load-test-the-new-fibscale-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load-test the new FibScale service<a href="#load-test-the-new-fibscale-service" aria-label="Link to heading 'Load-test the new FibScale service'" data-heading-content="Load-test the new FibScale service" class="anchor"></a></h3>
+<p>Access Locust at http://locust.fibscale.jde.archidep.ch and run the same load
+testing scenario as before: test the <strong>Host</strong> http://fibscale.jde.archidep.ch
+with the <strong>Number of users</strong> set to 10 and the <strong>Ramp Up</strong> set to 1.</p>
+<p><img src="./images/fibscale-locust-10-users-again-d086d9553b43e00404ca3d89d71a42cd.png" alt="Configure Locust with 10 users again" /></p>
+<p>You should see similar numbers as before. After all, we haven’t really changed
+anything yet: there is still only one FibScale application responding to
+requests.</p>
+<p><img src="./images/fibscale-locust-10-users-charts-again-635b917fdd2bdf73d028f1dcbd166776.png" alt="Locust charts with 10 users" /></p>
+<h3 id="spin-up-more-instance-of-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Spin up more instance of the FibScale application<a href="#spin-up-more-instance-of-the-fibscale-application" aria-label="Link to heading 'Spin up more instance of the FibScale application'" data-heading-content="Spin up more instance of the FibScale application" class="anchor"></a></h3>
+<p>To launch more instances of the FibScale application, simply update the
+<code>/etc/systemd/system/fibscales.target</code> file to run more instances of the
+service. Let’s run three:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">[Unit]
+</div><div class="l-line" data-line="2">Description=Fibonacci calculator cluster
+</div><div class="l-line" data-line="3">Requires=fibscale@1.service fibscale@2.service fibscale@3.service
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">[Install]
+</div><div class="l-line" data-line="6">WantedBy=multi-user.target
+</div></code></pre>
+<p>To take these changes into account, reload the systemd configuration and start
+the <code>fibscales.target</code> group again (no need to restart it):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">daemon-reload</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">fibscales.target</span>
+</div></code></pre>
+<p>You should then be able to check the status of each instance separately:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">fibscale@1</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">fibscale@2</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">fibscale@3</span>
+</div></code></pre>
+<p>You should not see any change in Locust yet, because nginx is not yet aware of
+the additional instances.</p>
+<h3 id="configure-nginx-to-balance-the-load-among-the-available-fibscale-instances"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure nginx to balance the load among the available FibScale instances<a href="#configure-nginx-to-balance-the-load-among-the-available-fibscale-instances" aria-label="Link to heading 'Configure nginx to balance the load among the available FibScale instances'" data-heading-content="Configure nginx to balance the load among the available FibScale instances" class="anchor"></a></h3>
+<p>Update the <code>upstream</code> definition in the nginx site configuration file
+<code>/etc/nginx/sites-available/fibscale</code> to add your new FibScale instances. Since
+the instance parameter <code>%i</code> is <code>2</code> and <code>3</code> for our 2 new instances, we know
+they’re listening on ports <code>42002</code> and <code>42003</code>:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">upstream fibscale {
+</div><div class="l-line" data-line="2">  server 127.0.0.1:42001;
+</div><div class="l-line" data-line="3">  server 127.0.0.1:42002;
+</div><div class="l-line" data-line="4">  server 127.0.0.1:42003;
+</div><div class="l-line" data-line="5">}
+</div></code></pre>
+<p>Test and reload nginx’s configuration:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
+</div></code></pre>
+<p>Check Locust again and you should quickly see the number of requests per second
+increase to 3 and the response time decrease.</p>
+<p><img src="./images/fibscale-locust-3-instances-eb8ae982e69126c7df1fdb707b4f4de9.png" alt="Locust charts with 3 instances" /></p>
+<p>If you access the FibScale application at http://fibscale.jde.archidep.ch
+and reload the page a few times, you will see that the navbar changes color,
+indicating that nginx correctly distributes your requests to the 3 FibScale
+instances.</p>
+<p><img src="./images/fibscale-instance-1-9dbecafaf32f033054bff6473c69e805.png" alt="FibScale instance 1" />
+<img src="./images/fibscale-instance-2-0c8f798d1bf5e31dd164cd2a856f9f25.png" alt="FibScale instance 2" />
+<img src="./images/fibscale-instance-3-ea07b29bfb68f1dc83ed00b4283ba2d0.png" alt="FibScale instance 3" /></p>
+<p>Now that the load is distributed among the 3 instances, our users’ computations
+are executed 3 at a time in parallel. For the same number of requests, it will
+only take a third of the time compared to before.</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">computation 1  --1s--
+</div><div class="l-line" data-line="2">computation 2  --1s--
+</div><div class="l-line" data-line="3">computation 3  --1s--
+</div><div class="l-line" data-line="4">computation 4        --1s--
+</div><div class="l-line" data-line="5">computation 5        --1s--
+</div><div class="l-line" data-line="6">computation 6        --1s--
+</div><div class="l-line" data-line="7">computation 7              --1s--
+</div><div class="l-line" data-line="8">computation 8              --1s--
+</div><div class="l-line" data-line="9">computation 9              --1s--
+</div><div class="l-line" data-line="10">               ------------------ 3s total
+</div></code></pre>
+<h2 id="not-the-solution-to-all-your-problems"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Not the solution to all your problems<a href="#not-the-solution-to-all-your-problems" aria-label="Link to heading 'Not the solution to all your problems'" data-heading-content="Not the solution to all your problems" class="anchor"></a></h2>
+<p>This exercise is intended as a demonstration of how to perform load balancing
+with nginx. But horizontal scaling is not necessarily a silver bullet for all
+your performance problems, especially on a single server.</p>
+<p>Actually, <strong>deploying more instances of your application on the same server may
+even make the problem worse</strong> depending on the cause!</p>
+<div class="callout callout-more group/callout" data-callout="515-fibscale-deployment:fibscale-performance"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-515-fibscale-deployment:fibscale-performance" type="checkbox" class="peer hidden" /><div class="content"><p>Three of the main causes of performance issues are: using too much CPU, not
+having enough memory, performing too much I/O (input/output, e.g. disk access).
+Whether horizontal scaling will work depends on the cause and on many other
+factors:</p>
+<ul>
+<li>
+<p>If your application is slow because it uses <strong>too much CPU</strong> (e.g. it makes
+many complex calculations), <strong>increasing the number of instances may not
+increase performance</strong>. It <strong>may even decrease</strong> it if your server’s CPU
+core(s) becomes overloaded. It will depend on the following factors:</p>
+<ul>
+<li>
+<p>Does your server have only one CPU core?</p>
+<p>If you are running a CPU-bound application on a machine with one CPU core,
+<strong>spinning up multiple instances of the application will only increase
+performance as long as you have CPU capacity to spare</strong>.</p>
+<p><strong>Once CPU usage reaches 100%, running more instances is unlikely to improve
+performance</strong> because one core cannot run things in parallel. It can run
+things concurrently using <a href="https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)" target="_blank" rel="noopener noreferrer">multithreading</a>, but that will
+probably not be enough change the overall throughput. Performance will start
+decreasing as you add more instances.</p>
+</li>
+<li>
+<p>Does your server have multiple CPU cores?</p>
+<ul>
+<li>
+<p>Is the application single-threaded (i.e. it can only serve one request at
+a time)? This depends on which programming language it is implemented in
+and how it is implemented.</p>
+<p>In this case, spinning up more instances will probably increase
+performance because the different cores can execute your code in parallel.
+But it will depend on how many instances you launch and on the other
+programs that may also be consuming CPU capacity on your server. At some
+point all of the CPU cores will be working at 100% capacity. Spinning up
+more instances then will only make the application (and the whole server)
+slower.</p>
+</li>
+<li>
+<p>Is the application already parallelizing its work (i.e. a single instance
+executes natively on multiple CPU cores)?</p>
+<p>In this case, spinning up more instance will only increase performance as
+long as you have CPU capacity to spare (i.e. all CPU cores are not yet at
+100% usage). Once all CPU cores are fully utilized, running more instances
+will only make the application (and the whole server) slower.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If your application is slow because it consumes <strong>too much memory</strong> (e.g. it
+keeps references to a lot of data structures in memory), <strong>spinning up
+multiple instances may increase performance IF your server has memory capacity
+to spare</strong>.</p>
+<p>If the memory usage is already close to 100%, the only thing you will achieve
+by spinning up more instances of your application is to bring down your whole
+server due to a lack of memory.</p>
+</li>
+<li>
+<p>If your application is <strong>slow due to I/O</strong> (e.g. it regularly stores/retrieves
+data from disk or from a database), <strong>increasing the number of instances will
+probably increase performance, but only IF the I/O work can be parallelized</strong>,
+which depends entirely on what kind of work it is.</p>
+<p>File access can be parallelized up to a point, but at some point there will be
+too many accesses for your server’s hard drive (or even SSD) to keep up.</p>
+<p>Database servers are designed for concurrent access and can get the most out
+of your hardware, but again there is a limit, especially if it’s running on
+the same server as your application. At some point, running more instances
+will slow everything down.</p>
+</li>
+</ul>
+<p><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /> <strong>Optimizing the application</strong></p>
+<p>If your application consumes too much CPU or memory, or performs too much I/O,
+you can of course try to identify the bottlenecks in the implementation and
+optimize them to consume less resources. The application may then be able to
+process more requests or with a shorter response time.</p>
+<p>This is a programming issue not directly related to architecture.</p>
+<p><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /> <strong>Scaling further</strong></p>
+<p>Running the load testing tool (Locust) on the same server as the application
+your are testing is actually quite a bad idea. As you increase the load, Locust
+itself will start consuming CPU and memory to simulate users. This will slow
+down your server and make your application slower than it would normally be.</p>
+<p>Regardless of the reason why your application is slow, you also have to make
+sure that it supports concurrency (concurrent access to files, to the database,
+etc) before you start spinning multiple instances, or else they might run into
+conflicts with each other.</p>
+<p>Once you reach the limits of a single server, you can launch other servers and
+run new instances of your application on those servers. In this exercise, you
+have configured an nginx <code>upstream</code> that only contacts <code>127.0.0.1</code> (your server
+itself), but nothing prevents you from pointing to other IP addresses (or domain
+names) to spread the work among multiple servers. Of course, in this case you
+have to make sure that your application supports being distributed across
+multiple servers.</p>
+<p>If you are very successful and reach 10,000+ concurrent clients, nginx may also
+become a bottleneck in your architecture and you may have to set up load
+balancing at the DNS level.</p>
+<p><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /> <strong>Performance is hard!</strong></p>
+<p>In summary: <strong>performance is a very complex issue</strong>.</p>
+<p>Again, before setting up anything: <strong>don’t guess, measure!</strong></p>
+<p>Again, <strong>be careful of issues such as <a href="https://en.wikipedia.org/wiki/Rate_limiting" target="_blank" rel="noopener noreferrer">rate limiting</a> and
+<a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener noreferrer">(D)DoS</a> protection when load testing</strong>. Load tests can look a lot like a
+DoS attack. You may inadvertently be banned by your cloud provider if you’re not
+careful.</p>
+<p><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /> <strong>Scaling FibScale horizontally</strong></p>
+<p>For your information, the FibScale application is very easy to scale
+horizontally on a single server because:</p>
+<ul>
+<li>It consumes little CPU (when using the iterative algorithm) and is neither
+memory-bound nor I/O bound. Its slowness in this exercise is artificially
+caused by a <a href="https://github.com/ArchiDep/fibscale/blob/00dba541f53468c94b239b692372a714f5b919e1/fibscale.rb#L84" target="_blank" rel="noopener noreferrer">call to Ruby’s <code>sleep</code>
+function</a>.
+This consumes neither CPU nor memory, and does not perform any I/O.</li>
+<li>It is <a href="https://github.com/ArchiDep/fibscale/blob/00dba541f53468c94b239b692372a714f5b919e1/config/puma.rb#L4-L5" target="_blank" rel="noopener noreferrer">pre-configured to be
+single-threaded</a>
+so that spreading its work among multiple processes shows a clear improvement.</li>
+<li>Since each computation of a Fibonacci number is independent of the others, and
+there is no shared resource to access (e.g. a database), there is no issue
+with running multiple instances. They never need to talk to each other or
+synchronize access to anything.</li>
+</ul></div><label for="callout-515-fibscale-deployment:fibscale-performance" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-515-fibscale-deployment:fibscale-performance" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
+<p>You have installed a web application and identified a performance problem by
+using <a href="https://locust.io" target="_blank" rel="noopener noreferrer">Locust</a>, a <a href="https://en.wikipedia.org/wiki/Load_testing" target="_blank" rel="noopener noreferrer">load testing</a> tool, to measure the
+average response time to clients.</p>
+<p>To improve the user experience, you have performed <a href="https://en.wikipedia.org/wiki/Scalability" target="_blank" rel="noopener noreferrer">horizontal scaling</a>
+of your application by spinning up multiple instances and <a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener noreferrer">load balancing
+incoming requests</a> to these various instances through nginx.
+This allows new instances to serve new clients while others are busy, increasing
+the overall throughput and decreasing the response time for each client.</p>
+<h3 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h3>
+<p>This is a simplified architecture of the main running processes and
+communication flow at the end of this exercise:</p>
+<p><img src="./images/architecture-4fb0102f2c5b01a8efec11cc8f6f5429.png" alt="Diagram" /></p>
+<div class="flex items-center gap-2">
+  <a href="./images/architecture-c155aa55794cc444cf52912a277ed470.pdf" download="FibScale Deployment Architecture" class="tooltip" data-tip="Download PDF"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+  />
+</svg>
+  </a>
+  <a href="./images/architecture-4fb0102f2c5b01a8efec11cc8f6f5429.png" download="FibScale Deployment Architecture" class="tooltip" data-tip="Download PNG"><svg
+  class="size-12 opacity-50 hover:opacity-100"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+  />
+</svg>
+  </a>
+</div>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Note that this diagram only shows the processes involved in this exercise,
+ignoring the other applications (such as the PHP Todolist) we have also deployed
+on the server.</p></div></div>
+
+      <div class="xl:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden xl:block xl:w-xs">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#artificially-slow-down-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Artificially slow down the application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#load-testing-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load testing the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#deploy-a-locust-instance"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy a Locust instance</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#start-load-testing-the-application-with-a-small-number-of-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Start load testing the application with a small number of users</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#increase-the-load"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Increase the load</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-to-do"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> What to do?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#horizontally-scale-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Horizontally scale the FibScale application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#transform-the-fibscale-systemd-unit-into-a-template"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Transform the FibScale systemd unit into a template</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#load-test-the-new-fibscale-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Load-test the new FibScale service</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#spin-up-more-instance-of-the-fibscale-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Spin up more instance of the FibScale application</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#configure-nginx-to-balance-the-load-among-the-available-fibscale-instances"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure nginx to balance the load among the available FibScale instances</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#not-the-solution-to-all-your-problems"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Not the solution to all your problems</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    
+  </li>
+</ul>
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-515-fibscale-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website/blob/dc7e82f74ae618099eabc534a9acae14ff7ac98f/course/chapters/515-fibscale-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      <div class="cloud-server-data" data-mode="details">
+      </div>
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <div class="avatar">
+          <div class="w-10">
+            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
+          </div>
+        </div>
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Git Branching</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>PHP Todolist</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done course-item-current">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-done">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-done">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-done">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <span class="avatar -mt-1">
+          <span class="w-5">
+            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
+          </span>
+        </span>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@dc7e82f</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>
