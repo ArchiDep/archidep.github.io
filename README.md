@@ -40,7 +40,9 @@ source instead.
 
 Each edition records where it came from: `<year>/version.json` names the commit
 it was rendered from, and that commit is tagged `archive/<year>` in the course
-repository.
+repository — or `archive/<year>.2`, `archive/<year>.3` and so on, if a mistake
+was found after the edition was published and it had to be frozen again. Those
+tags are only ever added, never moved.
 
 ## A finished edition is never re-rendered
 
