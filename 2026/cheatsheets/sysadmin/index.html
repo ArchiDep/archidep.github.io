@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,7 +101,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/cheatsheets/sysadmin/cheatsheet.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/sysadmin/cheatsheet.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
@@ -181,6 +181,9 @@ your work with servers and system administration tasks easier.</p></div>
     
   </li><li class="toc-entry toc-h3">
     <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
@@ -364,7 +367,7 @@ your work with servers and system administration tasks easier.</p></div>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">useradd</span> <span class="l-function-call">--create-home</span> <span class="l-variable-parameter">--shell</span> <span class="l-variable-parameter">/bin/bash</span> <span class="l-variable-parameter">jane_doe</span>
 </div></code></pre>
 <h3 id="how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)<a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill" aria-label="Link to heading 'How do I find and kill a naughty process? (ps, kill)'" data-heading-content="How do I find and kill a naughty process? (ps, kill)" class="anchor"></a></h3>
-<p>You might need this if you lost your SSH connection after you launched a process which listens on a port, e.g. 3000. If the process still runs, the port is no longer available. This could happen, for example, in the <a href="../../course/410-sftp-deployment/">“Deploy a PHP application with SFTP” exercise</a>.</p>
+<p>You might need this if you lost your SSH connection after you launched a process which listens on a port, e.g. 3000. If the process still runs, the port is no longer available. This could happen, for example, in the <a href="/2026/course/410-sftp-deployment/">“Deploy a PHP application with SFTP” exercise</a>.</p>
 <p>Find the process with <code>ps</code> and <code>grep</code>:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">php</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">root</span>     <span class="l-number">20942</span>     <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Dec06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:24</span> <span class="l-variable-parameter">php-fpm:</span> <span class="l-variable-parameter">master</span> <span class="l-variable-parameter">process</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">/etc/php/7.2/fpm/php-fpm.conf</span><span class="l-punctuation-bracket">)</span>
@@ -372,7 +375,7 @@ your work with servers and system administration tasks easier.</p></div>
 </div><div class="l-line" data-line="4"><span class="l-function-call">www-data</span> <span class="l-number">20961</span> <span class="l-number">20942</span>  <span class="l-number">0</span> <span class="l-variable-parameter">Dec06</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">php-fpm:</span> <span class="l-variable-parameter">pool</span> <span class="l-variable-parameter">www</span>
 </div><div class="l-line" data-line="5"><span class="l-function-call">jde</span>      <span class="l-number">26378</span> <span class="l-number">26365</span>  <span class="l-number">0</span> <span class="l-variable-parameter">10:02</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">php</span> <span class="l-variable-parameter">-S</span> <span class="l-variable-parameter">0.0.0.0:3000</span>
 </div></code></pre>
-<p>In this example based on the <a href="../../course/410-sftp-deployment/">“Deploy a PHP application with SFTP”exercise</a>, the process that interests you is the fourth one, which was launched by the <code>php -S 0.0.0.0:3000</code> command as shown in the last column, and has the Process ID <code>26378</code>. The other PHP processes are unrelated to what you were doing, so you should not touch them.</p>
+<p>In this example based on the <a href="/2026/course/410-sftp-deployment/">“Deploy a PHP application with SFTP”exercise</a>, the process that interests you is the fourth one, which was launched by the <code>php -S 0.0.0.0:3000</code> command as shown in the last column, and has the Process ID <code>26378</code>. The other PHP processes are unrelated to what you were doing, so you should not touch them.</p>
 <p>Now that you have the ID of the naughty process, you can kill it:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-number">26378</span>
 </div></code></pre>
@@ -398,6 +401,11 @@ at the system logs for that service:</p>
 <p>Not all services log there, however. If <code>journalctl</code> displays no log entries, you should look in the standard Linux log directory <code>/var/log</code> for a file or a directory named after your service. For example, nginx stores its error logs in
 <code>/var/log/nginx/error.log</code> by default.</p>
 <p>If your service cannot start, you should be able to find an error from one of these sources.</p>
+<h3 id="list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys<a href="#list-a-servers-ssh-host-public-keys" aria-label="Link to heading 'List a server’s SSH host public keys'" data-heading-content="List a server’s SSH host public keys" class="anchor"></a></h3>
+<p>If you need a server’s SSH host public keys (e.g. to register the server with a
+service that will connect to it), run the following command on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">cat</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_*_key.pub</span>
+</div></code></pre>
 <h3 id="list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints<a href="#list-a-servers-ssh-host-key-fingerprints" aria-label="Link to heading 'List a server’s SSH host key fingerprints'" data-heading-content="List a server’s SSH host key fingerprints" class="anchor"></a></h3>
 <p>If you need to see the fingerprints of a server’s SSH public keys (e.g. to check
 the key in an SSH client’s initial connection warning), run the following
@@ -675,6 +683,9 @@ remove:</p>
     <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
     
   </li><li class="toc-entry toc-h3">
+    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
     
   </li>
@@ -723,7 +734,7 @@ remove:</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/cheatsheets/sysadmin/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/sysadmin/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -792,16 +803,7 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -810,7 +812,7 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -819,7 +821,7 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -1381,6 +1383,13 @@ remove:</p>
 </span>
       </a>
     </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
@@ -1428,7 +1437,7 @@ remove:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       

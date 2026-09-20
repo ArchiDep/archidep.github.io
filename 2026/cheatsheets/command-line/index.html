@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,7 +101,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/cheatsheets/command-line/cheatsheet.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/command-line/cheatsheet.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
@@ -138,6 +138,9 @@ work with more advanced shells like <a href="https://en.wikipedia.org/wiki/Z_she
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#i-dont-remember-anything">I don’t remember anything!</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#stop-a-running-command-ctrl-c">Stop a running command (<code>Ctrl-C</code>)</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#getting-help-man---help">Getting help (<code>man</code>, <code>--help</code>)</a>
@@ -202,6 +205,17 @@ work with more advanced shells like <a href="https://en.wikipedia.org/wiki/Z_she
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#running-programs">Running programs</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#run-a-program-program">Run a program (<code>./program</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#make-a-file-executable-chmod-x">Make a file executable (<code>chmod +x</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
     <a href="#environment-variables">Environment variables</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -250,10 +264,20 @@ commands containing the word “ssh” in your history:</p>
 </div><div class="l-line" data-line="3"><span class="l-number">20</span> <span class="l-variable-parameter">ssh-keygen</span>
 </div><div class="l-line" data-line="4"><span class="l-number">26</span> <span class="l-variable-parameter">ssh</span> <span class="l-variable-parameter">jde@archidep.ch</span>
 </div></code></pre>
+<h2 id="stop-a-running-command-ctrl-c">Stop a running command (<code>Ctrl-C</code>)<a href="#stop-a-running-command-ctrl-c" aria-label="Link to heading 'Stop a running command (Ctrl-C)'" data-heading-content="Stop a running command (Ctrl-C)" class="anchor"></a></h2>
+<p>Some commands take a long time, and some never stop by themselves. While one is
+running, you have no prompt. Press <code>Ctrl-C</code> (hold the <strong>Control</strong> key and press
+<strong>C</strong>) to interrupt it and get your prompt back:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">^C</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span>
+</div></code></pre>
+<p>On macOS too, it is the <code>Control</code> key, not <code>Command</code>. <code>Ctrl-C</code> forces the
+command to stop: it might not have finished what it was doing.</p>
 <h2 id="getting-help-man---help">Getting help (<code>man</code>, <code>--help</code>)<a href="#getting-help-man---help" aria-label="Link to heading 'Getting help (man, --help)'" data-heading-content="Getting help (man, --help)" class="anchor"></a></h2>
 <ul>
-<li><code>man ls</code> displays the manual of the <code>ls</code> command on Unix systems.</li>
-<li><code>help ls</code> displays the help of the <code>ls</code> command in Git Bash on Windows.</li>
+<li><code>man ls</code> displays the manual of the <code>ls</code> command on Unix systems (including
+the WSL).</li>
 <li><code>git --help</code> displays the help of the <code>git</code> command. Many (but not all)
 commands provide a help page.</li>
 </ul>
@@ -392,6 +416,8 @@ and <code>tail</code> commands, respectively:</p>
 down arrow keys (exit this mode by typing the letter <code>q</code>, as in <strong>q</strong>uit):</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">less</span> <span class="l-function-call">file.txt</span>
 </div></code></pre>
+<p>In <code>less</code>, type <code>/</code> followed by a word and press <code>Enter</code> to search for that
+word. Press <code>n</code> to go to the next match.</p>
 <h2 id="writing">Writing<a href="#writing" aria-label="Link to heading 'Writing'" data-heading-content="Writing" class="anchor"></a></h2>
 <h3 id="create-a-directory-mkdir">Create a directory (<code>mkdir</code>)<a href="#create-a-directory-mkdir" aria-label="Link to heading 'Create a directory (mkdir)'" data-heading-content="Create a directory (mkdir)" class="anchor"></a></h3>
 <p><code>mkdir</code> stands for <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory.</p>
@@ -446,6 +472,9 @@ want to save your changes to another file, to keep the original one).</p></div><
 </div><div class="l-line" data-line="2">
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">directory</span> <span class="l-variable-parameter">/somewhere/else</span>
 </div></code></pre>
+<p>Rename a file (or directory), by moving it to a new name:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">oldname.txt</span> <span class="l-variable-parameter">newname.txt</span>
+</div></code></pre>
 <h3 id="delete-stuff-rm">Delete stuff (<code>rm</code>)<a href="#delete-stuff-rm" aria-label="Link to heading 'Delete stuff (rm)'" data-heading-content="Delete stuff (rm)" class="anchor"></a></h3>
 <p>Delete (or <strong>r</strong>e<strong>m</strong>ove) a file:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">file.txt</span>
@@ -475,6 +504,12 @@ directory you want to delete).</p></div></div></div>
 <p>Recursively list all files in the current directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span>
 </div></code></pre>
+<p>Recursively find a file by its exact name, however deep it is buried. <code>find</code>
+prints the path of each file it found, which you can then use with another
+command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-variable-parameter">notes.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">./projects/archidep/notes.txt</span>
+</div></code></pre>
 <p>Recursively list all JavaScript files in the current directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.js&quot;</span>
 </div></code></pre>
@@ -482,6 +517,53 @@ directory you want to delete).</p></div></div></div>
 <p>Recursively find all files in the current directory containing the word “foo”:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">foo</span> <span class="l-variable-parameter">.</span>
 </div></code></pre>
+<h2 id="running-programs">Running programs<a href="#running-programs" aria-label="Link to heading 'Running programs'" data-heading-content="Running programs" class="anchor"></a></h2>
+<h3 id="run-a-program-program">Run a program (<code>./program</code>)<a href="#run-a-program-program" aria-label="Link to heading 'Run a program (./program)'" data-heading-content="Run a program (./program)" class="anchor"></a></h3>
+<p>When you are in the directory that contains a program, run it by writing <code>./</code>
+before its name:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
+</div></code></pre>
+<p>The <code>./</code> is not decoration: it is a path to the program, since <code>.</code> is the
+current directory. Without it, the shell only looks for a command named
+<code>program</code> in the directories of your <a href="#path"><code>$PATH</code></a>, and answers <code>command not found</code>.</p>
+<p>Any other path to the program works too, relative or absolute, from wherever you
+are:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tools/program</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">../tools/program</span>
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/tools/program</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/home/jde/tools/program</span>
+</div></code></pre>
+<h3 id="make-a-file-executable-chmod-x">Make a file executable (<code>chmod +x</code>)<a href="#make-a-file-executable-chmod-x" aria-label="Link to heading 'Make a file executable (chmod +x)'" data-heading-content="Make a file executable (chmod +x)" class="anchor"></a></h3>
+<p>A file is only a program if it has the permission to be executed. A script you
+just wrote or downloaded often does not have it yet, and the shell refuses to
+run it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">permission</span> <span class="l-variable-parameter">denied:</span> <span class="l-variable-parameter">./program</span>
+</div></code></pre>
+<p>Add that permission with the <code>chmod</code> command (<strong>ch</strong>ange <strong>mod</strong>e), <code>+x</code> meaning
+<strong>add</strong> the e<strong>x</strong>ecute permission:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">program</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
+</div></code></pre>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Running a program gives it the right to do anything you can do on your computer:
+read, change or delete any of your files. Only make a file executable if you
+trust where it comes from.</p></div></div></div>
 <h2 id="environment-variables">Environment variables<a href="#environment-variables" aria-label="Link to heading 'Environment variables'" data-heading-content="Environment variables" class="anchor"></a></h2>
 <p>Display an environment variable:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span>
@@ -492,10 +574,10 @@ directory you want to delete).</p></div></div></div>
 </div><div class="l-line" data-line="2">$&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span>
 </div></code></pre>
 <p>To be able to keep this environment variable in all future CLIs, save the
-<code>export FOO=bar</code> line to your <code>~/.bash_profile</code> file (create it if it doesn’t
-exist).</p>
+<code>export FOO=bar</code> line to your shell configuration file: <code>~/.bashrc</code> for Bash
+(e.g. in the WSL or on Linux), or <code>~/.zshrc</code> for Zsh (the default on macOS).</p>
 <h3 id="path"><code>$PATH</code><a href="#path" aria-label="Link to heading '$PATH'" data-heading-content="$PATH" class="anchor"></a></h3>
-<p><code>$PATH</code> is an environment variable that contains a semicolon-delimited (<code>:</code>)
+<p><code>$PATH</code> is an environment variable that contains a colon-delimited (<code>:</code>)
 list of directories. When you type a command such as <code>git</code>, Bash will look for a
 binary file named <code>git</code> in each of these directories one by one and execute the
 first one it finds.</p>
@@ -504,8 +586,8 @@ error.</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</span>
 </div></code></pre>
-<p>You can modify your path by adding <code>export</code> statements to your <code>~/.bash_profile</code>
-file (create it if it doesn’t exist):</p>
+<p>You can modify your path by adding <code>export</code> statements to your shell
+configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1"># Add the /foo directory to the beginning of $PATH
 </div><div class="l-line" data-line="2">export PATH=&quot;/foo:$PATH&quot;
 </div><div class="l-line" data-line="3">
@@ -543,6 +625,9 @@ file (create it if it doesn’t exist):</p>
       <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#i-dont-remember-anything">I don’t remember anything!</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#stop-a-running-command-ctrl-c">Stop a running command (<code>Ctrl-C</code>)</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#getting-help-man---help">Getting help (<code>man</code>, <code>--help</code>)</a>
@@ -607,6 +692,17 @@ file (create it if it doesn’t exist):</p>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#running-programs">Running programs</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#run-a-program-program">Run a program (<code>./program</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#make-a-file-executable-chmod-x">Make a file executable (<code>chmod +x</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
     <a href="#environment-variables">Environment variables</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -635,7 +731,7 @@ file (create it if it doesn’t exist):</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -704,16 +800,7 @@ file (create it if it doesn’t exist):</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -722,7 +809,7 @@ file (create it if it doesn’t exist):</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -731,7 +818,7 @@ file (create it if it doesn’t exist):</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -1293,6 +1380,13 @@ file (create it if it doesn’t exist):</p>
 </span>
       </a>
     </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
@@ -1340,7 +1434,7 @@ file (create it if it doesn’t exist):</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       

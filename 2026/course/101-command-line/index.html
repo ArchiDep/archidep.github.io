@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,7 +101,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/101-command-line/subject.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/101-command-line/subject.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
@@ -152,6 +152,9 @@ manipulating your filesystem in a Unix shell.</p></div>
     
   </li><li class="toc-entry toc-h3">
     <a href="#install-wsl-windows-users-only">Install WSL (Windows users only)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows-users-drives-and-copypaste">Windows users: drives and copy/paste</a>
     
   </li>
 </ul>
@@ -235,33 +238,13 @@ manipulating your filesystem in a Unix shell.</p></div>
   </li><li class="toc-entry toc-h3">
     <a href="#stopping-running-commands">Stopping running commands</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#windows-users">Windows users</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#vim">Vim</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#why">WHY?!</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#how-vim-works">How Vim works</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#normal-mode">Normal mode</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#command-mode">Command mode</a>
-    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
     <a href="#nano">Nano</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#an-alternative-to-vim">An alternative to Vim</a>
+    <a href="#editing-a-file-without-a-window">Editing a file without a window</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#editing-files-with-nano">Editing files with nano</a>
@@ -276,6 +259,26 @@ manipulating your filesystem in a Unix shell.</p></div>
 </ul>
   </li><li class="toc-entry toc-h3">
     <a href="#setting-nano-as-the-default-editor">Setting nano as the default editor</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#vim">Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#why">WHY?!</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
     
   </li>
 </ul>
@@ -360,13 +363,15 @@ little”</a> since then. It usually looks
 something like this:</p>
 <p><img src="images/cli-6ed6f0795d1128baf09640536dbc7d35.jpg" alt="CLI" /></p>
 <h3 id="why-use-it">Why use it?<a href="#why-use-it" aria-label="Link to heading 'Why use it?'" data-heading-content="Why use it?" class="anchor"></a></h3>
-<p>A CLI is not very user-friendly or visually appealing but it has several advantages:</p>
+<p>A CLI is not very user-friendly or visually appealing but it has several
+advantages:</p>
 <ul>
 <li>It requires very <strong>few resources</strong> (e.g. memory),
 which is convenient where resources are scarce
 (e.g. embedded systems, web servers).</li>
 <li>It can be easily <strong>automated</strong> through scripting.</li>
-<li>Is is ultimately <strong>more powerful and efficient</strong> than any GUI for many computing tasks.</li>
+<li>It is ultimately <strong>more powerful and efficient</strong> than any GUI for many
+computing tasks.</li>
 </ul>
 <p>For these reasons, a lot of tools, <strong>especially development tools</strong>,
 don’t have any GUI and are only usable through a CLI.
@@ -374,7 +379,8 @@ Or they have a limited GUI that does not have as many options as the CLI.</p>
 <p><strong>Thus, using a CLI is a requirement for any developer today.</strong></p>
 <h3 id="open-a-cli">Open a CLI<a href="#open-a-cli" aria-label="Link to heading 'Open a CLI'" data-heading-content="Open a CLI" class="anchor"></a></h3>
 <p><strong>CLIs are available on every operating system.</strong></p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>On <strong>Unix-like</strong> systems <em>(like macOS or Linux)</em>, it’s an application called the <strong>Terminal</strong>.</p>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>On <strong>Unix-like</strong> systems <em>(like macOS or Linux)</em>, it’s an application called the
+<strong>Terminal</strong>.</p>
 <p>You can use it right away, as it’s the <em>de-facto</em> standard.</p></div><div><p>On <strong>Windows</strong>, the default CLI is called <strong>cmd</strong> (or <strong>Invite de commandes</strong> in
 French) However, it does not use the same syntax as Unix-like CLIs <em>(plus, it’s
 bad)</em>.</p>
@@ -395,6 +401,22 @@ of this course.</p>
 <p>It will ask you for a <strong>username</strong> and a <strong>password</strong>. We suggest you use the
 same username as for the rest of the course, and that you use the same password
 as your Windows user account’s.</p>
+<h3 id="windows-users-drives-and-copypaste">Windows users: drives and copy/paste<a href="#windows-users-drives-and-copypaste" aria-label="Link to heading 'Windows users: drives and copy/paste'" data-heading-content="Windows users: drives and copy/paste" class="anchor"></a></h3>
+<p>This is how you reference or use your <strong>drives</strong> (<code>C:</code>, <code>D:</code>, etc) in the
+Windows Subsystem for Linux (WSL):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/c/foo/bar</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/d/foo</span>
+</div></code></pre>
+<p><strong>Copy/Paste</strong></p>
+<p>In a terminal, <code>Ctrl-C</code> already means something else: it <strong>stops the command
+that is running</strong> (see <a href="#stopping-running-commands">stopping running
+commands</a>). It therefore <strong>can’t</strong> be used as a
+shortcut to copy things from the CLI. Instead, the <strong>W</strong>indows <strong>S</strong>ubsystem for
+<strong>L</strong>inux (WSL) has two custom shortcuts:</p>
+<ul>
+<li><code>Ctrl-Shift-C</code> to <strong>copy</strong> things from the CLI</li>
+<li><code>Ctrl-Shift-V</code> to <strong>paste</strong> things to the CLI</li>
+</ul>
 <h2 id="how-to-use-the-cli">How to use the CLI<a href="#how-to-use-the-cli" aria-label="Link to heading 'How to use the CLI'" data-heading-content="How to use the CLI" class="anchor"></a></h2>
 <p>When you open the CLI you will find a blank screen that looks like this:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span>
@@ -419,15 +441,15 @@ execute.</p>
 <p>For example, on earlier macOS versions, it used to be <code>bash3.2$</code>, indicating the
 name of the shell (<a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>) and its version.</p>
 <p>On more recent macOS versions using <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">the Z shell (Zsh)</a>, the prompt might
-indicate your computer’s name, your username and the current directory, e.g.
-<code>MyComputer:~ root#</code>.</p>
+indicate your username, your computer’s name and the current directory, e.g.
+<code>jde@MyComputer ~ %</code>.</p>
 <div class="grid grid-cols-2 gap-4">
   <div><img src='images/bash-prompt-7544c889f1b342a65a29bb0c91c2acd3.png' class="w-full !my-0" /></div>
   <div><img src='images/zsh-prompt-4aa933cbf0cd8cc05474fcfed6bb166d.png' class="w-full !my-0" /></div>
 </div></div></div>
 <p><strong>For consistency, we will always use <code>$&gt;</code> to represent the prompt.</strong></p>
 <h3 id="work-in-progress">Work in progress…<a href="#work-in-progress" aria-label="Link to heading 'Work in progress…'" data-heading-content="Work in progress…" class="anchor"></a></h3>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>When the computer is working, the prompt disappear and you no longer have
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>When the computer is working, the prompt disappears and you no longer have
 control.</p>
 <p><img src="images/sleep-45db509c448d9163a31754a1298d7d43.png" alt="Sleep" /></p></div><div><p>When the computer is done working, it will indicate that you are back in control
 by showing the prompt again.</p>
@@ -452,7 +474,7 @@ of seconds.</p></div></div>
 <p>The syntax for using commands looks like this:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">name</span> <span class="l-function-call">arg1</span> <span class="l-variable-parameter">arg2</span> <span class="l-variable-parameter">arg3</span> <span class="l-variable-parameter">...</span>
 </div></code></pre>
-<p>Note the use of <strong>spaces</strong> to separate the differents <strong>arguments</strong> of a command.</p>
+<p>Note the use of <strong>spaces</strong> to separate the different <strong>arguments</strong> of a command.</p>
 <ul>
 <li><code>name</code> represents the <strong>command</strong> you want to execute.</li>
 <li><code>arg1 arg2 arg3 ...</code> represent the <strong>arguments of the command</strong>, each of them <strong>separated by a space</strong>.</li>
@@ -479,21 +501,19 @@ command:</p>
 move to.</p>
 <h4 id="options-with-values">Options with values<a href="#options-with-values" aria-label="Link to heading 'Options with values'" data-heading-content="Options with values" class="anchor"></a></h4>
 <p><strong>Values</strong> can also be linked to an option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tar</span> <span class="l-function-call">-c</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">compressed.tar.gz</span> <span class="l-variable-parameter">file-to-compress</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">5</span> <span class="l-variable-parameter">notes.txt</span>
 </div></code></pre>
-<p>The <a href="https://en.wikipedia.org/wiki/Tar_(computing)" target="_blank" rel="noopener noreferrer"><code>tar</code> (<strong>t</strong>ape <strong>ar</strong>chive)</a> command bundles and compresses files. In
-this example, it takes <strong>three options</strong>:</p>
+<p>The <code>head</code> command prints the beginning of a file. In this example, it takes
+<strong>one option</strong>:</p>
 <ul>
-<li><code>-c</code> tells it to <strong>c</strong>ompress (instead of uncompressing).</li>
-<li><code>-v</code> tells it to be <strong>v</strong>erbose (print more information to the CLI).</li>
-<li><code>-f</code> tells it where to store the compressed <strong>f</strong>ile; this is followed
-<strong>immediately</strong> by <code>compressed.tar.gz</code> which is the <strong>value</strong> of that option.</li>
+<li><code>-n</code> tells it how many li<strong>n</strong>es to print; it is followed <strong>immediately</strong> by
+<code>5</code>, which is the <strong>value</strong> of that option.</li>
 </ul>
 <p>It then takes <strong>one value</strong>:</p>
 <ul>
-<li><code>file-to-compress</code> is the file (or directory) to compress</li>
+<li><code>notes.txt</code> is the file to print the beginning of.</li>
 </ul>
-<p>There are two values in this example: one linked to the <code>-f</code> option, and one
+<p>There are two values in this example: one linked to the <code>-n</code> option, and one
 used by the overall command.</p>
 <h3 id="naming-things-when-using-cli">Naming things when using CLI<a href="#naming-things-when-using-cli" aria-label="Link to heading 'Naming things when using CLI'" data-heading-content="Naming things when using CLI" class="anchor"></a></h3>
 <p>You should avoid the following characters in directories and file names you want to manipulate with the CLI:</p>
@@ -537,12 +557,12 @@ As the option’s name implies, it’s designed to <strong>give you some help</s
 <p>Some commands don’t have the <code>--help</code> option, but there are alternative sources
 of information depending on what operating system you’re on:</p>
 <ul>
-<li>On Linux or macOS, use <code>man ls</code> to display the <strong>manual</strong> for the <code>ls</code> command.</li>
-<li>On Windows, use <code>help cd</code> to display help for the <code>cd</code> command;
-you can also type <code>help</code> to list available commands (only system commands).</li>
-<li>If you have <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js and npm</a> installed, there is also <a href="https://tldr.sh" target="_blank" rel="noopener noreferrer">tldr
-pages</a>: a cross-platform tool that provides simplified and
-community-driven manual pages.</li>
+<li>On Linux (including the WSL) or macOS, use <code>man ls</code> to display the <strong>manual</strong>
+for the <code>ls</code> command.</li>
+<li>There is also <a href="https://tldr.sh" target="_blank" rel="noopener noreferrer">tldr pages</a>: simplified, community-driven manual
+pages that show the most common uses of a command instead of all its options.
+Install a client with <code>brew install tlrc</code> on macOS, or with
+<code>sudo apt install tldr</code> in the WSL or on Ubuntu.</li>
 </ul>
 <h4 id="interactive-help-pages">Interactive help pages<a href="#interactive-help-pages" aria-label="Link to heading 'Interactive help pages'" data-heading-content="Interactive help pages" class="anchor"></a></h4>
 <p>Some help pages or commands will take over the screen to display their content, hiding the prompt and previous interactions.</p>
@@ -660,8 +680,9 @@ strictly equivalent:</p>
 </div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
 </div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
 </div></code></pre>
-<p>Or compress the current directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">tar</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/somewhere/compressed.tar.gz</span> <span class="l-variable-parameter">.</span>
+<p>Or make a compressed archive of the current directory with the <a href="https://en.wikipedia.org/wiki/Tar_(computing)" target="_blank" rel="noopener noreferrer"><code>tar</code> (<strong>t</strong>ape
+<strong>ar</strong>chive)</a> command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tar</span> <span class="l-function-call">-c</span> <span class="l-variable-parameter">-z</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/somewhere/archive.tar.gz</span> <span class="l-variable-parameter">.</span>
 </div></code></pre>
 <p>This does not seem very useful now, but it will be in further tutorials.</p>
 <h4 id="the--path-1">The <code>..</code> path<a href="#the--path-1" aria-label="Link to heading 'The .. path'" data-heading-content="The .. path" class="anchor"></a></h4>
@@ -674,11 +695,27 @@ strictly equivalent:</p>
 </div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
 </div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
 </div></code></pre>
-<p>You can also drag and drop a directory from your Explorer or your Finder to the CLI to see its absolute path automaticaly written:</p>
+<p>You can also drag and drop a directory from your Explorer or your Finder to the CLI to see its absolute path automatically written:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
 </div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">Drag</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">drop</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">directory</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">Explorer/Finder,</span> <span class="l-variable-parameter">and...</span><span class="l-punctuation-bracket">)</span>
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Pictures/</span>
 </div></code></pre>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><strong>Windows users:</strong> dropping a directory into the WSL may write a Windows path
+such as <code>C:\Users\jde\Pictures</code>, which your Linux shell does not understand. In
+that case, write the path yourself in the <code>/mnt/c/...</code> form.</p></div></div>
 <p>At any time and from anywhere, you can return to your <strong>home directory</strong> with
 the <code>cd</code> command, without any argument or with a <code>~</code> (tilde):</p>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
@@ -692,7 +729,9 @@ the <code>cd</code> command, without any argument or with a <code>~</code> (tild
 <ul>
 <li><code>AltGr-^</code> on <strong>Windows</strong></li>
 <li><code>Alt-N</code> on <strong>Mac</strong></li>
-</ul></div></div>
+</ul>
+<p>These are <strong>dead keys</strong>: nothing appears on screen until you press the space bar
+afterwards.</p></div></div>
 <h4 id="path-reference">Path reference<a href="#path-reference" aria-label="Link to heading 'Path reference'" data-heading-content="Path reference" class="anchor"></a></h4>
 <table>
 <thead>
@@ -754,7 +793,7 @@ For example, on John Doe’s macOS system, it could be <code>/Users/jde/Projects
 </svg><span>Warning</span></div><div class="content"><p>Do not actually write <code>/path/to/projects</code>. It will obviously fail, unless you
 happen to have a <code>path</code> directory that contains a <code>to</code> directory that contains a
 <code>projects</code> directory…</p></div></div>
-<div class="callout callout-danger group/callout"><svg
+<div class="callout callout-warning group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
@@ -765,7 +804,7 @@ happen to have a <code>path</code> directory that contains a <code>to</code> dir
   <path
     stroke-linecap="round"
     stroke-linejoin="round"
-    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
   />
 </svg><div class="container"><div class="content"><p><strong>Windows users:</strong> if your username contains <strong>spaces</strong> or <strong>accents</strong>, you
 should <strong>NOT</strong> store your projects under your home directory. You should find a
@@ -853,12 +892,64 @@ typing <code>Ctrl-C</code> (press the <strong>C</strong> key while holding the <
   />
 </svg><span>Warning</span></div><div class="content"><p>Note that <code>Ctrl-C</code> <strong>forces termination</strong> of a running command. It might not
 have finished what it was doing.</p></div></div>
-<h3 id="windows-users">Windows users<a href="#windows-users" aria-label="Link to heading 'Windows users'" data-heading-content="Windows users" class="anchor"></a></h3>
-<p>This is how you reference or use your <strong>drives</strong> (<code>C:</code>, <code>D:</code>, etc) in the
-Windows Subsystem for Linux (WSL):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/c/foo/bar</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/d/foo</span>
+<h2 id="nano">Nano<a href="#nano" aria-label="Link to heading 'Nano'" data-heading-content="Nano" class="anchor"></a></h2>
+<div class="flex justify-center">
+  <img src='images/nano-931874628c2fd20c9bb50c34c82b404e.jpg' class="!m-0" />
+</div>
+<blockquote>
+<p>Nano: a simple CLI editor to keep your sanity.</p>
+</blockquote>
+<h3 id="editing-a-file-without-a-window">Editing a file without a window<a href="#editing-a-file-without-a-window" aria-label="Link to heading 'Editing a file without a window'" data-heading-content="Editing a file without a window" class="anchor"></a></h3>
+<p>Sooner or later you will have to edit a file on a machine that has no graphical
+interface, like the server you will be given later in this course. You then
+need an editor that runs in the terminal.</p>
+<p><a href="https://en.wikipedia.org/wiki/GNU_nano" target="_blank" rel="noopener noreferrer">Nano</a> is one, it is simple to use, and it is installed on most Unix-like
+systems (including the WSL). It is the one we suggest you use.</p>
+<p>Open a file by running the <code>nano</code> command with the path to the file you want to
+create or edit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.txt</span>
 </div></code></pre>
+<h3 id="editing-files-with-nano">Editing files with nano<a href="#editing-files-with-nano" aria-label="Link to heading 'Editing files with nano'" data-heading-content="Editing files with nano" class="anchor"></a></h3>
+<p>Editing files is much more straightforward and intuitive with nano. Once the
+file is open, you can simply type your text and move around with arrow keys:</p>
+<p><img src="images/nano-7b9102d73cdd72c1e0cdc826607543fe.png" alt="Nano" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Nano also helpfully prints its main keyboard shortcuts at the bottom of the
+window. The most important one is <code>^X</code> for Exit. In keyboard shortcut parlance,
+the <code>^</code> symbol always represents the control key.</p></div></div>
+<p>So, <strong>to exit from nano, type <code>Ctrl-X</code></strong>.</p>
+<h4 id="saving-files">Saving files<a href="#saving-files" aria-label="Link to heading 'Saving files'" data-heading-content="Saving files" class="anchor"></a></h4>
+<p>When you exit nano with <code>Ctrl-X</code>, it will ask you whether you want to save your
+changes:</p>
+<p><img src="images/nano-save-037da32262fbc35f70e75ebaaaf41778.png" alt="Nano Save" /></p>
+<p>Press the <code>y</code> key to save or the <code>n</code> key to discard your changes.</p>
+<h4 id="confirming-the-filename">Confirming the filename<a href="#confirming-the-filename" aria-label="Link to heading 'Confirming the filename'" data-heading-content="Confirming the filename" class="anchor"></a></h4>
+<p>When saving changes, nano will always ask you to <strong>confirm the filename</strong> where
+the changes should be saved:</p>
+<p><img src="images/nano-filename-209a588010095db32640dbff746001bd.png" alt="Nano Filename" /></p>
+<p>As you can see, it tells you the name of the file you opened. Now you can:</p>
+<ul>
+<li>Simply press <code>Enter</code> to save the file.</li>
+<li>Or, change the name to save your changes to another file (and keep the
+unmodified original).</li>
+</ul>
+<h3 id="setting-nano-as-the-default-editor">Setting nano as the default editor<a href="#setting-nano-as-the-default-editor" aria-label="Link to heading 'Setting nano as the default editor'" data-heading-content="Setting nano as the default editor" class="anchor"></a></h3>
+<p>Editing the shell configuration will depend on your shell: for Zsh (the default
+terminal shell on macOS) or Bash shell (the default in the WSL and most Linux
+systems), you have to set the <code>$EDITOR</code> environment variable. You can do that by
+adding the following line to your <strong><code>~/.zshrc</code> or <code>~/.bashrc</code> file</strong>
+depending on which shell you are using:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-constant">EDITOR</span><span class="l-operator">=</span><span class="l-string">nano</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.bashrc</span>  <span class="l-comment"># on WSL or Linux</span>
+</div><div class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">EDITOR</span><span class="l-operator">=</span><span class="l-string">nano</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.zshrc</span>   <span class="l-comment"># on macOS</span>
+</div></code></pre>
+<p>Remember that you must <strong>relaunch your terminal</strong> for this change to take
+effect.</p>
+<p>If you are unsure of what shell you are using, type in the following
+command. The output will display the name of your current shell.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-number">0</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">bash</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Now that you know how to use nano, you can also edit your Bash profile file with
+the following command: <code>nano ~/.bashrc</code>.</p></div></div>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -872,15 +963,10 @@ Windows Subsystem for Linux (WSL):</p>
     stroke-linejoin="round"
     d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
   />
-</svg><span>Note</span></div><div class="content"><p>If you are using Git Bash, it’s <code>/c</code> instead of <code>/mnt/c</code>.</p></div></div>
-<p><strong>Copy/Paste</strong></p>
-<p>Since <code>Ctrl-C</code> is used to stop the current process, it <strong>can’t</strong> be used as a
-shortcut to copy things from the CLI. Instead, the <strong>W</strong>indows <strong>S</strong>ubsystem for
-<strong>L</strong>inux (WSL) has two custom shortcuts:</p>
-<ul>
-<li><code>Shift-Ctrl-C</code> to <strong>copy</strong> things from the CLI</li>
-<li><code>Shift-Ctrl-P</code> to <strong>paste</strong> things to the CLI</li>
-</ul>
+</svg><span>Note</span></div><div class="content"><p>On Ubuntu, you can list available editors and choose the default one with the
+following command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span>
+</div></code></pre></div></div>
 <h2 id="vim">Vim<a href="#vim" aria-label="Link to heading 'Vim'" data-heading-content="Vim" class="anchor"></a></h2>
 <p><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" rel="noopener noreferrer"><strong>Vim</strong></a> is an infamous CLI editor originally developed in 1976 (WHAT?!)
 for the Unix operating system.</p>
@@ -899,27 +985,43 @@ for the Unix operating system.</p>
   />
 </svg><span>Note</span></div><div class="content"><p>The name comes from “<strong>vi</strong> i<strong>m</strong>proved”, because Vim is an improved clone of
 an earlier editor: <a href="https://en.wikipedia.org/wiki/Vi_(text_editor)" target="_blank" rel="noopener noreferrer">vi</a> (from <strong>vi</strong>sual).</p></div></div>
-<h3 id="why">WHY?!<a href="#why" aria-label="Link to heading 'WHY?!'" data-heading-content="WHY?!" class="anchor"></a></h3>
-<p>Why would you need to learn it?</p>
-<p>Sometimes it’s just the <strong>only editor you have</strong> (e.g. on a server).
-Also <strong>some developer tools might open Vim</strong> for user input.</p>
+<h3 id="help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out<a href="#help-vim-opened-and-i-cant-get-out" aria-label="Link to heading 'Help, Vim opened and I can’t get out'" data-heading-content="Help, Vim opened and I can’t get out" class="anchor"></a></h3>
+<p><strong>Some developer tools open Vim for you</strong>, without asking. Git, for example,
+opens an editor when you describe a change, and on many systems that editor is
+Vim. You find yourself in a full-screen editor where what you type does nothing,
+or something you did not ask for, and where none of the usual ways out work.</p>
 <p>If this happens (<em>and it will</em>), there’s <strong>one</strong> imperative rule to follow:</p>
 <p><strong>DO NOT PANIC!</strong></p>
+<p>To leave Vim without saving anything, type this, in this order:</p>
+<ol>
+<li>The <code>Esc</code> key.</li>
+<li><code>:q!</code> — a colon, the letter <code>q</code>, then an exclamation mark.</li>
+<li>The <code>Enter</code> key.</li>
+</ol>
+<p>You are back at your prompt, and the file is unchanged.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To avoid meeting Vim by accident in the first place, tell your tools to use nano
+instead: see <a href="#setting-nano-as-the-default-editor">setting nano as the default
+editor</a>.</p></div></div>
+<h3 id="why">WHY?!<a href="#why" aria-label="Link to heading 'WHY?!'" data-heading-content="WHY?!" class="anchor"></a></h3>
+<p>Why would you want to learn it?</p>
+<p>Sometimes it’s just the <strong>only editor you have</strong> (e.g. on a server). It is also
+much more powerful than nano and will let you edit text at the speed of light
+once you know your way around it. Some developers use nothing else.</p>
 <p>Open a file by running the <code>vim</code> command with the path to the file you want to
 create/edit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">vim</span> <span class="l-variable-parameter">test.txt</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vim</span> <span class="l-function-call">test.txt</span>
 </div></code></pre>
 <h3 id="how-vim-works">How Vim works<a href="#how-vim-works" aria-label="Link to heading 'How Vim works'" data-heading-content="How Vim works" class="anchor"></a></h3>
 <p>Vim can be unsettling at first, until you know how it works.</p>
-<p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim.
-You control Vim by <strong>typing</strong>.</p>
-<p>The first thing to understand whith Vim is that it has <em>3 modes</em>:</p>
+<p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim. You control
+Vim by <strong>typing</strong>.</p>
+<p>The first thing to understand with Vim is that it has <em>3 modes</em>:</p>
 <ul>
 <li><strong>Normal</strong> mode (the one you’re in when Vim starts).</li>
 <li><strong>Command</strong> mode (the one to use to save and/or quit).</li>
 <li><strong>Insert</strong> mode (the one to use to insert text).</li>
 </ul>
-<p>To go into each mode use this keys:</p>
+<p>To go into each mode, use these keys:</p>
 <table>
 <thead>
 <tr>
@@ -1017,78 +1119,6 @@ From there, you can use some commands:</p>
 </tbody>
 </table>
 <!-- TODO: add link http://www.openvim.com/ -->
-<h2 id="nano">Nano<a href="#nano" aria-label="Link to heading 'Nano'" data-heading-content="Nano" class="anchor"></a></h2>
-<div class="flex justify-center">
-  <img src='images/nano-931874628c2fd20c9bb50c34c82b404e.jpg' class="!m-0" />
-</div>
-<blockquote>
-<p>Nano: a simpler CLI editor to keep your sanity.</p>
-</blockquote>
-<h3 id="an-alternative-to-vim">An alternative to Vim<a href="#an-alternative-to-vim" aria-label="Link to heading 'An alternative to Vim'" data-heading-content="An alternative to Vim" class="anchor"></a></h3>
-<p>If Vim is a bit too much for you, <a href="https://en.wikipedia.org/wiki/GNU_nano" target="_blank" rel="noopener noreferrer">nano</a> is another CLI editor that is
-much simpler to use and is also usually installed on most Unix-like systems (and
-in Git Bash).</p>
-<p>You can open a file with nano in much the same way as Vim, using the <code>nano</code>
-command instead:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.txt</span>
-</div></code></pre>
-<h3 id="editing-files-with-nano">Editing files with nano<a href="#editing-files-with-nano" aria-label="Link to heading 'Editing files with nano'" data-heading-content="Editing files with nano" class="anchor"></a></h3>
-<p>Editing files is much more straightforward and intuitive with nano. Once the
-file is open, you can simply type your text and move around with arrow keys:</p>
-<p><img src="images/nano-7b9102d73cdd72c1e0cdc826607543fe.png" alt="Nano" /></p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Nano also helpfully prints its main keyboard shortcuts at the bottom of the
-window. The most important one is <code>^X</code> for Exit. In keyboard shortcut parlance,
-the <code>^</code> symbol always represents the control key.</p></div></div>
-<p>So, <strong>to exit from nano, type <code>Ctrl-X</code></strong>.</p>
-<h4 id="saving-files">Saving files<a href="#saving-files" aria-label="Link to heading 'Saving files'" data-heading-content="Saving files" class="anchor"></a></h4>
-<p>When you exit nano with <code>Ctrl-X</code>, it will ask you whether you want to save your
-changes:</p>
-<p><img src="images/nano-save-037da32262fbc35f70e75ebaaaf41778.png" alt="Nano Save" /></p>
-<p>Press the <code>y</code> key to save or the <code>n</code> key to discard your changes.</p>
-<h4 id="confirming-the-filename">Confirming the filename<a href="#confirming-the-filename" aria-label="Link to heading 'Confirming the filename'" data-heading-content="Confirming the filename" class="anchor"></a></h4>
-<p>When saving changes, nano will always ask you to <strong>confirm the filename</strong> where
-the changes should be saved:</p>
-<p><img src="images/nano-filename-209a588010095db32640dbff746001bd.png" alt="Nano Filename" /></p>
-<p>As you can see, it tells you the name of the file you opened. Now you can:</p>
-<ul>
-<li>Simply press <code>Enter</code> to save the file.</li>
-<li>Or, change the name to save your changes to another file (and keep the
-unmodified original).</li>
-</ul>
-<h3 id="setting-nano-as-the-default-editor">Setting nano as the default editor<a href="#setting-nano-as-the-default-editor" aria-label="Link to heading 'Setting nano as the default editor'" data-heading-content="Setting nano as the default editor" class="anchor"></a></h3>
-<p>Editing the shell configuration will depend on your shell: for Zsh (the default
-terminal shell on macOS) or Bash shell (the default in Git Bash and most Linux
-systems), you have to set the <code>$EDITOR</code> environment variable. You can do that by
-adding the following line to your <strong><code>~/.zshrc</code> or <code>~/.bash_profile</code> file</strong>
-depending on which shell you are using:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">export EDITOR=nano
-</div></code></pre>
-<p>Remember that you must <strong>relaunch your terminal</strong> for this change to take
-effect.</p>
-<p>If you are unsure of what shell you are using, type in the following
-command. The output will display the name of your current shell.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-number">0</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">bash</span>
-</div></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Now that you know how to use nano, you can edit your Bash profile file with the
-following command: <code>nano ~/.bash_profile</code>.</p></div></div>
-<div class="note note-info"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-  />
-</svg><span>Note</span></div><div class="content"><p>On Ubuntu, you can list available editors and choose the default one with the
-following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span>
-</div></code></pre></div></div>
 <h2 id="the-path-variable">The <code>PATH</code> variable<a href="#the-path-variable" aria-label="Link to heading 'The PATH variable'" data-heading-content="The PATH variable" class="anchor"></a></h2>
 <p>When you type a command in the CLI, it will try to see <strong>if it knows this
 command</strong> by looking in some directories to see if there is an <strong>executable file
@@ -1156,26 +1186,23 @@ Once you’ve installed them, you can simply run their new commands.
 Git and Node.js, for example, do this.</p>
 <p>However, sometimes you’re downloading only an executable and saving it in a directory somewhere that is <strong>not in the <code>PATH</code></strong>.</p>
 <h4 id="custom-command-example">Custom command example<a href="#custom-command-example" aria-label="Link to heading 'Custom command example'" data-heading-content="Custom command example" class="anchor"></a></h4>
-<p>Run the following commands to download a simple Hello World shell script and make it into an executable:</p>
+<p>Run the following commands to write a simple Hello World shell script and make
+it into an executable:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/hello-program/bin</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-o</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span> <span class="l-variable-parameter">https://gist.githubusercontent.com/AlphaHydrae/8e09bf8790cbd6e3c7d9974988da3c28/raw/74372a1be35e973897c0a1fc946f3d18012a860c/hello.sh</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/sh\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span>
 </div></code></pre>
-<div class="note note-info"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-  />
-</svg><span>Note</span></div><div class="content"><p>The <code>curl</code> command is used to download the script file, and the <code>chmod</code> command
-to make that file executable.</p></div></div>
+<div class="callout callout-more group/callout" data-callout="101-command-line:custom-command-example"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-101-command-line:custom-command-example" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>printf</code> command prints its argument, here interpreting <code>\n</code> as a line
+break, and the <code>&gt;</code> operator writes that output into the file (as seen in <a href="#the-echo-command">the
+<code>echo</code> command</a>). The file you have just created contains
+these two lines:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/sh</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<p>The first line tells the system which program should run the script. The second
+line is the script itself.</p>
+<p>A new file is not executable, so the <code>chmod</code> (<strong>ch</strong>ange <strong>mod</strong>e) command is
+used to add (<code>+</code>) the permission to e<strong>x</strong>ecute it.</p></div><label for="callout-101-command-line:custom-command-example" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-101-command-line:custom-command-example" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>You should now be able to find it in the <code>~/hello-program/bin</code> directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/hello-program/bin</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">hello</span>
@@ -1211,8 +1238,8 @@ by your CLI interpreter (shell). This file depends upon the shell you are using:
 </thead>
 <tbody>
 <tr>
-<td align="left">Git Bash</td>
-<td align="left"><code>~/.bash_profile</code></td>
+<td align="left">WSL / Bash</td>
+<td align="left"><code>~/.bashrc</code></td>
 </tr>
 <tr>
 <td align="left">Terminal / <a href="http://zsh.sourceforge.net/" target="_blank" rel="noopener noreferrer">Zsh</a></td>
@@ -1220,17 +1247,17 @@ by your CLI interpreter (shell). This file depends upon the shell you are using:
 </tr>
 </tbody>
 </table>
-<p>Open the adequate file (<code>.bash_profile</code> for this example) from the CLI with
-<code>nano</code> or your favorite editor if it can display hidden files:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.bash_profile</span>
+<p>Open the adequate file (<code>.bashrc</code> for this example) from the CLI with <code>nano</code> or
+your favorite editor if it can display hidden files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.bashrc</span>
 </div></code></pre>
 <p>Add this line at the bottom of your file (use <code>i</code> to enter <strong>insert</strong> mode if
 using Vim):</p>
-<pre class="lumis"><code class="language-vim" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">export</span> PATH=&quot;$HOME/hello-program/bin:$PATH&quot;
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
 </div></code></pre>
-<p>If you’re in Vim, press <code>Esc</code> when you’re done typing, then <code>:wq</code> and <code>Enter</code> to
-save and quit. If you’re in nano, press <code>Ctrl-X</code>, then answer <code>Yes</code> and confirm
-the filename.</p>
+<p>If you’re in nano, press <code>Ctrl-X</code>, then answer <code>Yes</code> and confirm the filename.
+If you’re in Vim, press <code>Esc</code> when you’re done typing, then <code>:wq</code> and <code>Enter</code> to
+save and quit.</p>
 <h4 id="does-it-work">Does it work?<a href="#does-it-work" aria-label="Link to heading 'Does it work?'" data-heading-content="Does it work?" class="anchor"></a></h4>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
@@ -1266,20 +1293,20 @@ by typing <code>hello</code>:</p></div><div class="order-3 md:order-none flex it
 </div></code></pre>
 <h4 id="what-have-i-done">What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h4>
 <p>You have <strong>added a directory to the <code>PATH</code></strong>:</p>
-<pre class="lumis"><code class="language-vim" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">export</span> PATH=&quot;~/hello-program/bin:$PATH&quot;
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
 </div></code></pre>
 <p>This line says:</p>
 <ul>
 <li>Modify the <code>PATH</code> variable.</li>
-<li>In it, put the new directory <code>~/hello-program/bin</code> and the previous value of the <code>PATH</code>, separated by <code>:</code>.</li>
+<li>In it, put the new directory <code>$HOME/hello-program/bin</code> and the previous value of the <code>PATH</code>, separated by <code>:</code>.</li>
 </ul>
 <p>The next time you run a command, your shell will <strong>first look</strong> in this directory for executables, then in the <strong>rest of the <code>PATH</code></strong>.</p>
 <p><strong>Common mistakes</strong></p>
 <ul>
 <li>What you must put in the <code>PATH</code> is <strong>NOT</strong> the path to the executable,
 but the path to the <strong>directory containing the executable</strong>.</li>
-<li>You must re-open your CLI for the change to take effect:
-the shell configuration file (e.g. <code>~/.bash_profile</code>) is only applied when the shell starts.</li>
+<li>You must re-open your CLI for the change to take effect: the shell
+configuration file (e.g. <code>~/.bashrc</code>) is only applied when the shell starts.</li>
 </ul>
 <h2 id="unleash-your-terminal">Unleash your terminal<a href="#unleash-your-terminal" aria-label="Link to heading 'Unleash your terminal'" data-heading-content="Unleash your terminal" class="anchor"></a></h2>
 <img class='w100' src='images/unleash-your-terminal-2529d0e7a3738449255d0c415f2bbdd3.png' />
@@ -1291,9 +1318,8 @@ plugins to simplify your daily command-line work.</p>
 unleash the power of your Terminal. It has <a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins" target="_blank" rel="noopener noreferrer">plugins</a> to
 integrate with Homebrew, Git, various programming languages like Ruby, PHP, Go,
 and much more.</p>
-<p>On Windows, you may want to <a href="https://learn.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener noreferrer">install the Windows Subsystem for Linux</a> so
-you can install a Linux distribution like Ubuntu. You can then <a href="http://kevinprogramming.com/using-zsh-in-windows-terminal/" target="_blank" rel="noopener noreferrer">install Zsh and
-Oh My Zsh as well</a>.</p>
+<p>On Windows, you can <a href="http://kevinprogramming.com/using-zsh-in-windows-terminal/" target="_blank" rel="noopener noreferrer">install Zsh and Oh My Zsh in the WSL</a> as
+well.</p>
 <h3 id="other-tools-for-the-command-line-lover">Other tools for the command line lover<a href="#other-tools-for-the-command-line-lover" aria-label="Link to heading 'Other tools for the command line lover'" data-heading-content="Other tools for the command line lover" class="anchor"></a></h3>
 <ul>
 <li><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener noreferrer"><code>bat</code></a>: a <code>cat</code> clone with wings</li>
@@ -1306,9 +1332,8 @@ alternative)</li>
 </ul>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>A Terminal <a href="https://en.wikipedia.org/wiki/Multiplexer" target="_blank" rel="noopener noreferrer">multiplexer</a> like:</p>
 <ul>
-<li><a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener noreferrer">tmux</a></li>
+<li><a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener noreferrer">tmux</a> <img class="emoji" src="/2026/assets/emoji/1f499-e37c985edda06b7d5f4559bc838c1bde.svg" alt="💙" width="20" height="20" /></li>
 <li><a href="https://www.gnu.org/software/screen/" target="_blank" rel="noopener noreferrer">screen</a></li>
-<li><a href="https://zellij.dev" target="_blank" rel="noopener noreferrer">zellij</a> <img class="emoji" src="/2026/assets/emoji/1f499-e37c985edda06b7d5f4559bc838c1bde.svg" alt="💙" width="20" height="20" /></li>
 </ul></div><div><p><img src="images/terminal-multiplexer-022fccd37223c3a300a00974d89b988b.png" alt="Terminal multiplexer" /></p></div></div>
 
       <div class="xl:hidden w-full flex justify-center items-center">
@@ -1341,6 +1366,9 @@ alternative)</li>
     
   </li><li class="toc-entry toc-h3">
     <a href="#install-wsl-windows-users-only">Install WSL (Windows users only)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#windows-users-drives-and-copypaste">Windows users: drives and copy/paste</a>
     
   </li>
 </ul>
@@ -1424,33 +1452,13 @@ alternative)</li>
   </li><li class="toc-entry toc-h3">
     <a href="#stopping-running-commands">Stopping running commands</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#windows-users">Windows users</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#vim">Vim</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#why">WHY?!</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#how-vim-works">How Vim works</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#normal-mode">Normal mode</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#command-mode">Command mode</a>
-    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
     <a href="#nano">Nano</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#an-alternative-to-vim">An alternative to Vim</a>
+    <a href="#editing-a-file-without-a-window">Editing a file without a window</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#editing-files-with-nano">Editing files with nano</a>
@@ -1465,6 +1473,26 @@ alternative)</li>
 </ul>
   </li><li class="toc-entry toc-h3">
     <a href="#setting-nano-as-the-default-editor">Setting nano as the default editor</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#vim">Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#why">WHY?!</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
     
   </li>
 </ul>
@@ -1526,7 +1554,7 @@ alternative)</li>
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
       </a>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1595,16 +1623,7 @@ alternative)</li>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -1613,7 +1632,7 @@ alternative)</li>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -1622,7 +1641,7 @@ alternative)</li>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -2184,6 +2203,13 @@ alternative)</li>
 </span>
       </a>
     </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
@@ -2231,7 +2257,7 @@ alternative)</li>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       

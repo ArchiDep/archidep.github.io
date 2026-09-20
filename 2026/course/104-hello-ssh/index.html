@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello SSH · ArchiDep</title>
-<meta name="description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools." />
-<link rel="canonical" href="https://archidep.ch/2026/course/105-hello-ssh/" />
+<meta name="description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools. Then you will use them to follow a parrot to the remote land of Avalon." />
+<link rel="canonical" href="https://archidep.ch/2026/course/104-hello-ssh/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Hello SSH" />
-<meta property="og:description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools." />
-<meta property="og:url" content="https://archidep.ch/2026/course/105-hello-ssh/" />
+<meta property="og:description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools. Then you will use them to follow a parrot to the remote land of Avalon." />
+<meta property="og:url" content="https://archidep.ch/2026/course/104-hello-ssh/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,14 +101,14 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/105-hello-ssh/exercise.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/104-hello-ssh/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
 
     <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
   <span>You are reading the backup copy of the ArchiDep website.</span>
-  <a href="https://archidep.ch/2026/course/105-hello-ssh/" class="link font-semibold transition-colors hover:text-base-content">
+  <a href="https://archidep.ch/2026/course/104-hello-ssh/" class="link font-semibold transition-colors hover:text-base-content">
     Go to the live site.
   </a>
 </div>
@@ -126,7 +126,8 @@
 
       <div class="my-4"><p>In this series of exercises, you will learn to use the <code>ssh</code> command to connect
 to a remote server, and how to copy files to and from such a server using
-various tools.</p></div>
+various tools. Then you will use them to follow a parrot to the remote land of
+Avalon.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
         <input type="checkbox">
@@ -146,12 +147,6 @@ various tools.</p></div>
     <a href="#spot-the-difference"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Spot the difference</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command</a>
-    
-  </li><li class="toc-entry toc-h2">
-    <a href="#copy-a-file-using-the-sftp-protocol"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file using the SFTP protocol</a>
-    
-  </li><li class="toc-entry toc-h2">
     <a href="#set-up-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set up public key authentication</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -166,16 +161,39 @@ various tools.</p></div>
   </li><li class="toc-entry toc-h3">
     <a href="#the-authorized_keys-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The <code>authorized_keys</code> file</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#is-your-password-gone"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is your password gone?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#which-key-is-where"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which key is where?</a>
+    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#configure-your-sftp-application-to-use-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your SFTP application to use public key authentication</a>
+    <a href="#copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)</a>
     
   </li>
 </ul>
@@ -218,8 +236,9 @@ various tools.</p></div>
 
       <h2 id="connect-to-the-exercise-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Connect to the exercise server<a href="#connect-to-the-exercise-server" aria-label="Link to heading 'Connect to the exercise server'" data-heading-content="Connect to the exercise server" class="anchor"></a></h2>
 <p>An SSH exercise server has been prepared so that you can learn to use the <code>ssh</code>
-command and other SSH-based tools. You should have received a username and
-password for this course by email.</p>
+command and other SSH-based tools. Your username and password for this server
+are shown on the <a href="/app">dashboard</a>, along with the fingerprints of the
+server’s SSH host keys.</p>
 <p>As we’ve seen, the basic syntax of the SSH command is as follows:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span><span class="l-string-special-path">@</span><span class="l-operator">&lt;</span><span class="l-string-special-path">hostname</span><span class="l-operator">&gt;</span>
 </div></code></pre>
@@ -227,7 +246,7 @@ password for this course by email.</p>
 <ul>
 <li>
 <p>Determine the SSH command to connect to the exercise server. Replace the
-<code>&lt;username&gt;</code> placeholder by the username you received in your email, and the
+<code>&lt;username&gt;</code> placeholder by the username shown on the dashboard, and the
 <code>&lt;hostname&gt;</code> placeholder by <code>ssh.archidep.ch</code>.</p>
 </li>
 <li>
@@ -236,9 +255,16 @@ password for this course by email.</p>
 <li>
 <p>Since you are probably connecting to this server for the first time,
 you should get the initial SSH connection warning indicating that the
-authenticity of the host cannot be established.</p>
+authenticity of the host cannot be established:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">The authenticity of host &#39;ssh.archidep.ch (W.X.Y.Z)&#39; can&#39;t be established.
+</div><div class="l-line" data-line="2">ED25519 key fingerprint is SHA256:...
+</div><div class="l-line" data-line="3">Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</div></code></pre>
 <p>Before accepting, you should verify that the key fingerprint in the warning
-message corresponds to one of the keys provided by the teacher.</p>
+message corresponds to one of the fingerprints shown on the dashboard. You
+can do that by pasting the fingerprint from the dashboard (the one that starts
+with <code>SHA256:</code>) instead of answering <code>yes</code>. Your SSH client will compare it
+with the fingerprint the server sent, and will only continue if they match.</p>
 </li>
 </ul>
 <div class="callout callout-danger group/callout"><svg
@@ -256,8 +282,8 @@ message corresponds to one of the keys provided by the teacher.</p>
   />
 </svg><div class="container"><div class="content"><p>Answering yes without checking the key fingerprint exposes you to a potential
 man-in-the-middle attack. An attacker could make you connect to a compromised
-server and then intercept all traffic going through the SSH connexion, including
-your password.</p></div></div></div>
+server and then intercept all traffic going through the SSH connection,
+including your password.</p></div></div></div>
 <ul>
 <li>Enter or paste your password when prompted.</li>
 </ul>
@@ -284,13 +310,13 @@ commands on your local machine.</p>
 it on. This is likely to be different on your local machine than on the SSH
 exercise server.</p></div></div>
 <p>Another interesting command to run to see the difference between your machine
-and the server is the <a href="https://linuxhint.com/linux-uname-command-tutorial/" target="_blank" rel="noopener noreferrer"><code>uname</code> command</a>. Try running it on the
+and the server is the <a href="https://man7.org/linux/man-pages/man1/uname.1.html" target="_blank" rel="noopener noreferrer"><code>uname</code> command</a>. Try running it on the
 server and your machine. Read the documentation and try some of its options to
 get more information about your machine and the server.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you want to quickly run a command on a remote server with SSH and
 immediately disconnect, you can do so by providing more arguments to the
 SSH command:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; ssh &lt;username&gt;@&lt;hostname&gt; [command]
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span><span class="l-string-special-path">@</span><span class="l-operator">&lt;</span><span class="l-string-special-path">hostname</span><span class="l-operator">&gt;</span> <span class="l-string">[</span><span class="l-string">command</span><span class="l-string">]</span>
 </div></code></pre>
 <p>For example, assuming your username is <code>jde</code>, open a new console and execute the
 following commands:</p>
@@ -302,135 +328,15 @@ following commands:</p>
 </div></code></pre>
 <p>You can see from the output that the first command was run on the server, but
 that you are no longer connected by the time you ran the second command.</p></div></div>
-<h2 id="copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command<a href="#copy-a-file-with-the-scp-command" aria-label="Link to heading 'Copy a file with the scp command'" data-heading-content="Copy a file with the scp command" class="anchor"></a></h2>
-<p><strong>Disconnect from the server</strong> (with the <code>exit</code> command) or open a new console
-to run commands on your local machine.</p>
-<p>Create a simple text file (using the following command or with your favorite
-text editor):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.txt</span>
-</div></code></pre>
-<p>All Unix systems have a <a href="https://linuxize.com/post/cp-command-in-linux/" target="_blank" rel="noopener noreferrer"><code>cp</code> (<strong>c</strong>o<strong>p</strong>y) command</a> that copies a
-file locally. Try it now:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">hello2.txt</span>
-</div></code></pre>
-<p>Observe that the file has been copied (either by listing the files in your
-console with the following command, or simply by looking at the directory in
-your file explorer):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hello.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">hello2.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
-</div></code></pre>
-<p>The <a href="https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/" target="_blank" rel="noopener noreferrer"><code>scp</code> (<strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y) command</a> works in principle
-like the <code>cp</code> command, except that it can copy files to and from other computers
-that have an SSH server running, using SSH to transfer the files. It reuses part
-of the same syntax as the <code>ssh</code> command to connect to an SSH server. Try running
-this command now (replacing <code>jde</code> with your username on the SSH exercise
-server):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:hello.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">100%</span> <span class="l-number">4</span> <span class="l-variable-parameter">0.6KB/s</span> <span class="l-variable-parameter">00:00</span>
-</div></code></pre>
-<p>This command copies your local <code>hello.txt</code> file to the home directory of the
-<code>jde</code> user account on the remote computer.</p>
-<p>To check that the file has indeed been copied, connect to your server
-and use some of the commands you have learned so far:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-punctuation-special">$</span> <span class="l-variable">ls</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">hello.txt</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-punctuation-special">$</span> <span class="l-variable">cat</span> <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">World</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-punctuation-special">$</span> <span class="l-variable">exit</span>
-</div></code></pre>
-<p>You can also copy files from the remote computer to your local computer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-string-special-path">jde@ssh.archidep.ch:hello.txt</span> <span class="l-string-special-path">hello3.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">100%</span> <span class="l-number">4</span> <span class="l-variable-parameter">5.7KB/s</span> <span class="l-variable-parameter">00:00</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">hello3.txt</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">World</span>
-</div></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Here’s a few additional examples of how to use the <code>scp</code> command:</p>
-<ul>
-<li>
-<p><code>scp foo.txt jde@192.168.50.4:bar.txt</code></p>
-<p>Copy the local file <code>foo.txt</code> to a file named <code>bar.txt</code> in <code>jde</code>’s home
-directory on the remote computer.</p>
-</li>
-<li>
-<p><code>scp foo.txt jde@192.168.50.4:</code></p>
-<p>Copy the file to <code>jde</code>’s home directory with the same file name.</p>
-</li>
-<li>
-<p><code>scp foo.txt jde@192.168.50.4:/tmp/foo.txt</code></p>
-<p>Copy the file to the absolute path <code>/tmp/foo.txt</code> on the remote computer.</p>
-</li>
-<li>
-<p><code>scp jde@192.168.50.4:foo.txt jsmith@192.168.50.5:bar.txt</code></p>
-<p>Copy the file from one remote computer to another.</p>
-</li>
-<li>
-<p><code>scp -r foo jde@192.168.50.4:foo</code></p>
-<p><strong>R</strong>ecursively (the <code>-r</code> option) copy the contents of directory <code>foo</code> to
-the remote computer (a <a href="https://en.wikipedia.org/wiki/Recursion" target="_blank" rel="noopener noreferrer">recursive</a> copy means that the directory
-and all its subdirectories are copied).</p>
-</li>
-</ul></div></div>
-<h2 id="copy-a-file-using-the-sftp-protocol"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file using the SFTP protocol<a href="#copy-a-file-using-the-sftp-protocol" aria-label="Link to heading 'Copy a file using the SFTP protocol'" data-heading-content="Copy a file using the SFTP protocol" class="anchor"></a></h2>
-<p><a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">SFTP</a> is an alternative to the original <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">FTP</a> protocol to transfer
-files. Since FTP is <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol#Security" target="_blank" rel="noopener noreferrer">insecure</a> (e.g. passwords are sent
-unencrypted), SFTP is an alternative that goes through SSH’s secure channel and
-therefore poses fewer security risks.</p>
-<p>Most modern FTP clients support SFTP. Here’s a couple:</p>
-<ul>
-<li><a href="https://filezilla-project.org/" target="_blank" rel="noopener noreferrer">FileZilla</a></li>
-<li><a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a></li>
-<li><a href="https://cyberduck.io" target="_blank" rel="noopener noreferrer">Cyberduck</a></li>
-</ul>
-<p>Many code editors also have SFTP support available through plugins.</p>
-<p>Install one of these applications (or use your favorite SFTP application if you
-already have one) and connect to the SSH exercise server. You will need to
-configure a connection with the following information:</p>
-<ul>
-<li><strong>Protocol:</strong> SFTP</li>
-<li><strong>Host, hostname or server address:</strong> <code>ssh.archidep.ch</code></li>
-<li><strong>Username</strong>: the username you received by email</li>
-<li><strong>Password</strong>: the password you received by email</li>
-<li><strong>Port:</strong> 22 (the standard SSH port)</li>
-</ul>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>How to use these parameters depends on which application you use. They
-may not be named exactly like this.</p></div></div>
-<p>For example, here’s how to do it with Cyberduck:</p>
-<p><img src="images/cyberduck-sftp-password-d9cf058c165f3b9df5ecf9a15b3b249b.png" alt="Cyberduck SFTP password authentication" /></p>
-<div class="note note-warning"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-  />
-</svg><span>Warning</span></div><div class="content"><p>When connecting for the first time, the application may issue the same
-initial connection warning as when you connect using the command line. Be sure
-to check the key fingerprint.</p></div></div>
-<p>Once you have successfully connected to the server, copy another file to the
-server using the SFTP application this time. These applications will usually
-allow you to drag-and-drop files to and from the server. Play with it a bit and
-see what you can do.</p>
-<p>Now you know another way to copy files over SSH.</p>
 <h2 id="set-up-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set up public key authentication<a href="#set-up-public-key-authentication" aria-label="Link to heading 'Set up public key authentication'" data-heading-content="Set up public key authentication" class="anchor"></a></h2>
 <p>The goal of this step is to generate a public/private key pair on your machine
 and to configure SSH to use public key authentication instead of password
 authentication on the SSH exercise server.</p>
 <p>This will improve security and avoid having to type your password on each SSH
-connection.</p>
+connection. You will also need this key pair for the rest of the course: to
+authenticate to GitHub, and to connect to your own server later.</p>
+<p><strong>Disconnect from the server</strong> (with the <code>exit</code> command) or open a new console
+to run commands on your local machine.</p>
 <h3 id="do-i-already-have-a-key-pair"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Do I already have a key pair?<a href="#do-i-already-have-a-key-pair" aria-label="Link to heading 'Do I already have a key pair?'" data-heading-content="Do I already have a key pair?" class="anchor"></a></h3>
 <p>By default, SSH keys are stored in the <code>.ssh</code> directory in your home directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/.ssh</span>
@@ -442,12 +348,6 @@ SSH expects to find your main <a href="https://en.wikipedia.org/wiki/EdDSA" targ
 algorithm, such as an <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank" rel="noopener noreferrer">ECDSA</a> key pair with files named <code>id_ecdsa</code> and
 <code>id_ecdsa.pub</code>, or an <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="noopener noreferrer">RSA</a> key pair with files named <code>id_rsa</code> and
 <code>id_rsa.pub</code> if your system has an older SSH client.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>On Windows, you can toggle the display of hidden files in the View tab of the
-explorer to access your <code>.ssh</code> directory manually.</p>
-<p>On macOS, type <code>open ~/.ssh</code> in your Terminal or use the <code>Cmd-Shift-.</code> shortcut
-to display hidden files.</p>
-<p>On most Linux distributions, the file manager will have an option to show hidden
-files under its menu.</p></div></div>
 <p>If the directory doesn’t exist or is empty, you don’t have a key pair yet.</p>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
@@ -466,6 +366,24 @@ files under its menu.</p></div></div>
 as it is sometimes generated by some software. You can use this key if you want,
 but since it doesn’t have the default name, you will have to add a <code>-i ~/.ssh/github_rsa</code> option to all your SSH commands. Generating a new key with
 the default name for command line use would probably be easier.</p></div></div>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>On Windows, generate and keep your key pair <strong>in the WSL</strong>, in the <code>~/.ssh</code>
+directory of your Linux home directory. Do not copy it to or from your Windows
+files (under <code>/mnt/c</code>). Files stored there appear to be readable by anyone, and
+SSH refuses to use a private key that other people can read. It stops with a
+<code>WARNING: UNPROTECTED PRIVATE KEY FILE!</code> error.</p></div></div>
 <h3 id="generate-a-private-public-key-pair"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Generate a private-public key pair<a href="#generate-a-private-public-key-pair" aria-label="Link to heading 'Generate a private-public key pair'" data-heading-content="Generate a private-public key pair" class="anchor"></a></h3>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Perform this step on your local machine, not on the SSH exercise server.</p></div></div></div>
 <p>If you do not already have a key pair, you should generate one for the rest of
@@ -509,12 +427,12 @@ algorithm:</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you choose to enter a passphrase, you will not see anything in your terminal
 when you type it. This is intentional, so that no one looking over your shoulder
 can read it.</p></div></div>
-<div class="callout callout-more group/callout" data-callout="105-hello-ssh:should-i-protect-my-key-with-a-password"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-105-hello-ssh:should-i-protect-my-key-with-a-password" type="checkbox" class="peer hidden" /><div class="content"><p><strong>Should I protect my key with a password?</strong></p>
+<div class="callout callout-more group/callout" data-callout="104-hello-ssh:should-i-protect-my-key-with-a-password"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" type="checkbox" class="peer hidden" /><div class="content"><p><strong>Should I protect my key with a password?</strong></p>
 <p>If you enter no password, your key will be stored <strong>in the clear</strong>. This will be
 convenient as you will not have to enter a password when you use it. However,
 any malicious code you allow to run on your machine could easily steal it.</p>
-<p>If your key is protected by a password, you can run an <a href="https://kb.iu.edu/d/aeww" target="_blank" rel="noopener noreferrer">SSH agent</a>
-to unlock it only once per session instead of every time you use it.</p></div><label for="callout-105-hello-ssh:should-i-protect-my-key-with-a-password" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-105-hello-ssh:should-i-protect-my-key-with-a-password" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span> Fabulous!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>If your key is protected by a password, you can run an <a href="https://man7.org/linux/man-pages/man1/ssh-agent.1.html" target="_blank" rel="noopener noreferrer">SSH agent</a>
+to unlock it only once per session instead of every time you use it.</p></div><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>You can verify that a key has indeed been created by listing the contents of the
 SSH directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/.ssh</span>
@@ -534,7 +452,7 @@ authentication</strong> and you should not have to enter your password again to 
 SSH will use your private key to authenticate you instead. (You may have to
 enter your private key’s password though, if it is protected by one.)</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Once you have set up public key authentication for an SSH server, that server is
-in posession of your public key. Your SSH client can then use your private key
+in possession of your public key. Your SSH client can then use your private key
 to prove that you are the owner of this public key, using the mathematical
 relationship between the two. Your private key is never sent to the server
 during this process.</p></div></div>
@@ -551,7 +469,7 @@ was added to your user’s <code>authorized_keys</code> file:</p>
 </div><div class="l-line" data-line="2"><span class="l-function-call">authorized_keys</span>
 </div><div class="l-line" data-line="3">
 </div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/authorized_keys</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">ssh-rsa</span> <span class="l-variable-parameter">AAAAB3NzaC1yc2EAA...</span> <span class="l-variable-parameter">example</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">ssh-ed25519</span> <span class="l-variable-parameter">AAAAC3NzaC1lZDI1NTE5AAAA...</span> <span class="l-variable-parameter">jde@497820feb22a</span>
 </div></code></pre>
 <p>When your SSH client connects to the SSH server, the server will look for your
 public key (or keys) in this file and ask the SSH client to prove that it owns
@@ -560,7 +478,7 @@ machine) using asymmetric cryptography.</p>
 <p>The private key is never transmitted, and this new authentication process is
 transparent, handled automatically for you by the SSH client and server, hence
 why you no longer have to enter a password.</p>
-<div class="callout callout-more group/callout" data-callout="105-hello-ssh:manually-create-authorized-keys-file"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-105-hello-ssh:manually-create-authorized-keys-file" type="checkbox" class="peer hidden" /><div class="content"><p>You can also create the <code>authorized_keys</code> file manually. Note that both the file
+<div class="callout callout-more group/callout" data-callout="104-hello-ssh:manually-create-authorized-keys-file"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-104-hello-ssh:manually-create-authorized-keys-file" type="checkbox" class="peer hidden" /><div class="content"><p>You can also create the <code>authorized_keys</code> file manually. Note that both the file
 and its parent directory must have permissions that make it accessible only to
 your user account, or the SSH server will refuse to use it for security reasons.
 The following commands can set up the file on the target machine:</p>
@@ -568,44 +486,428 @@ The following commands can set up the file on the target machine:</p>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">~/.ssh/authorized_keys</span>
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">600</span> <span class="l-variable-parameter">~/.ssh/authorized_keys</span>
 </div></code></pre>
-<p>The <a href="https://linux.die.net/man/1/chmod" target="_blank" rel="noopener noreferrer"><code>chmod</code> command</a> changes the permission of files. We will learn
-more about this command later on in the course.</p></div><label for="callout-105-hello-ssh:manually-create-authorized-keys-file" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-105-hello-ssh:manually-create-authorized-keys-file" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44f-9fa091f676e4451ee5946fed948cb8fe.svg" alt="👏" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
-<h2 id="configure-your-sftp-application-to-use-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your SFTP application to use public key authentication<a href="#configure-your-sftp-application-to-use-public-key-authentication" aria-label="Link to heading 'Configure your SFTP application to use public key authentication'" data-heading-content="Configure your SFTP application to use public key authentication" class="anchor"></a></h2>
-<p>Most SFTP applications also support SSH public key authentication instead of
-password authentication. Open the SFTP application you used earlier, find out
-how to replace your password by public key authentication, and try it.</p>
-<p>You can remove your password once you have selected your private key, since
-public key authentication will be used instead of your password.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You will need to provide the SFTP application with the location of your
-<strong>private key</strong>. The application will use the private key to prove that it owns
-the public key located in the server’s <code>authorized_keys</code> file.</p></div></div>
-<p>For example, Cyberduck allows you to select your default key file:</p>
+<p>The <a href="https://man7.org/linux/man-pages/man1/chmod.1.html" target="_blank" rel="noopener noreferrer"><code>chmod</code> command</a> changes the permission of files. We will learn
+more about this command later on in the course.</p></div><label for="callout-104-hello-ssh:manually-create-authorized-keys-file" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:manually-create-authorized-keys-file" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="is-your-password-gone"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is your password gone?<a href="#is-your-password-gone" aria-label="Link to heading 'Is your password gone?'" data-heading-content="Is your password gone?" class="anchor"></a></h3>
+<p><strong>Disconnect from the server</strong> again. Now connect while telling your SSH client
+<strong>not</strong> to use public key authentication:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">-o</span> <span class="l-variable-parameter">PubkeyAuthentication=no</span> <span class="l-variable-parameter">jde@ssh.archidep.ch</span>
+</div></code></pre>
+<p>What happens? Why?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>The server asks for your password again, and your password still works.</p>
+<p><code>ssh-copy-id</code> <strong>added</strong> a new way to authenticate to your user account. It did
+not replace your password. Your SSH client now tries your key first, which is
+why you no longer have to type your password, but the password is still
+accepted.</p>
+<p>Protecting a server with keys only means <strong>also disabling password
+authentication</strong> on the server, which is done in the SSH server’s configuration.
+The virtual server you will create later in the course does not accept passwords
+at all: you will give it your public key when you create it.</p></div></div>
+<h3 id="which-key-is-where"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which key is where?<a href="#which-key-is-where" aria-label="Link to heading 'Which key is where?'" data-heading-content="Which key is where?" class="anchor"></a></h3>
+<p>You have now seen several files containing keys, on two different machines.
+Copy the following table and fill it in. For each file, write on which machine
+it is stored (your machine or the server), what it contains, and whether it
+must be kept secret. You can look for them with <code>ls</code> on both machines. The
+server’s own keys are in the <code>/etc/ssh</code> directory.</p>
+<table>
+<thead>
+<tr>
+<th align="left">File</th>
+<th align="left">Machine</th>
+<th align="left">Contains</th>
+<th align="left">Secret?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>~/.ssh/id_ed25519</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/id_ed25519.pub</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/authorized_keys</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/known_hosts</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>/etc/ssh/ssh_host_ed25519_key</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>/etc/ssh/ssh_host_ed25519_key.pub</code></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Then answer these questions:</p>
+<ul>
+<li>Which of these files is used to prove to the server that you are you?</li>
+<li>Which of these files is used to prove to you that the server is the right
+server?</li>
+<li>An attacker copies your <code>id_ed25519.pub</code> file. What can they do with it?</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><table>
+<thead>
+<tr>
+<th align="left">File</th>
+<th align="left">Machine</th>
+<th align="left">Contains</th>
+<th align="left">Secret?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>~/.ssh/id_ed25519</code></td>
+<td align="left">Your machine</td>
+<td align="left">Your private key</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/id_ed25519.pub</code></td>
+<td align="left">Your machine</td>
+<td align="left">Your public key</td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/authorized_keys</code></td>
+<td align="left">The server</td>
+<td align="left">The public keys allowed to log in as your user</td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>~/.ssh/known_hosts</code></td>
+<td align="left">Your machine</td>
+<td align="left">The public keys of the servers you trust</td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/ssh/ssh_host_ed25519_key</code></td>
+<td align="left">The server</td>
+<td align="left">The server’s private host key</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/ssh/ssh_host_ed25519_key.pub</code></td>
+<td align="left">The server</td>
+<td align="left">The server’s public host key</td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Your private key, <code>~/.ssh/id_ed25519</code>, proves to the server that you are you.
+The server checks the proof with your public key, which it finds in
+<code>~/.ssh/authorized_keys</code>.</li>
+<li>The server’s private host key proves to your machine that it is the right
+server. Your SSH client checks the proof with the server’s public host key.
+The first time, you check it yourself with the fingerprint. After that, your
+SSH client finds it in <code>~/.ssh/known_hosts</code>.</li>
+<li>Nothing harmful. A public key can only be used to check a proof, not to make
+one. This is why you can give your public key to any server or service. The
+attacker would need your private key to log in as you.</li>
+</ul>
+<p>The two sides work the same way: each one keeps a private key, and the other
+side keeps the matching public key.</p></div></div>
+<h2 id="copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command<a href="#copy-a-file-with-the-scp-command" aria-label="Link to heading 'Copy a file with the scp command'" data-heading-content="Copy a file with the scp command" class="anchor"></a></h2>
+<p>The <a href="https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/" target="_blank" rel="noopener noreferrer"><code>scp</code> (<strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y) command</a> works like the <a href="https://linuxize.com/post/cp-command-in-linux/" target="_blank" rel="noopener noreferrer"><code>cp</code>
+(<strong>c</strong>o<strong>p</strong>y) command</a>, which copies files on your own machine,
+except that it can copy files to and from other computers that have an SSH
+server running. It uses SSH to transfer the files.</p>
+<p>Like <code>cp</code>, it takes the file to copy first, then where to copy it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">source</span><span class="l-operator">&gt;</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">destination</span><span class="l-operator">&gt;</span>
+</div></code></pre>
+<p>A file on the server is written with the same <code>&lt;username&gt;@&lt;hostname&gt;</code> as in the
+<code>ssh</code> command, then a colon (<code>:</code>), then the path of the file on the server. For
+example, assuming your username is <code>jde</code>:</p>
+<ul>
+<li><code>scp hello.txt jde@ssh.archidep.ch:hello.txt</code> copies the file <code>hello.txt</code> from
+your machine <strong>to</strong> the server.</li>
+<li><code>scp jde@ssh.archidep.ch:hello.txt hello.txt</code> copies it <strong>from</strong> the server to
+your machine.</li>
+</ul>
+<p>The side that comes first is where the file comes from. Run <code>scp</code> <strong>on your own
+machine</strong>, not on the server: your machine is the one that connects to the
+server, like with the <code>ssh</code> command.</p>
+<p>A path on the server that does not start with <code>/</code> starts in your home directory
+<strong>on the server</strong>. <code>jde@ssh.archidep.ch:hello.txt</code> is the file <code>~/hello.txt</code> of
+the <code>jde</code> user, on the server.</p>
+<p>You will use <code>scp</code> in a moment, on your way to the remote land of Avalon.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Here are a few additional examples of how to use the <code>scp</code> command:</p>
+<ul>
+<li>
+<p><code>scp foo.txt jde@192.168.50.4:bar.txt</code></p>
+<p>Copy the local file <code>foo.txt</code> to a file named <code>bar.txt</code> in <code>jde</code>’s home
+directory on the remote computer.</p>
+</li>
+<li>
+<p><code>scp foo.txt jde@192.168.50.4:</code></p>
+<p>Copy the file to <code>jde</code>’s home directory with the same file name.</p>
+</li>
+<li>
+<p><code>scp foo.txt jde@192.168.50.4:/tmp/foo.txt</code></p>
+<p>Copy the file to the absolute path <code>/tmp/foo.txt</code> on the remote computer.</p>
+</li>
+<li>
+<p><code>scp jde@192.168.50.4:foo.txt jsmith@192.168.50.5:bar.txt</code></p>
+<p>Copy the file from one remote computer to another.</p>
+</li>
+<li>
+<p><code>scp -r foo jde@192.168.50.4:foo</code></p>
+<p><strong>R</strong>ecursively (the <code>-r</code> option) copy the contents of directory <code>foo</code> to
+the remote computer (a <a href="https://en.wikipedia.org/wiki/Recursion" target="_blank" rel="noopener noreferrer">recursive</a> copy means that the directory
+and all its subdirectories are copied).</p>
+</li>
+</ul></div></div>
+<h2 id="copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application<a href="#copy-files-with-an-sftp-application" aria-label="Link to heading 'Copy files with an SFTP application'" data-heading-content="Copy files with an SFTP application" class="anchor"></a></h2>
+<p><a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">SFTP</a> is an alternative to the original <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">FTP</a> protocol to transfer
+files. Since FTP is <a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol#Security" target="_blank" rel="noopener noreferrer">insecure</a> (e.g. passwords are sent
+unencrypted), SFTP is an alternative that goes through SSH’s secure channel and
+therefore poses fewer security risks.</p>
+<p>Most modern FTP clients support SFTP. Here’s a couple:</p>
+<ul>
+<li><a href="https://filezilla-project.org/" target="_blank" rel="noopener noreferrer">FileZilla</a></li>
+<li><a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a></li>
+<li><a href="https://cyberduck.io" target="_blank" rel="noopener noreferrer">Cyberduck</a></li>
+</ul>
+<p>Many code editors also have SFTP support available through plugins.</p>
+<p>Install one of these applications (or use your favorite SFTP application if you
+already have one) and connect to the SSH exercise server with public key
+authentication. You will need to configure a connection with the following
+information:</p>
+<ul>
+<li><strong>Protocol:</strong> SFTP</li>
+<li><strong>Host, hostname or server address:</strong> <code>ssh.archidep.ch</code></li>
+<li><strong>Username</strong>: the username shown on the dashboard</li>
+<li><strong>Port:</strong> 22 (the standard SSH port)</li>
+<li><strong>Private key</strong> (or key file): your private key, <code>~/.ssh/id_ed25519</code></li>
+</ul>
+<p>Leave the password empty. The application will use your private key to prove
+that it owns the public key in your <code>authorized_keys</code> file on the server, just
+like the <code>ssh</code> command does. Make sure to select the <strong>private key</strong>
+(<code>id_ed25519</code>), not the public key (<code>id_ed25519.pub</code>).</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>How to use these parameters depends on which application you use. They
+may not be named exactly like this.</p></div></div>
+<p>For example, here’s how to do it with Cyberduck:</p>
 <p><img src="images/cyberduck-sftp-pubkey-40e2ab23ba0a9258be6a1930deb52104.png" alt="Cyberduck SFTP public key authentication" /></p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>On macOS, depending on which application you use, you may not see hidden files
-and directories (file names starting with a dot <code>.</code>) when browsing the file
-system. Use the <code>Cmd-Shift-.</code> shortcut to display them.</p>
-<p>On Windows, you can toggle the display of hidden files in the View tab of the
-explorer.</p>
-<p>On most Linux distributions, the file manager will have an option to show hidden
-files under its menu.</p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <code>.ssh</code> directory is hidden, so it may not appear when you browse for your
+private key:</p>
+<ul>
+<li>On macOS, use the <code>Cmd-Shift-.</code> shortcut in the file selection window to
+display hidden files and directories.</li>
+<li>On Windows, your private key is in the WSL, not in your Windows files. Type
+<code>\\wsl.localhost\</code> in the address bar of the file selection window, then open
+your Linux distribution’s directory (e.g. <code>Ubuntu</code>), then <code>home</code>, your Linux
+username, and <code>.ssh</code>. You can also find your Linux files under <strong>Linux</strong> in
+the sidebar of the Windows file explorer.</li>
+<li>On most Linux distributions, the file manager will have an option to show
+hidden files under its menu.</li>
+</ul></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>On Windows, FileZilla and WinSCP may ask you to convert your private key to
+another format. You can do so. The converted file is a copy of your private
+key: keep it as private as the original.</p></div></div>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>When connecting for the first time, the application may issue the same
+initial connection warning as when you connect using the command line. Be sure
+to check the key fingerprint.</p></div></div>
+<p>Once you have successfully connected to the server, copy a file to the server
+using the SFTP application. These applications will usually allow you to
+drag-and-drop files to and from the server. Play with it a bit and see what you
+can do.</p>
+<p>Now you know another way to copy files over SSH.</p>
+<h2 id="the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon<a href="#the-remote-land-of-avalon" aria-label="Link to heading 'The remote land of Avalon'" data-heading-content="The remote land of Avalon" class="anchor"></a></h2>
+<p>Did you find the treasure of Skull Island in <a href="/2026/course/102-hello-shell/">Hello Shell</a>? Then
+you remember the parrot. It took you to Skull Island, and when you opened the
+chest, it flew away over the sea, far from your computer, to the remote land of
+Avalon. Follow it, and take your treasure with you: someone there has heard
+about it.</p>
+<p>You did not play the treasure hunt? A parrot landed on your window this morning.
+It looked at you, said “SQUAWK!”, and flew away over the sea, to the remote land
+of Avalon. Follow it.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of Avalon.</strong> Avalon is on the SSH exercise server. Your own computer
+is your own land. Each step asks you to do something on the right machine, so
+before you type a command, know which machine your terminal is connected to. It
+helps to keep two terminals open: one logged in to the server, and one on your
+own computer.</p></div></div></div>
+<p>To go to Avalon, log in to the server <strong>with your key</strong>, and take the barge:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">dock</span>
+</div></code></pre>
+<p>Then follow what it says. Your goal: find out where the parrot is.</p>
+<p>On the way, you will:</p>
+<ul>
+<li>Show the server that you came with your key, not your password.</li>
+<li>Copy a file from your computer to the server with <code>scp</code>, and another one from
+the server to your computer.</li>
+<li>Run a command on the server without logging in.</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Stuck? There is a hint on Avalon: <code>cat .hint</code> in <code>~/avalon</code>, on the server. Want
+to start over? Run <code>dock --restart</code> on the server.</p></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>On your computer, log in to the server, then take the barge on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">dock</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/avalon</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./merlin</span>
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
+</div></code></pre>
+<p>Merlin wants a gift from your own land. On your computer, send him your treasure
+if you played the treasure hunt, or what your computer says about itself if you
+did not:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">~/treasure-hunt/bag/treasure</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:avalon/</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">uname</span> <span class="l-function-call">-a</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">land.txt</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">land.txt</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:avalon/</span>
+</div></code></pre>
+<p>Then give it to him, on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/avalon</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./merlin</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
+</div></code></pre>
+<p>On your computer, bring his prophecy home and read it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-string-special-path">jde@ssh.archidep.ch:avalon/prophecy</span> <span class="l-string-special-path">.</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">prophecy</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./prophecy</span>
+</div></code></pre>
+<p>Still on your computer, call the Lady of the Lake without logging in, with the
+word of the prophecy:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span> <span class="l-string-special-path">./avalon/lady</span> <span class="l-string-special-path">TINTAGEL</span>
+</div></code></pre>
+<p>Your word is different: it is chosen at random when you arrive on Avalon.</p></div></div>
+<h3 id="a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore<a href="#a-message-on-the-shore" aria-label="Link to heading 'A message on the shore'" data-heading-content="A message on the shore" class="anchor"></a></h3>
+<p>When the Lady of the Lake has spoken, someone leaves a message for you on the
+shore of Avalon: <code>~/avalon/message.txt</code>, on the server. Read it, and do what a
+careful traveller would do.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>The message tells you to connect to the server on another port, with the <code>-p</code>
+option of <code>ssh</code>. The address is the same, but your SSH client has never seen
+this port, so it asks you whether you trust the server, and shows you the
+fingerprint of its key:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">-p</span> <span class="l-number">2222</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222 ([W.X.Y.Z]:2222)&#39;</span> <span class="l-variable-parameter">can</span>&#39;t be established.
+</div><div class="l-line" data-line="3">ED25519 key fingerprint is SHA256:...
+</div><div class="l-line" data-line="4">Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</div></code></pre>
+<p>That fingerprint is not one of the fingerprints on the <a href="/app">dashboard</a>. If
+this were the same server, it would have the same keys. It is a different server
+pretending to be the one you know: answer <code>no</code>.</p>
+<p>If you answered <code>yes</code>, you found out who wrote the message. Your SSH client now
+trusts that server for this port. Make it forget it, on your computer:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222&#39;</span>
+</div></code></pre></div></div>
+<h2 id="sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key<a href="#sign-a-message-with-your-key" aria-label="Link to heading 'Sign a message with your key'" data-heading-content="Sign a message with your key" class="anchor"></a></h2>
+<p>When you log in with your key, your SSH client <strong>signs</strong> data from the
+connection with your private key, and the server <strong>checks the signature</strong> with
+your public key from <code>~/.ssh/authorized_keys</code>. You can do the same thing by
+hand, with a message of your own.</p>
+<p>On your machine, create a message and sign it with your private key:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I like you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-Y</span> <span class="l-variable-parameter">sign</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">~/.ssh/id_ed25519</span> <span class="l-variable-parameter">-n</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">message.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Signing</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">message.txt</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Write</span> <span class="l-variable-parameter">signature</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">message.txt.sig</span>
+</div></code></pre>
+<p>The <code>-f</code> option is the private key to sign with. The <code>-n</code> option is a label
+saying what the signature is for (here, a <strong>file</strong>). The same label must be
+given when checking the signature, so that a signature made for one purpose
+cannot be reused for another. If your key is protected by a passphrase, you will
+be asked for it.</p>
+<p>The signature is in the new <code>message.txt.sig</code> file. Take a look at it with
+<code>cat</code>.</p>
+<p>Copy both files to the server. The <code>scp</code> command can copy several files at
+once, if you list them before the destination:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">message.txt</span> <span class="l-variable-parameter">message.txt.sig</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:</span>
+</div></code></pre>
+<p>Connect to the server and check the signature:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-Y</span> <span class="l-variable-parameter">check-novalidate</span> <span class="l-variable-parameter">-n</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">message.txt.sig</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">message.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Good</span> <span class="l-string">&quot;file&quot;</span> <span class="l-variable-parameter">signature</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">ED25519</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">SHA256:oV28VA4IAtvQKMi6Tq21cCOy...</span>
+</div></code></pre>
+<p>The <code>-s</code> option is the signature to check. The <code>&lt;</code> character sends the contents
+of <code>message.txt</code> to the command as its input. You will learn more about it later
+in this course.</p>
+<p>The command tells you that the signature is valid for this message, and which
+key made it, by its fingerprint. It does not tell you whether that key is one
+you trust. Display the fingerprint of the public key in your
+<code>~/.ssh/authorized_keys</code> file, and compare the two:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">~/.ssh/authorized_keys</span>
+</div><div class="l-line" data-line="2"><span class="l-number">256</span> <span class="l-variable-parameter">SHA256:oV28VA4IAtvQKMi6Tq21cCOy...</span> <span class="l-variable-parameter">jde@example.com</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">ED25519</span><span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<p>Now modify the message <strong>on the server</strong>, and check the signature again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I hate you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-Y</span> <span class="l-variable-parameter">check-novalidate</span> <span class="l-variable-parameter">-n</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">message.txt.sig</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">message.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Signature</span> <span class="l-variable-parameter">verification</span> <span class="l-variable-parameter">failed:</span> <span class="l-variable-parameter">incorrect</span> <span class="l-variable-parameter">signature</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">verify</span> <span class="l-variable-parameter">signature.</span>
+</div></code></pre>
+<p>Then answer these questions:</p>
+<ul>
+<li>Which key made the signature, and on which machine was it?</li>
+<li>Which key checked it, and on which machine was it?</li>
+<li>An attacker intercepts your message, modifies it, and signs it with their own
+private key. Would the <code>ssh-keygen -Y check-novalidate</code> command accept their
+signature? How would you notice?</li>
+<li>What does the server do when you log in that you just did by hand?</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><ul>
+<li>Your private key, <code>~/.ssh/id_ed25519</code>, on your machine, made the signature.</li>
+<li>Your public key, in <code>~/.ssh/authorized_keys</code> on the server, was used to
+check it (its fingerprint matches). The private key never left your machine:
+only the signature was copied.</li>
+<li>Yes: their signature is valid, since it was made with their private key for
+this exact message. But the fingerprint shown would be the fingerprint of
+their key, not the one in your <code>~/.ssh/authorized_keys</code> file. A valid
+signature only proves something if you know whose key made it. This is the
+same reason you check the server’s fingerprint the first time you connect: an
+attacker in the middle can sign the key exchange with their own key.</li>
+<li>When you log in with your key, your SSH client signs data from the connection
+with your private key, and the server checks the signature with a public key
+from your <code>~/.ssh/authorized_keys</code> file. It only accepts a signature made by
+one of the keys listed there.</li>
+</ul></div></div>
 <h2 id="ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent<a href="#ssh-agent" aria-label="Link to heading 'SSH agent'" data-heading-content="SSH agent" class="anchor"></a></h2>
 <p>If you use a <strong>private key that is password-protected</strong>, you lose part of the
 convenience of public key authentication: you don’t have to enter a password to
 authenticate to the server, but <strong>you still have to enter the key’s password</strong>
 to unlock it.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you did not set a passphrase when generating your key, you can also <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases" target="_blank" rel="noopener noreferrer">add a
-passphrase
-afterwards</a>.</p></div></div>
+passphrase afterwards</a>.</p></div></div>
 <p>The <code>ssh-agent</code> command can help you there. It runs a helper program that will
 let you unlock your private key(s) once, then use it multiple times without
 entering the password again each time.</p>
-<div class="callout callout-more group/callout" data-callout="105-hello-ssh:run-an-ssh-agent"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-105-hello-ssh:run-an-ssh-agent" type="checkbox" class="peer hidden" /><div class="content"><p>There are several ways to run an SSH agent:</p>
+<div class="callout callout-more group/callout" data-callout="104-hello-ssh:run-an-ssh-agent"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-104-hello-ssh:run-an-ssh-agent" type="checkbox" class="peer hidden" /><div class="content"><p>There are several ways to run an SSH agent:</p>
 <ul>
 <li><a href="https://www.cyberciti.biz/faq/how-to-use-ssh-agent-for-authentication-on-linux-unix/" target="_blank" rel="noopener noreferrer">How to use ssh-agent for authentication on Linux /
 Unix</a></li>
-<li><a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener noreferrer">Generating a new SSH key and adding it to the ssh-agent
+<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent" target="_blank" rel="noopener noreferrer">Generating a new SSH key and adding it to the ssh-agent
 (GitHub)</a></li>
-<li><a href="https://www.ssh.com/ssh/agent" target="_blank" rel="noopener noreferrer">Single sign-on using SSH</a></li>
+<li><a href="https://www.ssh.com/academy/ssh/agent" target="_blank" rel="noopener noreferrer">Single sign-on using SSH</a></li>
 </ul>
 <p>You may already have an SSH agent running. Run the <code>ssh-add -l</code> command to
 <strong>l</strong>ist (<code>-l</code>) unlocked keys:</p>
@@ -627,7 +929,7 @@ running but that you have not unlocked any keys yet:</p>
 </ul>
 <p>If SSH agent is not already running, follow one of the guides above or run an
 agent and have it start a new shell for you:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-agent</span> <span class="l-function-call">bash</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ssh-agent <span class="l-constant">$</span><span class="l-string">SHELL</span>
 </div></code></pre>
 <p>The advantage of this last technique is that the agent will automatically quit
 when you exit the shell, which is good since it’s not necessarily a good idea to
@@ -644,16 +946,62 @@ password to unlock it:</p>
 password as long as the agent keeps running.</p>
 <p>If you want to load another key than the default one, you can specify its path:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-add</span> <span class="l-function-call">/path/to/custom_id_ed25519</span>
-</div></code></pre></div><label for="callout-105-hello-ssh:run-an-ssh-agent" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-105-hello-ssh:run-an-ssh-agent" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44f-9fa091f676e4451ee5946fed948cb8fe.svg" alt="👏" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+</div></code></pre></div><label for="callout-104-hello-ssh:run-an-ssh-agent" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:run-an-ssh-agent" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You have learned to use the <code>ssh</code> command to connect to a remote server, and
-also to use the SSH protocol through other tools such as <code>scp</code> or your favorite
-SFTP client to copy files.</p>
+<p>You have learned to use the <code>ssh</code> command to connect to a remote server, and to
+check that you are connecting to the right server with its key fingerprint.</p>
 <p>You have learned to configure and use public key authentication instead of the
-less secure password-based authentication mechanism.</p>
+less secure password-based authentication mechanism, and you know which keys
+are stored on your machine and which are stored on the server.</p>
+<p>You have also learned to use the SSH protocol through other tools such as <code>scp</code>
+or your favorite SFTP application to copy files.</p>
+<p>On the way to Avalon, you had to know, for every command, which machine it ran
+on: a file made on your computer had to be copied to the server, a prophecy made
+on the server had to be copied to your computer, and the Lady of the Lake only
+answered a command sent from your computer. Your settings stayed on your own
+computer too: the <code>PATH</code> that runs your treasure by its name does not exist on
+the server.</p>
 <p>If you are more security-minded, you may have also learned to protect your
 private key with a passphrase and to use SSH agent to make it more convenient to
 use SSH.</p>
+<h2 id="clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)<a href="#clean-up-optional" aria-label="Link to heading 'Clean up (optional)'" data-heading-content="Clean up (optional)" class="anchor"></a></h2>
+<p>Avalon is behind you? You can remove what the treasure hunt and Avalon left on
+your computer:</p>
+<ul>
+<li>
+<p>Open your shell’s configuration file with nano (<code>~/.bashrc</code> in the WSL,
+<code>~/.zshrc</code> on macOS), and delete the line you added to your <code>PATH</code> in <a href="/2026/course/102-hello-shell/">Hello
+Shell</a>. Then open a new terminal.</p>
+</li>
+<li>
+<p>Delete the prophecy you brought home from Avalon, and <code>land.txt</code> if you made
+one:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">prophecy</span> <span class="l-variable-parameter">land.txt</span>
+</div></code></pre>
+</li>
+<li>
+<p>Delete the treasure hunt:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">~/treasure-hunt</span>
+</div></code></pre>
+</li>
+</ul>
+<div class="callout callout-danger group/callout animate"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>The <code>-r</code> option makes <code>rm</code> delete a directory and everything inside it. This is
+the most dangerous command of this exercise: check the path twice before you
+press Enter. If you insert a space in the wrong place, you could delete your
+entire home directory.</p></div></div></div>
 
       <div class="xl:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -678,12 +1026,6 @@ use SSH.</p>
     <a href="#spot-the-difference"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Spot the difference</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command</a>
-    
-  </li><li class="toc-entry toc-h2">
-    <a href="#copy-a-file-using-the-sftp-protocol"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file using the SFTP protocol</a>
-    
-  </li><li class="toc-entry toc-h2">
     <a href="#set-up-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set up public key authentication</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -698,10 +1040,30 @@ use SSH.</p>
   </li><li class="toc-entry toc-h3">
     <a href="#the-authorized_keys-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The <code>authorized_keys</code> file</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#is-your-password-gone"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is your password gone?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#which-key-is-where"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which key is where?</a>
+    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#configure-your-sftp-application-to-use-public-key-authentication"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your SFTP application to use public key authentication</a>
+    <a href="#copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent</a>
@@ -709,17 +1071,20 @@ use SSH.</p>
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)</a>
+    
   </li>
 </ul>
     </nav>
     <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-105-hello-ssh-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-104-hello-ssh-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/105-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -788,16 +1153,7 @@ use SSH.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -806,7 +1162,7 @@ use SSH.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -815,7 +1171,7 @@ use SSH.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -1377,6 +1733,13 @@ use SSH.</p>
 </span>
       </a>
     </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
@@ -1424,7 +1787,7 @@ use SSH.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       

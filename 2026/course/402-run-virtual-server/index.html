@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,7 +101,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/402-run-virtual-server/exercise.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/402-run-virtual-server/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
@@ -201,6 +201,9 @@ Azure</a> cloud platform.</p></div>
 </ul>
   </li><li class="toc-entry toc-h2">
     <a href="#register-your-azure-vm-with-us"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Register your Azure VM with us</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#save-typing-with-an-ssh-configuration-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Save typing with an SSH configuration file</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
@@ -337,7 +340,7 @@ subdomain, it <strong>MUST NOT</strong> contain any underscores (_). We suggest 
 name that starts with a letter (a-z) and contains only alphanumeric characters
 (a-z and 0-9).</p></div></div>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Choose a username that is simple to type because you will need to type it often.
-If necessary, you can <a href="../../cheatsheets/sysadmin/#how-do-i-change-my-username-usermod">change it later</a>.</p></div></div>
+If necessary, you can <a href="/2026/cheatsheets/sysadmin/#how-do-i-change-my-username-usermod">change it later</a>.</p></div></div>
 <h4 id="make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open<a href="#make-sure-the-ssh-port-is-open" aria-label="Link to heading 'Make sure the SSH port is open'" data-heading-content="Make sure the SSH port is open" class="anchor"></a></h4>
 <p>Under inbound port rules, make sure the SSH (22) port is allowed:</p>
 <p><img src="images/azure-vm-inbound-port-rules-27428f549f0f53ab1804c1f6d1399758.png" alt="Azure: VM inbount port rules" /></p>
@@ -429,7 +432,7 @@ the resource group and name options to your configuration if necessary):</p>
 </div><div class="l-line" data-line="4">      &quot;code&quot;: &quot;ProvisioningState/succeeded&quot;,
 </div><div class="l-line" data-line="5">      &quot;displayStatus&quot;: &quot;Provisioning succeeded&quot;,
 </div><div class="l-line" data-line="6">      &quot;level&quot;: &quot;Info&quot;,
-</div><div class="l-line" data-line="7">      &quot;message&quot;: &quot;Enable succeeded: \n[stdout]\n256 SHA256:IKNmtqj1OKCP4gyErlaQkBbn26gB0ofV3fLkw14yokg root@ArchiDep (ED25519)\n1024 SHA256:mUJQmHnMkGeqbxrRjRrBCJYzxyFYIlwKx/R54eLi4ds root@ArchiDep (DSA)\n3072 SHA256:RGxd9jZfWrUUynsVNGmngD78AaZGcQNT4iHjwX6cK2c root@ArchiDep (RSA)\n256 SHA256:0TORCgUgzrPGeDHzV5fGAarkpGpc5Nbkhb7q2dbG0OA root@ArchiDep (ECDSA)\n\n[stderr]\n&quot;,
+</div><div class="l-line" data-line="7">      &quot;message&quot;: &quot;Enable succeeded: \n[stdout]\n256 SHA256:IKNmtqj1OKCP4gyErlaQkBbn26gB0ofV3fLkw14yokg root@ArchiDep (ED25519)\n3072 SHA256:RGxd9jZfWrUUynsVNGmngD78AaZGcQNT4iHjwX6cK2c root@ArchiDep (RSA)\n256 SHA256:0TORCgUgzrPGeDHzV5fGAarkpGpc5Nbkhb7q2dbG0OA root@ArchiDep (ECDSA)\n\n[stderr]\n&quot;,
 </div><div class="l-line" data-line="8">      &quot;time&quot;: null
 </div><div class="l-line" data-line="9">    }
 </div><div class="l-line" data-line="10">  ]
@@ -630,36 +633,64 @@ manpage</a>.</p></div></div>
 <p>Make a note of your virtual server’s public IP address (the same IP address you
 used to connect to it with the <code>ssh</code> command).</p>
 <p>Also run the following command <strong>while connected to your server with SSH</strong> to
-obtain your server’s SSH host key fingerprints:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-call">/etc/ssh</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.pub&quot;</span> <span class="l-variable-parameter">-exec</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">-lf</span> <span class="l-variable-parameter">{</span><span class="l-variable-parameter">}</span> <span class="l-variable-parameter">\;</span>
+print your server’s SSH host public keys:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/ssh/ssh_host_*_key.pub</span>
 </div></code></pre>
-<p>Just one more step, go back to the dashboard and:</p>
+<p>It should print one line per key, similar to this:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLw7...= root@ArchiDep
+</div><div class="l-line" data-line="2">ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJDLOpPWR7r89VjK9kPMhsuqERGVbUi5RZnBlccQnt4e root@ArchiDep
+</div><div class="l-line" data-line="3">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDL6EKznX0xg652E/oWppt3TBYTZlArXmjx6Qs3UOzE...= root@ArchiDep
+</div></code></pre>
+<p>Copy all of these lines. Just one more step, go back to the dashboard, and paste
+them into the <strong>SSH host public keys</strong> field when you register your server:</p>
 <a href="/app?server=ready" class="btn btn-primary btn-xl">
   <span class="flex items-center gap-2">
     <span><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span>
-    <span class="font-title">Register you virtual server</span>
+    <span class="font-title">Register your virtual server</span>
   </span>
 </a>
-<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" type="checkbox" class="peer hidden" /><div class="content"><p>When connecting to your server, we will match the public SSH key fingerprint it
-provides against the keys you are providing us to make sure we are connecting to
-your server and not an attacker’s (man-in-the-middle).</p>
-<p>The command above does a few things:</p>
-<ul>
-<li>The first <code>find</code> command finds all files named <code>*.pub</code> in the <code>/etc/ssh</code>
-directory, which contains the configuration files for the SSH server running
-on your virtual server. These will be the public SSH host keys of your server,
-i.e. the keys it uses to sign the Diffie-Helmann key exchange parameters
-during the establishment of the SSH secure tunnel.</li>
-<li>The <code>-exec</code> option of the <code>find</code> command executes a command for each file that
-was found, with <code>{}</code> being the path to the file and <code>\;</code> a marker to mark the
-end of the command to execute.</li>
-<li>For each public SSH host key file, the <code>ssh-keygen -lf &lt;file&gt;</code> command is
-executed. The <code>ssh-keygen</code> command can not only generate new keys, but with
-the <code>-l</code> option, it can also show the fingerprints of the file specified with
-the <code>-f</code> (<strong>f</strong>ile) option.</li>
-</ul>
-<p>Basically, the entire command will print the fingerprints of all public SSH host
-keys on your server.</p></div><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-key-fingerprints" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44f-9fa091f676e4451ee5946fed948cb8fe.svg" alt="👏" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<div class="callout callout-more group/callout" data-callout="402-run-virtual-server:providing-virtual-server-ssh-host-public-keys"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:providing-virtual-server-ssh-host-public-keys" type="checkbox" class="peer hidden" /><div class="content"><p>When connecting to your server, we will check that the SSH host key it presents
+is one of the public keys you gave us. This makes sure we are connecting to your
+server and not an attacker’s (man-in-the-middle).</p>
+<p>The files in the <code>/etc/ssh</code> directory whose names match <code>ssh_host_*_key.pub</code> are
+the public SSH host keys of your server, i.e. the keys it uses to sign the
+Diffie-Hellman key exchange parameters when an SSH secure tunnel is established.
+Your shell replaces the <code>*</code> wildcard with whatever matches in each file name
+(<code>ecdsa</code>, <code>ed25519</code> and <code>rsa</code>), and the <code>cat</code> command prints the contents of all
+matching files one after the other.</p>
+<p>Each of these public keys has a matching private key in the same directory, in
+the file with the same name without the <code>.pub</code> extension. It is safe to share a
+public key, but <strong>never share a private key</strong>: anyone who has it can pretend to
+be your server.</p></div><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-public-keys" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-402-run-virtual-server:providing-virtual-server-ssh-host-public-keys" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/2728-e820a306c732b90515989dada9995a97.svg" alt="✨" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="save-typing-with-an-ssh-configuration-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Save typing with an SSH configuration file<a href="#save-typing-with-an-ssh-configuration-file" aria-label="Link to heading 'Save typing with an SSH configuration file'" data-heading-content="Save typing with an SSH configuration file" class="anchor"></a></h2>
+<p>You will connect to your server many times during this course. Instead of typing
+its username and IP address every time, you can give it a short name in your
+SSH client’s configuration file, <code>~/.ssh/config</code>, <strong>on your local machine</strong>.
+Create or edit that file (for example with <code>nano ~/.ssh/config</code>) and add the
+following lines, replacing the IP address with your server’s and the username
+with yours:</p>
+<div
+  class="archidep-randomize"
+  data-regexp="(?:(?<=HostName )(?<ipAddress>[0-9]+(?:\.[0-9]+){3})|(?<=User )(?<username>[a-z][a-z0-9]+))"
+  data-template="<ipAddress><username>"></div>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Host archidep
+</div><div class="l-line" data-line="2">  HostName 87.65.43.210
+</div><div class="l-line" data-line="3">  User jde
+</div></code></pre>
+<p>You can now use <code>archidep</code> instead of your username and IP address with all
+SSH-based commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">archidep</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">archidep:</span>
+</div></code></pre>
+<p>The exercises in this course will keep showing the full form with a username and
+an IP address. You can use <code>archidep</code> instead wherever you see it. If you delete
+your server and create a new one, it will probably have a new IP address:
+remember to update the <code>HostName</code> line in your configuration file. Also note
+that not all SFTP applications read this file. If yours does not, keep using
+your server’s IP address and your username in the application.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The configuration file has many other options, for example <code>Port</code> to connect to
+a non-standard port, or <code>IdentityFile</code> to use a private key that does not have
+the default name. See the <a href="https://man.openbsd.org/ssh_config" target="_blank" rel="noopener noreferrer"><code>ssh_config</code> documentation</a>.</p></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You have used a popular Infrastructure-as-a-Service (IaaS) cloud service
 (Microsoft Azure) to set up a virtual machine for your own use. You are renting
@@ -789,6 +820,9 @@ everywhere else you may have used it.)</p></div></div></div>
     <a href="#register-your-azure-vm-with-us"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Register your Azure VM with us</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#save-typing-with-an-ssh-configuration-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Save typing with an SSH configuration file</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
     
   </li><li class="toc-entry toc-h2">
@@ -812,7 +846,7 @@ everywhere else you may have used it.)</p></div></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/402-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/402-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -882,16 +916,7 @@ everywhere else you may have used it.)</p></div></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -900,7 +925,7 @@ everywhere else you may have used it.)</p></div></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -909,7 +934,7 @@ everywhere else you may have used it.)</p></div></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -1471,6 +1496,13 @@ everywhere else you may have used it.)</p></div></div></div>
 </span>
       </a>
     </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
@@ -1518,7 +1550,7 @@ everywhere else you may have used it.)</p></div></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       

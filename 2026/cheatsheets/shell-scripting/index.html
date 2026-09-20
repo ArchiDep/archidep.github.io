@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Shell · ArchiDep</title>
-<meta name="description" content="In this exercise, you’ll set up a mini treasure hunt for adventurers navigating your server via the Command Line. You’ll automate this hunt using Shell Scripting. This activity aims to help you become more familiar with the command line’s fundamental tools and the automation of tasks through basic scripting. Execute these tasks solely using Terminal or Git Bash. Utilizing GUI tools would defeat the purpose." />
-<link rel="canonical" href="https://archidep.ch/2026/course/103-hello-shell/" />
+    <title>Shell Scripting Cheatsheet · ArchiDep</title>
+<meta name="description" content="Anything you can type in your terminal, you can put in a file and have the machine do for you, the same way every time. That file is a script, and this is how you write one with Bash. Most of it also works in other POSIX shells like sh and Zsh." />
+<link rel="canonical" href="https://archidep.ch/2026/cheatsheets/shell-scripting/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Hello Shell" />
-<meta property="og:description" content="In this exercise, you’ll set up a mini treasure hunt for adventurers navigating your server via the Command Line. You’ll automate this hunt using Shell Scripting. This activity aims to help you become more familiar with the command line’s fundamental tools and the automation of tasks through basic scripting. Execute these tasks solely using Terminal or Git Bash. Utilizing GUI tools would defeat the purpose." />
-<meta property="og:url" content="https://archidep.ch/2026/course/103-hello-shell/" />
+<meta property="og:title" content="Shell Scripting Cheatsheet" />
+<meta property="og:description" content="Anything you can type in your terminal, you can put in a file and have the machine do for you, the same way every time. That file is a script, and this is how you write one with Bash. Most of it also works in other POSIX shells like sh and Zsh." />
+<meta property="og:url" content="https://archidep.ch/2026/cheatsheets/shell-scripting/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-a595b6399ebe7f8693e0211891703787.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-9a09aa254823d306e57ed9bb252b2d76.js" defer>
+    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
     </script>
   </head>
 
@@ -101,14 +101,14 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/103-hello-shell/exercise.md">Rev: 63d1d222d1c3c28ae205314edb23bd1f08bdc2c6</a>
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/shell-scripting/cheatsheet.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
     </li>
   </ul>
 </div>
 
     <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
   <span>You are reading the backup copy of the ArchiDep website.</span>
-  <a href="https://archidep.ch/2026/course/103-hello-shell/" class="link font-semibold transition-colors hover:text-base-content">
+  <a href="https://archidep.ch/2026/cheatsheets/shell-scripting/" class="link font-semibold transition-colors hover:text-base-content">
     Go to the live site.
   </a>
 </div>
@@ -119,18 +119,15 @@
         <div class="md:p-4">
           <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
   <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
-    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
+    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-cheatsheet">
       <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
-  Hello Shell
+  Shell Scripting Cheatsheet
 </h1>
 
-      <div class="my-4"><p>In this exercise, you’ll set up a mini treasure hunt for adventurers navigating
-your server via the <a href="/2026/course/101-command-line/">Command Line</a>. You’ll automate this hunt
-using <a href="/2026/course/102-shell-scripting/">Shell Scripting</a>. This activity aims to help you become
-more familiar with the command line’s fundamental tools and the automation of
-tasks through basic scripting.</p>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Execute these tasks solely using Terminal or Git Bash. Utilizing GUI tools would
-defeat the purpose.</p></div></div></div></div>
+      <div class="my-4"><p>Anything you can type in your terminal, you can put in a file and have the
+machine do for you, the same way every time. That file is a script, and this is
+how you write one with <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>. Most of it also works in other POSIX
+shells like <a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener noreferrer"><code>sh</code></a> and <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">Zsh</a>.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
         <input type="checkbox">
@@ -141,28 +138,72 @@ defeat the purpose.</p></div></div></div></div>
         <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
-    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    <a href="#what-is-a-script">What is a script?</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#creating-directories-and-files"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Creating directories and files</a>
+    <a href="#writing-and-running-a-script">Writing and running a script</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-script-printf-nano">Create a script (<code>printf</code>, <code>nano</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#adding-clues"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Adding clues</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#run-a-script-chmod-x-script">Run a script (<code>chmod +x</code>, <code>./script</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#test-the-treasure-hunt"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Test the treasure hunt</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#know-where-the-script-runs-cd">Know where the script runs (<code>cd</code>)</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#automate-the-treasure-hunt-using-shell-scripting"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Automate the treasure hunt using shell scripting</a>
+    <a href="#variables">Variables</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#use-a-variable">Use a variable</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#make-auto_hunt-executable"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make <code>auto_hunt</code> executable</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#store-the-output-of-a-command-">Store the output of a command (<code>$(...)</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#running-auto_hunt-from-any-directory"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Running <code>auto_hunt</code> from any directory</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#read-and-set-environment-variables-export">Read and set environment variables (<code>export</code>)</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#use-the-arguments-the-script-was-given-1-">Use the arguments the script was given (<code>$1</code>, <code>$@</code>)</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#what-just-happened"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What just happened?</a>
+    <a href="#logic">Logic</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#test-a-condition-if">Test a condition (<code>if</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#test-a-file-or-an-empty-variable-test">Test a file or an empty variable (<code>test</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#repeat-something-for">Repeat something (<code>for</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reuse-a-piece-of-code-functions">Reuse a piece of code (functions)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#keep-a-variable-inside-a-function-local">Keep a variable inside a function (<code>local</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#when-it-goes-wrong">When it goes wrong</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#stop-on-the-first-error-set--e">Stop on the first error (<code>set -e</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#see-what-the-script-is-doing-set--x">See what the script is doing (<code>set -x</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
     
   </li>
 </ul>
@@ -173,264 +214,325 @@ defeat the purpose.</p></div></div></div></div>
 
       
 
-<h2 id="legend">
-  <img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend
-</h2>
-
-<p>Parts of this exercise are annotated with the following icons:</p>
-
-<ul class="legend">
-  <li>
-    <img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A task you MUST perform to complete the exercise
-  </li>
-  <li>
-    <img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional step that you may perform to make sure that
-    everything is working correctly, or to set up additional tools that are not required but can
-    help you
-  </li>
-  <li>
-    <img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Advanced tips on how to go further (or
-    challenges!)
-  </li>
-  <li><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> The end of the exercise</li>
-  <li>
-    <img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> The architecture of the software you ran or
-    deployed during this exercise
-  </li>
-  <li>
-    <img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting tips: how to fix common problems you might
-    encounter
-  </li>
-</ul>
-
-      <h2 id="creating-directories-and-files"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Creating directories and files<a href="#creating-directories-and-files" aria-label="Link to heading 'Creating directories and files'" data-heading-content="Creating directories and files" class="anchor"></a></h2>
-<p>We’re already familiar with the <code>pwd</code>, <code>cd</code>, <code>ls</code>, <code>mkdir</code>, <code>touch</code>, <code>echo</code>, and
-<code>cat</code> commands. Using the relevant commands, perform the tasks below:</p>
-<ul>
-<li>Starting from your home (<code>~</code>) directory, create a new directory named
-<code>treasure_hunt</code>.</li>
-<li>Within the <code>treasure_hunt</code> directory, craft three additional directories:
-<code>cave</code>, <code>forest</code>, and <code>lake</code>.</li>
-<li>Create the following files: <code>cave/echo.txt</code>, <code>lake/fish.txt</code>, and
-<code>forest/tree.txt</code>.</li>
-</ul>
-<div class="callout callout-more group/callout" data-callout="103-hello-shell:home-tilde"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-103-hello-shell:home-tilde" type="checkbox" class="peer hidden" /><div class="content"><p>In Unix-like operating systems, the tilde (<code>~</code>) symbol is a shorthand
-representation for a user’s home directory. It’s a convenient way to refer to
-this directory without needing to know or type the full path.</p>
-<p>For instance, if a user’s home directory is <code>/home/username</code>, typing <code>cd ~</code> in
-the terminal would navigate them directly to that location. The tilde is
-recognized and expanded to the full path by the shell, making it an efficient
-shortcut. Additionally, the tilde can be combined with other directory or file
-names, such as <code>~/Documents</code>, to quickly reference subdirectories or files
-within the home directory.</p>
-<p>The adoption of the tilde as a shortcut has become a deeply ingrained convention
-in the command-line world, providing users with a quick and consistent way to
-access their personal files and settings.</p></div><label for="callout-103-hello-shell:home-tilde" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-103-hello-shell:home-tilde" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /></span> Fabulous!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
-<div class="note note-advanced"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /><span>Challenge</span></div><div class="content"><p>As an added challenge: find a way to perform this step of the exercise using no
-more than two commands.</p></div></div>
-<h2 id="adding-clues"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Adding clues<a href="#adding-clues" aria-label="Link to heading 'Adding clues'" data-heading-content="Adding clues" class="anchor"></a></h2>
-<p>Using your preferred method, update the files we just created with the specified
-content:</p>
-<ul>
-<li><code>cave/echo.txt</code>: To uncover the next clue, explore where the water flows.</li>
-<li><code>lake/fish.txt</code>: Venture deep into the woods to discover the last hint.</li>
-<li><code>forest/tree.txt</code>: curl parrot.live</li>
-</ul>
-<div class="callout callout-more group/callout" data-callout="103-hello-shell:curl"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-103-hello-shell:curl" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>curl</code> command is a versatile tool used primarily for transferring data
-using various protocols, most commonly HTTP and HTTPS. For beginners diving into
-the world of command-line operations, think of <code>curl</code> as a way to communicate
-with websites and servers directly from the terminal without the need for a web
-browser.</p>
-<p>Whether you’re trying to fetch the contents of a web page, download a file, or
-interact with APIs, <code>curl</code> is your go-to utility. Its name stands for <strong>C</strong>lient
-<strong>URL</strong>, underscoring its capability to work with URLs to retrieve or send data.</p>
-<p>Beginners often start with basic <code>curl</code> commands, like <code>curl https://example.com</code>, which fetches and displays the content of the specified
-web page in the terminal. As users become more accustomed to it, they’ll find
-that <code>curl</code> offers a wide range of options and parameters to customize requests,
-making it an indispensable tool for many developers and system administrators.</p></div><label for="callout-103-hello-shell:curl" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-103-hello-shell:curl" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Wonderful!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
-<h2 id="test-the-treasure-hunt"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Test the treasure hunt<a href="#test-the-treasure-hunt" aria-label="Link to heading 'Test the treasure hunt'" data-heading-content="Test the treasure hunt" class="anchor"></a></h2>
-<p>Ensure your setup is in order:</p>
-<ul>
-<li>Transition to the <code>treasure_hunt</code> directory.</li>
-<li>Examine the contents of <code>echo.txt</code> within the cave directory.</li>
-<li>Guided by the clue, proceed to the subsequent directory.</li>
-<li>Unravel the next hint and move forward accordingly.</li>
-<li>Input the concluding hint into the terminal.</li>
-<li>Relish your discovered treasure.</li>
-</ul>
-<h2 id="automate-the-treasure-hunt-using-shell-scripting"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Automate the treasure hunt using shell scripting<a href="#automate-the-treasure-hunt-using-shell-scripting" aria-label="Link to heading 'Automate the treasure hunt using shell scripting'" data-heading-content="Automate the treasure hunt using shell scripting" class="anchor"></a></h2>
-<p>Follow these steps to script and automate your entire treasure hunt:</p>
-<ul>
-<li>In the <code>treasure_hunt</code> directory, create a file named <code>auto_hunt</code>.</li>
-<li>Launch your go-to command-line text editor to edit the <code>auto_hunt</code> file.</li>
-<li>Add the following line at the top of the file: <code>#!/bin/bash</code></li>
-<li>Systematically script the commands to journey through the treasure hunt.
-Introduce a theatrical pause of 2 seconds between commands using the <code>sleep</code>
-command for heightened suspense.</li>
-</ul>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>For a touch of efficiency, consider crafting a function that merges the file
-reading and short delay. This promotes reusability throughout your script.</p></div></div>
-<div class="callout callout-more group/callout" data-callout="103-hello-shell:sleep"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-103-hello-shell:sleep" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>sleep</code> command is a simple yet useful utility in Unix-like operating
-systems that pauses the execution of a program or script for a specified
-duration. For beginners getting acquainted with scripting or command-line tasks,
-think of sleep as a way to introduce deliberate delays. By inputting sleep
-followed by a number, the system will pause for that many seconds. For instance,
-<code>sleep 5</code> will introduce a pause of five seconds.</p></div><label for="callout-103-hello-shell:sleep" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-103-hello-shell:sleep" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Fabulous!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
-<ul>
-<li>To execute the command found within <code>forest/tree.txt</code>, incorporate: <code>sh forest/tree.txt</code>.</li>
-<li>Preserve your hard work by saving the script and gracefully exiting your text
-editor.</li>
-<li>Jumpstart your treasure hunt automation with the command:</li>
-</ul>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sh</span> <span class="l-function-call">auto_hunt</span>
+      <p>The companion to this page is the <a href="/2026/cheatsheets/command-line/">Command Line Cheatsheet</a>, which covers the commands you put
+<em>in</em> a script.</p>
+<h2 id="what-is-a-script">What is a script?<a href="#what-is-a-script" aria-label="Link to heading 'What is a script?'" data-heading-content="What is a script?" class="anchor"></a></h2>
+<p>A file that can be executed is one of two things: a <strong>binary file</strong>, containing
+machine code compiled from source, or a <strong>script</strong>, a text file that an
+interpreter reads and runs.</p>
+<p>The first line of a script, the <strong>shebang</strong>, names that interpreter:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
 </div></code></pre>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">~/treasure_hunt</span>
+<p>This one says the file should be run by <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>. There must be no space
+between <code>#!</code> and the path.</p>
+<p>A script whose interpreter is a shell is a <strong>shell script</strong>. A script whose
+interpreter is PHP is a PHP script: still a script, but not a shell script.
+What you may write inside depends entirely on the interpreter — in a Bash
+script, anything you could type at a Bash prompt.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Shebang</th>
+<th align="left">Script contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>#!/bin/sh</code></td>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener noreferrer">Bourne shell</a> commands</td>
+</tr>
+<tr>
+<td align="left"><code>#!/bin/bash</code></td>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash shell</a> commands</td>
+</tr>
+<tr>
+<td align="left"><code>#!/bin/zsh</code></td>
+<td align="left"><a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">Z shell</a> commands</td>
+</tr>
+<tr>
+<td align="left"><code>#!/usr/bin/node</code></td>
+<td align="left"><a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> code</td>
+</tr>
+<tr>
+<td align="left"><code>#!/usr/bin/php</code></td>
+<td align="left"><a href="http://php.net" target="_blank" rel="noopener noreferrer">PHP</a> code</td>
+</tr>
+<tr>
+<td align="left"><code>#!/usr/bin/python</code></td>
+<td align="left"><a href="https://www.python.org" target="_blank" rel="noopener noreferrer">Python</a> code</td>
+</tr>
+<tr>
+<td align="left"><code>#!/usr/bin/ruby</code></td>
+<td align="left"><a href="https://www.ruby-lang.org" target="_blank" rel="noopener noreferrer">Ruby</a> code</td>
+</tr>
+</tbody>
+</table>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The path must be where the interpreter actually is on the machine, which may
+differ from this table. <code>which bash</code> says where Bash is.</p></div></div>
+<h2 id="writing-and-running-a-script">Writing and running a script<a href="#writing-and-running-a-script" aria-label="Link to heading 'Writing and running a script'" data-heading-content="Writing and running a script" class="anchor"></a></h2>
+<h3 id="create-a-script-printf-nano">Create a script (<code>printf</code>, <code>nano</code>)<a href="#create-a-script-printf-nano" aria-label="Link to heading 'Create a script (printf, nano)'" data-heading-content="Create a script (printf, nano)" class="anchor"></a></h3>
+<p>Write the whole thing in one command:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/bash\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">test.sh</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>printf</code> (<strong>print</strong> <strong>f</strong>ormat) command is similar to the <code>echo</code> command but
+it has better support for special characters like new lines (<code>\n</code>).</p></div></div>
+<p>Or open an editor and type it in:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.sh</span>
+</div></code></pre>
+<h3 id="run-a-script-chmod-x-script">Run a script (<code>chmod +x</code>, <code>./script</code>)<a href="#run-a-script-chmod-x-script" aria-label="Link to heading 'Run a script (chmod +x, ./script)'" data-heading-content="Run a script (chmod +x, ./script)" class="anchor"></a></h3>
+<p>A file you have just created is not executable. Make it so, then run it by its
+path:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">test.sh</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./test.sh</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <code>./</code> matters: without it, the shell looks for <code>test.sh</code> in the directories
+of your <code>PATH</code> instead of in the current directory. See <a href="/2026/cheatsheets/command-line/#make-a-file-executable-chmod-x">make a file
+executable</a> and <a href="/2026/cheatsheets/command-line/#run-a-program-program">run a program</a>.</p></div></div>
+<h3 id="know-where-the-script-runs-cd">Know where the script runs (<code>cd</code>)<a href="#know-where-the-script-runs-cd" aria-label="Link to heading 'Know where the script runs (cd)'" data-heading-content="Know where the script runs (cd)" class="anchor"></a></h3>
+<p>A script starts in the directory it was run <strong>from</strong>, not the one it lives in.
+Use <code>cd</code> to move around:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">pwd</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">/home</span>
+</div><div class="l-line" data-line="4"><span class="l-function-builtin">pwd</span>
+</div></code></pre>
+<p>Run from <code>/some/where/over/the/rainbow</code>, this prints:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">/some/where/over/the/rainbow
+</div><div class="l-line" data-line="2">/home
+</div></code></pre>
+<h2 id="variables">Variables<a href="#variables" aria-label="Link to heading 'Variables'" data-heading-content="Variables" class="anchor"></a></h2>
+<h3 id="use-a-variable">Use a variable<a href="#use-a-variable" aria-label="Link to heading 'Use a variable'" data-heading-content="Use a variable" class="anchor"></a></h3>
+<p>No spaces around the <code>=</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar&quot;</span>
+</div></code></pre>
+<p>Quote the variable when you declare it and when you use it, so that a value
+containing whitespace (spaces, new lines, etc) stays one value:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar baz&quot;</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar baz&quot;</span>
+</div></code></pre>
+<h3 id="store-the-output-of-a-command-">Store the output of a command (<code>$(...)</code>)<a href="#store-the-output-of-a-command-" aria-label="Link to heading 'Store the output of a command ($(...))'" data-heading-content="Store the output of a command ($(...))" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-constant">FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-call">ls</span> <span class="l-number">-1</span><span class="l-punctuation-special">)</span>
+</div><div class="l-line" data-line="3"><span class="l-constant">NUMBER_OF_FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILES</span>&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span><span class="l-punctuation-special">)</span>
+</div><div class="l-line" data-line="4"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;There are <span class="l-punctuation-special">$</span><span class="l-constant">NUMBER_OF_FILES</span> files&quot;</span>
+</div></code></pre>
+<p>This script would print <code>There are 10 files</code> if there are 10 files in the
+current directory.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You will also see the older backtick form, <code>FILES=`ls -1`</code>. It does the same
+thing, but unlike backticks, <code>$(...)</code> can be nested.</p></div></div>
+<h3 id="read-and-set-environment-variables-export">Read and set environment variables (<code>export</code>)<a href="#read-and-set-environment-variables-export" aria-label="Link to heading 'Read and set environment variables (export)'" data-heading-content="Read and set environment variables (export)" class="anchor"></a></h3>
+<p>Environment variables are ordinary variables in a script:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
+</div></code></pre>
+<p>Set one the way you would in any shell:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p><code>$FOO</code> will only be set for this script and the programs it starts. The shell
+you ran the script from is unchanged.</p></div></div>
+<h3 id="use-the-arguments-the-script-was-given-1-">Use the arguments the script was given (<code>$1</code>, <code>$@</code>)<a href="#use-the-arguments-the-script-was-given-1-" aria-label="Link to heading 'Use the arguments the script was given ($1, $@)'" data-heading-content="Use the arguments the script was given ($1, $@)" class="anchor"></a></h3>
+<p>Bash has a number of <a href="https://tldp.org/LDP/abs/html/refcards.html#AEN22402" target="_blank" rel="noopener noreferrer">special variables</a> which are always
+available:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>$0</code></td>
+<td align="left">Name of the command being executed.</td>
+</tr>
+<tr>
+<td align="left"><code>$1</code></td>
+<td align="left">First argument passed on the command line (then <code>$2</code>, <code>$3</code>…).</td>
+</tr>
+<tr>
+<td align="left"><code>$@</code></td>
+<td align="left">All arguments passed.</td>
+</tr>
+<tr>
+<td align="left"><code>$?</code></td>
+<td align="left">Exit value of the last executed command.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, this script says hello to the name passed as the first argument:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
+</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span> <span class="l-function-call">World</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<h2 id="logic">Logic<a href="#logic" aria-label="Link to heading 'Logic'" data-heading-content="Logic" class="anchor"></a></h2>
+<h3 id="test-a-condition-if">Test a condition (<code>if</code>)<a href="#test-a-condition-if" aria-label="Link to heading 'Test a condition (if)'" data-heading-content="Test a condition (if)" class="anchor"></a></h3>
+<p>Bash has a classic <code>if/then/else</code> construct:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar&quot;</span>
 </div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function">read_clue</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="5">  <span class="l-function-call">cat</span> <span class="l-punctuation-special">$</span><span class="l-variable">1</span>
-</div><div class="l-line" data-line="6">  <span class="l-function-call">sleep</span> <span class="l-number">2</span>
-</div><div class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9"><span class="l-function-call">read_clue</span> <span class="l-variable-parameter">cave/echo.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-keyword-conditional">if</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;foo&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
+</div><div class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is foo&quot;</span>
+</div><div class="l-line" data-line="6"><span class="l-keyword-conditional">elif</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;bar&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
+</div><div class="l-line" data-line="7">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is bar&quot;</span>
+</div><div class="l-line" data-line="8"><span class="l-keyword-conditional">else</span>
+</div><div class="l-line" data-line="9">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is something else&quot;</span>
+</div><div class="l-line" data-line="10"><span class="l-keyword-conditional">fi</span>
+</div></code></pre>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><code>==</code> compares <strong>strings</strong>, <code>-eq</code> compares <strong>numbers</strong>. Comparing two strings
+with <code>-eq</code> compares 0 to 0, so the first branch always matches.</p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>[[  ]]</code> syntax is a Bash <a href="https://www.tldp.org/LDP/abs/html/testconstructs.html" target="_blank" rel="noopener noreferrer">test construct</a>. Also see
+Bash <a href="https://www.tldp.org/LDP/abs/html/comparison-ops.html" target="_blank" rel="noopener noreferrer">other comparison operators</a>.</p></div></div>
+<h3 id="test-a-file-or-an-empty-variable-test">Test a file or an empty variable (<code>test</code>)<a href="#test-a-file-or-an-empty-variable-test" aria-label="Link to heading 'Test a file or an empty variable (test)'" data-heading-content="Test a file or an empty variable (test)" class="anchor"></a></h3>
+<p>The <code>test</code> built-in command is another way to write some conditions:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-constant">EMPTY_VAR</span><span class="l-operator">=</span>
+</div><div class="l-line" data-line="4"><span class="l-constant">FULL_VAR</span><span class="l-operator">=</span><span class="l-string">&quot;full&quot;</span>
+</div><div class="l-line" data-line="5"><span class="l-constant">FILE</span><span class="l-operator">=</span><span class="l-string">&quot;/path/to/some/file&quot;</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-z</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">EMPTY_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
+</div><div class="l-line" data-line="8">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is empty&quot;</span>
+</div><div class="l-line" data-line="9"><span class="l-keyword-conditional">fi</span>
 </div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11"><span class="l-function-call">read_clue</span> <span class="l-variable-parameter">lake/fish.txt</span>
-</div><div class="l-line" data-line="12">
-</div><div class="l-line" data-line="13"><span class="l-function-call">read_clue</span> <span class="l-variable-parameter">forest/tree.txt</span>
+</div><div class="l-line" data-line="11"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-n</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FULL_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
+</div><div class="l-line" data-line="12">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is not empty&quot;</span>
+</div><div class="l-line" data-line="13"><span class="l-keyword-conditional">fi</span>
 </div><div class="l-line" data-line="14">
-</div><div class="l-line" data-line="15"><span class="l-function-call">sh</span> <span class="l-variable-parameter">forest/tree.txt</span>
-</div></code></pre></div></div>
-<h2 id="make-auto_hunt-executable"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make <code>auto_hunt</code> executable<a href="#make-auto_hunt-executable" aria-label="Link to heading 'Make auto_hunt executable'" data-heading-content="Make auto_hunt executable" class="anchor"></a></h2>
-<p>Currently, to execute the shell script, you must use the sh command followed by
-the script’s precise filepath. Assuming you are in the home directory, try
-running:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./auto_hunt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">permission</span> <span class="l-variable-parameter">denied:</span> <span class="l-variable-parameter">./auto_hunt</span>
+</div><div class="l-line" data-line="15"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-f</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILE</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
+</div><div class="l-line" data-line="16">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file exists&quot;</span>
+</div><div class="l-line" data-line="17"><span class="l-keyword-conditional">else</span>
+</div><div class="l-line" data-line="18">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file does not exist&quot;</span>
+</div><div class="l-line" data-line="19"><span class="l-keyword-conditional">fi</span>
 </div></code></pre>
-<p>The error message <code>permission denied: ./auto_hunt</code> that you see indicates that
-the shell has been denied the permission to execute the file named <code>auto_hunt</code>.
-In Unix-like operating systems, files have certain permissions associated with
-them, determining who can read, write, or execute them. When you try to run
-<code>./auto_hunt</code> without the necessary execute permission, the system prevents it
-from being executed, leading to this error.</p>
-<p>To address this, let’s grant the <code>auto_hunt</code> script execute permissions:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">auto_hunt</span>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>See Bash <a href="https://www.tldp.org/LDP/abs/html/fto.html" target="_blank" rel="noopener noreferrer">file test operators</a> and <a href="https://www.tldp.org/LDP/abs/html/comparison-ops.html" target="_blank" rel="noopener noreferrer">other comparison
+operators</a>.</p></div></div>
+<h3 id="repeat-something-for">Repeat something (<code>for</code>)<a href="#repeat-something-for" aria-label="Link to heading 'Repeat something (for)'" data-heading-content="Repeat something (for)" class="anchor"></a></h3>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-repeat">for</span> <span class="l-variable">item</span> <span class="l-keyword-conditional">in</span> one two three<span class="l-punctuation-delimiter">;</span> <span class="l-keyword-repeat">do</span>
+</div><div class="l-line" data-line="2">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">item</span>&quot;</span>
+</div><div class="l-line" data-line="3"><span class="l-keyword-repeat">done</span>
 </div></code></pre>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>At this juncture in the course, delving into the intricacies of Unix permissions
-isn’t required. We’ll embark on a deeper exploration of this topic as the
-semester progresses.</p></div></div>
-<p>Running the script now works:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./auto_hunt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">next</span> <span class="l-variable-parameter">clue,</span> <span class="l-variable-parameter">search</span> <span class="l-variable-parameter">where</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">water</span> <span class="l-variable-parameter">flows</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+<p>The above code would print:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">one
+</div><div class="l-line" data-line="2">two
+</div><div class="l-line" data-line="3">three
 </div></code></pre>
-<h2 id="running-auto_hunt-from-any-directory"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Running <code>auto_hunt</code> from any directory<a href="#running-auto_hunt-from-any-directory" aria-label="Link to heading 'Running auto_hunt from any directory'" data-heading-content="Running auto_hunt from any directory" class="anchor"></a></h2>
-<p>Wouldn’t it be convenient to execute this script without specifying its full
-path, much like the other commands we’ve utilized so far? Give this a shot by
-trying:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">auto_hunt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found:</span> <span class="l-variable-parameter">auto_hunt</span>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Bash also has <code>while</code> and <code>until</code>. See <a href="https://www.tldp.org/LDP/abs/html/loops.html" target="_blank" rel="noopener noreferrer">loops &amp; branches</a>.</p></div></div>
+<h3 id="reuse-a-piece-of-code-functions">Reuse a piece of code (functions)<a href="#reuse-a-piece-of-code-functions" aria-label="Link to heading 'Reuse a piece of code (functions)'" data-heading-content="Reuse a piece of code (functions)" class="anchor"></a></h3>
+<p>Isolate a piece of code in a function. Inside it, <code>$1</code>, <code>$2</code> and so on are the
+<strong>function’s</strong> arguments, not the script’s:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="4">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
+</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span>
 </div></code></pre>
-<p>The error message <code>command not found: auto_hunt</code> essentially means that the
-shell couldn’t find a command or program named <code>auto_hunt</code> in the places it
-usually looks for such commands. When you type a command in the terminal, the
-shell searches for that command in a list of directories specified in a variable
-called <code>PATH</code>. If the command or program isn’t located in any of these
-directories, you’ll get the “command not found” error.</p>
-<p>Let’s probe where our shell currently scouts for executable programs:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span>
+<p>This script would print <code>Hello World</code>.</p>
+<h3 id="keep-a-variable-inside-a-function-local">Keep a variable inside a function (<code>local</code>)<a href="#keep-a-variable-inside-a-function-local" aria-label="Link to heading 'Keep a variable inside a function (local)'" data-heading-content="Keep a variable inside a function (local)" class="anchor"></a></h3>
+<p>Normal Bash variables have no scope: one set anywhere is visible in the whole
+file and in every function. Use the <code>local</code> keyword to limit one to the function
+it is declared in:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="4">  <span class="l-keyword">local</span> <span class="l-variable">name</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
+</div><div class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span>
+</div><div class="l-line" data-line="6"><span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="7">
+</div><div class="l-line" data-line="8"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="9"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span>
 </div></code></pre>
-<p>The above command displays the contents of the <code>PATH</code> environment variable. The
-response enumerates the directories where the shell scans for executable files.
-As evident, the <code>~/treasure_hunt</code> directory is conspicuously absent from this
-compilation. Consequently, our shell remains oblivious to any executable linked
-with the <code>auto_hunt</code> command.</p>
-<p>To add <code>auto_hunt</code> to your <code>PATH</code>, you need to update the <code>PATH</code> environment
-variable to include the directory containing the <code>auto_hunt</code> script. Here’s how
-you can do it:</p>
-<p>You can temporarily add the directory to your <code>PATH</code> for the current session
-with:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export PATH=<span class="l-constant">$</span><span class="l-string">PATH:~/treasure_hunt</span>
+<p>This script would print <code>Hello World</code> and an empty line, since <code>$name</code> is only
+defined within the <code>print_hello</code> function.</p>
+<h2 id="when-it-goes-wrong">When it goes wrong<a href="#when-it-goes-wrong" aria-label="Link to heading 'When it goes wrong'" data-heading-content="When it goes wrong" class="anchor"></a></h2>
+<h3 id="stop-on-the-first-error-set--e">Stop on the first error (<code>set -e</code>)<a href="#stop-on-the-first-error-set--e" aria-label="Link to heading 'Stop on the first error (set -e)'" data-heading-content="Stop on the first error (set -e)" class="anchor"></a></h3>
+<p>A script keeps going after a command fails, which is <strong>not</strong> what you usually
+want. <code>set -e</code> aborts it instead:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-e</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">cat</span> <span class="l-variable-parameter">file-that-does-not-exist</span>
+</div><div class="l-line" data-line="5"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Done</span>
 </div></code></pre>
-<p>If you now run the following, you will see that your script is executed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">auto_hunt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">next</span> <span class="l-variable-parameter">clue,</span> <span class="l-variable-parameter">search</span> <span class="l-variable-parameter">where</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">water</span> <span class="l-variable-parameter">flows</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Hello World
+</div><div class="l-line" data-line="2">cat: file-that-does-not-exist: No such file or directory
 </div></code></pre>
-<p>Restart your shell and attempt executing <code>auto_hunt</code> once more. Oops! It seems
-our PATH has reverted to its original configuration.</p>
-<p>To permanently change the <code>PATH</code>, you’ll need to add the export line to your
-shell’s initialization file. The specific file depends on the shell you’re
-using:</p>
+<p><code>Done</code> is never printed.</p>
+<h3 id="see-what-the-script-is-doing-set--x">See what the script is doing (<code>set -x</code>)<a href="#see-what-the-script-is-doing-set--x" aria-label="Link to heading 'See what the script is doing (set -x)'" data-heading-content="See what the script is doing (set -x)" class="anchor"></a></h3>
+<p><code>set -x</code> prints each command, with a leading <code>+</code>, before running it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
+</div><div class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-x</span>
+</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">+ echo Hello World
+</div><div class="l-line" data-line="2">Hello World
+</div></code></pre>
+<p>Combine the two with <code>set -ex</code>.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>-e</code> and <code>-x</code> are POSIX options and work in <code>sh</code> and Zsh too. See Bash <a href="https://www.tldp.org/LDP/abs/html/options.html#OPTIONSREF" target="_blank" rel="noopener noreferrer">option
+flags</a> for the rest.</p></div></div>
+<h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <ul>
-<li>For <code>bash</code> (Git Bash), it’s typically <code>~/.bashrc</code> or <code>~/.bash_profile</code>.</li>
-<li>For <code>zsh</code> (MacOS), it’s <code>~/.zshrc</code>.</li>
-</ul>
-<p>With your preferred command-line text editor, append the following line to the
-end of your shell’s initialization file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span><span class="l-string">:~/treasure_hunt</span>
-</div></code></pre>
-<p>Let’s break this line down.</p>
+<li><a href="https://google.github.io/styleguide/shellguide.html" target="_blank" rel="noopener noreferrer">Shell Style Guide</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/" target="_blank" rel="noopener noreferrer">Advanced Bash Scripting Guide</a>
 <ul>
-<li>
-<p><strong><code>export</code></strong>: This command tells the shell to make a variable available for
-other processes or commands that come after. When you export a variable, it’s
-like announcing to programs and scripts you might run next, “Hey, you can use
-this!”</p>
-</li>
-<li>
-<p><strong><code>PATH</code></strong>: This is one of the most critical environment variables in
-Unix-like operating systems. It tells the shell where to look for executable
-files in response to commands entered by the user. Its value is a list of
-directories separated by colons (:).</p>
-</li>
-<li>
-<p><strong><code>$PATH</code></strong>: Here, the $ is used to retrieve the current value of the <code>PATH</code>
-variable. So, <code>$PATH</code> represents whatever directories are currently in your
-<code>PATH</code>.</p>
-</li>
-<li>
-<p><strong><code>:</code></strong> : In the context of the <code>PATH</code> variable, the colon (:) is used as a
-delimiter to separate different directory paths.</p>
-</li>
-<li>
-<p><strong><code>~/treasure_hunt</code></strong>: This is a directory named treasure_hunt located within
-the user’s home directory.</p>
-</li>
+<li><a href="https://www.tldp.org/LDP/abs/html/testconstructs.html" target="_blank" rel="noopener noreferrer">Test Constructs</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/fto.html" target="_blank" rel="noopener noreferrer">File Test Operators</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/comparison-ops.html" target="_blank" rel="noopener noreferrer">Other Comparison Operators</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/loops.html" target="_blank" rel="noopener noreferrer">Loops &amp; Branches</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/localvar.html" target="_blank" rel="noopener noreferrer">Local Variables</a></li>
+<li><a href="https://tldp.org/LDP/abs/html/refcards.html#AEN22402" target="_blank" rel="noopener noreferrer">Special Shell Variables</a></li>
+<li><a href="https://tldp.org/LDP/abs/html/sha-bang.html" target="_blank" rel="noopener noreferrer">Starting Off With a Sha-Bang</a></li>
 </ul>
-<p>In this command, we merge several elements together. Firstly, <code>$PATH</code> retrieves the present <code>PATH</code> value. Then, <code>~/treasure_hunt</code> gets tacked onto that value. Essentially, this operation adds the <code>treasure_hunt</code> directory in the user’s home to the roster of directories the shell peruses when seeking executables. Put plainly, after initiating this command, the shell will extend its search to the <code>~/treasure_hunt</code> directory whenever a command is run, supplementing the directories already listed in your <code>PATH</code>.</p>
-<p>To incorporate the modifications made to the startup file without restarting your terminal, simply “source” the file:</p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div class="md:order-1"><p>For Bash:</p></div><div class="md:order-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">source</span> <span class="l-function-call">~/.bash_profile</span>
-</div></code></pre></div><div class="md:order-2"><p>For zsh:</p></div><div class="md:order-4"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">source</span> <span class="l-function-call">~/.zshrc</span>
-</div></code></pre></div></div>
-<p>Now, the <code>auto_hunt</code> command should be accessible from any location in the terminal.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">auto_hunt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">next</span> <span class="l-variable-parameter">clue,</span> <span class="l-variable-parameter">search</span> <span class="l-variable-parameter">where</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">water</span> <span class="l-variable-parameter">flows</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="4">           <span class="l-function-call">.ccccccc.</span>
-</div><div class="l-line" data-line="5">      <span class="l-function-call">.,,,</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">cooolccoo</span><span class="l-punctuation-delimiter">;;</span><span class="l-function-call">,,.</span>
-</div><div class="l-line" data-line="6">     <span class="l-function-call">.dOx</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">..</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">lllll</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">..</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">xOd.</span>
-</div><div class="l-line" data-line="7">   <span class="l-function-call">.cdo</span><span class="l-punctuation-delimiter">;</span><span class="l-string">&#39;,loOXXXXXkll;&#39;</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">odc.</span>
-</div><div class="l-line" data-line="8">  <span class="l-function-call">,ol:</span><span class="l-punctuation-delimiter">;</span><span class="l-string">c,</span><span class="l-string">&#39;:oko:cccccc,...ckl.</span>
-</div><div class="l-line" data-line="9"><span class="l-string">  ;c.;kXo..::..;c::&#39;</span><span class="l-string">.......oc</span>
-</div><div class="l-line" data-line="10"><span class="l-string">,dc..oXX0kk0o.</span><span class="l-string">&#39;:lll;..cxxc.,ld,</span>
-</div><div class="l-line" data-line="11"><span class="l-string">kNo.&#39;</span><span class="l-string">oXXXXXXo</span><span class="l-string">&#39;,:lll;..oXXOo;cOd.</span>
-</div><div class="l-line" data-line="12"><span class="l-string">KOc;oOXXXXXXo.&#39;</span><span class="l-string">:lol</span><span class="l-punctuation-delimiter">;</span><span class="l-string">..dXXXXl</span><span class="l-string">&#39;;xc</span>
-</div><div class="l-line" data-line="13"><span class="l-string">Ol,:k0XXXXXX0c.,clc&#39;</span><span class="l-string">.:0XXXXx,.oc</span>
-</div><div class="l-line" data-line="14"><span class="l-function-call">KOc</span><span class="l-punctuation-delimiter">;</span><span class="l-string">dOXXXXXXXl..</span><span class="l-string">&#39;;&#39;</span><span class="l-string">..lXXXXXo..oc</span>
-</div><div class="l-line" data-line="15"><span class="l-string">dNo..oXXXXXXXOx:..</span><span class="l-string">&#39;lxOXXXXXk,.:; ..</span>
-</div><div class="l-line" data-line="16"><span class="l-string">cNo..lXXXXXXXXXOolkXXXXXXXXXkl,..;:&#39;</span><span class="l-punctuation-delimiter">;</span><span class="l-function-builtin">.</span>
-</div><div class="l-line" data-line="17"><span class="l-function-call">.,</span><span class="l-punctuation-delimiter">;</span><span class="l-string">&#39;.,dkkkkk0XXXXXXXXXXXXXXXXXOxxl;,;,;l:.</span>
-</div><div class="l-line" data-line="18"><span class="l-string">  ;c.;:&#39;</span><span class="l-string">&#39;&#39;</span><span class="l-string">&#39;&#39;</span><span class="l-string">:doOXXXXXXXXXXXXXXXXXXOdo</span><span class="l-punctuation-delimiter">;</span><span class="l-string">&#39;;clc.</span>
-</div><div class="l-line" data-line="19"><span class="l-string">  ;c.lOdood:&#39;</span><span class="l-string">&#39;&#39;</span><span class="l-string">oXXXXXXXXXXXXXXXXXXXXXk,..</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">ol.</span>
-</div><div class="l-line" data-line="20">  <span class="l-string">&#39;;.:xxxxxocccoxxxxxxxxxxxxxxxxxxxxxxl::&#39;</span><span class="l-string">.</span><span class="l-string">&#39;;;.</span>
-</div><div class="l-line" data-line="21"><span class="l-string">  &#39;</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">........................................</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">l</span>&#39;
-</div></code></pre>
-<h2 id="what-just-happened"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What just happened?<a href="#what-just-happened" aria-label="Link to heading 'What just happened?'" data-heading-content="What just happened?" class="anchor"></a></h2>
-<p>In this exercise, we navigated through basic Unix commands. We started by creating directories and files, and then crafted a “treasure hunt”, where we used these commands to create and modify files.</p>
-<p>We further explored the curl command and its capabilities in interacting with the Internet directly from the command line. Transitioning to shell scripting, we automated the treasure hunt sequence with the <code>auto_hunt</code> script.</p>
-<p>A challenge arose when trying to run the script from any directory, which led us to tinker with file permissions and the <code>PATH</code> environment variable. By modifying permissions and adjusting the <code>PATH</code>, we ensured our script was easily accessible from any location in the terminal.</p>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Shell_script" target="_blank" rel="noopener noreferrer">Shell Script</a></li>
+</ul>
 
       <div class="xl:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -446,40 +548,84 @@ the user’s home directory.</p>
     <nav class="toc" aria-labelledby="on-this-page-title">
       <ul class="section-nav">
   <li class="toc-entry toc-h2">
-    <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    <a href="#what-is-a-script">What is a script?</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#creating-directories-and-files"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Creating directories and files</a>
+    <a href="#writing-and-running-a-script">Writing and running a script</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#create-a-script-printf-nano">Create a script (<code>printf</code>, <code>nano</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#adding-clues"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Adding clues</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#run-a-script-chmod-x-script">Run a script (<code>chmod +x</code>, <code>./script</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#test-the-treasure-hunt"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Test the treasure hunt</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#know-where-the-script-runs-cd">Know where the script runs (<code>cd</code>)</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#automate-the-treasure-hunt-using-shell-scripting"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Automate the treasure hunt using shell scripting</a>
+    <a href="#variables">Variables</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#use-a-variable">Use a variable</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#make-auto_hunt-executable"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make <code>auto_hunt</code> executable</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#store-the-output-of-a-command-">Store the output of a command (<code>$(...)</code>)</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#running-auto_hunt-from-any-directory"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Running <code>auto_hunt</code> from any directory</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#read-and-set-environment-variables-export">Read and set environment variables (<code>export</code>)</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#use-the-arguments-the-script-was-given-1-">Use the arguments the script was given (<code>$1</code>, <code>$@</code>)</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#what-just-happened"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What just happened?</a>
+    <a href="#logic">Logic</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#test-a-condition-if">Test a condition (<code>if</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#test-a-file-or-an-empty-variable-test">Test a file or an empty variable (<code>test</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#repeat-something-for">Repeat something (<code>for</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#reuse-a-piece-of-code-functions">Reuse a piece of code (functions)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#keep-a-variable-inside-a-function-local">Keep a variable inside a function (<code>local</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#when-it-goes-wrong">When it goes wrong</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#stop-on-the-first-error-set--e">Stop on the first error (<code>set -e</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#see-what-the-script-is-doing-set--x">See what the script is doing (<code>set -x</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
     
   </li>
 </ul>
     </nav>
     <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-103-hello-shell-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-shell-scripting.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/63d1d222d1c3c28ae205314edb23bd1f08bdc2c6/course/chapters/103-hello-shell/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/cheatsheets/shell-scripting/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -535,7 +681,7 @@ the user’s home directory.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg>
           </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
         </label>
       </li>
       <li class="group hidden peer-has-checked/section-0:flex course-item-done">
@@ -548,16 +694,7 @@ the user’s home directory.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/102-shell-scripting/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Shell Scripting</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
-        <a href="/2026/course/103-hello-shell/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello Shell</span>
@@ -566,7 +703,7 @@ the user’s home directory.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/104-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Secure Shell (SSH)</span>
@@ -575,7 +712,7 @@ the user’s home directory.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
-        <a href="/2026/course/105-hello-ssh/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Hello SSH</span>
@@ -1136,6 +1273,13 @@ the user’s home directory.</p>
   <span>Command Line</span>
 </span>
       </a>
+    </li><li class="course-item-current">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
     </li><li class="">
       <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
         <span class="flex items-center gap-x-2">
@@ -1184,7 +1328,7 @@ the user’s home directory.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@63d1d22</span>
+        <span class="tooltip-content">main@31d728d</span>
         <span class="font-title">0.1.0</span>
       </span>
       
