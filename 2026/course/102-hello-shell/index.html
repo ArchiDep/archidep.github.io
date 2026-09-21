@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Shell · ArchiDep</title>
-<meta name="description" content="In this exercise, you go on a treasure hunt on your own computer. A script prepares the hunt for you: an island where places are directories, clues are files, and a few things are programs. You explore it with the Command Line. On the way, you meet a few new commands. The rule of the hunt. The goal of this exercise is to learn to use the command line, so do everything in your terminal: the Terminal on macOS, the WSL on Windows. Do not look at the files of the hunt in the Finder, the Windows file explorer or a graphical editor. Do not remember a command? Look it up in the Command Line cheatsheet, in the sidebar. It is there for that, and the hunt will send you there too." />
+<meta name="description" content="In this exercise, you go on a treasure hunt on your own computer. A script prepares the hunt for you: an island where places are directories, clues are files, and a few things are programs. You explore it with the Command Line. On the way, you meet a few new commands." />
 <link rel="canonical" href="https://archidep.ch/2026/course/102-hello-shell/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Hello Shell" />
-<meta property="og:description" content="In this exercise, you go on a treasure hunt on your own computer. A script prepares the hunt for you: an island where places are directories, clues are files, and a few things are programs. You explore it with the Command Line. On the way, you meet a few new commands. The rule of the hunt. The goal of this exercise is to learn to use the command line, so do everything in your terminal: the Terminal on macOS, the WSL on Windows. Do not look at the files of the hunt in the Finder, the Windows file explorer or a graphical editor. Do not remember a command? Look it up in the Command Line cheatsheet, in the sidebar. It is there for that, and the hunt will send you there too." />
+<meta property="og:description" content="In this exercise, you go on a treasure hunt on your own computer. A script prepares the hunt for you: an island where places are directories, clues are files, and a few things are programs. You explore it with the Command Line. On the way, you meet a few new commands." />
 <meta property="og:url" content="https://archidep.ch/2026/course/102-hello-shell/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/102-hello-shell/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/102-hello-shell/exercise.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -127,14 +123,7 @@
       <div class="my-4"><p>In this exercise, you go on a treasure hunt on your own computer. A script
 prepares the hunt for you: an island where places are directories, clues are
 files, and a few things are programs. You explore it with the <a href="/2026/course/101-command-line/">Command
-Line</a>. On the way, you meet a few new commands.</p>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of the hunt.</strong> The goal of this exercise is to learn to use the
-command line, so do everything in your terminal: the Terminal on macOS, the WSL
-on Windows. Do not look at the files of the hunt in the Finder, the Windows file
-explorer or a graphical editor.</p>
-<p>Do not remember a command? Look it up in the <a href="/2026/cheatsheets/command-line/"><strong>Command Line</strong>
-cheatsheet</a>, in the sidebar. It is there for that, and
-the hunt will send you there too.</p></div></div></div></div>
+Line</a>. On the way, you meet a few new commands.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
         <input type="checkbox">
@@ -154,18 +143,7 @@ the hunt will send you there too.</p></div></div></div></div>
     <a href="#prepare-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Prepare the hunt</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#explore-the-island"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Explore the island</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#the-golden-idol-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The golden idol (optional)</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#change-things"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change things</a>
-    
-  </li><li class="toc-entry toc-h2">
-    <a href="#find-the-treasure"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the treasure</a>
+    <a href="#go-on-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Go on the hunt</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#take-the-treasure-home"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take the treasure home</a>
@@ -247,6 +225,13 @@ none of them opens Vim when you did not choose it.</p>
   />
 </svg><span>Note</span></div><div class="content"><p>See <a href="/2026/course/101-command-line/#setting-nano-as-the-default-editor">setting nano as the default editor</a>.</p></div></div>
 <h2 id="prepare-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Prepare the hunt<a href="#prepare-the-hunt" aria-label="Link to heading 'Prepare the hunt'" data-heading-content="Prepare the hunt" class="anchor"></a></h2>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of the hunt.</strong> The goal of this exercise is to learn to use the
+command line, so do everything in your terminal: the Terminal on macOS, the WSL
+on Windows. Do not look at the files of the hunt in the Finder, the Windows file
+explorer or a graphical editor.</p>
+<p>Do not remember a command? Look it up in the <a href="/2026/cheatsheets/command-line/"><strong>Command Line</strong>
+cheatsheet</a>, in the sidebar. It is there for that, and
+the hunt will send you there too.</p></div></div></div>
 <p>Run this command:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-fsSL</span> <span class="l-variable-parameter">https://raw.githubusercontent.com/ArchiDep/website/main/course/chapters/102-hello-shell/treasure-hunt.sh</span> <span class="l-operator">|</span> <span class="l-function-call">bash</span>
 </div></code></pre>
@@ -271,74 +256,32 @@ computer, and you do not see what it does before it runs. Only do this with a
 script from someone you trust. You can <a href="https://raw.githubusercontent.com/ArchiDep/website/main/course/chapters/102-hello-shell/treasure-hunt.sh" target="_blank" rel="noopener noreferrer">read this
 one</a>
 before you run it. It only writes in <code>~/treasure-hunt</code>.</p></div></div></div>
-<p>At the end, the script tells you to type this command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/treasure-hunt</span>
-</div></code></pre>
-<p>Go ahead and do that. You will then be ready to explore the island.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Want to start over? Run the same <code>curl</code> command again. It asks before it deletes
 your hunt.</p></div></div>
-<h2 id="explore-the-island"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Explore the island<a href="#explore-the-island" aria-label="Link to heading 'Explore the island'" data-heading-content="Explore the island" class="anchor"></a></h2>
-<p>Read <code>start.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">start.txt</span>
+<h2 id="go-on-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Go on the hunt<a href="#go-on-the-hunt" aria-label="Link to heading 'Go on the hunt'" data-heading-content="Go on the hunt" class="anchor"></a></h2>
+<p>Go where the script put the hunt, and read <code>start.txt</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/treasure-hunt</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">start.txt</span>
 </div></code></pre>
-<p>Then follow the clues. Your goal for this part: find out where the captain hid
-the key, and get past the dragon.</p>
+<p>Everything you need is on the island from now on: each place tells you what to
+do and where to go next, and each one also has a hint in a hidden file if you
+are stuck (<code>cat .hint</code>). You will not need this page again until you have the
+treasure.</p>
 <p>On the way, you will:</p>
 <ul>
-<li>Move around with <code>cd</code>, look around with <code>ls</code>, and read with <code>cat</code>.</li>
-<li>Find hidden files with <code>ls -a</code>.</li>
-<li>Go into a directory whose name has a space, with quotes or with Tab
-completion.</li>
-<li>Use relative paths with <code>..</code>.</li>
-<li>Read a long file with <code>less</code>.</li>
-<li>Run a program with <code>./</code>, and stop it.</li>
-</ul>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Stuck? Every place has a hint in a hidden file: <code>cat .hint</code>.</p></div></div>
-<h3 id="the-golden-idol-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The golden idol (optional)<a href="#the-golden-idol-optional" aria-label="Link to heading 'The golden idol (optional)'" data-heading-content="The golden idol (optional)" class="anchor"></a></h3>
-<p>The catacombs, under the ruins, are very deep. A golden idol is lost somewhere
-down there. Bring it back in your bag, and your treasure will be bigger.</p>
-<p>Do not search by hand: use <code>find</code> (see <a href="/2026/cheatsheets/command-line/#find-files-find">“Find files” in the <strong>Command Line</strong>
-cheatsheet</a>).</p>
-<h2 id="change-things"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change things<a href="#change-things" aria-label="Link to heading 'Change things'" data-heading-content="Change things" class="anchor"></a></h2>
-<p>In this part, you do not only look at the island: you change it. Take the key
-to the fortress and get to the top of its tower.</p>
-<p>On the way, you will:</p>
-<ul>
-<li>Move a file with <code>mv</code>, and rename it with <code>mv</code> too.</li>
-<li>Copy a file with <code>cp</code>, and see how it is different from <code>mv</code>.</li>
-<li>Create a directory with <code>mkdir</code> and a file with <code>touch</code>, and write in a file
-with <code>echo … &gt;</code>.</li>
+<li>Move around the file system and see what is in it (<code>cd</code>, <code>ls</code>, <code>pwd</code>).</li>
+<li>Read files, short and long (<code>cat</code>, <code>less</code>).</li>
+<li>Create, copy, move, rename and delete files and directories (<code>mkdir</code>,
+<code>touch</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>).</li>
 <li>Edit a file with nano (or Vim). You will do this a lot on your server later in
 the course.</li>
-<li>Delete files with <code>rm</code>.</li>
+<li>Run programs, stop one that does not stop by itself, and make one executable.</li>
+<li>Look for what <code>ls</code> does not show you (<code>ls -a</code>, <code>find</code>).</li>
 </ul>
-<p><code>cp</code>, <code>mv</code> and <code>rm</code> are new: see <a href="/2026/cheatsheets/command-line/#copy-stuff-cp">“Copy stuff”</a>, <a href="/2026/cheatsheets/command-line/#move-stuff-mv">“Move
-stuff”</a> and <a href="/2026/cheatsheets/command-line/#delete-stuff-rm">“Delete stuff”</a> in the
-<strong>Command Line</strong> cheatsheet.</p>
-<div class="callout callout-warning group/callout"><svg
-  class="icon"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-  />
-</svg><div class="container"><div class="content"><p><code>rm</code> deletes a file forever. There is no bin to get it back from. Read the name
-twice before you press Enter.</p></div></div></div>
-<h2 id="find-the-treasure"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the treasure<a href="#find-the-treasure" aria-label="Link to heading 'Find the treasure'" data-heading-content="Find the treasure" class="anchor"></a></h2>
-<p>The parrot at the top of the tower tells you where to go next, as a path.
-Follow it, then ring the bell from the right place. Before you run anything,
-work out where the path goes: count the <code>..</code> one by one.</p>
-<p>On Skull Island, the chest is a program that you are not allowed to run yet. See
-<a href="/2026/cheatsheets/command-line/#make-a-file-executable-chmod-x">“Make a file executable” in the <strong>Command Line</strong> cheatsheet</a>.
-You will learn about permissions later in the course. The chest then asks for a
-combination: look at the coins you’ve collected in your bag.</p>
 <h2 id="take-the-treasure-home"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take the treasure home<a href="#take-the-treasure-home" aria-label="Link to heading 'Take the treasure home'" data-heading-content="Take the treasure home" class="anchor"></a></h2>
+<p>This last step is for when the chest is open and the treasure is in your bag.
+Not there yet? Go back to the island: the hunt sends you here when it is done
+with you.</p>
 <p>The treasure is a program in your bag. You can run it with its path:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/treasure-hunt/bag/treasure</span>
 </div></code></pre>
@@ -479,18 +422,7 @@ how to run the finished script.</p></div></div>
     <a href="#prepare-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Prepare the hunt</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#explore-the-island"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Explore the island</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#the-golden-idol-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The golden idol (optional)</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#change-things"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change things</a>
-    
-  </li><li class="toc-entry toc-h2">
-    <a href="#find-the-treasure"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the treasure</a>
+    <a href="#go-on-the-hunt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Go on the hunt</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#take-the-treasure-home"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take the treasure home</a>
@@ -519,7 +451,7 @@ how to run the finished script.</p></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/102-hello-shell/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/102-hello-shell/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -545,11 +477,7 @@ how to run the finished script.</p></div></div>
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -667,7 +595,7 @@ how to run the finished script.</p></div></div>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -1022,10 +950,10 @@ how to run the finished script.</p></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -1206,15 +1134,14 @@ how to run the finished script.</p></div></div>
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       

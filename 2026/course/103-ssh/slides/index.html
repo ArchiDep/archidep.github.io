@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-0a2d943f8cde0bd3af516c7d90d892c4.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-ac3a43a3296154b64e89d1a813965fd4.css">
     <script defer src="/2026/assets/course/slides-mermaid-a65afe425c6ae7f615bd2d58b4a99c21.js">
     </script>
   </head>
@@ -407,20 +407,72 @@ communication channel.
 
 #### Diffie-Hellman key exchange
 
-<img src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png" alt="Diffie-Hellman Key Exchange" class="w-1/3" />
+<!-- Six copies of the same image, each clipped to one horizontal band of it and
+     stacked in the same place, so that clicking through the fragments draws the
+     analogy one row at a time. The first copy is in the flow and gives the
+     stack its size: clipping is painting only, so it still occupies the whole
+     image even while showing just the top band, and nothing moves as the rest
+     appear. Each band's bottom inset is the next band's top inset, so the six
+     tile the image exactly.
+
+     Reveal caps slide images at 95% of their container, so every copy is
+     narrower than the wrapper. The copy in the flow is an inline box and the
+     slide centers it; the others are absolutely positioned, which makes them
+     blocks that centering no longer reaches, so they are placed on the same
+     axis by hand. -->
+<div class="relative mx-auto w-1/3">
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt="Diffie-Hellman Key Exchange"
+    class="box-border w-full [clip-path:inset(0_0_79.586%_0)]"
+  />
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt=""
+    class="fragment absolute top-0 left-1/2 -translate-x-1/2 box-border w-full [clip-path:inset(20.414%_0_68.343%_0)]"
+  />
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt=""
+    class="fragment absolute top-0 left-1/2 -translate-x-1/2 box-border w-full [clip-path:inset(31.657%_0_52.959%_0)]"
+  />
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt=""
+    class="fragment absolute top-0 left-1/2 -translate-x-1/2 box-border w-full [clip-path:inset(47.041%_0_26.775%_0)]"
+  />
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt=""
+    class="fragment absolute top-0 left-1/2 -translate-x-1/2 box-border w-full [clip-path:inset(73.225%_0_15.385%_0)]"
+  />
+  <img
+    src="images/dh-00c24d5edf3cc69b69a577a73d116f05.png"
+    alt=""
+    class="fragment absolute top-0 left-1/2 -translate-x-1/2 box-border w-full [clip-path:inset(84.615%_0_0_0)]"
+  />
+</div>
 
 **Notes:**
 
 This conceptual diagram illustrates the general idea behind the protocol:
 
-- Alice and Bob choose a **random, public starting color** (yellow) together.
-- Then they each separately choose a **secret color known only to themselves**
-  (orange and blue-green).
-- Then they **mix their own secret color with the mutually shared color**
-  (resulting in orange-tan and light-blue) and **publicly exchange** the two
-  mixed colors.
-- Finally, Alice and Bob each **mix the color they received** from the other
-  **with their own private color** (yellow-brown).
+1. Alice and Bob choose a **random, public starting color** (yellow) together.
+2. They each separately choose a **secret color known only to themselves**
+   (orange and blue-green).
+3. They each **mix their own secret color with the mutually shared color**,
+   giving orange-tan and light-blue.
+4. They **publicly exchange** the two mixed colors. An attacker can see them go
+   past, but **separating a mixture back into its ingredients is expensive**.
+5. They each add **their own secret color** to the mixture they received from
+   the other.
+6. Both now hold a mixture of **all three colors** (yellow-brown).
+
+Both sides apply **the same two secret colors to the same starting color**, only
+in the opposite order — and mixing does not care about the order. That
+**commutativity** is what makes the two results meet. The real protocol rests on
+the same property: Alice computes `(g^b)^a` and Bob computes `(g^a)^b`, which
+are both `g^(ab)`.
 
 The result is a final color mixture that is **identical to the partner's final
 color mixture**, and which was never shared publicly. When using large numbers
@@ -694,7 +746,7 @@ SSH does not counter the following threats:
       </div>
     </div>
 
-    <script src="/2026/assets/course/slides-12374c9d3ef6f91a6b23da78c128c90e.js">
+    <script src="/2026/assets/course/slides-e96ff36856ddc4bfa46fe5e484b380f5.js">
     </script>
 
     <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
@@ -702,7 +754,7 @@ SSH does not counter the following threats:
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/103-ssh/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/103-ssh/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -729,12 +781,12 @@ SSH does not counter the following threats:
           </li>
           
           <li class="text-xs">
-            Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed
+            Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@31d728d
+        ArchiDep 26-27 main@35efbb2
       </a>
     </div>
   </body>

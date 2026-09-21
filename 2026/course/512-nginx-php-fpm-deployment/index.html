@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/512-nginx-php-fpm-deployment/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/512-nginx-php-fpm-deployment/exercise.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -231,17 +227,17 @@ that you have done the <a href="/2026/course/506-systemd-deployment/">systemd ex
 <p>During this exercise, you will use a package and service called <code>php-fpm</code> that
 you installed on your server back during the first deployment exercise. The
 version of <code>php-fpm</code> running on your server will depend on which Ubuntu version
-you chose when configuring your Azure instance. It will likely be <code>8.3</code> for
-Ubuntu 24.04.</p>
+you chose when configuring your Azure instance. It will likely be <code>8.5</code> for
+Ubuntu 26.04.</p>
 <p>You can check which version you have by running either of the following
 commands:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/etc/php</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">8.3</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">8.5</span>
 </div><div class="l-line" data-line="3">
 </div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">dpkg</span> <span class="l-function-call">--list</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">php-fpm</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">ii</span>  <span class="l-variable-parameter">php-fpm</span>   <span class="l-variable-parameter">2:8.3+93ubuntu2</span>   <span class="l-variable-parameter">...</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">ii</span>  <span class="l-variable-parameter">php-fpm</span>   <span class="l-variable-parameter">2:8.5+99ubuntu1</span>   <span class="l-variable-parameter">...</span>
 </div></code></pre>
-<p>In this case, the output indicates that version <code>8.3</code> is installed. The
+<p>In this case, the output indicates that version <code>8.5</code> is installed. The
 remaining sections of the exercise assume that this is the case. <strong>If not</strong>, you
 will need to <strong>modify the commands containing the version number accordingly</strong>.</p>
 <div class="callout callout-more group/callout" data-callout="512-nginx-php-fpm-deployment:php-fpm"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-512-nginx-php-fpm-deployment:php-fpm" type="checkbox" class="peer hidden" /><div class="content"><p>When you did the <a href="/2026/course/506-systemd-deployment/">systemd exercise</a>, you used the PHP development
@@ -261,15 +257,15 @@ clients at the same time.</li>
 <a href="https://en.wikipedia.org/wiki/FastCGI" target="_blank" rel="noopener noreferrer">FastCGI protocol</a>.</li>
 </ul>
 <p>Use the following command for more information on how PHP-FPM manages processes
-(for version 8.3):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-A</span> <span class="l-number">50</span> <span class="l-variable-parameter">-m</span> <span class="l-number">1</span> <span class="l-string">&quot;number of child processes&quot;</span> <span class="l-variable-parameter">/etc/php/8.3/fpm/pool.d/www.conf</span>
+(for version 8.5):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-A</span> <span class="l-number">50</span> <span class="l-variable-parameter">-m</span> <span class="l-number">1</span> <span class="l-string">&quot;number of child processes&quot;</span> <span class="l-variable-parameter">/etc/php/8.5/fpm/pool.d/www.conf</span>
 </div></code></pre>
 <p>The <code>php-fpm</code> package is integrated with systemd out of the box (its service
-file is <code>/lib/systemd/system/php8.3-fpm.service</code> for version 8.3). It should
+file is <code>/lib/systemd/system/php8.5-fpm.service</code> for version 8.5). It should
 already be running:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">php8.3-fpm</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">●</span> <span class="l-variable-parameter">php8.3-fpm.service</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">PHP</span> <span class="l-variable-parameter">8.3</span> <span class="l-variable-parameter">FastCGI</span> <span class="l-variable-parameter">Process</span> <span class="l-variable-parameter">Manager</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">Loaded:</span> loaded <span class="l-punctuation-bracket">(</span><span class="l-function-call">/lib/systemd/system/php8.3-fpm.service</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">enabled</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">vendor</span> <span class="l-variable-parameter">preset:</span> <span class="l-variable-parameter">enabled</span><span class="l-punctuation-bracket">)</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">php8.5-fpm</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">●</span> <span class="l-variable-parameter">php8.5-fpm.service</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">PHP</span> <span class="l-variable-parameter">8.5</span> <span class="l-variable-parameter">FastCGI</span> <span class="l-variable-parameter">Process</span> <span class="l-variable-parameter">Manager</span>
+</div><div class="l-line" data-line="3">   <span class="l-function-call">Loaded:</span> loaded <span class="l-punctuation-bracket">(</span><span class="l-function-call">/lib/systemd/system/php8.5-fpm.service</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">enabled</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">vendor</span> <span class="l-variable-parameter">preset:</span> <span class="l-variable-parameter">enabled</span><span class="l-punctuation-bracket">)</span>
 </div><div class="l-line" data-line="4">   <span class="l-function-call">Active:</span> active <span class="l-punctuation-bracket">(</span><span class="l-function-call">running</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">since</span> <span class="l-variable-parameter">Thu</span> <span class="l-variable-parameter">2019-01-10</span> <span class="l-variable-parameter">17:58:07</span> <span class="l-variable-parameter">UTC</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">27min</span> <span class="l-variable-parameter">ago</span>
 </div><div class="l-line" data-line="5">   <span class="l-function-call">...</span>
 </div></code></pre></div><label for="callout-512-nginx-php-fpm-deployment:php-fpm" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-512-nginx-php-fpm-deployment:php-fpm" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/2728-e820a306c732b90515989dada9995a97.svg" alt="✨" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
@@ -283,8 +279,8 @@ between processes on the same machine by writing to and reading from that file.<
 configure PHP-FPM to also listen on a port rather than a domain socket for
 consistency.</p>
 <p>You will need to edit the PHP-FPM web configuration file which you can find at
-<code>/etc/php/8.3/fpm/pool.d/www.conf</code> (for version 8.3). Edit this file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/php/8.3/fpm/pool.d/www.conf</span>
+<code>/etc/php/8.5/fpm/pool.d/www.conf</code> (for version 8.5). Edit this file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/php/8.5/fpm/pool.d/www.conf</span>
 </div></code></pre>
 <p>Find the section configuring the listening address (the <code>listen = ...</code> key):</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">; The address on which to accept FastCGI requests.
@@ -297,17 +293,17 @@ consistency.</p>
 </div><div class="l-line" data-line="8">;                            (IPv6 and IPv4-mapped) on a specific port;
 </div><div class="l-line" data-line="9">;   &#39;/path/to/unix/socket&#39; - to listen on a unix socket.
 </div><div class="l-line" data-line="10">; Note: This value is mandatory.
-</div><div class="l-line" data-line="11">listen = /run/php/php8.3-fpm.sock
+</div><div class="l-line" data-line="11">listen = /run/php/php8.5-fpm.sock
 </div></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can search for a specific word in nano by typing the <code>Ctrl-W</code> shortcut, then
 typing your word (e.g. “listen”) and finally pressing the <code>Enter</code> key. This will
 scroll to the first occurrence of the word in the file. You can find further
 occurrences of the word by typing <code>Ctrl-W</code> followed by <code>Enter</code> again.</p></div></div>
-<p>Remove the existing <code>listen = /run/php/php8.3-fpm.sock</code> line, or comment it by
+<p>Remove the existing <code>listen = /run/php/php8.5-fpm.sock</code> line, or comment it by
 adding a <code>;</code> comment character at the beginning of the line. Then add a new
 <code>listen = 9000</code> line. This will instruct PHP-FPM to listen on port 9000 rather
 than using the Unix domain socket file:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">; listen = /run/php/php8.3-fpm.sock
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">; listen = /run/php/php8.5-fpm.sock
 </div><div class="l-line" data-line="2">listen = 9000
 </div></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Why port 9000, you ask? Why not? It does not matter which port you choose, as
@@ -328,7 +324,7 @@ sure the value is set to <code>127.0.0.1</code> (local clients only):</p>
 </div><div class="l-line" data-line="7">listen.allowed_clients = 127.0.0.1
 </div></code></pre>
 <p>For these changes to take effect, you must restart the PHP-FPM service:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">php8.3-fpm</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">php8.5-fpm</span>
 </div></code></pre>
 <h3 id="optional-check-something-is-listening-on-port-9000"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: check something is listening on port 9000<a href="#optional-check-something-is-listening-on-port-9000" aria-label="Link to heading 'Optional: check something is listening on port 9000'" data-heading-content="Optional: check something is listening on port 9000" class="anchor"></a></h3>
 <p>Running the <code>ss -tlpn</code> command should confirm that there is indeed a process
@@ -356,7 +352,7 @@ code. By default, PHP-FPM does not pass environment variables from systemd to
 the application. Therefore, you need to configure PHP-FPM to add this variable
 to your application’s environment.</p>
 <p>Edit the PHP-FPM web configuration file again:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/php/8.3/fpm/pool.d/www.conf</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/php/8.5/fpm/pool.d/www.conf</span>
 </div></code></pre>
 <p>Find the environment section which looks like this:</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from
@@ -374,18 +370,18 @@ characters. Also, be sure to remove the leading <code>;</code> which makes the l
 comment.</p></div></div>
 <h3 id="reload-php-fpm"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Reload PHP-FPM<a href="#reload-php-fpm" aria-label="Link to heading 'Reload PHP-FPM'" data-heading-content="Reload PHP-FPM" class="anchor"></a></h3>
 <p>For the change to take effect, you must restart the PHP-FPM service:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">php8.3-fpm</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">restart</span> <span class="l-variable-parameter">php8.5-fpm</span>
 </div></code></pre>
 <p>Make sure it is still running:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">php8.3-fpm</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">●</span> <span class="l-variable-parameter">php8.3-fpm.service</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">PHP</span> <span class="l-variable-parameter">8.3</span> <span class="l-variable-parameter">FastCGI</span> <span class="l-variable-parameter">Process</span> <span class="l-variable-parameter">Manager</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">Loaded:</span> loaded <span class="l-punctuation-bracket">(</span><span class="l-function-call">/lib/systemd/system/php8.3-fpm.service</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">enabled</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">vendor</span> <span class="l-variable-parameter">preset:</span> <span class="l-variable-parameter">enabled</span><span class="l-punctuation-bracket">)</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">php8.5-fpm</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">●</span> <span class="l-variable-parameter">php8.5-fpm.service</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">PHP</span> <span class="l-variable-parameter">8.5</span> <span class="l-variable-parameter">FastCGI</span> <span class="l-variable-parameter">Process</span> <span class="l-variable-parameter">Manager</span>
+</div><div class="l-line" data-line="3">   <span class="l-function-call">Loaded:</span> loaded <span class="l-punctuation-bracket">(</span><span class="l-function-call">/lib/systemd/system/php8.5-fpm.service</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">enabled</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">vendor</span> <span class="l-variable-parameter">preset:</span> <span class="l-variable-parameter">enabled</span><span class="l-punctuation-bracket">)</span>
 </div><div class="l-line" data-line="4">   <span class="l-function-call">Active:</span> active <span class="l-punctuation-bracket">(</span><span class="l-function-call">running</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">since</span> <span class="l-variable-parameter">Thu</span> <span class="l-variable-parameter">2019-01-10</span> <span class="l-variable-parameter">17:58:07</span> <span class="l-variable-parameter">UTC</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">3s</span> <span class="l-variable-parameter">ago</span>
 </div><div class="l-line" data-line="5">   <span class="l-function-call">...</span>
 </div></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If PHP-FPM is no longer running, you may have corrupted the configuration file.
 If the problem is not clear in the output of the <code>status</code> command, check the
-entire logs with <code>sudo journalctl -u php8.3-fpm</code> to see if you can find more
+entire logs with <code>sudo journalctl -u php8.5-fpm</code> to see if you can find more
 information.</p></div></div>
 <h2 id="create-an-nginx-configuration-file-to-serve-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create an nginx configuration file to serve the application<a href="#create-an-nginx-configuration-file-to-serve-the-application" aria-label="Link to heading 'Create an nginx configuration file to serve the application'" data-heading-content="Create an nginx configuration file to serve the application" class="anchor"></a></h2>
 <p>Create an nginx configuration file named <code>todolist</code> for the application. Put it
@@ -608,7 +604,7 @@ ignoring the other applications we have also deployed on the server.</p></div></
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/512-nginx-php-fpm-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/512-nginx-php-fpm-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -635,11 +631,7 @@ ignoring the other applications we have also deployed on the server.</p></div></
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -757,7 +749,7 @@ ignoring the other applications we have also deployed on the server.</p></div></
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -1112,10 +1104,10 @@ ignoring the other applications we have also deployed on the server.</p></div></
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -1296,15 +1288,14 @@ ignoring the other applications we have also deployed on the server.</p></div></
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       

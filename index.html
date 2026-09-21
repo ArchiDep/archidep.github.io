@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/index.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/index.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -122,7 +118,10 @@
     <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-home">
       <div class="flex flex-wrap xs:flex-nowrap items-center gap-4">
   <div class="flex items-center gap-4">
-    <img src="/favicons/archidep-512-flat.png" alt="ArchiDep logo" class="!m-0 w-40">
+    <picture>
+      <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-logo-2x.png 1x, /favicons/archidep-logo-4x.png 2x, /favicons/archidep-logo-6x.png 3x">
+      <img src="/favicons/archidep-logo-2x.png" srcset="/favicons/archidep-logo-2x.webp 1x, /favicons/archidep-logo-4x.webp 2x, /favicons/archidep-logo-6x.webp 3x" width="186" height="116" alt="ArchiDep logo" class="!m-0 w-[186px] [image-rendering:pixelated]">
+    </picture>
   </div>
   <div>
     <h1 class="text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-5xl !mb-0 dark:text-white print:hidden">
@@ -166,11 +165,25 @@
         <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
-    <a href="#what-you-will-need">What you will need</a>
+    <a href="#getting-started">Getting started</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#following-the-course">Following the course</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#resources">Resources</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#if-this-site-is-down">If this site is down</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#an-ai-tutor">An AI tutor</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#pdfs">PDFs</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#tools-for-later-sessions">Tools for later sessions</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
@@ -245,14 +258,78 @@ Azure</a>).</li>
 </ul>
 <p>This course is a <a href="https://heig-vd.ch/formation/bachelor/ingenierie-des-medias/" target="_blank" rel="noopener noreferrer">Media Engineering</a> web development course
 taught at <a href="http://www.heig-vd.ch" target="_blank" rel="noopener noreferrer">HEIG-VD</a>.</p>
-<h2 id="what-you-will-need">What you will need<a href="#what-you-will-need" aria-label="Link to heading 'What you will need'" data-heading-content="What you will need" class="anchor"></a></h2>
+<h2 id="getting-started">Getting started<a href="#getting-started" aria-label="Link to heading 'Getting started'" data-heading-content="Getting started" class="anchor"></a></h2>
+<p>All you need to start the course is a Unix command line:</p>
 <ul>
-<li>A Unix CLI
-<ul>
-<li>Linux/macOS users can use their standard Terminal</li>
-<li>Windows users should install the <a href="https://learn.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener noreferrer">Windows Subsystem for Linux (WSL)</a></li>
+<li>Linux and macOS users can use their standard Terminal.</li>
+<li>Windows users must install the <a href="https://learn.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener noreferrer">Windows Subsystem for Linux (WSL)</a> before
+the first session.</li>
 </ul>
-</li>
+<h3 id="following-the-course">Following the course<a href="#following-the-course" aria-label="Link to heading 'Following the course'" data-heading-content="Following the course" class="anchor"></a></h3>
+<p>This site follows the course as it happens. After each session, the cards at
+the top of this page are updated:</p>
+<ul>
+<li><strong>Previously (green)</strong>: what the last session covered.</li>
+<li><strong>Due next (yellow)</strong>: the exercises from the last session that you should
+finish before the next one.</li>
+<li><strong>Next time (blue)</strong>: what the next session will cover.</li>
+</ul>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>The sidebar uses the same colors as the cards: a bar on the right of each
+subject and exercise shows whether it has been covered, has work due or is
+coming next. Chapters the course has not reached yet are faded out. Exercise
+solutions appear within each exercise page once their chapter has been covered.</p></div><div><p><img src="/2026/images/sidebar-31cd0ed6770023424aec3e76029dbd1d.png" alt="The sidebar, showing chapters that have been covered, have work due, come next and have not been reached yet" /></p></div></div>
+<h3 id="if-this-site-is-down">If this site is down<a href="#if-this-site-is-down" aria-label="Link to heading 'If this site is down'" data-heading-content="If this site is down" class="anchor"></a></h3>
+<p>A backup copy of this site is available at <a href="https://backup.archidep.ch" target="_blank" rel="noopener noreferrer">backup.archidep.ch</a>. It may
+lag a little behind this site, but it is enough to keep reading the material and
+working on the exercises if the main site is temporarily down.</p>
+<h3 id="an-ai-tutor">An AI tutor<a href="#an-ai-tutor" aria-label="Link to heading 'An AI tutor'" data-heading-content="An AI tutor" class="anchor"></a></h3>
+<p>If you use an AI agent (Claude Code, Codex, Cursor, ChatGPT, etc.), remember
+that it can do any exercise of this course for you in a few minutes. But a
+finished exercise is not the goal: what you understand while you do it is. If
+the agent does the work, you learn nothing.</p>
+<p>The <a href="https://github.com/ArchiDep/tutor" target="_blank" rel="noopener noreferrer">ArchiDep tutor</a> turns your agent into a tutor for this course. It
+knows the course material and how far the class has got. It asks what you tried,
+gives you the smallest useful hint, and lets you type the commands yourself. You
+can also ask it to go through an exercise with you. Its page explains how to
+install it.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>The tutor is an AI and it can be wrong. Check what it tells you, especially
+before you run a command on your server. When in doubt, this site and your
+teachers are the reference.</p></div></div>
+<h3 id="pdfs">PDFs<a href="#pdfs" aria-label="Link to heading 'PDFs'" data-heading-content="PDFs" class="anchor"></a></h3>
+<p>Each page (subject, slides, exercise) is downloadable as a PDF.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>These PDFs are not final. They are <strong>not</strong> the reference material for this
+course. Course material <strong>will change</strong> until the end of the semester. The only
+up-to-date material is what is on this site.</p></div></div>
+<h3 id="tools-for-later-sessions">Tools for later sessions<a href="#tools-for-later-sessions" aria-label="Link to heading 'Tools for later sessions'" data-heading-content="Tools for later sessions" class="anchor"></a></h3>
+<p>You will need these as the course goes on. Install them when the subject that
+uses them comes up; you do not need them for the first session.</p>
+<ul>
 <li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Git</a>
 <ul>
 <li>macOS users should <a href="https://www.freecodecamp.org/news/install-xcode-command-line-tools/" target="_blank" rel="noopener noreferrer">install the command-line tools</a></li>
@@ -269,23 +346,6 @@ distributions’ package managers.</li>
 </li>
 <li>A free <a href="https://render.com" target="_blank" rel="noopener noreferrer">Render</a> account</li>
 </ul>
-<h2 id="resources">Resources<a href="#resources" aria-label="Link to heading 'Resources'" data-heading-content="Resources" class="anchor"></a></h2>
-<div class="note note-warning"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-  />
-</svg><span>Warning</span></div><div class="content"><p>Each page is downloadable as a PDF. These are not final. They are <strong>not</strong> the
-reference material for this course. Course material <strong>will change</strong> until the
-end of the semester. The only up-to-date material is what is on this site.</p></div></div>
 <h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <p>These are the main references used throughout this course. More detailed and
 additional links to various online articles and documentation can be found at
@@ -355,11 +415,10 @@ and related articles:</p>
 </ul>
 <h2 id="credits--thanks">Credits &amp; thanks<a href="#credits--thanks" aria-label="Link to heading 'Credits &amp; thanks'" data-heading-content="Credits &amp; thanks" class="anchor"></a></h2>
 <ul>
-<li><em>Me</em></li>
-<li>Simon Pinkas contributed the Docker subject, the Hello Shell command line
-exercise and various other material. He sometimes teaches parts of the course
-when I feel too lazy (his words), and helps students navigate through this
-mess along with me during exercise sessions.</li>
+<li>Simon Pinkas contributed the Docker subject, the original idea for the Hello
+Shell command line exercise and various other material. He used to teach parts
+of the course when I felt too lazy (his words), and to help students navigate
+through this mess along with me during exercise sessions.</li>
 <li>My <del>test subjects</del> early adopters: students who helped test, debug and
 improve the course.</li>
 <li>David Goetschmann, my current boss at <a href="https://www.squareservices.ch" target="_blank" rel="noopener noreferrer">Square
@@ -403,11 +462,25 @@ material that was turned into code.</li>
     <nav class="toc" aria-labelledby="on-this-page-title">
       <ul class="section-nav">
   <li class="toc-entry toc-h2">
-    <a href="#what-you-will-need">What you will need</a>
+    <a href="#getting-started">Getting started</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#following-the-course">Following the course</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#resources">Resources</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#if-this-site-is-down">If this site is down</a>
     
+  </li><li class="toc-entry toc-h3">
+    <a href="#an-ai-tutor">An AI tutor</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#pdfs">PDFs</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#tools-for-later-sessions">Tools for later sessions</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
@@ -424,7 +497,7 @@ material that was turned into code.</li>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/index.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/index.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -450,11 +523,7 @@ material that was turned into code.</li>
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -572,7 +641,7 @@ material that was turned into code.</li>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -927,10 +996,10 @@ material that was turned into code.</li>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -1111,15 +1180,14 @@ material that was turned into code.</li>
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       

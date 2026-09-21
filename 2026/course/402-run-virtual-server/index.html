@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/402-run-virtual-server/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/402-run-virtual-server/exercise.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -153,6 +149,9 @@ Azure</a> cloud platform.</p></div>
     <ul class="section-nav">
   <li class="toc-entry toc-h4">
     <a href="#configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#i-cant-select-the-right-size-or-region"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> I can’t select the right size or region</a>
     
   </li><li class="toc-entry toc-h4">
     <a href="#make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open</a>
@@ -282,9 +281,7 @@ section:</p>
 infrastructure:</p>
 <p><img src="images/azure-create-vm-0dbbb7e0325bda54389ad5c65403742e.png" alt="Azure: Create a new virtual machine" /></p>
 <h3 id="configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings<a href="#configure-basic-settings" aria-label="Link to heading 'Configure basic settings'" data-heading-content="Configure basic settings" class="anchor"></a></h3>
-<p>In the <strong>Basics</strong> settings, configure the <strong>virtual machine details</strong> (the
-machine’s name, region, image and size):</p>
-<p><img src="images/azure-vm-instance-details-0b37d191a3b93d13eaa8540698bc76ed.png" alt="Azure: VM instance details" /></p>
+<p>You will now configure your virtual machine.</p>
 <div class="callout callout-danger group/callout animate"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -298,24 +295,19 @@ machine’s name, region, image and size):</p>
     stroke-linejoin="round"
     d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
   />
-</svg><div class="container"><div class="content"><p><strong>Make sure to select the <code>Ubuntu 24.04</code> image and the <code>B1s</code> size.</strong> If you
-select a VM size that is too expensive, <strong>YOU WILL RUN OUT OF FREE CREDITS
-BEFORE THE END OF THE COURSE</strong> You will then have pay <img class="emoji" src="/2026/assets/emoji/1f4b8-aff6d39f4947f22f042e67ac21a9dc7a.svg" alt="💸" width="20" height="20" /> for a new VM and will
-have to reinstall your VM from scratch (including all deployment exercises you
-may already have completed).</p></div></div></div>
-<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If the correct size is not selected, you can select it from the complete list of
-VM sizes. If you cannot select the <code>B1s</code> size, try selecting another
-availability zone (or another region that is not too expensive).</p>
-<p><img src="images/azure-vm-size-d633d23a65dd971033b25ba93e4a9f8a.png" alt="Azure: virtual machine size" /></p></div></div>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>As a student, you are not allowed to run your virtual machine in any region.
-Choose one of the regions that are recommended for you (these may be different
-for each student):</p>
-<p><img src="images/azure-vm-recommended-regions-3b9562118eb04fa3b1dae464880cf804.png" alt="Azure: recommended regions" /></p>
-<p>In general, choosing a region closer to where you are (or where your customers
-are) will reduce latency, and the North/West European regions are among the
-cheapest.</p></div></div>
+</svg><div class="container"><div class="content"><p><strong>Make sure to select the <code>Ubuntu 26.04</code> image (x64) and the <code>B2ats_v2</code> or <code>B1s</code>
+size</strong>. If you select a VM size that is too expensive, <strong>YOU WILL RUN OUT OF
+FREE CREDITS BEFORE THE END OF THE COURSE</strong> You will then have pay <img class="emoji" src="/2026/assets/emoji/1f4b8-aff6d39f4947f22f042e67ac21a9dc7a.svg" alt="💸" width="20" height="20" /> for a new
+VM and will have to reinstall your VM from scratch (including all deployment
+exercises you may already have completed).</p></div></div></div>
+<p>In the <strong>Basics</strong> settings, configure the <strong>virtual machine details</strong> (the
+machine’s name, region, image and size):</p>
+<p><img src="images/azure-vm-instance-details-b3e33a391eef5876ca5de47d09b2e2d6.png" alt="Azure: VM instance details" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you cannot select the right size, <a href="#i-cant-select-the-right-size-or-region">see
+below</a> for troubleshooting.</p></div></div>
 <h4 id="configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account<a href="#configure-your-administrator-account" aria-label="Link to heading 'Configure your administrator account'" data-heading-content="Configure your administrator account" class="anchor"></a></h4>
-<p>Under the <strong>Administrator account</strong> settings, configure your username.</p>
+<p>Still in the <strong>Basics</strong> settings, just below, under the <strong>Administrator
+account</strong> settings, configure your username.</p>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Replace <code>jde</code> with the username you have selected for the course.</p></div></div></div>
 <p><img src="images/azure-vm-admin-settings-d34e27c9b130b67fd28ea75c55f14eae.png" alt="Azure: VM SSH admin settings" /></p>
 <p>Select <strong>SSH public key</strong> authentication, set the source to <strong>Use existing
@@ -341,6 +333,21 @@ name that starts with a letter (a-z) and contains only alphanumeric characters
 (a-z and 0-9).</p></div></div>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Choose a username that is simple to type because you will need to type it often.
 If necessary, you can <a href="/2026/cheatsheets/sysadmin/#how-do-i-change-my-username-usermod">change it later</a>.</p></div></div>
+<h4 id="i-cant-select-the-right-size-or-region"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> I can’t select the right size or region<a href="#i-cant-select-the-right-size-or-region" aria-label="Link to heading 'I can’t select the right size or region'" data-heading-content="I can’t select the right size or region" class="anchor"></a></h4>
+<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If the correct size is not selected, you can select it from the complete list of
+VM sizes. If you can select neither <code>B1s</code> nor <code>B2ats_v2</code> (for example, if they
+are listed under <strong>Insufficient quota</strong>), try selecting another availability
+zone, or another of the regions you are allowed to use.</p>
+<p><img src="images/azure-vm-size-d633d23a65dd971033b25ba93e4a9f8a.png" alt="Azure: virtual machine size" /></p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>As a student, you are not allowed to run your virtual machine in any region.
+Azure only allows each student a handful of regions, and <strong>they are different
+for each student</strong>. Choose one of the regions listed as <strong>Recommended</strong> for you;
+those listed as <strong>Ineligible</strong> will not work:</p>
+<p><img src="images/azure-vm-recommended-regions-3b9562118eb04fa3b1dae464880cf804.png" alt="Azure: recommended regions" /></p>
+<p>Among your allowed regions, choosing one closer to where you are (or where your
+customers are) will reduce latency. Prices vary slightly between regions: the
+<a href="#review-your-monthly-cost">cost review</a> below will tell you if your choice is
+too expensive.</p></div></div>
 <h4 id="make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open<a href="#make-sure-the-ssh-port-is-open" aria-label="Link to heading 'Make sure the SSH port is open'" data-heading-content="Make sure the SSH port is open" class="anchor"></a></h4>
 <p>Under inbound port rules, make sure the SSH (22) port is allowed:</p>
 <p><img src="images/azure-vm-inbound-port-rules-27428f549f0f53ab1804c1f6d1399758.png" alt="Azure: VM inbount port rules" /></p>
@@ -394,13 +401,14 @@ it is higher, you have probably selected the wrong region, or a VM size that is
 not the recommended one and that is too expensive for the credits you have at
 your disposal for this course.</p></div></div></div>
 <h3 id="create-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create your server<a href="#create-your-server" aria-label="Link to heading 'Create your server'" data-heading-content="Create your server" class="anchor"></a></h3>
-<p>Double-check that you are launching one virtual machine of size <code>B1s</code> (<strong>1 X
-Standard B1s</strong>).</p>
+<p>Double-check that you are launching one virtual machine of size <code>B2ats_v2</code> or
+<code>B1s</code>.</p>
 <p><img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /> Create your virtual machine!</p>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If Azure tells you that you cannot create a virtual machine in the region you
-have selected, go back to the <a href="#configure-basic-settings">basic
-settings</a> and find a region that works.
-<strong>Make sure to re-check your estimated monthly cost afterwards.</strong></p></div></div>
+have selected (some regions, like West Europe, may not accept new customers even
+if they are allowed), go back to the <a href="#configure-basic-settings">basic settings</a>
+and find a region that works. <strong>Make sure to re-check your estimated monthly
+cost afterwards.</strong></p></div></div>
 <p>Once your deployment is complete, go to the virtual machine source:</p>
 <p><img src="images/azure-vm-deployment-complete-36fd6086b7015e210d7ea9e1c85ebf87.png" alt="Azure: VM deployment complete" /></p>
 <p>Find your machine’s public IP address in the virtual machine’s information:</p>
@@ -414,8 +422,8 @@ get the usual warning that its authenticity cannot be verified:</p>
 </div></code></pre>
 <p>To protect yourself from <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank" rel="noopener noreferrer">man-in-the-middle attacks</a>,
 you can obtain the SSH host key fingerprints from your virtual machine before
-attempting to connect. That way, you will be able to see if the key fingerprint
-in the warning matches one of your virtual machine’s keys.</p>
+attempting to connect. That way, you will be able to check whether the key
+fingerprint in the warning is one of your virtual machine’s keys.</p>
 <p>To do this, you need to install the <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli" target="_blank" rel="noopener noreferrer">Azure CLI</a>. Once you
 have it installed and have logged in, you can run the following command (adapt
 the resource group and name options to your configuration if necessary):</p>
@@ -440,6 +448,13 @@ the resource group and name options to your configuration if necessary):</p>
 </div></code></pre>
 <p>Your machine’s public key fingerprints are in the <code>message</code> property, separated
 by encoded new lines (<code>\n</code>).</p>
+<p>Once you have them, there are two ways to check the key when the warning
+appears. You can compare the fingerprint in the warning with these ones by eye:
+in this example, the <code>SHA256:0TORCgUgzrPGeDHzV5fGAarkpGpc5Nbkhb7q2dbG0OA</code> the
+warning shows is the machine’s ECDSA key. Or, instead of answering <code>yes</code>, you
+can paste the matching fingerprint (the full <code>SHA256:...</code> value) at the prompt.
+Your SSH client then compares it with the fingerprint the server sent, and only
+connects if they are the same.</p>
 <div class="callout callout-more group/callout" data-callout="402-run-virtual-server:azure-fingerprint"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-402-run-virtual-server:azure-fingerprint" type="checkbox" class="peer hidden" /><div class="content"><p>You can skip this step if you consider the risk and impact of an attack low
 enough. Understand that if you simply answer “yes” when the SSH client warns
 you, you are exposing yourself to a potential man-in-the-middle attack. In all
@@ -514,7 +529,7 @@ that you can still connect:</p>
   data-regexp="(?<username>[a-z][a-z0-9]+)@(?<ipAddress>[a-z0-9]+(?:\.[a-z0-9]+){3})"
   data-template="<username>@<ipAddress>"></div>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@87.65.43.210</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Welcome</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">Ubuntu</span> <span class="l-variable-parameter">24.04</span> <span class="l-variable-parameter">LTS</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Welcome</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">Ubuntu</span> <span class="l-variable-parameter">26.04</span> <span class="l-variable-parameter">LTS</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
 </div></code></pre>
 <p>Also check that your hostname is correct:</p>
@@ -772,6 +787,9 @@ everywhere else you may have used it.)</p></div></div></div>
     <a href="#configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account</a>
     
   </li><li class="toc-entry toc-h4">
+    <a href="#i-cant-select-the-right-size-or-region"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> I can’t select the right size or region</a>
+    
+  </li><li class="toc-entry toc-h4">
     <a href="#make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open</a>
     
   </li>
@@ -846,7 +864,7 @@ everywhere else you may have used it.)</p></div></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/402-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/402-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -873,11 +891,7 @@ everywhere else you may have used it.)</p></div></div></div>
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -995,7 +1009,7 @@ everywhere else you may have used it.)</p></div></div></div>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -1350,10 +1364,10 @@ everywhere else you may have used it.)</p></div></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -1534,15 +1548,14 @@ everywhere else you may have used it.)</p></div></div></div>
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       

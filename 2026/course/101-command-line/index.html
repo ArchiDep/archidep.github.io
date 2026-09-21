@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/101-command-line/subject.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/101-command-line/subject.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -269,16 +265,7 @@ manipulating your filesystem in a Unix shell.</p></div>
     <a href="#help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#why">WHY?!</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#how-vim-works">How Vim works</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#normal-mode">Normal mode</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#command-mode">Command mode</a>
+    <a href="#should-you-learn-it">Should you learn it?</a>
     
   </li>
 </ul>
@@ -316,13 +303,44 @@ manipulating your filesystem in a Unix shell.</p></div>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#unleash-your-terminal">Unleash your terminal</a>
+    <a href="#appendix-unleash-your-terminal">Appendix: unleash your terminal</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#oh-my-zsh">Oh My Zsh</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#other-tools-for-the-command-line-lover">Other tools for the command line lover</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-vim">Appendix: Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#insert-mode">Insert mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#back-in-normal-mode-moving-and-editing">Back in normal mode: moving and editing</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#moving-without-the-arrow-keys">Moving without the arrow keys</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#trying-it-yourself">Trying it yourself</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#learning-more">Learning more</a>
     
   </li>
 </ul>
@@ -444,8 +462,8 @@ name of the shell (<a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" tar
 indicate your username, your computer’s name and the current directory, e.g.
 <code>jde@MyComputer ~ %</code>.</p>
 <div class="grid grid-cols-2 gap-4">
-  <div><img src='images/bash-prompt-7544c889f1b342a65a29bb0c91c2acd3.png' class="w-full !my-0" /></div>
-  <div><img src='images/zsh-prompt-4aa933cbf0cd8cc05474fcfed6bb166d.png' class="w-full !my-0" /></div>
+  <div><img src='images/bash-prompt-67b697cea03a8c034de05602513bb043.png' class="w-full !my-0" /></div>
+  <div><img src='images/zsh-prompt-5b82ed5f0c93229e015473cd2b8ab884.png' class="w-full !my-0" /></div>
 </div></div></div>
 <p><strong>For consistency, we will always use <code>$&gt;</code> to represent the prompt.</strong></p>
 <h3 id="work-in-progress">Work in progress…<a href="#work-in-progress" aria-label="Link to heading 'Work in progress…'" data-heading-content="Work in progress…" class="anchor"></a></h3>
@@ -968,8 +986,8 @@ following command:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span>
 </div></code></pre></div></div>
 <h2 id="vim">Vim<a href="#vim" aria-label="Link to heading 'Vim'" data-heading-content="Vim" class="anchor"></a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" rel="noopener noreferrer"><strong>Vim</strong></a> is an infamous CLI editor originally developed in 1976 (WHAT?!)
-for the Unix operating system.</p>
+<p><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" rel="noopener noreferrer"><strong>Vim</strong></a> is an infamous CLI editor originally developed in 1991 for the
+Unix operating system.</p>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -984,12 +1002,13 @@ for the Unix operating system.</p>
     d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
   />
 </svg><span>Note</span></div><div class="content"><p>The name comes from “<strong>vi</strong> i<strong>m</strong>proved”, because Vim is an improved clone of
-an earlier editor: <a href="https://en.wikipedia.org/wiki/Vi_(text_editor)" target="_blank" rel="noopener noreferrer">vi</a> (from <strong>vi</strong>sual).</p></div></div>
+an earlier editor: <a href="https://en.wikipedia.org/wiki/Vi_(text_editor)" target="_blank" rel="noopener noreferrer">vi</a> (from “<strong>vi</strong>sual”), developed in 1976.</p></div></div>
 <h3 id="help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out<a href="#help-vim-opened-and-i-cant-get-out" aria-label="Link to heading 'Help, Vim opened and I can’t get out'" data-heading-content="Help, Vim opened and I can’t get out" class="anchor"></a></h3>
 <p><strong>Some developer tools open Vim for you</strong>, without asking. Git, for example,
 opens an editor when you describe a change, and on many systems that editor is
 Vim. You find yourself in a full-screen editor where what you type does nothing,
 or something you did not ask for, and where none of the usual ways out work.</p>
+<p><img src="images/vim-git-message-82542bf3119fa6aa4cae171e16ec08c3.png" alt="Vim opened by git commit" /></p>
 <p>If this happens (<em>and it will</em>), there’s <strong>one</strong> imperative rule to follow:</p>
 <p><strong>DO NOT PANIC!</strong></p>
 <p>To leave Vim without saving anything, type this, in this order:</p>
@@ -1002,123 +1021,17 @@ or something you did not ask for, and where none of the usual ways out work.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To avoid meeting Vim by accident in the first place, tell your tools to use nano
 instead: see <a href="#setting-nano-as-the-default-editor">setting nano as the default
 editor</a>.</p></div></div>
-<h3 id="why">WHY?!<a href="#why" aria-label="Link to heading 'WHY?!'" data-heading-content="WHY?!" class="anchor"></a></h3>
-<p>Why would you want to learn it?</p>
-<p>Sometimes it’s just the <strong>only editor you have</strong> (e.g. on a server). It is also
-much more powerful than nano and will let you edit text at the speed of light
-once you know your way around it. Some developers use nothing else.</p>
-<p>Open a file by running the <code>vim</code> command with the path to the file you want to
-create/edit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vim</span> <span class="l-function-call">test.txt</span>
-</div></code></pre>
-<h3 id="how-vim-works">How Vim works<a href="#how-vim-works" aria-label="Link to heading 'How Vim works'" data-heading-content="How Vim works" class="anchor"></a></h3>
-<p>Vim can be unsettling at first, until you know how it works.</p>
-<p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim. You control
-Vim by <strong>typing</strong>.</p>
-<p>The first thing to understand with Vim is that it has <em>3 modes</em>:</p>
-<ul>
-<li><strong>Normal</strong> mode (the one you’re in when Vim starts).</li>
-<li><strong>Command</strong> mode (the one to use to save and/or quit).</li>
-<li><strong>Insert</strong> mode (the one to use to insert text).</li>
-</ul>
-<p>To go into each mode, use these keys:</p>
-<table>
-<thead>
-<tr>
-<th align="left">From</th>
-<th align="left">Type</th>
-<th align="left">To go to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Normal</td>
-<td align="left"><code>:</code></td>
-<td align="left">Command</td>
-</tr>
-<tr>
-<td align="left">Normal</td>
-<td align="left"><code>i</code></td>
-<td align="left">Insert</td>
-</tr>
-<tr>
-<td align="left">Command/Insert</td>
-<td align="left"><code>Esc</code></td>
-<td align="left">Normal</td>
-</tr>
-</tbody>
-</table>
-<h3 id="normal-mode">Normal mode<a href="#normal-mode" aria-label="Link to heading 'Normal mode'" data-heading-content="Normal mode" class="anchor"></a></h3>
-<p>The <strong>Normal</strong> mode of Vim is the one you’re in when it starts.
-In this mode, you can move the cursor around with the arrow keys.</p>
-<p>You can also use some commands to interact with the text:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Command</th>
-<th align="left">Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>x</code></td>
-<td align="left">Delete the character under the cursor</td>
-</tr>
-<tr>
-<td align="left"><code>dw</code></td>
-<td align="left">Delete a word, with the cursor standing before the first letter</td>
-</tr>
-<tr>
-<td align="left"><code>dd</code></td>
-<td align="left">Delete the complete line the cursor is on</td>
-</tr>
-<tr>
-<td align="left"><code>u</code></td>
-<td align="left">Undo the last command</td>
-</tr>
-<tr>
-<td align="left"><code>:</code></td>
-<td align="left">Enter <strong>Command</strong> mode (to save and/or quit)</td>
-</tr>
-<tr>
-<td align="left"><code>i</code></td>
-<td align="left">Enter <strong>Insert</strong> mode (to type text)</td>
-</tr>
-</tbody>
-</table>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>At anytime, you can hit the <code>Esc</code> key to go back to the <strong>Normal</strong> mode.</p></div></div>
-<h3 id="command-mode">Command mode<a href="#command-mode" aria-label="Link to heading 'Command mode'" data-heading-content="Command mode" class="anchor"></a></h3>
-<p>The <strong>Command</strong> mode, which you can only access from the <strong>Normal</strong> mode,
-is the one you’ll mostly use to save and/or quit.</p>
-<p>To enter the <strong>Command</strong> mode, hit the <code>:</code> key.
-From there, you can use some commands:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Command</th>
-<th align="left">Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>q</code></td>
-<td align="left"><strong>Q</strong>uit Vim (will fail if you have unsaved modifications)</td>
-</tr>
-<tr>
-<td align="left"><code>w</code></td>
-<td align="left"><strong>W</strong>rite (save) the file and all its modifications</td>
-</tr>
-<tr>
-<td align="left"><code>q!</code></td>
-<td align="left">Force (<strong>!</strong>) Vim to <strong>q</strong>uit (any unsaved modification will be lost)</td>
-</tr>
-<tr>
-<td align="left"><code>wq</code> or <code>x</code></td>
-<td align="left"><strong>W</strong>rite and <strong>q</strong>uit, i.e. save the file then quit Vim.</td>
-</tr>
-</tbody>
-</table>
-<!-- TODO: add link http://www.openvim.com/ -->
+<h3 id="should-you-learn-it">Should you learn it?<a href="#should-you-learn-it" aria-label="Link to heading 'Should you learn it?'" data-heading-content="Should you learn it?" class="anchor"></a></h3>
+<p>Knowing how to escape Vim is enough for this course: nano is the editor we
+suggest you use, and every exercise that asks you to edit a file on a server
+works with it.</p>
+<p>Vim is worth more than that, though, if you want to be at home on the command
+line. Sometimes it’s just the <strong>only editor you have</strong> (e.g. on a server). It is
+also much more powerful than nano and will let you edit text at the speed of
+light once you know your way around it. Some developers use nothing else.</p>
+<p>If that tempts you, <a href="#appendix-vim">the appendix on Vim</a> at the end of this page
+explains how it works, walks you through one complete edit, and points you at a
+tutorial.</p>
 <h2 id="the-path-variable">The <code>PATH</code> variable<a href="#the-path-variable" aria-label="Link to heading 'The PATH variable'" data-heading-content="The PATH variable" class="anchor"></a></h2>
 <p>When you type a command in the CLI, it will try to see <strong>if it knows this
 command</strong> by looking in some directories to see if there is an <strong>executable file
@@ -1308,8 +1221,11 @@ but the path to the <strong>directory containing the executable</strong>.</li>
 <li>You must re-open your CLI for the change to take effect: the shell
 configuration file (e.g. <code>~/.bashrc</code>) is only applied when the shell starts.</li>
 </ul>
-<h2 id="unleash-your-terminal">Unleash your terminal<a href="#unleash-your-terminal" aria-label="Link to heading 'Unleash your terminal'" data-heading-content="Unleash your terminal" class="anchor"></a></h2>
+<h2 id="appendix-unleash-your-terminal">Appendix: unleash your terminal<a href="#appendix-unleash-your-terminal" aria-label="Link to heading 'Appendix: unleash your terminal'" data-heading-content="Appendix: unleash your terminal" class="anchor"></a></h2>
 <img class='w100' src='images/unleash-your-terminal-2529d0e7a3738449255d0c415f2bbdd3.png' />
+<p>This appendix is a collection of things you may enjoy once the command line
+stops feeling foreign. None of it is needed for this course, and none of it is
+installed for you.</p>
 <h3 id="oh-my-zsh">Oh My Zsh<a href="#oh-my-zsh" aria-label="Link to heading 'Oh My Zsh'" data-heading-content="Oh My Zsh" class="anchor"></a></h3>
 <p>Command-line shells have been worked on for a very long time. Modern shells
 such as the <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener noreferrer">Z shell (Zsh)</a> have a whole community that created many
@@ -1335,6 +1251,240 @@ alternative)</li>
 <li><a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener noreferrer">tmux</a> <img class="emoji" src="/2026/assets/emoji/1f499-e37c985edda06b7d5f4559bc838c1bde.svg" alt="💙" width="20" height="20" /></li>
 <li><a href="https://www.gnu.org/software/screen/" target="_blank" rel="noopener noreferrer">screen</a></li>
 </ul></div><div><p><img src="images/terminal-multiplexer-022fccd37223c3a300a00974d89b988b.png" alt="Terminal multiplexer" /></p></div></div>
+<h2 id="appendix-vim">Appendix: Vim<a href="#appendix-vim" aria-label="Link to heading 'Appendix: Vim'" data-heading-content="Appendix: Vim" class="anchor"></a></h2>
+<p>This appendix is for the curious. Nothing in this course requires Vim — nano
+does everything the exercises ask for — but if you want to learn the editor
+rather than merely escape it, this is where to start.</p>
+<p>Open a file by running the <code>vim</code> command with the path to the file you want to
+create/edit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vim</span> <span class="l-function-call">test.txt</span>
+</div></code></pre>
+<h3 id="how-vim-works">How Vim works<a href="#how-vim-works" aria-label="Link to heading 'How Vim works'" data-heading-content="How Vim works" class="anchor"></a></h3>
+<p>Vim can be unsettling at first, until you know how it works.</p>
+<p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim. You control
+Vim by <strong>typing</strong>.</p>
+<p>The first thing to understand with Vim is that it has <em>3 modes</em>:</p>
+<ul>
+<li><strong>Normal</strong> mode (the one you’re in when Vim starts).</li>
+<li><strong>Insert</strong> mode (the one to use to insert text).</li>
+<li><strong>Command</strong> mode (the one to use to save and/or quit).</li>
+</ul>
+<p>To go into each mode, use these keys:</p>
+<table>
+<thead>
+<tr>
+<th align="left">From</th>
+<th align="left">Type</th>
+<th align="left">To go to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Normal</td>
+<td align="left"><code>i</code></td>
+<td align="left">Insert</td>
+</tr>
+<tr>
+<td align="left">Normal</td>
+<td align="left"><code>:</code></td>
+<td align="left">Command</td>
+</tr>
+<tr>
+<td align="left">Insert/Command</td>
+<td align="left"><code>Esc</code></td>
+<td align="left">Normal</td>
+</tr>
+</tbody>
+</table>
+<p>Since the same keys do different things in different modes, you must always
+know which one you are in. <strong>The bottom line of the window tells you</strong>: in
+<strong>Insert</strong> mode, Vim prints <code>-- INSERT --</code> in the bottom-left corner; in
+<strong>Command</strong> mode, it shows the <code>:</code> and the command you are typing there; in
+<strong>Normal</strong> mode, it shows neither, only the name of the file it opened, or
+nothing at all. Whenever you are lost, press <code>Esc</code> and look there.</p>
+<h3 id="normal-mode">Normal mode<a href="#normal-mode" aria-label="Link to heading 'Normal mode'" data-heading-content="Normal mode" class="anchor"></a></h3>
+<p>The <strong>Normal</strong> mode of Vim is the one you’re in when it starts. What you type
+in this mode does not go into your file: each key is a command instead, which is
+why typing into Vim when it has just opened seems to do nothing, or something
+strange.</p>
+<p><img src="images/vim-normal-mode-c6530f1194d1a91070d1d3c8df39f21e.png" alt="Vim in normal mode" /></p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>The <code>~</code> characters down the left side of the window are <strong>not</strong> in your file.
+Vim draws them to mark the lines after the last one, so an empty file is a full
+screen of them.</p></div></div>
+<p>To write something, you first have to switch to the <strong>Insert</strong> mode.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>At anytime, you can hit the <code>Esc</code> key to go back to the <strong>Normal</strong> mode.</p></div></div>
+<h3 id="insert-mode">Insert mode<a href="#insert-mode" aria-label="Link to heading 'Insert mode'" data-heading-content="Insert mode" class="anchor"></a></h3>
+<p>The <strong>Insert</strong> mode is the one in which Vim behaves like the editor you expect:
+what you type goes into the file.</p>
+<p>You enter it from the <strong>Normal</strong> mode, with the key that matches where you want
+to start typing:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>i</code></td>
+<td align="left"><strong>I</strong>nsert before the character under the cursor</td>
+</tr>
+<tr>
+<td align="left"><code>a</code></td>
+<td align="left"><strong>A</strong>ppend after the character under the cursor</td>
+</tr>
+<tr>
+<td align="left"><code>o</code></td>
+<td align="left"><strong>O</strong>pen a new empty line below the current one</td>
+</tr>
+</tbody>
+</table>
+<p>Vim prints <code>-- INSERT --</code> in the bottom-left corner to tell you that you are in
+this mode. Type your text, then press <code>Esc</code> to go back to the <strong>Normal</strong> mode.</p>
+<p><img src="images/vim-insert-mode-b92fc59498474c16f1d7d9692785c062.png" alt="Vim in insert mode" /></p>
+<h3 id="back-in-normal-mode-moving-and-editing">Back in normal mode: moving and editing<a href="#back-in-normal-mode-moving-and-editing" aria-label="Link to heading 'Back in normal mode: moving and editing'" data-heading-content="Back in normal mode: moving and editing" class="anchor"></a></h3>
+<p>Now that your file has some text in it, you can move the cursor around with the
+arrow keys.</p>
+<p>You can also use some commands to interact with the text:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left">Delete the character under the cursor</td>
+</tr>
+<tr>
+<td align="left"><code>dw</code></td>
+<td align="left">Delete a word, with the cursor on its first letter</td>
+</tr>
+<tr>
+<td align="left"><code>dd</code></td>
+<td align="left">Delete the complete line the cursor is on</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left">Undo the last command</td>
+</tr>
+</tbody>
+</table>
+<h4 id="moving-without-the-arrow-keys">Moving without the arrow keys<a href="#moving-without-the-arrow-keys" aria-label="Link to heading 'Moving without the arrow keys'" data-heading-content="Moving without the arrow keys" class="anchor"></a></h4>
+<p>The arrow keys work, but Vim power users move with four letters instead, sitting
+right under the fingers of your right hand on the home row:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Moves the cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>h</code></td>
+<td align="left">Left</td>
+</tr>
+<tr>
+<td align="left"><code>j</code></td>
+<td align="left">Down</td>
+</tr>
+<tr>
+<td align="left"><code>k</code></td>
+<td align="left">Up</td>
+</tr>
+<tr>
+<td align="left"><code>l</code></td>
+<td align="left">Right</td>
+</tr>
+</tbody>
+</table>
+<p><code>h</code> and <code>l</code> are the leftmost and rightmost of the four, which is the easiest way
+to remember which is which. <code>j</code> looks like an arrow pointing down, which takes
+care of the other two.</p>
+<p>This only works in <strong>Normal</strong> mode: in <strong>Insert</strong> mode, those keys type the
+letters <code>h</code>, <code>j</code>, <code>k</code> and <code>l</code> into your file, as they should.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>It feels pointless until you stop moving your hand to the arrow keys and back
+several times a minute. Vim is far from the only program that uses these keys
+to move around: <code>less</code>, <code>man</code> pages and many other terminal tools do too, so
+the habit pays off outside Vim.</p></div></div>
+<h3 id="command-mode">Command mode<a href="#command-mode" aria-label="Link to heading 'Command mode'" data-heading-content="Command mode" class="anchor"></a></h3>
+<p>The <strong>Command</strong> mode, which you can only access from the <strong>Normal</strong> mode,
+is the one you’ll mostly use to save and/or quit.</p>
+<p>To enter the <strong>Command</strong> mode, hit the <code>:</code> key. The colon appears at the
+<strong>bottom of the window</strong>, and so does everything you type after it: a command
+is never typed into your text. Press <code>Enter</code> to run it, or <code>Esc</code> to abandon it
+and go back to the <strong>Normal</strong> mode.</p>
+<p><img src="images/vim-command-mode-52e33d6dd79d3ce496cb5e83c2b4f6a4.png" alt="Typing the :wq command in Vim" /></p>
+<p>From there, you can use some commands:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>q</code></td>
+<td align="left"><strong>Q</strong>uit Vim (will fail if you have unsaved modifications)</td>
+</tr>
+<tr>
+<td align="left"><code>w</code></td>
+<td align="left"><strong>W</strong>rite (save) the file and all its modifications</td>
+</tr>
+<tr>
+<td align="left"><code>q!</code></td>
+<td align="left">Force (<strong>!</strong>) Vim to <strong>q</strong>uit (any unsaved modification will be lost)</td>
+</tr>
+<tr>
+<td align="left"><code>wq</code> or <code>x</code></td>
+<td align="left"><strong>W</strong>rite and <strong>q</strong>uit, i.e. save the file then quit Vim.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="trying-it-yourself">Trying it yourself<a href="#trying-it-yourself" aria-label="Link to heading 'Trying it yourself'" data-heading-content="Trying it yourself" class="anchor"></a></h3>
+<p>The quickest way to stop being afraid of Vim is to go through one complete edit
+from beginning to end. Move to a directory where you can safely create a file,
+then:</p>
+<ol>
+<li>Run <code>vim test.txt</code> to open a new, empty file. You are in <strong>Normal</strong> mode:
+there is no <code>-- INSERT --</code> at the bottom of the window.</li>
+<li>Press <code>i</code> to switch to <strong>Insert</strong> mode. <code>-- INSERT --</code> appears in the
+bottom-left corner.</li>
+<li>Type a line of text, for example <code>Hello from Vim.</code></li>
+<li>Press <code>Esc</code> to go back to <strong>Normal</strong> mode. The <code>-- INSERT --</code> indicator
+disappears.</li>
+<li>Type <code>:wq</code>. The three characters appear at the bottom of the window instead
+of in your text. Press <code>Enter</code>: Vim saves the file and quits.</li>
+<li>Run <code>cat test.txt</code> to check that your line is there.</li>
+</ol>
+<p>Do it a few times, and the three modes stop being mysterious.</p>
+<h3 id="learning-more">Learning more<a href="#learning-more" aria-label="Link to heading 'Learning more'" data-heading-content="Learning more" class="anchor"></a></h3>
+<p>You now know enough Vim to open a file, change it and get out again. To go
+further, Vim comes with its own interactive tutorial, which takes roughly half
+an hour:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vimtutor</span>
+</div></code></pre>
+<p>It is installed together with Vim on most systems. If your own machine does not
+have it, the <a href="/2026/course/104-hello-ssh/">SSH exercise server</a> you will connect to later in this course does. <a href="https://openvim.com" target="_blank" rel="noopener noreferrer">Open
+Vim</a> is an equivalent tutorial that runs in your browser.</p>
 
       <div class="xl:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -1483,16 +1633,7 @@ alternative)</li>
     <a href="#help-vim-opened-and-i-cant-get-out">Help, Vim opened and I can’t get out</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#why">WHY?!</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#how-vim-works">How Vim works</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#normal-mode">Normal mode</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#command-mode">Command mode</a>
+    <a href="#should-you-learn-it">Should you learn it?</a>
     
   </li>
 </ul>
@@ -1530,13 +1671,44 @@ alternative)</li>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#unleash-your-terminal">Unleash your terminal</a>
+    <a href="#appendix-unleash-your-terminal">Appendix: unleash your terminal</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#oh-my-zsh">Oh My Zsh</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#other-tools-for-the-command-line-lover">Other tools for the command line lover</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-vim">Appendix: Vim</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-vim-works">How Vim works</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#normal-mode">Normal mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#insert-mode">Insert mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#back-in-normal-mode-moving-and-editing">Back in normal mode: moving and editing</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#moving-without-the-arrow-keys">Moving without the arrow keys</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#command-mode">Command mode</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#trying-it-yourself">Trying it yourself</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#learning-more">Learning more</a>
     
   </li>
 </ul>
@@ -1554,7 +1726,7 @@ alternative)</li>
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
       </a>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1580,11 +1752,7 @@ alternative)</li>
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -1702,7 +1870,7 @@ alternative)</li>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -2057,10 +2225,10 @@ alternative)</li>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -2241,15 +2409,14 @@ alternative)</li>
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       

@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello SSH · ArchiDep</title>
-<meta name="description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools. Then you will use them to follow a parrot to the remote land of Avalon." />
+<meta name="description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools." />
 <link rel="canonical" href="https://archidep.ch/2026/course/104-hello-ssh/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Hello SSH" />
-<meta property="og:description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools. Then you will use them to follow a parrot to the remote land of Avalon." />
+<meta property="og:description" content="In this series of exercises, you will learn to use the ssh command to connect to a remote server, and how to copy files to and from such a server using various tools." />
 <meta property="og:url" content="https://archidep.ch/2026/course/104-hello-ssh/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-f6157775981de39cd20c70da068881da.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -67,11 +67,7 @@
     </label>
     <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <h1 class="print:hidden">ArchiDep</h1>
         <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
       </div>
@@ -101,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/104-hello-ssh/exercise.md">Rev: 31d728d62a1bff989f714560e31f8c2f80efa1ed</a>
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/104-hello-ssh/exercise.md">Rev: 35efbb24fe1004e8e16d29c74951d014ce05f29a</a>
     </li>
   </ul>
 </div>
@@ -126,8 +122,7 @@
 
       <div class="my-4"><p>In this series of exercises, you will learn to use the <code>ssh</code> command to connect
 to a remote server, and how to copy files to and from such a server using
-various tools. Then you will use them to follow a parrot to the remote land of
-Avalon.</p></div>
+various tools.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
         <input type="checkbox">
@@ -176,19 +171,19 @@ Avalon.</p></div>
     <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
     <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A message on the shore</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
     
@@ -239,6 +234,14 @@ Avalon.</p></div>
 command and other SSH-based tools. Your username and password for this server
 are shown on the <a href="/app">dashboard</a>, along with the fingerprints of the
 server’s SSH host keys.</p>
+<div class="text-center">
+  <a href="/app" class="btn btn-primary btn-xl">
+    <span class="flex items-center gap-2">
+      <span><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></span>
+      <span class="font-title">Go to the dashboard</span>
+    </span>
+  </a>
+</div>
 <p>As we’ve seen, the basic syntax of the SSH command is as follows:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span><span class="l-string-special-path">@</span><span class="l-operator">&lt;</span><span class="l-string-special-path">hostname</span><span class="l-operator">&gt;</span>
 </div></code></pre>
@@ -578,7 +581,8 @@ server, like with the <code>ssh</code> command.</p>
 <p>A path on the server that does not start with <code>/</code> starts in your home directory
 <strong>on the server</strong>. <code>jde@ssh.archidep.ch:hello.txt</code> is the file <code>~/hello.txt</code> of
 the <code>jde</code> user, on the server.</p>
-<p>You will use <code>scp</code> in a moment, on your way to the remote land of Avalon.</p>
+<p>You will use <code>scp</code> at the end of this exercise, on your way to the remote land
+of Avalon.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Here are a few additional examples of how to use the <code>scp</code> command:</p>
 <ul>
 <li>
@@ -673,37 +677,6 @@ using the SFTP application. These applications will usually allow you to
 drag-and-drop files to and from the server. Play with it a bit and see what you
 can do.</p>
 <p>Now you know another way to copy files over SSH.</p>
-<h2 id="the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon<a href="#the-remote-land-of-avalon" aria-label="Link to heading 'The remote land of Avalon'" data-heading-content="The remote land of Avalon" class="anchor"></a></h2>
-<p>Did you find the treasure of Skull Island in <a href="/2026/course/102-hello-shell/">Hello Shell</a>? Then
-you remember the parrot. It took you to Skull Island, and when you opened the
-chest, it flew away over the sea, far from your computer, to the remote land of
-Avalon. Follow it, and take your treasure with you: someone there has heard
-about it.</p>
-<p>You did not play the treasure hunt? A parrot landed on your window this morning.
-It looked at you, said “SQUAWK!”, and flew away over the sea, to the remote land
-of Avalon. Follow it.</p>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of Avalon.</strong> Avalon is on the SSH exercise server. Your own computer
-is your own land. Each step asks you to do something on the right machine, so
-before you type a command, know which machine your terminal is connected to. It
-helps to keep two terminals open: one logged in to the server, and one on your
-own computer.</p></div></div></div>
-<p>To go to Avalon, log in to the server <strong>with your key</strong>, and take the barge:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">dock</span>
-</div></code></pre>
-<p>Then follow what it says. Your goal: find out where the parrot is.</p>
-<p>On the way, you will:</p>
-<ul>
-<li>Show the server that you came with your key, not your password.</li>
-<li>Copy a file from your computer to the server with <code>scp</code>, and another one from
-the server to your computer.</li>
-<li>Run a command on the server without logging in.</li>
-</ul>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Stuck? There is a hint on Avalon: <code>cat .hint</code> in <code>~/avalon</code>, on the server. Want
-to start over? Run <code>dock --restart</code> on the server.</p></div></div>
-<h3 id="a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore<a href="#a-message-on-the-shore" aria-label="Link to heading 'A message on the shore'" data-heading-content="A message on the shore" class="anchor"></a></h3>
-<p>When the Lady of the Lake has spoken, someone leaves a message for you on the
-shore of Avalon: <code>~/avalon/message.txt</code>, on the server. Read it, and do what a
-careful traveller would do.</p>
 <h2 id="sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key<a href="#sign-a-message-with-your-key" aria-label="Link to heading 'Sign a message with your key'" data-heading-content="Sign a message with your key" class="anchor"></a></h2>
 <p>When you log in with your key, your SSH client <strong>signs</strong> data from the
 connection with your private key, and the server <strong>checks the signature</strong> with
@@ -813,26 +786,94 @@ password as long as the agent keeps running.</p>
 <p>If you want to load another key than the default one, you can specify its path:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-add</span> <span class="l-function-call">/path/to/custom_id_ed25519</span>
 </div></code></pre></div><label for="callout-104-hello-ssh:run-an-ssh-agent" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:run-an-ssh-agent" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon<a href="#the-remote-land-of-avalon" aria-label="Link to heading 'The remote land of Avalon'" data-heading-content="The remote land of Avalon" class="anchor"></a></h2>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p><strong>You found the treasure of Skull Island</strong> in <a href="/2026/course/102-hello-shell/">Hello Shell</a>? Then
+you remember the parrot. It took you to Skull Island, and when you opened the
+chest, it flew away over the sea, far from your computer, to the remote land of
+Avalon. Follow it, and take your treasure with you: someone there has heard
+about it.</p></div><div><p><strong>You did not play the treasure hunt?</strong> A parrot landed on your window this
+morning. It looked at you, said “SQUAWK!”, and flew away over the sea, towards a
+land you have never seen: the remote land of Avalon. Follow it, and bring
+something with you: someone there will ask where you come from.</p></div></div>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of Avalon.</strong> Avalon is on the SSH exercise server. Your own computer
+is your own land. Each step asks you to do something on the right machine, so
+before you type a command, know which machine your terminal is connected to. It
+helps to keep two terminals open: one logged in to the server, and one on your
+own computer.</p></div></div></div>
+<p>To go to Avalon, log in to the server <strong>with your key</strong>, and take the barge:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span><span class="l-string-special-path">@ssh.archidep.ch</span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">dock</span>
+</div></code></pre>
+<p>Then follow what it says. Your goal: find out where the parrot is.</p>
+<p>Avalon tells you what to do from there on, and there is a hint on Avalon itself
+if you are stuck (<code>cat .hint</code> in <code>~/avalon</code>, on the server). You will not need
+this page again until Avalon is behind you.</p>
+<p>On the way, you will:</p>
+<ul>
+<li>Show the server that you came with your key, not your password.</li>
+<li>Copy a file from your computer to the server with <code>scp</code>, and another one from
+the server to your computer.</li>
+<li>Run a command on the server without logging in.</li>
+<li>Decide whether to trust a server you have never connected to before.</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Want to start over? Run <code>dock --restart</code> on the server.</p></div></div>
+<h3 id="a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A message on the shore<a href="#a-message-on-the-shore" aria-label="Link to heading 'A message on the shore'" data-heading-content="A message on the shore" class="anchor"></a></h3>
+<p>When the Lady of the Lake has spoken, someone leaves a message for you on the
+shore of Avalon: <code>~/avalon/message.txt</code>, on the server. It is the last trial of
+your journey. Read it, and do what a careful traveller would do.</p>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You have learned to use the <code>ssh</code> command to connect to a remote server, and to
-check that you are connecting to the right server with its key fingerprint.</p>
-<p>You have learned to configure and use public key authentication instead of the
-less secure password-based authentication mechanism, and you know which keys
-are stored on your machine and which are stored on the server.</p>
-<p>You have also learned to use the SSH protocol through other tools such as <code>scp</code>
-or your favorite SFTP application to copy files.</p>
-<p>On the way to Avalon, you had to know, for every command, which machine it ran
-on: a file made on your computer had to be copied to the server, a prophecy made
-on the server had to be copied to your computer, and the Lady of the Lake only
-answered a command sent from your computer. Your settings stayed on your own
-computer too: the <code>PATH</code> that runs your treasure by its name does not exist on
-the server.</p>
-<p>If you are more security-minded, you may have also learned to protect your
-private key with a passphrase and to use SSH agent to make it more convenient to
-use SSH.</p>
+<p>You worked on two computers from a single terminal. The exercise server is a
+real machine somewhere on the Internet, with no screen and no windows of its
+own: text sent over the network is the only way in, and everything you learned
+in the previous chapter is what works there.</p>
+<p>Along the way, you:</p>
+<ul>
+<li>Connected to a server with <code>ssh</code>, after checking its key fingerprint.</li>
+<li>Generated a key pair and gave your public key to the server with
+<code>ssh-copy-id</code>.</li>
+<li>Copied files in both directions with <code>scp</code>, and with an SFTP application,
+which goes through the same SSH channel.</li>
+<li>Ran a command on the server without logging in.</li>
+<li>Refused a server whose fingerprint did not match.</li>
+<li>(Optionally) signed a message with your key by hand, and used an SSH agent.</li>
+</ul>
+<p>The hardest part of SSH is not a command: it is knowing <strong>which machine</strong> your
+command runs on. While you are logged in, your terminal shows a shell running on
+the server: what you type is sent there, and what it prints comes back.
+<code>hostname</code> and <code>whoami</code> are how you ask where you are. Avalon made every step
+depend on it: Merlin only accepted a gift made on your own computer, the
+prophecy only showed its ink away from the server, and the Lady of the Lake only
+answered a command sent from home. <code>scp</code> says the same thing in its arguments:
+the side written first is the one the file comes from.</p>
+<p>Files cross; settings do not. If you carried your treasure to Avalon, it still
+ran there as <code>./treasure</code>, because a program is a file like any other — but
+typing <code>treasure</code> gave “command not found”, since the <code>PATH</code> that knows about
+your bag is yours, at home. Each machine also has its own home directory:
+<code>avalon/prophecy</code> after a colon is on the server.</p>
+<p>An SSH connection authenticates twice, in opposite directions: the server proves
+that it is the server, then you prove that you are you. Both proofs are the same
+mechanism: a signature made with a private key and checked with the matching
+public key. Your private key never leaves <code>~/.ssh</code> on your machine, the server’s
+host key never leaves <code>/etc/ssh</code> on the server, and only signatures travel, each
+one made for a single connection and useless anywhere else. That is why giving a
+server your public key costs you nothing, and why a password, which can be
+replayed, is far worse to hand over.</p>
+<p>Nothing on the network tells you whose key you are being shown: you decide,
+once, the first time you connect. That is what the fingerprint question asks,
+and your SSH client then remembers your answer in <code>~/.ssh/known_hosts</code> and stops
+asking. The message on the shore was that attack in miniature: same address,
+same username, everything looking right, and only the fingerprint said otherwise
+— it was not on the dashboard. Refusing printed <code>Host key verification failed</code>,
+which reads like an error and was the right outcome; <code>ssh-keygen -R</code> is how you
+take a wrong answer back.</p>
+<p>Finally, <code>ssh-copy-id</code> <strong>added</strong> a way into your account without closing the old
+one: your password still worked when you asked for it. Only the server’s own
+configuration can refuse passwords, and the server you will create later in the
+course will do exactly that: a hostname, a username and your key, with no
+password left to steal.</p>
 <h2 id="clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)<a href="#clean-up-optional" aria-label="Link to heading 'Clean up (optional)'" data-heading-content="Clean up (optional)" class="anchor"></a></h2>
-<p>Avalon is behind you? You can remove what the treasure hunt and Avalon left on
-your computer:</p>
+<p>Avalon is behind you? You can remove what these exercises left on your
+computer:</p>
 <ul>
 <li>
 <p>Open your shell’s configuration file with nano (<code>~/.bashrc</code> in the WSL,
@@ -844,6 +885,21 @@ Shell</a>. Then open a new terminal.</p>
 one:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">prophecy</span> <span class="l-variable-parameter">land.txt</span>
 </div></code></pre>
+</li>
+<li>
+<p>If you signed a message with your key, delete it and its signature:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">message.txt</span> <span class="l-variable-parameter">message.txt.sig</span>
+</div></code></pre>
+</li>
+<li>
+<p>If you answered <code>yes</code> to the message on the shore, your SSH client still
+trusts the server that was waiting on that other port. Make it forget that
+key:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222&#39;</span>
+</div></code></pre>
+<p>Your <code>~/.ssh/known_hosts</code> file is where that trust was written down. The entry
+for the exercise server itself, on its normal port, is a key you checked
+against the <a href="/app">dashboard</a>: keep that one.</p>
 </li>
 <li>
 <p>Delete the treasure hunt:</p>
@@ -921,19 +977,19 @@ entire home directory.</p></div></div></div>
     <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
     <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A message on the shore</a>
+    
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
     
@@ -950,7 +1006,7 @@ entire home directory.</p></div></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/31d728d62a1bff989f714560e31f8c2f80efa1ed/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/35efbb24fe1004e8e16d29c74951d014ce05f29a/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -976,11 +1032,7 @@ entire home directory.</p></div></div></div>
   <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
     <a href="/" class="text-xl font-bold inline">
       <div class="flex items-center gap-x-2">
-        <div class="avatar">
-          <div class="w-10">
-            <img src="/favicons/archidep-rocket-192.png" alt="ArchiDep logo">
-          </div>
-        </div>
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
         <span class="font-title">ArchiDep</span>
       </div>
     </a>
@@ -1098,7 +1150,7 @@ entire home directory.</p></div></div></div>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>PHP Todolist</span>
 </span>
           
@@ -1453,10 +1505,10 @@ entire home directory.</p></div></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
-        <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
-  <span>Deploy Flood It, a Spring Boot (Java) &amp; Angular (JavaScript) application with a PostgreSQL database</span>
+  <span>Graded deployment exercise</span>
 </span>
           
           
@@ -1637,15 +1689,14 @@ entire home directory.</p></div></div></div>
     </p>
     <p class="flex items-center gap-x-1 text-xs">
       <a href="/" class="hover:text-accent flex items-center gap-1.5">
-        <span class="avatar -mt-1">
-          <span class="w-5">
-            <img src="/favicons/archidep-coffee.png" alt="ArchiDep logo">
-          </span>
-        </span>
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@31d728d</span>
+        <span class="tooltip-content">main@35efbb2</span>
         <span class="font-title">0.1.0</span>
       </span>
       
