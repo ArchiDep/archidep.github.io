@@ -561,34 +561,6 @@ Read the “Configuring Locations” section of <a href="https://docs.nginx.com/
 Server</a>.</p></div></div>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You can read <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms" target="_blank" rel="noopener noreferrer">Understanding Nginx Server and Location Block Selection
 Algorithms</a> if you want more detailed information.</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>Your <code>/etc/nginx/sites-available/revprod</code> file on your server should look
-something like this:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">server {
-</div><div class="l-line" data-line="2">  listen 80;
-</div><div class="l-line" data-line="3">  server_name revprod.jde.archidep.ch;
-</div><div class="l-line" data-line="4">  root /home/jde/revprod-landing-page/public;
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">  # Proxy requests for dynamic content to another server/application.
-</div><div class="l-line" data-line="7">  location / {
-</div><div class="l-line" data-line="8">    proxy_pass http://localhost:4201;
-</div><div class="l-line" data-line="9">  }
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">  location /comments {
-</div><div class="l-line" data-line="12">    proxy_pass http://localhost:4200;
-</div><div class="l-line" data-line="13">  }
-</div><div class="l-line" data-line="14">
-</div><div class="l-line" data-line="15">  location /share {
-</div><div class="l-line" data-line="16">    proxy_pass http://localhost:4200;
-</div><div class="l-line" data-line="17">  }
-</div><div class="l-line" data-line="18">}
-</div></code></pre>
-<p>If you know your <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="noopener noreferrer">regular
-expressions</a>, you can also
-combine the last two location blocks into one:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">location ~ \/(comments|share) {
-</div><div class="l-line" data-line="2">  proxy_pass http://localhost:4200;
-</div><div class="l-line" data-line="3">}
-</div></code></pre></div></div>
 <p>Enable the new configuration with the following command:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/revprod</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/revprod</span>
 </div></code></pre>
@@ -800,23 +772,15 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   
   <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
     
-      <li class="peer/section-0 group/section-0 course-section-done">
+      <li class="peer/section-0 group/section-0 course-section-next">
         <label for="section-introduction-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Introduction</span>
-          <span class="group-has-checked/section-0:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-0:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -825,7 +789,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -834,7 +798,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -843,7 +807,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -854,7 +818,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-1 group/section-1 course-section-done">
+      <li class="peer/section-1 group/section-1 course-section-future">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
           <span class="group-has-checked/section-1:hidden">
@@ -870,7 +834,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-version-control-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -879,7 +843,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -890,7 +854,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -901,7 +865,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -910,7 +874,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -921,7 +885,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-2 group/section-2 course-section-done">
+      <li class="peer/section-2 group/section-2 course-section-future">
         <label for="section-security-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Security</span>
           <span class="group-has-checked/section-2:hidden">
@@ -937,7 +901,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-security-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -946,7 +910,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -957,7 +921,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-3 group/section-3 course-section-done">
+      <li class="peer/section-3 group/section-3 course-section-future">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
           <span class="group-has-checked/section-3:hidden">
@@ -973,7 +937,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -984,7 +948,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -993,7 +957,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1004,7 +968,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1013,7 +977,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1022,7 +986,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1031,7 +995,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1040,7 +1004,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1049,7 +1013,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1058,7 +1022,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1067,7 +1031,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1078,7 +1042,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-done">
+      <li class="peer/section-4 group/section-4 course-section-future">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
           <span class="group-has-checked/section-4:hidden">
@@ -1094,7 +1058,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1103,7 +1067,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1112,7 +1076,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1121,7 +1085,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1130,7 +1094,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1139,7 +1103,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1148,7 +1112,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1157,7 +1121,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1166,7 +1130,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1175,7 +1139,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1184,7 +1148,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done course-item-current">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future course-item-current">
         <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1193,7 +1157,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1202,7 +1166,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1213,7 +1177,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1222,7 +1186,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1233,7 +1197,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-5 group/section-5 course-section-done">
+      <li class="peer/section-5 group/section-5 course-section-future">
         <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Automated Deployment</span>
           <span class="group-has-checked/section-5:hidden">
@@ -1249,7 +1213,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1258,7 +1222,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1267,7 +1231,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -1278,7 +1242,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-6 group/section-6 course-section-done">
+      <li class="peer/section-6 group/section-6 course-section-future">
         <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Managed Deployment</span>
           <span class="group-has-checked/section-6:hidden">
@@ -1294,7 +1258,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1303,7 +1267,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1312,7 +1276,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1321,7 +1285,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1332,7 +1296,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
         </a>
       </li>
     
-      <li class="peer/section-7 group/section-7 course-section-done">
+      <li class="peer/section-7 group/section-7 course-section-future">
         <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Docker Deployment</span>
           <span class="group-has-checked/section-7:hidden">
@@ -1348,7 +1312,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1357,7 +1321,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1366,7 +1330,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1375,7 +1339,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1384,7 +1348,7 @@ configuration with <code>sudo nano /etc/nginx/nginx.conf</code> and add the foll
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>

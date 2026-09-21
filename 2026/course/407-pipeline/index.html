@@ -208,87 +208,30 @@ or on your cloud server through SSH. Both will work.</p></div></div></div></div>
 <h2 id="the-exercise"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The exercise<a href="#the-exercise" aria-label="Link to heading 'The exercise'" data-heading-content="The exercise" class="anchor"></a></h2>
 <p>Use command pipelines and stream redirections to:</p>
 <ul>
-<li>Count the number of lines and characters in the text</li>
+<li>
+<p>Count the number of lines and characters in the text</p>
+</li>
+<li>
+<p>Print the lines of the text containing the word <code>rainbow</code></p>
+</li>
+<li>
+<p>Do the same but without any duplicates</p>
+</li>
+<li>
+<p>Print the second word of each line in the text</p>
+</li>
+<li>
+<p>Compress the text and save it to <code>rainbow.txt.gz</code></p>
+</li>
+<li>
+<p>Count the number of times the letter <code>e</code> is used (case-insensitive)</p>
+</li>
+<li>
+<p>Count the number of times the word <code>the</code> is used (case-insensitive)</p>
+</li>
 </ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-number">50</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-m</span>
-</div><div class="l-line" data-line="4"><span class="l-number">1284</span>
-</div></code></pre>
-<p><strong>Counting the number of characters excluding new lines:</strong></p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">fold</span> <span class="l-variable-parameter">-w</span> <span class="l-number">1</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-number">1242</span>
-</div></code></pre></div></div>
-<ul>
-<li>Print the lines of the text containing the word <code>rainbow</code></li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">The</span> <span class="l-variable-parameter">colors</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">pretty</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">sky</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">Oh,</span> <span class="l-variable-parameter">somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div></code></pre>
-<p>Note that this looks for occurrences of the work “rainbow” exactly like this, in
-lowercase. If you wanted to make a case-insensitive search, you would use the
-<code>grep</code> command’s <code>-i</code> or <code>--ignore-case</code> option.</p></div></div>
-<ul>
-<li>Do the same but without any duplicates</li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">rainbow</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Oh,</span> <span class="l-variable-parameter">somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">The</span> <span class="l-variable-parameter">colors</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">pretty</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">sky</span>
-</div></code></pre></div></div>
-<ul>
-<li>Print the second word of each line in the text</li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">2</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">over</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">up</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">the</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">in</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-function-call">over</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">fly</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span>
-</div></code></pre></div></div>
-<ul>
-<li>Compress the text and save it to <code>rainbow.txt.gz</code></li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">gzip</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">rainbow.txt.gz</span>
-</div></code></pre></div></div>
-<ul>
-<li>Count the number of times the letter <code>e</code> is used (case-insensitive)</li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">fold</span> <span class="l-variable-parameter">-w</span> <span class="l-number">1</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">-i</span> <span class="l-variable-parameter">e</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-number">131</span>
-</div></code></pre></div></div>
-<ul>
-<li>Count the number of times the word <code>the</code> is used (case-insensitive)</li>
-</ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="2">     <span class="l-function-call">tr</span> <span class="l-string">&#39;[:upper:]&#39;</span> <span class="l-string">&#39;[:lower:]&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="3">     <span class="l-function-call">tr</span> <span class="l-variable-parameter">-s</span> <span class="l-string">&#39;[[:punct:][:space:]]&#39;</span> <span class="l-string">&#39;\n&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="4">     <span class="l-function-call">grep</span> <span class="l-variable-parameter">-i</span> <span class="l-string">&#39;^the$&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="5">     <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div></code></pre>
-<p>Instead of using a regular expression (<code>^the$</code>) with <code>grep</code>, you could also use
-its <code>-w</code> (<strong>w</strong>ord regexp) option which does the same thing in this case: <code>grep -i -w the</code>.</p></div></div>
 <div class="note note-advanced"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /><span>Challenge</span></div><div class="content"><p>Answer the question: what are the five most used words in the text
 (case-insensitive) and how many times are they used?</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">cat</span> <span class="l-variable-parameter">rainbow.txt</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="2">  <span class="l-function-call">tr</span> <span class="l-string">&#39;[:upper:]&#39;</span> <span class="l-string">&#39;[:lower:]&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="3">  <span class="l-function-call">tr</span> <span class="l-variable-parameter">-s</span> <span class="l-string">&#39;[[:punct:][:space:]]&#39;</span> <span class="l-string">&#39;\n&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="4">  <span class="l-function-call">sort</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="5">  <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="6">  <span class="l-function-call">sort</span> <span class="l-variable-parameter">-r</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="7">  <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span>
-</div></code></pre>
-<p>By luck, simply sorting alphabetically works because the numbers are correctly
-aligned. But if you want a more robust solution, you can add the <code>-b</code> or
-<code>--ignore-leading-blanks</code> option and the <code>-n</code> or <code>--numeric-sort</code> option to the
-<code>sort</code> command: <code>sort -bnr</code>.</p></div></div>
 <h2 id="example"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /> Example<a href="#example" aria-label="Link to heading 'Example'" data-heading-content="Example" class="anchor"></a></h2>
 <p>For example, the following command counts the number of words in the text:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-w</span>
@@ -442,23 +385,15 @@ philosophy.</p>
   
   <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
     
-      <li class="peer/section-0 group/section-0 course-section-done">
+      <li class="peer/section-0 group/section-0 course-section-next">
         <label for="section-introduction-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Introduction</span>
-          <span class="group-has-checked/section-0:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-0:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -467,7 +402,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -476,7 +411,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -485,7 +420,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -496,7 +431,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-1 group/section-1 course-section-done">
+      <li class="peer/section-1 group/section-1 course-section-future">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
           <span class="group-has-checked/section-1:hidden">
@@ -512,7 +447,7 @@ philosophy.</p>
           <input type="checkbox" id="section-version-control-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -521,7 +456,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -532,7 +467,7 @@ philosophy.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -543,7 +478,7 @@ philosophy.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -552,7 +487,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -563,7 +498,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-2 group/section-2 course-section-done">
+      <li class="peer/section-2 group/section-2 course-section-future">
         <label for="section-security-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Security</span>
           <span class="group-has-checked/section-2:hidden">
@@ -579,7 +514,7 @@ philosophy.</p>
           <input type="checkbox" id="section-security-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -588,7 +523,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -599,7 +534,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-3 group/section-3 course-section-done">
+      <li class="peer/section-3 group/section-3 course-section-future">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
           <span class="group-has-checked/section-3:hidden">
@@ -615,7 +550,7 @@ philosophy.</p>
           <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -626,7 +561,7 @@ philosophy.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -635,7 +570,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -646,7 +581,7 @@ philosophy.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -655,7 +590,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -664,7 +599,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -673,7 +608,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done course-item-current">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future course-item-current">
         <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -682,7 +617,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -691,7 +626,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -700,7 +635,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -709,7 +644,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -720,7 +655,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-done">
+      <li class="peer/section-4 group/section-4 course-section-future">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
           <span class="group-has-checked/section-4:hidden">
@@ -736,7 +671,7 @@ philosophy.</p>
           <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -745,7 +680,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -754,7 +689,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -763,7 +698,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -772,7 +707,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -781,7 +716,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -790,7 +725,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -799,7 +734,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -808,7 +743,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -817,7 +752,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -826,7 +761,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -835,7 +770,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -844,7 +779,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -855,7 +790,7 @@ philosophy.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -864,7 +799,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -875,7 +810,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-5 group/section-5 course-section-done">
+      <li class="peer/section-5 group/section-5 course-section-future">
         <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Automated Deployment</span>
           <span class="group-has-checked/section-5:hidden">
@@ -891,7 +826,7 @@ philosophy.</p>
           <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -900,7 +835,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -909,7 +844,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -920,7 +855,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-6 group/section-6 course-section-done">
+      <li class="peer/section-6 group/section-6 course-section-future">
         <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Managed Deployment</span>
           <span class="group-has-checked/section-6:hidden">
@@ -936,7 +871,7 @@ philosophy.</p>
           <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -945,7 +880,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -954,7 +889,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -963,7 +898,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -974,7 +909,7 @@ philosophy.</p>
         </a>
       </li>
     
-      <li class="peer/section-7 group/section-7 course-section-done">
+      <li class="peer/section-7 group/section-7 course-section-future">
         <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Docker Deployment</span>
           <span class="group-has-checked/section-7:hidden">
@@ -990,7 +925,7 @@ philosophy.</p>
           <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -999,7 +934,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1008,7 +943,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1017,7 +952,7 @@ philosophy.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1026,7 +961,7 @@ philosophy.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>

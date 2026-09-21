@@ -272,21 +272,6 @@ request</a> and <a href="http://nginx.org/en/docs/beginners_guide.html#static" t
 Static Content section of the nginx Beginner’s
 Guide</a> if you want to know
 more..</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>You <code>/etc/nginx/sites-available/clock</code> file on your server should look something
-like this:</p>
-<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="2">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="3">  <span class="l-keyword">server_name</span> <span class="l-variable">jde.archidep.ch</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/home/jde/static-clock-website</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="5">  <span class="l-keyword">index</span> <span class="l-variable">index.html</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">  <span class="l-comment"># Cache images, icons, video, audio, HTC, etc.</span>
-</div><div class="l-line" data-line="8">  <span class="l-keyword">location</span> <span class="l-operator">~*</span> <span class="l-string-special">\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ </span><span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="9">    <span class="l-keyword">access_log</span> <span class="l-boolean">off</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="10">    <span class="l-keyword">add_header</span> <span class="l-variable">Cache-Control</span> <span class="l-string">&quot;max-age=2592000&quot;</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="11">  <span class="l-punctuation-bracket">}</span>
-</div><div class="l-line" data-line="12"><span class="l-punctuation-bracket">}</span>
-</div></code></pre></div></div>
 <h3 id="enable-the-nginx-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Enable the nginx configuration<a href="#enable-the-nginx-configuration" aria-label="Link to heading 'Enable the nginx configuration'" data-heading-content="Enable the nginx configuration" class="anchor"></a></h3>
 <p>By default, configurations stored in the <code>sites-available</code> directory are
 available, but not enabled.</p>
@@ -598,23 +583,15 @@ directory actually exist?</p>
   
   <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
     
-      <li class="peer/section-0 group/section-0 course-section-done">
+      <li class="peer/section-0 group/section-0 course-section-next">
         <label for="section-introduction-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Introduction</span>
-          <span class="group-has-checked/section-0:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-0:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -623,7 +600,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -632,7 +609,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -641,7 +618,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -652,7 +629,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-1 group/section-1 course-section-done">
+      <li class="peer/section-1 group/section-1 course-section-future">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
           <span class="group-has-checked/section-1:hidden">
@@ -668,7 +645,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-version-control-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -677,7 +654,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -688,7 +665,7 @@ directory actually exist?</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -699,7 +676,7 @@ directory actually exist?</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -708,7 +685,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -719,7 +696,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-2 group/section-2 course-section-done">
+      <li class="peer/section-2 group/section-2 course-section-future">
         <label for="section-security-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Security</span>
           <span class="group-has-checked/section-2:hidden">
@@ -735,7 +712,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-security-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -744,7 +721,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -755,7 +732,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-3 group/section-3 course-section-done">
+      <li class="peer/section-3 group/section-3 course-section-future">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
           <span class="group-has-checked/section-3:hidden">
@@ -771,7 +748,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -782,7 +759,7 @@ directory actually exist?</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -791,7 +768,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -802,7 +779,7 @@ directory actually exist?</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -811,7 +788,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -820,7 +797,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -829,7 +806,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -838,7 +815,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -847,7 +824,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -856,7 +833,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -865,7 +842,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -876,7 +853,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-done">
+      <li class="peer/section-4 group/section-4 course-section-future">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
           <span class="group-has-checked/section-4:hidden">
@@ -892,7 +869,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -901,7 +878,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -910,7 +887,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -919,7 +896,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -928,7 +905,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -937,7 +914,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -946,7 +923,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -955,7 +932,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -964,7 +941,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -973,7 +950,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done course-item-current">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future course-item-current">
         <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -982,7 +959,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -991,7 +968,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1000,7 +977,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1011,7 +988,7 @@ directory actually exist?</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1020,7 +997,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1031,7 +1008,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-5 group/section-5 course-section-done">
+      <li class="peer/section-5 group/section-5 course-section-future">
         <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Automated Deployment</span>
           <span class="group-has-checked/section-5:hidden">
@@ -1047,7 +1024,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1056,7 +1033,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1065,7 +1042,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -1076,7 +1053,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-6 group/section-6 course-section-done">
+      <li class="peer/section-6 group/section-6 course-section-future">
         <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Managed Deployment</span>
           <span class="group-has-checked/section-6:hidden">
@@ -1092,7 +1069,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1101,7 +1078,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1110,7 +1087,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1119,7 +1096,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1130,7 +1107,7 @@ directory actually exist?</p>
         </a>
       </li>
     
-      <li class="peer/section-7 group/section-7 course-section-done">
+      <li class="peer/section-7 group/section-7 course-section-future">
         <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Docker Deployment</span>
           <span class="group-has-checked/section-7:hidden">
@@ -1146,7 +1123,7 @@ directory actually exist?</p>
           <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1155,7 +1132,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1164,7 +1141,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1173,7 +1150,7 @@ directory actually exist?</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1182,7 +1159,7 @@ directory actually exist?</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>

@@ -494,15 +494,6 @@ more about this command later on in the course.</p></div><label for="callout-104
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">-o</span> <span class="l-variable-parameter">PubkeyAuthentication=no</span> <span class="l-variable-parameter">jde@ssh.archidep.ch</span>
 </div></code></pre>
 <p>What happens? Why?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>The server asks for your password again, and your password still works.</p>
-<p><code>ssh-copy-id</code> <strong>added</strong> a new way to authenticate to your user account. It did
-not replace your password. Your SSH client now tries your key first, which is
-why you no longer have to type your password, but the password is still
-accepted.</p>
-<p>Protecting a server with keys only means <strong>also disabling password
-authentication</strong> on the server, which is done in the SSH server’s configuration.
-The virtual server you will create later in the course does not accept passwords
-at all: you will give it your public key when you create it.</p></div></div>
 <h3 id="which-key-is-where"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which key is where?<a href="#which-key-is-where" aria-label="Link to heading 'Which key is where?'" data-heading-content="Which key is where?" class="anchor"></a></h3>
 <p>You have now seen several files containing keys, on two different machines.
 Copy the following table and fill it in. For each file, write on which machine
@@ -564,68 +555,6 @@ server’s own keys are in the <code>/etc/ssh</code> directory.</p>
 server?</li>
 <li>An attacker copies your <code>id_ed25519.pub</code> file. What can they do with it?</li>
 </ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><table>
-<thead>
-<tr>
-<th align="left">File</th>
-<th align="left">Machine</th>
-<th align="left">Contains</th>
-<th align="left">Secret?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>~/.ssh/id_ed25519</code></td>
-<td align="left">Your machine</td>
-<td align="left">Your private key</td>
-<td align="left">Yes</td>
-</tr>
-<tr>
-<td align="left"><code>~/.ssh/id_ed25519.pub</code></td>
-<td align="left">Your machine</td>
-<td align="left">Your public key</td>
-<td align="left">No</td>
-</tr>
-<tr>
-<td align="left"><code>~/.ssh/authorized_keys</code></td>
-<td align="left">The server</td>
-<td align="left">The public keys allowed to log in as your user</td>
-<td align="left">No</td>
-</tr>
-<tr>
-<td align="left"><code>~/.ssh/known_hosts</code></td>
-<td align="left">Your machine</td>
-<td align="left">The public keys of the servers you trust</td>
-<td align="left">No</td>
-</tr>
-<tr>
-<td align="left"><code>/etc/ssh/ssh_host_ed25519_key</code></td>
-<td align="left">The server</td>
-<td align="left">The server’s private host key</td>
-<td align="left">Yes</td>
-</tr>
-<tr>
-<td align="left"><code>/etc/ssh/ssh_host_ed25519_key.pub</code></td>
-<td align="left">The server</td>
-<td align="left">The server’s public host key</td>
-<td align="left">No</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Your private key, <code>~/.ssh/id_ed25519</code>, proves to the server that you are you.
-The server checks the proof with your public key, which it finds in
-<code>~/.ssh/authorized_keys</code>.</li>
-<li>The server’s private host key proves to your machine that it is the right
-server. Your SSH client checks the proof with the server’s public host key.
-The first time, you check it yourself with the fingerprint. After that, your
-SSH client finds it in <code>~/.ssh/known_hosts</code>.</li>
-<li>Nothing harmful. A public key can only be used to check a proof, not to make
-one. This is why you can give your public key to any server or service. The
-attacker would need your private key to log in as you.</li>
-</ul>
-<p>The two sides work the same way: each one keeps a private key, and the other
-side keeps the matching public key.</p></div></div>
 <h2 id="copy-a-file-with-the-scp-command"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy a file with the <code>scp</code> command<a href="#copy-a-file-with-the-scp-command" aria-label="Link to heading 'Copy a file with the scp command'" data-heading-content="Copy a file with the scp command" class="anchor"></a></h2>
 <p>The <a href="https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/" target="_blank" rel="noopener noreferrer"><code>scp</code> (<strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y) command</a> works like the <a href="https://linuxize.com/post/cp-command-in-linux/" target="_blank" rel="noopener noreferrer"><code>cp</code>
 (<strong>c</strong>o<strong>p</strong>y) command</a>, which copies files on your own machine,
@@ -771,57 +700,10 @@ the server to your computer.</li>
 </ul>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Stuck? There is a hint on Avalon: <code>cat .hint</code> in <code>~/avalon</code>, on the server. Want
 to start over? Run <code>dock --restart</code> on the server.</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>On your computer, log in to the server, then take the barge on the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">dock</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/avalon</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./merlin</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
-</div></code></pre>
-<p>Merlin wants a gift from your own land. On your computer, send him your treasure
-if you played the treasure hunt, or what your computer says about itself if you
-did not:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">~/treasure-hunt/bag/treasure</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:avalon/</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">uname</span> <span class="l-function-call">-a</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">land.txt</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">land.txt</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:avalon/</span>
-</div></code></pre>
-<p>Then give it to him, on the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/avalon</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./merlin</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
-</div></code></pre>
-<p>On your computer, bring his prophecy home and read it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-string-special-path">jde@ssh.archidep.ch:avalon/prophecy</span> <span class="l-string-special-path">.</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">prophecy</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./prophecy</span>
-</div></code></pre>
-<p>Still on your computer, call the Lady of the Lake without logging in, with the
-word of the prophecy:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span> <span class="l-string-special-path">./avalon/lady</span> <span class="l-string-special-path">TINTAGEL</span>
-</div></code></pre>
-<p>Your word is different: it is chosen at random when you arrive on Avalon.</p></div></div>
 <h3 id="a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> A message on the shore<a href="#a-message-on-the-shore" aria-label="Link to heading 'A message on the shore'" data-heading-content="A message on the shore" class="anchor"></a></h3>
 <p>When the Lady of the Lake has spoken, someone leaves a message for you on the
 shore of Avalon: <code>~/avalon/message.txt</code>, on the server. Read it, and do what a
 careful traveller would do.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>The message tells you to connect to the server on another port, with the <code>-p</code>
-option of <code>ssh</code>. The address is the same, but your SSH client has never seen
-this port, so it asks you whether you trust the server, and shows you the
-fingerprint of its key:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">-p</span> <span class="l-number">2222</span> <span class="l-string-special-path">jde@ssh.archidep.ch</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222 ([W.X.Y.Z]:2222)&#39;</span> <span class="l-variable-parameter">can</span>&#39;t be established.
-</div><div class="l-line" data-line="3">ED25519 key fingerprint is SHA256:...
-</div><div class="l-line" data-line="4">Are you sure you want to continue connecting (yes/no/[fingerprint])?
-</div></code></pre>
-<p>That fingerprint is not one of the fingerprints on the <a href="/app">dashboard</a>. If
-this were the same server, it would have the same keys. It is a different server
-pretending to be the one you know: answer <code>no</code>.</p>
-<p>If you answered <code>yes</code>, you found out who wrote the message. Your SSH client now
-trusts that server for this port. Make it forget it, on your computer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222&#39;</span>
-</div></code></pre></div></div>
 <h2 id="sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key<a href="#sign-a-message-with-your-key" aria-label="Link to heading 'Sign a message with your key'" data-heading-content="Sign a message with your key" class="anchor"></a></h2>
 <p>When you log in with your key, your SSH client <strong>signs</strong> data from the
 connection with your private key, and the server <strong>checks the signature</strong> with
@@ -875,22 +757,6 @@ private key. Would the <code>ssh-keygen -Y check-novalidate</code> command accep
 signature? How would you notice?</li>
 <li>What does the server do when you log in that you just did by hand?</li>
 </ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><ul>
-<li>Your private key, <code>~/.ssh/id_ed25519</code>, on your machine, made the signature.</li>
-<li>Your public key, in <code>~/.ssh/authorized_keys</code> on the server, was used to
-check it (its fingerprint matches). The private key never left your machine:
-only the signature was copied.</li>
-<li>Yes: their signature is valid, since it was made with their private key for
-this exact message. But the fingerprint shown would be the fingerprint of
-their key, not the one in your <code>~/.ssh/authorized_keys</code> file. A valid
-signature only proves something if you know whose key made it. This is the
-same reason you check the server’s fingerprint the first time you connect: an
-attacker in the middle can sign the key exchange with their own key.</li>
-<li>When you log in with your key, your SSH client signs data from the connection
-with your private key, and the server checks the signature with a public key
-from your <code>~/.ssh/authorized_keys</code> file. It only accepts a signature made by
-one of the keys listed there.</li>
-</ul></div></div>
 <h2 id="ssh-agent"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> SSH agent<a href="#ssh-agent" aria-label="Link to heading 'SSH agent'" data-heading-content="SSH agent" class="anchor"></a></h2>
 <p>If you use a <strong>private key that is password-protected</strong>, you lose part of the
 convenience of public key authentication: you don’t have to enter a password to
@@ -1127,23 +993,15 @@ entire home directory.</p></div></div></div>
   
   <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
     
-      <li class="peer/section-0 group/section-0 course-section-done">
+      <li class="peer/section-0 group/section-0 course-section-next">
         <label for="section-introduction-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Introduction</span>
-          <span class="group-has-checked/section-0:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-0:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked>
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1152,7 +1010,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1161,7 +1019,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1170,7 +1028,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next course-item-current">
         <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1181,7 +1039,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-1 group/section-1 course-section-done">
+      <li class="peer/section-1 group/section-1 course-section-future">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
           <span class="group-has-checked/section-1:hidden">
@@ -1197,7 +1055,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-version-control-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1206,7 +1064,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1217,7 +1075,7 @@ entire home directory.</p></div></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1228,7 +1086,7 @@ entire home directory.</p></div></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1237,7 +1095,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -1248,7 +1106,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-2 group/section-2 course-section-done">
+      <li class="peer/section-2 group/section-2 course-section-future">
         <label for="section-security-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Security</span>
           <span class="group-has-checked/section-2:hidden">
@@ -1264,7 +1122,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-security-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1273,7 +1131,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1284,7 +1142,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-3 group/section-3 course-section-done">
+      <li class="peer/section-3 group/section-3 course-section-future">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
           <span class="group-has-checked/section-3:hidden">
@@ -1300,7 +1158,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1311,7 +1169,7 @@ entire home directory.</p></div></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1320,7 +1178,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1331,7 +1189,7 @@ entire home directory.</p></div></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1340,7 +1198,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1349,7 +1207,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1358,7 +1216,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1367,7 +1225,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1376,7 +1234,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1385,7 +1243,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1394,7 +1252,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1405,7 +1263,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-done">
+      <li class="peer/section-4 group/section-4 course-section-future">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
           <span class="group-has-checked/section-4:hidden">
@@ -1421,7 +1279,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1430,7 +1288,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1439,7 +1297,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1448,7 +1306,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1457,7 +1315,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1466,7 +1324,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1475,7 +1333,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1484,7 +1342,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1493,7 +1351,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1502,7 +1360,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1511,7 +1369,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1520,7 +1378,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1529,7 +1387,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1540,7 +1398,7 @@ entire home directory.</p></div></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1549,7 +1407,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1560,7 +1418,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-5 group/section-5 course-section-done">
+      <li class="peer/section-5 group/section-5 course-section-future">
         <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Automated Deployment</span>
           <span class="group-has-checked/section-5:hidden">
@@ -1576,7 +1434,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1585,7 +1443,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1594,7 +1452,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -1605,7 +1463,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-6 group/section-6 course-section-done">
+      <li class="peer/section-6 group/section-6 course-section-future">
         <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Managed Deployment</span>
           <span class="group-has-checked/section-6:hidden">
@@ -1621,7 +1479,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1630,7 +1488,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1639,7 +1497,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1648,7 +1506,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1659,7 +1517,7 @@ entire home directory.</p></div></div></div>
         </a>
       </li>
     
-      <li class="peer/section-7 group/section-7 course-section-done">
+      <li class="peer/section-7 group/section-7 course-section-future">
         <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Docker Deployment</span>
           <span class="group-has-checked/section-7:hidden">
@@ -1675,7 +1533,7 @@ entire home directory.</p></div></div></div>
           <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1684,7 +1542,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1693,7 +1551,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1702,7 +1560,7 @@ entire home directory.</p></div></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1711,7 +1569,7 @@ entire home directory.</p></div></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>

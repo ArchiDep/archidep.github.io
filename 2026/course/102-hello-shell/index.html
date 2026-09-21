@@ -294,48 +294,11 @@ completion.</li>
 <li>Run a program with <code>./</code>, and stop it.</li>
 </ul>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Stuck? Every place has a hint in a hidden file: <code>cat .hint</code>.</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/treasure-hunt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">start.txt</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">beach</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">.bottle.txt</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-string">&quot;../old temple&quot;</span>   <span class="l-comment"># or cd ../old\ temple</span>
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">inscription.txt</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../jungle/river/waterfall</span>
-</div><div class="l-line" data-line="12">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">carving.txt</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../../ruins</span>
-</div><div class="l-line" data-line="15">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">stone.txt</span>
-</div><div class="l-line" data-line="16">
-</div><div class="l-line" data-line="17">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../../shipwreck</span>
-</div><div class="l-line" data-line="18">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">less</span> <span class="l-function-call">diary.txt</span>       <span class="l-comment"># then type /dragon and press Enter,</span>
-</div><div class="l-line" data-line="19">                        <span class="l-comment"># press n to go to the next match,</span>
-</div><div class="l-line" data-line="20">                        <span class="l-comment"># and q to quit</span>
-</div><div class="l-line" data-line="21">
-</div><div class="l-line" data-line="22">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../cave</span>
-</div><div class="l-line" data-line="23">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./dragon</span>             <span class="l-comment"># then press Ctrl-C</span>
-</div><div class="l-line" data-line="24">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">lair</span>
-</div></code></pre></div></div>
 <h3 id="the-golden-idol-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The golden idol (optional)<a href="#the-golden-idol-optional" aria-label="Link to heading 'The golden idol (optional)'" data-heading-content="The golden idol (optional)" class="anchor"></a></h3>
 <p>The catacombs, under the ruins, are very deep. A golden idol is lost somewhere
 down there. Bring it back in your bag, and your treasure will be bigger.</p>
 <p>Do not search by hand: use <code>find</code> (see <a href="/2026/cheatsheets/command-line/#find-files-find">“Find files” in the <strong>Command Line</strong>
 cheatsheet</a>).</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/treasure-hunt/jungle/ruins/catacombs</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-variable-parameter">golden-idol</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">./left/right/left/.../golden-idol</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-comment"># You have to copy the whole path find gives you, including</span>
-</div><div class="l-line" data-line="7"><span class="l-comment"># the `./` at the beginning. Then you can move the golden</span>
-</div><div class="l-line" data-line="8"><span class="l-comment"># idol to your bag:</span>
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">./left/right/left/.../golden-idol</span> <span class="l-variable-parameter">~/treasure-hunt/bag/</span>
-</div></code></pre>
-<p>Your path is different: the catacombs are different each time the hunt is
-prepared. Copy the one <code>find</code> gives you.</p></div></div>
 <h2 id="change-things"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Change things<a href="#change-things" aria-label="Link to heading 'Change things'" data-heading-content="Change things" class="anchor"></a></h2>
 <p>In this part, you do not only look at the island: you change it. Take the key
 to the fortress and get to the top of its tower.</p>
@@ -367,40 +330,6 @@ stuff”</a> and <a href="/2026/cheatsheets/command-line/#delete-stuff-rm">“De
   />
 </svg><div class="container"><div class="content"><p><code>rm</code> deletes a file forever. There is no bin to get it back from. Read the name
 twice before you press Enter.</p></div></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/treasure-hunt/cave</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">lair/rusty-key</span> <span class="l-variable-parameter">../bag/</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../fortress</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">../bag/rusty-key</span> <span class="l-variable-parameter">key</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./door</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">courtyard</span>
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./guardian</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">../../shipwreck/map.txt</span> <span class="l-variable-parameter">map-copy.txt</span>
-</div><div class="l-line" data-line="12">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./guardian</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./rest</span>
-</div><div class="l-line" data-line="15">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">camp</span>
-</div><div class="l-line" data-line="16">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">camp/fire</span>
-</div><div class="l-line" data-line="17">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">lit</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">camp/fire</span>
-</div><div class="l-line" data-line="18">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./rest</span>
-</div><div class="l-line" data-line="19">
-</div><div class="l-line" data-line="20">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">drawbridge.conf</span>  <span class="l-comment"># change state=closed to state=open,</span>
-</div><div class="l-line" data-line="21">                         <span class="l-comment"># save and quit (use vim instead of</span>
-</div><div class="l-line" data-line="22">                         <span class="l-comment"># nano if you want more of a challenge)</span>
-</div><div class="l-line" data-line="23">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./lever</span>
-</div><div class="l-line" data-line="24">
-</div><div class="l-line" data-line="25">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">tower</span>
-</div><div class="l-line" data-line="26">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">cursed-chest.txt</span>
-</div><div class="l-line" data-line="27">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">trap-snakes.txt</span>
-</div><div class="l-line" data-line="28">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">trap-spiders.txt</span>
-</div><div class="l-line" data-line="29">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">trap-spikes.txt</span>
-</div><div class="l-line" data-line="30">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./stairs</span>
-</div><div class="l-line" data-line="31">
-</div><div class="l-line" data-line="32">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">top</span>
-</div><div class="l-line" data-line="33">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">parrot.txt</span>
-</div></code></pre></div></div>
 <h2 id="find-the-treasure"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the treasure<a href="#find-the-treasure" aria-label="Link to heading 'Find the treasure'" data-heading-content="Find the treasure" class="anchor"></a></h2>
 <p>The parrot at the top of the tower tells you where to go next, as a path.
 Follow it, then ring the bell from the right place. Before you run anything,
@@ -409,23 +338,6 @@ work out where the path goes: count the <code>..</code> one by one.</p>
 <a href="/2026/cheatsheets/command-line/#make-a-file-executable-chmod-x">“Make a file executable” in the <strong>Command Line</strong> cheatsheet</a>.
 You will learn about permissions later in the course. The chest then asks for a
 combination: look at the coins you’ve collected in your bag.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../../../../beach/./boat</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/jde/treasure-hunt/beach/boat</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/treasure-hunt/bell</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">../../skull-island</span>
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./chest</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">permission</span> <span class="l-variable-parameter">denied:</span> <span class="l-variable-parameter">./chest</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">chest</span>
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">../bag/coin-1</span> <span class="l-variable-parameter">../bag/coin-2</span> <span class="l-variable-parameter">../bag/coin-3</span>
-</div><div class="l-line" data-line="12">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./chest</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">../bag/treasure</span>
-</div></code></pre>
-<p>The combination is different for each student: it is chosen at random when the
-hunt is prepared.</p></div></div>
 <h2 id="take-the-treasure-home"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take the treasure home<a href="#take-the-treasure-home" aria-label="Link to heading 'Take the treasure home'" data-heading-content="Take the treasure home" class="anchor"></a></h2>
 <p>The treasure is a program in your bag. You can run it with its path:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/treasure-hunt/bag/treasure</span>
@@ -458,15 +370,6 @@ your <code>PATH</code>, as explained in <a href="/2026/course/101-command-line/#
 <p>Run <code>treasure</code>, from any directory.</p>
 </li>
 </ul>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.zshrc</span>         <span class="l-comment"># or ~/.bashrc in the WSL</span>
-</div></code></pre>
-<p>Add this line at the end, save and quit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/treasure-hunt/bag:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
-</div></code></pre>
-<p>Open a new terminal, then:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">treasure</span>
-</div></code></pre></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You interacted with your computer through nothing but text. The island you
 explored is an ordinary directory in your home directory, and the Finder or the
@@ -534,34 +437,6 @@ pointing at the next place, and the treasure in the last place.</p>
 <p>Then play your own hunt by hand, the way you played the one on the island: see
 what’s there (<code>ls</code>), read the first clue (<code>cat</code>), follow it to the next place
 (<code>cd</code>), and go on until you dig up the treasure.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>Build the island: three places, a clue in each one, and the treasure at the end
-of the trail.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/my-hunt/cave</span> <span class="l-variable-parameter">~/my-hunt/lake</span> <span class="l-variable-parameter">~/my-hunt/forest</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/my-hunt</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;An echo answers you: GO TO THE LAKE.&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">cave/echo.txt</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;A fish jumps out and shouts: THE FOREST!&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">lake/fish.txt</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;The oldest tree whispers: DIG UNDER MY ROOTS.&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">forest/tree.txt</span>
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;A chest full of gold. The hunt is over!&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">forest/treasure.txt</span>
-</div></code></pre>
-<p>Check that the island looks the way you think it does:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">./cave</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">./cave/echo.txt</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">./forest</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">./forest/treasure.txt</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">./forest/tree.txt</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">./lake</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">./lake/fish.txt</span>
-</div></code></pre>
-<p>Then play it, one clue at a time:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/my-hunt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">cave/echo.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">lake/fish.txt</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">forest/tree.txt</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">forest/treasure.txt</span>
-</div></code></pre></div></div>
 <h3 id="automate-it"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Automate it<a href="#automate-it" aria-label="Link to heading 'Automate it'" data-heading-content="Automate it" class="anchor"></a></h3>
 <p>You have to type those four commands, in that order, every single time you want
 to see your hunt played, and so does everyone you show it to. Write that walk
@@ -580,29 +455,6 @@ run it (<a href="/2026/cheatsheets/command-line/#run-a-program-program">“Run a
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <a href="/2026/cheatsheets/shell-scripting/">Shell Scripting Cheatsheet</a> has everything you need here —
 the <code>#!/bin/bash</code> line every script starts with, how to define a function, and
 how to run the finished script.</p></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral hover:bg-primary/25"><input type="checkbox" /><div class="collapse-title font-semibold"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>Write the script with nano (or vim):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/my-hunt/play</span>
-</div></code></pre>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">~/my-hunt</span> <span class="l-operator">||</span> <span class="l-function-builtin">exit</span> <span class="l-number">1</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function">show_clue</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="5">  <span class="l-function-call">cat</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
-</div><div class="l-line" data-line="6">  <span class="l-function-call">sleep</span> <span class="l-number">2</span>
-</div><div class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9"><span class="l-function-call">show_clue</span> <span class="l-variable-parameter">cave/echo.txt</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">show_clue</span> <span class="l-variable-parameter">lake/fish.txt</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">show_clue</span> <span class="l-variable-parameter">forest/tree.txt</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">cat</span> <span class="l-variable-parameter">forest/treasure.txt</span>
-</div></code></pre>
-<p>Make it executable, and run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">~/my-hunt/play</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/my-hunt/play</span>
-</div></code></pre>
-<p>The same four <code>cat</code> commands you typed by hand, in the same order, but written
-down once. From now on, whenever you catch yourself typing the same commands
-twice, that is a script asking to be written.</p></div></div>
 
       <div class="xl:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -710,23 +562,15 @@ twice, that is a script asking to be written.</p></div></div>
   
   <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
     
-      <li class="peer/section-0 group/section-0 course-section-done">
+      <li class="peer/section-0 group/section-0 course-section-next">
         <label for="section-introduction-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Introduction</span>
-          <span class="group-has-checked/section-0:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-0:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked>
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -735,7 +579,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done course-item-current">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next course-item-current">
         <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -744,7 +588,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -753,7 +597,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-next">
         <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -764,7 +608,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-1 group/section-1 course-section-done">
+      <li class="peer/section-1 group/section-1 course-section-future">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
           <span class="group-has-checked/section-1:hidden">
@@ -780,7 +624,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-version-control-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -789,7 +633,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -800,7 +644,7 @@ twice, that is a script asking to be written.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -811,7 +655,7 @@ twice, that is a script asking to be written.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -820,7 +664,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
         <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -831,7 +675,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-2 group/section-2 course-section-done">
+      <li class="peer/section-2 group/section-2 course-section-future">
         <label for="section-security-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Security</span>
           <span class="group-has-checked/section-2:hidden">
@@ -847,7 +691,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-security-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -856,7 +700,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
         <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -867,7 +711,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-3 group/section-3 course-section-done">
+      <li class="peer/section-3 group/section-3 course-section-future">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
           <span class="group-has-checked/section-3:hidden">
@@ -883,7 +727,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -894,7 +738,7 @@ twice, that is a script asking to be written.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -903,7 +747,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -914,7 +758,7 @@ twice, that is a script asking to be written.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -923,7 +767,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -932,7 +776,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -941,7 +785,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -950,7 +794,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -959,7 +803,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -968,7 +812,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -977,7 +821,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
         <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -988,7 +832,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-done">
+      <li class="peer/section-4 group/section-4 course-section-future">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
           <span class="group-has-checked/section-4:hidden">
@@ -1004,7 +848,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1013,7 +857,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1022,7 +866,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1031,7 +875,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1040,7 +884,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1049,7 +893,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1058,7 +902,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1067,7 +911,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1076,7 +920,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1085,7 +929,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1094,7 +938,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1103,7 +947,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1112,7 +956,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
@@ -1123,7 +967,7 @@ twice, that is a script asking to be written.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
 </svg>
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1132,7 +976,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1143,7 +987,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-5 group/section-5 course-section-done">
+      <li class="peer/section-5 group/section-5 course-section-future">
         <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Automated Deployment</span>
           <span class="group-has-checked/section-5:hidden">
@@ -1159,7 +1003,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1168,7 +1012,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1177,7 +1021,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-5:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
         <a href="/2026/course/603-floodit-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
@@ -1188,7 +1032,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-6 group/section-6 course-section-done">
+      <li class="peer/section-6 group/section-6 course-section-future">
         <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Managed Deployment</span>
           <span class="group-has-checked/section-6:hidden">
@@ -1204,7 +1048,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1213,7 +1057,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1222,7 +1066,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1231,7 +1075,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-6:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
         <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1242,7 +1086,7 @@ twice, that is a script asking to be written.</p></div></div>
         </a>
       </li>
     
-      <li class="peer/section-7 group/section-7 course-section-done">
+      <li class="peer/section-7 group/section-7 course-section-future">
         <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Docker Deployment</span>
           <span class="group-has-checked/section-7:hidden">
@@ -1258,7 +1102,7 @@ twice, that is a script asking to be written.</p></div></div>
           <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1267,7 +1111,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1276,7 +1120,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1285,7 +1129,7 @@ twice, that is a script asking to be written.</p></div></div>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1294,7 +1138,7 @@ twice, that is a script asking to be written.</p></div></div>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-7:flex course-item-done">
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
         <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
