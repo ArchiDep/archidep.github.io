@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-2105a5a2623b09c56404c1321ed4514d.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/e5dafcc0634337d310b340ebca0fc2df976239b2/course/chapters/102-hello-shell/exercise.md">Rev: e5dafcc0634337d310b340ebca0fc2df976239b2</a>
+      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/102-hello-shell/exercise.md">Rev: e319b61dc474063a53168d8ed2f73c4bda303ddd</a>
     </li>
   </ul>
 </div>
@@ -113,10 +113,10 @@
       <input id="sidebar" type="checkbox" class="drawer-toggle">
       <div class="drawer-content">
         <div class="md:p-4">
-          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
-  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
-    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
-      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+          <div class="@container flex justify-center-safe gap-4">
+  <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
+    <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-exercise">
+      <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
   Hello Shell
 </h1>
 
@@ -125,7 +125,7 @@ prepares the hunt for you: an island where places are directories, clues are
 files, and a few things are programs. You explore it with the <a href="/2026/course/101-command-line/">Command
 Line</a>. On the way, you meet a few new commands.</p></div>
 
-      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
         <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
           <span class="print:hidden">On this page</span>
@@ -135,6 +135,9 @@ Line</a>. On the way, you meet a few new commands.</p></div>
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-wsl-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install WSL (Windows only)</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#set-your-editor"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set your editor</a>
@@ -159,6 +162,26 @@ Line</a>. On the way, you meet a few new commands.</p></div>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#automate-it"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Automate it</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-command-that-prepares-the-hunt-fails"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The command that prepares the hunt fails</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-shells-configuration-file-lost-its-content"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My shell’s configuration file lost its content</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-terminal-seems-frozen"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My terminal seems frozen</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#treasure-is-still-not-found-after-i-changed-my-path"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>treasure</code> is still not found after I changed my <code>PATH</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#every-command-is-now-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Every command is now <code>command not found</code></a>
     
   </li>
 </ul>
@@ -201,7 +224,14 @@ Line</a>. On the way, you meet a few new commands.</p></div>
   </li>
 </ul>
 
-      <h2 id="set-your-editor"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set your editor<a href="#set-your-editor" aria-label="Link to heading 'Set your editor'" data-heading-content="Set your editor" class="anchor"></a></h2>
+      <h2 id="install-wsl-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install WSL (Windows only)<a href="#install-wsl-windows-only" aria-label="Link to heading 'Install WSL (Windows only)'" data-heading-content="Install WSL (Windows only)" class="anchor"></a></h2>
+<p>Skip this step if you are on macOS or Linux.</p>
+<p><strong>Windows users:</strong> this exercise, and everything that follows in this course,
+happens in the <a href="/2026/course/101-command-line/#install-wsl-windows-only">Windows Subsystem for Linux (WSL)</a>, not in
+PowerShell or the Windows command prompt. If you have not installed it yet, do
+so before you start: <a href="/2026/course/101-command-line/#appendix-installing-the-wsl-step-by-step">installing the WSL step by step</a>
+walks through it.</p>
+<h2 id="set-your-editor"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set your editor<a href="#set-your-editor" aria-label="Link to heading 'Set your editor'" data-heading-content="Set your editor" class="anchor"></a></h2>
 <p>You will edit a file during the hunt, and later in the course other programs
 will open a text editor for you without asking. Tell them to use nano, so that
 none of them opens Vim when you did not choose it.</p>
@@ -398,8 +428,61 @@ run it (<a href="/2026/cheatsheets/command-line/#run-a-program-program">“Run a
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <a href="/2026/cheatsheets/shell-scripting/">Shell Scripting Cheatsheet</a> has everything you need here —
 the <code>#!/bin/bash</code> line every script starts with, how to define a function, and
 how to run the finished script.</p></div></div>
+<h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
+<p>Here’s a few tips about some problems you may encounter during this exercise.</p>
+<h3 id="the-command-that-prepares-the-hunt-fails"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The command that prepares the hunt fails<a href="#the-command-that-prepares-the-hunt-fails" aria-label="Link to heading 'The command that prepares the hunt fails'" data-heading-content="The command that prepares the hunt fails" class="anchor"></a></h3>
+<p>If the <code>curl</code> command that prepares the hunt fails with an error about its
+options, or says that <code>bash</code> is not found, you probably typed it in PowerShell
+or in the Windows command prompt. Open the WSL (Ubuntu) and run it there.</p>
+<h3 id="my-shells-configuration-file-lost-its-content"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My shell’s configuration file lost its content<a href="#my-shells-configuration-file-lost-its-content" aria-label="Link to heading 'My shell’s configuration file lost its content'" data-heading-content="My shell’s configuration file lost its content" class="anchor"></a></h3>
+<p>If you typed <code>&gt;</code> instead of <code>&gt;&gt;</code> when you added a line to <code>~/.bashrc</code> or
+<code>~/.zshrc</code>, the file now contains only that line. <code>&gt;</code> replaces the content of a
+file, while <code>&gt;&gt;</code> adds to its end (see <a href="/2026/course/101-command-line/#the-echo-command">the <code>echo</code> command</a> in
+“Command Line”).</p>
+<p>In the WSL, get Ubuntu’s default <code>~/.bashrc</code> back, then add your line again with
+<code>&gt;&gt;</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">/etc/skel/.bashrc</span> <span class="l-variable-parameter">~/</span>
+</div></code></pre>
+<p>On macOS, there is no default <code>~/.zshrc</code> to get back: the file does not exist
+until something creates it. Add back the lines you know were in it. Or delete it
+and open a new terminal: macOS will create a new <code>~/.zshrc</code> with the default
+content.</p>
+<h3 id="my-terminal-seems-frozen"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My terminal seems frozen<a href="#my-terminal-seems-frozen" aria-label="Link to heading 'My terminal seems frozen'" data-heading-content="My terminal seems frozen" class="anchor"></a></h3>
+<p>A program is probably still running. Read what is on the screen: it may tell you
+how to stop it. Otherwise:</p>
+<ul>
+<li><code>Ctrl-C</code> stops most programs (see <a href="/2026/cheatsheets/command-line/#stop-a-running-command-ctrl-c">Stop a running command</a> in
+the cheatsheet).</li>
+<li>Press <code>q</code> to quit <code>less</code> or a scrolling help page.</li>
+<li>Press <code>Ctrl-X</code> to quit nano.</li>
+<li>Press <code>Esc</code>, type <code>:q!</code> and press <code>Enter</code> to quit Vim (see <a href="/2026/course/101-command-line/#help-vim-opened-and-i-cant-get-out">Help, Vim opened
+and I can’t get out</a> in “Command Line”).</li>
+</ul>
+<h3 id="treasure-is-still-not-found-after-i-changed-my-path"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>treasure</code> is still not found after I changed my <code>PATH</code><a href="#treasure-is-still-not-found-after-i-changed-my-path" aria-label="Link to heading 'treasure is still not found after I changed my PATH'" data-heading-content="treasure is still not found after I changed my PATH" class="anchor"></a></h3>
+<p>Check these, in this order:</p>
+<ul>
+<li>Did you open a new terminal? Your shell only reads its configuration file
+when it starts.</li>
+<li>Did you add the directory <code>~/treasure-hunt/bag</code>, and not the file
+<code>~/treasure-hunt/bag/treasure</code>? The <code>PATH</code> is a list of directories.</li>
+<li>Did you edit the right file? It is <code>~/.bashrc</code> in the WSL and <code>~/.zshrc</code> on
+macOS. <code>echo $0</code> tells you which shell you are using.</li>
+<li>Is your line exactly the one on this page? Write <code>$HOME</code>, not <code>~</code>: Zsh does
+not replace a <code>~</code> inside quotes with your home directory.</li>
+</ul>
+<p>In a new terminal, <code>echo $PATH</code> shows whether your bag is in your <code>PATH</code>.</p>
+<h3 id="every-command-is-now-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Every command is now <code>command not found</code><a href="#every-command-is-now-command-not-found" aria-label="Link to heading 'Every command is now command not found'" data-heading-content="Every command is now command not found" class="anchor"></a></h3>
+<p>If even <code>ls</code> or <code>nano</code> is now <code>command not found</code>, the line you added probably
+does not end with <code>:$PATH</code>. Your <code>PATH</code> then contains only your bag, and your
+shell does not find any other command.</p>
+<p>Run nano with its full path to open your configuration file:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/usr/bin/nano</span> <span class="l-function-call">~/.bashrc</span>  <span class="l-comment"># in the WSL</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/usr/bin/nano</span> <span class="l-function-call">~/.zshrc</span>   <span class="l-comment"># on macOS</span>
+</div></code></pre>
+<p>Fix the line so that it is exactly the one on this page, save, and open a new
+terminal.</p>
 
-      <div class="xl:hidden w-full flex justify-center items-center">
+      <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
@@ -408,12 +491,15 @@ how to run the finished script.</p></div></div>
       </div>
     </main>
   </div>
-  <aside class="hidden xl:block xl:w-xs">
+  <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
     <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
     <nav class="toc" aria-labelledby="on-this-page-title">
       <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-wsl-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install WSL (Windows only)</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#set-your-editor"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set your editor</a>
@@ -441,6 +527,26 @@ how to run the finished script.</p></div></div>
     
   </li>
 </ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-command-that-prepares-the-hunt-fails"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The command that prepares the hunt fails</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-shells-configuration-file-lost-its-content"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My shell’s configuration file lost its content</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-terminal-seems-frozen"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My terminal seems frozen</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#treasure-is-still-not-found-after-i-changed-my-path"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>treasure</code> is still not found after I changed my <code>PATH</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#every-command-is-now-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Every command is now <code>command not found</code></a>
+    
+  </li>
+</ul>
   </li>
 </ul>
     </nav>
@@ -451,7 +557,7 @@ how to run the finished script.</p></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/e5dafcc0634337d310b340ebca0fc2df976239b2/course/chapters/102-hello-shell/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/102-hello-shell/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1141,7 +1247,7 @@ how to run the finished script.</p></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@e5dafcc</span>
+        <span class="tooltip-content">main@e319b61</span>
         <span class="font-title">0.1.0</span>
       </span>
       

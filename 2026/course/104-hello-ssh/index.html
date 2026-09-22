@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-aa98a2578f5b3afc9871b7cb777be388.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-2105a5a2623b09c56404c1321ed4514d.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/e5dafcc0634337d310b340ebca0fc2df976239b2/course/chapters/104-hello-ssh/exercise.md">Rev: e5dafcc0634337d310b340ebca0fc2df976239b2</a>
+      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/104-hello-ssh/exercise.md">Rev: e319b61dc474063a53168d8ed2f73c4bda303ddd</a>
     </li>
   </ul>
 </div>
@@ -113,10 +113,10 @@
       <input id="sidebar" type="checkbox" class="drawer-toggle">
       <div class="drawer-content">
         <div class="md:p-4">
-          <div class="flex flex-wrap xl:flex-nowrap justify-center gap-4 mx-auto">
-  <div class="p-4 lg:p-6 xl:p-8 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 md:w-auto">
-    <main class="prose prose-lg xl:prose-xl 2xl:prose-2xl sm:max-md:max-w-none course-exercise">
-      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl !mb-0">
+          <div class="@container flex justify-center-safe gap-4">
+  <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
+    <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-exercise">
+      <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
   Hello SSH
 </h1>
 
@@ -124,7 +124,7 @@
 to a remote server, and how to copy files to and from such a server using
 various tools.</p></div>
 
-      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border xl:hidden">
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
         <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
           <span class="print:hidden">On this page</span>
@@ -169,7 +169,12 @@ various tools.</p></div>
     
   </li><li class="toc-entry toc-h2">
     <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#give-your-key-to-winscp-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give your key to WinSCP (Windows only)</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
@@ -190,6 +195,32 @@ various tools.</p></div>
   </li><li class="toc-entry toc-h2">
     <a href="#clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#please-type-yes-no-or-the-fingerprint"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Please type 'yes', 'no' or the fingerprint:</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#warning-remote-host-identification-has-changed"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#i-am-still-asked-for-my-password-after-ssh-copy-id"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I am still asked for my password after <code>ssh-copy-id</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#scp-finishes-without-error-but-nothing-arrives-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>scp</code> finishes without error, but nothing arrives on the server</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-sftp-application-asks-for-a-password-or-refuses-my-key"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My SFTP application asks for a password or refuses my key</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#zsh-no-matches-found-with-ssh-keygen--r"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>zsh: no matches found</code> with <code>ssh-keygen -R</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#ssh--p-ends-with-connection-timed-out"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>ssh -p</code> ends with <code>Connection timed out</code></a>
+    
+  </li>
+</ul>
   </li>
 </ul>
         </nav>
@@ -343,7 +374,7 @@ to run commands on your local machine.</p>
 <h3 id="do-i-already-have-a-key-pair"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Do I already have a key pair?<a href="#do-i-already-have-a-key-pair" aria-label="Link to heading 'Do I already have a key pair?'" data-heading-content="Do I already have a key pair?" class="anchor"></a></h3>
 <p>By default, SSH keys are stored in the <code>.ssh</code> directory in your home directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/.ssh</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">id_ed25519</span>  <span class="l-variable-parameter">id_ed25519.pub</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">id_ed25519</span>  <span class="l-variable-parameter">id_ed25519.pub</span>  <span class="l-variable-parameter">known_hosts</span>
 </div></code></pre>
 <p>If you have the <code>id_ed25519</code> and <code>id_ed25519.pub</code> files, you’re good to go, since
 SSH expects to find your main <a href="https://en.wikipedia.org/wiki/EdDSA" target="_blank" rel="noopener noreferrer">Ed25519</a> private key at
@@ -351,7 +382,10 @@ SSH expects to find your main <a href="https://en.wikipedia.org/wiki/EdDSA" targ
 algorithm, such as an <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank" rel="noopener noreferrer">ECDSA</a> key pair with files named <code>id_ecdsa</code> and
 <code>id_ecdsa.pub</code>, or an <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="noopener noreferrer">RSA</a> key pair with files named <code>id_rsa</code> and
 <code>id_rsa.pub</code> if your system has an older SSH client.</p>
-<p>If the directory doesn’t exist or is empty, you don’t have a key pair yet.</p>
+<p>The <code>known_hosts</code> file is where your SSH client remembers the servers you
+trusted: it was created when you first connected to any server over SSH.</p>
+<p>If the directory doesn’t exist or only contains <code>known_hosts</code>, you don’t have a
+key pair yet.</p>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -406,26 +440,25 @@ algorithm:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">Generating</span> <span class="l-variable-parameter">public/private</span> <span class="l-variable-parameter">ed25519</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">pair.</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">which</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">save</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">key</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">/home/jde/.ssh/id_ed25519</span><span class="l-punctuation-bracket">)</span>:
-</div><div class="l-line" data-line="4"><span class="l-function-call">Created</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/home/jde/.ssh&#39;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">empty</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">no</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-bracket">)</span>:
-</div><div class="l-line" data-line="6"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">passphrase</span> <span class="l-variable-parameter">again:</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Your</span> <span class="l-variable-parameter">identification</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/.ssh/id_ed25519.</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">Your</span> <span class="l-variable-parameter">public</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/.ssh/id_ed25519.pub.</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">fingerprint</span> <span class="l-variable-parameter">is:</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">SHA256:MmwL9n4KOUCuLoyvGJ7nWRDXjTSGAXO8AcCNVqmDJH0</span> <span class="l-variable-parameter">jde@497820feb22a</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span>&#39;s randomart image is:
-</div><div class="l-line" data-line="12">
-</div><div class="l-line" data-line="13">+--[ED25519 256]--+
-</div><div class="l-line" data-line="14">|.o===oo+         |
-</div><div class="l-line" data-line="15">|.=.oE++ +        |
-</div><div class="l-line" data-line="16">|= oo .oo .       |
-</div><div class="l-line" data-line="17">|.=  oo           |
-</div><div class="l-line" data-line="18">|  +.o = S        |
-</div><div class="l-line" data-line="19">| . o.= +         |
-</div><div class="l-line" data-line="20">|=   +.o          |
-</div><div class="l-line" data-line="21">|*o..o+  .        |
-</div><div class="l-line" data-line="22">|+*+o  oo         |
-</div><div class="l-line" data-line="23">+----[SHA256]-----+
+</div><div class="l-line" data-line="4"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">empty</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">no</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-bracket">)</span>:
+</div><div class="l-line" data-line="5"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">passphrase</span> <span class="l-variable-parameter">again:</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">Your</span> <span class="l-variable-parameter">identification</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/.ssh/id_ed25519.</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">Your</span> <span class="l-variable-parameter">public</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/.ssh/id_ed25519.pub.</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">fingerprint</span> <span class="l-variable-parameter">is:</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">SHA256:MmwL9n4KOUCuLoyvGJ7nWRDXjTSGAXO8AcCNVqmDJH0</span> <span class="l-variable-parameter">jde@497820feb22a</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span>&#39;s randomart image is:
+</div><div class="l-line" data-line="11">
+</div><div class="l-line" data-line="12">+--[ED25519 256]--+
+</div><div class="l-line" data-line="13">|.o===oo+         |
+</div><div class="l-line" data-line="14">|.=.oE++ +        |
+</div><div class="l-line" data-line="15">|= oo .oo .       |
+</div><div class="l-line" data-line="16">|.=  oo           |
+</div><div class="l-line" data-line="17">|  +.o = S        |
+</div><div class="l-line" data-line="18">| . o.= +         |
+</div><div class="l-line" data-line="19">|=   +.o          |
+</div><div class="l-line" data-line="20">|*o..o+  .        |
+</div><div class="l-line" data-line="21">|+*+o  oo         |
+</div><div class="l-line" data-line="22">+----[SHA256]-----+
 </div></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you choose to enter a passphrase, you will not see anything in your terminal
 when you type it. This is intentional, so that no one looking over your shoulder
@@ -439,7 +472,7 @@ to unlock it only once per session instead of every time you use it.</p></div><l
 <p>You can verify that a key has indeed been created by listing the contents of the
 SSH directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/.ssh</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">id_ed25519</span> <span class="l-variable-parameter">id_ed25519.pub</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">id_ed25519</span>  <span class="l-variable-parameter">id_ed25519.pub</span>  <span class="l-variable-parameter">known_hosts</span>
 </div></code></pre>
 <h3 id="use-ssh-copy-id-to-copy-your-public-key-to-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Use <code>ssh-copy-id</code> to copy your public key to the server<a href="#use-ssh-copy-id-to-copy-your-public-key-to-the-server" aria-label="Link to heading 'Use ssh-copy-id to copy your public key to the server'" data-heading-content="Use ssh-copy-id to copy your public key to the server" class="anchor"></a></h3>
 <p>The <code>ssh-copy-id</code> command uses the same syntax as the <code>ssh</code> command to connect
@@ -551,6 +584,11 @@ server’s own keys are in the <code>/etc/ssh</code> directory.</p>
 </tr>
 </tbody>
 </table>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>In modern Ubuntu (WSL included), the lines of your <code>~/.ssh/known_hosts</code> file
+start with <code>|1|</code> and a jumble of characters instead of <code>ssh.archidep.ch</code>. Ubuntu
+hides the names of the servers you connect to, in case someone reads the file.
+The rest of each line is unchanged: a key type such as <code>ssh-ed25519</code>, then a
+server’s public key.</p></div></div>
 <p>Then answer these questions:</p>
 <ul>
 <li>Which of these files is used to prove to the server that you are you?</li>
@@ -581,8 +619,8 @@ server, like with the <code>ssh</code> command.</p>
 <p>A path on the server that does not start with <code>/</code> starts in your home directory
 <strong>on the server</strong>. <code>jde@ssh.archidep.ch:hello.txt</code> is the file <code>~/hello.txt</code> of
 the <code>jde</code> user, on the server.</p>
-<p>You will use <code>scp</code> at the end of this exercise, on your way to the remote land
-of Avalon.</p>
+<p>You will use <code>scp</code> later in the exercise, on your way to the remote land of
+Avalon.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Here are a few additional examples of how to use the <code>scp</code> command:</p>
 <ul>
 <li>
@@ -616,9 +654,9 @@ unencrypted), SFTP is an alternative that goes through SSH’s secure channel an
 therefore poses fewer security risks.</p>
 <p>Most modern FTP clients support SFTP. Here’s a couple:</p>
 <ul>
-<li><a href="https://filezilla-project.org/" target="_blank" rel="noopener noreferrer">FileZilla</a></li>
 <li><a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a></li>
 <li><a href="https://cyberduck.io" target="_blank" rel="noopener noreferrer">Cyberduck</a></li>
+<li><a href="https://filezilla-project.org/" target="_blank" rel="noopener noreferrer">FileZilla</a></li>
 </ul>
 <p>Many code editors also have SFTP support available through plugins.</p>
 <p>Install one of these applications (or use your favorite SFTP application if you
@@ -628,7 +666,7 @@ information:</p>
 <ul>
 <li><strong>Protocol:</strong> SFTP</li>
 <li><strong>Host, hostname or server address:</strong> <code>ssh.archidep.ch</code></li>
-<li><strong>Username</strong>: the username shown on the dashboard</li>
+<li><strong>Username</strong>: the username shown on the <a href="/app">dashboard</a></li>
 <li><strong>Port:</strong> 22 (the standard SSH port)</li>
 <li><strong>Private key</strong> (or key file): your private key, <code>~/.ssh/id_ed25519</code></li>
 </ul>
@@ -638,24 +676,18 @@ like the <code>ssh</code> command does. Make sure to select the <strong>private 
 (<code>id_ed25519</code>), not the public key (<code>id_ed25519.pub</code>).</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>How to use these parameters depends on which application you use. They
 may not be named exactly like this.</p></div></div>
-<p>For example, here’s how to do it with Cyberduck:</p>
+<p>For example, here’s how to do it with Cyberduck on macOS:</p>
 <p><img src="images/cyberduck-sftp-pubkey-40e2ab23ba0a9258be6a1930deb52104.png" alt="Cyberduck SFTP public key authentication" /></p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <code>.ssh</code> directory is hidden, so it may not appear when you browse for your
 private key:</p>
 <ul>
 <li>On macOS, use the <code>Cmd-Shift-.</code> shortcut in the file selection window to
 display hidden files and directories.</li>
-<li>On Windows, your private key is in the WSL, not in your Windows files. Type
-<code>\\wsl.localhost\</code> in the address bar of the file selection window, then open
-your Linux distribution’s directory (e.g. <code>Ubuntu</code>), then <code>home</code>, your Linux
-username, and <code>.ssh</code>. You can also find your Linux files under <strong>Linux</strong> in
-the sidebar of the Windows file explorer.</li>
+<li>On Windows, your private key is in the WSL, not in your Windows files. Follow
+<a href="#give-your-key-to-winscp-windows-only">the Windows instructions below</a>.</li>
 <li>On most Linux distributions, the file manager will have an option to show
 hidden files under its menu.</li>
 </ul></div></div>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>On Windows, FileZilla and WinSCP may ask you to convert your private key to
-another format. You can do so. The converted file is a copy of your private
-key: keep it as private as the original.</p></div></div>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -677,6 +709,88 @@ using the SFTP application. These applications will usually allow you to
 drag-and-drop files to and from the server. Play with it a bit and see what you
 can do.</p>
 <p>Now you know another way to copy files over SSH.</p>
+<h3 id="give-your-key-to-winscp-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give your key to WinSCP (Windows only)<a href="#give-your-key-to-winscp-windows-only" aria-label="Link to heading 'Give your key to WinSCP (Windows only)'" data-heading-content="Give your key to WinSCP (Windows only)" class="anchor"></a></h3>
+<p>This section is for <strong>Windows users</strong>. Your private key is in the WSL, not in
+your Windows files, and a Windows application must be told where to find it. We
+suggest <a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a>, which can read it where it is.</p>
+<p>Install it, then fill in its <strong>Login</strong> window: the <strong>File protocol</strong> is <code>SFTP</code>,
+the <strong>Host name</strong> is <code>ssh.archidep.ch</code>, the <strong>Port number</strong> is <code>22</code>, and the
+<strong>User name</strong> is the one from your <a href="/app">dashboard</a>. <strong>Leave the password
+empty</strong>, and click <strong>Advanced…</strong>:</p>
+<p><img src="images/winscp-login-82a536d7d43a51cc95dfd62240c7f6a3.png" alt="WinSCP’s login window" /></p>
+<p>Under <strong>SSH &gt; Authentication</strong>, click the <strong>…</strong> button next to <strong>Private key
+file</strong>:</p>
+<p><img src="images/winscp-authentication-b4b8d0fb788e7917e01a109de20de3e8.png" alt="WinSCP’s authentication settings" /></p>
+<p>The file selection window that opens does <strong>not</strong> show the <strong>Linux</strong> entry that
+the Windows file explorer has in its sidebar. Type the path to your <code>.ssh</code>
+directory in the address bar instead, replacing <code>jde</code> with your Linux username:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">\\wsl.localhost\Ubuntu\home\jde\.ssh
+</div></code></pre>
+<p><img src="images/winscp-key-chooser-e609a0d9f4d28a3f8b381c206824ac0d.png" alt="Selecting the private key in the WSL" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Windows hides file extensions, so your <strong>private</strong> key <code>id_ed25519</code> and your
+<strong>public</strong> key <code>id_ed25519.pub</code> are both shown as <code>id_ed25519</code>. Tell them apart
+with the <strong>Type</strong> column: the private key is a plain <code>File</code>, while Windows
+believes the public key to be a <code>Microsoft Publisher Document</code>. Select the plain
+<code>File</code>.</p>
+<p>If your key does not appear at all, the window is only showing the file types it
+knows: choose <strong>All Files</strong> in the drop-down list next to the file name.</p></div></div>
+<p>WinSCP only reads private keys in its own format, so it offers to convert yours:</p>
+<p><img src="images/winscp-convert-key-f9650ef483f339f736b1e059ddf127b0.png" alt="WinSCP offering to convert the key" /></p>
+<p>Accept. It then asks where to save the converted key, and suggests your <code>.ssh</code>
+directory, next to the original. Keep it there:</p>
+<p><img src="images/winscp-save-converted-key-0f3e8dca6c5abb4c21fc0b235b201b31.png" alt="WinSCP saving the converted key" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>You now have <strong>two private keys</strong> in your <code>.ssh</code> directory: the original
+<code>id_ed25519</code> and the converted <code>id_ed25519.ppk</code>. The conversion changes the
+format, not the secret: the <code>.ppk</code> file must be kept as private as the original.</p>
+<p>Only WinSCP uses it. The <code>ssh</code> command goes on using <code>id_ed25519</code>.</p></div></div>
+<p>Click <strong>OK</strong>, then <strong>Login</strong>. WinSCP shows you the server’s host key the first
+time you connect, just like the <code>ssh</code> command did:</p>
+<p><img src="images/winscp-host-key-e33fdc08963d864d71748183f95128ed.png" alt="WinSCP showing the server’s host key" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><strong>Check this fingerprint against the one on your <a href="/app">dashboard</a></strong> before
+accepting it. WinSCP shows the SHA256 fingerprint without the <code>SHA256:</code> prefix
+your dashboard displays: compare the characters that follow it.</p></div></div>
+<p>Once connected, your Windows files are on the left and the server’s files on the
+right, and you can drag and drop between them:</p>
+<p><img src="images/winscp-connected-5a97bd46ed73f9b31cc0603391009755.png" alt="WinSCP connected to the server" /></p>
 <h2 id="sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key<a href="#sign-a-message-with-your-key" aria-label="Link to heading 'Sign a message with your key'" data-heading-content="Sign a message with your key" class="anchor"></a></h2>
 <p>When you log in with your key, your SSH client <strong>signs</strong> data from the
 connection with your private key, and the server <strong>checks the signature</strong> with
@@ -881,9 +995,15 @@ computer:</p>
 Shell</a>. Then open a new terminal.</p>
 </li>
 <li>
-<p>Delete the prophecy you brought home from Avalon, and <code>land.txt</code> if you made
-one:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">prophecy</span> <span class="l-variable-parameter">land.txt</span>
+<p>Delete the prophecy you brought home from Avalon. It is in the directory you
+ran <code>scp</code> in:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">prophecy</span>
+</div></code></pre>
+</li>
+<li>
+<p>If you made a <code>land.txt</code> file on your way to Avalon, delete it too, in the
+directory you made it in:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">land.txt</span>
 </div></code></pre>
 </li>
 <li>
@@ -924,8 +1044,55 @@ against the <a href="/app">dashboard</a>: keep that one.</p>
 the most dangerous command of this exercise: check the path twice before you
 press Enter. If you insert a space in the wrong place, you could delete your
 entire home directory.</p></div></div></div>
+<h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
+<p>Here’s a few tips about some problems you may encounter during this exercise.</p>
+<h3 id="please-type-yes-no-or-the-fingerprint"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Please type 'yes', 'no' or the fingerprint:</code><a href="#please-type-yes-no-or-the-fingerprint" aria-label="Link to heading 'Please type 'yes', 'no' or the fingerprint:'" data-heading-content="Please type 'yes', 'no' or the fingerprint:" class="anchor"></a></h3>
+<p>If SSH asks you this after you pasted a fingerprint, the fingerprint you pasted
+does not match the key the server sent. The dashboard shows one fingerprint per
+key type, and the question names one type, usually <code>ED25519</code>. Paste the
+fingerprint of that type, all of it, starting with <code>SHA256:</code>.</p>
+<p>If it still does not match, answer <code>no</code>, and tell the teacher.</p>
+<h3 id="warning-remote-host-identification-has-changed"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code><a href="#warning-remote-host-identification-has-changed" aria-label="Link to heading 'WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!'" data-heading-content="WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!" class="anchor"></a></h3>
+<p>Your SSH client remembers another key for <code>ssh.archidep.ch</code>, for example the key
+of a server that was there before. See <a href="/2026/course/103-ssh/#preventing-future-man-in-the-middle-attacks">how to handle this
+warning</a> in “Secure Shell (SSH)”. Check the new
+fingerprint against the dashboard <strong>before</strong> you remove the old key with
+<code>ssh-keygen -R</code>. If it does not match, do not connect, and tell the teacher.</p>
+<h3 id="i-am-still-asked-for-my-password-after-ssh-copy-id"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I am still asked for my password after <code>ssh-copy-id</code><a href="#i-am-still-asked-for-my-password-after-ssh-copy-id" aria-label="Link to heading 'I am still asked for my password after ssh-copy-id'" data-heading-content="I am still asked for my password after ssh-copy-id" class="anchor"></a></h3>
+<p>If <code>ssh-copy-id</code> says <code>No identities found</code>, or if the server still asks for
+your password after it, your key pair is probably not on the machine you run
+<code>ssh</code> from. For example, you ran <code>ssh-keygen</code> while you were connected to the
+server, or on Windows, you generated the key in PowerShell and you connect from
+the WSL.</p>
+<p>Run <code>hostname</code> to see which machine your terminal is on. Then run <code>ls ~/.ssh</code>
+on your own computer (in the WSL on Windows). If <code>id_ed25519</code> is not there,
+generate your key pair there, and run <code>ssh-copy-id</code> again.</p>
+<h3 id="scp-finishes-without-error-but-nothing-arrives-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>scp</code> finishes without error, but nothing arrives on the server<a href="#scp-finishes-without-error-but-nothing-arrives-on-the-server" aria-label="Link to heading 'scp finishes without error, but nothing arrives on the server'" data-heading-content="scp finishes without error, but nothing arrives on the server" class="anchor"></a></h3>
+<p>You probably forgot the colon (<code>:</code>) after the address of the server. Without it,
+both sides of the command are on your computer: <code>scp hello.txt jde@ssh.archidep.ch</code> copies <code>hello.txt</code> to a new file on your computer, named
+<code>jde@ssh.archidep.ch</code>. Delete that file, and add the colon:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">hello.txt</span> <span class="l-variable-parameter">jde@ssh.archidep.ch:</span>
+</div></code></pre>
+<h3 id="my-sftp-application-asks-for-a-password-or-refuses-my-key"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My SFTP application asks for a password or refuses my key<a href="#my-sftp-application-asks-for-a-password-or-refuses-my-key" aria-label="Link to heading 'My SFTP application asks for a password or refuses my key'" data-heading-content="My SFTP application asks for a password or refuses my key" class="anchor"></a></h3>
+<p>You probably selected your public key (<code>id_ed25519.pub</code>) instead of your
+private key (<code>id_ed25519</code>), or no key file at all. See the tips under <a href="#copy-files-with-an-sftp-application">Copy
+files with an SFTP application</a> to select
+the right file, including how to find it when it is hidden or in the WSL.</p>
+<p>On Windows, some applications cannot read a file from the WSL at all, and fail
+with an error of their own instead of asking for your key again. Cyberduck is
+one of them. Use <a href="#give-your-key-to-winscp-windows-only">WinSCP</a>, which reads your
+key where it is.</p>
+<h3 id="zsh-no-matches-found-with-ssh-keygen--r"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>zsh: no matches found</code> with <code>ssh-keygen -R</code><a href="#zsh-no-matches-found-with-ssh-keygen--r" aria-label="Link to heading 'zsh: no matches found with ssh-keygen -R'" data-heading-content="zsh: no matches found with ssh-keygen -R" class="anchor"></a></h3>
+<p>Zsh reads the square brackets in <code>[ssh.archidep.ch]:2222</code> as a pattern of file
+names. Put the address in quotes, as on this page:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-string">&#39;[ssh.archidep.ch]:2222&#39;</span>
+</div></code></pre>
+<h3 id="ssh--p-ends-with-connection-timed-out"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>ssh -p</code> ends with <code>Connection timed out</code><a href="#ssh--p-ends-with-connection-timed-out" aria-label="Link to heading 'ssh -p ends with Connection timed out'" data-heading-content="ssh -p ends with Connection timed out" class="anchor"></a></h3>
+<p>The network you are on probably blocks that port: some networks only let a few
+ports through. Try again from another network, such as your phone’s hotspot. If
+that does not work either, tell the teacher.</p>
 
-      <div class="xl:hidden w-full flex justify-center items-center">
+      <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
@@ -934,7 +1101,7 @@ entire home directory.</p></div></div></div>
       </div>
     </main>
   </div>
-  <aside class="hidden xl:block xl:w-xs">
+  <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
     <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
     <nav class="toc" aria-labelledby="on-this-page-title">
       <ul class="section-nav">
@@ -975,7 +1142,12 @@ entire home directory.</p></div></div></div>
     
   </li><li class="toc-entry toc-h2">
     <a href="#copy-files-with-an-sftp-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy files with an SFTP application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#give-your-key-to-winscp-windows-only"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Give your key to WinSCP (Windows only)</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
     <a href="#sign-a-message-with-your-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Sign a message with your key</a>
     
@@ -996,6 +1168,32 @@ entire home directory.</p></div></div></div>
   </li><li class="toc-entry toc-h2">
     <a href="#clean-up-optional"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Clean up (optional)</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#please-type-yes-no-or-the-fingerprint"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Please type 'yes', 'no' or the fingerprint:</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#warning-remote-host-identification-has-changed"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#i-am-still-asked-for-my-password-after-ssh-copy-id"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I am still asked for my password after <code>ssh-copy-id</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#scp-finishes-without-error-but-nothing-arrives-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>scp</code> finishes without error, but nothing arrives on the server</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-sftp-application-asks-for-a-password-or-refuses-my-key"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My SFTP application asks for a password or refuses my key</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#zsh-no-matches-found-with-ssh-keygen--r"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>zsh: no matches found</code> with <code>ssh-keygen -R</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#ssh--p-ends-with-connection-timed-out"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>ssh -p</code> ends with <code>Connection timed out</code></a>
+    
+  </li>
+</ul>
   </li>
 </ul>
     </nav>
@@ -1006,7 +1204,7 @@ entire home directory.</p></div></div></div>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/e5dafcc0634337d310b340ebca0fc2df976239b2/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1696,7 +1894,7 @@ entire home directory.</p></div></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@e5dafcc</span>
+        <span class="tooltip-content">main@e319b61</span>
         <span class="font-title">0.1.0</span>
       </span>
       
