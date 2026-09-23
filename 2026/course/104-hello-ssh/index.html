@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-2105a5a2623b09c56404c1321ed4514d.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-c4fe0f642700a0d655b4043bb09ea888.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/104-hello-ssh/exercise.md">Rev: e319b61dc474063a53168d8ed2f73c4bda303ddd</a>
+      <a href="https://github.com/ArchiDep/website/blob/2ad989111d89ca6514d3d8d824f36189da5ec7d2/course/chapters/104-hello-ssh/exercise.md">Rev: 2ad989111d89ca6514d3d8d824f36189da5ec7d2</a>
     </li>
   </ul>
 </div>
@@ -466,9 +466,14 @@ can read it.</p></div></div>
 <div class="callout callout-more group/callout" data-callout="104-hello-ssh:should-i-protect-my-key-with-a-password"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" type="checkbox" class="peer hidden" /><div class="content"><p><strong>Should I protect my key with a password?</strong></p>
 <p>If you enter no password, your key will be stored <strong>in the clear</strong>. This will be
 convenient as you will not have to enter a password when you use it. However,
-any malicious code you allow to run on your machine could easily steal it.</p>
+any malicious code you allow to run on your machine could easily steal it. So
+could any AI agent (e.g. a coding assistant) that you let read files or run
+commands on your computer, even one you trust: the key is just a file it can
+read.</p>
 <p>If your key is protected by a password, you can run an <a href="https://man7.org/linux/man-pages/man1/ssh-agent.1.html" target="_blank" rel="noopener noreferrer">SSH agent</a>
-to unlock it only once per session instead of every time you use it.</p></div><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+to unlock it only once per session instead of every time you use it. While it is
+unlocked, other programs, AI agents included, still cannot copy it, but they can
+use it.</p></div><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:should-i-protect-my-key-with-a-password" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>You can verify that a key has indeed been created by listing the contents of the
 SSH directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/.ssh</span>
@@ -704,6 +709,10 @@ hidden files under its menu.</li>
 </svg><span>Warning</span></div><div class="content"><p>When connecting for the first time, the application may issue the same
 initial connection warning as when you connect using the command line. Be sure
 to check the key fingerprint.</p></div></div>
+<p><img src="images/cyberduck-host-key-7df4c1c288dd1634d9dedaeca766af76.png" alt="Cyberduck showing the server’s key fingerprint" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Cyberduck shows the MD5 fingerprint, not the SHA256 one, and without the <code>MD5:</code>
+prefix. Compare it with the fingerprint that starts with <code>MD5:</code> on your
+<a href="/app">dashboard</a>, for the same type of key (here <code>ed25519</code>).</p></div></div>
 <p>Once you have successfully connected to the server, copy a file to the server
 using the SFTP application. These applications will usually allow you to
 drag-and-drop files to and from the server. Play with it a bit and see what you
@@ -902,26 +911,23 @@ password as long as the agent keeps running.</p>
 </div></code></pre></div><label for="callout-104-hello-ssh:run-an-ssh-agent" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-104-hello-ssh:run-an-ssh-agent" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <h2 id="the-remote-land-of-avalon"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> The remote land of Avalon<a href="#the-remote-land-of-avalon" aria-label="Link to heading 'The remote land of Avalon'" data-heading-content="The remote land of Avalon" class="anchor"></a></h2>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p><strong>You found the treasure of Skull Island</strong> in <a href="/2026/course/102-hello-shell/">Hello Shell</a>? Then
-you remember the parrot. It took you to Skull Island, and when you opened the
-chest, it flew away over the sea, far from your computer, to the remote land of
-Avalon. Follow it, and take your treasure with you: someone there has heard
-about it.</p></div><div><p><strong>You did not play the treasure hunt?</strong> A parrot landed on your window this
-morning. It looked at you, said “SQUAWK!”, and flew away over the sea, towards a
-land you have never seen: the remote land of Avalon. Follow it, and bring
-something with you: someone there will ask where you come from.</p></div></div>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of Avalon.</strong> Avalon is on the SSH exercise server. Your own computer
-is your own land. Each step asks you to do something on the right machine, so
-before you type a command, know which machine your terminal is connected to. It
-helps to keep two terminals open: one logged in to the server, and one on your
-own computer.</p></div></div></div>
+you remember the parrot. When you opened the chest, it flew away over the sea,
+far from your computer, to the remote land of Avalon. Follow it, and bring your
+treasure: someone there has heard about it.</p></div><div><p><strong>You did not play the treasure hunt?</strong> This morning, a parrot landed on your
+window, said “SQUAWK!”, and flew away over the sea to a land you have never
+seen: the remote land of Avalon. Follow it, and bring something with you:
+someone there will ask where you come from.</p></div></div>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p><strong>The rule of Avalon.</strong> Avalon is on the SSH exercise server, and your own
+computer is your own land. Each step must be done on the right machine, so
+always know which machine your terminal is connected to. Keep two terminals
+open: one logged in to the server, and one on your own computer.</p></div></div></div>
 <p>To go to Avalon, log in to the server <strong>with your key</strong>, and take the barge:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span><span class="l-string-special-path">@ssh.archidep.ch</span>
 </div><div class="l-line" data-line="2"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">dock</span>
 </div></code></pre>
-<p>Then follow what it says. Your goal: find out where the parrot is.</p>
-<p>Avalon tells you what to do from there on, and there is a hint on Avalon itself
-if you are stuck (<code>cat .hint</code> in <code>~/avalon</code>, on the server). You will not need
-this page again until Avalon is behind you.</p>
+<p>Then do what it says. Your goal: find the parrot. Stuck? Read the hint in
+<code>~/avalon</code>, on the server (<code>cat .hint</code>). You will not need this page again until
+Avalon is behind you.</p>
 <p>On the way, you will:</p>
 <ul>
 <li>Show the server that you came with your key, not your password.</li>
@@ -932,9 +938,9 @@ the server to your computer.</li>
 </ul>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Want to start over? Run <code>dock --restart</code> on the server.</p></div></div>
 <h3 id="a-message-on-the-shore"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A message on the shore<a href="#a-message-on-the-shore" aria-label="Link to heading 'A message on the shore'" data-heading-content="A message on the shore" class="anchor"></a></h3>
-<p>When the Lady of the Lake has spoken, someone leaves a message for you on the
-shore of Avalon: <code>~/avalon/message.txt</code>, on the server. It is the last trial of
-your journey. Read it, and do what a careful traveller would do.</p>
+<p>When the Lady of the Lake has spoken, someone leaves you a message on the shore:
+<code>~/avalon/message.txt</code>, on the server. This is the last trial. Read it, and do
+what a careful traveller would do.</p>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You worked on two computers from a single terminal. The exercise server is a
 real machine somewhere on the Internet, with no screen and no windows of its
@@ -1204,7 +1210,7 @@ that does not work either, tell the teacher.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/e319b61dc474063a53168d8ed2f73c4bda303ddd/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/2ad989111d89ca6514d3d8d824f36189da5ec7d2/course/chapters/104-hello-ssh/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1894,7 +1900,7 @@ that does not work either, tell the teacher.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@e319b61</span>
+        <span class="tooltip-content">main@2ad9891</span>
         <span class="font-title">0.1.0</span>
       </span>
       

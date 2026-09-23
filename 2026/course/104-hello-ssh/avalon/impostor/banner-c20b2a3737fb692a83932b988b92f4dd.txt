@@ -1,0 +1,22 @@
+
+    ()==[::::::::::::::::::::::::::::::::>     This is not Excalibur.
+
+"Ha! I am Morgan le Fay, traveller, and this is not Avalon.
+
+ You trusted my key without comparing its fingerprint with the
+ dashboard. That is how an attacker in the middle takes over a
+ connection: a server that says it is the right one, and a traveller
+ who does not check.
+
+ You were lucky: your key only signed a challenge for this one
+ connection, and it is useless to me. A password, I would have kept."
+
+You cannot log in here. Make your computer forget this server:
+
+    ssh-keygen -R '[ssh.archidep.ch]:2222'
+
+Then connect again, and answer no. Bring the fingerprint you are
+shown (on the line that begins with SHA256) to the Lady of the Lake:
+
+    ssh <username>@ssh.archidep.ch ./avalon/lady THE-WORD SHA256:...
+
