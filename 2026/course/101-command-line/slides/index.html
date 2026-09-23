@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-9aa582b9b4789b6d6e061cc81c0db42b.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-3ecbd3af57136dfa2ffd7409576a80b4.css">
     <script defer src="/2026/assets/course/slides-mermaid-a65afe425c6ae7f615bd2d58b4a99c21.js">
     </script>
   </head>
@@ -91,35 +91,23 @@ machine by rewiring it. Everything that follows is a departure from that.
 
 ---
 
-### Punched cards (1950s)
+### Punched cards (1725)
 
 One of the first user interfaces <!-- .element: class="subtitle" -->
 
-<div class="grid grid-cols-12 gap-8">
-  <div class="col-span-5 col-start-2">
+<div class="grid grid-cols-10">
+  <div class="col-span-8 col-start-2">
     <img src="images/punched-card-4c034a3a0c63e7f279dc0aad4930821d.jpg" alt="Punched Card">
-
-Invented in 1725 <!-- .element: style="margin-top: 0;" -->
-
-  </div>
-  <div class="col-span-5 col-start-7">
-    <img src="images/keypunch-machine-b8a2d0a46f9cedceeeeba6962a53c245.jpg" alt="Keypunch Machine">
   </div>
 </div>
 
 **Notes:**
 
 Many early general-purpose digital computers used [punched cards](https://en.wikipedia.org/wiki/Punched_card)
-for data input, output and storage. Someone had to use a [keypunch](https://en.wikipedia.org/wiki/Keypunch)
-machine to write your cards, then feed them to the computer.
+for data input, output and storage.
 
 Punched cards are much older than computers. They were first invented around
 1725 to control mechanical [looms](https://en.wikipedia.org/wiki/Loom).
-
-A standard IBM card has 80 columns, and each column holds one character. That
-makes one card about 80 bytes, usually one line of a program. A megabyte would
-take about 12,500 cards. It is also why terminals are still 80 columns wide by
-default.
 
 ---
 
@@ -143,6 +131,29 @@ electrical circuit, and advances the counter for that position by one.
 
 Hollerith's company later became part of IBM, whose cards the computers of the
 1950s would read in much the same way.
+
+---
+
+### Keypunch machine (1950s)
+
+Writing a program, one card at a time <!-- .element: class="subtitle" -->
+
+<div class="grid grid-cols-10">
+  <div class="col-span-6 col-start-3">
+    <img src="images/keypunch-machine-b8a2d0a46f9cedceeeeba6962a53c245.jpg" alt="Keypunch Machine">
+  </div>
+</div>
+
+**Notes:**
+
+Someone had to use a [keypunch](https://en.wikipedia.org/wiki/Keypunch) machine to write your cards, then
+feed them to the computer. Each key press punched the holes for one character in
+the current column of the card.
+
+A standard IBM card has 80 columns, and each column holds one character. That
+makes one card about 80 bytes, usually one line of a program. A megabyte would
+take about 12,500 cards. It is also why terminals are still 80 columns wide by
+default.
 
 ---
 
@@ -472,7 +483,7 @@ system, and so is the Linux running in the WSL and on the server.
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/a967b222cbf6cb872cc20fdf7e681dbd0594e870/course/chapters/101-command-line/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/ea3fc5384b439be0e27f35093509936e306beaad/course/chapters/101-command-line/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -499,12 +510,12 @@ system, and so is the Linux running in the WSL and on the server.
           </li>
           
           <li class="text-xs">
-            Rev: a967b222cbf6cb872cc20fdf7e681dbd0594e870
+            Rev: ea3fc5384b439be0e27f35093509936e306beaad
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@a967b22
+        ArchiDep 26-27 main@ea3fc53
       </a>
     </div>
   </body>
