@@ -123,6 +123,29 @@ default.
 
 ---
 
+### Reading punched cards (1890)
+
+A hole is data <!-- .element: class="subtitle" -->
+
+<div class="grid grid-cols-10">
+  <div class="col-span-8 col-start-2">
+    <video src="images/tabulator-ac8a6ba282feb8cf72485c20ce2bd34d.mp4" data-autoplay loop muted playsinline aria-label="Animation of a tabulating machine reading punched cards"></video>
+  </div>
+</div>
+
+**Notes:**
+
+[Herman Hollerith](https://en.wikipedia.org/wiki/Herman_Hollerith)'s [tabulating machine](https://en.wikipedia.org/wiki/Tabulating_machine) was
+built to count the 1890 United States census. A row of spring-loaded pins
+presses down on each card. Where there is no hole, the card stops the pin. Where
+there is a hole, the pin goes through into a cup of mercury, closes an
+electrical circuit, and advances the counter for that position by one.
+
+Hollerith's company later became part of IBM, whose cards the computers of the
+1950s would read in much the same way.
+
+---
+
 ### A typical program (1950s)
 
 <p class="subtitle italic">Whatever you do, <strong>DON'T</strong> drop it!</p>
@@ -132,6 +155,22 @@ default.
     <img src="images/punched-cards-program-122531f9d7154b264cb3a6ec4edf1db2.jpg" alt="Punched Card Program">
   </div>
 </div>
+
+**Notes:**
+
+One card holds one line of code, so the size of a program is the height of its
+stack. Cards were sold in boxes of 2,000, which make a stack about 35 cm high.
+
+- A small program of a few hundred lines is a few centimetres of cards, held
+  together with a rubber band.
+- A [FORTRAN](https://en.wikipedia.org/wiki/Fortran) compiler for the IBM 1401 fit in a deck of 2,200 cards:
+  about one box.
+- The software of the [SAGE](https://en.wikipedia.org/wiki/Semi-Automatic_Ground_Environment) air defense system had more than 100,000
+  instructions. At one instruction per card, that is more than 50 boxes, or a
+  stack about 18 metres high.
+
+Programmers often punched a sequence number in the last columns of each card.
+If the deck was dropped, a machine could sort it back into order.
 
 ---
 
@@ -396,9 +435,11 @@ system, and so is the Linux running in the WSL and on the server.
 [cli]: https://en.wikipedia.org/wiki/Command-line_interface
 [digital]: https://en.wikipedia.org/wiki/Digital_data
 [eniac]: https://en.wikipedia.org/wiki/ENIAC
+[fortran]: https://en.wikipedia.org/wiki/Fortran
 [freebsd]: https://en.wikipedia.org/wiki/FreeBSD
 [general-purpose-computer]: https://en.wikipedia.org/wiki/Computer
 [gui]: https://en.wikipedia.org/wiki/Graphical_user_interface
+[hollerith]: https://en.wikipedia.org/wiki/Herman_Hollerith
 [keypunch]: https://en.wikipedia.org/wiki/Keypunch
 [linux]: https://en.wikipedia.org/wiki/Linux
 [loom]: https://en.wikipedia.org/wiki/Loom
@@ -408,6 +449,8 @@ system, and so is the Linux running in the WSL and on the server.
 [note-g]: https://en.wikipedia.org/wiki/Note_G
 [programmable]: https://en.wikipedia.org/wiki/Computer_program
 [punched-card]: https://en.wikipedia.org/wiki/Punched_card
+[sage]: https://en.wikipedia.org/wiki/Semi-Automatic_Ground_Environment
+[tabulating-machine]: https://en.wikipedia.org/wiki/Tabulating_machine
 [tty]: https://en.wikipedia.org/wiki/Teleprinter
 [tui]: https://en.wikipedia.org/wiki/Touch_user_interface
 [unix]: https://en.wikipedia.org/wiki/Unix
@@ -429,7 +472,7 @@ system, and so is the Linux running in the WSL and on the server.
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/f07df386eb538c8295ac9667b5517af150c08b3c/course/chapters/101-command-line/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/a967b222cbf6cb872cc20fdf7e681dbd0594e870/course/chapters/101-command-line/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -456,12 +499,12 @@ system, and so is the Linux running in the WSL and on the server.
           </li>
           
           <li class="text-xs">
-            Rev: f07df386eb538c8295ac9667b5517af150c08b3c
+            Rev: a967b222cbf6cb872cc20fdf7e681dbd0594e870
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@f07df38
+        ArchiDep 26-27 main@a967b22
       </a>
     </div>
   </body>
