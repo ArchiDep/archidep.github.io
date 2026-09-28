@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/46879dab5e8b1a468641cbbafb5f33907e517541/course/chapters/202-hello-git/exercise.md">Rev: 46879dab5e8b1a468641cbbafb5f33907e517541</a>
+      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/202-hello-git/exercise.md">Rev: 64a7a78ad100fe09a66b78838e5040814fcac641</a>
     </li>
   </ul>
 </div>
@@ -874,10 +874,10 @@ your prediction:</p>
 the files you end up with. But the history is different: two merge commits
 instead of one.</p></div></div>
 <h2 id="history-hunt"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> History hunt<a href="#history-hunt" aria-label="Link to heading 'History hunt'" data-heading-content="History hunt" class="anchor"></a></h2>
-<p>This exercise is <strong>optional</strong>. Every project on GitHub comes with its whole history, and you can search it
-without leaving your terminal. Clone the repository of <a href="https://gabrielecirulli.github.io/2048/" target="_blank" rel="noopener noreferrer">2048</a>, the puzzle
-game that went viral in 2014, next to your <code>hello-git</code> directory (not inside
-it):</p>
+<p>This exercise is <strong>optional</strong>. Every project on GitHub comes with its whole
+history, and you can search it without leaving your terminal. Clone the
+repository of <a href="https://gabrielecirulli.github.io/2048/" target="_blank" rel="noopener noreferrer">2048</a>, the puzzle game that went viral in 2014, next to
+your <code>hello-git</code> directory (not inside it):</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">https://github.com/gabrielecirulli/2048.git</span>
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-number">2048</span>
@@ -1001,23 +1001,52 @@ then moved into <code>style</code>, then renamed to <code>main.scss</code>. With
 history stops at the last rename. <code>A</code>, <code>M</code> and <code>R</code> mean added, modified and
 renamed.</p></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You created a repository and made commits, and each prediction checked one piece
-of how Git works:</p>
+<p>You kept the history of a project: every version you committed is still there,
+to go back to, compare, or build on in parallel. All of it lives in the hidden
+<code>.git</code> directory at the root of your project, the <strong>Git directory</strong>. Without it,
+your files stay but their history is gone. Copied elsewhere, it carries the
+whole history with it, which is what <code>git clone</code> does.</p>
+<p>Along the way, you:</p>
 <ul>
-<li>A new file is <strong>untracked</strong> until you add it, and a commit contains <strong>only
-what is staged</strong>.</li>
-<li>The working directory, the staging area and the repository are <strong>three
-separate places</strong>. <code>git add</code> puts a snapshot of a file in the staging area as
-it is at that moment, which is why a file can be both staged and modified.
-<code>git diff</code> and <code>git diff --cached</code> show you the difference between them.</li>
-<li><code>.gitignore</code> keeps files out of the repository, but only files Git does not
-track yet. A secret that has been committed stays in the history: the only
-real fix is to change the secret.</li>
-<li>A branch is a pointer to a commit. Switching moves <code>HEAD</code> and rewrites the
-files of your working directory to match another snapshot.</li>
-<li>Whether a merge is a fast-forward or creates a merge commit depends on the
-shape of the history when you merge.</li>
+<li>Created a repository and made commits.</li>
+<li>Committed a file that was both staged and modified.</li>
+<li>Ignored files, and stopped tracking one that was committed too late.</li>
+<li>Created branches, switched between them, and merged them.</li>
+<li>(Optionally) searched the history of a real project.</li>
 </ul>
+<p>A commit saves the <strong>staging area</strong>, not your files. Git keeps your project in
+three places: the working directory, where you edit; the staging area, where you
+prepare the next commit; and the Git directory, where commits are stored. <code>git add</code> copies a file from the first to the second as it is at that moment, which
+is how <code>hello.txt</code> could be both staged and modified. <code>git status</code> tells you
+where each change is.</p>
+<p>A commit is a snapshot of the whole project, named by the <strong>hash</strong> of its
+content. Change anything in it, even its author or its date, and it becomes a
+different commit, which is why the commits you made do not have the hashes shown
+on this page. A commit, once made, never changes.</p>
+<p>That is why your first API key is still in the history, even after you stopped
+tracking it, and anyone with a copy has it. The only real fix for a committed
+secret is to change it. <code>.gitignore</code> only protects files Git does not track yet,
+so it has to come <strong>before</strong> the secret, and it is committed so that everyone on
+the project shares it. Keeping secrets out of the code comes back later in the
+course.</p>
+<p>A <strong>branch</strong> is only a pointer to a commit, and <code>HEAD</code> says which one you are
+on. Committing moves the current branch forward. Switching moves <code>HEAD</code> and
+rewrites your working directory to match another snapshot. Nothing is lost when
+you switch: <code>goodbye.txt</code> disappeared from <code>main</code>, but it was still in the
+commit of <code>bye</code>.</p>
+<p>How Git <strong>merges</strong> depends only on the shape of the history. When the other
+branch is directly ahead, as <code>fix-typo</code> was, Git just moves the pointer forward:
+a fast-forward. When the two have diverged, as <code>contact-page</code> had, Git combines
+what each side changed since their common ancestor into a merge commit, which
+has two parents. Merged in another order, the same branches give the same files
+but a different history.</p>
+<p>If you went on the history hunt, you also saw that a history is something you
+can search, and that an author’s name is only what they configured.</p>
+<p>So far, your history has lived in a single copy, on your computer. In
+<a href="/2026/course/203-git-collaborating/">Collaborating with Git</a>, you share it with others through a
+remote, where diverged histories come back as refused pushes and conflicts.
+Later in the course, a repository is also how you put your application on your
+server.</p>
 <h2 id="going-further"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Going further<a href="#going-further" aria-label="Link to heading 'Going further'" data-heading-content="Going further" class="anchor"></a></h2>
 <p>The exercises below are <strong>optional</strong>. They practise other Git commands that are
 useful in everyday work, but that you will not be asked about in the exam. Do
@@ -1347,7 +1376,7 @@ follow the steps in <a href="#two-merges">two merges</a> in order.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/46879dab5e8b1a468641cbbafb5f33907e517541/course/chapters/202-hello-git/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/202-hello-git/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -2025,7 +2054,7 @@ follow the steps in <a href="#two-merges">two merges</a> in order.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@46879da</span>
+        <span class="tooltip-content">main@64a7a78</span>
         <span class="font-title">0.1.0</span>
       </span>
       
