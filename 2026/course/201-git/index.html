@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-14eff0037c695688c61038bf03519066.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-3d2034ecfda35e0b22480652c56249c0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-2d47e935d2313cdd7b40110584b5fa2e.js" defer>
+    <script src="/2026/assets/course/course-c90ca709c6da20f25911a9024dce765d.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/891e39ba0c006f5d1a5ae3993f576e6d1f7d7e31/course/chapters/201-git/subject.md">Rev: 891e39ba0c006f5d1a5ae3993f576e6d1f7d7e31</a>
+      <a href="https://github.com/ArchiDep/website/blob/72b8c66a607db036651ad577f2db0cdf83970e8f/course/chapters/201-git/subject.md">Rev: 72b8c66a607db036651ad577f2db0cdf83970e8f</a>
     </li>
   </ul>
 </div>
@@ -122,8 +122,8 @@
 
       <div class="my-4"><p>Learn the basics of <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git</a>, one of the most popular distributed version
 control systems. This is a condensed version of the first chapters of the <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Git
-Book</a>, which you should read if you want more
-detailed information on the subject.</p></div>
+Book</a>, which you should read if you want more detailed information on
+the subject.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -137,94 +137,46 @@ detailed information on the subject.</p></div>
     <a href="#presentation">Presentation</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#getting-started">Getting started</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
     <a href="#git-and-the-command-line">Git and the command line</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#installing-git">Installing Git</a>
     
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#first-time-git-setup">First-time Git setup</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#choosing-a-default-branch-name">Choosing a default branch name</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#creating-a-new-repository">Creating a new repository</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#checking-the-status-of-your-files">Checking the status of your files</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#adding-new-files">Adding new files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#tracking-new-files">Tracking new files</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#checking-staged-changes">Checking staged changes</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#committing-your-changes">Committing your changes</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#modifying-files">Modifying files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#staging-modified-files">Staging modified files</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#modifying-a-staged-file">Modifying a staged file</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#checking-staged-and-unstaged-changes">Checking staged and unstaged changes</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#staging-area-versus-working-directory">Staging area versus working directory</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#committing-partially-staged-changes">Committing partially staged changes</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#moving-and-removing-files">Moving and removing files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#adding-all-changes">Adding all changes</a>
-    
-  </li>
-</ul>
-  </li>
-</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#viewing-the-commit-history">Viewing the commit history</a>
+    <a href="#how-git-stores-your-project">How Git stores your project</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-basic-git-commands">The basic Git commands</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#viewing-the-changes-in-the-history">Viewing the changes in the history</a>
+    <a href="#git-config-set-up-git"><code>git config</code>: set up Git</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#other-log-options">Other log options</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#ignoring-files">Ignoring files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#committing-the-ignore-file">Committing the ignore file</a>
+    <a href="#git-init-create-a-new-repository"><code>git init</code>: create a new repository</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#status-of-ignored-files">Status of ignored files</a>
+    <a href="#git-clone-get-an-existing-repository"><code>git clone</code>: get an existing repository</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#global-ignore-file">Global ignore file</a>
+    <a href="#git-status-see-where-you-are"><code>git status</code>: see where you are</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-add-prepare-the-next-commit"><code>git add</code>: prepare the next commit</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-diff-see-exactly-what-changed"><code>git diff</code>: see exactly what changed</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-commit-save-a-snapshot"><code>git commit</code>: save a snapshot</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-log-look-at-the-history"><code>git log</code>: look at the history</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-branch-list-create-and-delete-branches"><code>git branch</code>: list, create and delete branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-switch-move-between-branches"><code>git switch</code>: move between branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-merge-bring-the-work-of-a-branch-into-another"><code>git merge</code>: bring the work of a branch into another</a>
     
   </li>
 </ul>
@@ -232,22 +184,42 @@ detailed information on the subject.</p></div>
     <a href="#undoing-things">Undoing things</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#unmodifying-a-modified-file">Unmodifying a modified file</a>
+    <a href="#unstaging-a-file-git-restore---staged">Unstaging a file: <code>git restore --staged</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#unstaging-a-staged-file">Unstaging a staged file</a>
+    <a href="#discarding-changes-git-restore">Discarding changes: <code>git restore</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#changing-the-commit-message">Changing the commit message</a>
+    <a href="#changing-the-last-commit-git-commit---amend">Changing the last commit: <code>git commit --amend</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#adding-changes-to-a-commit">Adding changes to a commit</a>
+    <a href="#deleting-an-unmerged-branch-git-branch--d">Deleting an unmerged branch: <code>git branch -D</code></a>
     
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
     <a href="#best-practices">Best practices</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-going-further">Appendix: going further</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-a-short-history-of-version-control">Appendix: a short history of version control</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#local-version-control-systems-1980s">Local version control systems (1980s)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#centralized-version-control-systems-1990s">Centralized version control systems (1990s)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#distributed-version-control-systems-2000">Distributed version control systems (2000+)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#snapshots-not-differences">Snapshots, not differences</a>
+    
+  </li>
+</ul>
   </li>
 </ul>
         </nav>
@@ -283,491 +255,381 @@ detailed information on the subject.</p></div>
 <ul>
 <li><a href="/2026/course/101-command-line/">Command line</a></li>
 </ul>
-<h2 id="getting-started">Getting started<a href="#getting-started" aria-label="Link to heading 'Getting started'" data-heading-content="Getting started" class="anchor"></a></h2>
-<p>This is a tutorial where you will learn how to:</p>
-<ul>
-<li>Configure Git for the first time</li>
-<li>Create a new repository</li>
-<li>Check the status of your files</li>
-<li>Track new files</li>
-<li>Stage and commit modified files</li>
-<li>Move and remove files</li>
-<li>Ignore files</li>
-</ul>
-<h3 id="git-and-the-command-line">Git and the command line<a href="#git-and-the-command-line" aria-label="Link to heading 'Git and the command line'" data-heading-content="Git and the command line" class="anchor"></a></h3>
+<h2 id="git-and-the-command-line">Git and the command line<a href="#git-and-the-command-line" aria-label="Link to heading 'Git and the command line'" data-heading-content="Git and the command line" class="anchor"></a></h2>
 <p>There are a lot of different ways to use Git: the original <strong>command line
 tools</strong> and various <strong>GUIs</strong> of varying capabilities. But the command line is
 the only place you can run <strong>all</strong> Git commands with all their options.</p>
 <p>If you know how to run the command line version, you can easily figure out how
 to use the GUI version, while the opposite is not necessarily true. So the
 <strong>command line</strong> is what we will use.</p>
-<p>Some of you may already have Git installed. Run the following command in your
-CLI to make sure:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">git</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">2.46.0</span>
+<h2 id="how-git-stores-your-project">How Git stores your project<a href="#how-git-stores-your-project" aria-label="Link to heading 'How Git stores your project'" data-heading-content="How Git stores your project" class="anchor"></a></h2>
+<p>Git stores your project as a series of <strong>snapshots</strong>. Each time you commit, it
+records what <strong>all</strong> your files look like at that moment, not just the changes
+you made.</p>
+<p><img src="images/snapshots-658112accd3df5aaf4604a3d77f56198.png" alt="Git stores changes as snapshots" /></p>
+<p>A snapshot is made of two kinds of objects:</p>
+<ul>
+<li>A <strong>blob</strong> is the content of one file.</li>
+<li>A <strong>tree</strong> is the listing of one directory: the name of each file in it, with
+the blob holding its content, and the name of each subdirectory, with the tree
+listing it in turn.</li>
+</ul>
+<p>For example, here are the trees and blobs of a project with two files, <code>README</code>
+and <code>Rakefile</code>, and a <code>lib</code> directory containing one more file,
+<code>simplegit.rb</code>:</p>
+<p><img src="images/data-model-e0ca06a25bdd7b624b5b310f4b17fcf8.png" alt="Trees and blobs" /></p>
+<p>A <strong>commit</strong> points to the tree of your project’s root directory, which is how
+it holds the whole project. It also records its author, its date, a message, and
+its <strong>parent</strong>: the commit that came before it. That chain of parents is your
+project’s history.</p>
+<p>Every object, whether commit, tree or blob, is named by a <strong>hash</strong> of its
+content: a long string of letters and digits, computed by a <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener noreferrer">cryptographic hash
+function</a> (SHA-1). The same content always gives
+the same hash, and any change to it gives a different one. This has three
+consequences:</p>
+<ul>
+<li><strong>A file that has not changed is not stored again.</strong> Its content still has the
+same hash, so the new tree simply points to the blob that already exists. A
+snapshot of the whole project only costs the files that changed.</li>
+<li><strong>A commit cannot be changed.</strong> Changing anything in it, even a single letter
+of its message, gives a different hash, and therefore a different commit.</li>
+<li><strong>Git notices when data is corrupted.</strong> If stored content no longer matches
+its hash, Git knows it has been damaged.</li>
+</ul>
+<div class="callout callout-more group/callout" data-callout="201-git:git-objects"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-201-git:git-objects" type="checkbox" class="peer hidden" /><div class="content"><p>It is sometimes said that Git is just a content-addressable file system: it
+mostly just stores objects, named by the hash of their content. If you are
+curious, <code>git cat-file -p</code> shows the content of any object. Here is a commit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">cat-file</span> <span class="l-variable-parameter">-p</span> <span class="l-number">5233289</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">tree</span> <span class="l-variable-parameter">9d8b9c81fd3a780a1ada92e68b8ffaffd4dbd5cf</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">parent</span> <span class="l-variable-parameter">af8051aa78016f10f1e0775ab9282d61a0862ffd</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">author</span> <span class="l-variable-parameter">John</span> <span class="l-variable-parameter">Doe</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">john.doe@example.com</span><span class="l-operator">&gt;</span> <span class="l-number">1486906554</span> <span class="l-string-special-path">+0100</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">committer</span> <span class="l-variable-parameter">John</span> <span class="l-variable-parameter">Doe</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">john.doe@example.com</span><span class="l-operator">&gt;</span> <span class="l-number">1486906554</span> <span class="l-string-special-path">+0100</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-function-call">Add</span> <span class="l-variable-parameter">readme</span>
 </div></code></pre>
-<h4 id="installing-git">Installing Git<a href="#installing-git" aria-label="Link to heading 'Installing Git'" data-heading-content="Installing Git" class="anchor"></a></h4>
-<p>On <strong>macOS</strong>, Git may already be installed. If not, it is part of the
-command-line tools, which you can install by running the following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">xcode-select</span> <span class="l-function-call">--install</span>
+<p>Here’s the tree it points to:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">cat-file</span> <span class="l-variable-parameter">-p</span> <span class="l-variable-parameter">9d8b9c81</span>
+</div><div class="l-line" data-line="2"><span class="l-number">100644</span> <span class="l-variable-parameter">blob</span> <span class="l-variable-parameter">020333cd4ff6b5d4156215dc7df36210df3ae824</span>    <span class="l-variable-parameter">addition.js</span>
+</div><div class="l-line" data-line="3"><span class="l-number">100644</span> <span class="l-variable-parameter">blob</span> <span class="l-variable-parameter">c7add86fef91e20012654afc2a32ea315f59cd8b</span>    <span class="l-variable-parameter">calculations.js</span>
+</div><div class="l-line" data-line="4"><span class="l-number">100644</span> <span class="l-variable-parameter">blob</span> <span class="l-variable-parameter">cd558f6317227223c201057db00709eabb9bf9e7</span>    <span class="l-variable-parameter">index.html</span>
+</div><div class="l-line" data-line="5"><span class="l-number">100644</span> <span class="l-variable-parameter">blob</span> <span class="l-variable-parameter">1ef27915edde8b6afa1936b3db1d9c11d8ac85ba</span>    <span class="l-variable-parameter">subtraction.js</span>
 </div></code></pre>
-<p>On <strong>Windows</strong> under the <strong>W</strong>indows <strong>S</strong>ubsystem for <strong>L</strong>inux (WSL), or on
-<strong>Linux</strong>, Git may already be installed. If not, you can install it using your
-distribution’s package manager, for example on APT-based systems:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">git-all</span>
-</div></code></pre>
-<p>Otherwise, follow the <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener noreferrer">official installation instructions</a>.</p>
-<h3 id="first-time-git-setup">First-time Git setup<a href="#first-time-git-setup" aria-label="Link to heading 'First-time Git setup'" data-heading-content="First-time Git setup" class="anchor"></a></h3>
-<p>Now that you have Git, you must configure your <strong>identity</strong>: your user name and
-e-mail address. This is important because <strong>every Git commit uses this
-information</strong>, and it’s <em>immutably</em> baked into every commit you make.</p>
-<p>Use the <code>git config</code> command to do this:</p>
+<p>To learn more, read <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener noreferrer">Git Internals - Git Objects</a> in the Pro Git
+book.</p></div><label for="callout-201-git:git-objects" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-201-git:git-objects" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f31f-030fc6691abd2ab36c1d90407e02505e.svg" alt="🌟" width="20" height="20" /></span> Amazing!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="the-basic-git-commands">The basic Git commands<a href="#the-basic-git-commands" aria-label="Link to heading 'The basic Git commands'" data-heading-content="The basic Git commands" class="anchor"></a></h2>
+<p>This section explains the commands you will use every day, what they do, and the
+options you will need most often. You can practise all of them in <a href="/2026/course/202-hello-git/">Hello
+Git</a>.</p>
+<p>A few words come back throughout:</p>
+<ul>
+<li>A <strong>repository</strong> is your project together with its whole history. Git keeps
+that history in a hidden <code>.git</code> directory at the root of the project, the
+<strong>Git directory</strong>.</li>
+<li>A <strong>commit</strong> is a <a href="#how-git-stores-your-project">snapshot</a> of your whole
+project at a particular moment in time, also often called a <strong>version</strong>.
+Think of it as a save point.</li>
+<li>The <strong>working directory</strong> (or <strong>working tree</strong>) is the files you see and
+edit: one version of the project, taken out of the repository for you to work
+on.</li>
+<li>The <strong>staging area</strong> (or <strong>index</strong>) is where you prepare the next commit: the
+changes you have put there are the ones the next commit will save.</li>
+<li>A <strong>branch</strong> is a named line of work. Technically, it is only a label that
+points to a commit, and moves forward each time you commit on it.</li>
+<li><strong><code>HEAD</code></strong> is Git’s “you are here” marker: it says which branch you are
+currently on.</li>
+</ul>
+<h3 id="git-config-set-up-git"><code>git config</code>: set up Git<a href="#git-config-set-up-git" aria-label="Link to heading 'git config: set up Git'" data-heading-content="git config: set up Git" class="anchor"></a></h3>
+<p><code>git config</code> reads and changes Git’s settings. You need it mostly once, on each
+new computer, to tell Git who you are. Every commit records the name and e-mail
+address of its author, and they are part of the commit forever: set them before
+your first commit.</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">user.name</span> <span class="l-string">&quot;John Doe&quot;</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">user.email</span> <span class="l-variable-parameter">john.doe@example.com</span>
 </div></code></pre>
-<p>You can also run the command with the <code>--list</code> option to check that the settings
-were successfully applied:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--list</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">user.name=John</span> <span class="l-variable-parameter">Doe</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">user.email=john.doe@example.com</span>
+<p>With <code>--global</code>, a setting applies to all your repositories on this computer,
+and is saved in the <code>~/.gitconfig</code> file in your home directory. Without it, it
+applies only to the repository you are in.</p>
+<p>To check a setting, give only its name. <code>git config --list</code> shows all of them:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">user.name</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">John</span> <span class="l-variable-parameter">Doe</span>
 </div></code></pre>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>With the <code>--global</code> option, Git will store these settings in your user
-configuration file (<code>~/.gitconfig</code>), so you only need to do this <strong>once on any
-given computer</strong>. You can also change them at any time by running the commands
-again. Run <code>cat ~/.gitconfig</code> to display this file.</p></div></div>
-<h3 id="choosing-a-default-branch-name">Choosing a default branch name<a href="#choosing-a-default-branch-name" aria-label="Link to heading 'Choosing a default branch name'" data-heading-content="Choosing a default branch name" class="anchor"></a></h3>
-<p>You should also configure a default branch name, like <code>main</code>, for all your
-repositories:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">init.defaultBranch</span> <span class="l-variable-parameter">main</span>
-</div></code></pre>
-<p>We will talk more about branches later. If you don’t perform this configuration
-now, you may see this warning when creating your first repository:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Using</span> <span class="l-string">&#39;master&#39;</span> <span class="l-variable-parameter">as</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">name</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">initial</span> <span class="l-variable-parameter">branch.</span> <span class="l-variable-parameter">This</span> <span class="l-variable-parameter">default</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">name</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">subject</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">change.</span> <span class="l-variable-parameter">To</span> <span class="l-variable-parameter">configure</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">initial</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">name</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">use</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">all</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">repositories,</span> <span class="l-variable-parameter">which</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">suppress</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">warning,</span> <span class="l-variable-parameter">call:</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span> 	<span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">init.defaultBranch</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">name</span><span class="l-operator">&gt;</span>
-</div><div class="l-line" data-line="7"><span class="l-string-special-path">hint:</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Names</span> <span class="l-variable-parameter">commonly</span> <span class="l-variable-parameter">chosen</span> <span class="l-variable-parameter">instead</span> <span class="l-variable-parameter">of</span> <span class="l-string">&#39;master&#39;</span> <span class="l-variable-parameter">are</span> <span class="l-string">&#39;main&#39;</span><span class="l-variable-parameter">,</span> <span class="l-string">&#39;trunk&#39;</span> <span class="l-variable-parameter">and</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">hint:</span> <span class="l-string">&#39;development&#39;</span><span class="l-variable-parameter">.</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">just-created</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">renamed</span> <span class="l-variable-parameter">via</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">command:</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">hint:</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">hint:</span> 	<span class="l-variable-parameter">git</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">-m</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">name</span><span class="l-operator">&gt;</span><span class="l-string-special-path"></span>
-</div></code></pre>
-<h3 id="creating-a-new-repository">Creating a new repository<a href="#creating-a-new-repository" aria-label="Link to heading 'Creating a new repository'" data-heading-content="Creating a new repository" class="anchor"></a></h3>
-<p>Let’s get started by creating a directory for our new project:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">hello-project</span>
-</div></code></pre>
-<p>Go into the directory and run <code>git init</code> to create a Git repository:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">hello-project</span>
+<h3 id="git-init-create-a-new-repository"><code>git init</code>: create a new repository<a href="#git-init-create-a-new-repository" aria-label="Link to heading 'git init: create a new repository'" data-heading-content="git init: create a new repository" class="anchor"></a></h3>
+<p><code>git init</code> turns the current directory into a new, empty Git repository. It
+creates the Git directory (<code>.git</code>), where Git will store the history. Your files
+are not touched, and none of them is part of the repository yet: Git only starts
+tracking a file when you <a href="#git-add-prepare-the-next-commit">add</a> it.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/my-project</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Initialized</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">Git</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/path/to/projects/hello-project</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Initialized</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">Git</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/path/to/projects/my-project/.git/</span>
 </div></code></pre>
-<p>This creates a Git directory (<code>.git</code>) with an empty object database.
-At this point, nothing in your project is tracked yet.</p>
-<h3 id="checking-the-status-of-your-files">Checking the status of your files<a href="#checking-the-status-of-your-files" aria-label="Link to heading 'Checking the status of your files'" data-heading-content="Checking the status of your files" class="anchor"></a></h3>
-<p>The main tool you use to determine which files are in which state is the <code>git status</code> command.
-If you run it in the repo you just created, you should see something like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function-call">Initial</span> <span class="l-variable-parameter">commit</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">create/copy</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span><span class="l-punctuation-bracket">)</span>
+<p>Use it once, when you start a new project from scratch. <code>git init my-project</code>
+creates the <code>my-project</code> directory and the repository inside it in one go.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>Make sure you are <strong>not already inside a repository</strong> before running <code>git init</code>.
+Git looks for a repository in the current directory and in all its parents, so
+running <code>git init</code> in a subdirectory of a project creates a second repository
+nested inside the first, which is almost never what you want. Run <code>git status</code>
+first: outside of any repository, it fails with <code>fatal: not a git repository</code>,
+which is what you want in this case.</p>
+<p>Also be careful to never run <code>git init</code> in your home directory, or any other
+directory that contains other projects. It would make all of them part of the
+same repository, which is almost never what you want.</p></div></div>
+<h3 id="git-clone-get-an-existing-repository"><code>git clone</code>: get an existing repository<a href="#git-clone-get-an-existing-repository" aria-label="Link to heading 'git clone: get an existing repository'" data-heading-content="git clone: get an existing repository" class="anchor"></a></h3>
+<p>Where <code>git init</code> starts a new, empty history, <code>git clone</code> gets a copy of a
+repository that already exists, usually on a server such as GitHub:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">https://github.com/ArchiDep/git-calculator.git</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Cloning</span> <span class="l-variable-parameter">into</span> <span class="l-string">&#39;git-calculator&#39;</span><span class="l-variable-parameter">...</span>
 </div></code></pre>
-<p>This means you have an empty repo with no commits, and a <strong>clean working directory</strong> – there is nothing there.</p>
-<p>As you can see, Git often helps you by telling you what you can do next: you need to start adding some files.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><strong>The <code>git status</code> command is your best friend when using Git.</strong> Do not hesitate
-to use it at any time to check in what state you are.</p></div></div>
-<h3 id="adding-new-files">Adding new files<a href="#adding-new-files" aria-label="Link to heading 'Adding new files'" data-heading-content="Adding new files" class="anchor"></a></h3>
-<p>In the project’s directory, write “Hello World” into a <code>hello.txt</code> file and “Hi Bob” into a <code>hi.txt</code> file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hi Bob&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hi.txt</span>
-</div></code></pre>
-<p>Re-run the <code>git status</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function-call">Initial</span> <span class="l-variable-parameter">commit</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">Untracked</span> <span class="l-variable-parameter">files:</span>
-</div><div class="l-line" data-line="7">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">include</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9">  <span class="l-function-call">hello.txt</span>
-</div><div class="l-line" data-line="10">  <span class="l-function-call">hi.txt</span>
-</div><div class="l-line" data-line="11">
-</div><div class="l-line" data-line="12"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">untracked</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">present</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<p>Those files are <strong>untracked</strong>.
-Git will not include them in the repository unless you <strong>explicitly</strong> tell it to do so.</p>
-<h4 id="tracking-new-files">Tracking new files<a href="#tracking-new-files" aria-label="Link to heading 'Tracking new files'" data-heading-content="Tracking new files" class="anchor"></a></h4>
-<p>In order to begin tracking a new file, you must use the <code>git add</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">Initial</span> <span class="l-variable-parameter">commit</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="9">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git rm --cached &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">unstage</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">    <span class="l-function-call">new</span> <span class="l-variable-parameter">file:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="12">    <span class="l-function-call">new</span> <span class="l-variable-parameter">file:</span>   <span class="l-variable-parameter">hi.txt</span>
-</div></code></pre>
-<p>The files are now <strong>staged</strong>: they will be in the next commit.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><ul>
-<li><code>git add *.txt</code> would have added all files with the <code>.txt</code> extension in one
-command.</li>
-<li><code>git add .</code> would have added all the files in the current directory
-(recursively).</li>
-</ul></div></div>
-<h4 id="checking-staged-changes">Checking staged changes<a href="#checking-staged-changes" aria-label="Link to heading 'Checking staged changes'" data-heading-content="Checking staged changes" class="anchor"></a></h4>
-<p>Git can show you what you have <strong>staged</strong>:</p>
-<pre class="lumis"><code class="language-diff" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; git diff --staged
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hello.txt b/`hello.txt`</span>
-</div><div class="l-line" data-line="4"><span class="l-label">new file mode <span class="l-number">100644</span></span>
-</div><div class="l-line" data-line="5"><span class="l-keyword">index</span> <span class="l-constant">0000000</span><span class="l-punctuation-special">..</span><span class="l-constant">557db03</span>
-</div><div class="l-line" data-line="6"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">/dev/null</span></span>
-</div><div class="l-line" data-line="7"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hello.txt</span></span>
-</div><div class="l-line" data-line="8"><span class="l-attribute">@@ -0,0 +1 @@</span>
-</div><div class="l-line" data-line="9"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>Hello World</span>
-</div><div class="l-line" data-line="10"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hi.txt b/`hi.txt`</span>
-</div><div class="l-line" data-line="11"><span class="l-label">new file mode <span class="l-number">100644</span></span>
-</div><div class="l-line" data-line="12"><span class="l-keyword">index</span> <span class="l-constant">0000000</span><span class="l-punctuation-special">..</span><span class="l-constant">e5db1d9</span>
-</div><div class="l-line" data-line="13"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">/dev/null</span></span>
-</div><div class="l-line" data-line="14"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hi.txt</span></span>
-</div><div class="l-line" data-line="15"><span class="l-attribute">@@ -0,0 +1 @@</span>
-</div><div class="l-line" data-line="16"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>Hi Bob</span>
-</div></code></pre>
-<p>It shows you each staged file and the changes in those files.</p>
-<h3 id="committing-your-changes">Committing your changes<a href="#committing-your-changes" aria-label="Link to heading 'Committing your changes'" data-heading-content="Committing your changes" class="anchor"></a></h3>
-<p>Now that your staging area is set up the way you want it, you can <strong>commit</strong> your changes with the <code>git commit</code> command.
-This command takes a <code>--message</code> or <code>-m</code> option where you should put a short description of the changes you made:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add hello and hi files&quot;</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">root-commit</span><span class="l-punctuation-bracket">)</span> `<span class="l-function-call">c90aa36</span>`<span class="l-function-call">]</span> <span class="l-variable-parameter">Add</span> <span class="l-variable-parameter">hello</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">hi</span> <span class="l-variable-parameter">files</span>
-</div><div class="l-line" data-line="4"> <span class="l-number">2</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">2</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">create</span> <span class="l-variable-parameter">mode</span> <span class="l-number">100644</span> <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">create</span> <span class="l-variable-parameter">mode</span> <span class="l-number">100644</span> <span class="l-variable-parameter">hi.txt</span>
-</div></code></pre>
-<p>Note that Git gives you the beginning of the new commit’s SHA-1 checksum (<code>c90aa36</code> in this example, but it will be different on your machine)
-along with change statistics and other information.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre>
-<h3 id="modifying-files">Modifying files<a href="#modifying-files" aria-label="Link to heading 'Modifying files'" data-heading-content="Modifying files" class="anchor"></a></h3>
-<p>Let’s make some changes.
-Add one line to both files:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;You are beautiful&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">hello.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hi Jane&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">hi.txt</span>
-</div></code></pre>
-<p>And see what Git tells us:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
-</div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<p>Git has identified the <strong>modified files</strong> different from the last commit,
-but they are <strong>not staged</strong>, meaning that if you try to commit now, those changes will <strong>not</strong> be committed.</p>
-<h4 id="staging-modified-files">Staging modified files<a href="#staging-modified-files" aria-label="Link to heading 'Staging modified files'" data-heading-content="Staging modified files" class="anchor"></a></h4>
-<p>Stage the changes on the <code>hello.txt</code> file and check the status:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="6">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore --staged &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">unstage</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
-</div><div class="l-line" data-line="11">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="12">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hi.txt</span>
-</div></code></pre>
-<p>If you commit now, only the changes on <code>hello.txt</code> will be included in the snapshot, while the changes in <code>hi.txt</code> will remain uncommitted.</p>
-<h4 id="modifying-a-staged-file">Modifying a staged file<a href="#modifying-a-staged-file" aria-label="Link to heading 'Modifying a staged file'" data-heading-content="Modifying a staged file" class="anchor"></a></h4>
-<p>Before committing, let’s make another change to <code>hello.txt</code> and check the status:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;I see trees of green&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">hello.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="6">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore --staged &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">unstage</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
-</div><div class="l-line" data-line="11">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="12">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="15">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hi.txt</span>
-</div></code></pre>
-<p><code>hello.txt</code> is shown both under “Changes to be committed” and “Changes not staged for commit”.
-What does this mean?</p>
-<h4 id="checking-staged-and-unstaged-changes">Checking staged and unstaged changes<a href="#checking-staged-and-unstaged-changes" aria-label="Link to heading 'Checking staged and unstaged changes'" data-heading-content="Checking staged and unstaged changes" class="anchor"></a></h4>
-<!-- slide-column 40 -->
-<p>Use <code>git diff</code> with the <code>--staged</code> option to show <strong>staged</strong> changes.</p>
-<!-- slide-column -->
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span> <span class="l-variable-parameter">--staged</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-variable-parameter">a/hello.txt</span> <span class="l-variable-parameter">b/hello.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">index</span> <span class="l-variable-parameter">557db03..2136a8e</span> <span class="l-number">100644</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">---</span> <span class="l-variable-parameter">a/hello.txt</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">+++</span> <span class="l-variable-parameter">b/hello.txt</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">@@</span> <span class="l-number">-1</span> <span class="l-variable-parameter">+1,2</span> <span class="l-variable-parameter">@@</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">+You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">beautiful</span>
-</div></code></pre>
-<!-- slide-container -->
-<!-- slide-column 40 -->
-<p>You can also use it without the option to see <strong>unstaged</strong> changes.</p>
-<!-- slide-column -->
-<pre class="lumis"><code class="language-diff" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; git diff
-</div><div class="l-line" data-line="2"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hello.txt b/hello.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-keyword">index</span> <span class="l-constant">2136a8e</span><span class="l-punctuation-special">..</span><span class="l-constant">730ea5a</span> <span class="l-number">100644</span>
-</div><div class="l-line" data-line="4"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">a/hello.txt</span></span>
-</div><div class="l-line" data-line="5"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hello.txt</span></span>
-</div><div class="l-line" data-line="6"><span class="l-attribute">@@ -1,2 +1,3 @@</span>
-</div><div class="l-line" data-line="7"> Hello World
-</div><div class="l-line" data-line="8"> You are beautiful
-</div><div class="l-line" data-line="9"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>I see trees of green</span>
-</div><div class="l-line" data-line="10"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hi.txt b/hi.txt</span>
-</div><div class="l-line" data-line="11"><span class="l-keyword">index</span> <span class="l-constant">e5db1d9</span><span class="l-punctuation-special">..</span><span class="l-constant">f74a87a</span> <span class="l-number">100644</span>
-</div><div class="l-line" data-line="12"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">a/hi.txt</span></span>
-</div><div class="l-line" data-line="13"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hi.txt</span></span>
-</div><div class="l-line" data-line="14"><span class="l-attribute">@@ -1 +1,2 @@</span>
-</div><div class="l-line" data-line="15"> Hi Bob
-</div><div class="l-line" data-line="16"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>Hi Jane</span>
-</div></code></pre>
-<h4 id="staging-area-versus-working-directory">Staging area versus working directory<a href="#staging-area-versus-working-directory" aria-label="Link to heading 'Staging area versus working directory'" data-heading-content="Staging area versus working directory" class="anchor"></a></h4>
-<p>This example shows you that the working directory and the staging area are
-really two separate steps:</p>
+<p>This creates a <code>git-calculator</code> directory containing the <strong>whole</strong> repository
+— every commit of its history, not only the latest version — and fills its
+working directory with the files of the default branch, ready to work on.
+<code>git clone &lt;url&gt; &lt;directory&gt;</code> puts it in a directory with a name of your choice.</p>
+<p>The copy remembers where it came from, under the name <code>origin</code>. You will see what
+that means when you learn to collaborate with Git.</p>
+<h3 id="git-status-see-where-you-are"><code>git status</code>: see where you are<a href="#git-status-see-where-you-are" aria-label="Link to heading 'git status: see where you are'" data-heading-content="git status: see where you are" class="anchor"></a></h3>
+<p><code>git status</code> tells you which branch you are on, and how your files differ from
+the last commit. It sorts your changes into three groups:</p>
 <ul>
-<li>The version of <code>hello.txt</code> you have <strong>staged</strong> contains two lines of text
-(“Hello World” and “You are beautiful”). This is what will be committed.</li>
-<li>The version of <code>hello.txt</code> in the <strong>working directory</strong> has an additional line
-of text (“I see trees of green”) which you added later. It will not be
-included in the next commit unless you stage the file again.</li>
+<li><strong>Changes to be committed</strong>: changes in the staging area, which the next
+commit will save.</li>
+<li><strong>Changes not staged for commit</strong>: files you have modified since the last
+commit, but have not added to the staging area. The next commit will not
+include these changes.</li>
+<li><strong>Untracked files</strong>: new files that Git does not track yet.</li>
 </ul>
-<div class="flex justify-center dark:bg-radial dark:from-gray-800 dark:from-40% dark:to-zinc-800/40">
-  <img src='images/areas-a12c1c9e0413e6dd169b4de0649f4d4e.png' class='w-2/3' />
-</div>
-<h4 id="committing-partially-staged-changes">Committing partially staged changes<a href="#committing-partially-staged-changes" aria-label="Link to heading 'Committing partially staged changes'" data-heading-content="Committing partially staged changes" class="anchor"></a></h4>
-<p>Commit now:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;The world is beautiful&quot;</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">b65ec9c</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">The</span> <span class="l-variable-parameter">world</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">beautiful</span>
-</div><div class="l-line" data-line="3"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<p>As expected, the changes we did not stage are still <strong>uncommitted</strong>.</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">sub</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
 </div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
 </div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<p>Let’s fix that:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;New lines in hello.txt and hi.txt&quot;</span>
-</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">dfc6c75</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">New</span> <span class="l-variable-parameter">lines</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">hello.txt</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="4"> <span class="l-number">2</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">2</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<h3 id="moving-and-removing-files">Moving and removing files<a href="#moving-and-removing-files" aria-label="Link to heading 'Moving and removing files'" data-heading-content="Moving and removing files" class="anchor"></a></h3>
-<p>Git has a <code>git mv</code> (<strong>m</strong>o<strong>v</strong>e) and <code>git rm</code> (<strong>r</strong>e<strong>m</strong>ove) command, but
-nobody uses them for day-to-day work on files. It’s simpler to just move or
-remove the files yourself. Rename <code>hi.txt</code> to <code>people.txt</code> in your editor or
-with this command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">hi.txt</span> <span class="l-variable-parameter">people.txt</span>
-</div></code></pre>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <a href="https://en.wikipedia.org/wiki/Mv_(Unix)" target="_blank" rel="noopener noreferrer"><code>mv</code> (<strong>m</strong>o<strong>v</strong>e) command</a> moves a source file to a target path.</p></div></div>
-<p>Then see what Git tells you:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
-</div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add/rm &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">  <span class="l-function-call">deleted:</span>    <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9"><span class="l-function-call">Untracked</span> <span class="l-variable-parameter">files:</span>
-</div><div class="l-line" data-line="10">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">include</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="11">
-</div><div class="l-line" data-line="12">  <span class="l-function-call">people.txt</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<h4 id="adding-all-changes">Adding all changes<a href="#adding-all-changes" aria-label="Link to heading 'Adding all changes'" data-heading-content="Adding all changes" class="anchor"></a></h4>
-<p>You can tell Git to add all changes (additions, modifications and removals):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="6">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore --staged &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">unstage</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="6">        <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">subtraction.js</span>
 </div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-function-call">renamed:</span>    <span class="l-variable-parameter">hi.txt</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">people.txt</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
 </div></code></pre>
-<p>Note that Git can now tell that the file was moved.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Many developers simply modify and manipulate files in their favorite editor or
-IDE, then use the command above.</p></div></div>
-<p>You may commit the rename now:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Rename hi.txt to people.txt&quot;</span>
+<p>When everything is committed, it says <code>nothing to commit, working tree clean</code>.</p>
+<p><code>git status</code> changes nothing, so you can run it as often as you like. Read it
+after every step: it is how you check that a command did what you expected. It
+also suggests the commands you are likely to need next, in parentheses.</p>
+<h3 id="git-add-prepare-the-next-commit"><code>git add</code>: prepare the next commit<a href="#git-add-prepare-the-next-commit" aria-label="Link to heading 'git add: prepare the next commit'" data-heading-content="git add: prepare the next commit" class="anchor"></a></h3>
+<p><code>git add</code> puts a snapshot of a file, as it is right now, into the staging area.
+Think of the staging area as a loading dock: you gather there what you want to
+ship, and the commit ships everything on the dock at once.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">subtraction.js</span>   <span class="l-comment"># one file</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">src</span>              <span class="l-comment"># everything in a directory</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span>                <span class="l-comment"># everything in the current directory</span>
 </div></code></pre>
-<h2 id="viewing-the-commit-history">Viewing the commit history<a href="#viewing-the-commit-history" aria-label="Link to heading 'Viewing the commit history'" data-heading-content="Viewing the commit history" class="anchor"></a></h2>
-<p>Git has a very powerful <code>log</code> command:</p>
+<p>Adding a new file also tells Git to start tracking it. Adding a deleted file
+stages its deletion.</p>
+<p><code>git add</code> stages the file <strong>as it is when you run it</strong>. If you modify the file
+again afterwards, the new change is not staged: <code>git status</code> then lists the file
+both under “Changes to be committed” and under “Changes not staged for commit”,
+and you have to add it again to include the new change.</p>
+<p><code>git add .</code> is convenient because it stages everything in the current directory
+and its subdirectories in one go, but it adds everything, including files you
+might not want in your repository. Check with <code>git status</code> before you commit.</p>
+<h3 id="git-diff-see-exactly-what-changed"><code>git diff</code>: see exactly what changed<a href="#git-diff-see-exactly-what-changed" aria-label="Link to heading 'git diff: see exactly what changed'" data-heading-content="git diff: see exactly what changed" class="anchor"></a></h3>
+<p><code>git status</code> tells you <strong>which</strong> files changed; <code>git diff</code> shows you <strong>what</strong>
+changed in them, line by line. Without options, it shows the changes you have
+<strong>not staged</strong> yet: the differences between your working directory and the
+staging area.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-variable-parameter">a/subtraction.js</span> <span class="l-variable-parameter">b/subtraction.js</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">index</span> <span class="l-variable-parameter">1ef2791..612b196</span> <span class="l-number">100644</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">---</span> <span class="l-variable-parameter">a/subtraction.js</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">+++</span> <span class="l-variable-parameter">b/subtraction.js</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">@@</span> <span class="l-variable-parameter">-1,5</span> <span class="l-variable-parameter">+1,5</span> <span class="l-variable-parameter">@@</span>
+</div><div class="l-line" data-line="7"> <span class="l-keyword-function">function</span> <span class="l-function">subtract</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">a,</span> <span class="l-variable-parameter">b</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">-</span>  <span class="l-variable-parameter">return</span> <span class="l-string">&#39;?&#39;</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">+</span>  <span class="l-variable-parameter">return</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">b</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="10"> <span class="l-punctuation-bracket">}</span>
+</div><div class="l-line" data-line="11">
+</div><div class="l-line" data-line="12"> <span class="l-function-call">calculate</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;subtraction&#39;</span><span class="l-string">,</span> <span class="l-variable-parameter">subtract</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
+</div></code></pre>
+<p>Lines starting with <code>-</code> were removed, and lines starting with <code>+</code> were added. A
+modified line shows up as both: its old version removed, its new version added.
+The other lines are unchanged, and only shown to give you some context.</p>
+<p>Once you have staged a change with <code>git add</code>, <code>git diff</code> no longer shows it. Use
+the <code>--cached</code> option (or <code>--staged</code>, which is the same) to see the changes that
+are <strong>staged</strong>, the ones the next commit will save:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span>            <span class="l-comment"># what you changed but have not staged</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span> <span class="l-variable-parameter">--cached</span>   <span class="l-comment"># what you have staged, and will commit</span>
+</div></code></pre>
+<p>Together, the two show you each of the three areas at work. Run
+<code>git diff --cached</code> before committing, to check that the commit contains what
+you meant, and nothing else.</p>
+<p><code>git diff</code> can also compare any two versions of your project, for example two
+branches: <code>git diff main sub</code>. When the output is longer than your terminal, use
+the arrow keys to scroll and press <code>q</code> to quit.</p>
+<h3 id="git-commit-save-a-snapshot"><code>git commit</code>: save a snapshot<a href="#git-commit-save-a-snapshot" aria-label="Link to heading 'git commit: save a snapshot'" data-heading-content="git commit: save a snapshot" class="anchor"></a></h3>
+<p><code>git commit</code> saves everything in the staging area as a new <strong>commit</strong>: a
+snapshot of your whole project, with your name, the date, and a message
+describing the change. The new commit points to the previous one, its
+<strong>parent</strong>: that chain of commits is your project’s history. The current branch
+moves forward to point to the new commit.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Implement subtraction&quot;</span>
+</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">[</span><span class="l-function-call">sub</span> <span class="l-variable-parameter">7f2a5d0</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">Implement</span> <span class="l-variable-parameter">subtraction</span>
+</div><div class="l-line" data-line="3"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>, <span class="l-number">1</span> <span class="l-variable-parameter">deletion</span><span class="l-punctuation-bracket">(</span>-<span class="l-punctuation-bracket">)</span>
+</div></code></pre>
+<p>The new commit is named by its <a href="#how-git-stores-your-project">hash</a>, such as
+<code>7f2a5d0…</code>. Git often shows only its first few characters.</p>
+<p>The options you will use most:</p>
+<ul>
+<li>
+<p><code>-m &quot;message&quot;</code> gives the commit message on the command line. Without it, Git
+opens your editor for you to write the message.</p>
+<p>If that editor is Vim and you do not know how to use it, press <code>Esc</code>, then
+type <code>:q!</code> and press <code>Enter</code>: the message stays empty, so Git cancels the
+commit. See <a href="/2026/course/101-command-line/#setting-nano-as-the-default-editor">setting nano as the default editor</a>.</p>
+</li>
+<li>
+<p><code>-a</code> stages every modified file before committing, so that you can skip
+<code>git add</code>. It only includes files Git already tracks: new files still have to
+be added with <code>git add</code>.</p>
+</li>
+</ul>
+<p>To change the last commit after the fact, see <a href="#undoing-things">undoing
+things</a>.</p>
+<h3 id="git-log-look-at-the-history"><code>git log</code>: look at the history<a href="#git-log-look-at-the-history" aria-label="Link to heading 'git log: look at the history'" data-heading-content="git log: look at the history" class="anchor"></a></h3>
+<p><code>git log</code> lists the commits of the current branch, newest first, with their
+hash, author, date and message.</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">log</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">commit</span> <span class="l-variable-parameter">739b7c8987d72879f79ac7979as8f9db790a82da</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">commit</span> <span class="l-variable-parameter">7f2a5d0...</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">Author:</span> <span class="l-variable-parameter">John</span> <span class="l-variable-parameter">Doe</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">john.doe@example.com</span><span class="l-operator">&gt;</span>
-</div><div class="l-line" data-line="4"><span class="l-string-special-path">Date:</span>   <span class="l-string-special-path">Mon</span> <span class="l-string-special-path">Jan</span> <span class="l-number">23</span> <span class="l-string-special-path">11:50:09</span> <span class="l-number">2017</span> <span class="l-string-special-path">+0100</span>
+</div><div class="l-line" data-line="4"><span class="l-string-special-path">Date:</span>   <span class="l-string-special-path">Thu</span> <span class="l-string-special-path">Oct</span> <span class="l-number">1</span> <span class="l-string-special-path">10:12:34</span> <span class="l-number">2026</span> <span class="l-string-special-path">+0200</span>
 </div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">    <span class="l-function-call">Rename</span> <span class="l-variable-parameter">hi.txt</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">people.txt</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-function-call">commit</span> <span class="l-variable-parameter">e753ceb86806b285aa105a846c7295e826439637</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">Author:</span> <span class="l-variable-parameter">John</span> <span class="l-variable-parameter">Doe</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">john.doe@example.com</span><span class="l-operator">&gt;</span>
-</div><div class="l-line" data-line="10"><span class="l-string-special-path">Date:</span>   <span class="l-string-special-path">Mon</span> <span class="l-string-special-path">Jan</span> <span class="l-number">23</span> <span class="l-string-special-path">11:50:07</span> <span class="l-number">2017</span> <span class="l-string-special-path">+0100</span>
-</div><div class="l-line" data-line="11">
-</div><div class="l-line" data-line="12">    <span class="l-function-call">New</span> <span class="l-variable-parameter">lines</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">hello.txt</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">hi.txt</span>
-</div><div class="l-line" data-line="13">
-</div><div class="l-line" data-line="14"><span class="l-function-call">commit</span> <span class="l-variable-parameter">4c56257f622c53f1ddeaf3d58b6729b01b35aedb</span>
-</div><div class="l-line" data-line="15"><span class="l-function-call">Author:</span> <span class="l-variable-parameter">John</span> <span class="l-variable-parameter">Doe</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">john.doe@example.com</span><span class="l-operator">&gt;</span>
-</div><div class="l-line" data-line="16"><span class="l-string-special-path">Date:</span>   <span class="l-string-special-path">Mon</span> <span class="l-string-special-path">Jan</span> <span class="l-number">23</span> <span class="l-string-special-path">11:50:00</span> <span class="l-number">2017</span> <span class="l-string-special-path">+0100</span>
-</div><div class="l-line" data-line="17">
-</div><div class="l-line" data-line="18">    <span class="l-function-call">The</span> <span class="l-variable-parameter">world</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">beautiful</span>
-</div><div class="l-line" data-line="19">
-</div><div class="l-line" data-line="20"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="6">    <span class="l-function-call">Implement</span> <span class="l-variable-parameter">subtraction</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
 </div></code></pre>
-<h3 id="viewing-the-changes-in-the-history">Viewing the changes in the history<a href="#viewing-the-changes-in-the-history" aria-label="Link to heading 'Viewing the changes in the history'" data-heading-content="Viewing the changes in the history" class="anchor"></a></h3>
-<p>With the <code>--patch</code> option, you can see that Git shows you the differences you introduced in each commit:</p>
-<pre class="lumis"><code class="language-diff" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; git log --patch
-</div><div class="l-line" data-line="2">commit e753ceb86806b285aa105a846c7295e826439637
-</div><div class="l-line" data-line="3">Author: John Doe &lt;john.doe@example.com&gt;
-</div><div class="l-line" data-line="4">Date:   Mon Jan 23 11:50:07 2017 +0100
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">    New lines in hello.txt and hi.txt
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hello.txt b/hello.txt</span>
-</div><div class="l-line" data-line="9"><span class="l-keyword">index</span> <span class="l-constant">2136a8e</span><span class="l-punctuation-special">..</span><span class="l-constant">730ea5a</span> <span class="l-number">100644</span>
-</div><div class="l-line" data-line="10"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">a/hello.txt</span></span>
-</div><div class="l-line" data-line="11"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hello.txt</span></span>
-</div><div class="l-line" data-line="12"><span class="l-attribute">@@ -1,2 +1,3 @@</span>
-</div><div class="l-line" data-line="13"> Hello World
-</div><div class="l-line" data-line="14"> You are beautiful
-</div><div class="l-line" data-line="15"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>I see trees of green</span>
-</div><div class="l-line" data-line="16"><span class="l-function">diff</span> <span class="l-variable-parameter">--git</span> <span class="l-string-special-path">a/hi.txt b/hi.txt</span>
-</div><div class="l-line" data-line="17"><span class="l-keyword">index</span> <span class="l-constant">e5db1d9</span><span class="l-punctuation-special">..</span><span class="l-constant">f74a87a</span> <span class="l-number">100644</span>
-</div><div class="l-line" data-line="18"><span class="l-diff-minus"><span class="l-punctuation-special">---</span> <span class="l-string-special-path">a/hi.txt</span></span>
-</div><div class="l-line" data-line="19"><span class="l-diff-plus"><span class="l-punctuation-special">+++</span> <span class="l-string-special-path">b/hi.txt</span></span>
-</div><div class="l-line" data-line="20"><span class="l-attribute">@@ -1 +1,2 @@</span>
-</div><div class="l-line" data-line="21"> Hi Bob
-</div><div class="l-line" data-line="22"><span class="l-diff-plus"><span class="l-punctuation-special">+</span>Hi Jane</span>
-</div></code></pre>
-<h3 id="other-log-options">Other log options<a href="#other-log-options" aria-label="Link to heading 'Other log options'" data-heading-content="Other log options" class="anchor"></a></h3>
-<p>The <code>git log</code> has many options to customize its output or limit what commits it shows you.
-Here are some other useful options:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Option</th>
-<th align="left">Limit to</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>--stat</code></td>
-<td align="left">Show the list of changed files</td>
-</tr>
-<tr>
-<td align="left"><code>--pretty</code></td>
-<td align="left">Show the commit history with a <a href="https://git-scm.com/docs/git-log#_pretty_formats" target="_blank" rel="noopener noreferrer">custom format</a></td>
-</tr>
-<tr>
-<td align="left"><code>-(n)</code></td>
-<td align="left">Only the last n commits</td>
-</tr>
-<tr>
-<td align="left"><code>--after</code></td>
-<td align="left">Only commits made after the specified date</td>
-</tr>
-<tr>
-<td align="left"><code>--before</code></td>
-<td align="left">Only commits made before the specified date</td>
-</tr>
-<tr>
-<td align="left"><code>--author</code></td>
-<td align="left">Only commits whose author matches the specified string</td>
-</tr>
-<tr>
-<td align="left"><code>--grep</code></td>
-<td align="left">Only commits with a commit message containing the string</td>
-</tr>
-<tr>
-<td align="left"><code>-S</code></td>
-<td align="left">Only commits adding or removing code matching the string</td>
-</tr>
-</tbody>
-</table>
-<p>Use <code>git help log</code> or read <a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History" target="_blank" rel="noopener noreferrer">the documentation</a> to learn more.</p>
-<h2 id="ignoring-files">Ignoring files<a href="#ignoring-files" aria-label="Link to heading 'Ignoring files'" data-heading-content="Ignoring files" class="anchor"></a></h2>
-<p>Sometimes there are files you don’t want to commit in your repository:</p>
+<p>When the history is longer than your terminal, Git shows it one screen at a
+time: use the arrow keys to scroll, and press <code>q</code> to quit.</p>
+<p>Useful options:</p>
 <ul>
-<li>Log files</li>
-<li>Dependencies</li>
-<li>Build artifacts</li>
+<li><code>--oneline</code> shows one commit per line, with a short hash.</li>
+<li><code>--graph</code> draws the branches and merges on the left.</li>
+<li><code>--all</code> shows the commits of all branches, not only the current one.</li>
+<li><code>--patch</code> (or <code>-p</code>) shows the changes made by each commit.</li>
+<li><code>--stat</code> lists the files changed by each commit, and <code>--name-status</code> also
+says whether each file was added, modified, deleted or renamed.</li>
+<li><code>-n 5</code> (or <code>-5</code>) shows only the last 5 commits.</li>
+<li><code>--reverse</code> shows the oldest commits first.</li>
 </ul>
-<p>You can tell Git not to track them by adding a <code>.gitignore</code> file to your repository.
-Create it now with this content:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">**.log
-</div><div class="l-line" data-line="2">*node_modules
+<p>To search the history:</p>
+<ul>
+<li><code>--grep &lt;text&gt;</code> only shows the commits whose message contains the text. Add
+<code>-i</code> to ignore uppercase and lowercase.</li>
+<li><code>--author &lt;name&gt;</code> only shows the commits of an author.</li>
+<li><code>-S &lt;text&gt;</code> only shows the commits whose changes added or removed the text,
+even when their message does not mention it.</li>
+<li><code>-- &lt;file&gt;</code> only shows the commits that changed that file. Add <code>--follow</code> to
+keep following the file through its renames.</li>
+</ul>
+<p>The options combine: <code>git log --oneline -i --grep fix -- index.html</code> lists the
+commits that changed <code>index.html</code> and mention a fix in their message.</p>
+<p><code>git log --oneline --graph --all</code> draws the whole commit graph of the
+repository. You can define it as an alias, <code>git graph</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">alias.graph</span> <span class="l-string">&quot;log --oneline --decorate --graph --all&quot;</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">*</span> 7f2a5d0 <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">sub</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Implement</span> <span class="l-variable-parameter">subtraction</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">*</span> 907e519 <span class="l-punctuation-bracket">(</span><span class="l-function-call">main</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Add</span> <span class="l-variable-parameter">readme</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">...</span>
 </div></code></pre>
-<h3 id="committing-the-ignore-file">Committing the ignore file<a href="#committing-the-ignore-file" aria-label="Link to heading 'Committing the ignore file'" data-heading-content="Committing the ignore file" class="anchor"></a></h3>
-<p>Do not forget to stage and commit the <code>.gitignore</code> file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.gitignore</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Ignore file&quot;</span>
+<h3 id="git-branch-list-create-and-delete-branches"><code>git branch</code>: list, create and delete branches<a href="#git-branch-list-create-and-delete-branches" aria-label="Link to heading 'git branch: list, create and delete branches'" data-heading-content="git branch: list, create and delete branches" class="anchor"></a></h3>
+<p>A branch is a separate line of work: you can make commits on it without
+affecting the others. Technically, it is only a <strong>pointer to a commit</strong>, which
+is why creating one is instant and costs nothing.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span>             <span class="l-comment"># list the branches; * marks the current one</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">sub</span>         <span class="l-comment"># create a branch pointing to the current commit</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">sub</span>      <span class="l-comment"># delete a branch</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">-m</span> <span class="l-variable-parameter">old</span> <span class="l-variable-parameter">new</span>  <span class="l-comment"># rename a branch</span>
 </div></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>That way, when you start collaborating with the other developers in your team,
-the same files will be ignored on their machine.</p></div></div>
-<h3 id="status-of-ignored-files">Status of ignored files<a href="#status-of-ignored-files" aria-label="Link to heading 'Status of ignored files'" data-heading-content="Status of ignored files" class="anchor"></a></h3>
-<p>Ignored files are no longer shown when using <code>git status</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">data</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">app.log</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
+<p>Creating a branch does <strong>not</strong> switch to it: you are still on the same branch
+as before. Use <a href="#git-switch-move-between-branches"><code>git switch</code></a> for that.</p>
+<p>Deleting a branch only deletes the pointer, not the commits. <code>-d</code> refuses to
+delete a branch whose commits are not part of the current branch’s history,
+because you would then have no easy way to find them again. <code>-D</code> deletes it
+anyway (see <a href="#undoing-things">undoing things</a>).</p>
+<h3 id="git-switch-move-between-branches"><code>git switch</code>: move between branches<a href="#git-switch-move-between-branches" aria-label="Link to heading 'git switch: move between branches'" data-heading-content="git switch: move between branches" class="anchor"></a></h3>
+<p><code>git switch</code> makes another branch the current one. It does two things:</p>
+<ul>
+<li>It moves <code>HEAD</code> to point to that branch.</li>
+<li>It rewrites the files in your working directory to match the snapshot of the
+commit that branch points to.</li>
+</ul>
+<p>In other words, it takes you to another version of your project. Your work on
+the branch you leave is not lost: it is safely stored in its commits, and you
+can switch back to it at any time.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">main</span>             <span class="l-comment"># switch to an existing branch</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">fix-add</span>       <span class="l-comment"># create a new branch and switch to it</span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">-</span>                <span class="l-comment"># switch back to the previous branch</span>
 </div></code></pre>
-<h3 id="global-ignore-file">Global ignore file<a href="#global-ignore-file" aria-label="Link to heading 'Global ignore file'" data-heading-content="Global ignore file" class="anchor"></a></h3>
-<p>There are <strong>some files you might want to always ignore</strong> for all projects on your machine.</p>
-<p>For example, macOS creates <code>.DS_Store</code> files in directories you open in the Finder.
-There is no reason to keep these files in your Git history,
-and they are useless on other operating systems.</p>
-<p>You can create a <strong>global ignore file</strong> in your home directory to ignore them:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;.DS_Store&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.gitignore</span>
+<p>Switch from a clean state, when <code>git status</code> says there is nothing to commit. If
+you have uncommitted changes that switching would overwrite, Git refuses to
+switch rather than lose them: commit them first, or discard them.</p>
+<p><code>git checkout</code> is the older command for the same thing, and you will find it
+in a lot of documentation: <code>git checkout main</code> switches to <code>main</code>, and
+<code>git checkout -b fix-add</code> creates and switches to <code>fix-add</code>. <code>git switch</code> was
+added to Git because <code>git checkout</code> does many other things as well.</p>
+<h3 id="git-merge-bring-the-work-of-a-branch-into-another"><code>git merge</code>: bring the work of a branch into another<a href="#git-merge-bring-the-work-of-a-branch-into-another" aria-label="Link to heading 'git merge: bring the work of a branch into another'" data-heading-content="git merge: bring the work of a branch into another" class="anchor"></a></h3>
+<p><code>git merge</code> brings the changes of another branch into the <strong>current</strong> branch.
+To bring <code>fix-add</code> into <code>main</code>, you first switch to <code>main</code>, then merge:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">fix-add</span>
 </div></code></pre>
-<p>Run the following command to configure Git to use this file.
-You only have to do it once on each machine:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">core.excludesfile</span> <span class="l-variable-parameter">~/.gitignore</span>
+<p>Depending on the history, Git merges in one of two ways:</p>
+<ul>
+<li><strong>Fast-forward</strong>: if the current branch has not moved since the other branch
+was created, the other branch is simply ahead of it. Git only has to move the
+current branch forward to the same commit. No new commit is created.</li>
+<li><strong>Three-way merge</strong>: if both branches have new commits, their histories have
+diverged. Git compares the two latest commits with their <strong>common ancestor</strong>
+(the last commit they share), combines the changes made on both sides, and
+saves the result as a new <strong>merge commit</strong>. A merge commit is special in that
+it has two parents, one on each branch.</li>
+</ul>
+<p>A merge commit needs a message, so Git opens your editor with one it has written
+for you. In Vim, press <code>Esc</code>, then type <code>:q!</code> and press <code>Enter</code> to keep Git’s
+message and finish the merge. As with <code>git commit</code>, you can instead give the
+message on the command line with the <code>-m</code> option, and Git will not open the
+editor:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Merge the subtraction feature&quot;</span> <span class="l-variable-parameter">sub</span>
 </div></code></pre>
-<p><code>.DS_Store</code> files will no longer show up in your <code>git status</code> output,
-and they will not be staged or committed.</p>
+<p>If both branches changed the same lines of the same file, Git cannot choose
+between the two versions on its own, and stops with a <strong>merge conflict</strong>. You
+will learn to resolve conflicts when you learn to collaborate with Git. Until
+then, <code>git merge --abort</code> cancels a merge and puts everything back as it was
+before.</p>
+<p>Once a branch is merged, you can delete it with <code>git branch -d</code>: all its commits
+are now part of the history of the branch you merged it into.</p>
 <h2 id="undoing-things">Undoing things<a href="#undoing-things" aria-label="Link to heading 'Undoing things'" data-heading-content="Undoing things" class="anchor"></a></h2>
-<p>There are several ways of undoing things with Git.
-We’ll review a few of the tools available.</p>
-<div class="callout callout-warning group/callout"><svg
+<p>Once something is committed, Git keeps it, and most mistakes can be fixed. But a
+few commands <strong>throw work away for good</strong>, or <strong>rewrite history</strong>. Know which
+ones they are, and read <code>git status</code> before you run them.</p>
+<h3 id="unstaging-a-file-git-restore---staged">Unstaging a file: <code>git restore --staged</code><a href="#unstaging-a-file-git-restore---staged" aria-label="Link to heading 'Unstaging a file: git restore --staged'" data-heading-content="Unstaging a file: git restore --staged" class="anchor"></a></h3>
+<p>If you have staged a change you do not want in the next commit, take it out of
+the staging area:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">--staged</span> <span class="l-variable-parameter">subtraction.js</span>
+</div></code></pre>
+<p>This is the opposite of <code>git add</code>, and it is safe: the change stays in the file
+in your working directory. It is only no longer staged.</p>
+<h3 id="discarding-changes-git-restore">Discarding changes: <code>git restore</code><a href="#discarding-changes-git-restore" aria-label="Link to heading 'Discarding changes: git restore'" data-heading-content="Discarding changes: git restore" class="anchor"></a></h3>
+<p>If you have modified a file and want to throw the changes away, put the file
+back as it was:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">subtraction.js</span>
+</div></code></pre>
+<div class="callout callout-danger group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
@@ -778,55 +640,19 @@ We’ll review a few of the tools available.</p>
   <path
     stroke-linecap="round"
     stroke-linejoin="round"
-    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
   />
-</svg><div class="container"><div class="content"><p><strong><em>Be careful:</em></strong> you can’t always undo some of these operations.</p></div></div></div>
-<h3 id="unmodifying-a-modified-file">Unmodifying a modified file<a href="#unmodifying-a-modified-file" aria-label="Link to heading 'Unmodifying a modified file'" data-heading-content="Unmodifying a modified file" class="anchor"></a></h3>
-<p>Sometimes you make a change and you realize it was wrong or you don’t need it anymore.
-Git actually tells you what to do to discard that change:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hi Steve&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">people.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">staged</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">commit:</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">what</span> <span class="l-variable-parameter">will</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">  `<span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">discard</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">directory</span><span class="l-punctuation-bracket">)</span>`
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">people.txt</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
-<p>Simply use <code>git restore</code> as instructed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">people.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre>
-<p>Note that in this case, <strong>the change is forever lost</strong> as it was never committed.</p>
-<h3 id="unstaging-a-staged-file">Unstaging a staged file<a href="#unstaging-a-staged-file" aria-label="Link to heading 'Unstaging a staged file'" data-heading-content="Unstaging a staged file" class="anchor"></a></h3>
-<p>If you have staged a file but realize you don’t want it in the next commit anymore, Git also tells you what to do:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hi Steve&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">people.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">people.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="6">  `<span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git restore --staged &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">unstage</span><span class="l-punctuation-bracket">)</span>`
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">people.txt</span>
-</div></code></pre>
-<p>Use <code>git restore</code> as instructed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">--staged</span> <span class="l-variable-parameter">people.txt</span>
-</div></code></pre>
-<p>The changes will still be in the file in the working directory. If you want to
-completely get rid of them, you can use <code>git restore</code> as shown before.</p>
-<h3 id="changing-the-commit-message">Changing the commit message<a href="#changing-the-commit-message" aria-label="Link to heading 'Changing the commit message'" data-heading-content="Changing the commit message" class="anchor"></a></h3>
-<p>Commit a new change:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Wolf</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">people.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">people.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Fix teh prblme&quot;</span>
-</div></code></pre>
-<p>Oops, you’ve used the wrong commit message. Want to change it?</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">--amend</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Fix the problem&quot;</span>
+</svg><div class="container"><div class="content"><p>This command is <strong>destructive</strong>. The file goes back to its staged version, or to
+its last committed version if nothing is staged. Changes that were never
+committed are not stored anywhere else in Git, so they are <strong>lost forever</strong>.</p></div></div></div>
+<h3 id="changing-the-last-commit-git-commit---amend">Changing the last commit: <code>git commit --amend</code><a href="#changing-the-last-commit-git-commit---amend" aria-label="Link to heading 'Changing the last commit: git commit --amend'" data-heading-content="Changing the last commit: git commit --amend" class="anchor"></a></h3>
+<p>If you notice a mistake right after committing, such as a typo in the message
+or a forgotten file, you can replace the last commit with a corrected one:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Impement sbtraction&quot;</span>            <span class="l-comment"># oops, fat fingers</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">--amend</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Implement subtraction&quot;</span>  <span class="l-comment"># fix the message</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">forgotten.js</span>
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">--amend</span>                               <span class="l-comment"># add a forgotten file</span>
 </div></code></pre>
 <div class="callout callout-warning group/callout"><svg
   class="icon"
@@ -841,24 +667,16 @@ completely get rid of them, you can use <code>git restore</code> as shown before
     stroke-linejoin="round"
     d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
   />
-</svg><div class="container"><div class="content"><p><strong><em>Be careful:</em></strong> this changes the commit and its SHA-1 hash. You should not do
-this if you have already shared this commit with others.</p></div></div></div>
-<h3 id="adding-changes-to-a-commit">Adding changes to a commit<a href="#adding-changes-to-a-commit" aria-label="Link to heading 'Adding changes to a commit'" data-heading-content="Adding changes to a commit" class="anchor"></a></h3>
-<p>Make two changes but only commit one of them:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">a</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">a.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">b</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">b.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">a.txt</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add a &amp; b&quot;</span>
-</div></code></pre>
-<p>Oops, you forgot to stage one file. Want to add it to the last commit?</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">b.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">--amend</span>
-</div></code></pre>
-<p>Your editor will open to give you the opportunity to change the message if you
-want, but you do not have to. Simply save and exit the editor. The changes to
-<code>b.txt</code> will now also be in the last commit.</p>
-<div class="callout callout-warning group/callout"><svg
-  class="icon"
+</svg><div class="container"><div class="content"><p>This command <strong>rewrites history</strong>. The corrected commit is a new commit, with a
+different hash, which replaces the old one on the current branch. That is
+harmless as long as the commit exists only on your machine, but <strong>do not amend a
+commit you have already shared</strong> with others: their copy of the history would no
+longer match yours.</p></div></div></div>
+<h3 id="deleting-an-unmerged-branch-git-branch--d">Deleting an unmerged branch: <code>git branch -D</code><a href="#deleting-an-unmerged-branch-git-branch--d" aria-label="Link to heading 'Deleting an unmerged branch: git branch -D'" data-heading-content="Deleting an unmerged branch: git branch -D" class="anchor"></a></h3>
+<p><code>git branch -d</code> refuses to delete a branch whose commits are not part of the
+current branch’s history. <code>git branch -D</code> deletes it anyway.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
   viewBox="0 0 24 24"
@@ -870,8 +688,12 @@ want, but you do not have to. Simply save and exit the editor. The changes to
     stroke-linejoin="round"
     d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
   />
-</svg><div class="container"><div class="content"><p><strong><em>Be careful:</em></strong> this changes the commit and its SHA-1 hash. You should not do
-this if you have already shared this commit with others.</p></div></div></div>
+</svg><span>Warning</span></div><div class="content"><p>Although the commits are not destroyed immediately, no branch leads to them any
+more, so for practical purposes they are <strong>lost</strong>. Only use it on work you
+really want to throw away.</p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To retrieve a branch you deleted by mistake, use <code>git reflog</code> to find the hash
+of its last commit, then create a new branch pointing to it: <code>git branch &lt;name&gt; &lt;hash&gt;</code>. But you can only do that as long as Git has not cleaned up the commit,
+which it does automatically after a few weeks.</p></div></div>
 <h2 id="best-practices">Best practices<a href="#best-practices" aria-label="Link to heading 'Best practices'" data-heading-content="Best practices" class="anchor"></a></h2>
 <ul>
 <li>
@@ -897,6 +719,122 @@ from this article.</p>
 adding human and machine readable meaning to commit messages.</p>
 </li>
 </ul>
+<h2 id="appendix-going-further">Appendix: going further<a href="#appendix-going-further" aria-label="Link to heading 'Appendix: going further'" data-heading-content="Appendix: going further" class="anchor"></a></h2>
+<p>This subject covers the commands you need every day. These pages of the <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Pro
+Git</a> book go further:</p>
+<ul>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring" target="_blank" rel="noopener noreferrer"><strong>Ignoring Files</strong></a></p>
+<p>A <code>.gitignore</code> file tells Git which files never to track, such as build
+output, dependencies, or files holding secrets, so that <code>git status</code> and
+<code>git add .</code> leave them alone.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging" target="_blank" rel="noopener noreferrer"><strong>Interactive Staging</strong></a></p>
+<p>Stage only some of the changes in a file with <code>git add -p</code>, to split your work
+into several focused commits.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning" target="_blank" rel="noopener noreferrer"><strong>Stashing and Cleaning</strong></a></p>
+<p>Put uncommitted changes aside with <code>git stash</code>, to switch branches with a
+clean working directory, and get them back later.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" target="_blank" rel="noopener noreferrer"><strong>Tagging</strong></a></p>
+<p>Name a commit that matters, such as a release, with a tag that never moves,
+unlike a branch.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things" target="_blank" rel="noopener noreferrer"><strong>Undoing Things</strong></a> and <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified" target="_blank" rel="noopener noreferrer"><strong>Reset
+Demystified</strong></a></p>
+<p>More ways to undo, and how <code>git reset</code> moves a branch and changes the staging
+area and working directory, which is the key to many of Git’s other commands.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection" target="_blank" rel="noopener noreferrer"><strong>Revision Selection</strong></a></p>
+<p>The many ways to name a commit besides its hash, such as <code>HEAD~2</code>, <code>main^</code>,
+ranges like <code>main..feature</code>, and the <strong>reflog</strong>, which records where your
+branches and <code>HEAD</code> have been and lets you find commits no branch points to.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" target="_blank" rel="noopener noreferrer"><strong>Rebasing</strong></a></p>
+<p>The other way to integrate the work of a branch: <code>git rebase</code> replays its
+commits on top of another branch instead of merging, which keeps the history
+linear. Read “The Perils of Rebasing” before you rebase commits you have
+already shared.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History" target="_blank" rel="noopener noreferrer"><strong>Rewriting History</strong></a></p>
+<p>Clean up your commits before you share them: reword, reorder, squash or split
+them with an interactive rebase (<code>git rebase -i</code>). Like
+<a href="#changing-the-last-commit-git-commit---amend"><code>git commit --amend</code></a>, it
+replaces commits with new ones, so do not rewrite commits you have already
+shared.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git" target="_blank" rel="noopener noreferrer"><strong>Debugging with Git</strong></a></p>
+<p>Find who last changed each line of a file with <code>git blame</code>, and which commit
+introduced a bug with <code>git bisect</code>, a binary search through the history.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain" target="_blank" rel="noopener noreferrer"><strong>Git Internals</strong></a></p>
+<p>How Git stores snapshots, commits and branches in the <code>.git</code> directory, for
+those who want to know how it works under the hood.</p>
+</li>
+</ul>
+<h2 id="appendix-a-short-history-of-version-control">Appendix: a short history of version control<a href="#appendix-a-short-history-of-version-control" aria-label="Link to heading 'Appendix: a short history of version control'" data-heading-content="Appendix: a short history of version control" class="anchor"></a></h2>
+<p>Git was not the first version control system. It belongs to the third of three
+generations, each of which answered the limits of the one before.</p>
+<h3 id="local-version-control-systems-1980s">Local version control systems (1980s)<a href="#local-version-control-systems-1980s" aria-label="Link to heading 'Local version control systems (1980s)'" data-heading-content="Local version control systems (1980s)" class="anchor"></a></h3>
+<p>The simplest way to keep old versions of your files is to <strong>copy them manually</strong>
+into other directories. The <a href="https://en.wikipedia.org/wiki/Revision_Control_System" target="_blank" rel="noopener noreferrer"><strong>R</strong>evision <strong>C</strong>ontrol <strong>S</strong>ystem (RCS)</a>,
+first released in 1982, automated this process on your own machine.</p>
+<p><img src="images/local-vcs-58bc75511f91d60f0b71e1ffc325e1ae.png" alt="Local version control" /></p>
+<p>It is still easy to <strong>accidentally edit the wrong files</strong>, and <strong>hard to
+collaborate</strong> on different versions with other people.</p>
+<h3 id="centralized-version-control-systems-1990s">Centralized version control systems (1990s)<a href="#centralized-version-control-systems-1990s" aria-label="Link to heading 'Centralized version control systems (1990s)'" data-heading-content="Centralized version control systems (1990s)" class="anchor"></a></h3>
+<p>Centralized version control systems are based on a <strong>single central server</strong>
+that keeps all the versioned files. <a href="https://en.wikipedia.org/wiki/Concurrent_Versions_System" target="_blank" rel="noopener noreferrer"><strong>C</strong>oncurrent <strong>V</strong>ersion <strong>S</strong>ystems
+(CVS)</a> and <a href="https://subversion.apache.org/" target="_blank" rel="noopener noreferrer"><strong>S</strong>ub<strong>v</strong>ersio<strong>n</strong> (SVN)</a> are such systems, first
+released in 1990 and 2000 respectively.</p>
+<p><img src="images/centralized-vcs-039a73a4f34206b65d0d20332a87e8f3.png" alt="Centralized version control" /></p>
+<p>Administrators have <strong>fine-grained control</strong> over who can do what. But many
+operations need the network, which makes them <strong>slow</strong>; the server is a
+<strong>single point of failure</strong>; and the history <strong>can be lost</strong> if it has no
+backups.</p>
+<p>You could also consider storing your files in a shared Dropbox, Google Drive,
+etc. to be a kind of centralized version control system. However, it doesn’t
+have as many tools for <strong>consulting and manipulating the history</strong> of your
+project, or to <strong>collaborate on source code</strong>.</p>
+<h3 id="distributed-version-control-systems-2000">Distributed version control systems (2000+)<a href="#distributed-version-control-systems-2000" aria-label="Link to heading 'Distributed version control systems (2000+)'" data-heading-content="Distributed version control systems (2000+)" class="anchor"></a></h3>
+<p>Systems such as <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git</a> and <a href="https://www.mercurial-scm.org/" target="_blank" rel="noopener noreferrer">Mercurial</a>, both first released in
+2005, are <strong>distributed</strong>. Each client <strong>fully mirrors</strong> the repository: the
+whole history, not just the latest snapshot.</p>
+<p><img src="images/distributed-vcs-ff17f92c20684447a0be6f4137748627.png" alt="Distributed version control" /></p>
+<p>Because Git stores all versions of all files <strong>locally</strong>, most operations are
+almost instantaneous and do not need a connection to a server:</p>
+<ul>
+<li>Browsing the history</li>
+<li>Checking a file’s changes from a month ago</li>
+<li>Committing</li>
+</ul>
+<p>Basically any collaborative workflow is possible, since the team can organize
+itself however it wants (see <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows" target="_blank" rel="noopener noreferrer">distributed workflows</a>).
+Administrators still control their servers, but not their collaborators’
+machines.</p>
+<h3 id="snapshots-not-differences">Snapshots, not differences<a href="#snapshots-not-differences" aria-label="Link to heading 'Snapshots, not differences'" data-heading-content="Snapshots, not differences" class="anchor"></a></h3>
+<p>Most earlier systems, such as Subversion, store each file as its first version
+followed by the list of <strong>changes</strong> (or deltas) made to it over time.</p>
+<p><img src="images/deltas-3a3849e41003bf061832fdb451cf483e.png" alt="Subversion stores changes as deltas" /></p>
+<p>Git stores its data as <strong>snapshots</strong> instead. Every time you commit, it takes a
+picture of what all your files look like at that moment and stores a reference
+to that snapshot. To be efficient, <strong>if a file has not changed, Git does not
+store it again</strong>, just a link to the identical file it has already stored.</p>
+<p><img src="images/snapshots-658112accd3df5aaf4604a3d77f56198.png" alt="Git stores changes as snapshots" /></p>
+<hr />
+<p><em>The figures of snapshots, deltas, trees and blobs, and version control systems
+on this page come from <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Pro Git</a>, by Scott Chacon and Ben Straub,
+licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 3.0</a>.</em></p>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -915,94 +853,46 @@ adding human and machine readable meaning to commit messages.</p>
     <a href="#presentation">Presentation</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#getting-started">Getting started</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
     <a href="#git-and-the-command-line">Git and the command line</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#installing-git">Installing Git</a>
     
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#first-time-git-setup">First-time Git setup</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#choosing-a-default-branch-name">Choosing a default branch name</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#creating-a-new-repository">Creating a new repository</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#checking-the-status-of-your-files">Checking the status of your files</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#adding-new-files">Adding new files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#tracking-new-files">Tracking new files</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#checking-staged-changes">Checking staged changes</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#committing-your-changes">Committing your changes</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#modifying-files">Modifying files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#staging-modified-files">Staging modified files</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#modifying-a-staged-file">Modifying a staged file</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#checking-staged-and-unstaged-changes">Checking staged and unstaged changes</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#staging-area-versus-working-directory">Staging area versus working directory</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#committing-partially-staged-changes">Committing partially staged changes</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#moving-and-removing-files">Moving and removing files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#adding-all-changes">Adding all changes</a>
-    
-  </li>
-</ul>
-  </li>
-</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#viewing-the-commit-history">Viewing the commit history</a>
+    <a href="#how-git-stores-your-project">How Git stores your project</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-basic-git-commands">The basic Git commands</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#viewing-the-changes-in-the-history">Viewing the changes in the history</a>
+    <a href="#git-config-set-up-git"><code>git config</code>: set up Git</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#other-log-options">Other log options</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#ignoring-files">Ignoring files</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#committing-the-ignore-file">Committing the ignore file</a>
+    <a href="#git-init-create-a-new-repository"><code>git init</code>: create a new repository</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#status-of-ignored-files">Status of ignored files</a>
+    <a href="#git-clone-get-an-existing-repository"><code>git clone</code>: get an existing repository</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#global-ignore-file">Global ignore file</a>
+    <a href="#git-status-see-where-you-are"><code>git status</code>: see where you are</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-add-prepare-the-next-commit"><code>git add</code>: prepare the next commit</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-diff-see-exactly-what-changed"><code>git diff</code>: see exactly what changed</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-commit-save-a-snapshot"><code>git commit</code>: save a snapshot</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-log-look-at-the-history"><code>git log</code>: look at the history</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-branch-list-create-and-delete-branches"><code>git branch</code>: list, create and delete branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-switch-move-between-branches"><code>git switch</code>: move between branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-merge-bring-the-work-of-a-branch-into-another"><code>git merge</code>: bring the work of a branch into another</a>
     
   </li>
 </ul>
@@ -1010,22 +900,42 @@ adding human and machine readable meaning to commit messages.</p>
     <a href="#undoing-things">Undoing things</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#unmodifying-a-modified-file">Unmodifying a modified file</a>
+    <a href="#unstaging-a-file-git-restore---staged">Unstaging a file: <code>git restore --staged</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#unstaging-a-staged-file">Unstaging a staged file</a>
+    <a href="#discarding-changes-git-restore">Discarding changes: <code>git restore</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#changing-the-commit-message">Changing the commit message</a>
+    <a href="#changing-the-last-commit-git-commit---amend">Changing the last commit: <code>git commit --amend</code></a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#adding-changes-to-a-commit">Adding changes to a commit</a>
+    <a href="#deleting-an-unmerged-branch-git-branch--d">Deleting an unmerged branch: <code>git branch -D</code></a>
     
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
     <a href="#best-practices">Best practices</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-going-further">Appendix: going further</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-a-short-history-of-version-control">Appendix: a short history of version control</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#local-version-control-systems-1980s">Local version control systems (1980s)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#centralized-version-control-systems-1990s">Centralized version control systems (1990s)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#distributed-version-control-systems-2000">Distributed version control systems (2000+)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#snapshots-not-differences">Snapshots, not differences</a>
+    
+  </li>
+</ul>
   </li>
 </ul>
     </nav>
@@ -1040,7 +950,7 @@ adding human and machine readable meaning to commit messages.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
       </a>
-      <a href="https://github.com/ArchiDep/website/blob/891e39ba0c006f5d1a5ae3993f576e6d1f7d7e31/course/chapters/201-git/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/72b8c66a607db036651ad577f2db0cdf83970e8f/course/chapters/201-git/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1143,26 +1053,22 @@ adding human and machine readable meaning to commit messages.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-next">
-        <a href="/2026/course/202-git-branching/slides/" target="_blank" class="flex items-center gap-2">
+        <a href="/2026/course/202-hello-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
-  <span>Git Branching</span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Git</span>
 </span>
           
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-</svg>
+          
         </a>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-next">
-        <a href="/2026/course/203-git-collaborating/slides/" target="_blank" class="flex items-center gap-2">
+        <a href="/2026/course/203-git-collaborating/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Collaborating with Git</span>
 </span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-</svg>
         </a>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-next">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
@@ -1174,10 +1080,10 @@ adding human and machine readable meaning to commit messages.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
-        <a href="/2026/course/205-php-todolist/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/205-guessit/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>PHP Todolist</span>
+  <span>Guess It</span>
 </span>
           
           
@@ -1722,7 +1628,7 @@ adding human and machine readable meaning to commit messages.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@891e39b</span>
+        <span class="tooltip-content">main@72b8c66</span>
         <span class="font-title">0.1.0</span>
       </span>
       

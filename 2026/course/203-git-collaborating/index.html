@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collaborating with Git · ArchiDep</title>
+<meta name="description" content="Share your work with Git through remote repositories, such as those on GitHub, and resolve the conflicts that come up when two people change the same thing. This is a condensed version of the Git Basics - Working with Remotes chapter of the Git Book, and the appendix lists where to read more." />
+<link rel="canonical" href="https://archidep.ch/2026/course/203-git-collaborating/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Collaborating with Git" />
+<meta property="og:description" content="Share your work with Git through remote repositories, such as those on GitHub, and resolve the conflicts that come up when two people change the same thing. This is a condensed version of the Git Basics - Working with Remotes chapter of the Git Book, and the appendix lists where to read more." />
+<meta property="og:url" content="https://archidep.ch/2026/course/203-git-collaborating/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-3d2034ecfda35e0b22480652c56249c0.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-c90ca709c6da20f25911a9024dce765d.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/72b8c66a607db036651ad577f2db0cdf83970e8f/course/chapters/203-git-collaborating/subject.md">Rev: 72b8c66a607db036651ad577f2db0cdf83970e8f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/203-git-collaborating/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="@container flex justify-center-safe gap-4">
+  <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
+    <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-subject">
+      <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
+  Collaborating with Git
+</h1>
+
+      <div class="my-4"><p>Share your work with <a href="https://git-scm.com" target="_blank" rel="noopener noreferrer">Git</a> through remote repositories, such as those on
+<a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>, and resolve the conflicts that come up when two people change
+the same thing. This is a condensed version of the <a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes" target="_blank" rel="noopener noreferrer">Git Basics - Working with
+Remotes</a> chapter of the <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Git Book</a>, and the
+<a href="#appendix-going-further">appendix</a> lists where to read more.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#remotes">Remotes</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#git-remote-name-your-remotes"><code>git remote</code>: name your remotes</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-push-send-your-commits"><code>git push</code>: send your commits</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#a-rejected-push">A rejected push</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#remote-tracking-branches">Remote-tracking branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-fetch-get-the-others-commits"><code>git fetch</code>: get the others’ commits</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-pull-fetch-and-merge"><code>git pull</code>: fetch and merge</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#merge-conflicts">Merge conflicts</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#resolving-a-conflict">Resolving a conflict</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-going-further">Appendix: going further</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/203-git-collaborating/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/203-git-collaborating/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/203-git-collaborating/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <p><strong>You will need</strong></p>
+<ul>
+<li><a href="https://git-scm.com" target="_blank" rel="noopener noreferrer">Git</a></li>
+<li>A free <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> account, with your SSH key</li>
+<li>A Unix CLI</li>
+</ul>
+<p><strong>Recommended reading</strong></p>
+<ul>
+<li><a href="/2026/course/201-git/">Version Control with Git</a></li>
+</ul>
+<h2 id="remotes">Remotes<a href="#remotes" aria-label="Link to heading 'Remotes'" data-heading-content="Remotes" class="anchor"></a></h2>
+<p>A <strong>remote</strong> is another copy of your repository, usually on a server. It holds
+the whole commit graph, not only the latest version of your files. Every copy
+holds everything: this is what makes Git a <strong>distributed</strong> version control
+system. No copy is more important than another, except by agreement.</p>
+<p>Collaborating means <strong>pushing</strong> your commits to a remote, and <strong>pulling</strong> (or
+<strong>fetching</strong>) the commits others have pushed there. Git never does either by
+itself: nothing is shared until you ask for it, and two remotes of the same
+repository know nothing about each other.</p>
+<p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> is a service that hosts Git repositories, so that you and
+others can push to them and fetch from them. It adds features Git does not have,
+such as access control, <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues" target="_blank" rel="noopener noreferrer">issues</a> and <a href="https://docs.github.com/en/pull-requests/reference/pull-requests" target="_blank" rel="noopener noreferrer">pull requests</a>,
+but the repositories themselves are ordinary Git repositories.</p>
+<h3 id="git-remote-name-your-remotes"><code>git remote</code>: name your remotes<a href="#git-remote-name-your-remotes" aria-label="Link to heading 'git remote: name your remotes'" data-heading-content="git remote: name your remotes" class="anchor"></a></h3>
+<p>A remote is known to your repository by a <strong>name</strong> and a <strong>URL</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># add a remote</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">git@github.com:jdoe/git-calculator.git</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">-v</span>                    <span class="l-comment"># list the remotes and their URLs</span>
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rename</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">github</span>  <span class="l-comment"># rename a remote</span>
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rm</span> <span class="l-variable-parameter">github</span>             <span class="l-comment"># remove a remote</span>
+</div></code></pre>
+<p><code>git clone</code> automatically adds a remote named <code>origin</code>, pointing to the
+repository it cloned. “origin” is only a <strong>conventional name</strong>: a repository can
+have as many remotes as you want, each under a name of your choice.</p>
+<p>Use the SSH URL GitHub shows for a repository, <code>git@github.com:&lt;owner&gt;/&lt;repo&gt;</code>.
+Git connects to GitHub with SSH, and authenticates you with your SSH key.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>When you create a repository on GitHub to push an existing project to it, create
+it <strong>without</strong> a README, a license or a <code>.gitignore</code> file. Any of them makes a
+first commit on GitHub, which your project does not have, and your first push is
+then refused, as <a href="#a-rejected-push">described below</a>.</p></div></div>
+<h3 id="git-push-send-your-commits"><code>git push</code>: send your commits<a href="#git-push-send-your-commits" aria-label="Link to heading 'git push: send your commits'" data-heading-content="git push: send your commits" class="anchor"></a></h3>
+<p><code>git push &lt;remote&gt; &lt;branch&gt;</code> sends the commit your branch points to, with every
+commit behind it that the remote does not have yet, and asks the remote to move
+its own branch there:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:jdoe/git-calculator.git</span>
+</div><div class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">branch</span> <span class="l-string">&#39;main&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span>
+</div></code></pre>
+<p><code>-u</code> (<code>--set-upstream</code>) makes <code>origin/main</code> the <strong>upstream</strong> of your <code>main</code>: the
+branch <code>git status</code> compares yours to, and the one <code>git push</code> and <code>git pull</code>
+use when you give them no arguments. You only need it for the first push of a
+branch.</p>
+<h4 id="a-rejected-push">A rejected push<a href="#a-rejected-push" aria-label="Link to heading 'A rejected push'" data-heading-content="A rejected push" class="anchor"></a></h4>
+<p>A remote only accepts a push that moves its branch <strong>forward</strong> with a
+<strong>fast-forward</strong>. If someone else has pushed commits you do not have, moving the
+remote’s branch to your commit would throw their work away, so the remote
+refuses:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">team</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team.git</span>
+</div><div class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:ArchiDep/git-calculator-team.git&#39;</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">contains</span> <span class="l-variable-parameter">work</span> <span class="l-variable-parameter">that</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">not</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">locally.</span> <span class="l-variable-parameter">...</span>
+</div></code></pre>
+<p>The reason Git gives says why:</p>
+<ul>
+<li><strong><code>(fetch first)</code></strong>: the remote’s branch points to a commit your repository
+does not know at all. <a href="#git-fetch-get-the-others-commits">Fetch</a> it to see the
+latest changes or <a href="#git-pull-fetch-and-merge">pull</a> it to integrate them.</li>
+<li><strong><code>(non-fast-forward)</code></strong>: your repository knows that commit, but your branch
+does not include it, because the histories have diverged. Merge it or pull it.</li>
+</ul>
+<p>A rejected push changes nothing, on either side. Fetch the others’ commits and
+merge them into your branch (or do both with a pull): your branch then contains
+their work, and pushing it is a fast-forward again.</p>
+<h3 id="remote-tracking-branches">Remote-tracking branches<a href="#remote-tracking-branches" aria-label="Link to heading 'Remote-tracking branches'" data-heading-content="Remote-tracking branches" class="anchor"></a></h3>
+<p>Each time your Git talks to a remote, it records where the remote’s branches
+were, as <strong>remote-tracking branches</strong> named after the remote: <code>origin/main</code> is
+your record of where <code>main</code> is on <code>origin</code>. <code>git graph</code> shows them next to your
+own branches:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">*</span>   e0711c3 <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main,</span> <span class="l-string-special-path">origin/main</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Merge</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;sub&#39;</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
+</div></code></pre>
+<p>A remote-tracking branch is <strong>not a live view</strong> of the remote. It only moves
+when you push, fetch or pull. When <code>git status</code> says that your branch is “up to
+date with ‘origin/main’”, it compares your branch to that record, not to what is
+on the server now. You never commit on a remote-tracking branch yourself.</p>
+<h3 id="git-fetch-get-the-others-commits"><code>git fetch</code>: get the others’ commits<a href="#git-fetch-get-the-others-commits" aria-label="Link to heading 'git fetch: get the others’ commits'" data-heading-content="git fetch: get the others’ commits" class="anchor"></a></h3>
+<p><code>git fetch &lt;remote&gt;</code> downloads the commits of a remote that you do not have, and
+moves your remote-tracking branches to where the remote’s branches are:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">team</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team</span>
+</div><div class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">team/main</span>
+</div></code></pre>
+<p>A fetch changes <strong>neither your branches nor your files</strong>. It only lets you see
+what the others have done, with <code>git graph</code>, <code>git log team/main</code> or
+<code>git diff main team/main</code>, before you decide to merge it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span>
+</div></code></pre>
+<p>Merging a remote-tracking branch works exactly like merging any other branch: a
+fast-forward if your branch has no commits of its own, a three-way merge if the
+histories have diverged.</p>
+<h3 id="git-pull-fetch-and-merge"><code>git pull</code>: fetch and merge<a href="#git-pull-fetch-and-merge" aria-label="Link to heading 'git pull: fetch and merge'" data-heading-content="git pull: fetch and merge" class="anchor"></a></h3>
+<p><code>git pull</code> fetches, then merges what it fetched into the current branch.
+<code>git pull team main</code> is the same as <code>git fetch team</code> followed by
+<code>git merge team/main</code>. On a branch with an upstream, <code>git pull</code> without
+arguments fetches from the upstream’s remote and merges the upstream.</p>
+<p>Fetching and merging in two steps lets you look at what the others did before
+you merge it. <code>git pull</code> is the shortcut once you know what to expect.</p>
+<h2 id="merge-conflicts">Merge conflicts<a href="#merge-conflicts" aria-label="Link to heading 'Merge conflicts'" data-heading-content="Merge conflicts" class="anchor"></a></h2>
+<p>A three-way merge combines the changes of both branches since their common
+ancestor. When both branches changed the <strong>same lines</strong> of the same file
+differently, Git cannot choose between the two versions, and stops in the middle
+of the merge. This is a <strong>merge conflict</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">subtraction.js</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">CONFLICT</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">content</span><span class="l-punctuation-bracket">)</span>: <span class="l-function-call">Merge</span> <span class="l-variable-parameter">conflict</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">subtraction.js</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Automatic</span> <span class="l-variable-parameter">merge</span> <span class="l-variable-parameter">failed</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">result.</span>
+</div></code></pre>
+<p>A conflict is about lines, not whole files. Git merges everything it can, and
+<code>git status</code> lists what is left: the files it merged on its own are already
+staged, and the files in conflict are <strong>unmerged</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">unmerged</span> <span class="l-variable-parameter">paths.</span>
+</div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">run</span> <span class="l-string">&quot;git commit&quot;</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git merge --abort&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">abort</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
+</div><div class="l-line" data-line="8">        <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">index.html</span>
+</div><div class="l-line" data-line="9">
+</div><div class="l-line" data-line="10"><span class="l-function-call">Unmerged</span> <span class="l-variable-parameter">paths:</span>
+</div><div class="l-line" data-line="11">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">mark</span> <span class="l-variable-parameter">resolution</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="12">        <span class="l-function-call">both</span> <span class="l-variable-parameter">modified:</span>   <span class="l-variable-parameter">subtraction.js</span>
+</div></code></pre>
+<h3 id="resolving-a-conflict">Resolving a conflict<a href="#resolving-a-conflict" aria-label="Link to heading 'Resolving a conflict'" data-heading-content="Resolving a conflict" class="anchor"></a></h3>
+<p>In each file in conflict, Git has written both versions of the conflicting
+lines, between <strong>conflict markers</strong>:</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment">/**</span>
+</div><div class="l-line" data-line="2"><span class="l-comment"> * Takes two numbers, a and b, and returns their subtraction.</span>
+</div><div class="l-line" data-line="3"><span class="l-comment"> */</span>
+</div><div class="l-line" data-line="4"><span class="l-keyword-function">function</span> <span class="l-function">subtract</span><span class="l-punctuation-bracket">(</span><span class="l-variable-parameter">a</span><span class="l-punctuation-delimiter">,</span> <span class="l-variable-parameter">b</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
+</div><div class="l-line" data-line="5"><span class="l-operator">&lt;</span><span class="l-operator">&lt;&lt;</span><span class="l-operator">&lt;&lt;</span><span class="l-operator">&lt;&lt;</span> <span class="l-constant">HEAD</span>
+</div><div class="l-line" data-line="6">  <span class="l-keyword-return">return</span> <span class="l-variable">a</span> <span class="l-operator">-</span> <span class="l-variable">b</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="7"><span class="l-operator">=</span><span class="l-operator">===</span><span class="l-operator">===</span>
+</div><div class="l-line" data-line="8">  <span class="l-keyword-return">return</span> <span class="l-operator">-</span><span class="l-variable">b</span> <span class="l-operator">+</span> <span class="l-variable">a</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="9"><span class="l-operator">&gt;</span><span class="l-operator">&gt;&gt;&gt;</span><span class="l-operator">&gt;&gt;&gt;</span> <span class="l-variable">team</span><span class="l-operator">/</span><span class="l-variable">main</span>
+</div><div class="l-line" data-line="10"><span class="l-punctuation-bracket">}</span>
+</div></code></pre>
+<ul>
+<li>Between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>=======</code> is <strong>your</strong> version, the one of the
+branch you are on.</li>
+<li>Between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; team/main</code> is <strong>theirs</strong>, the one of the branch
+you are merging.</li>
+</ul>
+<p>To resolve the conflict:</p>
+<ol>
+<li><strong>Edit the file</strong> until it is what it should be: keep one version, the
+other, or write a third that combines them, and <strong>remove the markers</strong>. Git
+does not check that the result makes sense, so test it.</li>
+<li><strong>Stage it</strong> with <code>git add</code>, which marks the conflict as resolved.</li>
+<li>When <code>git status</code> says that all conflicts are fixed, <strong>commit</strong>. The commit
+concludes the merge, with the two commits as parents. <code>git commit --no-edit</code>
+keeps the message Git generated, and <code>git commit -m &quot;Your message&quot;</code> allows
+you to provide a custom message.</li>
+</ol>
+<p>At any point before that commit, <code>git merge --abort</code> gives up on the merge and
+puts everything back as it was before it.</p>
+<p>Conflicts are normal when several people work on the same code, and small ones
+are easy to resolve. Pulling often, and committing small changes, keeps them
+small.</p>
+<h2 id="appendix-going-further">Appendix: going further<a href="#appendix-going-further" aria-label="Link to heading 'Appendix: going further'" data-heading-content="Appendix: going further" class="anchor"></a></h2>
+<p>This subject stops at what a small team sharing one repository needs day to day.
+These pages of the <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener noreferrer">Pro Git</a> book go further:</p>
+<ul>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows" target="_blank" rel="noopener noreferrer"><strong>Distributed Workflows</strong></a></p>
+<p>The ways to organize a team’s work with Git, which differ in who pushes to
+which repository and who merges what. The <a href="/2026/course/204-hello-github/">Hello GitHub</a>
+exercise uses the simplest one, a <strong>centralized workflow</strong> where everyone
+pushes to one shared repository. Most open source projects use an
+<strong>integration manager workflow</strong> instead, where contributors push to their own
+copy and a maintainer merges their work.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches" target="_blank" rel="noopener noreferrer"><strong>Remote Branches</strong></a></p>
+<p>Remote-tracking branches and upstreams in more detail: pushing a branch under
+another name, tracking other branches than <code>main</code>, and deleting a branch on a
+remote.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project" target="_blank" rel="noopener noreferrer"><strong>Contributing to a Project</strong></a> and <a href="https://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project" target="_blank" rel="noopener noreferrer"><strong>Maintaining a
+Project</strong></a></p>
+<p>Both sides of each workflow: how to prepare and share your work in a small
+team, in a larger one, or in a public project you cannot push to; and how to
+review and integrate the work of others.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project" target="_blank" rel="noopener noreferrer"><strong>GitHub - Contributing to a Project</strong></a></p>
+<p><a href="https://docs.github.com/en/pull-requests/get-started/about-forks" target="_blank" rel="noopener noreferrer"><strong>Forks</strong></a> and <a href="https://docs.github.com/en/pull-requests/reference/pull-requests" target="_blank" rel="noopener noreferrer"><strong>pull requests</strong></a>, the way most
+projects on GitHub take in contributions.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merge_conflicts" target="_blank" rel="noopener noreferrer"><strong>Basic Merge Conflicts</strong></a> and <a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging" target="_blank" rel="noopener noreferrer"><strong>Advanced
+Merging</strong></a></p>
+<p>More ways to understand and resolve a conflict: graphical merge tools with
+<code>git mergetool</code>, showing the common ancestor’s version of the conflicting
+lines, taking one side for a whole file, and undoing a merge.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rerere" target="_blank" rel="noopener noreferrer"><strong>Rerere</strong></a></p>
+<p>“Reuse recorded resolution”: Git remembers how you resolved a conflict, and
+resolves the same conflict the same way the next time it comes up.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" target="_blank" rel="noopener noreferrer"><strong>Rebasing</strong></a></p>
+<p>The other way to integrate the others’ work: <code>git pull --rebase</code> replays your
+commits on top of theirs instead of merging, which keeps the history linear.
+Read “The Perils of Rebasing” before you rebase commits you have already
+pushed.</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Internals-The-Refspec" target="_blank" rel="noopener noreferrer"><strong>The Refspec</strong></a></p>
+<p>How <code>git fetch</code> and <code>git push</code> decide which remote branch goes to which local
+branch, and how to change it.</p>
+</li>
+</ul>
+
+      <div class="@toc:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
+    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+    <nav class="toc" aria-labelledby="on-this-page-title">
+      <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#remotes">Remotes</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#git-remote-name-your-remotes"><code>git remote</code>: name your remotes</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-push-send-your-commits"><code>git push</code>: send your commits</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#a-rejected-push">A rejected push</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#remote-tracking-branches">Remote-tracking branches</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-fetch-get-the-others-commits"><code>git fetch</code>: get the others’ commits</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#git-pull-fetch-and-merge"><code>git pull</code>: fetch and merge</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#merge-conflicts">Merge conflicts</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#resolving-a-conflict">Resolving a conflict</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-going-further">Appendix: going further</a>
+    
+  </li>
+</ul>
+    </nav>
+    <div class="my-4 pl-4 flex items-center gap-4">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/website/blob/72b8c66a607db036651ad577f2db0cdf83970e8f/course/chapters/203-git-collaborating/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </div>
+    <div class="pt-2 sticky top-0">
+      
+
+      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+      </a>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          
+          
+          <input type="checkbox" id="section-introduction-toggle" class="hidden" checked disabled>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-due">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-due">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-next">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          
+          
+          <input type="checkbox" id="section-version-control-toggle" class="hidden" checked disabled>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-next">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-next">
+        <a href="/2026/course/202-hello-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-next course-item-current">
+        <a href="/2026/course/203-git-collaborating/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-next">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-future">
+        <a href="/2026/course/205-guessit/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Guess It</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-future">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-future">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-future">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-future">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>Linux</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Pipeline</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-future">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          <span class="group-has-checked/section-4:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-4:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a PHP application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a PHP application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-future">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Graded deployment exercise</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-future">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-future">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@72b8c66</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>

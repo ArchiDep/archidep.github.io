@@ -17,8 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-3ecbd3af57136dfa2ffd7409576a80b4.css">
-    <script defer src="/2026/assets/course/slides-mermaid-a65afe425c6ae7f615bd2d58b4a99c21.js">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-d6da427b5025a010b39c48e200b26557.css">
+    <script defer src="/2026/assets/course/slides-mermaid-7d1a87396acab995c54c01d26e0d7644.js">
     </script>
   </head>
   <body data-theme="light">
@@ -33,204 +33,290 @@ Architecture & Deployment <!-- .element: class="subtitle" -->
 
 ## What is Git?
 
-[Git](https://git-scm.com) is a [**version control system (VCS)**](https://en.wikipedia.org/wiki/Version_control) originally developed by
-Linus Torvalds to work on Linux.
+<!-- .element: class="hidden" -->
 
-<img src='images/git-logo-042664999475fd8cc3672db6567e2e53.png' class='w-1/3' />
+<img src='images/git-logo-042664999475fd8cc3672db6567e2e53.png' alt='Git' class='w-1/4' />
+
+[Git](https://git-scm.com) is a [**version control system**](https://en.wikipedia.org/wiki/Version_control). It allows you to **take
+snapshots** of your project over time.
+
+- **Restore** files to a previous state
+- **Compare** versions
+- See **who changed what**
+- **Collaborate** as a team
 
 **Notes:**
 
-Linus Torvals is the creator of Linux. He created Git to manage the source code
-of the Linux kernel, because the alternatives were proprietary and did not
-support the kind of workflow he wanted to develop Linux with.
+Git was created in 2005 by Linus Torvalds, the creator of Linux, to manage the
+source code of the Linux kernel. The alternatives were proprietary, and did not
+support the way he wanted to develop Linux.
 
----
-
-### Design goals
+Linux is a large and complex piece of code with thousands of contributors, so
+Git was designed for:
 
 - **Speed**
-- **Simple** design
-- Strong support for **non-linear development**
-- Fully **distributed**
-- Able to handle **large projects**
+- A **simple** design
+- Strong support for **non-linear development** (thousands of parallel
+  branches)
+- Being fully **distributed**
+- Handling **large projects** efficiently
+
+_Figures of this deck from [Pro Git](https://git-scm.com/book/en/v2), by Scott Chacon and Ben Straub
+([CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)); the workflow figure is adapted_
+
+---
+
+### Remember commits?
+
+<simgit-story name='branchingOneLine' start-chapter='third-commit' end-chapter='third-commit' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true' controls='false'></simgit-story>
 
 **Notes:**
 
-The Linux is a large and complex piece of code, and it has thousands of
-contributors. A version control system was needed that could handle thousands of
-parallel branches and handle a project of that size with speed and efficiency
-(data size).
+Each **commit** (the circles above) records:
 
----
+- A **snapshot** of the whole project as it was when you committed: not the
+  changes you made, but the full content of every file.
+- The **author**'s name and e-mail address, and the **date** of the commit.
+- A **message** describing the change.
+- A pointer to its **parent**: the previous commit, or commits. The history of
+  the project is the chain of these pointers.
 
-### What is a version control system?
-
-> A system that **records changes** to a file or set of files over time so that
-> you can **recall specific versions later**.
-
-<img src='images/commits-10495ae1cccfa9f3c714773ae4931585.png' alt='Commits' class='w-1/2' />
-
----
-
-### What can I do with it?
-
-- **Revert** files back to a previous state
-- **Compare** changes over time
-- See **who last modified something**
-- **Recover** if you screw things up
-- **Collaborate** as a distributed team
-
----
-
-## A short history
-
----
-
-### **Local** version control systems (1980s)
-
-<div class="grid grid-cols-5 gap-4">
-  <div class="col-span-3">
-
-- Easy to <strong class="text-error">accidentally edit the wrong files</strong>
-- <strong class="text-error">Hard to collaborate</strong> on different versions with other people
-
-  </div>
-  <div class="col-span-2">
-    <img src='images/local-vcs-58bc75511f91d60f0b71e1ffc325e1ae.png' class='w-full' />
-  </div>
-</div>
-
-**Notes:**
-
-Basically, you **manually** copy your files into other directories to keep old
-versions.
-
-[**R**evision **C**ontrol **S**ystem (RCS)](https://en.wikipedia.org/wiki/Revision_Control_System), first released in 1982,
-automates this process.
-
----
-
-### **Centralized** version control systems (1990s)
-
-<div class="grid grid-cols-5 gap-4">
-  <div class="col-span-3 text-3xl">
-
-- <strong class="text-success">Fine-grained administrator control</strong>
-- <strong class="text-error">Slow</strong> (many network operations)
-- <strong class="text-error">Single point of failure</strong>
-- History <strong class="text-error">can be lost</strong> without backups
-
-  </div>
-  <div class="col-span-2">
-    <img src='images/centralized-vcs-039a73a4f34206b65d0d20332a87e8f3.png' class='w-full' />
-  </div>
-</div>
-
-**Notes:**
-
-Centralized version control systems are based on a **single central server**
-that keeps all the versioned files.
-
-[**C**oncurrent **V**ersion **S**ystems (CVS)](https://en.wikipedia.org/wiki/Concurrent_Versions_System) and [**S**ub**v**ersio**n**
-(SVN)](https://subversion.apache.org/) are such systems that were first released in 1990 and 2000,
-respectively.
-
-You could also consider storing your files in a shared Dropbox, Google Drive,
-etc. to be a kind of centralized version control system. However, it doesn't
-have as many tools for **consulting and manipulating the history** of your
-project, or to **collaborate on source code**.
-
----
-
-### **Distributed** version control systems (2000+)
-
-<div class="grid grid-cols-5 gap-4">
-  <div class="col-span-3 text-4xl">
-
-- Each client has a <strong class="text-success">full copy</strong> of the
-  project, so operations are local and <strong
-  class="text-success">fast</strong>.
-- Basically any <strong class="text-success">collaborative workflow</strong> is
-  possible.
-- <strong class="text-success">Administrators still have control</strong> over
-their servers (but not collaborators' machines).
-
-  </div>
-  <div class="col-span-2">
-    <img src='images/distributed-vcs-ff17f92c20684447a0be6f4137748627.png' class='w-full' />
-  </div>
-</div>
-
-**Notes:**
-
-Systems such as [Git](https://git-scm.com) and [Mercurial](https://www.mercurial-scm.org/) are **distributed**. This
-enables [various types of collaborative workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows), since
-the team can organize itself however it wants.
-
-Clients **fully mirror** the repository, not just the latest snapshot. Because
-Git stores all versions of all files **locally**, most Git operations are almost
-instantaneous and do not require a connection to a server:
-
-- Browsing the history
-- Checking a file's changes from a month ago
-- Committing
-
-Git and Mercurial were first released in 2005.
-
----
-
-## Git basics
-
----
-
-### Snapshots, not differences
-
-<div class="grid grid-cols-2 gap-4">
-  <div>
-    <img src='images/deltas-3a3849e41003bf061832fdb451cf483e.png' alt='Subversion stores changes as deltas' class='w-full' />
-    Subversion
-  </div>
-  <div>
-    <img src='images/snapshots-658112accd3df5aaf4604a3d77f56198.png' alt='Git stores changes as snapshots' class='w-full' />
-    Git
-  </div>
-</div>
-
-**Notes:**
-
-Unlike other version control systems, Git stores its data as **snapshots**
-instead of file-based changes. Git thinks of its data like a set of
-**snapshots** of a miniature filesystem.
-
-Every time you save the state of your project in Git, it basically takes a
-picture of what all your files look like at that moment and stores a reference
-to that snapshot. To be efficient, **if files have not changed, Git doesn't
-store the file again**, just a link to the previous identical file it has
-already stored. Git thinks about its data more like a stream of snapshots.
-
----
-
-### Git has integrity
-
-All Git objects are identified by a [SHA-1](https://en.wikipedia.org/wiki/SHA-1) digest:
+A commit is named by its **hash**, a [SHA-1](https://en.wikipedia.org/wiki/SHA-1) digest computed from its
+content, such as:
 
 ```
 24b9da6552252987aa493b52f8696cd6d3b00373
 ```
 
-You will see them all over the place in Git.
-Often you will only see a prefix (the first 6-7 characters):
+Git often shows only its first 7 characters, like `24b9da6`, which is usually
+enough to tell commits apart.
 
-```
-24b9da6
+Because the hash is computed from everything in the commit — the snapshot, the
+author, the date, the message and the parent — changing any of these gives a
+different hash, and therefore a different commit. This also gives Git
+**integrity**: since all content is [hashed](https://en.wikipedia.org/wiki/Hash_function) with a [cryptographic hash
+function](https://en.wikipedia.org/wiki/Cryptographic_hash_function), it's virtually impossible for files to
+be lost or corrupted without Git knowing about it.
+
+---
+
+### Trees and blobs
+
+<img src='../images/data-model-e0ca06a25bdd7b624b5b310f4b17fcf8.png' alt='A tree pointing to blobs and to another tree' class='w-1/2' />
+
+**Notes:**
+
+The snapshot of a commit is made of two kinds of objects:
+
+- A **blob** is the content of one file.
+- A **tree** is the listing of one directory: the name of each file in it, with
+  the blob holding its content, and the name of each subdirectory, with the tree
+  listing it in turn.
+
+A commit points to the tree of the project's root directory, which is how it
+holds the whole project. Blobs and trees are also named by the hash of their
+content, so a file that has not changed since the previous commit is not stored
+again: the new tree simply points to the blob that already exists.
+
+See [how Git stores your project](/2026/course/201-git/#how-git-stores-your-project) for more.
+
+---
+
+## What is branching?
+
+<!-- .element: class="hidden" -->
+
+<img src='images/commits-10495ae1cccfa9f3c714773ae4931585.png' alt='Branches diverging from the main line' class='w-1/2' />
+
+**Branching** means **diverging from the main line of development** and
+**merging back** later.
+
+- Work **in isolation**
+- Pull changes from the main line **at your own pace**
+- Choose **which features to release and when**
+
+**Notes:**
+
+Git's branching model is very **lightweight and fast**: it encourages workflows
+that branch and merge often. Many teams using Git create a **separate branch**
+to develop **each feature**.
+
+This is a condensed version of the [branching chapter of the Git
+Book](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell),
+which you should read if you want more detailed information on the subject.
+
+**Resources**
+
+- [Git branching](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+- [Advanced merging](https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging)
+- [Understanding branches in Git](https://blog.thoughtram.io/git/rebase-book/2015/02/10/understanding-branches-in-git.html)
+- [Branching workflows](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows)
+  - [A successful branching model](http://nvie.com/posts/a-successful-git-branching-model/) (for large teams)
+  - [A successful branching model considered harmful](https://barro.github.io/2016/02/a-succesful-git-branching-model-considered-harmful/)
+  - [Branch-per-feature](http://dymitruk.com/blog/2012/02/05/branch-per-feature/)
+  - [Trunk-based development](https://trunkbaseddevelopment.com)
+
+---
+
+### Branches point to commits
+
+A branch is a lightweight, movable **pointer to a commit**.
+
+<simgit-story name='branchingOneLine' start-chapter='setup' end-chapter='third-commit' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+The default branch is `main` (or `master` with the default Git configuration).
+The special `HEAD` pointer indicates the current branch.
+
+As you start making commits, the current branch pointer **automatically moves**
+forward to your latest commit.
+
+---
+
+### Example repository
+
+This prepared repository serves to illustrate branching.
+
+```bash
+$> cd /path/to/projects
+
+$> git clone https://github.com/ArchiDep/git-calculator.git
+
+$> cd git-calculator
+
+# We will talk more about this
+$> git remote rm origin
 ```
 
 **Notes:**
 
-SHA-1 is a [hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) and provides integrity.
-Because all content is [hashed](https://en.wikipedia.org/wiki/Hash_function), it's virtually impossible for files to be
-lost or corrupted without Git knowing about it. This functionality is built into
-Git at the lowest levels and is integral to its philosophy.
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Clone the example repository and move into it.
+
+`git clone` downloads a copy of a repository, its whole history included. The
+last command removes the link to the repository on GitHub, which is explained
+with remotes later.
+
+Open the project with your favorite editor and open the `index.html` page in a
+browser. As you can see if you type `git log`, there are some commits already.
+
+---
+
+### Showing the commit graph
+
+```bash
+$> git config --global alias.graph \
+   "log --oneline --decorate --graph --all"
+
+$> git graph
+* 907e519 (HEAD -> main) Add readme
+* 24bb77c Add license
+* 073570e Initial commit
+```
+
+**Notes:**
+
+The [`git log` command](https://git-scm.com/docs/git-log) can show you a representation of the commit
+graph and its branches, with `git log --oneline --decorate --graph --all`. This
+command is so useful that you should make an **alias** for it, `git graph`, as
+it is used throughout these slides.
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Create the alias, and show the commit graph of the example repository.
+
+---
+
+### Create a new branch
+
+```bash
+$> git branch sub
+```
+
+<simgit-story name='branchingOneLine' start-chapter='third-commit' end-chapter='branch' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Our JavaScript calculator is missing some code. Let's create a branch to
+> implement subtraction.
+
+It's very fast and simple to create a new branch with the `git branch` command.
+There is now a new pointer to the current commit. Note that `HEAD` didn't move:
+we are still on the `main` branch.
+
+Without arguments, `git branch` lists the branches, with a star next to the
+current one:
+
+```bash
+$> git branch
+* main
+  sub
+```
+
+---
+
+### Switch branches
+
+```bash
+$> git switch sub
+Switched to branch 'sub'
+```
+
+<simgit-story name='branchingOneLine' start-chapter='branch' end-chapter='checkout' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Switch to the new branch.
+
+This moves `HEAD` to point to the `sub` branch. No file has changed, because
+`sub` points to the same commit as `main`.
+
+You will also find `git checkout sub` in older documentation. It does the same
+thing: `git switch` is a newer command dedicated to switching branches.
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> You can now implement the subtraction in `subtraction.js`: replace
+> `return '?';` with `return a - b;`.
+
+---
+
+### Check the status
+
+```bash
+$> git status
+On branch sub
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   subtraction.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Check the status of your repository.
+
+Git has noticed that `subtraction.js` was modified, but the change is **not
+staged for commit**: if you committed now, it would not be included. To
+understand why, you need to know the three parts of a Git project.
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> See exactly what you changed with `git diff`.
+
+`git status` says **which** files changed; `git diff` shows **what** changed in
+them, line by line:
+
+```bash
+$> git diff
+diff --git a/subtraction.js b/subtraction.js
+index 88fc891..c5770d6 100644
+--- a/subtraction.js
++++ b/subtraction.js
+@@ -2,7 +2,7 @@
+  * Takes two numbers, a and b, and returns their subtraction.
+  */
+ function subtract(a, b) {
+-  return '?';
++  return a - b;
+ }
+```
 
 ---
 
@@ -262,7 +348,8 @@ A Git project has three main parts:
 
   You should never modify any of the files in this directory yourself; you could
   easily corrupt the Git repository. It is hidden by default, but you can see it
-  on the command line.
+  on the command line. (The exception to this rule are **hooks**, scripts that
+  you can write for Git to run automatically, which we will cover later.)
 
 - The **working directory**: it contains the **files you are currently working
   on**; that is, **one specific version** of your project. These files are
@@ -289,7 +376,7 @@ This is one of the **most important things to remember about Git**:
 - You **modify** files (or add new files) in your _working directory_.
 - You **stage** the files, adding snapshots of them to your _staging area_.
 - You make a **commit**, which takes the files as they are in the _staging area_
-  and stores these snapshots permanently to your _Git directory_.
+  and stores this snapshot of your project permanently to your _Git directory_.
 
 ---
 
@@ -302,26 +389,423 @@ This is one of the **most important things to remember about Git**:
 New snapshots of files **MUST go through the staging area** to be **committed**
 into the Git directory.
 
+---
+
+### Stage the change
+
+```bash
+$> git add subtraction.js
+
+$> git status
+On branch sub
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   subtraction.js
+```
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Stage your change, and check the status again.
+
+`git add` puts a snapshot of the file, as it is now, into the **staging area**.
+The change is now ready **to be committed**.
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Run `git diff` again, then `git diff --cached`.
+
+`git diff` now shows nothing: it only shows the changes you have **not staged**,
+the differences between the working directory and the staging area. The change
+has moved to the staging area, where `git diff --cached` shows it: the
+differences between the staging area and the last commit, which is exactly what
+the next commit will contain. Check it before you commit.
+
+---
+
+### Commit on a branch
+
+```bash
+$> git commit -m "Implement subtraction"
+[sub 7f2a5d0] Implement subtraction
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+<simgit-story name='branchingOneLine' start-chapter='checkout' end-chapter='commit-on-a-branch' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Commit your change.
+
+As you commit, the current branch (the one pointed to by `HEAD`) moves forward
+to the new commit.
+
+The working directory, the staging area and the last commit now all agree, so
+`git status` has nothing to report:
+
+```bash
+$> git status
+On branch sub
+nothing to commit, working tree clean
+```
+
+Make a habit of reading `git status` after every step.
+
+---
+
+### Switch/checkout behavior
+
+```bash
+$> git switch main
+Switched to branch 'main'
+```
+
+<simgit-story name='branchingOneLine' start-chapter='commit-on-a-branch' end-chapter='back-to-main' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+Now check your files.
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Oops, you just noticed that addition is not working correctly. You need to
+> make a bug fix, but you don't want to mix that code with the new subtraction
+> feature. Let's **go back to `main`**.
+
+Two things happened when you ran `git switch main`:
+
+- The `HEAD` pointer was **moved** back to the `main` branch.
+- The files in your working directory were **restored** to the snapshot that
+  `main` points to.
+
+`subtraction.js` contains `return '?';` again: you are working on an **older
+version** of the project. Your work is not lost: it is in the commit that `sub`
+points to.
+
+---
+
+### Create another branch
+
+```bash
+$> git switch -c fix-add
+Switched to a new branch 'fix-add'
+```
+
+<simgit-story name='branchingOneLine' start-chapter='back-to-main' end-chapter='another-branch' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Let's create a new branch to fix the bug.
+
+You can create a new branch _and_ switch to it in one command with the `-c`
+(**c**reate) option of the `switch` command (or the `-b` option of the older
+`checkout` command).
+
+Nothing changed yet because `fix-add` still points to the same commit as `main`.
+
+---
+
+### Work on a separate branch
+
+```bash
+$> git add addition.js
+$> git commit -m "Fix addition"
+[fix-add a4160d7] Fix addition
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+<simgit-story name='branching' start-chapter='another-branch' end-chapter='divergent-history' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Fix `addition.js` (replace `a * b` with `a + b`), then stage and commit
+> your changes.
+
+As on `sub`, the commit moves the current branch, `fix-add`, forward. `sub` and
+its commit are left where they were.
+
+---
+
+### Divergent history
+
+```bash
+$> git switch sub
+$> git switch fix-add
+```
+
+<simgit-story name='branching' start-chapter='divergent-history' end-chapter='switch-to-fix-add' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Switch back and forth between `sub` and `fix-add` a few times, and
+> watch `subtraction.js` and `addition.js` change in your editor.
+
+Your project history has now **diverged**: `sub` and `fix-add` both start from
+the same commit, and each adds a different change to it. The two changes are
+**isolated** from each other: `sub` has the subtraction but not the fix, and
+`fix-add` has the fix but not the subtraction.
+
+Every time you switch branches, Git **rewrites the files in your working
+directory** to match the snapshot of the commit that the branch points to. This
+works for any branch, and therefore any version of your project, at any time:
+nothing is lost by switching, since every version is safely stored in a commit.
+
+Switch from a **clean** working directory, when `git status` says there is
+nothing to commit. If you have uncommitted changes that switching would
+overwrite, Git refuses to switch rather than lose them:
+
+```bash
+$> git switch sub
+error: Your local changes to the following files would be overwritten by checkout:
+        subtraction.js
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+
+Commit your changes first, or discard them with `git restore`. And if your
+uncommitted changes are to a file that is the same in both branches, Git
+switches without complaint, and the changes simply follow you to the other
+branch (which is rarely what you meant).
+
+`git diff` can also compare two versions without switching: `git diff sub
+fix-add` shows everything that differs between the two branches, here the
+subtraction on one side and the addition fix on the other.
+
+---
+
+### Go back to the main line
+
+We want to bring back those changes to the main line.
+
+```bash
+$> git switch main
+```
+
+<simgit-story name='branching' start-chapter='switch-to-fix-add' end-chapter='fast-forward-merge-checkout' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+Now that you've tested your fix and made sure it works, you want to **bring
+those changes** back **into the `main` branch**.
+
+Git's `merge` command can do that for you, but it can only **bring changes**
+from another branch **into the current branch**, not the other way around. So
+you must first switch to the `main` branch.
+
+---
+
+### Merge a branch
+
+**Merge** the changes from the `fix-add` branch:
+
+```bash
+$> git merge fix-add
+Updating 907e519..a4160d7
+Fast-forward
+ addition.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+Notice the term **fast-forward**.
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Merge `fix-add` into `main`.
+
+---
+
+### Fast-forward
+
+<simgit-story name='branching' start-chapter='fast-forward-merge-checkout' end-chapter='fast-forward-merge' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+The `fix-add` branch pointed to a commit **directly ahead** of the commit `main`
+pointed to. There is no divergent history, so Git simply has to **move the
+pointer forward**. This is what is called a **fast-forward**.
+
+---
+
+### Delete a branch
+
+```bash
+$> git branch -d fix-add
+Deleted branch fix-add (was a4160d7).
+```
+
+<simgit-story name='branching' start-chapter='fast-forward-merge' end-chapter='delete-branch' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Now that the fix is in `main`, the `fix-add` branch is no longer needed.
+> Delete it.
+
+Use the `-d` (**d**elete) option of the `branch` command. This only deletes the
+pointer: the commit stays in the history of `main`.
+
+---
+
+### Merging a divergent history
+
+<simgit-story name='branching' start-chapter='delete-branch' end-chapter='delete-branch' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true' controls='false'></simgit-story>
+
+Can we do a fast forward here?
+
+**Notes:**
+
+Now we want to **merge** the subtraction feature into `main` as well. But `main`
+has moved on since `sub` was created, so Git cannot do a fast-forward:
+
+- `sub` points to commit `7f2a5d0`, which contains our feature.
+- `main` points to commit `a4160d7`, which contains the addition fix.
+- Commit `907e519` is their common ancestor.
+
+If you moved `main` to `sub`'s current commit, you would **lose the addition
+fix**, and commit `a4160d7` would become **unreachable**: no branch would lead
+to it any more. Git will not let you do that (at least not without insistence).
+
+Instead, it will do a **three-way merge**, combining the changes of `main` and
+`sub` (compared to their common ancestor). A **new commit** will be created
+representing that state.
+
+---
+
+### Merge the divergent branch
+
+```bash
+$> git merge sub
+Merge made by the 'ort' strategy.
+ subtraction.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Merge `sub` into `main`.
+
+---
+
+### Merge commit message
+
+Git will ask you to confirm the commit message:
+
+```txt
+Merge branch 'sub'
+
+# Please enter a commit message to explain why this merge is
+# necessary, especially if it merges an updated upstream into
+# a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty
+# message aborts the commit.
+```
+
+If you are in Vim, press `Esc`, then type `:q!` and press `Enter`. If you are in
+nano, use `Ctrl-X`, then `Y` and `Enter` to confirm.
+
+**Notes:**
+
+Git needs to create a new commit for this merge, so it **opens your configured
+editor** with a generated commit message, and waits for you to exit the editor
+before it makes the commit. The output of the `git merge` command only appears
+once you have exited the editor.
+
+The editor Git opens is the one named by the `EDITOR` environment variable, or
+Vim if it is not set. If you find yourself in Vim, press `Esc` first: if you
+typed anything, it takes you back to Vim's normal mode, where it expects
+commands. Then `:q!` quits without saving what you may have typed, and Git
+uses the generated message as it is. To have Git open nano instead, see [setting
+nano as the default editor](/2026/course/101-command-line/#setting-nano-as-the-default-editor).
+
+---
+
+### Merge commit
+
+<simgit-story name='branching' start-chapter='delete-branch' end-chapter='merge' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+This commit has more than one parent.
+
+**Notes:**
+
+The **merge commit** that Git has just created is a commit like any other: a
+snapshot of the whole project, with an author, a date and a message. To build
+its snapshot, Git performed a **three-way merge**, comparing three commits:
+
+- `907e519`, the **common ancestor** of the two branches;
+- `a4160d7`, the commit `main` pointed to, which changed `addition.js`;
+- `7f2a5d0`, the commit `sub` pointed to, which changed `subtraction.js`.
+
+Each branch changed something the other did not touch, so Git could apply both
+sets of changes to the common ancestor without having to choose between them.
+The result has both the addition fix and the subtraction.
+
+What makes this commit special is that it has **two parents**: `a4160d7`, the
+commit you were on, and `7f2a5d0`, the commit of the branch you merged in. That
+is how the history records that two lines of development were joined. As with
+any commit, the current branch, `main`, moved forward to it, while `sub` stayed
+where it was.
+
+The history of `main` now includes the commits of both branches, which
+`git graph` shows:
+
+```bash
+$> git graph
+*   e0711c3 (HEAD -> main) Merge branch 'sub'
+|\
+| * 7f2a5d0 (sub) Implement subtraction
+* | a4160d7 Fix addition
+|/
+* 907e519 Add readme
+* 24bb77c Add license
+* 073570e Initial commit
+```
+
+Had both branches changed the same lines of the same file, Git could not have
+chosen between the two versions on its own. That is a **merge conflict**, which
+you will see later.
+
+---
+
+### Delete `sub`
+
+```bash
+$> git branch -d sub
+```
+
+<simgit-story name='branching' start-chapter='merge' end-chapter='delete-sub' sizing='auto-height' theme='light' commit-representation='below' duration='1200' start-delay='1500' defer-until-visible='true' replay-on-revisit='true'></simgit-story>
+
+**Notes:**
+
+> <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /> Now that the subtraction is in `main`, delete the `sub` branch.
+
+Git lets you delete it with `-d` because it is **fully merged**: its commit is
+part of the history of `main`, so deleting the pointer loses nothing. Git
+refuses to delete a branch whose commits are not in the history of the current
+branch, since they would become hard to find again:
+
+```bash
+$> git branch -d sub
+error: the branch 'sub' is not fully merged
+hint: If you are sure you want to delete it, run 'git branch -D sub'
+hint: Disable this message with "git config set advice.forceDeleteBranch false"
+```
+
+The history is now back to a single branch, `main`, which contains all the work
+done on `sub` and `fix-add`. Branch, commit, merge, delete: this is the cycle
+you will repeat for every feature and every fix.
+
+[advanced-merging]: https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging
+[branching]: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+[cc-by-nc-sa-3]: https://creativecommons.org/licenses/by-nc-sa/3.0/
 [cryptographic-hash-function]: https://en.wikipedia.org/wiki/Cryptographic_hash_function
-[cvs]: https://en.wikipedia.org/wiki/Concurrent_Versions_System
-[distributed-workflows]: https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows
-[dsstore]: https://en.wikipedia.org/wiki/.DS_Store
 [git]: https://git-scm.com
-[git-log]: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
-[git-log-pretty-formats]: https://git-scm.com/docs/git-log#_pretty_formats
+[git-log]: https://git-scm.com/docs/git-log
 [hash]: https://en.wikipedia.org/wiki/Hash_function
-[install-git]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-[mercurial]: https://www.mercurial-scm.org/
-[rcs]: https://en.wikipedia.org/wiki/Revision_Control_System
+[pro-git]: https://git-scm.com/book/en/v2
 [sha1]: https://en.wikipedia.org/wiki/SHA-1
-[svn]: https://subversion.apache.org/
+[understanding-branches]: https://blog.thoughtram.io/git/rebase-book/2015/02/10/understanding-branches-in-git.html
 [vcs]: https://en.wikipedia.org/wiki/Version_control
 </textarea>
         </section>
       </div>
     </div>
 
-    <script src="/2026/assets/course/slides-e96ff36856ddc4bfa46fe5e484b380f5.js">
+    <script src="/2026/assets/course/slides-48f42051060fdffda858fe0140712e09.js">
     </script>
 
     <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
@@ -329,7 +813,7 @@ into the Git directory.
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/891e39ba0c006f5d1a5ae3993f576e6d1f7d7e31/course/chapters/201-git/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/72b8c66a607db036651ad577f2db0cdf83970e8f/course/chapters/201-git/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -356,12 +840,12 @@ into the Git directory.
           </li>
           
           <li class="text-xs">
-            Rev: 891e39ba0c006f5d1a5ae3993f576e6d1f7d7e31
+            Rev: 72b8c66a607db036651ad577f2db0cdf83970e8f
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@891e39b
+        ArchiDep 26-27 main@72b8c66
       </a>
     </div>
   </body>
