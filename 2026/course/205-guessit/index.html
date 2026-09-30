@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-c90ca709c6da20f25911a9024dce765d.js" defer>
+    <script src="/2026/assets/course/course-032aaffd307c2c355ea03aeee7da01ee.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/205-guessit/exercise.md">Rev: 64a7a78ad100fe09a66b78838e5040814fcac641</a>
+      <a href="https://github.com/ArchiDep/website/blob/5d4e2acf99c1168cead68df5929e387c7987198f/course/chapters/205-guessit/exercise.md">Rev: 5d4e2acf99c1168cead68df5929e387c7987198f</a>
     </li>
   </ul>
 </div>
@@ -180,6 +180,9 @@ and each implement one of its missing database queries.</p></div>
     <a href="#password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code></a>
     
   </li><li class="toc-entry toc-h3">
+    <a href="#role-guessit-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>role &quot;guessit&quot; already exists</code></a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code></a>
     
   </li><li class="toc-entry toc-h3">
@@ -240,7 +243,7 @@ and each implement one of its missing database queries.</p></div>
 <li><a href="https://git-scm.com" target="_blank" rel="noopener noreferrer">Git</a></li>
 <li>Your group’s fork of Guess It on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="#get-your-groups-repository">cloned on your
 computer</a></li>
-<li><a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> 26</li>
+<li><a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> 22, 24 or 26</li>
 <li>A <a href="https://www.postgresql.org" target="_blank" rel="noopener noreferrer">PostgreSQL</a> server, version 14 or newer</li>
 <li>A Unix CLI</li>
 </ul>
@@ -275,7 +278,7 @@ back here:</p>
 </ol>
 <p>The rest of Hello GitHub is not needed for this exercise.</p>
 <h2 id="install-nodejs"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Node.js<a href="#install-nodejs" aria-label="Link to heading 'Install Node.js'" data-heading-content="Install Node.js" class="anchor"></a></h2>
-<p>Check whether you have Node.js 26:</p>
+<p>Check whether you have Node.js 22 or newer:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">v26.x.y</span>
 </div></code></pre>
@@ -492,6 +495,13 @@ encoded. It is simpler if everyone in the group uses the same one.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>With <code>&lt;</code>, your shell reads the file and passes its content to <code>psql</code>. With
 <code>sudo -u postgres</code>, <code>psql</code> runs as another user, which is not allowed to read
 your files, so it could not open the file itself.</p></div></div>
+<p>The superuser you connected as can do anything on your PostgreSQL server: create
+and delete users, and read, change or delete every database on it, including
+those of your other projects. The application needs none of that. So
+<code>schema.sql</code> creates a user of its own, <code>guessit</code>, which owns the <code>guessit</code>
+database and nothing else, and the application connects as that user. If the
+application misbehaves, because of a bug or because someone has taken control of
+it, it can only reach its own database.</p>
 <h2 id="configure-and-start-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure and start the application<a href="#configure-and-start-the-application" aria-label="Link to heading 'Configure and start the application'" data-heading-content="Configure and start the application" class="anchor"></a></h2>
 <p>Open your <code>guessit-ex</code> directory in your editor. At the top of <code>server.js</code>, put
 the password you chose into <code>DATABASE_URL</code>, in place of <code>change-me-now</code>:</p>
@@ -558,11 +568,37 @@ application:</p>
 computer, with their own name and email address.</li>
 </ul></div></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You have installed what a Node.js application needs to run on your computer: the
-Node.js runtime, the application’s dependencies, and a PostgreSQL server with a
-database of its own.</p>
-<p>You have configured the application to connect to that database, and made it
-work, each member of the group with commits of your own, shared through GitHub.</p>
+<p>You made an application work on your computer. Its code was only one of the
+pieces it needed: a program to run it, the libraries it depends on, and a
+database server, all installed and configured before the first page could load.</p>
+<p>Along the way, you:</p>
+<ul>
+<li>Installed Node.js, and found, started or installed a PostgreSQL server.</li>
+<li>Created a database, and a user for the application.</li>
+<li>Configured the application to connect to it, and ran it.</li>
+<li>Implemented a query, and shared it with your group through GitHub.</li>
+</ul>
+<p>An application needs more than its code. Node.js is the <strong>runtime</strong> that runs
+<code>server.js</code>. The <strong>dependencies</strong> are listed in the repository, but not stored
+in it: they are downloaded into a directory that Git ignores. PostgreSQL is
+another program altogether, with a life of its own.</p>
+<p>PostgreSQL is a <strong>server</strong>: a process that listens on a <strong>port</strong>, 5432, and
+waits for connections. The application is its <strong>client</strong>, and connects to it
+over the network, even when both are on the same computer.</p>
+<p>The application is a server too, listening on port 3000 for your browser. The
+<a href="#architecture">architecture diagram</a> below shows the chain: the browser is a
+client of the application, which is a client of the database.</p>
+<p>The <strong>connection URL</strong> gathers everything a client needs to reach a database in
+one address: which user connects, with which password, on which host and port,
+and to which database.</p>
+<p>You used the PostgreSQL <strong>superuser</strong> once, to create the application’s own
+user, and never again. That user owns its database and nothing else, so if the
+application misbehaves, the damage stops there. Give each application the access
+it needs, and no more.</p>
+<p>Each member of the group changed <code>server.js</code> at their own pace, and the queries
+merged on their own: each one is on lines of its own. Whenever a push was
+refused, you pulled first. Each commit carries the name its author configured,
+which is how your group’s history shows who implemented what.</p>
 <h2 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h2>
 <p>This is a simplified architecture of the main running processes and
 communication flow at the end of this exercise.</p>
@@ -607,6 +643,23 @@ GitHub</a>.</p>
 <p>The password in the <code>DATABASE_URL</code> at the top of <code>server.js</code> is not the one you
 set in <code>schema.sql</code> when you created the database. Put the same password in
 both.</p>
+<p>If they are already the same, you may have run <code>schema.sql</code> more than once: see
+<a href="#role-guessit-already-exists"><code>role &quot;guessit&quot; already exists</code></a>.</p>
+<h3 id="role-guessit-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>role &quot;guessit&quot; already exists</code><a href="#role-guessit-already-exists" aria-label="Link to heading 'role &quot;guessit&quot; already exists'" data-heading-content="role &quot;guessit&quot; already exists" class="anchor"></a></h3>
+<p><code>psql</code> prints this error, with <code>database &quot;guessit&quot; already exists</code> and <code>relation &quot;game&quot; already exists</code>, when you run <code>schema.sql</code> a second time. The first run
+created the user, the database and the table. The second run changed nothing:
+the user still has the password of the first run, even if you have changed it in
+<code>schema.sql</code> since.</p>
+<p>Give the user the password of your <code>DATABASE_URL</code> with your <a href="#connect-as-a-superuser">superuser
+command</a>, for example:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># installed with apt</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5"><span class="l-comment"># Postgres.app, or Homebrew</span>
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">postgres</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
+</div></code></pre>
 <h3 id="connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code><a href="#connect-econnrefused" aria-label="Link to heading 'connect ECONNREFUSED'" data-heading-content="connect ECONNREFUSED" class="anchor"></a></h3>
 <p>The home page says that the leaderboard could not be loaded, and the terminal
 where the application runs shows <code>ECONNREFUSED</code> in the error below
@@ -696,6 +749,9 @@ again.</p>
     <a href="#password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code></a>
     
   </li><li class="toc-entry toc-h3">
+    <a href="#role-guessit-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>role &quot;guessit&quot; already exists</code></a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code></a>
     
   </li><li class="toc-entry toc-h3">
@@ -722,7 +778,7 @@ again.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/5d4e2acf99c1168cead68df5929e387c7987198f/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1400,7 +1456,7 @@ again.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@64a7a78</span>
+        <span class="tooltip-content">main@5d4e2ac</span>
         <span class="font-title">0.1.0</span>
       </span>
       

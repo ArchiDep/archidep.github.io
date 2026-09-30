@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-c90ca709c6da20f25911a9024dce765d.js" defer>
+    <script src="/2026/assets/course/course-032aaffd307c2c355ea03aeee7da01ee.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/202-hello-git/exercise.md">Rev: 64a7a78ad100fe09a66b78838e5040814fcac641</a>
+      <a href="https://github.com/ArchiDep/website/blob/5d4e2acf99c1168cead68df5929e387c7987198f/course/chapters/202-hello-git/exercise.md">Rev: 5d4e2acf99c1168cead68df5929e387c7987198f</a>
     </li>
   </ul>
 </div>
@@ -367,27 +367,17 @@ repository:</p>
 install the <a href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph" target="_blank" rel="noopener noreferrer">Git Graph</a> extension in Visual Studio Code. Open a
 repository’s directory in Visual Studio Code, then click <strong>Git Graph</strong> in the
 status bar at the bottom of the window.</p>
-<div class="note note-warning"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-  />
-</svg><span>Warning</span></div><div class="content"><p><strong>On Windows</strong>, your repositories are in the WSL, and Git Graph only sees them
-if Visual Studio Code is opened in the WSL too. Open it from your WSL terminal,
-in the repository’s directory:</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><strong>On Windows</strong>, your repositories are in the WSL. The simplest way to open one
+is from your WSL terminal, in the repository’s directory:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">code</span> <span class="l-function-builtin">.</span>
 </div></code></pre>
-<p>The first time, this installs what Visual Studio Code needs to work in the WSL.
-Then install the Git Graph extension again <strong>in the WSL</strong>, where Visual Studio
-Code offers to.</p></div></div>
+<p>The first time, this installs what Visual Studio Code needs to work in the WSL.</p>
+<p>You can also open the repository from Windows, with <strong>File &gt; Open Folder</strong>. The
+WSL (Linux) may not appear in the sidebar of the folder selection window: type
+<code>\\wsl.localhost\</code> in its address bar, then open your Linux distribution’s
+directory (e.g. <code>Ubuntu</code>), then <code>home</code>, your Linux username, and the repository.
+Visual Studio Code warns you that the repository is on a different host. Accept
+the warning, and Git Graph works.</p></div></div>
 <h2 id="create-a-repository"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a repository<a href="#create-a-repository" aria-label="Link to heading 'Create a repository'" data-heading-content="Create a repository" class="anchor"></a></h2>
 <p>Create a directory for a new project, and move into it:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
@@ -1140,6 +1130,9 @@ deleted one, and describes them as one rename:</p>
 <p>Git does not record renames: a commit is a snapshot, which only says which files
 exist and what they contain. Git works the rename out when it compares two
 snapshots, from the content of the files.</p></div></div>
+<p>Commit the rename, along with <code>new.txt</code>, which <code>git add .</code> staged too:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Rename a file&quot;</span>
+</div></code></pre>
 <h3 id="the-global-ignore-file"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> The global ignore file<a href="#the-global-ignore-file" aria-label="Link to heading 'The global ignore file'" data-heading-content="The global ignore file" class="anchor"></a></h3>
 <p>Some files are created by your operating system or your editor in every
 directory, such as <code>.DS_Store</code> on macOS. Rather than ignoring them in every
@@ -1376,7 +1369,7 @@ follow the steps in <a href="#two-merges">two merges</a> in order.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/64a7a78ad100fe09a66b78838e5040814fcac641/course/chapters/202-hello-git/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/5d4e2acf99c1168cead68df5929e387c7987198f/course/chapters/202-hello-git/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -2054,7 +2047,7 @@ follow the steps in <a href="#two-merges">two merges</a> in order.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@64a7a78</span>
+        <span class="tooltip-content">main@5d4e2ac</span>
         <span class="font-title">0.1.0</span>
       </span>
       
