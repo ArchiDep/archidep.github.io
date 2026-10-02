@@ -163,3 +163,4 @@ Its entries, with their anchors on that page:
 - `ERROR: Permission to alice/guessit-ex.git denied to bob` (#error-permission-to-aliceguessit-exgit-denied-to-bob)
 - `ERROR: Permission to ArchiDep/guessit-ex.git denied` (#error-permission-to-archidepguessit-exgit-denied)
 - `fatal: Need to specify how to reconcile divergent branches.` (#fatal-need-to-specify-how-to-reconcile-divergent-branches)
+- `libatomic.so.1: cannot open shared object file` (#libatomicso1-cannot-open-shared-object-file)
