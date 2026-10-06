@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-3d2034ecfda35e0b22480652c56249c0.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-a7e7d428ea89aad9cc7ce2bbb630dddb.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-1425a7053f92fae06adf58753ea2ab4c.js" defer>
+    <script src="/2026/assets/course/course-37ba10ab1f29500eb622bc4ebe604281.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/f90e7d6a183e13d4697f7dbcf83fa287821f23ee/course/cheatsheets/sysadmin/cheatsheet.md">Rev: f90e7d6a183e13d4697f7dbcf83fa287821f23ee</a>
+      <a href="https://github.com/ArchiDep/website/blob/db6ac04424b295184ccf260e30c7702eabd6cf66/course/cheatsheets/sysadmin/cheatsheet.md">Rev: db6ac04424b295184ccf260e30c7702eabd6cf66</a>
     </li>
   </ul>
 </div>
@@ -161,15 +161,20 @@ your work with servers and system administration tasks easier.</p></div>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#administration">Administration</a>
+    <a href="#ssh">SSH</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
+    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
     
-  </li><li class="toc-entry toc-h3">
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#process-management">Process management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
     <a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)</a>
     
   </li><li class="toc-entry toc-h3">
@@ -178,11 +183,32 @@ your work with servers and system administration tasks easier.</p></div>
   </li><li class="toc-entry toc-h3">
     <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#user-management">User management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
+    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-login-user">Checking the created login user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-create-a-system-user-useradd---system">How do I create a system user? (<code>useradd --system</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-system-user">Checking the created system user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-manage-users-and-groups-usermod-userdel-groupadd">How do I manage users and groups? (<code>usermod</code>, <code>userdel</code>, <code>groupadd</code>)</a>
     
   </li>
 </ul>
@@ -350,18 +376,27 @@ your work with servers and system administration tasks easier.</p></div>
 </div><div class="l-line" data-line="23"><span class="l-function-call">│</span> <span class="l-variable-parameter">/sys/firmware/efi/efivars</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">128.0K</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">34.4K</span> <span class="l-variable-parameter">│</span>  <span class="l-variable-parameter">88.6K</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">#####...............</span><span class="l-variable-parameter">]</span>  <span class="l-variable-parameter">26.9%</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">efivarfs</span> <span class="l-variable-parameter">│</span> <span class="l-variable-parameter">efivarfs</span>   <span class="l-variable-parameter">│</span>
 </div><div class="l-line" data-line="24"><span class="l-function-call">╰───────────────────────────┴────────┴───────┴────────┴───────────────────────────────┴──────────┴────────────╯</span>
 </div></code></pre>
-<h2 id="administration">Administration<a href="#administration" aria-label="Link to heading 'Administration'" data-heading-content="Administration" class="anchor"></a></h2>
-<p>You must be an administrator (have <code>sudo</code> access) to perform the following operations.</p>
-<h3 id="how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)<a href="#how-do-i-change-my-username-usermod" aria-label="Link to heading 'How do I change my username? (usermod)'" data-heading-content="How do I change my username? (usermod)" class="anchor"></a></h3>
-<p>The following command renames the <code>oldname</code> user account into <code>newname</code> and also renames the user’s home directory at the same time:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">usermod</span> <span class="l-variable-parameter">--login</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">--home</span> <span class="l-variable-parameter">/home/newname</span> <span class="l-variable-parameter">--move-home</span> <span class="l-variable-parameter">oldname</span>
+<h2 id="ssh">SSH<a href="#ssh" aria-label="Link to heading 'SSH'" data-heading-content="SSH" class="anchor"></a></h2>
+<p>Useful commands for working with SSH on a server.</p>
+<h3 id="list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys<a href="#list-a-servers-ssh-host-public-keys" aria-label="Link to heading 'List a server’s SSH host public keys'" data-heading-content="List a server’s SSH host public keys" class="anchor"></a></h3>
+<p>If you need a server’s SSH host public keys (e.g. to register the server with a
+service that will connect to it), run the following command on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">cat</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_*_key.pub</span>
 </div></code></pre>
-<p>You also have to rename the associated group:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">groupmod</span> <span class="l-variable-parameter">--new-name</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">oldname</span>
+<h3 id="list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints<a href="#list-a-servers-ssh-host-key-fingerprints" aria-label="Link to heading 'List a server’s SSH host key fingerprints'" data-heading-content="List a server’s SSH host key fingerprints" class="anchor"></a></h3>
+<p>If you need to see the fingerprints of a server’s SSH public keys (e.g. to check
+the key in an SSH client’s initial connection warning), run the following
+command on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">find</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.pub&quot;</span> <span class="l-variable-parameter">-exec</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">{</span><span class="l-variable-parameter">}</span> <span class="l-variable-parameter">\;</span>
 </div></code></pre>
-<h3 id="how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)<a href="#how-do-i-create-another-user-useradd" aria-label="Link to heading 'How do I create another user? (useradd)'" data-heading-content="How do I create another user? (useradd)" class="anchor"></a></h3>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">useradd</span> <span class="l-function-call">--create-home</span> <span class="l-variable-parameter">--shell</span> <span class="l-variable-parameter">/bin/bash</span> <span class="l-variable-parameter">jane_doe</span>
-</div></code></pre>
+<p>Each line of the output has the fingerprint of one key as its <code>SHA256:...</code> part.
+When the warning appears, you can either compare the fingerprint it shows with
+these ones by eye, or paste the matching <code>SHA256:...</code> value instead of answering
+<code>yes</code>, which has your SSH client make the comparison and refuse to connect if
+they differ.</p>
+<h2 id="process-management">Process management<a href="#process-management" aria-label="Link to heading 'Process management'" data-heading-content="Process management" class="anchor"></a></h2>
+<p>Useful commands to find and manage processes on your server, including those
+managed by systemd.</p>
 <h3 id="how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)<a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill" aria-label="Link to heading 'How do I find and kill a naughty process? (ps, kill)'" data-heading-content="How do I find and kill a naughty process? (ps, kill)" class="anchor"></a></h3>
 <p>You might need this if you lost your SSH connection after you launched a process which listens on a port, e.g. 3000. If the process still runs, the port is no longer available. This could happen, for example, in the <a href="/2026/course/410-sftp-deployment/">“Deploy a PHP application with SFTP” exercise</a>.</p>
 <p>Find the process with <code>ps</code> and <code>grep</code>:</p>
@@ -397,24 +432,192 @@ at the system logs for that service:</p>
 <p>Not all services log there, however. If <code>journalctl</code> displays no log entries, you should look in the standard Linux log directory <code>/var/log</code> for a file or a directory named after your service. For example, nginx stores its error logs in
 <code>/var/log/nginx/error.log</code> by default.</p>
 <p>If your service cannot start, you should be able to find an error from one of these sources.</p>
-<h3 id="list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys<a href="#list-a-servers-ssh-host-public-keys" aria-label="Link to heading 'List a server’s SSH host public keys'" data-heading-content="List a server’s SSH host public keys" class="anchor"></a></h3>
-<p>If you need a server’s SSH host public keys (e.g. to register the server with a
-service that will connect to it), run the following command on the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">cat</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_*_key.pub</span>
+<h2 id="user-management">User management<a href="#user-management" aria-label="Link to heading 'User management'" data-heading-content="User management" class="anchor"></a></h2>
+<p>You must be an administrator (have <code>sudo</code> access) to perform the following operations.</p>
+<h3 id="how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)<a href="#how-do-i-change-my-username-usermod" aria-label="Link to heading 'How do I change my username? (usermod)'" data-heading-content="How do I change my username? (usermod)" class="anchor"></a></h3>
+<p>The following command renames the <code>oldname</code> user account into <code>newname</code> and also renames the user’s home directory at the same time:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">usermod</span> <span class="l-variable-parameter">--login</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">--home</span> <span class="l-variable-parameter">/home/newname</span> <span class="l-variable-parameter">--move-home</span> <span class="l-variable-parameter">oldname</span>
 </div></code></pre>
-<h3 id="list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints<a href="#list-a-servers-ssh-host-key-fingerprints" aria-label="Link to heading 'List a server’s SSH host key fingerprints'" data-heading-content="List a server’s SSH host key fingerprints" class="anchor"></a></h3>
-<p>If you need to see the fingerprints of a server’s SSH public keys (e.g. to check
-the key in an SSH client’s initial connection warning), run the following
-command on the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">find</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.pub&quot;</span> <span class="l-variable-parameter">-exec</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">{</span><span class="l-variable-parameter">}</span> <span class="l-variable-parameter">\;</span>
+<p>You also have to rename the associated group:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">groupmod</span> <span class="l-variable-parameter">--new-name</span> <span class="l-variable-parameter">newname</span> <span class="l-variable-parameter">oldname</span>
 </div></code></pre>
-<p>Each line of the output has the fingerprint of one key as its <code>SHA256:...</code> part.
-When the warning appears, you can either compare the fingerprint it shows with
-these ones by eye, or paste the matching <code>SHA256:...</code> value instead of answering
-<code>yes</code>, which has your SSH client make the comparison and refuse to connect if
-they differ.</p>
+<h3 id="how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)<a href="#how-do-i-create-another-user-useradd" aria-label="Link to heading 'How do I create another user? (useradd)'" data-heading-content="How do I create another user? (useradd)" class="anchor"></a></h3>
+<p>To create a <strong>login user</strong> (e.g. a user that can be used by an actual person to
+log in to the machine), you will need to use the <code>useradd</code> and <code>passwd</code>
+commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">useradd</span> <span class="l-variable-parameter">-m</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/bin/bash</span> <span class="l-variable-parameter">jde</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">passwd</span> <span class="l-variable-parameter">jde</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">UNIX</span> <span class="l-variable-parameter">password:</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Retype</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">UNIX</span> <span class="l-variable-parameter">password:</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">passwd:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">updated</span> <span class="l-variable-parameter">successfully</span>
+</div></code></pre>
+<p>The <code>-m</code> option to the <code>useradd</code> command instructs it to also create a ho<strong>m</strong>e
+directory for the user, which by default will be <code>/home/jde</code> in this case.</p>
+<p>The <code>-s</code> option specifies the user’s login <strong>s</strong>hell. Since it defaults to a
+simple <a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener noreferrer">Bourne shell</a> (<code>/bin/sh</code>) on most systems, in this example we use
+the more advanced <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash shell</a> (<code>/bin/bash</code>) for the user’s convenience.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>It is possible to give an encrypted <strong>p</strong>assword directly to the <code>useradd</code>
+command with the <code>-p</code> option instead of using <code>passwd</code>, but it’s bad practice
+because running commands can be seen by other users with <code>ps</code>.</p></div></div>
+<h4 id="checking-the-created-login-user">Checking the created login user<a href="#checking-the-created-login-user" aria-label="Link to heading 'Checking the created login user'" data-heading-content="Checking the created login user" class="anchor"></a></h4>
+<p>You can see the newly created user (and corresponding group)
+by looking at the last line of the relevant user database files:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/passwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">jde:x:1004:1004::/home/jde:/bin/bash</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/group</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">jde:x:1004:</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="cheatsheets-sysadmin:tail-and-uid-range"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-cheatsheets-sysadmin:tail-and-uid-range" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>tail</code> command displays the last 10 lines of a file. With the <code>-n</code> option
+(<strong>n</strong>umber) set to 1, it only displays the last line.</p>
+<p>Note that on a typical Linux system, regular users will have UIDs starting at
+1000 and incremented every time a new user is created. This is defined by the
+<code>UID_MIN</code> and <code>UID_MAX</code> options in the <code>/etc/login.defs</code> file.</p></div><label for="callout-cheatsheets-sysadmin:tail-and-uid-range" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-cheatsheets-sysadmin:tail-and-uid-range" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f38a-9d23479dd0484c082194cf5a316adf08.svg" alt="🎊" width="20" height="20" /></span> Awesome!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="how-do-i-create-a-system-user-useradd---system">How do I create a system user? (<code>useradd --system</code>)<a href="#how-do-i-create-a-system-user-useradd---system" aria-label="Link to heading 'How do I create a system user? (useradd --system)'" data-heading-content="How do I create a system user? (useradd --system)" class="anchor"></a></h3>
+<p>To create a <strong>system user</strong> (e.g. a technical user that will need to run an
+application or service, but does not need to log in), the <code>useradd</code> command is
+sufficient:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">useradd</span> <span class="l-variable-parameter">--system</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/usr/sbin/nologin</span> <span class="l-variable-parameter">myapp</span>
+</div></code></pre>
+<p>The user is created a bit differently with the <code>--system</code> option. Notably, the
+UID is chosen in a different range, to help quickly differentiate system users
+from login users.</p>
+<p>In this example, we use <code>/usr/sbin/nologin</code> as the user’s login shell, which is
+a special shell that prevents the user from logging in. This is a common
+practice for system users that do not need to log in interactively.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can also add the <code>-m</code> (ho<strong>m</strong>e) option if necessary. Some applications or
+services might expect the user to have a home directory.</p></div></div>
+<h4 id="checking-the-created-system-user">Checking the created system user<a href="#checking-the-created-system-user" aria-label="Link to heading 'Checking the created system user'" data-heading-content="Checking the created system user" class="anchor"></a></h4>
+<p>Check the user database files again:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/passwd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">myapp:x:999:999::/home/myapp:/usr/sbin/nologin</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">/etc/group</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">myapp:x:999:</span>
+</div></code></pre>
+<div class="callout callout-more group/callout" data-callout="cheatsheets-sysadmin:system-user-home-and-uid-range"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-cheatsheets-sysadmin:system-user-home-and-uid-range" type="checkbox" class="peer hidden" /><div class="content"><p>Note that a home directory is configured even if it wasn’t created. This is not
+an issue.</p>
+<p>System users use a different UID range by default, specified by the
+<code>SYS_UID_MIN</code> and <code>SYS_UID_MAX</code> options in the <code>/etc/login.defs</code> file. On
+Ubuntu, for example, it will start at 999 and be decremented by 1 for each new
+user.</p></div><label for="callout-cheatsheets-sysadmin:system-user-home-and-uid-range" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-cheatsheets-sysadmin:system-user-home-and-uid-range" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4ab-1b3817ca3b1dc991baefdb3079ed0624.svg" alt="💫" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<p>You can try to use <code>su</code> to try to switch to that user.
+It won’t work:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">su</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">myapp</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">No</span> <span class="l-variable-parameter">directory,</span> <span class="l-variable-parameter">logging</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">HOME=/</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">This</span> <span class="l-variable-parameter">account</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">currently</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">available.</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you really need to log in as that user for administative purposes, the <code>su</code>
+command allows you to change the shell. For this example, the command would be
+<code>sudo su -l -s /bin/bash myapp</code>.</p></div></div>
+<h3 id="how-do-i-manage-users-and-groups-usermod-userdel-groupadd">How do I manage users and groups? (<code>usermod</code>, <code>userdel</code>, <code>groupadd</code>)<a href="#how-do-i-manage-users-and-groups-usermod-userdel-groupadd" aria-label="Link to heading 'How do I manage users and groups? (usermod, userdel, groupadd)'" data-heading-content="How do I manage users and groups? (usermod, userdel, groupadd)" class="anchor"></a></h3>
+<p>The following commands can be used to create, modify and delete users:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>useradd</code></td>
+<td align="left">Create a user account (and by default, a corresponding group)</td>
+</tr>
+<tr>
+<td align="left"><code>usermod</code></td>
+<td align="left">Modify an existing user account</td>
+</tr>
+<tr>
+<td align="left"><code>passwd</code></td>
+<td align="left">Change (or set) a user’s password</td>
+</tr>
+<tr>
+<td align="left"><code>userdel</code></td>
+<td align="left">Delete a user account</td>
+</tr>
+<tr>
+<td align="left"><code>deluser</code></td>
+<td align="left">Friendlier frontend to the <code>userdel</code> command. Delete a user account or remove a user from a group</td>
+</tr>
+<tr>
+<td align="left"><code>groupadd</code></td>
+<td align="left">Create a new group</td>
+</tr>
+<tr>
+<td align="left"><code>groupmod</code></td>
+<td align="left">Modify an existing group</td>
+</tr>
+<tr>
+<td align="left"><code>groupdel</code></td>
+<td align="left">Delete a group</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>man &lt;command&gt;</code> to read their manual, e.g. <code>man useradd</code>.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Note that these commands are specific to <a href="https://www.ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a>. They might differ
+slightly in other Linux distributions or other Unix systems.</p></div></div>
+<p>Here’s a few command examples for common administrative tasks:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Example</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>usermod -a -G vip jde</code></td>
+<td align="left">Add (<strong>a</strong>ppend) user <code>jde</code> to <strong>g</strong>roup <code>vip</code></td>
+</tr>
+<tr>
+<td align="left"><code>deluser jde vip</code></td>
+<td align="left">Remove user <code>jde</code> from group <code>vip</code></td>
+</tr>
+<tr>
+<td align="left"><code>userdel -r jde</code></td>
+<td align="left">Permanently <strong>r</strong>emove user <code>jde</code> and its home directory</td>
+</tr>
+<tr>
+<td align="left"><code>passwd --lock jde</code></td>
+<td align="left">Lock the password for user <code>jde</code> (note that it may still be possible for that user to log in using other authentication methods, such as a public key)</td>
+</tr>
+<tr>
+<td align="left"><code>usermod --shell /usr/sbin/nologin jde</code></td>
+<td align="left">Lock user <code>jde</code> out of the system (note that this will not disconnect the user if already connected, but it prevents future logins)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="installing--upgrading">Installing &amp; upgrading<a href="#installing--upgrading" aria-label="Link to heading 'Installing &amp; upgrading'" data-heading-content="Installing &amp; upgrading" class="anchor"></a></h2>
-<p>You must be an administrator (have <code>sudo</code> access) to perform some of the following operations.</p>
+<p>You must be an administrator (have <code>sudo</code> access) to perform some of the
+following operations.</p>
 <h3 id="how-do-i-know-what-is-installed-apt-list">How do I know what is installed? (<code>apt list</code>)<a href="#how-do-i-know-what-is-installed-apt-list" aria-label="Link to heading 'How do I know what is installed? (apt list)'" data-heading-content="How do I know what is installed? (apt list)" class="anchor"></a></h3>
 <p>List all installed packages:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--installed</span>
@@ -666,15 +869,20 @@ remove:</p>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#administration">Administration</a>
+    <a href="#ssh">SSH</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
+    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
     
-  </li><li class="toc-entry toc-h3">
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#process-management">Process management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
     <a href="#how-do-i-find-and-kill-a-naughty-process-ps-kill">How do I find and kill a naughty process? (<code>ps</code>, <code>kill</code>)</a>
     
   </li><li class="toc-entry toc-h3">
@@ -683,11 +891,32 @@ remove:</p>
   </li><li class="toc-entry toc-h3">
     <a href="#my-systemd-service-is-not-working-systemctl-status--journalctl">My systemd service is not working! (<code>systemctl status</code> &amp; <code>journalctl</code>)</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#list-a-servers-ssh-host-public-keys">List a server’s SSH host public keys</a>
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#user-management">User management</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#how-do-i-change-my-username-usermod">How do I change my username? (<code>usermod</code>)</a>
     
   </li><li class="toc-entry toc-h3">
-    <a href="#list-a-servers-ssh-host-key-fingerprints">List a server’s SSH host key fingerprints</a>
+    <a href="#how-do-i-create-another-user-useradd">How do I create another user? (<code>useradd</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-login-user">Checking the created login user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-create-a-system-user-useradd---system">How do I create a system user? (<code>useradd --system</code>)</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#checking-the-created-system-user">Checking the created system user</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-do-i-manage-users-and-groups-usermod-userdel-groupadd">How do I manage users and groups? (<code>usermod</code>, <code>userdel</code>, <code>groupadd</code>)</a>
     
   </li>
 </ul>
@@ -735,7 +964,7 @@ remove:</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/f90e7d6a183e13d4697f7dbcf83fa287821f23ee/course/cheatsheets/sysadmin/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/db6ac04424b295184ccf260e30c7702eabd6cf66/course/cheatsheets/sysadmin/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -920,47 +1149,25 @@ remove:</p>
         </label>
       </li>
       <li class="group hidden peer-has-checked/section-3:flex course-item-next">
-        <a href="/2026/course/401-cloud-computing/slides/" target="_blank" class="flex items-center gap-2">
+        <a href="/2026/course/401-cloud-computing/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Cloud Computing</span>
 </span>
-          
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-</svg>
-        </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/402-run-virtual-server/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Run your own virtual server on Microsoft Azure</span>
-</span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/403-linux/slides/" target="_blank" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
-  <span>Linux</span>
-</span>
-          
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-</svg>
-        </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/404-unix-basics/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/402-unix-basics/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Unix Basics</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/405-permissions/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/403-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Unix Permissions</span>
@@ -969,25 +1176,25 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/406-unix-processes/" target="_self" class="flex items-center gap-2">
-          <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Unix Processes</span>
-</span>
-          
-          
-        </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/407-pipeline/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/404-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Unix Pipeline</span>
+  <span>Run your own virtual server on Microsoft Azure</span>
 </span>
           
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/408-unix-networking/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/405-meet-your-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Meet your server</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/406-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Unix Networking</span>
@@ -996,10 +1203,28 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/409-tcp/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/407-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
   <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/408-unix-streams-and-pipelines/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Streams and Pipelines</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/409-pipe-redirect-kill/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Pipe, redirect and kill</span>
 </span>
           
           
@@ -1014,7 +1239,25 @@ remove:</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/411-how-to-improve/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/411-how-a-computer-works/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How a computer works</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/412-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+        <a href="/2026/course/413-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How to improve our basic deployment</span>
@@ -1405,7 +1648,7 @@ remove:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@f90e7d6</span>
+        <span class="tooltip-content">main@db6ac04</span>
         <span class="font-title">0.1.0</span>
       </span>
       

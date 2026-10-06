@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-9f19331e32c09ff58dbe0e4a8625ed1c.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-55db8323d2b0f78c4acce6250f2a0ce5.css">
     <script defer src="/2026/assets/course/slides-mermaid-7d1a87396acab995c54c01d26e0d7644.js">
     </script>
   </head>
@@ -40,55 +40,16 @@ Learn what cloud computing is and about the common service models available toda
 
 ---
 
-## Client-server model
-
-<!-- .element: class="hidden" -->
-
-<img class='w-3/4' src='../images/client-server-f96539cd0461a528c38168d940069ebb.jpg' />
-
-**Notes:**
-
-The [client-server model](https://en.wikipedia.org/wiki/Client%E2%80%93server_model) is one of the main ways distributed and networked computer systems are organized today.
-In this model, **servers** share their resources with **clients**, who **request a server's content or services**.
-
-The communication is not only one way. In modern web applications, servers may
-also **push data to their clients**.
-
----
-
-### Server-side
+## Server-side
 
 <img class='w-3/4' src='../images/client-server-backend-focus-2c835ee0b57ecaed03395ee7a0b3b2ec.jpg' />
 
 **Notes:**
 
-The **server** is what we will focus on.
-
----
-
-### Servers, servers everywhere...
-
-<div class='flex justify-center gap-8'>
-  <img height='150px' src='../images/file-server-0d3d7fb5dc973c49ff53c4d968733582.png' />
-  <img height='150px' src='../images/db-server-e29ea3b9de4d9bce690c7c3189ed7e9d.png' />
-  <img height='150px' src='../images/web-server-1366030de7b989ab51ecd9c8a9a82f4f.png' />
-</div>
-
-**Notes:**
-
-A server can provide many different kinds of content or services:
-
-- A [**file server**](https://en.wikipedia.org/wiki/File_server) provides shared disk access accessible over
-  the network (using protocols such as [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocol) or [AFP](https://en.wikipedia.org/wiki/Apple_Filing_Protocol)), to store files
-  such as text, image, sound or video.
-- A [**database server**](https://en.wikipedia.org/wiki/Database_server) houses an application that provides
-  database services to other computer programs.
-- A [**web server**](https://en.wikipedia.org/wiki/Web_server) can serve contents over the Internet (using
-  [HTTP](https://en.wikipedia.org/wiki/HTTP)).
-
-These are just a few examples.
-There are many [types of servers](https://en.wikipedia.org/wiki/Server_(computing)#Purpose) depending on the scenario and the resources you want to provide.
-One computer may fulfill one or several of these roles.
+In this course, we will focus on the **server-side** of the client-server model:
+setting it up, deploying applications on it, and managing it. The server is the
+computer that **provides content or services** to the client, which is the
+computer that **requests content or services** from the server.
 
 ---
 
@@ -104,8 +65,8 @@ Not every individual and organization has access to vast computer resources.
 Some companies provide [Internet hosting](https://en.wikipedia.org/wiki/Internet_hosting_service): servers that can be
 owned or leased by customers.
 
-One common example is [web hosting](https://en.wikipedia.org/wiki/Web_hosting_service),
-where server space is provided to make websites accessible over the Internet.
+One common example is [web hosting](https://en.wikipedia.org/wiki/Web_hosting_service), where server space is provided
+to make websites accessible over the Internet.
 
 ---
 
@@ -135,23 +96,18 @@ performance.
 
 ---
 
-#### Virtual hosting
+#### Virtual hosting & virtualization
 
-<img src='../images/virtualized-servers-cac2fe6df086e17f0062444b593fd52c.png' />
+<div class='grid grid-cols-2 items-center justify-items-center gap-8'>
+  <img src='../images/virtualization-host-guest-f0178095a11ad04b459e2246f6b97025.jpg' />
+  <img src='../images/virtualized-servers-cac2fe6df086e17f0062444b593fd52c.png' />
+</div>
 
 **Notes:**
 
 With [**virtual hosting**](https://en.wikipedia.org/wiki/Virtual_private_server), using
 [virtualization](https://en.wikipedia.org/wiki/Virtualization), physical server resources can be divided into
 **virtual servers**. Customers gain full access to their own virtual space.
-
----
-
-### Virtualization
-
-<img class='w-2/5' src='../images/virtualization-host-guest-f0178095a11ad04b459e2246f6b97025.jpg' />
-
-**Notes:**
 
 **Hardware [virtualization](https://en.wikipedia.org/wiki/Virtualization)** refers to the creation of a
 **virtual machine** that acts like a real computer with an operating system.
@@ -241,66 +197,6 @@ expending resources on computer infrastructure and maintenance.
 
 ---
 
-### Deployment models
-
-<div class="grid grid-cols-2 gap-8 text-3xl">
-  <div>
-    <img src='../images/private-cloud-9ea145bde5a32bf00ba11e545277fa5f.png' />
-    <p>Cloud infrastructure operated solely for a single organization</p>
-  </div>
-  <div>
-    <img src='../images/public-cloud-04ec0173823ecd77d7d06cf73470ec5c.png' />
-    <p>Cloud services open for public use, provided over the Internet</p>
-  </div>
-</div>
-
-**Notes:**
-
-Cloud infrastructure operated solely **for a single organization**, managed and
-hosted internally or by a third party. These clouds are very capital-intensive
-(they require physical space, hardware, etc) but are usually more customizable
-and secure.
-
-**Providers:** Microsoft, IBM, Dell, VMWare, HP, Cisco, Red Hat
-
-Cloud services **open for public use**, provided over the Internet.
-
-Infrastructure is often shared through virtualization. Security guarantees are
-not as strong. However, costs are low and the solution is highly flexible.
-
-**Platforms:** [Amazon Web Services](https://aws.amazon.com), [Google Cloud Platform](https://cloud.google.com), [Microsoft Azure](https://azure.microsoft.com)
-
----
-
-### Hybrid clouds
-
-<img src='../images/hybrid-cloud-c858d4b0925cf8af24b649070c76e6fc.png' />
-
-**Notes:**
-
-There are also **hybrid clouds** composed of two or more clouds bound together
-to benefit from the advantages of multiple deployment models. For example, a
-platform may store sensitive data on a private cloud, but connect to other
-applications on a public cloud for greater flexibility.
-
----
-
-### Distributed clouds
-
-<img src='../images/seti-b4de481f132a09d5292ff9b32d94bb5a.gif' />
-
-**Notes:**
-
-There also are a few [other deployment models](https://en.wikipedia.org/wiki/Cloud_computing#Others), for
-example **distributed clouds** where computing power can be provided by
-volunteers donating the idle processing resources of their computers.
-
-For example, [SETI@home](https://en.wikipedia.org/wiki/SETI@home) uses volunteers' computers to analyze radio
-signals with the aim of searching for signs of extraterrestrial intelligence.
-Also see [Science United](https://scienceunited.org) for more recent projects.
-
----
-
 ### Public clouds
 
 <img src='../images/data-center-8203e874352325359baadb42196d7942.jpg' />
@@ -322,52 +218,15 @@ services**, initially virtual servers, as well as a storage and a message
 queuing service. Today Amazon is one of the largest and most popular cloud
 services provider.
 
+The [appendix of this subject](/2026/course/401-cloud-computing/#appendix-cloud-deployment-models) describes public
+clouds alongside the other deployment models: private, hybrid and distributed
+clouds.
+
 ---
 
 ## Service models
 
 <img src='../images/xaas-dbdc0a5832bf579a0dc08dd1ba1a18de.jpg' />
-
----
-
-### What can I get?
-
-<table class="text-2xl">
-  <thead>
-    <tr>
-      <th>Model</th>
-      <th>Acronym</th>
-      <th>What is provided</th>
-      <th>Examples</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Infrastructure as a Service</td>
-      <td><strong><code>IaaS</code></strong></td>
-      <td>Virtual machines, servers, storage, load balancers, network</td>
-      <td><a href="https://aws.amazon.com">Amazon Web Services</a>, <a href="https://cloud.google.com">Google Cloud</a>, <a href="https://azure.microsoft.com">Microsoft Azure</a></td>
-    </tr>
-    <tr>
-      <td>Platform as a Service</td>
-      <td><strong><code>PaaS</code></strong></td>
-      <td>Execution runtime, database, web server, development tools</td>
-      <td><a href="https://www.cloudfoundry.org">Cloud Foundry</a>, <a href="https://www.heroku.com">Heroku</a>, <a href="https://www.openshift.com">OpenShift</a>, <a href="https://render.com">Render</a></td>
-    </tr>
-    <tr>
-      <td>Function as a Service</td>
-      <td><strong><code>FaaS</code></strong></td>
-      <td>Event-based hosting of individual functions</td>
-      <td><a href="https://aws.amazon.com/lambda/">AWS Lambda</a>, <a href="https://azure.microsoft.com/en-us/services/functions/">Azure Functions</a>, <a href="https://cloud.google.com/functions/">Cloud Functions</a></td>
-    </tr>
-    <tr>
-      <td>Software as a Service</td>
-      <td><strong><code>SaaS</code></strong></td>
-      <td>Web applications such as CMS, email, games</td>
-      <td><a href="https://www.dropbox.com">Dropbox</a>, <a href="https://www.google.com/gmail/">Gmail</a>, <a href="https://slack.com">Slack</a>, <a href="https://wordpress.com">WordPress</a></td>
-    </tr>
-  </tbody>
-</table>
 
 ---
 
@@ -573,61 +432,115 @@ These models can be ordered by increasing level of abstraction, from IaaS being
 the lowest level and most flexible service model, to SaaS being the highest
 level and fastest-to-use service model.
 
-[afp]: https://en.wikipedia.org/wiki/Apple_Filing_Protocol
-[app-server]: https://en.wikipedia.org/wiki/Application_server
+---
+
+## What is Linux?
+
+<img src='../images/linux-e5cddb405e4f31d72be86ad8f41132b6.png' />
+
+**Notes:**
+
+[Linux](https://en.wikipedia.org/wiki/Linux) is a family of free and open source software operating systems
+built around the [Linux kernel](https://en.wikipedia.org/wiki/Linux_kernel), an [operating system
+kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) first released in 1991, by [Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds).
+
+---
+
+### Unix history
+
+<!-- .element: class="hidden" -->
+
+<img class='w-9/10' src='../images/unix-history-3e79ce3ed72a863bed4a1e26d64745f4.png' />
+
+**Notes:**
+
+It is based on [Unix](https://en.wikipedia.org/wiki/Unix), an operating system released in 1971 at AT&T's
+[Bell Laboratories](https://en.wikipedia.org/wiki/Bell_Labs) in the United States. As it was [proprietary
+software](https://en.wikipedia.org/wiki/Proprietary_software), Linus Torvalds decided to release his own [open
+source](https://en.wikipedia.org/wiki/Open-source_software) kernel.
+
+---
+
+### Why use Linux?
+
+- Free and open source
+- Stable and lightweight
+- Runs more than 75% of servers and most supercomputers
+- Fits in 2.1MB on embedded devices
+
+**Notes:**
+
+There are many [reasons to use it](https://en.wikipedia.org/wiki/Linux_adoption#Reasons_for_adoption): its open source philosophy, low
+or no upfront cost, better system stability, and lightweight distributions with
+lower CPU and memory usage and a smaller size.
+
+Linux is king in two places:
+
+- [Embedded systems](https://en.wikipedia.org/wiki/Embedded_system): [BusyBox](https://en.wikipedia.org/wiki/BusyBox) fits in 2.1MB.
+- [Servers](https://en.wikipedia.org/wiki/Linux#Servers,_mainframes_and_supercomputers): more than 75% of servers, most cloud workloads and
+  most supercomputers run Linux.
+
+Note that no system is perfect. Linux also has [barriers to
+adoption](https://en.wikipedia.org/wiki/Linux_adoption#Barriers_to_adoption), mostly the facts that it rarely comes pre-installed and
+that it requires users to know more about managing their operating system.
+
+---
+
+### Linux distribution timeline
+
+<a href='../images/linux-distribution-timeline-62fef185bdda3e997127e1ed610cf536.svg'>
+  <img src='../images/major-linux-distributions-history-67a6ae4533c628988f57cf8b2f533a1e.png' width='70%' />
+</a>
+
+**Notes:**
+
+Linux is not just one operating system, it is a family of systems called [Linux
+distributions](https://en.wikipedia.org/wiki/Linux_distribution). For example, on desktop or server, the most
+popular is [Ubuntu](https://www.ubuntu.com).
+
+[appendix-deployment-models]: /2026/course/401-cloud-computing/#appendix-cloud-deployment-models
 [aws]: https://aws.amazon.com
 [aws-history]: https://en.wikipedia.org/wiki/Amazon_Web_Services#History
-[azure]: https://azure.microsoft.com
-[azure-functions]: https://azure.microsoft.com/en-us/services/functions/
-[cd]: https://en.wikipedia.org/wiki/Continuous_delivery
-[client-server-model]: https://en.wikipedia.org/wiki/Client%E2%80%93server_model
+[bell-labs]: https://en.wikipedia.org/wiki/Bell_Labs
+[busybox]: https://en.wikipedia.org/wiki/BusyBox
 [cloud]: https://en.wikipedia.org/wiki/Cloud_computing
-[cloud-foundry]: https://www.cloudfoundry.org
-[cloud-functions]: https://cloud.google.com/functions/
-[db-server]: https://en.wikipedia.org/wiki/Database_server
 [dedicated-hosting]: https://en.wikipedia.org/wiki/Dedicated_hosting_service
-[dropbox]: https://www.dropbox.com
+[embedded]: https://en.wikipedia.org/wiki/Embedded_system
 [faas]: https://en.wikipedia.org/wiki/Function_as_a_service
-[file-server]: https://en.wikipedia.org/wiki/File_server
-[ftp]: https://en.wikipedia.org/wiki/File_Transfer_Protocol
-[gmail]: https://www.google.com/gmail/
-[google-cloud]: https://cloud.google.com
-[heroku]: https://www.heroku.com
 [heroku-pricing]: https://www.heroku.com/pricing/
-[http]: https://en.wikipedia.org/wiki/HTTP
 [hypervisor]: https://en.wikipedia.org/wiki/Hypervisor
 [iaas]: https://en.wikipedia.org/wiki/Infrastructure_as_a_service
 [internet-hosting]: https://en.wikipedia.org/wiki/Internet_hosting_service
+[kernel]: https://en.wikipedia.org/wiki/Kernel_(operating_system)
 [kvm]: https://www.linux-kvm.org
+[linus]: https://en.wikipedia.org/wiki/Linus_Torvalds
+[linux]: https://en.wikipedia.org/wiki/Linux
+[linux-cons]: https://en.wikipedia.org/wiki/Linux_adoption#Barriers_to_adoption
+[linux-distros]: https://en.wikipedia.org/wiki/Linux_distribution
+[linux-kernel]: https://en.wikipedia.org/wiki/Linux_kernel
+[linux-pros]: https://en.wikipedia.org/wiki/Linux_adoption#Reasons_for_adoption
+[linux-servers]: https://en.wikipedia.org/wiki/Linux#Servers,_mainframes_and_supercomputers
 [microservices-in-practice]: https://medium.com/microservices-in-practice/microservices-in-practice-7a3e85b6624c
-[openshift]: https://www.openshift.com
-[other-deployment-models]: https://en.wikipedia.org/wiki/Cloud_computing#Others
+[oss]: https://en.wikipedia.org/wiki/Open-source_software
 [paas]: https://en.wikipedia.org/wiki/Platform_as_a_service
 [parallels]: https://www.parallels.com
-[render]: https://render.com
+[proprietary]: https://en.wikipedia.org/wiki/Proprietary_software
 [saas]: https://en.wikipedia.org/wiki/Software_as_a_service
-[science-united]: https://scienceunited.org
-[server-types]: https://en.wikipedia.org/wiki/Server_(computing)#Purpose
-[serverless]: https://en.wikipedia.org/wiki/Serverless_computing
-[seti]: https://en.wikipedia.org/wiki/SETI@home
 [shared-hosting]: https://en.wikipedia.org/wiki/Shared_web_hosting_service
-[slack]: https://slack.com
-[soa]: https://en.wikipedia.org/wiki/Service-oriented_architecture
 [ubuntu]: https://www.ubuntu.com
-[virtualbox]: https://www.virtualbox.org
+[unix]: https://en.wikipedia.org/wiki/Unix
 [virtual-hosting]: https://en.wikipedia.org/wiki/Virtual_private_server
+[virtualbox]: https://www.virtualbox.org
 [virtualization]: https://en.wikipedia.org/wiki/Virtualization
 [vm]: https://en.wikipedia.org/wiki/Virtual_machine
 [vmware]: https://www.vmware.com
 [web-hosting]: https://en.wikipedia.org/wiki/Web_hosting_service
-[web-server]: https://en.wikipedia.org/wiki/Web_server
-[wordpress]: https://wordpress.com
 </textarea>
         </section>
       </div>
     </div>
 
-    <script src="/2026/assets/course/slides-a88920aa31c47f4463b9f7e7413c6561.js">
+    <script src="/2026/assets/course/slides-656930585cf94f97364165f091321839.js">
     </script>
 
     <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
@@ -635,7 +548,7 @@ level and fastest-to-use service model.
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/f90e7d6a183e13d4697f7dbcf83fa287821f23ee/course/chapters/401-cloud-computing/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/db6ac04424b295184ccf260e30c7702eabd6cf66/course/chapters/401-cloud-computing/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -662,12 +575,12 @@ level and fastest-to-use service model.
           </li>
           
           <li class="text-xs">
-            Rev: f90e7d6a183e13d4697f7dbcf83fa287821f23ee
+            Rev: db6ac04424b295184ccf260e30c7702eabd6cf66
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@f90e7d6
+        ArchiDep 26-27 main@db6ac04
       </a>
     </div>
   </body>
