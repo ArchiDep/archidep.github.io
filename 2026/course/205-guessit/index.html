@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/981548c708111cde19ed4619ab931e716e95892a/course/chapters/205-guessit/exercise.md">Rev: 981548c708111cde19ed4619ab931e716e95892a</a>
+      <a href="https://github.com/ArchiDep/website/blob/dacff2eb17b81a7609e56cd90089a328960fecba/course/chapters/205-guessit/exercise.md">Rev: dacff2eb17b81a7609e56cd90089a328960fecba</a>
     </li>
   </ul>
 </div>
@@ -144,7 +144,10 @@ and each implement one of its missing database queries.</p></div>
     <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check what you already have</a>
+    <a href="#run-postgresql-with-docker-desktop"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run PostgreSQL with Docker Desktop</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Check what you already have</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#start-your-server"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Start your server</a>
@@ -292,10 +295,94 @@ system. On Windows, install it <strong>in the WSL</strong>, with the Linux instr
 <p>The application needs a PostgreSQL server, version 14 or newer. It connects to
 it at <code>localhost</code>, on port 5432: that is the address in its connection URL. On
 Windows, the application runs in the WSL, so the server must answer in the WSL.</p>
-<p>You may already have a PostgreSQL server, installed for another course. Check
-before you install anything: two PostgreSQL servers on the same computer both
-want port 5432, and only one of them can have it.</p>
-<h2 id="check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check what you already have<a href="#check-what-you-already-have" aria-label="Link to heading 'Check what you already have'" data-heading-content="Check what you already have" class="anchor"></a></h2>
+<p>The simplest way is to run PostgreSQL in a <strong>container</strong> with <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker
+Desktop</a>: <a href="#run-postgresql-with-docker-desktop">Run PostgreSQL with Docker Desktop</a>. It
+does not interfere with any PostgreSQL server you may already have.</p>
+<p>If you would rather not install Docker Desktop, you can use a PostgreSQL server
+installed on your computer instead: <a href="#check-what-you-already-have">Check what you already have</a>.</p>
+<h2 id="run-postgresql-with-docker-desktop"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run PostgreSQL with Docker Desktop<a href="#run-postgresql-with-docker-desktop" aria-label="Link to heading 'Run PostgreSQL with Docker Desktop'" data-heading-content="Run PostgreSQL with Docker Desktop" class="anchor"></a></h2>
+<p>Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a> by following the instructions for
+<a href="https://docs.docker.com/desktop/setup/install/mac-install/" target="_blank" rel="noopener noreferrer">macOS</a> or <a href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank" rel="noopener noreferrer">Windows</a>, and start it. On Windows,
+keep the default settings: Docker Desktop uses the WSL to run its containers.</p>
+<p>Type <code>postgres:18</code> in the search bar at the top of Docker Desktop, and click
+<code>Run</code> next to the <code>postgres:18</code> image. Docker Desktop downloads the image the
+first time.</p>
+<p><img src="images/guessit-docker-postgres-d683e6bbc31a583f68b82e85dc316f80.png" alt="Search for the postgres:18 image" /></p>
+<p>Open the <code>Optional settings</code>. Name the container <code>guessit-db</code>, and enter <code>5434</code>
+as its host port:</p>
+<p><img src="images/guessit-docker-container-72cd02379e74186acd822409c4a014ea.png" alt="Name the container and choose its port" /></p>
+<p>PostgreSQL listens on port 5432 inside the container. Docker Desktop forwards
+port 5434 of your computer to it. Using 5434 rather than 5432 avoids a conflict
+with a PostgreSQL server you may already have on your computer. Choose another
+port number if 5434 is also taken.</p>
+<p>Below, add three environment variables, and click <code>Run</code>:</p>
+<p><img src="images/guessit-docker-env-fd6deb705a88fbbbb8041349ca44d189.png" alt="Set the environment variables of the container" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>POSTGRES_USER</code></td>
+<td align="left"><code>guessit</code></td>
+</tr>
+<tr>
+<td align="left"><code>POSTGRES_DB</code></td>
+<td align="left"><code>guessit</code></td>
+</tr>
+<tr>
+<td align="left"><code>POSTGRES_PASSWORD</code></td>
+<td align="left"><code>change-me-now</code></td>
+</tr>
+</tbody>
+</table>
+<p>Choose a password made only of letters, digits and dashes: it goes into a URL
+later, where other characters would have to be encoded. When the container
+starts, PostgreSQL creates the <code>guessit</code> user with that password, and the
+<code>guessit</code> database.</p>
+<p>Check that the server answers on port 5434 (or the port you chose). Run this in
+your terminal on macOS, or in the WSL on Windows:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span> <span class="l-variable-parameter">port</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">tcp/*</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">succeeded!</span>
+</div></code></pre>
+<p>Then connect to the database with <code>psql</code>, as the <code>guessit</code> user. It asks for the
+password you chose:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">-h</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-variable-parameter">-p</span> <span class="l-number">5434</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">guessit</span> <span class="l-variable-parameter">guessit</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-variable-parameter">guessit:</span>
+</div><div class="l-line" data-line="3"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span>
+</div></code></pre>
+<p><code>-h 127.0.0.1</code> makes <code>psql</code> connect over the network, to the port given by
+<code>-p</code>, rather than look for a server running on your computer itself. <code>-U</code> is the
+user, and the last argument the database.</p>
+<p>If <code>psql</code> is not found, install it: <code>sudo apt install postgresql-client</code> in the
+WSL; <code>brew install libpq</code> on macOS, followed by the <code>echo 'export PATH=...' &gt;&gt; ~/.zshrc</code> command that its output gives, and a new terminal.</p>
+<p>The database is still empty. The repository’s <code>schema.sql</code> file would also
+create the user and the database, which already exist, so only its
+<code>CREATE TABLE game (...)</code> statement is needed. Copy it from the file, from
+<code>CREATE TABLE</code> to the <code>;</code> that ends it, paste it at the <code>guessit=#</code> prompt, and
+press <code>Enter</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span> <span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span> <span class="l-variable-parameter">game</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
+</div></code></pre>
+<p>Quit <code>psql</code> with <code>\q</code>. Then go on to <a href="#configure-and-start-the-application">Configure and start the
+application</a>: you do not need the other PostgreSQL steps.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The container keeps its data while it exists, even when it is stopped. After you
+restart your computer, start Docker Desktop, and start the <code>guessit-db</code>
+container again from its <code>Containers</code> list. Do not delete the container: its
+database would be deleted with it.</p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>POSTGRES_USER</code> makes <code>guessit</code> the superuser of the server in the container.
+That server holds the Guess It database and nothing else, so the application
+still cannot reach the databases of your other projects.</p></div></div>
+<h2 id="check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Check what you already have<a href="#check-what-you-already-have" aria-label="Link to heading 'Check what you already have'" data-heading-content="Check what you already have" class="anchor"></a></h2>
+<p>If you do not use Docker Desktop, you may already have a PostgreSQL server,
+installed for another course. Check before you install anything: two PostgreSQL
+servers on the same computer both want port 5432, and only one of them can have
+it.</p>
 <p>First, check whether a server already answers on port 5432. Run this in your
 terminal on macOS, or in the WSL on Windows:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">localhost</span> <span class="l-number">5432</span>
@@ -513,6 +600,10 @@ the password you chose into <code>DATABASE_URL</code>, in place of <code>change-
 </div><div class="l-line" data-line="3"><span class="l-comment">//                      ^^^^^^^^^^^^^</span>
 </div><div class="l-line" data-line="4"><span class="l-comment">//                       change this</span>
 </div></code></pre>
+<p>If you run PostgreSQL with Docker Desktop, also replace the port <code>5432</code> with
+<code>5434</code>, the host port of your container:</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my-password@localhost:5434/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
+</div></code></pre>
 <p>If the application is still running from the <a href="/2026/course/204-hello-github/#everyone-run-the-application">optional step of Hello
 GitHub</a>, it has restarted by itself when you saved <code>server.js</code>.
 Otherwise, install its dependencies, and start it:</p>
@@ -576,7 +667,8 @@ pieces it needed: a program to run it, the libraries it depends on, and a
 database server, all installed and configured before the first page could load.</p>
 <p>Along the way, you:</p>
 <ul>
-<li>Installed Node.js, and found, started or installed a PostgreSQL server.</li>
+<li>Installed Node.js, and ran a PostgreSQL server in a container, or found,
+started or installed one.</li>
 <li>Created a database, and a user for the application.</li>
 <li>Configured the application to connect to it, and ran it.</li>
 <li>Implemented a query, and shared it with your group through GitHub.</li>
@@ -680,6 +772,8 @@ where the application runs shows <code>ECONNREFUSED</code> in the error below
 port 5432: your PostgreSQL server is either not running or is not reachable on
 that port. <a href="#check-what-you-already-have">Check what you have</a> again, and start your server if it is
 stopped.</p>
+<p>With Docker Desktop, check that Docker Desktop and the <code>guessit-db</code> container
+are running, and that the <code>DATABASE_URL</code> in <code>server.js</code> uses port <code>5434</code>.</p>
 <h3 id="psql-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>psql: command not found</code><a href="#psql-command-not-found" aria-label="Link to heading 'psql: command not found'" data-heading-content="psql: command not found" class="anchor"></a></h3>
 <p>On macOS, the <code>psql</code> command of Postgres.app and of Homebrew’s PostgreSQL is not
 available until you configure your <code>$PATH</code>, as described in <a href="#install-postgresql-on-macos">Install PostgreSQL
@@ -726,7 +820,10 @@ again.</p>
     <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check what you already have</a>
+    <a href="#run-postgresql-with-docker-desktop"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run PostgreSQL with Docker Desktop</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#check-what-you-already-have"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Check what you already have</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#start-your-server"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Start your server</a>
@@ -794,7 +891,7 @@ again.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/981548c708111cde19ed4619ab931e716e95892a/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/dacff2eb17b81a7609e56cd90089a328960fecba/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -890,9 +987,17 @@ again.</p>
       <li class="peer/section-1 group/section-1 course-section-done">
         <label for="section-version-control-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Version Control</span>
-          
-          
-          <input type="checkbox" id="section-version-control-toggle" class="hidden" checked disabled>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden" checked>
         </label>
       </li>
       <li class="group hidden peer-has-checked/section-1:flex course-item-done">
@@ -904,7 +1009,7 @@ again.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
         <a href="/2026/course/202-hello-git/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -922,7 +1027,7 @@ again.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
         <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -931,7 +1036,7 @@ again.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-1:flex course-item-due course-item-current">
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done course-item-current">
         <a href="/2026/course/205-guessit/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1478,7 +1583,7 @@ again.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@981548c</span>
+        <span class="tooltip-content">main@dacff2e</span>
         <span class="font-title">0.1.0</span>
       </span>
       
