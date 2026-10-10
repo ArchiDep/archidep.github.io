@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-fb23d82b6837fe06f85bc07f68adaeb0.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-bb6075c00d86478e64de039bb3c719cf.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/7c9337e7febd19f4fab9a91fa1401f30a4ae5be1/course/chapters/404-run-virtual-server/exercise.md">Rev: 7c9337e7febd19f4fab9a91fa1401f30a4ae5be1</a>
+      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/404-run-virtual-server/exercise.md">Rev: c8ae97147c2deb0f5bca433cd167863be803b272</a>
     </li>
   </ul>
 </div>
@@ -148,6 +148,12 @@ Azure</a> cloud platform.</p></div>
     <a href="#launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
+    <a href="#find-the-regions-you-are-allowed-to-use"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the regions you are allowed to use</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-a-new-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a new virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h4">
@@ -298,8 +304,41 @@ later in this exercise.</p>
 <h2 id="launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server<a href="#launch-a-virtual-server" aria-label="Link to heading 'Launch a virtual server'" data-heading-content="Launch a virtual server" class="anchor"></a></h2>
 <p>Once you have your Azure account, you can launch the virtual server you will be
 using for the rest of the course.</p>
-<p>Access the <a href="https://portal.azure.com" target="_blank" rel="noopener noreferrer">Azure portal</a> and go to the <strong>Virtual machines</strong>
-section:</p>
+<h3 id="find-the-regions-you-are-allowed-to-use"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the regions you are allowed to use<a href="#find-the-regions-you-are-allowed-to-use" aria-label="Link to heading 'Find the regions you are allowed to use'" data-heading-content="Find the regions you are allowed to use" class="anchor"></a></h3>
+<p>As a student, you are not allowed to run your virtual machine in any region.
+Azure only allows each student a handful of regions, and <strong>they are different
+for each student</strong>. Find out which ones are yours before you create your virtual
+machine.</p>
+<p>Access the <a href="https://portal.azure.com" target="_blank" rel="noopener noreferrer">Azure portal</a>, type “Policy” (or “Stratégie” in
+French) in the search bar at the top, and open the <strong>Policy</strong> (Stratégie) page.
+In the menu on the left, open <strong>Authoring</strong>, then <strong>Assignments</strong>
+(“Attributions” in French):</p>
+<p><img src="images/azure-policy-91f40ff82fda10294a429875ad9886d5.png" alt="Azure: policy assignments" /></p>
+<p>Click the assignment named <strong>Allowed resource deployment regions</strong>. Under its
+<strong>Parameters</strong> tab, the value of the <code>listOfAllowedLocations</code> parameter is your
+list of allowed regions:</p>
+<p><img src="images/azure-student-regions-69735b7af7dbfc740ed94b0ee12fe990.png" alt="Azure: allowed regions" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>This screenshot comes from another student’s account, and <strong>your list is not
+the same</strong>. Read your own.</p></div></div>
+<p>Each region is written as a code, such as <code>germanywestcentral</code>. When you create
+your virtual machine, the <strong>Region</strong> menu shows the same region with its full
+name, <code>(Europe) Germany West Central</code>. <strong>Choose one of the regions in your list.
+Other regions will not work.</strong></p>
+<h3 id="create-a-new-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a new virtual machine<a href="#create-a-new-virtual-machine" aria-label="Link to heading 'Create a new virtual machine'" data-heading-content="Create a new virtual machine" class="anchor"></a></h3>
+<p>Go to the <strong>Virtual machines</strong> section of the Azure portal:</p>
 <p><img src="images/azure-portal-menu-9ee5b60d34d823db772a02bb1d9b548e.png" alt="Azure Portal" /></p>
 <p>Create a new virtual machine, i.e. a new virtual server in the Microsoft Azure
 infrastructure:</p>
@@ -326,8 +365,10 @@ VM and will have to reinstall your VM from scratch (including all deployment
 exercises you may already have completed).</p></div></div></div>
 <p>In the <strong>Basics</strong> settings, configure the <strong>virtual machine details</strong> (the
 machine’s name, region, image and size):</p>
-<p><img src="images/azure-vm-instance-details-ebf0dfa39fcb004e43b2409c036bb8e4.png" alt="Azure: VM instance details" /></p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you cannot select the right size, <a href="#i-cant-select-the-right-size-or-region">see
+<p><img src="images/azure-vm-instance-details-8c78e43b1580fcb76daec4961504f694.png" alt="Azure: VM instance details" /></p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Choose one of the regions <a href="#find-the-regions-you-are-allowed-to-use">you are allowed to
+use</a> from the list you found earlier.
+If you cannot select the right size, <a href="#i-cant-select-the-right-size-or-region">see
 below</a> for troubleshooting.</p></div></div>
 <h4 id="configure-your-administrator-account"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure your administrator account<a href="#configure-your-administrator-account" aria-label="Link to heading 'Configure your administrator account'" data-heading-content="Configure your administrator account" class="anchor"></a></h4>
 <p>Still in the <strong>Basics</strong> settings, just below, under the <strong>Administrator
@@ -362,15 +403,12 @@ VM sizes. If you can select neither <code>B1s</code> nor <code>B2ats_v2</code> (
 are listed under <strong>Insufficient quota</strong>), try selecting another availability
 zone, or another of the regions you are allowed to use.</p>
 <p><img src="images/azure-vm-size-d633d23a65dd971033b25ba93e4a9f8a.png" alt="Azure: virtual machine size" /></p></div></div>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>As a student, you are not allowed to run your virtual machine in any region.
-Azure only allows each student a handful of regions, and <strong>they are different
-for each student</strong>. Choose one of the regions listed as <strong>Recommended</strong> for you;
-those listed as <strong>Ineligible</strong> will not work:</p>
-<p><img src="images/azure-vm-recommended-regions-3b9562118eb04fa3b1dae464880cf804.png" alt="Azure: recommended regions" /></p>
-<p>Among your allowed regions, choosing one closer to where you are (or where your
-customers are) will reduce latency. Prices vary slightly between regions: the
-<a href="#review-your-monthly-cost">cost review</a> below will tell you if your choice is
-too expensive.</p></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If a region does not work, try another one from <a href="#find-the-regions-you-are-allowed-to-use">your list of allowed
+regions</a>. Among them, choosing one
+closer to where you are (or where your customers are) will reduce latency.
+Prices vary slightly between regions: the <a href="#review-your-monthly-cost">cost
+review</a> below will tell you if your choice is too
+expensive.</p></div></div>
 <h4 id="make-sure-the-ssh-port-is-open"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure the SSH port is open<a href="#make-sure-the-ssh-port-is-open" aria-label="Link to heading 'Make sure the SSH port is open'" data-heading-content="Make sure the SSH port is open" class="anchor"></a></h4>
 <p>Under inbound port rules, make sure the SSH (22) port is allowed:</p>
 <p><img src="images/azure-vm-inbound-port-rules-27428f549f0f53ab1804c1f6d1399758.png" alt="Azure: VM inbount port rules" /></p>
@@ -432,8 +470,9 @@ your disposal for this course.</p></div></div></div>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If Azure tells you that you cannot create a virtual machine in the region you
 have selected (some regions, like West Europe, may not accept new customers even
 if they are allowed), go back to the <a href="#configure-basic-settings">basic settings</a>
-and find a region that works. <strong>Make sure to re-check your estimated monthly
-cost afterwards.</strong></p></div></div>
+and try another region from <a href="#find-the-regions-you-are-allowed-to-use">your
+list</a>. <strong>Make sure to re-check your
+estimated monthly cost afterwards.</strong></p></div></div>
 <p>Once your deployment is complete, go to the virtual machine source:</p>
 <p><img src="images/azure-vm-deployment-complete-36fd6086b7015e210d7ea9e1c85ebf87.png" alt="Azure: VM deployment complete" /></p>
 <p>Find your machine’s public IP address in the virtual machine’s information:</p>
@@ -828,6 +867,12 @@ connects if they are the same.</p>
     <a href="#launch-a-virtual-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Launch a virtual server</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
+    <a href="#find-the-regions-you-are-allowed-to-use"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find the regions you are allowed to use</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#create-a-new-virtual-machine"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a new virtual machine</a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#configure-basic-settings"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure basic settings</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h4">
@@ -914,7 +959,7 @@ connects if they are the same.</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/7c9337e7febd19f4fab9a91fa1401f30a4ae5be1/course/chapters/404-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/404-run-virtual-server/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1179,19 +1224,19 @@ connects if they are the same.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
-        <a href="/2026/course/408-unix-streams-and-pipelines/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/408-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Unix Streams and Pipelines</span>
+  <span>Unix Processes</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
-        <a href="/2026/course/409-pipe-redirect-kill/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/409-unix-plumbing/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Pipe, redirect and kill</span>
+  <span>Unix plumbing</span>
 </span>
           
           
@@ -1200,7 +1245,7 @@ connects if they are the same.</p>
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP application with SFTP</span>
+  <span>Deploy a web application with SFTP</span>
 </span>
           
           
@@ -1215,10 +1260,10 @@ connects if they are the same.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/412-unix-processes/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Unix Processes</span>
+  <span>Watch your processes</span>
 </span>
           
           
@@ -1615,7 +1660,7 @@ connects if they are the same.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@7c9337e</span>
+        <span class="tooltip-content">main@c8ae971</span>
         <span class="font-title">0.1.0</span>
       </span>
       

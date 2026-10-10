@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unix Processes · ArchiDep</title>
+<meta name="description" content="Slides for the Unix Processes chapter of the ArchiDep course." />
+<link rel="canonical" href="https://archidep.ch/2026/course/408-unix-processes/slides/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Unix Processes" />
+<meta property="og:description" content="Slides for the Unix Processes chapter of the ArchiDep course." />
+<meta property="og:url" content="https://archidep.ch/2026/course/408-unix-processes/slides/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/course/slides-792ca51a722b378783f5eb5249fd1747.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-5997c511504783d3a38b45f584a0f39e.css">
+    <script defer src="/2026/assets/course/slides-mermaid-7d1a87396acab995c54c01d26e0d7644.js">
+    </script>
+  </head>
+  <body data-theme="light">
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template># Unix Processes
+
+Architecture & Deployment <!-- .element: class="subtitle" -->
+
+**Notes:**
+
+Learn how the programs you run on a Unix system receive their input and send
+their output, how the shell can redirect that input and output to files, and
+how it can chain programs together into pipelines.
+
+---
+
+## Processes
+
+<img class="w-3/5" src="../images/pid-9f884f697c056486e563c58f7541b66b.png" />
+
+- A **process** is a running program
+- Each process has a number, its **PID**
+- A process started from the shell **holds the terminal** until it ends
+
+**Notes:**
+
+A **process** is a program that is being executed. A program is a file of
+instructions stored on disk; every time you run it, the system creates a new
+process to execute it.
+
+The system gives each process a number that identifies it while it runs, its
+**p**rocess **ID** (PID). The `ps` command (**p**rocess **s**tatus) lists
+running processes with their PIDs.
+
+A program you run from the shell runs in the **foreground**: it holds your
+terminal, and you get the prompt back only when it ends. A short command like
+`ls` ends at once; a server waiting for connections may never end on its own.
+
+---
+
+## Exit status
+
+<img class="w-2/5" src="../images/exit-status-2b0954ac8e96d52b6153227d80a8372c.png" />
+
+- A process ends with a number, its **exit status**
+- `0` means **success**, anything else means **failure**
+- The shell keeps the last one in `$?`
+
+**Notes:**
+
+When a process ends, it gives a small number, from 0 to 255, called its **exit
+status**. By convention, `0` means that the program succeeded, and any other
+number means that something went wrong. What each other number means is up to
+each program, and is usually described in its manual.
+
+The exit status is separate from the output. A program can print a lot and
+still fail, or print nothing and succeed. The shell keeps the exit status of the
+last command in the special variable `$?`, which you can display with `echo
+$?`.
+
+---
+
+## Standard streams
+
+<div class="flex gap-4 justify-center items-center">
+  <img class="w-1/3" src="../images/streams-bash-e89d8add7c1c069a2e44b52dc125108c.png" />
+
+  <ul class="text-4xl">
+    <li><strong>Standard input</strong> (<code>stdin</code>)<br/>data going in</li>
+    <li><strong>Standard output</strong> (<code>stdout</code>)<br/>data coming out</li>
+    <li><strong>Standard error</strong> (<code>stderr</code>)<br/>errors and diagnostics</li>
+  </ul>
+</div>
+
+**Notes:**
+
+Every Unix process gets three communication channels when it starts, its
+**standard streams**. A stream is an ordered sequence of bytes, text or binary,
+that a program can read from or write to without knowing how much data there
+will be.
+
+By default, all three are connected to your terminal: the standard input to
+your keyboard, and the standard output and standard error to your screen. A
+program started from the shell writes to the same terminal as the shell.
+
+A program does not need to know what is at the other end of its streams. It
+reads from its standard input and writes to its standard output, whatever they
+are connected to. This is why the output of an application you run on a server
+appears in your SSH session: its standard output is your terminal, on the other
+side of the SSH connection.
+
+---
+
+## Two outputs
+
+<img class="w-1/2" src="../images/streams-ls-526a71e2d1e5515a42c51f9caccf79b0.png" />
+
+- **Data** goes to the standard output
+- **Errors** go to the standard error
+- Both show up in your terminal by default
+
+**Notes:**
+
+A program has two output streams so that its data and its errors can be kept
+apart. Both are displayed in your terminal by default, so you usually see no
+difference between them.
+
+The difference matters as soon as the data goes somewhere else, such as a file
+or another program: the data goes there, and the errors still reach you,
+instead of being mixed into the data. A program may write to both streams in
+the same run.
+
+---
+
+## Redirection
+
+<img class="w-3/7" src="../images/streams-e278253a3665e43247f5f1f406b52e68.jpg" />
+
+<table class="text-3xl">
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Shortcut</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0&lt;</code></td>
+      <td><code>&lt;</code></td>
+      <td>Standard input from a file</td>
+    </tr>
+    <tr>
+      <td><code>1&gt;</code></td>
+      <td><code>&gt;</code></td>
+      <td>Standard output to a file (overwrites it)</td>
+    </tr>
+    <tr>
+      <td><code>2&gt;</code></td>
+      <td><code>2&gt;</code></td>
+      <td>Standard error to a file</td>
+    </tr>
+    <tr>
+      <td><code>&amp;&gt;</code></td>
+      <td><code>&amp;&gt;</code></td>
+      <td>Both streams to a file</td>
+    </tr>
+  </tbody>
+</table>
+
+**Notes:**
+
+The shell can connect a process's streams to something other than the
+terminal: this is **redirection**. The shell sets it up before the program
+starts, and the program does not know: it writes to its standard output as
+usual, and the data ends up in a file.
+
+Each stream has a number, its **file descriptor**: `0` for the standard input,
+`1` for the standard output and `2` for the standard error. `1>`, or just `>`,
+redirects the standard output, which is file descriptor `1`. `2>` redirects the
+standard error. `&>` redirects both streams at once.
+
+`>` replaces the contents of the file, while `>>` adds to the end of it. Both
+create the file if it does not exist. You can use it with either standard output
+or standard error (`1>>` or `2>>`), or with both at once (`&>>`).
+
+---
+
+## The pipe
+
+<img class="w-2/3" src="../images/pipe-stdout-stdin-e217a011460df3c3b6e28781b924f34b.png" />
+
+<img class="w-1/2" src="../images/modern-times-f66318707080bf8fe21780d52a78a466.jpg" />
+
+**Notes:**
+
+Since every process has a standard input and a standard output, the standard
+output of one process can be connected to the standard input of another. The
+`|` operator of the shell, a vertical **pipe**, does this:
+
+```bash
+$> ls | wc -l
+```
+
+The `ls` command lists files, and `wc -l` (**w**ord **c**ount, with the `-l`
+option for **l**ines) counts the lines it reads. Together, they count the files
+in the current directory.
+
+Processes can be chained into a **pipeline**, each one transforming the data
+and passing it on to the next, like a production chain where the parts go from
+one worker to the next until the product is finished.
+
+---
+
+### Chaining programs
+
+```bash
+$> ls -1 | wc -l   # counts entries in the current directory
+```
+
+<img class="w-1/3" src="../images/pipes-ls-wc-f54dd55df6d3e58cc7bdcf4456a38f05.png" />
+
+**Notes:**
+
+`ls -1 | wc -l` counts entries in the current directory: `wc` counts the
+lines `ls` writes, one per file. With the `-1` option or when its standard
+output is not a terminal, `ls` writes one file per line.
+
+The standard error of each process is not part of the pipeline: it still goes to
+your terminal.
+
+---
+
+## The Unix philosophy
+
+- Write programs that **do one thing and do it well**
+- Write programs to **work together**
+- Write programs to **handle text streams**, because that is a universal
+  interface
+
+**Notes:**
+
+Because Unix programs can easily be chained together, they tend to be small and
+simple. A complex task is done by combining many small programs, rather than by
+writing one large program that does everything.
+
+This is, in a few words, the [Unix
+philosophy](https://en.wikipedia.org/wiki/Unix_philosophy), as summarized by
+Doug McIlroy, who came up with the Unix pipe.
+</textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="/2026/assets/course/slides-656930585cf94f97364165f091321839.js">
+    </script>
+
+    <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
+      <a id="heig-vd-logo" href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
+      </a>
+
+      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/408-unix-processes/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+
+      <a id="download-pdf" href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-slides.pdf" class="print:hidden tooltip" data-tip="Download PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+
+      <a href="https://archidep.ch/2026/course/408-unix-processes/slides/" class="tooltip print:hidden" data-tip="Go to the live site.">
+  <span class="badge badge-warning badge-sm">Backup copy</span>
+</a>
+    </div>
+
+    <div id="footer" class="tooltip absolute bottom-4 left-1/4 right-1/4 z-10 text-center font-meta text-sm opacity-25 hover:opacity-100">
+      <div class="tooltip-content">
+        <ul class="list-none m-0 p-0 flex flex-col gap-1">
+          <li>Architecture &amp; Deployment 2026-2027</li>
+          <li class="text-xs">
+            v0.1.0 on branch main
+          </li>
+          
+          <li class="text-xs">
+            Rev: c8ae97147c2deb0f5bca433cd167863be803b272
+          </li>
+        </ul>
+      </div>
+      <a href="https://archidep.ch" class="!no-underline hover:!underline">
+        ArchiDep 26-27 main@c8ae971
+      </a>
+    </div>
+  </body>
+</html>

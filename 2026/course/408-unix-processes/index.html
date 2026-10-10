@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Unix Streams and Pipelines · ArchiDep</title>
-<meta name="description" content="Learn about processes in Unix operating systems, as well as how to manage them and make them communicate." />
-<link rel="canonical" href="https://archidep.ch/2026/course/408-unix-streams-and-pipelines/" />
+    <title>Unix Processes · ArchiDep</title>
+<meta name="description" content="Learn about processes in Unix operating systems: how they are identified, how they report success or failure, how they receive their input and send their output, and how they can be chained together." />
+<link rel="canonical" href="https://archidep.ch/2026/course/408-unix-processes/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Unix Streams and Pipelines" />
-<meta property="og:description" content="Learn about processes in Unix operating systems, as well as how to manage them and make them communicate." />
-<meta property="og:url" content="https://archidep.ch/2026/course/408-unix-streams-and-pipelines/" />
+<meta property="og:title" content="Unix Processes" />
+<meta property="og:description" content="Learn about processes in Unix operating systems: how they are identified, how they report success or failure, how they receive their input and send their output, and how they can be chained together." />
+<meta property="og:url" content="https://archidep.ch/2026/course/408-unix-processes/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-fb23d82b6837fe06f85bc07f68adaeb0.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-bb6075c00d86478e64de039bb3c719cf.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,14 +97,14 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/7c9337e7febd19f4fab9a91fa1401f30a4ae5be1/course/chapters/408-unix-streams-and-pipelines/subject.md">Rev: 7c9337e7febd19f4fab9a91fa1401f30a4ae5be1</a>
+      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/408-unix-processes/subject.md">Rev: c8ae97147c2deb0f5bca433cd167863be803b272</a>
     </li>
   </ul>
 </div>
 
     <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
   <span>You are reading the backup copy of the ArchiDep website.</span>
-  <a href="https://archidep.ch/2026/course/408-unix-streams-and-pipelines/" class="link font-semibold transition-colors hover:text-base-content">
+  <a href="https://archidep.ch/2026/course/408-unix-processes/" class="link font-semibold transition-colors hover:text-base-content">
     Go to the live site.
   </a>
 </div>
@@ -117,11 +117,12 @@
   <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
     <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-subject">
       <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
-  Unix Streams and Pipelines
+  Unix Processes
 </h1>
 
-      <div class="my-4"><p>Learn about processes in Unix operating systems, as well as how to manage them
-and make them communicate.</p></div>
+      <div class="my-4"><p>Learn about processes in Unix operating systems: how they are identified, how
+they report success or failure, how they receive their input and send their
+output, and how they can be chained together.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -132,6 +133,9 @@ and make them communicate.</p></div>
         <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#what-is-a-process">What is a process?</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -170,9 +174,6 @@ and make them communicate.</p></div>
   </li><li class="toc-entry toc-h3">
     <a href="#other-monitoring-commands">Other monitoring commands</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#welcome-to-the-future">Welcome to the future</a>
-    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
@@ -189,36 +190,6 @@ and make them communicate.</p></div>
     
   </li><li class="toc-entry toc-h3">
     <a href="#meaning-of-exit-statuses">Meaning of exit statuses</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#signals">Signals</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#what-is-a-signal">What is a signal?</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#common-unix-signals">Common Unix signals</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#the-kill-command">The <code>kill</code> command</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#trapping-signals">Trapping signals</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#the-kill-signal">The <code>KILL</code> signal</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#unix-signals-in-the-real-world">Unix signals in the real world</a>
     
   </li>
 </ul>
@@ -266,44 +237,22 @@ and make them communicate.</p></div>
     <a href="#both-standard-output-and-error-streams">Both standard output and error streams</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h4">
-    <a href="#redirect-standard-output-stream-curl">Redirect standard output stream (curl)</a>
+    <a href="#redirect-standard-output-stream-grep">Redirect standard output stream (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#redirect-standard-error-stream-curl">Redirect standard error stream (curl)</a>
+    <a href="#redirect-standard-error-stream-grep">Redirect standard error stream (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#redirect-both-standard-output-and-error-streams-curl">Redirect both standard output and error streams (curl)</a>
+    <a href="#redirect-both-standard-output-and-error-streams-grep">Redirect both standard output and error streams (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#combine-standard-output-and-error-streams-curl">Combine standard output and error streams (curl)</a>
+    <a href="#combine-standard-output-and-error-streams-grep">Combine standard output and error streams (grep)</a>
     
   </li>
 </ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#discard-an-output-stream">Discard an output stream</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#the-devnull-device">The <code>/dev/null</code> device</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#redirect-a-stream-to-the-null-device">Redirect a stream to the null device</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#other-redirections-to-the-null-device">Other redirections to the null device</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#redirect-one-output-stream-to-another">Redirect one output stream to another</a>
-    
   </li><li class="toc-entry toc-h3">
     <a href="#redirect-standard-input-stream">Redirect standard input stream</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#here-documents">Here documents</a>
     
-  </li>
-</ul>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
@@ -326,6 +275,29 @@ and make them communicate.</p></div>
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-discard-an-output-stream">Appendix: Discard an output stream</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-devnull-device">The <code>/dev/null</code> device</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#redirect-a-stream-to-the-null-device">Redirect a stream to the null device</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-redirections-to-the-null-device">Other redirections to the null device</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-redirect-one-output-stream-to-another">Appendix: Redirect one output stream to another</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-here-documents">Appendix: Here documents</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-welcome-to-the-future">Appendix: Welcome to the future</a>
+    
   </li>
 </ul>
         </nav>
@@ -333,7 +305,25 @@ and make them communicate.</p></div>
 
       
 
-      
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/408-unix-processes/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/408-unix-processes/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/408-unix-processes/slides/?view=scroll" title="Slides"></iframe>
+</div>
 
       <p><strong>You will need</strong></p>
 <ul>
@@ -344,6 +334,7 @@ and make them communicate.</p></div>
 <ul>
 <li><a href="/2026/course/101-command-line/">Command Line Introduction</a></li>
 <li><a href="/2026/course/103-ssh/">Secure Shell (SSH)</a></li>
+<li><a href="/2026/course/402-unix-basics/">Unix Basics</a></li>
 </ul>
 <h2 id="what-is-a-process">What is a process?<a href="#what-is-a-process" aria-label="Link to heading 'What is a process?'" data-heading-content="What is a process?" class="anchor"></a></h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Process_(computing)" target="_blank" rel="noopener noreferrer">process</a> is an <strong>instance of a computer program that is being
@@ -369,7 +360,7 @@ launch other child processes for greater performance. For example, most modern
 browsers will run at least one child process per tab.</p>
 <h3 id="unix-processes">Unix processes<a href="#unix-processes" aria-label="Link to heading 'Unix processes'" data-heading-content="Unix processes" class="anchor"></a></h3>
 <p>Processes work differently depending on the operating system. We will focus on
-processes in Unix systems, which have the following features:</p>
+processes in Unix systems, and these features in particular:</p>
 <table>
 <thead>
 <tr>
@@ -387,10 +378,6 @@ processes in Unix systems, which have the following features:</p>
 <td align="left">A number given when a process exits, indicating whether it was successful</td>
 </tr>
 <tr>
-<td align="left"><a href="https://en.wikipedia.org/wiki/Signal_(IPC)" target="_blank" rel="noopener noreferrer">Signals</a></td>
-<td align="left">Notifications sent to a process, a form of <a href="https://en.wikipedia.org/wiki/Inter-process_communication" target="_blank" rel="noopener noreferrer">inter-process communication (IPC)</a></td>
-</tr>
-<tr>
 <td align="left"><a href="https://en.wikipedia.org/wiki/Standard_streams" target="_blank" rel="noopener noreferrer">Standard streams</a></td>
 <td align="left">Preconnected input and output communication channels between a process and its environment</td>
 </tr>
@@ -402,16 +389,27 @@ processes in Unix systems, which have the following features:</p>
 </table>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>These features have been standardized for Unix systems as the <a href="https://en.wikipedia.org/wiki/POSIX" target="_blank" rel="noopener noreferrer">Portable
 Operating System Interface (POSIX)</a>.</p></div></div>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Later, we will also talk about <a href="https://en.wikipedia.org/wiki/Signal_(IPC)" target="_blank" rel="noopener noreferrer">signals</a>, a way for processes to send
+each other notifications.</p></div></div>
 <h2 id="process-id">Process ID<a href="#process-id" aria-label="Link to heading 'Process ID'" data-heading-content="Process ID" class="anchor"></a></h2>
 <p>Let’s talk about how running processes are identified.</p>
-<div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
-  <img src='images/pid-9f884f697c056486e563c58f7541b66b.png' />
-</div>
 <h3 id="what-is-a-process-identifier">What is a process identifier?<a href="#what-is-a-process-identifier" aria-label="Link to heading 'What is a process identifier?'" data-heading-content="What is a process identifier?" class="anchor"></a></h3>
 <p>Any process that is created in a Unix system is assigned an <strong>identifier (or
 PID)</strong>. Each new process gets the next available PID. This ID can be used to
-reference the process, for example to terminate it with the <code>kill</code> command (more
-about that later).</p>
+reference the process.</p>
 <p>PIDs are sometimes reused as processes die and are created again,
 but <strong>at any given time, a PID uniquely identifies a specific process</strong>.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>By default, the maximum PID on Linux systems is 32,768 on 32-bit systems, and
@@ -524,8 +522,9 @@ only processes belonging to your <strong>u</strong>ser:</p>
 </div><div class="l-line" data-line="8"><span class="l-function-call">jde</span>      <span class="l-number">3791</span>  <span class="l-number">3789</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:21</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span>
 </div><div class="l-line" data-line="9"><span class="l-function-call">jde</span>      <span class="l-number">3812</span>  <span class="l-number">3791</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:23</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sleep</span> <span class="l-number">1000</span>
 </div></code></pre>
-<p>You can indeed see the running process started with the <code>sleep</code> command.
-You can stop it with <code>Ctrl-C</code> (in the terminal when it’s running) when you’re done.</p>
+<p>You can indeed see the running process started with the <code>sleep</code> command. It ends
+on its own once its 1000 seconds have passed, or you can stop it with <code>Ctrl+C</code>
+in the second terminal.</p>
 <h3 id="other-monitoring-commands">Other monitoring commands<a href="#other-monitoring-commands" aria-label="Link to heading 'Other monitoring commands'" data-heading-content="Other monitoring commands" class="anchor"></a></h3>
 <p>Here are other ways to inspect processes and have more information on their resource consumption:</p>
 <ul>
@@ -543,17 +542,6 @@ but it helps you know how much memory is remaining on your system.</li>
 </div></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-m</code> option of the <code>free</code> command displays memory size in
 <a href="https://simple.wikipedia.org/wiki/Mebibyte" target="_blank" rel="noopener noreferrer">mebibytes</a>, a more human-readable quantity, instead of bytes.</p></div></div>
-<h3 id="welcome-to-the-future">Welcome to the future<a href="#welcome-to-the-future" aria-label="Link to heading 'Welcome to the future'" data-heading-content="Welcome to the future" class="anchor"></a></h3>
-<p>Some of the previously-mentioned commands may be older than you, although they
-are regularly updated. But new command line tools are also being developed
-today:</p>
-<ul>
-<li>The <a href="https://github.com/dalance/procs" target="_blank" rel="noopener noreferrer"><code>procs</code> command</a> is a modern interactive alternative to the <code>ps</code>
-command for listing processes, written in <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">Rust</a>, a modern systems
-programming language.</li>
-<li>The <a href="https://github.com/ClementTsang/bottom" target="_blank" rel="noopener noreferrer"><code>btm</code> command</a> is a modern alternative to <code>htop</code> and <code>top</code> with
-more features, also written in <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">Rust</a>.</li>
-</ul>
 <h2 id="exit-status">Exit status<a href="#exit-status" aria-label="Link to heading 'Exit status'" data-heading-content="Exit status" class="anchor"></a></h2>
 <p>How children indicate success to their parent.</p>
 <div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
@@ -605,167 +593,6 @@ example, the manual of the <code>ls</code> command documents the following value
 <p>But this will be different for other programs or applications.</p>
 <p>The only thing you can rely on for the majority of programs is that <strong>0 is good,
 anything else is probably bad</strong>.</p>
-<h2 id="signals">Signals<a href="#signals" aria-label="Link to heading 'Signals'" data-heading-content="Signals" class="anchor"></a></h2>
-<div class="w-full flex justify-center">
-  <img src='images/kill-9-54c5f672a726520371de2ea1ab0660ed.jpg' />
-</div>
-<h3 id="what-is-a-signal">What is a signal?<a href="#what-is-a-signal" aria-label="Link to heading 'What is a signal?'" data-heading-content="What is a signal?" class="anchor"></a></h3>
-<p>A signal is an <strong><a href="https://en.wikipedia.org/wiki/Asynchrony_(computer_programming)" target="_blank" rel="noopener noreferrer">asynchronous</a> notification sent to a process</strong> to
-notify it that an event has occurred. Signals are sent by other processes or by
-the system (i.e. the kernel).</p>
-<div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
-  <img src='images/sighup-diagram-c3264a93c24ea6894a5e20e793ff761f.png' />
-</div>
-<p>If the process has registered a <strong>signal handler</strong> for that specific signal, it
-is executed. Otherwise the <strong>default signal handler</strong> is executed.</p>
-<h3 id="common-unix-signals">Common Unix signals<a href="#common-unix-signals" aria-label="Link to heading 'Common Unix signals'" data-heading-content="Common Unix signals" class="anchor"></a></h3>
-<p>A signal is defined by the <code>SIG</code> prefix followed by a mnemonic name for the
-signal. Some signals also have a standard number assigned to them. Here are some
-of the most commonly encountered Unix signals:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Signal</th>
-<th align="right">Number</th>
-<th align="left">Default handler</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>SIGHUP</code></td>
-<td align="right">1</td>
-<td align="left">Terminate</td>
-<td align="left">Hangup (i.e. connection lost)</td>
-</tr>
-<tr>
-<td align="left"><code>SIGINT</code></td>
-<td align="right">2</td>
-<td align="left">Terminate</td>
-<td align="left">Interrupt signal (sent when you use <code>Ctrl-C</code>)</td>
-</tr>
-<tr>
-<td align="left"><code>SIGTERM</code></td>
-<td align="right">15</td>
-<td align="left">Terminate</td>
-<td align="left">Termination signal (default signal sent by the <code>kill</code> command)</td>
-</tr>
-<tr>
-<td align="left"><code>SIGQUIT</code></td>
-<td align="right">3</td>
-<td align="left">Terminate (with <a href="https://en.wikipedia.org/wiki/Core_dump" target="_blank" rel="noopener noreferrer">core dump</a>)</td>
-<td align="left">Termination signal</td>
-</tr>
-<tr>
-<td align="left"><code>SIGKILL</code></td>
-<td align="right">9</td>
-<td align="left">Terminate</td>
-<td align="left">Kill (cannot be caught or ignored)</td>
-</tr>
-<tr>
-<td align="left"><code>SIGUSR1</code></td>
-<td align="right">-</td>
-<td align="left">Terminate</td>
-<td align="left">User-defined signal 1</td>
-</tr>
-<tr>
-<td align="left"><code>SIGUSR2</code></td>
-<td align="right">-</td>
-<td align="left">Terminate</td>
-<td align="left">User-defined signal 2</td>
-</tr>
-<tr>
-<td align="left"><code>SIGWINCH</code></td>
-<td align="right">-</td>
-<td align="left">Ignore</td>
-<td align="left">Terminal window size changed</td>
-</tr>
-</tbody>
-</table>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can <strong>l</strong>ist available signals on your system by running <code>kill -l</code>. Here’s
-a more complete list: <a href="https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals" target="_blank" rel="noopener noreferrer">POSIX signals</a>.</p></div></div>
-<h4 id="the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)<a href="#the-terminal-interrupt-signal-sigint" aria-label="Link to heading 'The terminal interrupt signal (SIGINT)'" data-heading-content="The terminal interrupt signal (SIGINT)" class="anchor"></a></h4>
-<p>When you type <code>Ctrl-C</code> in your terminal to terminate a running process, you are
-actually using Unix signals.</p>
-<p>The shortcut is interpreted by your shell, which then sends a <strong>terminal
-interrupt signal</strong>, or <strong><code>SIGINT</code></strong>, to the running process.</p>
-<p>Most processes handle that signal by terminating (altough some don’t respond to
-it, like some interactive helps, e.g. <code>man ls</code>).</p>
-<h3 id="the-kill-command">The <code>kill</code> command<a href="#the-kill-command" aria-label="Link to heading 'The kill command'" data-heading-content="The kill command" class="anchor"></a></h3>
-<p>The <code>kill</code> command <strong>sends a signal to a process</strong>.</p>
-<p>Since the default signal handler for most signals is to terminate the process,
-it often has that effect, hence the name “kill”.</p>
-<p>Its syntax is:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">kill [-&lt;SIGNAL&gt;] &lt;PID&gt;
-</div><div class="l-line" data-line="2">kill [-s &lt;SIGNAL&gt;] &lt;PID&gt;
-</div></code></pre>
-<table>
-<thead>
-<tr>
-<th align="left">Command</th>
-<th align="left">Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>kill 10000</code></td>
-<td align="left">Send the <strong>default <code>SIGTERM</code> signal</strong> to process with PID <code>10000</code></td>
-</tr>
-<tr>
-<td align="left"><code>kill -s HUP 10000</code></td>
-<td align="left">Send the <code>SIGHUP</code> signal to that same process</td>
-</tr>
-<tr>
-<td align="left"><code>kill -HUP 10000</code></td>
-<td align="left">Equivalent to the previous command</td>
-</tr>
-<tr>
-<td align="left"><code>kill -1 10000</code></td>
-<td align="left">Equivalent to the previous command (1 is the official POSIX number for <code>SIGHUP</code>)</td>
-</tr>
-</tbody>
-</table>
-<h4 id="trapping-signals">Trapping signals<a href="#trapping-signals" aria-label="Link to heading 'Trapping signals'" data-heading-content="Trapping signals" class="anchor"></a></h4>
-<p>This command will run a
-<a href="https://gist.github.com/AlphaHydrae/162f28e3e2bd9355a95914e04cd4dd0c/91dda64d9e0ca26168d25195a189ca6a69a14ee6" target="_blank" rel="noopener noreferrer">badly behaved script</a>
-which traps and ignores all signals sent to it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-string-special-path">-s</span> <span class="l-string-special-path">-L</span> <span class="l-string-special-path">https://git.io/JitFQ</span><span class="l-operator">|</span><span class="l-function-call">sh</span> <span class="l-variable-parameter">-s</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hi,</span> <span class="l-variable-parameter">I</span>&#39;m running with PID 10000
-</div><div class="l-line" data-line="3">Try and kill me!
-</div></code></pre>
-<p>Since it ignores the <code>SIGINT</code> signal among others,
-you will not be able to stop it with <code>Ctrl-C</code>.</p>
-<p>Open another terminal and try to kill the process by referring to its PID
-(which is <code>10000</code> in this example but will be different on your machine):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-number">10000</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">HUP</span> <span class="l-number">10000</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">QUIT</span> <span class="l-number">10000</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">USR1</span> <span class="l-number">10000</span>
-</div></code></pre>
-<p>The script will simply log that it is ignoring your signal and continue executing.</p>
-<h4 id="the-kill-signal">The <code>KILL</code> signal<a href="#the-kill-signal" aria-label="Link to heading 'The KILL signal'" data-heading-content="The KILL signal" class="anchor"></a></h4>
-<p>There is one signal that cannot be ignored: <strong>the <code>KILL</code> signal</strong>.</p>
-<p>Although a process can detect the signal and attempt to perform additional operations,
-<strong>the OS will permanently kill the process</strong> shortly after it is received,
-and the process can do nothing to prevent it.</p>
-<p>Send a <code>KILL</code> signal to the process with the same PID as before:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">KILL</span> <span class="l-number">10000</span>
-</div></code></pre>
-<p>The script will finally have the decency to die.</p>
-<h3 id="unix-signals-in-the-real-world">Unix signals in the real world<a href="#unix-signals-in-the-real-world" aria-label="Link to heading 'Unix signals in the real world'" data-heading-content="Unix signals in the real world" class="anchor"></a></h3>
-<p>Many widely-used programs react to Unix signals, for example:</p>
-<ul>
-<li><a href="http://nginx.org/en/docs/control.html" target="_blank" rel="noopener noreferrer">Nginx</a></li>
-<li><a href="https://www.postgresql.org/docs/current/static/app-postgres.html#id-1.9.5.14.9" target="_blank" rel="noopener noreferrer">PostgreSQL</a></li>
-<li><a href="https://linux.die.net/man/8/sshd" target="_blank" rel="noopener noreferrer">OpenSSH</a></li>
-</ul>
-<div class="cols grid grid-cols-1 md:grid-cols-3 gap-4"><div class="md:col-span-2"><p>A common example is the <code>SIGHUP</code> signal. Originally it was meant to indicate
-that the modem hanged up.</p>
-<p>That’s not relevant to programs not directly connected to a terminal, but some
-programs repurposed it for another use.</p>
-<p>Many background services like Nginx and PostgreSQL will reload their
-configuration (without shutting down) when receiving that signal. Many other
-tools follow this convention.</p></div><div><p><img src="images/sighup-04c39cccb6f2714ce0c0c2c2e8d43d5d.jpg" alt="SIGHUP" /></p></div></div>
 <h2 id="standard-streams">Standard streams<a href="#standard-streams" aria-label="Link to heading 'Standard streams'" data-heading-content="Standard streams" class="anchor"></a></h2>
 <p><strong>Standard streams</strong> are preconnected input and output communication channels
 between a process and its environment.</p>
@@ -773,24 +600,7 @@ between a process and its environment.</p>
 <h3 id="the-good-old-days">The good old days<a href="#the-good-old-days" aria-label="Link to heading 'The good old days'" data-heading-content="The good old days" class="anchor"></a></h3>
 <p>In <strong>pre-Unix</strong> (before 1970) systems, programs had to <strong>explicitly connect to
 input and output devices</strong>. This was done differently for each device (e.g.
-magnetic tape drive, disk drive, printer, etc) and operating system. For
-example, IBM mainframes used a <a href="https://en.wikipedia.org/wiki/Job_Control_Language" target="_blank" rel="noopener noreferrer"><strong>J</strong>ob <strong>C</strong>ontrol <strong>L</strong>anguage (JCL)</a> to
-establish connections between programs and devices.</p>
-<!-- slide-column 25 -->
-<p><strong>Unix file copy</strong></p>
-<p><code>cp a.txt b.txt</code></p>
-<!-- slide-column -->
-<p><strong>JCL copy instructions for <a href="https://en.wikipedia.org/wiki/OS/360_and_successors" target="_blank" rel="noopener noreferrer">OS/360</a></strong></p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">//IS198CPY JOB (IS198T30500),&#39;COPY JOB&#39;,CLASS=L,MSGCLASS=X
-</div><div class="l-line" data-line="2">//COPY01   EXEC PGM=IEBGENER
-</div><div class="l-line" data-line="3">//SYSPRINT DD SYSOUT=*
-</div><div class="l-line" data-line="4">//SYSUT1   DD DSN=a.txt,DISP=SHR
-</div><div class="l-line" data-line="5">//SYSUT2   DD DSN=b.txt,
-</div><div class="l-line" data-line="6">//            DISP=(NEW,CATLG,DELETE),
-</div><div class="l-line" data-line="7">//            SPACE=(CYL,(40,5),RLSE),
-</div><div class="l-line" data-line="8">//            DCB=(LRECL=115,BLKSIZE=1150)
-</div><div class="l-line" data-line="9">//SYSIN  DD DUMMY
-</div></code></pre>
+magnetic tape drive, disk drive, printer, etc) and operating system.</p>
 <h3 id="unix-streams">Unix streams<a href="#unix-streams" aria-label="Link to heading 'Unix streams'" data-heading-content="Unix streams" class="anchor"></a></h3>
 <p>Unix introduced <strong>abstract devices</strong> and the concept of a <strong>data stream</strong>: an
 ordered sequence of data bytes which can be read until the <strong>e</strong>nd <strong>o</strong>f
@@ -830,7 +640,6 @@ default:</p>
 </tr>
 </tbody>
 </table>
-<p><img src="images/streams-e278253a3665e43247f5f1f406b52e68.jpg" alt="Standard streams" /></p>
 <h4 id="streams-the-keyboard-and-the-terminal">Streams, the keyboard, and the terminal<a href="#streams-the-keyboard-and-the-terminal" aria-label="Link to heading 'Streams, the keyboard, and the terminal'" data-heading-content="Streams, the keyboard, and the terminal" class="anchor"></a></h4>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>Another Unix breakthrough was to <strong>automatically associate</strong>:</p>
 <ul>
@@ -854,20 +663,594 @@ of the parent process, in this case your shell (e.g. Bash) is inherited by the
 you do not have to explicitly connect your keyboard input to this new process.
 As the SSH client is a child process of the shell, it inherits the same standard
 input.</p>
-<p><img src="images/ssh-channel-and-processes-83b089217f288f5cd5d67d9f19f1c4c4.png" alt="SSH channel and processes" /></p>
+<!-- Generated from diagrams/408-streams.svg and 408-streams.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="408-streams">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 670" role="img" aria-labelledby="diagram-408-streams-title">
+<title id="diagram-408-streams-title">What you type and what a command prints, through an SSH connection</title>
+<style id="diagram-408-streams-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-408-streams-diagram-defs">
+<marker id="diagram-408-streams-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-408-streams-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs><g class="fragment teardown" data-fragment-index="2"/><g class="fragment teardown" data-fragment-index="1"/>
+<g id="diagram-408-streams-lane-computer" class="lane"><text class="lane-heading" x="260" y="58">Your Computer</text></g>
+<g id="diagram-408-streams-lane-server" class="lane"><text class="lane-heading" x="880" y="58">Server</text></g>
+<g id="diagram-408-streams-boundary-internet" class="boundary">
+<line x1="520" y1="48" x2="520" y2="650"/>
+<line x1="660" y1="48" x2="660" y2="650"/>
+</g>
+<g id="diagram-408-streams-cloud-internet" class="cloud">
+<path d="M558,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="590" y="80">Internet</text>
+</g>
+<g id="diagram-408-streams-node-terminal" class="process">
+<rect x="40" y="96" width="200" height="46" rx="8"/>
+<text class="label" x="140" y="124">Terminal</text>
+</g>
+<g id="diagram-408-streams-node-local-shell" class="process">
+<rect x="40" y="186" width="200" height="46" rx="8"/>
+<text class="label" x="140" y="214">Shell (Bash/Zsh)</text>
+</g>
+<g id="diagram-408-streams-node-ssh-client" class="process">
+<rect x="290" y="186" width="200" height="46" rx="8"/>
+<text class="label" x="390" y="206">SSH Client</text>
+<text class="command" x="390" y="222">ssh jde@example.com</text>
+</g>
+<g id="diagram-408-streams-node-sshd" class="process">
+<rect x="760" y="96" width="200" height="46" rx="8"/>
+<text class="label" x="860" y="124">SSH Server</text>
+<g id="diagram-408-streams-socket-sshd-22" class="socket">
+<path d="M760,112 L742,96 M760,126 L742,142"/>
+<text x="746" y="90">22</text>
+</g>
+</g>
+<g id="diagram-408-streams-node-ssh-session" class="process">
+<rect x="760" y="186" width="200" height="46" rx="8"/>
+<text class="label" x="860" y="214">SSH Session</text>
+</g>
+<g id="diagram-408-streams-node-remote-shell" class="process">
+<rect x="760" y="276" width="200" height="46" rx="8"/>
+<text class="label" x="860" y="304">Shell (Bash/Zsh)</text>
+</g>
+<g id="diagram-408-streams-remote-prompt-l" class="fragment prompt-line transient arrives" data-fragment-index="0" data-gone-from="1" style="--gone-delay: 1.1s"><text x="766" y="340">$&gt; l</text></g>
+<g id="diagram-408-streams-remote-prompt-ls" class="fragment prompt-line transient arrives" data-fragment-index="1" data-gone-from="2" style="--gone-delay: 1.1s"><text x="766" y="340">$&gt; ls</text></g>
+<g id="diagram-408-streams-node-remote-command" class="fragment child process" data-fragment-index="2" style="--launch: 1.7s">
+<rect x="760" y="366" width="200" height="46" rx="8"/><rect x="760" y="366" width="200" height="46" rx="8" class="glow"/><g class="cog"><path d="M952.35,377.72 L954.45,378.18 L954.45,379.82 L952.35,380.28 L951.69,381.87 L952.85,383.69 L951.69,384.85 L949.87,383.69 L948.28,384.35 L947.82,386.45 L946.18,386.45 L945.72,384.35 L944.13,383.69 L942.31,384.85 L941.15,383.69 L942.31,381.87 L941.65,380.28 L939.55,379.82 L939.55,378.18 L941.65,377.72 L942.31,376.13 L941.15,374.31 L942.31,373.15 L944.13,374.31 L945.72,373.65 L946.18,371.55 L947.82,371.55 L948.28,373.65 L949.87,374.31 L951.69,373.15 L952.85,374.31 L951.69,376.13 Z M949.3,379 A2.3,2.3 0 1 0 944.7,379 A2.3,2.3 0 1 0 949.3,379 Z"/></g>
+<text class="label" x="860" y="386">Command</text>
+<text class="command" x="860" y="402">ls</text>
+<g class="fragment pulse" data-fragment-index="3"/></g>
+<g id="diagram-408-streams-edge-terminal-local-shell" class="edge control">
+<path d="M140,142 V186" marker-end="url(#diagram-408-streams-arrow-control)"/>
+</g>
+<g id="diagram-408-streams-edge-local-shell-ssh-client" class="edge control">
+<path d="M240,209 H290" marker-end="url(#diagram-408-streams-arrow-control)"/>
+</g>
+<g id="diagram-408-streams-edge-ssh-client-ssh-session" class="edge comm">
+<path d="M490,209 H560 C640,209 640,209 760,209" marker-end="url(#diagram-408-streams-arrow-comm)"/>
+<text x="590" y="214">example.com</text>
+</g>
+<g id="diagram-408-streams-edge-sshd-ssh-session" class="edge control">
+<path d="M860,142 V186" marker-end="url(#diagram-408-streams-arrow-control)"/>
+</g>
+<g id="diagram-408-streams-edge-ssh-session-remote-shell" class="edge control">
+<path d="M860,232 V276" marker-end="url(#diagram-408-streams-arrow-control)"/>
+</g>
+<g id="diagram-408-streams-edge-remote-shell-remote-command" class="fragment fade-on edge control" data-fragment-index="2" style="--delay: 1.1s">
+<path d="M860,322 V366" marker-end="url(#diagram-408-streams-arrow-control)"/>
+</g>
+<g id="diagram-408-streams-legend" class="legend" transform="translate(0,170)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-408-streams-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-408-streams-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+<g class="overlay packet fragment whole" data-fragment-index="0"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">l</text></g></g><g class="overlay packet fragment whole" data-fragment-index="1"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">s</text></g></g><g class="overlay packet fragment whole" data-fragment-index="2"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">⏎</text></g></g><g class="overlay packet fragment whole" data-fragment-index="4"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 100%; --to: 0%"><path d="M-35,-12 H25 L35,0 L25,12 H-35 Z" transform="scale(-1,1)"/><text x="5" y="5">output</text></g></g></svg>
+</div>
+<template class="diagram-captions"><p data-caption="rest">The SSH client inherited the standard streams of your shell: it reads what you type, and writes to your terminal. On the server, the shell and the commands it starts read from and write to the SSH session.</p><p data-caption="0">You are connected to a server over SSH. Your shell started the SSH client, and on the server, the SSH session started a shell. The connection is open, waiting for you to type.</p><p data-caption="1">You type <code>l</code>. It goes to the standard input of the SSH client, which it inherited from your shell. The client sends it over the connection, and on the server, the session hands it to the standard input of the shell.</p><p data-caption="2">You type <code>s</code>: it travels the same way.</p><p data-caption="3">You press Enter, which travels too. Once it has arrived, the server’s shell starts <code>ls</code>, which inherits the shell’s standard streams.</p><p data-caption="4"><code>ls</code> lists the files of the current directory on the server, and writes them to its standard output. It does not know where that goes.</p><p data-caption="5">Its output goes to the SSH session, back over the connection, and out of the standard output of the SSH client: your terminal displays it.</p></template>
+</div>
 <h4 id="optional-input-stream">Optional input stream<a href="#optional-input-stream" aria-label="Link to heading 'Optional input stream'" data-heading-content="Optional input stream" class="anchor"></a></h4>
 <p>A process is not obligated to use its input or output streams. For example,
 <strong>the <code>ls</code> command</strong> produces output (or an error) but <strong>takes no input</strong> (it
 has arguments, but that does not come from the input data stream).</p>
 <div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
-  <img src='images/streams-ls-68ff2a294ab9f29b3ecc6e5722aef9ed.png' />
+  <img src='images/streams-ls-526a71e2d1e5515a42c51f9caccf79b0.png' />
 </div>
 <h4 id="optional-output-stream">Optional output stream<a href="#optional-output-stream" aria-label="Link to heading 'Optional output stream'" data-heading-content="Optional output stream" class="anchor"></a></h4>
-<p><strong>The <code>cd</code> command</strong> takes no input and <strong>produces no output</strong> either,
-although it can produce an error.</p>
-<div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
-  <img src='images/streams-cd-690e21bb9e8a640f2b22dae64f9b341c.png' />
-</div>
+<p>Similarly, a process is not obligated to use its output streams. For example,
+when you <code>cat</code> a file, it outputs the content of the file to the standard output
+stream, but it does not use the standard error stream:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre>
+<p>Unless the file does not exist, in which case it will output an error message to
+the standard error stream, and nothing to the standard output stream.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">unknown-file</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">cat:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
+</div></code></pre>
 <h3 id="stream-redirection">Stream redirection<a href="#stream-redirection" aria-label="Link to heading 'Stream redirection'" data-heading-content="Stream redirection" class="anchor"></a></h3>
 <p>The standard streams can be <strong>redirected</strong>.</p>
 <p>Redirection means capturing output from a file or command,
@@ -906,15 +1289,17 @@ is redirected</strong> to the file <code>data.txt</code>:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
 </div><div class="l-line" data-line="2">
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">data.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">data.txt</span>  <span class="l-variable-parameter">directory1</span>  <span class="l-variable-parameter">file1</span>
 </div><div class="l-line" data-line="5">
 </div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
 </div><div class="l-line" data-line="7"><span class="l-function-builtin">.</span>
 </div><div class="l-line" data-line="8"><span class="l-function-call">..</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">file1</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">data.txt</span>
 </div><div class="l-line" data-line="10"><span class="l-function-call">directory1</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">...</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">file1</span>
 </div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>data.txt</code> is in its own list: the shell creates the file before it starts
+<code>ls</code>, so that it can connect the standard output of <code>ls</code> to it.</p></div></div>
 <h4 id="how-to-use-standard-output-redirection">How to use standard output redirection<a href="#how-to-use-standard-output-redirection" aria-label="Link to heading 'How to use standard output redirection'" data-heading-content="How to use standard output redirection" class="anchor"></a></h4>
 <p>You can do the same with any command that produces output:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
@@ -930,7 +1315,8 @@ to the end of the file</strong>:</p>
 </div><div class="l-line" data-line="4"><span class="l-function-call">Hello</span>
 </div><div class="l-line" data-line="5"><span class="l-function-call">World</span>
 </div></code></pre>
-<p>If you specify no file descriptor, <strong>standard output is redirected by default</strong>:</p>
+<p>If you specify no file descriptor, <strong>standard output (<code>1</code>) is redirected by
+default</strong>:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Again</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">data.txt</span>
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
@@ -957,165 +1343,93 @@ standard error stream instead</strong>:</p>
 </div></code></pre>
 <h3 id="both-standard-output-and-error-streams">Both standard output and error streams<a href="#both-standard-output-and-error-streams" aria-label="Link to heading 'Both standard output and error streams'" data-heading-content="Both standard output and error streams" class="anchor"></a></h3>
 <p>Some commands will <strong>send data to both output streams</strong> (standard output and
-standard error). As we’ve seen, both are displayed in the terminal by default.</p>
-<p>For example, the <code>curl</code> (<strong>C</strong>lient <strong>URL</strong>) command is used to make HTTP
-requests. By default, it only outputs the HTTP response body to the standard
-output stream, but with the <code>-v</code> (<strong>v</strong>erbose) option it also prints diagnostics
-information to the standard error stream:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span>
-</div><div class="l-line" data-line="2">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="3">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="4">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span><span class="l-punctuation-bracket"></span>
+standard error) in the same run. As we’ve seen, both are displayed in the
+terminal by default.</p>
+<p>For example, the <code>grep</code> command prints the lines of a file that contain a word,
+and with the <code>-r</code> (<strong>r</strong>ecursive) option, it searches all the files of a
+directory. The following command searches the SSH configuration files for the
+word <code>PasswordAuthentication</code>. Run as a regular user, it prints the lines it
+finds to the standard output stream, and an error to the standard error stream
+for each file it is not allowed to read, such as the server’s private SSH keys,
+which only <code>root</code> may read:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
 </div></code></pre>
-<p>Here, <code>Hello World</code> is the output data, while the rest of the output is the
-diagnostics information on the standard error stream.</p>
-<h4 id="redirect-standard-output-stream-curl">Redirect standard output stream (curl)<a href="#redirect-standard-output-stream-curl" aria-label="Link to heading 'Redirect standard output stream (curl)'" data-heading-content="Redirect standard output stream (curl)" class="anchor"></a></h4>
+<p>Here, the lines starting with <code>/etc/ssh/</code> are the output data, while the lines
+starting with <code>grep:</code> are error messages on the standard error stream.</p>
+<h4 id="redirect-standard-output-stream-grep">Redirect standard output stream (grep)<a href="#redirect-standard-output-stream-grep" aria-label="Link to heading 'Redirect standard output stream (grep)'" data-heading-content="Redirect standard output stream (grep)" class="anchor"></a></h4>
 <p>This example demonstrates how the <strong>standard output and error streams</strong> can be
 <strong>redirected separately</strong>.</p>
-<p>The following version redirects standard output to the file <code>curl-output.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">curl-output.txt</span>
-</div><div class="l-line" data-line="2">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="3">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="4">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">curl-output.txt</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span><span class="l-punctuation-bracket"></span>
+<p>The following version redirects standard output to the file <code>found.txt</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
 </div></code></pre>
-<p>As you can see, the <code>Hello World</code> output data is no longer displayed since it
-has been redirected to the file, but the diagnostics information printed on the
-standard error stream is still displayed.</p>
-<h4 id="redirect-standard-error-stream-curl">Redirect standard error stream (curl)<a href="#redirect-standard-error-stream-curl" aria-label="Link to heading 'Redirect standard error stream (curl)'" data-heading-content="Redirect standard error stream (curl)" class="anchor"></a></h4>
-<p>The following version redirects standard error to the file <code>curl-error.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">curl-error.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">curl-error.txt</span>
-</div><div class="l-line" data-line="5">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="6">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="7">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="9"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">...</span><span class="l-punctuation-bracket"></span>
+<p>As you can see, the lines that were found are no longer displayed since they
+have been redirected to the file, but the error messages printed on the
+standard error stream are still displayed.</p>
+<h4 id="redirect-standard-error-stream-grep">Redirect standard error stream (grep)<a href="#redirect-standard-error-stream-grep" aria-label="Link to heading 'Redirect standard error stream (grep)'" data-heading-content="Redirect standard error stream (grep)" class="anchor"></a></h4>
+<p>The following version redirects standard error to the file <code>errors.txt</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">errors.txt</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
 </div></code></pre>
-<p>This time, the <code>Hello World</code> output data is displayed in the terminal as with
-the initial command, but the diagnostics information has been redirected to the
-file.</p>
-<h4 id="redirect-both-standard-output-and-error-streams-curl">Redirect both standard output and error streams (curl)<a href="#redirect-both-standard-output-and-error-streams-curl" aria-label="Link to heading 'Redirect both standard output and error streams (curl)'" data-heading-content="Redirect both standard output and error streams (curl)" class="anchor"></a></h4>
+<p>This time, the lines that were found are displayed in the terminal as with the
+initial command, but the error messages have been redirected to the file.</p>
+<h4 id="redirect-both-standard-output-and-error-streams-grep">Redirect both standard output and error streams (grep)<a href="#redirect-both-standard-output-and-error-streams-grep" aria-label="Link to heading 'Redirect both standard output and error streams (grep)'" data-heading-content="Redirect both standard output and error streams (grep)" class="anchor"></a></h4>
 <p>You can <strong>perform both redirections at once</strong> in one command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">curl-output.txt</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">curl-error.txt</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">errors.txt</span>
 </div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">curl-error.txt</span>
-</div><div class="l-line" data-line="4">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="5">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="6">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">curl-output.txt</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span><span class="l-punctuation-bracket"></span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="7">
+</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
 </div></code></pre>
-<h4 id="combine-standard-output-and-error-streams-curl">Combine standard output and error streams (curl)<a href="#combine-standard-output-and-error-streams-curl" aria-label="Link to heading 'Combine standard output and error streams (curl)'" data-heading-content="Combine standard output and error streams (curl)" class="anchor"></a></h4>
+<h4 id="combine-standard-output-and-error-streams-grep">Combine standard output and error streams (grep)<a href="#combine-standard-output-and-error-streams-grep" aria-label="Link to heading 'Combine standard output and error streams (grep)'" data-heading-content="Combine standard output and error streams (grep)" class="anchor"></a></h4>
 <p>In some situations, you might want to <strong>redirect all of a command’s output</strong>
 (both the standard output stream and error stream) to the same file.</p>
 <p>You can do that with the <code>&amp;&gt;</code> operator:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">curl-result.txt</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">all.txt</span>
 </div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">curl-result.txt</span>
-</div><div class="l-line" data-line="4">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="5">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="6">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">...</span><span class="l-punctuation-bracket"></span>
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">all.txt</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
 </div></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>&amp;&gt; file.txt</code> is equivalent to using both <code>1&gt; file.txt</code> and <code>2&gt; file.txt</code>.</p></div></div>
-<h3 id="discard-an-output-stream">Discard an output stream<a href="#discard-an-output-stream" aria-label="Link to heading 'Discard an output stream'" data-heading-content="Discard an output stream" class="anchor"></a></h3>
-<p>Sometimes you might not be interested in one of the output streams.</p>
-<p>For example, let’s say you want to display the diagnostics information from a
-<code>curl</code> command to identify a network issue, but you <strong>don’t care about the
-standard output</strong>. You don’t want to have to delete a useless file either.</p>
-<h4 id="the-devnull-device">The <code>/dev/null</code> device<a href="#the-devnull-device" aria-label="Link to heading 'The /dev/null device'" data-heading-content="The /dev/null device" class="anchor"></a></h4>
-<p>The file <code>/dev/null</code> is available on all Unix systems and is a <a href="https://en.wikipedia.org/wiki/Null_device" target="_blank" rel="noopener noreferrer"><strong>null
-device</strong></a> (sometimes also called a <em>black hole</em>). It’s a <a href="https://en.wikipedia.org/wiki/Device_file" target="_blank" rel="noopener noreferrer">Unix
-device file</a> that you can write anything to, but that will discard
-all received data.</p>
-<p>It never contains anything:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
-</div></code></pre>
-<p>Even after you write to it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
-</div></code></pre>
-<h4 id="redirect-a-stream-to-the-null-device">Redirect a stream to the null device<a href="#redirect-a-stream-to-the-null-device" aria-label="Link to heading 'Redirect a stream to the null device'" data-heading-content="Redirect a stream to the null device" class="anchor"></a></h4>
-<p>When you don’t care about an output stream, you can simply <strong>redirect it to the
-null device</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2">  <span class="l-function-call">%</span> <span class="l-variable-parameter">Total</span>    <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Received</span> <span class="l-variable-parameter">%</span> <span class="l-variable-parameter">Xferd</span>  <span class="l-variable-parameter">Average</span> <span class="l-variable-parameter">Speed</span>   <span class="l-variable-parameter">Time</span>    <span class="l-variable-parameter">Time</span>     <span class="l-variable-parameter">Time</span>  <span class="l-variable-parameter">Current</span>
-</div><div class="l-line" data-line="3">                                 <span class="l-function-call">Dload</span>  <span class="l-variable-parameter">Upload</span>   <span class="l-variable-parameter">Total</span>   <span class="l-variable-parameter">Spent</span>    <span class="l-variable-parameter">Left</span>  <span class="l-variable-parameter">Speed</span>
-</div><div class="l-line" data-line="4">  <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>    <span class="l-number">0</span>     <span class="l-number">0</span>      <span class="l-number">0</span>      <span class="l-number">0</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span> <span class="l-variable-parameter">--:--:--</span>     <span class="l-number">0</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">TCP_NODELAY</span> <span class="l-variable-parameter">set</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">Connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">git.io</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">54.152.127.232</span><span class="l-punctuation-bracket">)</span> port <span class="l-number">443</span> <span class="l-punctuation-bracket">(</span><span class="l-number"><span class="l-comment">#0</span>)</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">...</span><span class="l-punctuation-bracket"></span>
-</div></code></pre>
-<p>In this example, the standard output stream is redirected to the null device,
-and therefore discarded, while the standard error stream is displayed normally.</p>
-<h4 id="other-redirections-to-the-null-device">Other redirections to the null device<a href="#other-redirections-to-the-null-device" aria-label="Link to heading 'Other redirections to the null device'" data-heading-content="Other redirections to the null device" class="anchor"></a></h4>
-<p>You can also redirect the standard error stream to the null device:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
-<p>Or you can redirect both output streams.
-In this case, all output, diagnostics information and error messages will be discarded:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">https://git.io/fAp8D</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div></code></pre>
-<div class="note note-info"><div class="title"><svg
-  class="size-6"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-  />
-</svg><span>Note</span></div><div class="content"><p>Please send complaints to <code>/dev/null</code>.</p></div></div>
-<h3 id="redirect-one-output-stream-to-another">Redirect one output stream to another<a href="#redirect-one-output-stream-to-another" aria-label="Link to heading 'Redirect one output stream to another'" data-heading-content="Redirect one output stream to another" class="anchor"></a></h3>
-<p>You can also redirect one output stream into another output stream.</p>
-<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>For example, the <code>echo</code> command prints its data to the standard output stream by
-default:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre></div></div>
-<p>The <code>i&gt;&amp;j</code> operator redirects file descriptor <code>i</code> to file descriptor <code>j</code>.</p>
-<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>This <code>echo</code> command has its data redirected to the standard error stream:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div></code></pre></div></div>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This can be useful if you’re writing a shell script and want to print error
-messages to the standard error stream.</p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The lines are not in the same order as in the terminal. When its standard output
+is a file, <code>grep</code> collects the lines it finds and writes them in one go, while
+it writes each error as soon as it happens.</p></div></div>
 <h3 id="redirect-standard-input-stream">Redirect standard input stream<a href="#redirect-standard-input-stream" aria-label="Link to heading 'Redirect standard input stream'" data-heading-content="Redirect standard input stream" class="anchor"></a></h3>
 <p>Just as a command’s output can be redirected to a file, its <strong>input can be
 redirected from a file</strong>.</p>
@@ -1128,26 +1442,6 @@ redirected from a file</strong>.</p>
 </div></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The above command combines two redirections to compress the contents of the
 <code>bar.txt</code> file and save the result into <code>bar.txt.gz</code>.</p></div></div>
-<h4 id="here-documents">Here documents<a href="#here-documents" aria-label="Link to heading 'Here documents'" data-heading-content="Here documents" class="anchor"></a></h4>
-<p>The <code>&lt;&lt;</code> operator also performs <strong>standard input stream redirection</strong> but is a
-bit different. It’s called a <a href="http://tldp.org/LDP/abs/html/here-docs.html" target="_blank" rel="noopener noreferrer"><strong>here document</strong></a> and can be used
-to send multiline input to a command or script, preserving line breaks and other
-whitespace. For example, you could use it to send a list of names or a set of
-commands to be executed to a script.</p>
-<p>Typing the following <code>cat</code> command starts a here document delimited by the
-string <code>EOF</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-operator">&lt;&lt;</span> <span class="l-label">EOF</span>
-</div><div class="l-line" data-line="2"><span class="l-string">heredoc&gt; Hello</span>
-</div><div class="l-line" data-line="3"><span class="l-string">heredoc&gt; World</span>
-</div><div class="l-line" data-line="4"><span class="l-string">heredoc&gt; EOF</span>
-</div><div class="l-line" data-line="5"><span class="l-string">Hello</span>
-</div><div class="l-line" data-line="6"><span class="l-string"></span>World
-</div></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>After you type the first line, you won’t get a prompt back. The here document
-remains open and you can type more text. Typing <code>EOF</code> again and pressing <code>Enter</code>
-closes the document.</p></div></div>
-<p>As you can see, the text you typed is printed by <code>cat</code>, with line breaks
-preserved.</p>
 <h2 id="pipelines">Pipelines<a href="#pipelines" aria-label="Link to heading 'Pipelines'" data-heading-content="Pipelines" class="anchor"></a></h2>
 <p>The <a href="https://en.wikipedia.org/wiki/Unix_philosophy" target="_blank" rel="noopener noreferrer"><strong>Unix philosophy</strong></a>: the power of a system comes more
 from the relationships among programs than from the programs themselves.</p>
@@ -1186,6 +1480,19 @@ as input:</p>
 directory.</p></div><div><div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
   <img src='images/pipes-ls-wc-f54dd55df6d3e58cc7bdcf4456a38f05.png' />
 </div></div></div>
+<p>A pipeline is also a way to find what you are looking for in a long output. The
+<code>ps -ef</code> command lists every process running on the system, and the <code>grep</code>
+command keeps only the lines of its input that contain a word. Together, they
+find the processes of the SSH server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">sshd</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">root</span>        <span class="l-number">3824</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">11:07</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>        <span class="l-number">3840</span>    <span class="l-number">3824</span>  <span class="l-number">0</span> <span class="l-variable-parameter">11:07</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">jde</span>         <span class="l-number">3851</span>    <span class="l-number">3840</span>  <span class="l-number">0</span> <span class="l-variable-parameter">11:07</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">jde@pts/0</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">jde</span>         <span class="l-number">3854</span>    <span class="l-number">3852</span>  <span class="l-number">0</span> <span class="l-variable-parameter">11:07</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">grep</span> <span class="l-variable-parameter">--color=auto</span> <span class="l-variable-parameter">sshd</span>
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The last line is <code>grep</code> itself. Both commands of a pipeline run at the same
+time, so <code>grep</code> was running while <code>ps</code> listed the processes, with <code>sshd</code> in its
+command line.</p></div></div>
 <h3 id="the-unix-philosophy">The Unix philosophy<a href="#the-unix-philosophy" aria-label="Link to heading 'The Unix philosophy'" data-heading-content="The Unix philosophy" class="anchor"></a></h3>
 <p>Pipelines are one of the core features of Unix systems.</p>
 <p>Because <strong>Unix programs</strong> can be easily chained together, they <strong>tend to be
@@ -1207,7 +1514,7 @@ at each step and passing it along to the next command to arrive at the final
 result. <strong>Each of these commands only knows how to do one job</strong>:</p>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-type</span> <span class="l-variable-parameter">f</span> <span class="l-operator">|</span> \
 </div><div class="l-line" data-line="2">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\///&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="3">   <span class="l-function-call">egrep</span> <span class="l-string">&quot;.+\.[^\.]+$&quot;</span> <span class="l-operator">|</span> \
+</div><div class="l-line" data-line="3">   <span class="l-function-call">grep</span> <span class="l-variable-parameter">-E</span> <span class="l-string">&quot;.+\.[^\.]+$&quot;</span> <span class="l-operator">|</span> \
 </div><div class="l-line" data-line="4">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\.//&#39;</span> <span class="l-operator">|</span> \
 </div><div class="l-line" data-line="5">   <span class="l-function-call">sort</span> <span class="l-operator">|</span> \
 </div><div class="l-line" data-line="6">   <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span>
@@ -1223,8 +1530,9 @@ result. <strong>Each of these commands only knows how to do one job</strong>:</p
 extension.</p></div><div><ul>
 <li><code>find</code> is used to recursively list all files in the current directory.</li>
 <li><code>sed</code> (<strong>s</strong>tream <strong>ed</strong>itor) is used to obtain the files’ basenames.</li>
-<li><code>egrep</code> (<strong>e</strong>xtended <strong>g</strong>lobal <strong>r</strong>egular <strong>e</strong>xpression search and
-<strong>p</strong>rint) is used to filter out names that do not have an extension.</li>
+<li><code>grep -E</code> (<strong>g</strong>lobal <strong>r</strong>egular <strong>e</strong>xpression search and <strong>p</strong>rint, with
+<strong>E</strong>xtended regular expressions) is used to filter out names that do not have
+an extension.</li>
 <li><code>sed</code> is used again to transform basenames into just their extension.</li>
 <li><code>sort</code> is used to sort the resulting list alphabetically.</li>
 <li><code>uniq</code> is used to group identical adjacent lines and count them.</li>
@@ -1234,12 +1542,119 @@ extension.</p></div><div><ul>
 <li><a href="https://medium.com/@boutnaru/the-linux-process-journey-pid-0-swapper-7868d1131316" target="_blank" rel="noopener noreferrer">The Linux Process Journey - PID 0 (swapper) - Shlomi Boutnaru</a></li>
 <li><a href="https://medium.com/@boutnaru/the-linux-process-journey-pid-1-init-60765a069f17" target="_blank" rel="noopener noreferrer">The Linux Process Journey - PID 1 (init) - Shlomi Boutnaru</a></li>
 <li><a href="https://medium.com/@boutnaru/the-linux-process-journey-pid-2-kthreadd-38657c2f0fa2" target="_blank" rel="noopener noreferrer">The Linux Process Journey - PID 2 (kthreadd) - Shlomi Boutnaru</a></li>
-<li><a href="https://www.baeldung.com/linux/sigint-and-other-termination-signals" target="_blank" rel="noopener noreferrer">SIGINT And Other Termination Signals in Linux</a></li>
 <li><a href="https://superuser.com/a/377675" target="_blank" rel="noopener noreferrer">What is the main purpose of the swapper process in Unix? - superuser</a></li>
 <li><a href="https://www.tldp.org/LDP/abs/html/io-redirection.html" target="_blank" rel="noopener noreferrer">I/O Redirection (The Linux Documentation Project)</a></li>
 <li><a href="http://tldp.org/LDP/abs/html/here-docs.html" target="_blank" rel="noopener noreferrer">Here Documents (The Linux Documentation Project)</a></li>
 <li><a href="https://www.tutorialspoint.com/unix/unix-io-redirections.htm" target="_blank" rel="noopener noreferrer">Unix/Linux - Shell Input/Output Redirections</a></li>
-<li><a href="http://www.opsschool.org/unix_signals.html" target="_blank" rel="noopener noreferrer">Signals - Unix fundamentals 201 - Ops School Curriculum</a></li>
+</ul>
+<h2 id="appendix-discard-an-output-stream">Appendix: Discard an output stream<a href="#appendix-discard-an-output-stream" aria-label="Link to heading 'Appendix: Discard an output stream'" data-heading-content="Appendix: Discard an output stream" class="anchor"></a></h2>
+<p>Sometimes you might not be interested in one of the output streams.</p>
+<p>For example, you may only want the error messages of the <code>grep</code> command from
+<a href="#both-standard-output-and-error-streams">the previous examples</a>, to see which
+files it could not read, and <strong>don’t care about the lines it found</strong>. You don’t
+want to have to delete a useless file either.</p>
+<h3 id="the-devnull-device">The <code>/dev/null</code> device<a href="#the-devnull-device" aria-label="Link to heading 'The /dev/null device'" data-heading-content="The /dev/null device" class="anchor"></a></h3>
+<p>The file <code>/dev/null</code> is available on all Unix systems and is a <a href="https://en.wikipedia.org/wiki/Null_device" target="_blank" rel="noopener noreferrer"><strong>null
+device</strong></a> (sometimes also called a <em>black hole</em>). It’s a <a href="https://en.wikipedia.org/wiki/Device_file" target="_blank" rel="noopener noreferrer">Unix
+device file</a> that you can write anything to, but that will discard
+all received data.</p>
+<p>It never contains anything:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
+</div></code></pre>
+<p>Even after you write to it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div><div class="l-line" data-line="2">
+</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
+</div></code></pre>
+<h3 id="redirect-a-stream-to-the-null-device">Redirect a stream to the null device<a href="#redirect-a-stream-to-the-null-device" aria-label="Link to heading 'Redirect a stream to the null device'" data-heading-content="Redirect a stream to the null device" class="anchor"></a></h3>
+<p>When you don’t care about an output stream, you can simply <strong>redirect it to the
+null device</strong>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
+</div></code></pre>
+<p>In this example, the standard output stream is redirected to the null device,
+and therefore discarded, while the standard error stream is displayed normally.</p>
+<h3 id="other-redirections-to-the-null-device">Other redirections to the null device<a href="#other-redirections-to-the-null-device" aria-label="Link to heading 'Other redirections to the null device'" data-heading-content="Other redirections to the null device" class="anchor"></a></h3>
+<p>You can also redirect the standard error stream to the null device, to see only
+the lines that were found:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
+</div></code></pre>
+<p>Or you can redirect both output streams. In this case, all output and error
+messages will be discarded:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div></code></pre>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>Please send complaints to <code>/dev/null</code>.</p></div></div>
+<h2 id="appendix-redirect-one-output-stream-to-another">Appendix: Redirect one output stream to another<a href="#appendix-redirect-one-output-stream-to-another" aria-label="Link to heading 'Appendix: Redirect one output stream to another'" data-heading-content="Appendix: Redirect one output stream to another" class="anchor"></a></h2>
+<p>You can also redirect one output stream into another output stream.</p>
+<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>For example, the <code>echo</code> command prints its data to the standard output stream by
+default:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div><div class="l-line" data-line="5">
+</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div></code></pre></div></div>
+<p>The <code>i&gt;&amp;j</code> operator redirects file descriptor <code>i</code> to file descriptor <code>j</code>.</p>
+<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>This <code>echo</code> command has its data redirected to the standard error stream:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="3">
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
+</div><div class="l-line" data-line="6">
+</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
+</div></code></pre></div></div>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This can be useful if you’re writing a shell script and want to print error
+messages to the standard error stream.</p></div></div>
+<h2 id="appendix-here-documents">Appendix: Here documents<a href="#appendix-here-documents" aria-label="Link to heading 'Appendix: Here documents'" data-heading-content="Appendix: Here documents" class="anchor"></a></h2>
+<p>The <code>&lt;&lt;</code> operator also performs <strong>standard input stream redirection</strong> but is a
+bit different. It’s called a <a href="http://tldp.org/LDP/abs/html/here-docs.html" target="_blank" rel="noopener noreferrer"><strong>here document</strong></a> and can be used
+to send multiline input to a command or script, preserving line breaks and other
+whitespace. For example, you could use it to send a list of names or a set of
+commands to be executed to a script.</p>
+<p>Typing the following <code>cat</code> command starts a here document delimited by the
+string <code>EOF</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-operator">&lt;&lt;</span> <span class="l-label">EOF</span>
+</div><div class="l-line" data-line="2"><span class="l-string">&gt; Hello</span>
+</div><div class="l-line" data-line="3"><span class="l-string">&gt; World</span>
+</div><div class="l-line" data-line="4"><span class="l-string">&gt; EOF</span>
+</div><div class="l-line" data-line="5"><span class="l-string">Hello</span>
+</div><div class="l-line" data-line="6"><span class="l-string"></span>World
+</div></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>After you type the first line, you won’t get your usual prompt back, only the
+<code>&gt;</code> prompt of a line still being typed. The here document remains open and you
+can type more text. Typing <code>EOF</code> again and pressing <code>Enter</code>
+closes the document.</p></div></div>
+<p>As you can see, the text you typed is printed by <code>cat</code>, with line breaks
+preserved.</p>
+<h2 id="appendix-welcome-to-the-future">Appendix: Welcome to the future<a href="#appendix-welcome-to-the-future" aria-label="Link to heading 'Appendix: Welcome to the future'" data-heading-content="Appendix: Welcome to the future" class="anchor"></a></h2>
+<p>Some of the previously-mentioned commands are older than you, although they are
+regularly updated. But new command line tools are also being developed today:</p>
+<ul>
+<li>The <a href="https://github.com/dalance/procs" target="_blank" rel="noopener noreferrer"><code>procs</code> command</a> is a modern interactive alternative to the <code>ps</code>
+command for listing processes, written in <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">Rust</a>, a modern systems
+programming language.</li>
+<li>The <a href="https://github.com/ClementTsang/bottom" target="_blank" rel="noopener noreferrer"><code>btm</code> command</a> is a modern alternative to <code>htop</code> and <code>top</code> with
+more features, also written in <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">Rust</a>.</li>
 </ul>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
@@ -1256,6 +1671,9 @@ extension.</p></div><div><ul>
     <nav class="toc" aria-labelledby="on-this-page-title">
       <ul class="section-nav">
   <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#what-is-a-process">What is a process?</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -1294,9 +1712,6 @@ extension.</p></div><div><ul>
   </li><li class="toc-entry toc-h3">
     <a href="#other-monitoring-commands">Other monitoring commands</a>
     
-  </li><li class="toc-entry toc-h3">
-    <a href="#welcome-to-the-future">Welcome to the future</a>
-    
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
@@ -1313,36 +1728,6 @@ extension.</p></div><div><ul>
     
   </li><li class="toc-entry toc-h3">
     <a href="#meaning-of-exit-statuses">Meaning of exit statuses</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#signals">Signals</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#what-is-a-signal">What is a signal?</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#common-unix-signals">Common Unix signals</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#the-kill-command">The <code>kill</code> command</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#trapping-signals">Trapping signals</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#the-kill-signal">The <code>KILL</code> signal</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#unix-signals-in-the-real-world">Unix signals in the real world</a>
     
   </li>
 </ul>
@@ -1390,44 +1775,22 @@ extension.</p></div><div><ul>
     <a href="#both-standard-output-and-error-streams">Both standard output and error streams</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h4">
-    <a href="#redirect-standard-output-stream-curl">Redirect standard output stream (curl)</a>
+    <a href="#redirect-standard-output-stream-grep">Redirect standard output stream (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#redirect-standard-error-stream-curl">Redirect standard error stream (curl)</a>
+    <a href="#redirect-standard-error-stream-grep">Redirect standard error stream (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#redirect-both-standard-output-and-error-streams-curl">Redirect both standard output and error streams (curl)</a>
+    <a href="#redirect-both-standard-output-and-error-streams-grep">Redirect both standard output and error streams (grep)</a>
     
   </li><li class="toc-entry toc-h4">
-    <a href="#combine-standard-output-and-error-streams-curl">Combine standard output and error streams (curl)</a>
+    <a href="#combine-standard-output-and-error-streams-grep">Combine standard output and error streams (grep)</a>
     
   </li>
 </ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#discard-an-output-stream">Discard an output stream</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#the-devnull-device">The <code>/dev/null</code> device</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#redirect-a-stream-to-the-null-device">Redirect a stream to the null device</a>
-    
-  </li><li class="toc-entry toc-h4">
-    <a href="#other-redirections-to-the-null-device">Other redirections to the null device</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#redirect-one-output-stream-to-another">Redirect one output stream to another</a>
-    
   </li><li class="toc-entry toc-h3">
     <a href="#redirect-standard-input-stream">Redirect standard input stream</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#here-documents">Here documents</a>
     
-  </li>
-</ul>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
@@ -1450,17 +1813,44 @@ extension.</p></div><div><ul>
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-discard-an-output-stream">Appendix: Discard an output stream</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#the-devnull-device">The <code>/dev/null</code> device</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#redirect-a-stream-to-the-null-device">Redirect a stream to the null device</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#other-redirections-to-the-null-device">Other redirections to the null device</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-redirect-one-output-stream-to-another">Appendix: Redirect one output stream to another</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-here-documents">Appendix: Here documents</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-welcome-to-the-future">Appendix: Welcome to the future</a>
+    
   </li>
 </ul>
     </nav>
     <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-streams-and-pipelines-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
         <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
       </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/7c9337e7febd19f4fab9a91fa1401f30a4ae5be1/course/chapters/408-unix-streams-and-pipelines/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/408-unix-processes/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1724,19 +2114,19 @@ extension.</p></div><div><ul>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next course-item-current">
-        <a href="/2026/course/408-unix-streams-and-pipelines/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/408-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
-  <span>Unix Streams and Pipelines</span>
+  <span>Unix Processes</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
-        <a href="/2026/course/409-pipe-redirect-kill/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/409-unix-plumbing/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Pipe, redirect and kill</span>
+  <span>Unix plumbing</span>
 </span>
           
           
@@ -1745,7 +2135,7 @@ extension.</p></div><div><ul>
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP application with SFTP</span>
+  <span>Deploy a web application with SFTP</span>
 </span>
           
           
@@ -1760,10 +2150,10 @@ extension.</p></div><div><ul>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
-        <a href="/2026/course/412-unix-processes/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Unix Processes</span>
+  <span>Watch your processes</span>
 </span>
           
           
@@ -2160,7 +2550,7 @@ extension.</p></div><div><ul>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@7c9337e</span>
+        <span class="tooltip-content">main@c8ae971</span>
         <span class="font-title">0.1.0</span>
       </span>
       
