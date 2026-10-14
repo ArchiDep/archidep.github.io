@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Deploy a web application with SFTP · ArchiDep</title>
-<meta name="description" content="This guide describes how to deploy a Node.js application over SFTP on a server with Node.js and PostgreSQL installed. Connect to your cloud server with SSH for this exercise." />
+<meta name="description" content="This guide describes how to deploy a Node.js application over SFTP on a server, including installing what it needs to run, such as a PostgreSQL database server." />
 <link rel="canonical" href="https://archidep.ch/2026/course/410-sftp-deployment/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Deploy a web application with SFTP" />
-<meta property="og:description" content="This guide describes how to deploy a Node.js application over SFTP on a server with Node.js and PostgreSQL installed. Connect to your cloud server with SSH for this exercise." />
+<meta property="og:description" content="This guide describes how to deploy a Node.js application over SFTP on a server, including installing what it needs to run, such as a PostgreSQL database server." />
 <meta property="og:url" content="https://archidep.ch/2026/course/410-sftp-deployment/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-bb6075c00d86478e64de039bb3c719cf.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/410-sftp-deployment/exercise.md">Rev: c8ae97147c2deb0f5bca433cd167863be803b272</a>
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/410-sftp-deployment/exercise.md">Rev: 9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55</a>
     </li>
   </ul>
 </div>
@@ -121,8 +121,8 @@
 </h1>
 
       <div class="my-4"><p>This guide describes how to deploy a <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> application over
-<a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">SFTP</a> on a server with Node.js and <a href="https://www.postgresql.org" target="_blank" rel="noopener noreferrer">PostgreSQL</a> installed.</p>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this exercise.</p></div></div></div></div>
+<a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol" target="_blank" rel="noopener noreferrer">SFTP</a> on a server, including installing what it needs to run, such as a
+<a href="https://www.postgresql.org" target="_blank" rel="noopener noreferrer">PostgreSQL</a> database server.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -136,7 +136,7 @@
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#make-sure-your-guess-it-is-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure your Guess It is up to date</a>
+    <a href="#make-sure-you-have-your-own-up-to-date-guess-it-fork"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure you have your own up-to-date Guess It fork</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#make-sure-your-fork-is-up-to-date"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Make sure your fork is up to date</a>
@@ -150,19 +150,33 @@
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies</a>
-    
-  </li><li class="toc-entry toc-h2">
     <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#install-nodejs"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Node.js</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#whats-running-so-far"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> What’s running so far?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#generate-a-password"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Generate a password</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#upload-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Upload the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#optional-check-that-the-files-have-arrived"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: check that the files have arrived</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-did-the-files-get-there"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> How did the files get there?</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#initialize-the-database"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Initialize the database</a>
@@ -172,9 +186,6 @@
     
   </li>
 </ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
-    
   </li><li class="toc-entry toc-h2">
     <a href="#run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application</a>
     <ul class="section-nav">
@@ -197,6 +208,9 @@
     
   </li><li class="toc-entry toc-h3">
     <a href="#daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated libraries</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-changes-to-schemasql-or-serverjs-are-not-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My changes to <code>schema.sql</code> or <code>server.js</code> are not on the server</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#cannot-find-module"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Cannot find module</code></a>
@@ -263,16 +277,20 @@
   </li>
 </ul>
 
-      <h2 id="make-sure-your-guess-it-is-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure your Guess It is up to date<a href="#make-sure-your-guess-it-is-up-to-date" aria-label="Link to heading 'Make sure your Guess It is up to date'" data-heading-content="Make sure your Guess It is up to date" class="anchor"></a></h2>
-<p>You will deploy <a href="/2026/course/205-guessit/">Guess It</a>, with the three queries implemented and its
-vulnerabilities fixed.</p>
-<p>The original Guess It repository, <a href="https://github.com/ArchiDep/guessit-ex" target="_blank" rel="noopener noreferrer"><code>ArchiDep/guessit-ex</code></a>, has changed
-since you forked it. It now has the three queries, and the fixes for the
+      <h2 id="make-sure-you-have-your-own-up-to-date-guess-it-fork"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure you have your own up-to-date Guess It fork<a href="#make-sure-you-have-your-own-up-to-date-guess-it-fork" aria-label="Link to heading 'Make sure you have your own up-to-date Guess It fork'" data-heading-content="Make sure you have your own up-to-date Guess It fork" class="anchor"></a></h2>
+<p>You will deploy <a href="/2026/course/205-guessit/">Guess It</a> on your own server, with the three queries
+implemented and its vulnerabilities fixed.</p>
+<p>The original Guess It repository, <a href="https://github.com/ArchiDep/guessit-ex" target="_blank" rel="noopener noreferrer"><code>ArchiDep/guessit-ex</code></a>, has been
+updated since it was forked. It now has the three queries, and the fixes for the
 vulnerabilities we found during the <a href="/2026/course/301-security/">security analysis</a>. Your
-application will be on the Internet, where anyone can attack it, so you must
-deploy that fixed version.</p>
+deployment will be accessible on the Internet, where anyone can attack it, so
+you must deploy that fixed version.</p>
+<p>Everyone deploys and makes changes individually in this and later exercises, so
+you need to make sure you have your own fork of the repository.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>This step happens on your local machine. Choose the option that applies to you,
+and follow the instructions.</p></div></div></div>
 <ul>
-<li><strong>If you have your own fork:</strong> <a href="#make-sure-your-fork-is-up-to-date">Make sure your fork is up to
+<li><strong>If you already have your own fork:</strong> <a href="#make-sure-your-fork-is-up-to-date">Make sure your fork is up to
 date</a>.</li>
 <li><strong>If you do not have your own fork yet:</strong> <a href="#fork-the-repository">Fork the
 repository</a>.</li>
@@ -300,8 +318,7 @@ merge its <code>main</code> branch into yours:</p>
 <p>Git will probably report a conflict in <code>server.js</code>: your group and the original
 repository both implemented the same queries, and the original repository then
 rewrote them to fix the vulnerabilities. Resolve each conflict by keeping the
-original repository’s version, the part between <code>=======</code> and
-<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; upstream/main</code>. Then finish the merge and push it:</p>
+original repository’s version, the part between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; upstream/main</code>. Then finish the merge and push it:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Mark the conflict as resolved</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
 </div><div class="l-line" data-line="3">
@@ -315,8 +332,8 @@ original repository’s version, the part between <code>=======</code> and
 <code>git push</code> is left to do.</p></div></div>
 <h3 id="fork-the-repository"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Fork the repository<a href="#fork-the-repository" aria-label="Link to heading 'Fork the repository'" data-heading-content="Fork the repository" class="anchor"></a></h3>
 <p>If you do not have a fork of your own yet, either fork your group’s repository
-(<strong>after</strong> the owner has updated it), or fork the original
-<a href="https://github.com/ArchiDep/guessit-ex" target="_blank" rel="noopener noreferrer"><code>ArchiDep/guessit-ex</code> repository</a>, using the <strong>Fork</strong> button:</p>
+<strong>after</strong> the owner has updated it, or fork the original <a href="https://github.com/ArchiDep/guessit-ex" target="_blank" rel="noopener noreferrer"><code>ArchiDep/guessit-ex</code>
+repository</a>, using the <strong>Fork</strong> button:</p>
 <p><img src="images/fork-b6cfdd9f7882569819767822983ae065.png" alt="Fork button" /></p>
 <p>Then clone your fork on your computer:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
@@ -326,9 +343,10 @@ original repository’s version, the part between <code>=======</code> and
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If <code>git clone</code> fails because <code>guessit-ex</code> already exists, see <a href="#destination-path-guessit-ex-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" />
 <code>destination path 'guessit-ex' already exists</code></a>.</p></div></div>
 <h3 id="fork-again"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Fork again<a href="#fork-again" aria-label="Link to heading 'Fork again'" data-heading-content="Fork again" class="anchor"></a></h3>
-<p>If you prefer to start again from the clean course repository, you can fork it
-again. The new fork will not have your group’s commits, but it will have the
-working queries and the fixes of the vulnerabilities.</p>
+<p>If you already have a fork, but prefer to start again from the clean course
+repository, you can fork it again. The new fork will not have your group’s
+commits, but it will have the working queries and the fixes of the
+vulnerabilities.</p>
 <p>You can delete your own fork on GitHub, in the <strong>Danger Zone</strong> at the bottom of
 the repository’s <strong>Settings</strong>:</p>
 <p><img src="images/repo-delete-cd22116fec5f7266e0ea8482a834541e.png" alt="Delete repository" /></p>
@@ -341,22 +359,15 @@ the repository’s <strong>Settings</strong>:</p>
 </div></code></pre>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If <code>git clone</code> fails because <code>guessit-ex</code> already exists, see <a href="#destination-path-guessit-ex-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" />
 <code>destination path 'guessit-ex' already exists</code></a>.</p></div></div>
-<h2 id="install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies<a href="#install-the-dependencies" aria-label="Link to heading 'Install the dependencies'" data-heading-content="Install the dependencies" class="anchor"></a></h2>
-<p>Make sure to install the dependencies in your Guess It fork, even if you had
-already done it. The XSS vulnerability was fixed by adding the <code>mustache</code>
-dependency to escape user input, so you need to install it.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span>
-</div></code></pre>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This reinstalls all dependencies, including the new <code>mustache</code> dependency, in
-the <code>node_modules</code> directory.</p></div></div>
 <h2 id="install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL<a href="#install-postgresql" aria-label="Link to heading 'Install PostgreSQL'" data-heading-content="Install PostgreSQL" class="anchor"></a></h2>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this part.</p></div></div></div>
 <p>Update your package lists and install the PostgreSQL database server:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">update</span>
 </div><div class="l-line" data-line="2">
 </div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql</span>
 </div></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>APT may prompt you to restart some services. See the troubleshooting section
-about <a href="#daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated
+<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>APT may open a purple full-screen dialog to prompt you to restart some services.
+See the troubleshooting section about <a href="#daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated
 libraries</a> if necessary.</p></div></div>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><a href="https://en.wikipedia.org/wiki/APT_(software)" target="_blank" rel="noopener noreferrer"><strong>A</strong>dvanced <strong>P</strong>ackaging <strong>T</strong>ool (APT)</a> is the <a href="https://en.wikipedia.org/wiki/Package_manager" target="_blank" rel="noopener noreferrer">package
 manager</a> for Ubuntu (and some other Linux distributions). We
@@ -379,31 +390,710 @@ Node.js 26 from <a href="https://nodesource.com/products/distributions" target="
 </div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">-v</span>
 </div><div class="l-line" data-line="8"><span class="l-function-call">v26.x.y</span>
 </div></code></pre>
+<h2 id="whats-running-so-far"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> What’s running so far?<a href="#whats-running-so-far" aria-label="Link to heading 'What’s running so far?'" data-heading-content="What’s running so far?" class="anchor"></a></h2>
+<p>Installing PostgreSQL started it, while installing Node.js only put its files on
+the disk. This diagram represents the running processes after the initial steps
+of the exercise (assuming you still have your SSH connection open in the
+terminal).</p>
+<!-- Generated from diagrams/410-setup.svg and 410-setup.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="410-setup">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-setup-title">
+<title id="diagram-410-setup-title">Installing PostgreSQL and Node.js on a server over SSH</title>
+<style id="diagram-410-setup-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Waiting for an answer: a still clock, where the cog turns while working. */
+svg.diagram .process .clock :is(circle, path) {
+fill: none;
+stroke: #fff;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A detail: shown while the diagram is explained, in a page stepping through it
+or in a deck, but left out of the fully drawn diagram, at rest and in print,
+since students are not expected to draw it. */
+svg.diagram .detail {
+display: none;
+}
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
+display: inline;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+svg.diagram .packet.heavy.whole.visible .leg:not(.visible) {
+animation-duration: 6s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* A process starts waiting as its request sets off. */
+svg.diagram .clock.visible {
+animation: diagram-fade-in 0.4s ease-out 0.2s both;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-410-setup-diagram-defs">
+<marker id="diagram-410-setup-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-410-setup-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs>
+<g id="diagram-410-setup-lane-computer" class="lane"><text class="lane-heading" x="200" y="58">Your Computer</text></g>
+<g id="diagram-410-setup-lane-server" class="lane"><text class="lane-heading" x="820" y="58">Server</text></g>
+<g id="diagram-410-setup-boundary-internet" class="boundary">
+<line x1="400" y1="48" x2="400" y2="610"/>
+<line x1="540" y1="48" x2="540" y2="610"/>
+</g>
+<g id="diagram-410-setup-cloud-internet" class="cloud">
+<path d="M438,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="470" y="80">Internet</text>
+</g>
+<g id="diagram-410-setup-node-terminal" class="process">
+<rect x="92" y="182" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-setup-node-local-shell" class="process">
+<rect x="96" y="186" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-setup-node-ssh-client" class="process">
+<rect x="100" y="190" width="250" height="46" rx="8"/>
+<text class="label" x="225" y="218">Terminal, Shell &amp; SSH Client</text>
+</g>
+<g id="diagram-410-setup-node-sshd" class="process">
+<rect x="600" y="96" width="160" height="46" rx="8"/>
+<text class="label" x="680" y="124">SSH Server</text>
+<g id="diagram-410-setup-socket-sshd-22" class="socket">
+<path d="M600,112 L582,96 M600,126 L582,142"/>
+<text x="586" y="90">22</text>
+</g>
+</g>
+<g id="diagram-410-setup-node-ssh-session" class="process">
+<rect x="594" y="184" width="200" height="46" rx="8"/>
+</g>
+<g id="diagram-410-setup-node-remote-shell" class="process">
+<rect x="600" y="190" width="200" height="46" rx="8"/>
+<text class="label" x="700" y="218">SSH Session &amp; Shell</text>
+</g>
+<g id="diagram-410-setup-node-apt-postgresql" class="passing fragment spawn process" data-fragment-index="0" style="--work: 3.8s; --chars: 27; --t0: 0.3s; --type: 2s; --enter: 2.7s; --launch: 3.3s"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">sudo apt install postgresql</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="230" height="46" rx="8"/><rect x="600" y="320" width="230" height="46" rx="8" class="glow"/><g class="cog"><path d="M822.35,331.72 L824.45,332.18 L824.45,333.82 L822.35,334.28 L821.69,335.87 L822.85,337.69 L821.69,338.85 L819.87,337.69 L818.28,338.35 L817.82,340.45 L816.18,340.45 L815.72,338.35 L814.13,337.69 L812.31,338.85 L811.15,337.69 L812.31,335.87 L811.65,334.28 L809.55,333.82 L809.55,332.18 L811.65,331.72 L812.31,330.13 L811.15,328.31 L812.31,327.15 L814.13,328.31 L815.72,327.65 L816.18,325.55 L817.82,325.55 L818.28,327.65 L819.87,328.31 L821.69,327.15 L822.85,328.31 L821.69,330.13 Z M819.3,333 A2.3,2.3 0 1 0 814.7,333 A2.3,2.3 0 1 0 819.3,333 Z"/></g>
+<text class="label" x="715" y="340">APT</text>
+<text class="command" x="715" y="356">sudo apt install postgresql</text>
+</g>
+<g id="diagram-410-setup-node-apt-nodejs" class="passing fragment spawn process" data-fragment-index="2" style="--work: 3.8s; --chars: 30; --t0: 0.3s; --type: 2s; --enter: 2.7s; --launch: 3.3s"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">sudo apt-get install -y nodejs</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="250" height="46" rx="8"/><rect x="600" y="320" width="250" height="46" rx="8" class="glow"/><g class="cog"><path d="M842.35,331.72 L844.45,332.18 L844.45,333.82 L842.35,334.28 L841.69,335.87 L842.85,337.69 L841.69,338.85 L839.87,337.69 L838.28,338.35 L837.82,340.45 L836.18,340.45 L835.72,338.35 L834.13,337.69 L832.31,338.85 L831.15,337.69 L832.31,335.87 L831.65,334.28 L829.55,333.82 L829.55,332.18 L831.65,331.72 L832.31,330.13 L831.15,328.31 L832.31,327.15 L834.13,328.31 L835.72,327.65 L836.18,325.55 L837.82,325.55 L838.28,327.65 L839.87,328.31 L841.69,327.15 L842.85,328.31 L841.69,330.13 Z M839.3,333 A2.3,2.3 0 1 0 834.7,333 A2.3,2.3 0 1 0 839.3,333 Z"/></g>
+<text class="label" x="725" y="340">APT</text>
+<text class="command" x="725" y="356">sudo apt-get install -y nodejs</text>
+</g>
+<g id="diagram-410-setup-node-node-version" class="passing fragment spawn process" data-fragment-index="3" style="--work: 2.36s; --chars: 7; --t0: 0.3s; --type: 0.56s; --enter: 1.26s; --launch: 1.86s"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">node -v</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="180" height="46" rx="8"/><rect x="600" y="320" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M772.35,331.72 L774.45,332.18 L774.45,333.82 L772.35,334.28 L771.69,335.87 L772.85,337.69 L771.69,338.85 L769.87,337.69 L768.28,338.35 L767.82,340.45 L766.18,340.45 L765.72,338.35 L764.13,337.69 L762.31,338.85 L761.15,337.69 L762.31,335.87 L761.65,334.28 L759.55,333.82 L759.55,332.18 L761.65,331.72 L762.31,330.13 L761.15,328.31 L762.31,327.15 L764.13,328.31 L765.72,327.65 L766.18,325.55 L767.82,325.55 L768.28,327.65 L769.87,328.31 L771.69,327.15 L772.85,328.31 L771.69,330.13 Z M769.3,333 A2.3,2.3 0 1 0 764.7,333 A2.3,2.3 0 1 0 769.3,333 Z"/></g>
+<text class="label" x="690" y="340">Node.js</text>
+<text class="command" x="690" y="356">node -v</text>
+</g>
+<g id="diagram-410-setup-node-postgresql" class="fragment process" data-fragment-index="1">
+<rect x="880" y="480" width="180" height="46" rx="8"/>
+<text class="label" x="970" y="500">PostgreSQL</text>
+<text class="subtitle" x="970" y="516">Started automatically, somehow?</text>
+<g id="diagram-410-setup-socket-postgresql-5432" class="socket">
+<path d="M963,480 L947,462 M977,480 L993,462"/>
+<text x="942" y="466">5432</text>
+</g>
+<g id="diagram-410-setup-socket-postgresql-unix" class="socket detail">
+<path d="M880,496 L862,480 M880,510 L862,526"/>
+<text x="858" y="546">/var/run/postgresql/.s.PGSQL.5432</text>
+</g>
+</g>
+<g id="diagram-410-setup-edge-ssh-client-ssh-session" class="edge comm">
+<path d="M350,213 H480 C540,213 540,213 594,213" marker-end="url(#diagram-410-setup-arrow-comm)"/>
+<text x="440" y="218">W.X.Y.Z</text>
+</g>
+<g id="diagram-410-setup-edge-sshd-ssh-session" class="edge control">
+<path d="M680,142 V184" marker-end="url(#diagram-410-setup-arrow-control)"/>
+</g>
+<g id="diagram-410-setup-edge-remote-shell-apt-postgresql" class="passing fragment fade-on edge control" data-fragment-index="0" style="--work: 3.8s; --delay: 2.7s">
+<path d="M760,236 V320" marker-end="url(#diagram-410-setup-arrow-control)"/>
+</g>
+<g id="diagram-410-setup-edge-remote-shell-apt-nodejs" class="passing fragment fade-on edge control" data-fragment-index="2" style="--work: 3.8s; --delay: 2.7s">
+<path d="M760,236 V320" marker-end="url(#diagram-410-setup-arrow-control)"/>
+</g>
+<g id="diagram-410-setup-edge-remote-shell-node-version" class="passing fragment fade-on edge control" data-fragment-index="3" style="--work: 2.36s; --delay: 1.26s">
+<path d="M760,236 V320" marker-end="url(#diagram-410-setup-arrow-control)"/>
+</g>
+<g id="diagram-410-setup-legend" class="legend" transform="translate(0,128)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-410-setup-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-410-setup-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+</svg>
+</div>
+<template class="diagram-captions"><p data-caption="rest">PostgreSQL is installed and running on your server, listening on port 5432. Node.js is installed, but nothing of it runs.</p><p data-caption="0">You start the exercise by connecting to your server over SSH. This diagram shows that connection already open. The following steps show what happens when you type commands on the server.</p><p data-caption="1">You run <code>sudo apt install postgresql</code>. APT downloads PostgreSQL, installs it, and exits.</p><p data-caption="2">Installing PostgreSQL also started it. It listens on port 5432, and on a Unix socket, a file through which programs on the same server can connect to it. Something started it automatically: more on that later in the course.</p><p data-caption="3">You install Node.js: you install <code>curl</code>, download and run NodeSource’s setup script with it, which adds their repository, then run <code>sudo apt-get install -y nodejs</code>. APT installs it, and exits. Nothing new stays running: installing a program only puts its files on the disk.</p><p data-caption="4">You run <code>node -v</code>. Installed, Node.js is only files on the disk: it runs only when you start it, and here, it stops as soon as it has printed its version.</p></template>
+</div>
+<div class="callout callout-more group/callout" data-callout="410-sftp-deployment:unix-sockets"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-410-sftp-deployment:unix-sockets" type="checkbox" class="peer hidden" /><div class="content"><p>PostgreSQL has a second listening point which is not a network port. It is a
+<a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreferrer">Unix domain socket</a>. A Unix socket is a special kind of file
+through which processes connect to each other, as they would to a TCP port, but
+only on the same machine: it is never reachable from the network. Listing it
+with <code>ls -l</code> shows the type <code>s</code>, for socket, where a regular file has <code>-</code> and a
+directory <code>d</code>.</p>
+<p>Since it is a file, it has an owner and permissions, like any other: the
+operating system checks them when a process connects. It also tells the server
+which user the connecting process runs as. That is how PostgreSQL knows that
+<code>sudo -u postgres psql</code>, which connects through this socket, runs as the
+<code>postgres</code> user of your server, and lets it connect as the PostgreSQL superuser
+without a password. Guess It connects to port 5432 instead, over TCP, with a
+password.</p>
+<p>Many other programs use Unix sockets to connect to each other on Unix systems,
+for example <code>systemctl</code>, the systemd command line tool, and Docker, both of
+which we’ll use later in the course.</p></div><label for="callout-410-sftp-deployment:unix-sockets" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-410-sftp-deployment:unix-sockets" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f60e-5f80f04e6ee97feebdd00feff92ced82.svg" alt="😎" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h2 id="install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies<a href="#install-the-dependencies" aria-label="Link to heading 'Install the dependencies'" data-heading-content="Install the dependencies" class="anchor"></a></h2>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Go back to your local machine for this part. You can open a new local terminal
+while the other one stays connected to your server.</p></div></div></div>
+<p>Install the dependencies in your local copy of the repository, even if you had
+already done it. The XSS vulnerability was fixed by adding the <code>mustache</code>
+dependency to escape user input, so you need to install it.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Install dependencies (do this in the &quot;guessit-ex&quot; directory on your computer)</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span>
+</div></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This reinstalls all dependencies, including the new <code>mustache</code> dependency, in
+the <code>node_modules</code> directory. You will upload that directory with the
+application, so you do not need to install them again on the server.</p></div></div>
 <h2 id="generate-a-password"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Generate a password<a href="#generate-a-password" aria-label="Link to heading 'Generate a password'" data-heading-content="Generate a password" class="anchor"></a></h2>
-<p>The <code>schema.sql</code> file creates a <code>guessit</code> user with the password
-<code>change-me-now</code>. Replace it with a random password. This command generates one,
-made of 32 random hexadecimal digits:</p>
+<p>The <code>schema.sql</code> file of the original repository creates a <code>guessit</code> user with
+the password <code>change-me-now</code>. If you have not changed it yet, replace it with a
+random password. This command generates one, made of 32 random hexadecimal
+digits:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">rand</span> <span class="l-variable-parameter">-hex</span> <span class="l-number">16</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">cc46a7fcd8dd9c0ce9bc6f0aaf63eb3a</span>
 </div></code></pre>
 <p>A password made only of letters and digits can go into the connection URL of
-<code>server.js</code> as it is. Put yours in <code>schema.sql</code>, in your copy of the repository,
-in place of <code>change-me-now</code>. Keep it: you will need it again to configure the
-application.</p>
+<code>server.js</code> as it is. Put it in <code>schema.sql</code>, in your copy of the repository, in
+place of <code>change-me-now</code>.</p>
+<h2 id="update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration<a href="#update-the-configuration" aria-label="Link to heading 'Update the configuration'" data-heading-content="Update the configuration" class="anchor"></a></h2>
+<p>Still in your copy of the repository, on your computer, update the
+<code>DATABASE_URL</code> at the top of the <code>server.js</code> file with the password you put in
+<code>schema.sql</code>:</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span>
+</div><div class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:your-secret-password@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
+</div></code></pre>
+<ul>
+<li>The password must be the same as the one in <code>schema.sql</code>.</li>
+<li>The port must be 5432. If you ran PostgreSQL with Docker Desktop on your
+computer, your copy of <code>server.js</code> may use port <code>5434</code>. On your server,
+PostgreSQL listens on its default port, <code>5432</code>.</li>
+</ul>
+<p>Both files are now ready for your server: you will upload them as they are.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If your password contains special characters, you must URL-encode it before
+putting it in the connection URL of <code>server.js</code>. For example, if your password
+is <code>my$ecret</code>, you must replace the <code>$</code> with <code>%24</code>, so that the connection URL
+becomes</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my%24ecret@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
+</div></code></pre></div></div>
 <h2 id="upload-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Upload the application<a href="#upload-the-application" aria-label="Link to heading 'Upload the application'" data-heading-content="Upload the application" class="anchor"></a></h2>
 <p><strong>On your local machine</strong>, use the SFTP application you set up in <a href="/2026/course/104-hello-ssh/#copy-files-with-an-sftp-application">Hello
 SSH</a> to upload the application to your server: <a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a>
 on Windows, or <a href="https://cyberduck.io" target="_blank" rel="noopener noreferrer">Cyberduck</a> on macOS. Configure a new connection the
 same way, with two differences:</p>
 <ul>
-<li>The <strong>host</strong> is your server’s public IP address.</li>
-<li>The <strong>username</strong> is your Unix username on your server.</li>
+<li>The <strong>host</strong> is your server’s public IP address (<code>W.X.Y.Z</code> in the screenshots
+below).</li>
+<li>The <strong>username</strong> is your Unix username on your server (<code>jde</code> in the
+screenshots below).</li>
 </ul>
 <p>Your private key is the same. On Windows, use the converted
 <code>id_ed25519.ppk</code> key you saved for WinSCP, as described in <a href="/2026/course/104-hello-ssh/#give-your-key-to-winscp-windows-only">Give your key to
 WinSCP</a>.</p>
-<p><strong>[Screenshot to add: WinSCP’s login window, configured for the student’s
-server.]</strong></p>
+<p>On macOS, in Cyberduck’s <strong>Open Connection</strong> window:</p>
+<p><img src="images/cyberduck-connect-744b166cda0c3faca80c5221a51e8ffc.png" alt="Cyberduck’s connection window, configured for the server" /></p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>When you connect for the first time, check the server’s key fingerprint, as you
+did when you first connected to your server with SSH.</p></div></div>
+<p>On Windows, in WinSCP’s login window (the key is under <strong>Advanced…</strong>):</p>
+<p><img src="images/winscp-connect-d38a48020929d51967ab67e6ddae8494.png" alt="WinSCP’s login window, configured for the server" /></p>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -420,24 +1110,665 @@ server.]</strong></p>
 </svg><span>Warning</span></div><div class="content"><p>When you connect for the first time, check the server’s key fingerprint, as you
 did when you first connected to your server with SSH.</p></div></div>
 <p>Once you are connected to your server with your SFTP application, copy your
-<code>guessit-ex</code> directory to <code>/home/jde/guessit</code> (replacing <code>jde</code> with your Unix
-username). Copy the whole directory, including <code>node_modules</code>: the application
-cannot run without its dependencies.</p>
-<p>On Windows, your copy of the repository is in the WSL. In WinSCP’s local panel,
-type its path in the address bar, for example
-<code>\\wsl.localhost\Ubuntu\home\jde\guessit-ex</code>, replacing <code>jde</code> with your Linux
+<code>guessit-ex</code> directory into your home directory on the server, <code>/home/jde</code>
+(replacing <code>jde</code> with your Unix username), so that it ends up in
+<code>/home/jde/guessit-ex</code>. Copy the whole directory, including <code>node_modules</code>: the
+application cannot run without its dependencies.</p>
+<p>On macOS, drag it from the Finder into Cyberduck’s window:</p>
+<p><img src="images/cyberduck-copy-215777caed69bb76f4fbeff891afbb64.png" alt="Dragging guessit-ex from the Finder into Cyberduck" /></p>
+<p>On Windows, your copy of the repository is either in your Windows file system or
+in the WSL. If it’s in Windows, open the directory containing <code>guessit-ex</code> in
+WinSCP’s local panel. If it’s in the WSL, you can type your WSL home path in the
+address bar of WinSCP’s local panel, for example
+<code>\\wsl.localhost\Ubuntu\home\jde</code>, replacing <code>jde</code> with your local Linux
 username.</p>
-<p><strong>[Screenshot to add: WinSCP uploading the <code>guessit-ex</code> directory to the
-server.]</strong></p>
-<p>You can simply drag-and-drop the directory from your machine to the server. You
-can then rename it if necessary.</p>
+<p>You can then simply drag-and-drop the directory from WinSCP’s local panel (on
+the left) to your home directory on the server (on the right):</p>
+<p><img src="images/winscp-copy-888bde1c6a05f8dff5691c4e4a8cdb85.png" alt="WinSCP showing guessit-ex in the WSL, ready to be dragged to the server" /></p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>node_modules</code> holds hundreds of small files, so the upload takes a while.</p></div></div>
+<h3 id="optional-check-that-the-files-have-arrived"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: check that the files have arrived<a href="#optional-check-that-the-files-have-arrived" aria-label="Link to heading 'Optional: check that the files have arrived'" data-heading-content="Optional: check that the files have arrived" class="anchor"></a></h3>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Go back to your terminal that is still connected to your cloud server over SSH
+for this part, or reconnect if necessary.</p></div></div></div>
+<p>Your SFTP application shows the files on the server, but you can also check from
+your terminal. List the uploaded directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Make sure you&#39;re still connected to your server</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">jde.archidep.ch</span>
+</div><div class="l-line" data-line="4">
+</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">README.md</span>  <span class="l-variable-parameter">node_modules</span>  <span class="l-variable-parameter">package-lock.json</span>  <span class="l-variable-parameter">package.json</span>  <span class="l-variable-parameter">schema.sql</span>  <span class="l-variable-parameter">server.js</span>
+</div></code></pre>
+<p>Make sure the configuration you prepared on your computer made it too:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-string-special-path">postgresql://</span> <span class="l-string-special-path">~/guessit-ex/server.js</span>
+</div></code></pre>
+<p>It prints the line of the <code>DATABASE_URL</code>: check that it has your password and
+port <code>5432</code>.</p>
+<p><code>node_modules</code> is where an interrupted upload usually shows: some of its
+packages are missing. Count them on the server:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex/node_modules</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
+</div></code></pre>
+<p>Then run <code>ls node_modules | wc -l</code> in your copy of the repository, on your
+computer. Both numbers should be the same.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>When its output goes into a <a href="/2026/course/408-unix-processes/#pipelines">pipe</a> rather than to your terminal,
+<code>ls</code> lists one name per line, and <code>wc -l</code> counts the lines: the number of
+packages.</p></div></div>
+<h2 id="how-did-the-files-get-there"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> How did the files get there?<a href="#how-did-the-files-get-there" aria-label="Link to heading 'How did the files get there?'" data-heading-content="How did the files get there?" class="anchor"></a></h2>
+<p>Your SFTP application opened a second SSH connection to your server, next to
+your terminal’s. This diagram shows the running processes and network
+connections between them during the SFTP upload, in parallel with the SSH
+connection open in your terminal.</p>
+<!-- Generated from diagrams/410-upload.svg and 410-upload.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="410-upload">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-upload-title">
+<title id="diagram-410-upload-title">Uploading an application to a server over SFTP</title>
+<style id="diagram-410-upload-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Waiting for an answer: a still clock, where the cog turns while working. */
+svg.diagram .process .clock :is(circle, path) {
+fill: none;
+stroke: #fff;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A detail: shown while the diagram is explained, in a page stepping through it
+or in a deck, but left out of the fully drawn diagram, at rest and in print,
+since students are not expected to draw it. */
+svg.diagram .detail {
+display: none;
+}
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
+display: inline;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+svg.diagram .packet.heavy.whole.visible .leg:not(.visible) {
+animation-duration: 6s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* A process starts waiting as its request sets off. */
+svg.diagram .clock.visible {
+animation: diagram-fade-in 0.4s ease-out 0.2s both;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-410-upload-diagram-defs">
+<marker id="diagram-410-upload-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-410-upload-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs><g class="fragment teardown" data-fragment-index="9"/>
+<g id="diagram-410-upload-lane-computer" class="lane"><text class="lane-heading" x="200" y="58">Your Computer</text></g>
+<g id="diagram-410-upload-lane-server" class="lane"><text class="lane-heading" x="820" y="58">Server</text></g>
+<g id="diagram-410-upload-boundary-internet" class="boundary">
+<line x1="400" y1="48" x2="400" y2="610"/>
+<line x1="540" y1="48" x2="540" y2="610"/>
+</g>
+<g id="diagram-410-upload-cloud-internet" class="cloud">
+<path d="M438,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="470" y="80">Internet</text>
+</g>
+<g id="diagram-410-upload-node-terminal" class="process">
+<rect x="92" y="182" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-upload-node-local-shell" class="process">
+<rect x="96" y="186" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-upload-node-ssh-client" class="process">
+<rect x="100" y="190" width="250" height="46" rx="8"/>
+<text class="label" x="225" y="218">Terminal, Shell &amp; SSH Client</text>
+</g>
+<g id="diagram-410-upload-node-sshd" class="process">
+<rect x="600" y="96" width="160" height="46" rx="8"/>
+<text class="label" x="680" y="124">SSH Server</text>
+<g id="diagram-410-upload-socket-sshd-22" class="socket">
+<path d="M600,112 L582,96 M600,126 L582,142"/>
+<text x="586" y="90">22</text>
+</g>
+</g>
+<g id="diagram-410-upload-node-ssh-session" class="process">
+<rect x="594" y="184" width="200" height="46" rx="8"/>
+</g>
+<g id="diagram-410-upload-node-remote-shell" class="process">
+<rect x="600" y="190" width="200" height="46" rx="8"/>
+<text class="label" x="700" y="218">SSH Session &amp; Shell</text>
+</g>
+<g id="diagram-410-upload-node-sftp-client" class="fragment process" data-fragment-index="0" data-gone-from="9">
+<rect x="100" y="320" width="250" height="46" rx="8"/>
+<text class="label" x="225" y="340">SFTP Client</text>
+<text class="subtitle" x="225" y="356">WinSCP or Cyberduck</text>
+</g>
+<g id="diagram-410-upload-node-sftp-session" class="fragment child process" data-fragment-index="2" style="--launch: 0.6s" data-gone-from="9">
+<rect x="600" y="320" width="200" height="46" rx="8"/>
+<text class="label" x="700" y="348">SSH Session</text>
+</g>
+<g id="diagram-410-upload-node-sftp-server" class="fragment child process" data-fragment-index="4" style="--launch: 0.6s" data-gone-from="9">
+<rect x="600" y="410" width="200" height="46" rx="8"/><rect x="600" y="410" width="200" height="46" rx="8" class="glow"/><g class="cog"><path d="M792.35,421.72 L794.45,422.18 L794.45,423.82 L792.35,424.28 L791.69,425.87 L792.85,427.69 L791.69,428.85 L789.87,427.69 L788.28,428.35 L787.82,430.45 L786.18,430.45 L785.72,428.35 L784.13,427.69 L782.31,428.85 L781.15,427.69 L782.31,425.87 L781.65,424.28 L779.55,423.82 L779.55,422.18 L781.65,421.72 L782.31,420.13 L781.15,418.31 L782.31,417.15 L784.13,418.31 L785.72,417.65 L786.18,415.55 L787.82,415.55 L788.28,417.65 L789.87,418.31 L791.69,417.15 L792.85,418.31 L791.69,420.13 Z M789.3,423 A2.3,2.3 0 1 0 784.7,423 A2.3,2.3 0 1 0 789.3,423 Z"/></g>
+<text class="label" x="700" y="430">SFTP Server</text>
+<text class="command" x="700" y="446">sftp-server</text>
+<g class="fragment pulse" data-fragment-index="8"/></g>
+<g id="diagram-410-upload-node-postgresql" class="process">
+<rect x="880" y="480" width="180" height="46" rx="8"/>
+<text class="label" x="970" y="500">PostgreSQL</text>
+<text class="subtitle" x="970" y="516">Started automatically, somehow?</text>
+<g id="diagram-410-upload-socket-postgresql-5432" class="socket">
+<path d="M963,480 L947,462 M977,480 L993,462"/>
+<text x="942" y="466">5432</text>
+</g>
+<g id="diagram-410-upload-socket-postgresql-unix" class="socket detail">
+<path d="M880,496 L862,480 M880,510 L862,526"/>
+<text x="858" y="546">/var/run/postgresql/.s.PGSQL.5432</text>
+</g>
+</g>
+<g id="diagram-410-upload-edge-ssh-client-ssh-session" class="edge comm">
+<path d="M350,213 H480 C540,213 540,213 594,213" marker-end="url(#diagram-410-upload-arrow-comm)"/>
+<text x="440" y="218">W.X.Y.Z</text>
+</g>
+<g id="diagram-410-upload-edge-sshd-ssh-session" class="edge control">
+<path d="M680,142 V184" marker-end="url(#diagram-410-upload-arrow-control)"/>
+</g>
+<g class="fragment hand-over" data-fragment-index="3"/><g id="diagram-410-upload-edge-sftp-client-sftp-session" class="fragment draw-on edge comm" data-to-listener="M350,343 H480 C560,343 540,119 600,119" data-fragment-index="1" style="--delay: 0.3s" data-gone-from="9">
+<path d="M350,343 H480 C540,343 540,343 600,343" marker-end="url(#diagram-410-upload-arrow-comm)" pathLength="1"/>
+<text x="470" y="348">sftp://W.X.Y.Z</text>
+</g>
+<g id="diagram-410-upload-edge-sshd-sftp-session" class="fragment fade-on edge control" data-fragment-index="2" style="--delay: 0s" data-gone-from="9">
+<path d="M760,119 H830 V343 H800" marker-end="url(#diagram-410-upload-arrow-control)"/>
+</g>
+<g id="diagram-410-upload-edge-sftp-session-sftp-server" class="fragment fade-on edge control" data-fragment-index="4" style="--delay: 0s" data-gone-from="9">
+<path d="M700,366 V410" marker-end="url(#diagram-410-upload-arrow-control)"/>
+</g>
+<g id="diagram-410-upload-legend" class="legend" transform="translate(0,128)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-410-upload-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-410-upload-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+<g class="overlay packet fragment whole" data-fragment-index="5"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-47,-12 H37 L47,0 L37,12 H-47 Z"/><text x="-5" y="5">server.js</text></g></g><g class="overlay packet fragment whole" data-fragment-index="6"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-51,-12 H41 L51,0 L41,12 H-51 Z"/><text x="-5" y="5">schema.sql</text></g></g><g class="overlay packet fragment whole heavy" data-fragment-index="7"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-63,-12 H53 L63,0 L53,12 H-63 Z"/><text x="-5" y="5">node_modules/</text></g></g></svg>
+</div>
+<template class="diagram-captions"><p data-caption="rest">Your SFTP client is connected to your server, uploading the application, while your terminal is still connected over SSH.</p><p data-caption="0">Your terminal is still connected to your server over SSH, and PostgreSQL is running. You now upload the application from your computer.</p><p data-caption="1">You open your SFTP client: WinSCP on Windows, or Cyberduck on macOS.</p><p data-caption="2">It connects to port 22, where the SSH server is listening, as your SSH client did: SFTP works over SSH.</p><p data-caption="3">The SSH server accepts the connection, and starts a new SSH session for it. Your terminal’s session is still there: the SSH server is not tied up by one connection.</p><p data-caption="4">It hands the connection over to the new session, and goes back to waiting on port 22.</p><p data-caption="5">This session starts the SFTP server, <code>sftp-server</code>, rather than a shell, because this is an SFTP client connecting, not a human logging in.</p><p data-caption="6">You drag the application’s directory onto the server. Its files travel over the connection: <code>server.js</code>, the application…</p><p data-caption="7">…<code>schema.sql</code>, the structure of its database…</p><p data-caption="8">…and <code>node_modules</code>, the libraries it depends on, copied with it: hundreds of small files, which take a while.</p><p data-caption="9">The SFTP server writes the files to the disk of the server, in the directory you chose.</p><p data-caption="10">You close your SFTP client: its connection closes, and its session and the SFTP server exit. The SSH server is still waiting on port 22, and your terminal is still connected.</p></template>
+</div>
 <h2 id="initialize-the-database"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Initialize the database<a href="#initialize-the-database" aria-label="Link to heading 'Initialize the database'" data-heading-content="Initialize the database" class="anchor"></a></h2>
-<p><strong>Connect to your server</strong> and go into the uploaded directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">jde.archidep.ch</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/guessit</span>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Go back to your terminal that is still connected to your cloud server over SSH
+for this part, or reconnect if necessary.</p></div></div></div>
+<p>Go into the uploaded directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/guessit-ex</span>
 </div></code></pre>
 <p>Run the project’s SQL file as the PostgreSQL superuser, <code>postgres</code>, to create
 the user, the database and its table:</p>
@@ -448,62 +1779,41 @@ the user, the database and its table:</p>
 </div><div class="l-line" data-line="5"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
 </div><div class="l-line" data-line="6"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">TABLE</span>
 </div></code></pre>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This uses the <a href="/2026/course/408-unix-processes/#stream-redirection">redirection operator <code>&lt;</code></a> to send the contents
+<p>This uses the <a href="/2026/course/408-unix-processes/#stream-redirection">redirection operator <code>&lt;</code></a> to send the contents
 of the <code>schema.sql</code> file into the standard input stream of <code>psql</code>. When given
 SQL queries on its input stream, <code>psql</code> connects to the PostgreSQL server,
 executes them, then stops.</p>
-<p><code>sudo -u postgres</code> runs <code>psql</code> as the <code>postgres</code> user of your server, which is
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>sudo -u postgres</code> runs <code>psql</code> as the <code>postgres</code> user of your server, which is
 allowed to connect to PostgreSQL as its superuser, also named <code>postgres</code>. That
 user is not allowed to read your files, so it could not open <code>schema.sql</code>
 itself: your shell opens it, and passes its content to <code>psql</code>.</p></div></div>
-<div class="callout callout-more group/callout" data-callout="410-sftp-deployment:database-users"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-410-sftp-deployment:database-users" type="checkbox" class="peer hidden" /><div class="content"><p>It is good practice to create a different user and password for each application
-that connects to a database server. That way, if one of the applications is
-compromised, it cannot access or modify the databases of the other applications.</p>
+<p>It is good practice to create a different database user and password for each
+application that connects to a database server. That way, if one of the
+applications is compromised, it cannot access or modify the databases of the
+other applications.</p>
 <p>Notably, you should never connect an application to its database as the
 superuser. On your server, only you, the system administrator, can become the
-PostgreSQL superuser, with <code>sudo</code>.</p></div><label for="callout-410-sftp-deployment:database-users" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-410-sftp-deployment:database-users" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f31f-030fc6691abd2ab36c1d90407e02505e.svg" alt="🌟" width="20" height="20" /></span> Amazing!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+PostgreSQL superuser, with <code>sudo</code>.</p>
 <h3 id="optional-make-sure-it-worked"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: make sure it worked<a href="#optional-make-sure-it-worked" aria-label="Link to heading 'Optional: make sure it worked'" data-heading-content="Optional: make sure it worked" class="anchor"></a></h3>
-<p>To make sure everything worked, you can check that the table was created. Connect
-to the <code>guessit</code> database as the superuser, and display the <code>game</code> table’s
-schema with <code>\d</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">guessit</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span> <span class="l-function-call">\d</span> <span class="l-variable-parameter">game</span>
-</div><div class="l-line" data-line="4">                          <span class="l-function-call">Table</span> <span class="l-string">&quot;public.game&quot;</span>
-</div><div class="l-line" data-line="5">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>           <span class="l-function-call">Type</span>           <span class="l-operator">|</span> <span class="l-function-call">Collation</span> <span class="l-operator">|</span> <span class="l-function-call">Nullable</span> <span class="l-operator">|</span> <span class="l-function-call">Default</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">------------+--------------------------+-----------+----------+---------</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">name</span>       <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="9"> <span class="l-function-call">secret</span>     <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="10"> <span class="l-function-call">attempts</span>   <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-number">0</span>
-</div><div class="l-line" data-line="11"> <span class="l-function-call">found_at</span>   <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span>           <span class="l-operator">|</span>          <span class="l-operator">|</span>
-</div><div class="l-line" data-line="12"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span><span class="l-function-call"></span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-function-call">now</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="13">Indexes:
-</div><div class="l-line" data-line="14">    <span class="l-string">&quot;game_pkey&quot;</span> PRIMARY KEY, btree <span class="l-punctuation-bracket">(</span><span class="l-function-call">id</span><span class="l-punctuation-bracket">)</span>
+<p>To make sure everything worked, you can check that the table was created:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&#39;\d game&#39;</span> <span class="l-variable-parameter">guessit</span>
+</div><div class="l-line" data-line="2">                          <span class="l-function-call">Table</span> <span class="l-string">&quot;public.game&quot;</span>
+</div><div class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>           <span class="l-function-call">Type</span>           <span class="l-operator">|</span> <span class="l-function-call">Collation</span> <span class="l-operator">|</span> <span class="l-function-call">Nullable</span> <span class="l-operator">|</span> <span class="l-function-call">Default</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">------------+--------------------------+-----------+----------+---------</span>
+</div><div class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
+</div><div class="l-line" data-line="6"> <span class="l-function-call">name</span>       <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
+</div><div class="l-line" data-line="7"> <span class="l-function-call">secret</span>     <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
+</div><div class="l-line" data-line="8"> <span class="l-function-call">attempts</span>   <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-number">0</span>
+</div><div class="l-line" data-line="9"> <span class="l-function-call">found_at</span>   <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span>           <span class="l-operator">|</span>          <span class="l-operator">|</span>
+</div><div class="l-line" data-line="10"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span><span class="l-function-call"></span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-function-call">now</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="11">Indexes:
+</div><div class="l-line" data-line="12">    <span class="l-string">&quot;game_pkey&quot;</span> PRIMARY KEY, btree <span class="l-punctuation-bracket">(</span><span class="l-function-call">id</span><span class="l-punctuation-bracket">)</span>
 </div></code></pre>
-<p>Everything went well if the table was created, since that is the last step of
-the <code>schema.sql</code> file.</p>
-<p>You may exit <code>psql</code> with <code>\q</code>.</p>
-<h2 id="update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration<a href="#update-the-configuration" aria-label="Link to heading 'Update the configuration'" data-heading-content="Update the configuration" class="anchor"></a></h2>
-<p>Update the <code>DATABASE_URL</code> at the top of the <code>server.js</code> file <strong>on the server</strong>,
-with the password you put in <code>schema.sql</code>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span>
-</div><div class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:your-secret-password@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
-<p>If you ran PostgreSQL with Docker Desktop on your computer, your copy of
-<code>server.js</code> uses port <code>5434</code>. On your server, PostgreSQL listens on its usual
-port, <code>5432</code>.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <code>server.js</code> file <strong>on the server</strong> must be modified. There are several ways
-you can do this:</p>
-<ul>
-<li>Edit the file locally, then copy it to the server again with your SFTP
-application.</li>
-<li>Edit the file directly on the server with <code>nano</code> or <code>vim</code>.</li>
-<li>Your SFTP application can open a remote file in an editor. In WinSCP,
-right-click the file and choose <strong>Edit</strong>. In Cyberduck, right-click the file
-and choose <strong>Edit With</strong>, then your favorite editor. Make your changes and
-save the file: the application uploads it again.</li>
-</ul></div></div>
+<p>If you see the table’s schema, it means it was successfully created and
+everything went well, since that is the last step of the <code>schema.sql</code> file.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The command above connects to the <code>guessit</code> database of the PostgreSQL server,
+executes <code>\d game</code>, then exits. <code>\d</code> is a PostgreSQL command that shows the
+schema of a table.</p></div></div>
 <h2 id="run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application<a href="#run-the-application" aria-label="Link to heading 'Run the application'" data-heading-content="Run the application" class="anchor"></a></h2>
 <p>Also in the uploaded directory on the server, start the application, as you did
 on your computer:</p>
@@ -516,38 +1826,53 @@ on your computer:</p>
 </div></code></pre>
 <p>You (and everybody else) should be able to access the application in a browser
 at your server’s IP address and port 3000 (e.g. <code>http://W.X.Y.Z:3000</code>).</p>
-<p><strong>[Screenshot to add: Guess It’s home page, opened at the server’s IP address
-and port 3000.]</strong></p>
+<p><img src="images/guessit-455612a9a69d4171026903f234be0c38.png" alt="Guess It’s home page, at the server’s IP address and port 3000" /></p>
+<p>If you can play Guess It, congratulations! <img class="emoji" src="/2026/assets/emoji/1f389-b052a4bef57c1aa73cd7cff5bc4fb61d.svg" alt="🎉" width="20" height="20" /> You have deployed a web
+application on a server, and made it accessible to anyone on the Internet.</p>
+<div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If you see Guess It but also see the warning that the leaderbord could not be
+loaded from the database, you are not done. Check your terminal for errors. Most
+likely, the password in <code>server.js</code> does not match the one in <code>schema.sql</code>. See
+<a href="#password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code></a>.</p></div></div>
 <h3 id="optional-see-who-listens-where"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: see who listens where<a href="#optional-see-who-listens-where" aria-label="Link to heading 'Optional: see who listens where'" data-heading-content="Optional: see who listens where" class="anchor"></a></h3>
-<p>Despite what its message says, the application does not only listen on
-<code>localhost</code>. In another SSH connection to your server, list the processes
-listening for TCP connections with <code>ss</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ss</span> <span class="l-function-call">-tln</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">State</span>  <span class="l-variable-parameter">Recv-Q</span> <span class="l-variable-parameter">Send-Q</span> <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span> <span class="l-variable-parameter">Peer</span> <span class="l-variable-parameter">Address:Port</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">200</span>        <span class="l-variable-parameter">127.0.0.1:5432</span>      <span class="l-variable-parameter">0.0.0.0:*</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>                <span class="l-variable-parameter">*:3000</span>            <span class="l-variable-parameter">*:*</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">200</span>            <span class="l-variable-parameter">[</span><span class="l-variable-parameter">::1</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:5432</span>         <span class="l-variable-parameter">[</span><span class="l-variable-parameter">::</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:*</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
+<p>In another SSH connection to your server, list the processes listening for TCP
+connections with <code>ss</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">State</span>   <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span>    <span class="l-variable-parameter">…</span>  <span class="l-variable-parameter">Process</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>         <span class="l-variable-parameter">0.0.0.0:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="4"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>      <span class="l-variable-parameter">127.0.0.54:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>       <span class="l-variable-parameter">127.0.0.1:5432</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;postgres&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="6"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">127.0.0.53%lo:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="7"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>            <span class="l-variable-parameter">[</span><span class="l-variable-parameter">::</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>               <span class="l-variable-parameter">*:3000</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;node-MainThread&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
 </div></code></pre>
-<p>PostgreSQL listens on port 5432 of the <a href="https://en.wikipedia.org/wiki/Loopback#Virtual_loopback_interface" target="_blank" rel="noopener noreferrer">loopback addresses</a>,
-<code>127.0.0.1</code> and its IPv6 equivalent <code>::1</code>: only programs running on your server
-can connect to it. Guess It listens on port 3000 of <code>*</code>, all the addresses of
-your server: anyone who can reach your server can connect to it.</p>
+<p>PostgreSQL (<code>postgres</code>) listens on port 5432 of the <a href="https://en.wikipedia.org/wiki/Loopback#Virtual_loopback_interface" target="_blank" rel="noopener noreferrer">loopback
+address</a>, <code>127.0.0.1</code>: only programs running on your server can
+connect to it. Guess It (<code>node-MainThread</code>, the name Node.js gives its main
+thread) listens on port 3000 of <code>*</code>, all the addresses of your server: anyone
+who can reach your server can connect to it.</p>
+<p>The other lines are the SSH server (<code>sshd</code>), on port 22 of all addresses, and
+your server’s own DNS resolver (<code>systemd-resolve</code>), on port 53 of two loopback
+addresses.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>ss</code> needs <code>sudo</code> to show the processes of other users, like <code>postgres</code>. Without
+it, the Process column stays empty for them.</p></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You have <strong>deployed</strong> an application to a server running in the Microsoft Azure
 cloud. It is now publicly accessible by anyone on the Internet, at your server’s
 public IP address.</p>
 <p>Along the way, you:</p>
 <ul>
-<li>Updated your fork with the fixes of the original repository.</li>
+<li>Updated your fork with the fixes of the original repository (or made a new
+fork).</li>
 <li>Installed PostgreSQL and Node.js on your server.</li>
 <li>Uploaded the application with SFTP, its dependencies included.</li>
 <li>Created its database, configured it, and started it.</li>
 </ul>
 <p>Deploying an application means putting it on a computer where its users can
 reach it, and running it there. Here, that took the same steps as on your own
-computer: install what the application needs, create its database, configure
-it, and start it. Only the computer has changed.</p>
+computer: install what the application needs, create its database, configure it,
+and start it. Only the computer has changed. On an IaaS cloud like Azure, that
+computer is all the provider gives you: as the administrator, installing what
+the application needs is your job.</p>
 <p>For Guess It, the files are the program. Node.js reads the JavaScript files as
 they are, so copying them to the server is enough, as long as Node.js is
 installed there. Its dependencies are files too, which is why you could copy
@@ -556,53 +1881,639 @@ server.</p>
 <p>PostgreSQL and Guess It are two separate programs, running side by side on your
 server. Each is a server of its own, listening on its own port: 5432 for
 PostgreSQL, 3000 for Guess It. Guess It is a client of PostgreSQL, and your
-browser a client of Guess It.</p>
+browser a client of Guess It. Your browser connects as Alice’s <code>nc</code> did to Bob’s
+in the <a href="/2026/course/407-tcp/">TCP exercise</a>, on the same port 3000, then sends an HTTP request,
+the same way you typed one to Google.</p>
 <p>A program chooses which of the computer’s addresses it listens on. PostgreSQL
 only listens on the loopback address, so it cannot be reached from the Internet,
 only by programs on the same server. Guess It listens on all addresses, which is
 what makes it public.</p>
 <p>The application still has a user of its own in the database, as it had on your
 computer. The superuser created that user and is not used again. The password
-is random, because nobody has to remember it.</p>
-<p>The application runs in your terminal, as a program you started yourself. Close
-your SSH connection, and it stops.</p>
+is (ideally) random, because nobody has to remember it.</p>
+<p>The application runs in your terminal, as a program you started yourself.</p>
 <p>Your deployment works, but it has flaws. We will discuss these flaws and improve
 this deployment, one flaw at a time.</p>
 <h2 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h2>
 <p>This is a simplified architecture of the main running processes and
 communication flow at the end of this exercise.</p>
-<p><img src="./images/architecture-e59b0d126b8cdff4d8aea2ef9cf4468f.png" alt="Diagram" /></p>
-<div class="flex items-center gap-2">
-  <a href="./images/architecture-a17bbc40b8d4eb9e07e198cdf92b6987.pdf" download="SFTP Deployment Architecture" class="tooltip" data-tip="Download PDF"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-  />
-</svg>
-  </a>
-  <a href="./images/architecture-e59b0d126b8cdff4d8aea2ef9cf4468f.png" download="SFTP Deployment Architecture" class="tooltip" data-tip="Download PNG"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-  />
-</svg>
-  </a>
+<!-- Generated from diagrams/410-running.svg and 410-running.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="410-running">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-running-title">
+<title id="diagram-410-running-title">A Node.js application deployed by hand over SSH</title>
+<style id="diagram-410-running-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Waiting for an answer: a still clock, where the cog turns while working. */
+svg.diagram .process .clock :is(circle, path) {
+fill: none;
+stroke: #fff;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A detail: shown while the diagram is explained, in a page stepping through it
+or in a deck, but left out of the fully drawn diagram, at rest and in print,
+since students are not expected to draw it. */
+svg.diagram .detail {
+display: none;
+}
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
+display: inline;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+svg.diagram .packet.heavy.whole.visible .leg:not(.visible) {
+animation-duration: 6s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* A process starts waiting as its request sets off. */
+svg.diagram .clock.visible {
+animation: diagram-fade-in 0.4s ease-out 0.2s both;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-410-running-diagram-defs">
+<marker id="diagram-410-running-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-410-running-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs><g class="fragment teardown" data-fragment-index="14"/><g class="fragment teardown" data-fragment-index="12"/><g class="fragment teardown" data-fragment-index="3"/><g class="fragment teardown" data-fragment-index="3"/>
+<g id="diagram-410-running-lane-computer" class="lane"><text class="lane-heading" x="200" y="58">Your Computer</text></g>
+<g id="diagram-410-running-lane-server" class="lane"><text class="lane-heading" x="820" y="58">Server</text></g>
+<g id="diagram-410-running-boundary-internet" class="boundary">
+<line x1="400" y1="48" x2="400" y2="610"/>
+<line x1="540" y1="48" x2="540" y2="610"/>
+</g>
+<g id="diagram-410-running-cloud-internet" class="cloud">
+<path d="M438,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="470" y="80">Internet</text>
+</g>
+<g id="diagram-410-running-node-terminal" class="process">
+<rect x="92" y="182" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-node-local-shell" class="process">
+<rect x="96" y="186" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-node-ssh-client" class="process">
+<rect x="100" y="190" width="250" height="46" rx="8"/>
+<text class="label" x="225" y="218">Terminal, Shell &amp; SSH Client</text>
+</g>
+<g id="diagram-410-running-node-sshd" class="process">
+<rect x="600" y="96" width="160" height="46" rx="8"/>
+<text class="label" x="680" y="124">SSH Server</text>
+<g id="diagram-410-running-socket-sshd-22" class="socket">
+<path d="M600,112 L582,96 M600,126 L582,142"/>
+<text x="586" y="90">22</text>
+</g>
+</g>
+<g id="diagram-410-running-node-ssh-session" class="process">
+<rect x="594" y="184" width="200" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-node-remote-shell" class="process">
+<rect x="600" y="190" width="200" height="46" rx="8"/>
+<text class="label" x="700" y="218">SSH Session &amp; Shell</text>
+</g>
+<g id="diagram-410-running-node-psql" class="fragment spawn process transient" data-fragment-index="0" style="--chars: 34; --t0: 0.3s; --type: 2s; --enter: 2.7s; --launch: 3.3s" data-gone-from="3"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">sudo -u postgres psql &lt; schema.sql</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="270" height="46" rx="8"/>
+<text class="label" x="735" y="340">psql</text>
+<text class="command" x="735" y="356">sudo -u postgres psql &lt; schema.sql</text>
+<g class="fragment transient clock" data-fragment-index="1" data-gone-from="3"><circle cx="857" cy="333" r="6.5"/><path d="M857,329 V333 H860"/></g></g>
+<g id="diagram-410-running-node-browser" class="fragment process" data-fragment-index="5">
+<rect x="160" y="320" width="180" height="46" rx="8"/><rect x="160" y="320" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M332.35,331.72 L334.45,332.18 L334.45,333.82 L332.35,334.28 L331.69,335.87 L332.85,337.69 L331.69,338.85 L329.87,337.69 L328.28,338.35 L327.82,340.45 L326.18,340.45 L325.72,338.35 L324.13,337.69 L322.31,338.85 L321.15,337.69 L322.31,335.87 L321.65,334.28 L319.55,333.82 L319.55,332.18 L321.65,331.72 L322.31,330.13 L321.15,328.31 L322.31,327.15 L324.13,328.31 L325.72,327.65 L326.18,325.55 L327.82,325.55 L328.28,327.65 L329.87,328.31 L331.69,327.15 L332.85,328.31 L331.69,330.13 Z M329.3,333 A2.3,2.3 0 1 0 324.7,333 A2.3,2.3 0 1 0 329.3,333 Z"/></g>
+<text class="label" x="250" y="348">Browser</text>
+<g class="fragment input" data-fragment-index="6" style="--chars: 19; --t0: 0.3s; --type: 1.52s; --enter: 2.22s; --launch: 2.22s"><g class="prompt" style="--at: 0"><text class="typed" x="166" y="384">http://W.X.Y.Z:3000</text><text class="cursor" x="166" y="384">█</text></g></g><g class="fragment transient clock" data-fragment-index="7" data-gone-from="14" style="--gone-delay: 1.1s"><circle cx="327" cy="333" r="6.5"/><path d="M327,329 V333 H330"/></g><g class="fragment pulse" data-fragment-index="15"/></g>
+<g id="diagram-410-running-node-guessit" class="fragment spawn process" data-fragment-index="4" style="--chars: 11; --t0: 0.3s; --type: 0.88s; --enter: 1.58s; --launch: 2.18s"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">npm run dev</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="180" height="46" rx="8"/><rect x="600" y="320" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M772.35,331.72 L774.45,332.18 L774.45,333.82 L772.35,334.28 L771.69,335.87 L772.85,337.69 L771.69,338.85 L769.87,337.69 L768.28,338.35 L767.82,340.45 L766.18,340.45 L765.72,338.35 L764.13,337.69 L762.31,338.85 L761.15,337.69 L762.31,335.87 L761.65,334.28 L759.55,333.82 L759.55,332.18 L761.65,331.72 L762.31,330.13 L761.15,328.31 L762.31,327.15 L764.13,328.31 L765.72,327.65 L766.18,325.55 L767.82,325.55 L768.28,327.65 L769.87,328.31 L771.69,327.15 L772.85,328.31 L771.69,330.13 Z M769.3,333 A2.3,2.3 0 1 0 764.7,333 A2.3,2.3 0 1 0 769.3,333 Z"/></g>
+<text class="label" x="690" y="340">Guess It</text>
+<text class="command" x="690" y="356">npm run dev</text>
+<g id="diagram-410-running-socket-guessit-3000" class="socket">
+<path d="M600,336 L582,320 M600,350 L582,366"/>
+<text x="586" y="314">3000</text>
+</g>
+<g class="fragment pulse" data-fragment-index="8"/><g class="fragment transient clock" data-fragment-index="10" data-gone-from="12" style="--gone-delay: 1.1s"><circle cx="767" cy="333" r="6.5"/><path d="M767,329 V333 H770"/></g><g class="fragment pulse" data-fragment-index="13"/></g>
+<g id="diagram-410-running-node-postgresql" class="process">
+<rect x="880" y="480" width="180" height="46" rx="8"/><rect x="880" y="480" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M1052.35,491.72 L1054.45,492.18 L1054.45,493.82 L1052.35,494.28 L1051.69,495.87 L1052.85,497.69 L1051.69,498.85 L1049.87,497.69 L1048.28,498.35 L1047.82,500.45 L1046.18,500.45 L1045.72,498.35 L1044.13,497.69 L1042.31,498.85 L1041.15,497.69 L1042.31,495.87 L1041.65,494.28 L1039.55,493.82 L1039.55,492.18 L1041.65,491.72 L1042.31,490.13 L1041.15,488.31 L1042.31,487.15 L1044.13,488.31 L1045.72,487.65 L1046.18,485.55 L1047.82,485.55 L1048.28,487.65 L1049.87,488.31 L1051.69,487.15 L1052.85,488.31 L1051.69,490.13 Z M1049.3,493 A2.3,2.3 0 1 0 1044.7,493 A2.3,2.3 0 1 0 1049.3,493 Z"/></g>
+<text class="label" x="970" y="500">PostgreSQL</text>
+<text class="subtitle" x="970" y="516">Started automatically, somehow?</text>
+<g id="diagram-410-running-socket-postgresql-5432" class="socket">
+<path d="M963,480 L947,462 M977,480 L993,462"/>
+<text x="942" y="466">5432</text>
+</g>
+<g id="diagram-410-running-socket-postgresql-unix" class="socket detail">
+<path d="M880,496 L862,480 M880,510 L862,526"/>
+<text x="858" y="546">/var/run/postgresql/.s.PGSQL.5432</text>
+</g>
+<g class="fragment pulse" data-fragment-index="2"/><g class="fragment pulse" data-fragment-index="11"/></g>
+<g id="diagram-410-running-edge-ssh-client-ssh-session" class="edge comm">
+<path d="M350,213 H480 C540,213 540,213 594,213" marker-end="url(#diagram-410-running-arrow-comm)"/>
+<text x="440" y="218">W.X.Y.Z</text>
+</g>
+<g id="diagram-410-running-edge-sshd-ssh-session" class="edge control">
+<path d="M680,142 V184" marker-end="url(#diagram-410-running-arrow-control)"/>
+</g>
+<g id="diagram-410-running-edge-remote-shell-psql" class="fragment fade-on edge control transient" data-fragment-index="0" style="--delay: 2.7s" data-gone-from="3">
+<path d="M760,236 V320" marker-end="url(#diagram-410-running-arrow-control)"/>
+</g>
+<g id="diagram-410-running-edge-psql-postgresql" class="fragment draw-on edge comm transient" data-fragment-index="0" style="--delay: 3.5s" data-gone-from="3">
+<path d="M820,366 V483 C820,497 826,503 840,503 H880" marker-end="url(#diagram-410-running-arrow-comm)" pathLength="1"/>
+</g>
+<g id="diagram-410-running-edge-remote-shell-guessit" class="fragment fade-on edge control" data-fragment-index="4" style="--delay: 1.58s">
+<path d="M760,236 V320" marker-end="url(#diagram-410-running-arrow-control)"/>
+</g>
+<g id="diagram-410-running-edge-browser-guessit" class="fragment draw-on edge comm" data-fragment-index="6" style="--delay: 2.42s">
+<path d="M340,343 H600" marker-end="url(#diagram-410-running-arrow-comm)" pathLength="1"/>
+<text x="470" y="348">http://W.X.Y.Z:3000</text>
+</g>
+<g id="diagram-410-running-edge-guessit-postgresql" class="fragment draw-on edge comm" data-fragment-index="9" style="--delay: 0s">
+<path d="M780,343 H900 C950,343 970,363 970,413 V480" marker-end="url(#diagram-410-running-arrow-comm)" pathLength="1"/>
+<text class="beside" x="960" y="430">postgresql://guessit:pw@localhost:5432/guessit</text>
+</g>
+<g id="diagram-410-running-legend" class="legend" transform="translate(0,128)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-410-running-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-410-running-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+<g class="overlay packet fragment whole" data-fragment-index="1"><g class="leg" style="offset-path: path('M820,366 V483 C820,497 826,503 840,503 H880'); --from: 0%; --to: 100%"><path d="M-23,-12 H13 L23,0 L13,12 H-23 Z"/><text x="-5" y="5">SQL</text></g></g><g class="overlay packet fragment whole" data-fragment-index="7"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 0%; --to: 100%"><path d="M-31,-12 H21 L31,0 L21,12 H-31 Z"/><text x="-5" y="5">GET /</text></g></g><g class="overlay packet fragment whole" data-fragment-index="10"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 0%; --to: 100%"><path d="M-38,-12 H38 V12 H8 L0,20 L-8,12 H-38 Z"/><text x="0" y="5">SELECT …</text></g></g><g class="overlay packet fragment whole" data-fragment-index="12"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 100%; --to: 0%"><path d="M-27,-12 H17 L27,0 L17,12 H-27 Z" transform="scale(-1,1)"/><text x="5" y="5">rows</text></g></g><g class="overlay packet fragment whole" data-fragment-index="14"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 100%; --to: 0%"><path d="M-55,-12 H45 L55,0 L45,12 H-55 Z" transform="scale(-1,1)"/><text x="5" y="5">HTML/CSS/JS</text></g></g></svg>
+</div>
+<template class="diagram-captions"><p data-caption="rest">Your browser talks to the Guess It application running on your server. Guess It talks to the PostgreSQL database server also running on your server. You started Guess It manually in your SSH session, in a shell running on the server.</p><p data-caption="0">Your terminal is still connected to your server over SSH, PostgreSQL is running, and the application’s files are on the server.</p><p data-caption="1">You run <code>sudo -u postgres psql &lt; schema.sql</code>. psql starts and connects to PostgreSQL through its Unix socket, as the <code>postgres</code> user.</p><p data-caption="2">Your shell opened <code>schema.sql</code> and gave its contents to the standard input of psql, which sends the SQL to PostgreSQL, and waits for it to be run.</p><p data-caption="3">PostgreSQL works: it creates the <code>guessit</code> user, its database and its table.</p><p data-caption="4">psql has nothing more to send, and exits.</p><p data-caption="5">You run <code>npm run dev</code>, as on your computer. Your shell starts Guess It, which listens on port 3000.</p><p data-caption="6">You open a browser on your computer.</p><p data-caption="7">You type your server’s public IP address and port into it. It connects to port 3000, where Guess It is listening.</p><p data-caption="8">It sends an HTTP request for the home page over the connection, and waits for the answer.</p><p data-caption="9">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="10">Guess It connects to PostgreSQL on port 5432, with the database URL you configured.</p><p data-caption="11">It sends its query over the connection.</p><p data-caption="12">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="13">The rows of the leaderboard travel back to Guess It.</p><p data-caption="14">Guess It works again, building the HTML page from the rows.</p><p data-caption="15">The page travels back over the connection to your browser, with its stylesheets and scripts.</p><p data-caption="16">Your browser works, displaying the page.</p></template>
 </div>
 <h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
 <p>Here’s a few tips about some problems you may encounter during this exercise.</p>
@@ -635,13 +2546,25 @@ these upgrades to be applied.</p>
 must be started, APT asks whether you want to apply upgrades to other background
 services by restarting them. Rebooting your server would also have the effect of
 restarting these services and applying the security upgrades.</p></div><label for="callout-410-sftp-deployment:unattended-upgrades" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-410-sftp-deployment:unattended-upgrades" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
+<h3 id="my-changes-to-schemasql-or-serverjs-are-not-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My changes to <code>schema.sql</code> or <code>server.js</code> are not on the server<a href="#my-changes-to-schemasql-or-serverjs-are-not-on-the-server" aria-label="Link to heading 'My changes to schema.sql or server.js are not on the server'" data-heading-content="My changes to schema.sql or server.js are not on the server" class="anchor"></a></h3>
+<p>If you notice a mistake in <code>schema.sql</code> or <code>server.js</code> later, once you’ve
+already uploaded them to your server, there are several ways to fix it:</p>
+<ul>
+<li>Fix the file on your computer, then upload them again with your SFTP
+application.</li>
+<li>Your SFTP application can open a remote file in an editor. In WinSCP,
+right-click the file and choose <strong>Edit</strong>. In Cyberduck, right-click the file
+and choose <strong>Edit With</strong>, then your favorite editor. Make your changes and
+save the file: the application uploads it again.</li>
+<li>Edit the file directly on the server with <code>nano</code> or <code>vim</code>.</li>
+</ul>
 <h3 id="cannot-find-module"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Cannot find module</code><a href="#cannot-find-module" aria-label="Link to heading 'Cannot find module'" data-heading-content="Cannot find module" class="anchor"></a></h3>
 <p>The application stops as soon as it starts, with an error like this one:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">Error:</span> <span class="l-variable-parameter">Cannot</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">module</span> <span class="l-string">&#39;mustache&#39;</span>
 </div><div class="l-line" data-line="4"><span class="l-function-call">Require</span> <span class="l-variable-parameter">stack:</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">-</span> <span class="l-variable-parameter">/home/jde/guessit/server.js</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">-</span> <span class="l-variable-parameter">/home/jde/guessit-ex/server.js</span>
 </div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
 </div><div class="l-line" data-line="7"><span class="l-function-call">Failed</span> <span class="l-variable-parameter">running</span> <span class="l-string">&#39;server.js&#39;</span><span class="l-variable-parameter">.</span> <span class="l-variable-parameter">Waiting</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">restarting...</span>
 </div></code></pre>
@@ -660,12 +2583,20 @@ Look at the terminal where the application runs, at the error below <code>Could 
 <p>The application cannot connect to PostgreSQL as the <code>guessit</code> user:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span>
 </div></code></pre>
-<p>The password in the <code>DATABASE_URL</code> at the top of <code>server.js</code> <strong>on the server</strong>
-is not the one in the <code>schema.sql</code> file you ran. Put the same password in both.</p>
-<p>If they are already the same, you may have run <code>schema.sql</code> more than once: see
-<a href="#role-guessit-already-exists"><code>role &quot;guessit&quot; already exists</code></a>. Or you may not
-have run it at all: go back to <a href="#initialize-the-database">Initialize the
-database</a>.</p>
+<p>You may have missed the database initialization step. If you did, go back to
+<a href="#initialize-the-database">Initialize the database</a> to create the Guess It
+database and user.</p>
+<p>If you did initialize the database, check that the password in <code>schema.sql</code> is
+the same as the one in the <code>DATABASE_URL</code> at the top of <code>server.js</code>.</p>
+<p>If it is not, change the password in <code>server.js</code> to match the one in
+<code>schema.sql</code>, or change the password in PostgreSQL to match the one in
+<code>server.js</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;the-correct-password&#39;;&quot;</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
+</div></code></pre>
+<p>The password in <code>server.js</code> must match the one that was defined in PostgreSQL
+<strong>at the time you ran <code>schema.sql</code></strong>. Changing the password in <code>schema.sql</code>
+after that does not change the password in PostgreSQL. This is what the <code>ALTER USER</code> query above does.</p>
 <h3 id="connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code><a href="#connect-econnrefused" aria-label="Link to heading 'connect ECONNREFUSED'" data-heading-content="connect ECONNREFUSED" class="anchor"></a></h3>
 <p>The application cannot reach PostgreSQL at all:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">Error:</span> <span class="l-variable-parameter">connect</span> <span class="l-variable-parameter">ECONNREFUSED</span> <span class="l-variable-parameter">127.0.0.1:5432</span>
@@ -729,7 +2660,7 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#make-sure-your-guess-it-is-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure your Guess It is up to date</a>
+    <a href="#make-sure-you-have-your-own-up-to-date-guess-it-fork"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make sure you have your own up-to-date Guess It fork</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#make-sure-your-fork-is-up-to-date"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Make sure your fork is up to date</a>
@@ -743,19 +2674,33 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies</a>
-    
-  </li><li class="toc-entry toc-h2">
     <a href="#install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#install-nodejs"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Node.js</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#whats-running-so-far"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> What’s running so far?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#install-the-dependencies"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install the dependencies</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#generate-a-password"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Generate a password</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#upload-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Upload the application</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#optional-check-that-the-files-have-arrived"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: check that the files have arrived</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-did-the-files-get-there"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> How did the files get there?</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#initialize-the-database"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Initialize the database</a>
@@ -765,9 +2710,6 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
     
   </li>
 </ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
-    
   </li><li class="toc-entry toc-h2">
     <a href="#run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application</a>
     <ul class="section-nav">
@@ -790,6 +2732,9 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
     
   </li><li class="toc-entry toc-h3">
     <a href="#daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated libraries</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-changes-to-schemasql-or-serverjs-are-not-on-the-server"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My changes to <code>schema.sql</code> or <code>server.js</code> are not on the server</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#cannot-find-module"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Cannot find module</code></a>
@@ -824,7 +2769,7 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/410-sftp-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/410-sftp-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1525,7 +3470,7 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@c8ae971</span>
+        <span class="tooltip-content">main@9e59fbb</span>
         <span class="font-title">0.1.0</span>
       </span>
       

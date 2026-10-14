@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-bb6075c00d86478e64de039bb3c719cf.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/406-unix-networking/subject.md">Rev: c8ae97147c2deb0f5bca433cd167863be803b272</a>
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/406-unix-networking/subject.md">Rev: 9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55</a>
     </li>
   </ul>
 </div>
@@ -195,13 +195,13 @@
 <p>The <a href="https://man7.org/linux/man-pages/man8/ip.8.html" target="_blank" rel="noopener noreferrer"><strong><code>ip</code></strong> command</a> is used to manipulate and display IP network
 information:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ip</span> <span class="l-function-call">address</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">1:</span> `<span class="l-function-call">lo</span>`<span class="l-variable-parameter">:</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">LOOPBACK,UP,LOWER_UP</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">mtu</span> <span class="l-number">65536</span> <span class="l-string-special-path">qdisc</span> <span class="l-string-special-path">noqueue</span> <span class="l-string-special-path">...</span>
+</div><div class="l-line" data-line="2"><span class="l-function-call">1:</span> <span class="l-variable-parameter">lo:</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">LOOPBACK,UP,LOWER_UP</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">mtu</span> <span class="l-number">65536</span> <span class="l-string-special-path">qdisc</span> <span class="l-string-special-path">noqueue</span> <span class="l-string-special-path">...</span>
 </div><div class="l-line" data-line="3">    <span class="l-function-call">link/loopback</span> <span class="l-variable-parameter">00:00:00:00:00:00</span> <span class="l-variable-parameter">brd</span> <span class="l-variable-parameter">00:00:00:00:00:00</span>
 </div><div class="l-line" data-line="4">    <span class="l-function-call">inet</span> `<span class="l-function-call">127.0.0.1</span>`<span class="l-variable-parameter">/8</span> <span class="l-variable-parameter">scope</span> <span class="l-variable-parameter">host</span> <span class="l-variable-parameter">lo</span>
 </div><div class="l-line" data-line="5">       <span class="l-function-call">valid_lft</span> <span class="l-variable-parameter">forever</span> <span class="l-variable-parameter">preferred_lft</span> <span class="l-variable-parameter">forever</span>
 </div><div class="l-line" data-line="6">    <span class="l-function-call">inet6</span> `<span class="l-function-call">::1</span>`<span class="l-variable-parameter">/128</span> <span class="l-variable-parameter">scope</span> <span class="l-variable-parameter">host</span>
 </div><div class="l-line" data-line="7">       <span class="l-function-call">valid_lft</span> <span class="l-variable-parameter">forever</span> <span class="l-variable-parameter">preferred_lft</span> <span class="l-variable-parameter">forever</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">2:</span> `<span class="l-function-call">eth0</span>`<span class="l-variable-parameter">:</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">BROADCAST,MULTICAST,UP,LOWER_UP</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">mtu</span> <span class="l-number">9001</span> <span class="l-string-special-path">...</span>
+</div><div class="l-line" data-line="8"><span class="l-function-call">2:</span> <span class="l-variable-parameter">eth0:</span> <span class="l-operator">&lt;</span><span class="l-string-special-path">BROADCAST,MULTICAST,UP,LOWER_UP</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">mtu</span> <span class="l-number">9001</span> <span class="l-string-special-path">...</span>
 </div><div class="l-line" data-line="9">    <span class="l-function-call">link/ether</span> <span class="l-variable-parameter">06:5f:44:85:36:92</span> <span class="l-variable-parameter">brd</span> <span class="l-variable-parameter">ff:ff:ff:ff:ff:ff</span>
 </div><div class="l-line" data-line="10">    <span class="l-function-call">inet</span> `<span class="l-function-call">172.31.39.219</span>`<span class="l-variable-parameter">/20</span> <span class="l-variable-parameter">brd</span> <span class="l-variable-parameter">172.31.47.255</span> <span class="l-variable-parameter">scope</span> <span class="l-variable-parameter">global</span> <span class="l-variable-parameter">dynamic</span> <span class="l-variable-parameter">eth0</span>
 </div><div class="l-line" data-line="11">       <span class="l-function-call">valid_lft</span> <span class="l-variable-parameter">2665sec</span> <span class="l-variable-parameter">preferred_lft</span> <span class="l-variable-parameter">2665sec</span>
@@ -224,8 +224,8 @@ sends a pulse of sound and listens for the echo to detect objects under water.</
 <p>It uses the <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol" target="_blank" rel="noopener noreferrer"><strong>I</strong>nternet <strong>C</strong>ontrol <strong>M</strong>essage <strong>P</strong>rotocol (ICMP)</a>, a
 <strong>network layer</strong> protocol (OSI layer 3).</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ping</span> <span class="l-function-call">-c</span> <span class="l-number">1</span> <span class="l-variable-parameter">google.com</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">PING</span> `<span class="l-function-call">google.com</span>`<span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span>`<span class="l-function-call">172.217.21.238</span>`<span class="l-punctuation-bracket">)</span> <span class="l-number">56</span><span class="l-punctuation-bracket">(</span><span class="l-number">84</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">bytes</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">data.</span>
-</div><div class="l-line" data-line="3"><span class="l-number">64</span> <span class="l-variable-parameter">bytes</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">172.217.21.238:</span> <span class="l-variable-parameter">icmp_seq=1</span> <span class="l-variable-parameter">ttl=53</span> <span class="l-variable-parameter">time=</span>`<span class="l-function-call">1.12</span> <span class="l-variable-parameter">ms</span>`
+</div><div class="l-line" data-line="2"><span class="l-function-call">PING</span> <span class="l-variable-parameter">google.com</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">172.217.21.238</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span> <span class="l-number">56</span><span class="l-punctuation-bracket">(</span><span class="l-number">84</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">bytes</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">data.</span>
+</div><div class="l-line" data-line="3"><span class="l-number">64</span> <span class="l-variable-parameter">bytes</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">172.217.21.238:</span> <span class="l-variable-parameter">icmp_seq=1</span> <span class="l-variable-parameter">ttl=53</span> <span class="l-variable-parameter">time=1.12</span> <span class="l-variable-parameter">ms</span>
 </div><div class="l-line" data-line="4">
 </div><div class="l-line" data-line="5"><span class="l-function-call">---</span> <span class="l-variable-parameter">google.com</span> <span class="l-variable-parameter">ping</span> <span class="l-variable-parameter">statistics</span> <span class="l-variable-parameter">---</span>
 </div><div class="l-line" data-line="6"><span class="l-number">1</span> <span class="l-variable-parameter">packets</span> <span class="l-variable-parameter">transmitted,</span> <span class="l-number">1</span> <span class="l-variable-parameter">received,</span> <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">packet</span> <span class="l-variable-parameter">loss,</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">0ms</span>
@@ -240,7 +240,7 @@ keep pinging once per second.</p></div></div>
 <p>A <strong>socket</strong> is the software representation of a network communication’s
 endpoint. For a TCP connection in an IP network, it corresponds to a connection
 made on an IP address and port number.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ss</span> <span class="l-function-call">-tlpn</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span>
 </div><div class="l-line" data-line="2"><span class="l-function-call">State</span>   <span class="l-variable-parameter">Recv-Q</span>  <span class="l-variable-parameter">Send-Q</span>  <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span>  <span class="l-variable-parameter">Peer</span> <span class="l-variable-parameter">Address:Port</span>  <span class="l-variable-parameter">Process</span>
 </div><div class="l-line" data-line="3"><span class="l-function-call">LISTEN</span>  <span class="l-number">0</span>       <span class="l-number">80</span>          <span class="l-variable-parameter">127.0.0.1:3306</span>       <span class="l-variable-parameter">0.0.0.0:*</span>     <span class="l-variable-parameter">mysqld...</span>
 </div><div class="l-line" data-line="4"><span class="l-function-call">LISTEN</span>  <span class="l-number">0</span>       <span class="l-number">128</span>     <span class="l-variable-parameter">127.0.0.53%lo:53</span>         <span class="l-variable-parameter">0.0.0.0:*</span>     <span class="l-variable-parameter">systemd-resolve...</span>
@@ -350,7 +350,7 @@ netcat to <strong>w</strong>ait at most 2 seconds before giving up.</p></div></d
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
       </a>
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/406-unix-networking/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/406-unix-networking/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1050,7 +1050,7 @@ netcat to <strong>w</strong>ait at most 2 seconds before giving up.</p></div></d
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@c8ae971</span>
+        <span class="tooltip-content">main@9e59fbb</span>
         <span class="font-title">0.1.0</span>
       </span>
       

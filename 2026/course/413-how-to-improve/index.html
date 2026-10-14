@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How to improve our basic deployment · ArchiDep</title>
-<meta name="description" content="The basic SFTP deployment of the PHP TodoList has several flaws which we will fix during the rest of the course." />
+<meta name="description" content="The basic SFTP deployment of Guess It has several flaws which we will fix during the rest of the course." />
 <link rel="canonical" href="https://archidep.ch/2026/course/413-how-to-improve/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="How to improve our basic deployment" />
-<meta property="og:description" content="The basic SFTP deployment of the PHP TodoList has several flaws which we will fix during the rest of the course." />
+<meta property="og:description" content="The basic SFTP deployment of Guess It has several flaws which we will fix during the rest of the course." />
 <meta property="og:url" content="https://archidep.ch/2026/course/413-how-to-improve/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-bb6075c00d86478e64de039bb3c719cf.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/413-how-to-improve/subject.md">Rev: c8ae97147c2deb0f5bca433cd167863be803b272</a>
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/413-how-to-improve/subject.md">Rev: 9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55</a>
     </li>
   </ul>
 </div>
@@ -120,8 +120,8 @@
   How to improve our basic deployment
 </h1>
 
-      <div class="my-4"><p>The basic SFTP deployment of the PHP TodoList has several flaws which we will
-fix during the rest of the course.</p></div>
+      <div class="my-4"><p>The basic SFTP deployment of Guess It has several flaws which we will fix during
+the rest of the course.</p></div>
 
       
 
@@ -131,10 +131,11 @@ fix during the rest of the course.</p></div>
 
       <!-- more -->
 <ul>
-<li>Transfering files manually through SFTP is slow and error-prone. We will use
-<strong>Git</strong> to reliably transfer files <a href="https://12factor.net/codebase" target="_blank" rel="noopener noreferrer">from our central
-codebase</a> and easily keep our deployment up-to-date over
-time.</li>
+<li>Transfering files manually through SFTP is slow and error-prone, all the more
+so with the hundreds of files of <code>node_modules</code>. We will use <strong>Git</strong> to
+reliably transfer files <a href="https://12factor.net/codebase" target="_blank" rel="noopener noreferrer">from our central codebase</a> and
+easily keep our deployment up-to-date over time. The dependencies will be
+installed on the server instead of being uploaded.</li>
 <li><a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Hardcoding configuration is a bad practice</a>. We will use
 <strong>environment variables</strong> so that our application can be dynamically
 configured and deployed in any environment without changing its source code.</li>
@@ -142,6 +143,15 @@ configured and deployed in any environment without changing its source code.</li
 We will use a <strong>process manager</strong> to manage the lifecycle of our application:
 starting it automatically when the server boots, and restarting it
 automatically if it crashes.</li>
+<li>We started the application with <code>npm run dev</code>, the same command as on our
+computer. It runs the application in <strong>development mode</strong>, with <code>node --watch</code>, which restarts it whenever one of its files changes. That is
+convenient while you are editing the code, but not on a server. Every change
+to a file causes an <strong>unplanned downtime</strong>, however short, while the
+application restarts, at a moment nobody chose. A file changing halfway
+through an upload restarts the application on a half-updated version of its
+code, which may not work, or not start at all. If it crashes, it stays down
+until another file changes. We will run it in <strong>production mode</strong> instead,
+with <code>node server.js</code>, so that it only restarts when we decide to.</li>
 <li>Accessing a web application through an IP address is not user-friendly. We
 will obtain a domain and configure its DNS zone file so that our application
 is accessible with a human-readable <strong>domain name</strong>.</li>
@@ -157,10 +167,12 @@ server</strong>. That will be the job of a reverse proxy like <a href="https://h
 served over HTTP and not HTTPS. We will obtain a <strong>TLS/SSL certificate</strong>
 signed by a trusted certificate authority so that our application can be
 served over HTTPS and recognized as secure by browsers.</li>
-<li>The <a href="https://www.php.net/manual/en/features.commandline.webserver.php" target="_blank" rel="noopener noreferrer">PHP Development Server</a> is not meant to deploy
-applications in production environments. We will use the <a href="https://www.php.net/manual/en/install.fpm.php" target="_blank" rel="noopener noreferrer"><strong>FastCGI Process
-Manager</strong></a> to perform a production-grade deployment, making our
-application more resilient and able to serve more clients concurrently.</li>
+<li>We deployed and ran the application with our own user account, which <a href="/2026/course/405-meet-your-server/#ask-sudo-what-you-may-do">can run
+any command as <code>root</code> with <code>sudo</code>, without a password</a>.
+An attacker who found a vulnerability letting them run commands through the
+application would run them as us, so they could become <code>root</code> and take over
+the whole server. We will deploy the application with a <strong>dedicated user</strong>
+which has no <code>sudo</code> access, and can only touch what the application needs.</li>
 </ul>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
@@ -186,7 +198,7 @@ application more resilient and able to serve more clients concurrently.</li>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/c8ae97147c2deb0f5bca433cd167863be803b272/course/chapters/413-how-to-improve/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/413-how-to-improve/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -886,7 +898,7 @@ application more resilient and able to serve more clients concurrently.</li>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@c8ae971</span>
+        <span class="tooltip-content">main@9e59fbb</span>
         <span class="font-title">0.1.0</span>
       </span>
       
