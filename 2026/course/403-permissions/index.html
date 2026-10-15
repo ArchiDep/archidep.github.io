@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/403-permissions/exercise.md">Rev: 9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55</a>
+      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/403-permissions/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
     </li>
   </ul>
 </div>
@@ -286,6 +286,8 @@ can only read (<code>r--</code>).</p></div></div>
 <h3 id="take-away-your-own-write-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away your own write permission<a href="#take-away-your-own-write-permission" aria-label="Link to heading 'Take away your own write permission'" data-heading-content="Take away your own write permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the write permission
 of the owner (you) from <code>notes.txt</code>.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">notes.txt</span>
+</div></code></pre></div></div>
 <p>Then try to add a line to the file:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;World&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">notes.txt</span>
 </div></code></pre>
@@ -300,6 +302,8 @@ you only removed the write permission:</p>
 <h3 id="take-away-your-own-read-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away your own read permission<a href="#take-away-your-own-read-permission" aria-label="Link to heading 'Take away your own read permission'" data-heading-content="Take away your own read permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the read permission
 of the owner from <code>notes.txt</code> as well.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-r</span> <span class="l-variable-parameter">notes.txt</span>
+</div></code></pre></div></div>
 <p>Look at the permissions, then try to read the file:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">notes.txt</span>
@@ -315,6 +319,10 @@ group’s permissions are never looked at, even though you are in the group.</p>
 <h3 id="set-the-permissions-back"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set the permissions back<a href="#set-the-permissions-back" aria-label="Link to heading 'Set the permissions back'" data-heading-content="Set the permissions back" class="anchor"></a></h3>
 <p>Give <code>notes.txt</code> its original permissions back, <code>rw-rw-r--</code>, using the <code>chmod</code>
 command either in symbolic or in octal mode.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">664</span> <span class="l-variable-parameter">notes.txt</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-variable">u</span><span class="l-operator">=</span><span class="l-string">rw,g=rw,o=r</span> <span class="l-function-call">notes.txt</span>
+</div></code></pre>
+<p><code>rw-</code> is <code>110</code> in binary, which is 6, and <code>r--</code> is <code>100</code>, which is 4.</p></div></div>
 <h2 id="directories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Directories<a href="#directories" aria-label="Link to heading 'Directories'" data-heading-content="Directories" class="anchor"></a></h2>
 <p>Directories have the same three permissions as files, but they do not mean
 quite the same thing. See what each of them allows on a directory.</p>
@@ -341,6 +349,8 @@ the same way.</p></div></div>
 <h3 id="take-away-the-directorys-write-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away the directory’s write permission<a href="#take-away-the-directorys-write-permission" aria-label="Link to heading 'Take away the directory’s write permission'" data-heading-content="Take away the directory’s write permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the write permission
 of the owner from the <code>~/permissions</code> directory itself.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">~/permissions</span>
+</div></code></pre></div></div>
 <p>Try to rename the file back, then to create a new file:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">renamed.txt</span> <span class="l-variable-parameter">locked.txt</span>
 </div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">new.txt</span>
@@ -352,6 +362,8 @@ of the owner from the <code>~/permissions</code> directory itself.</p>
 <p>Without <code>w</code> on the directory, you can no longer add, rename or remove anything
 in it, even files that you own and could write to.</p></div></div>
 <p>Give the directory its write permission back.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+w</span> <span class="l-variable-parameter">~/permissions</span>
+</div></code></pre></div></div>
 <h3 id="go-through-a-directory-you-cannot-list"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Go through a directory you cannot list<a href="#go-through-a-directory-you-cannot-list" aria-label="Link to heading 'Go through a directory you cannot list'" data-heading-content="Go through a directory you cannot list" class="anchor"></a></h3>
 <p>Create a directory with a file in it, then leave the directory only the <code>x</code>
 permission, for its owner only:</p>
@@ -382,6 +394,13 @@ know. <code>secret.txt</code> is readable by you, so <code>cat</code> works.</p>
 <code>rw-rw-r--</code>, like <code>notes.txt</code>.</p></div></div>
 <p>Find and execute the appropriate <code>chmod</code> command to make the script executable
 by its owner only, until you can run it successfully.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+x</span> <span class="l-variable-parameter">hello.sh</span>
+</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span>
+</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">script</span>
+</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">hello.sh</span>
+</div><div class="l-line" data-line="5"><span class="l-function-call">-rwxrw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">27</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:10</span> <span class="l-variable-parameter">hello.sh</span>
+</div></code></pre>
+<p><code>rwxrw-r--</code> is <code>764</code>.</p></div></div>
 <h2 id="where-you-are-other"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where you are “other”<a href="#where-you-are-other" aria-label="Link to heading 'Where you are “other”'" data-heading-content="Where you are “other”" class="anchor"></a></h2>
 <p>So far, you have only worked with your own files. Most files on this server
 belong to other users, and for them, you are “other”.</p>
@@ -440,6 +459,8 @@ can see the names of the files in <code>/tmp</code>:</p>
 (<code>r--</code>).</p></div></div>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the read permission
 of others from your file.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">o-r</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span>
+</div></code></pre></div></div>
 <p>Ask your classmate to read your file again. Will it work this time?</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">cat: /tmp/jde-note.txt: Permission denied
 </div></code></pre>
@@ -588,7 +609,7 @@ back:</p>
 </svg>
       </a>
       
-      <a href="https://github.com/ArchiDep/website/blob/9e59fbb0f8d25ca77c9ee9559a4f7abce29a9c55/course/chapters/403-permissions/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/403-permissions/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -806,7 +827,7 @@ back:</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due course-item-current">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done course-item-current">
         <a href="/2026/course/403-permissions/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -815,7 +836,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/404-run-virtual-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -824,7 +845,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/405-meet-your-server/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -833,7 +854,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/406-unix-networking/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -842,7 +863,7 @@ back:</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
         <a href="/2026/course/407-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -851,7 +872,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/408-unix-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -860,7 +881,7 @@ back:</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
         <a href="/2026/course/409-unix-plumbing/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -869,7 +890,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -878,7 +899,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
         <a href="/2026/course/411-how-a-computer-works/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -887,7 +908,7 @@ back:</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
         <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1288,7 +1309,7 @@ back:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@9e59fbb</span>
+        <span class="tooltip-content">main@d6dadf2</span>
         <span class="font-title">0.1.0</span>
       </span>
       
