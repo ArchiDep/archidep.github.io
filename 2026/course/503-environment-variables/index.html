@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/503-environment-variables/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/503-environment-variables/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -240,38 +240,35 @@ alternative to configuration files or hardcoded values.</p>
 <h3 id="getting-an-environment-variable">Getting an environment variable<a href="#getting-an-environment-variable" aria-label="Link to heading 'Getting an environment variable'" data-heading-content="Getting an environment variable" class="anchor"></a></h3>
 <p>To display the current value of an environment variable, use the <code>echo</code> command.
 A variable can be referenced by its name prefixed with a dollar sign (<code>$</code>):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">USER</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ubuntu</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">HOME</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">/home/ubuntu</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">SHELL</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">/bin/bash</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">USER</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ubuntu</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">HOME</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/home/ubuntu</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">SHELL</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/bin/bash</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span></code></pre>
 <p>If a variable is not set, nothing will be displayed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span></span></code></pre>
 <h3 id="listing-all-environment-variables">Listing all environment variables<a href="#listing-all-environment-variables" aria-label="Link to heading 'Listing all environment variables'" data-heading-content="Listing all environment variables" class="anchor"></a></h3>
 <p>The <code>env</code> command prints all environment variables currently set in your shell,
 and their values:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">env</span>
-</div><div class="l-line" data-line="2"><span class="l-variable-builtin">LC_ALL</span><span class="l-operator">=</span><span class="l-string">en_US.utf-8</span>
-</div><div class="l-line" data-line="3"><span class="l-constant">LS_COLORS</span><span class="l-operator">=</span><span class="l-string">rs=0:di=01</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">34:...</span>
-</div><div class="l-line" data-line="4"><span class="l-variable-builtin">LANG</span><span class="l-operator">=</span><span class="l-string">C.UTF-8</span>
-</div><div class="l-line" data-line="5"><span class="l-constant">USER</span><span class="l-operator">=</span><span class="l-string">ubuntu</span>
-</div><div class="l-line" data-line="6"><span class="l-variable-builtin">PWD</span><span class="l-operator">=</span><span class="l-string">/home/ubuntu</span>
-</div><div class="l-line" data-line="7"><span class="l-variable-builtin">HOME</span><span class="l-operator">=</span><span class="l-string">/home/ubuntu</span>
-</div><div class="l-line" data-line="8"><span class="l-variable-builtin">LC_CTYPE</span><span class="l-operator">=</span><span class="l-string">UTF-8</span>
-</div><div class="l-line" data-line="9"><span class="l-constant">SSH_TTY</span><span class="l-operator">=</span><span class="l-string">/dev/pts/0</span>
-</div><div class="l-line" data-line="10"><span class="l-variable-builtin">MAIL</span><span class="l-operator">=</span><span class="l-string">/var/mail/ubuntu</span>
-</div><div class="l-line" data-line="11"><span class="l-constant">TERM</span><span class="l-operator">=</span><span class="l-string">xterm-256color</span>
-</div><div class="l-line" data-line="12"><span class="l-variable-builtin">SHELL</span><span class="l-operator">=</span><span class="l-string">/bin/bash</span>
-</div><div class="l-line" data-line="13"><span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">env</span></span>
+<span class="l-line" data-line="2"><span class="l-variable-builtin">LC_ALL</span><span class="l-operator">=</span><span class="l-string">en_US.utf-8</span></span>
+<span class="l-line" data-line="3"><span class="l-constant">LS_COLORS</span><span class="l-operator">=</span><span class="l-string">rs=0:di=01</span><span class="l-punctuation-delimiter">;</span><span class="l-function-call">34:...</span></span>
+<span class="l-line" data-line="4"><span class="l-variable-builtin">LANG</span><span class="l-operator">=</span><span class="l-string">C.UTF-8</span></span>
+<span class="l-line" data-line="5"><span class="l-constant">USER</span><span class="l-operator">=</span><span class="l-string">ubuntu</span></span>
+<span class="l-line" data-line="6"><span class="l-variable-builtin">PWD</span><span class="l-operator">=</span><span class="l-string">/home/ubuntu</span></span>
+<span class="l-line" data-line="7"><span class="l-variable-builtin">HOME</span><span class="l-operator">=</span><span class="l-string">/home/ubuntu</span></span>
+<span class="l-line" data-line="8"><span class="l-variable-builtin">LC_CTYPE</span><span class="l-operator">=</span><span class="l-string">UTF-8</span></span>
+<span class="l-line" data-line="9"><span class="l-constant">SSH_TTY</span><span class="l-operator">=</span><span class="l-string">/dev/pts/0</span></span>
+<span class="l-line" data-line="10"><span class="l-variable-builtin">MAIL</span><span class="l-operator">=</span><span class="l-string">/var/mail/ubuntu</span></span>
+<span class="l-line" data-line="11"><span class="l-constant">TERM</span><span class="l-operator">=</span><span class="l-string">xterm-256color</span></span>
+<span class="l-line" data-line="12"><span class="l-variable-builtin">SHELL</span><span class="l-operator">=</span><span class="l-string">/bin/bash</span></span>
+<span class="l-line" data-line="13"><span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span></code></pre>
 <h3 id="setting-an-environment-variable">Setting an environment variable<a href="#setting-an-environment-variable" aria-label="Link to heading 'Setting an environment variable'" data-heading-content="Setting an environment variable" class="anchor"></a></h3>
 <p>There are multiple ways to set an environment variable. The lifetime of the
 variable depends on how you set it:</p>
@@ -283,75 +280,66 @@ variable depends on how you set it:</p>
 <p>In order to test these techniques, download this <a href="https://git.io/fpdar" target="_blank" rel="noopener noreferrer">simple
 script</a> which prints the value of an environment variable
 if set:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; curl -sL https://git.io/fpdar &gt; print-env-var.sh
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$&gt; chmod 755 print-env-var.sh
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$&gt; ./print-env-var.sh PATH
-</div><div class="l-line" data-line="6">The value of <span class="l-constant">$</span><span class="l-string">PATH</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">/usr/local/sbin:/usr/local/bin:...</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="9"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; curl -sL https://git.io/fpdar &gt; print-env-var.sh</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$&gt; chmod 755 print-env-var.sh</span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$&gt; ./print-env-var.sh PATH</span>
+<span class="l-line" data-line="6">The value of <span class="l-constant">$</span><span class="l-string">PATH</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">/usr/local/sbin:/usr/local/bin:...</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="9"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
 <h4 id="setting-a-variable-for-one-command">Setting a variable for one command<a href="#setting-a-variable-for-one-command" aria-label="Link to heading 'Setting a variable for one command'" data-heading-content="Setting a variable for one command" class="anchor"></a></h4>
 <p>You can prefix a command by an environment variable assigment:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; FOO=bar ./print-env-var.sh FOO
-</div><div class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; FOO=bar ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
 <p>This only sets the variable <strong>for the process executed by that command</strong>. As you
 can see, the variable is still not set if we check later, even in the same shell
 session:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
 <h4 id="setting-a-variable-for-a-shell-session">Setting a variable for a shell session<a href="#setting-a-variable-for-a-shell-session" aria-label="Link to heading 'Setting a variable for a shell session'" data-heading-content="Setting a variable for a shell session" class="anchor"></a></h4>
 <p>The <code>export</code> command exports an environment variable to all the child processes
 running in the current shell session:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export FOO=bar
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="7">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export FOO=bar</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="7">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
 <p>As you can see, the variable remains set.</p>
 <p>However, if you close the shell and reopen a new one, the variable is no longer
 set:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
 <h4 id="setting-a-variable-in-the-shell-configuration-file">Setting a variable in the shell configuration file<a href="#setting-a-variable-in-the-shell-configuration-file" aria-label="Link to heading 'Setting a variable in the shell configuration file'" data-heading-content="Setting a variable in the shell configuration file" class="anchor"></a></h4>
 <p>If you add the <code>export</code> command to your shell configuration file (<code>.bashrc</code> for
 <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>, <code>.zshrc</code> for Zsh), it will be run every time you start a new
 shell:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export FOO=bar&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.bashrc</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">~/.bashrc</span>
-</div><div class="l-line" data-line="4"><span class="l-keyword-import">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export FOO=bar&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.bashrc</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">1</span> <span class="l-variable-parameter">~/.bashrc</span></span>
+<span class="l-line" data-line="4"><span class="l-keyword-import">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span></span></code></pre>
 <p>This will not immediately take effect in the current shell, as the configuration
 file is only evaluated when the shell starts. But you can evaluate it with the
 <code>source</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; source ~/.bashrc
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; source ~/.bashrc</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
 <p>The variable will still be set if you close this shell and launch another one:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
 <h3 id="removing-an-environment-variable">Removing an environment variable<a href="#removing-an-environment-variable" aria-label="Link to heading 'Removing an environment variable'" data-heading-content="Removing an environment variable" class="anchor"></a></h3>
 <p>The <code>unset</code> command removes a variable from the environment:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span>&gt; unset FOO
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$&gt; ./print-env-var.sh FOO
-</div><div class="l-line" data-line="7"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span>&gt; unset FOO</span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$&gt; ./print-env-var.sh FOO</span>
+<span class="l-line" data-line="7"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Of course, if the variable is exported in your shell configuration file, this
 will only remove it for the current shell session. You must remove the export
 from the configuration file to remove the variable from future shells.</p></div></div>
@@ -409,26 +397,24 @@ from the configuration file to remove the variable from future shells.</p></div>
 </table>
 <h3 id="environment-variables-are-always-strings">Environment variables are always strings<a href="#environment-variables-are-always-strings" aria-label="Link to heading 'Environment variables are always strings'" data-heading-content="Environment variables are always strings" class="anchor"></a></h3>
 <p>You may put whatever kind of value you want into an environment variable:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-constant">MEANING_OF_LIFE</span><span class="l-operator">=</span><span class="l-number">42</span>  <span class="l-comment"># A number</span>
-</div><div class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">PERSON</span><span class="l-operator">=</span><span class="l-string">&#39;{&quot;name&quot;:&quot;John Doe&quot;,&quot;age&quot;:24}&#39;</span>  <span class="l-comment"># Serialized JSON</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-constant">MEANING_OF_LIFE</span><span class="l-operator">=</span><span class="l-number">42</span>  <span class="l-comment"># A number</span></span>
+<span class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">PERSON</span><span class="l-operator">=</span><span class="l-string">&#39;{&quot;name&quot;:&quot;John Doe&quot;,&quot;age&quot;:24}&#39;</span>  <span class="l-comment"># Serialized JSON</span></span></code></pre>
 <p>In your programming language of choice, however, the value will <strong>always</strong> be a
 character string. It’s up to you to parse it if you want to use it as another
 type, for example in Node.js:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-operator">&gt;</span> <span class="l-variable-builtin">console</span><span class="l-punctuation-delimiter">.</span><span class="l-function-method-call">log</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="2"><span class="l-number">42</span>
-</div><div class="l-line" data-line="3"><span class="l-operator">*</span><span class="l-operator">&gt;</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span> <span class="l-operator">+</span> <span class="l-number">2</span>
-</div><div class="l-line" data-line="4"><span class="l-operator">*</span><span class="l-string">&#39;422&#39;</span>
-</div><div class="l-line" data-line="5"><span class="l-operator">&gt;</span> <span class="l-keyword-operator">typeof</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span>
-</div><div class="l-line" data-line="6"><span class="l-variable">string</span>
-</div><div class="l-line" data-line="7"><span class="l-operator">&gt;</span> <span class="l-function-builtin">parseInt</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span><span class="l-punctuation-delimiter">,</span> <span class="l-number">10</span><span class="l-punctuation-bracket">)</span> <span class="l-operator">+</span> <span class="l-number">2</span>
-</div><div class="l-line" data-line="8"><span class="l-number">44</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-operator">&gt;</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">PERSON</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">name</span>
-</div><div class="l-line" data-line="11"><span class="l-constant-builtin">undefined</span>
-</div><div class="l-line" data-line="12"><span class="l-operator">&gt;</span> <span class="l-constant">JSON</span><span class="l-punctuation-delimiter">.</span><span class="l-function-method-call">parse</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">PERSON</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">name</span>
-</div><div class="l-line" data-line="13"><span class="l-string">&#39;John Doe&#39;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-operator">&gt;</span> <span class="l-variable-builtin">console</span><span class="l-punctuation-delimiter">.</span><span class="l-function-method-call">log</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="2"><span class="l-number">42</span></span>
+<span class="l-line" data-line="3"><span class="l-operator">*&gt;</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span> <span class="l-operator">+</span> <span class="l-number">2</span></span>
+<span class="l-line" data-line="4"><span class="l-operator">*</span><span class="l-string">&#39;422&#39;</span></span>
+<span class="l-line" data-line="5"><span class="l-operator">&gt;</span> <span class="l-keyword-operator">typeof</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span></span>
+<span class="l-line" data-line="6"><span class="l-variable">string</span></span>
+<span class="l-line" data-line="7"><span class="l-operator">&gt;</span> <span class="l-function-builtin">parseInt</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">MEANING_OF_LIFE</span><span class="l-punctuation-delimiter">,</span> <span class="l-number">10</span><span class="l-punctuation-bracket">)</span> <span class="l-operator">+</span> <span class="l-number">2</span></span>
+<span class="l-line" data-line="8"><span class="l-number">44</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10"><span class="l-operator">&gt;</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">PERSON</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">name</span></span>
+<span class="l-line" data-line="11"><span class="l-constant-builtin">undefined</span></span>
+<span class="l-line" data-line="12"><span class="l-operator">&gt;</span> <span class="l-constant">JSON</span><span class="l-punctuation-delimiter">.</span><span class="l-function-method-call">parse</span><span class="l-punctuation-bracket">(</span><span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">PERSON</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">name</span></span>
+<span class="l-line" data-line="13"><span class="l-string">&#39;John Doe&#39;</span></span></code></pre>
 <h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank" rel="noopener noreferrer">Environment Variable</a></li>
@@ -446,9 +432,10 @@ type, for example in Node.js:</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -499,33 +486,35 @@ type, for example in Node.js:</p>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-503-environment-variables-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-503-environment-variables-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-503-environment-variables-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-503-environment-variables-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/503-environment-variables/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/503-environment-variables/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -807,7 +796,7 @@ type, for example in Node.js:</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1211,7 +1200,7 @@ type, for example in Node.js:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

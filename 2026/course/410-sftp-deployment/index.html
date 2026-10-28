@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/410-sftp-deployment/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/410-sftp-deployment/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -301,33 +301,30 @@ again</a>.</li>
 <p>If your group’s fork belongs to you (it’s under your own GitHub account), you
 can update it with the latest changes.</p>
 <p>Open a terminal and go into your local clone of the fork:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span></code></pre>
 <p>Make sure you are in a clean state on your <code>main</code> branch, with no uncommitted
 changes. If you have uncommitted changes, commit them (or throw them away with
 <code>git restore .</code>).</p>
 <p>Add the original repository as a second remote, named <code>upstream</code>, fetch it, and
 merge its <code>main</code> branch into yours:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">upstream</span> <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">upstream</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">upstream/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">upstream</span> <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">upstream</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">upstream/main</span></span></code></pre>
 <p>Git will probably report a conflict in <code>server.js</code>: your group and the original
 repository both implemented the same queries, and the original repository then
 rewrote them to fix the vulnerabilities. Resolve each conflict by keeping the
 original repository’s version, the part between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; upstream/main</code>. Then finish the merge and push it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Mark the conflict as resolved</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-comment"># Finish the merge</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-comment"># Push the merge commit to your fork</span>
-</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Mark the conflict as resolved</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># Finish the merge</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-comment"># Push the merge commit to your fork</span></span>
+<span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If Git reports no conflict, it has already finished the merge by itself: only
 <code>git push</code> is left to do.</p></div></div>
 <h3 id="fork-the-repository"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Fork the repository<a href="#fork-the-repository" aria-label="Link to heading 'Fork the repository'" data-heading-content="Fork the repository" class="anchor"></a></h3>
@@ -336,10 +333,9 @@ original repository’s version, the part between <code>=======</code> and <code
 repository</a>, using the <strong>Fork</strong> button:</p>
 <p><img src="images/fork-b6cfdd9f7882569819767822983ae065.png" alt="Fork button" /></p>
 <p>Then clone your fork on your computer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span></span></code></pre>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If <code>git clone</code> fails because <code>guessit-ex</code> already exists, see <a href="#destination-path-guessit-ex-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" />
 <code>destination path 'guessit-ex' already exists</code></a>.</p></div></div>
 <h3 id="fork-again"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Fork again<a href="#fork-again" aria-label="Link to heading 'Fork again'" data-heading-content="Fork again" class="anchor"></a></h3>
@@ -353,19 +349,17 @@ the repository’s <strong>Settings</strong>:</p>
 <p>You can then fork <a href="https://github.com/ArchiDep/guessit-ex" target="_blank" rel="noopener noreferrer"><code>ArchiDep/guessit-ex</code></a> again:</p>
 <p><img src="images/fork-b6cfdd9f7882569819767822983ae065.png" alt="Fork button" /></p>
 <p>Then clone your fork on your computer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span></span></code></pre>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>If <code>git clone</code> fails because <code>guessit-ex</code> already exists, see <a href="#destination-path-guessit-ex-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" />
 <code>destination path 'guessit-ex' already exists</code></a>.</p></div></div>
 <h2 id="install-postgresql"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install PostgreSQL<a href="#install-postgresql" aria-label="Link to heading 'Install PostgreSQL'" data-heading-content="Install PostgreSQL" class="anchor"></a></h2>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this part.</p></div></div></div>
 <p>Update your package lists and install the PostgreSQL database server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">update</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">update</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql</span></span></code></pre>
 <div class="note note-troubleshooting"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /><span>Troubleshooting</span></div><div class="content"><p>APT may open a purple full-screen dialog to prompt you to restart some services.
 See the troubleshooting section about <a href="#daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated
 libraries</a> if necessary.</p></div></div>
@@ -376,20 +370,18 @@ will not discuss this tool, but you can read more about it in the <a href="/2026
 cheatsheet</a>.</p></div></div>
 <p>APT should automatically start PostgreSQL after installation. You can check this
 with the following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">postgresql</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">postgresql</span></span></code></pre>
 <h2 id="install-nodejs"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Node.js<a href="#install-nodejs" aria-label="Link to heading 'Install Node.js'" data-heading-content="Install Node.js" class="anchor"></a></h2>
 <p>Guess It needs Node.js. The version that Ubuntu provides is too old, so install
 Node.js 26 from <a href="https://nodesource.com/products/distributions" target="_blank" rel="noopener noreferrer">NodeSource</a> instead:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt-get</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">curl</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-fsSL</span> <span class="l-variable-parameter">https://deb.nodesource.com/setup_26.x</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">-E</span> <span class="l-variable-parameter">bash</span> <span class="l-variable-parameter">-</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt-get</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">nodejs</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">-v</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">v26.x.y</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt-get</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">curl</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-fsSL</span> <span class="l-variable-parameter">https://deb.nodesource.com/setup_26.x</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">-E</span> <span class="l-variable-parameter">bash</span> <span class="l-variable-parameter">-</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt-get</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">nodejs</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">-v</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">v26.x.y</span></span></code></pre>
 <h2 id="whats-running-so-far"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> What’s running so far?<a href="#whats-running-so-far" aria-label="Link to heading 'What’s running so far?'" data-heading-content="What’s running so far?" class="anchor"></a></h2>
 <p>Installing PostgreSQL started it, while installing Node.js only put its files on
 the disk. This diagram represents the running processes after the initial steps
@@ -398,7 +390,7 @@ terminal).</p>
 <!-- Generated from diagrams/410-setup.svg and 410-setup.ts by "npm run diagrams": edit those instead. -->
 <div class="diagram-figure" data-diagram="410-setup">
 <div class="diagram-canvas">
-<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-setup-title">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-setup-title" data-diagram="410-setup">
 <title id="diagram-410-setup-title">Installing PostgreSQL and Node.js on a server over SSH</title>
 <style id="diagram-410-setup-diagram-styles">
 svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
@@ -469,6 +461,11 @@ display: none;
 }
 .diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
 display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
 }
 /* A short-lived process, and the control edge that started it, only while
 their step is the current one. */
@@ -561,6 +558,13 @@ svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
 animation: none;
 opacity: 0;
 }
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
 /* --- Torn down ----------------------------------------------------------- */
 /* Gone from a step on, such as a session closing; the fully drawn diagram still
 shows it. The motion script sets `gone`. */
@@ -587,6 +591,12 @@ animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
 /* A control edge appears, then the process it starts. */
 svg.diagram .fade-on.visible {
 animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
 }
 /* The cursor types, then disappears on Enter. */
 svg.diagram :is(.spawn, .input).visible .prompt .cursor {
@@ -836,6 +846,24 @@ display: none;
 .diagram-figure.in-deck svg.diagram {
 max-height: 520px;
 }
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
 /* A page stepping through the diagram does what reveal.js does in a deck:
 hides the steps not reached yet. The captions say what the legend would. */
 .diagram-figure.stepping svg.diagram .fragment {
@@ -868,6 +896,14 @@ border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 border-radius: 6px;
 padding: 0.2em 0.75em;
 cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
 }
 .diagram-figure .diagram-controls button:disabled {
 opacity: 0.4;
@@ -1000,7 +1036,7 @@ break-inside: avoid;
 </g>
 </svg>
 </div>
-<template class="diagram-captions"><p data-caption="rest">PostgreSQL is installed and running on your server, listening on port 5432. Node.js is installed, but nothing of it runs.</p><p data-caption="0">You start the exercise by connecting to your server over SSH. This diagram shows that connection already open. The following steps show what happens when you type commands on the server.</p><p data-caption="1">You run <code>sudo apt install postgresql</code>. APT downloads PostgreSQL, installs it, and exits.</p><p data-caption="2">Installing PostgreSQL also started it. It listens on port 5432, and on a Unix socket, a file through which programs on the same server can connect to it. Something started it automatically: more on that later in the course.</p><p data-caption="3">You install Node.js: you install <code>curl</code>, download and run NodeSource’s setup script with it, which adds their repository, then run <code>sudo apt-get install -y nodejs</code>. APT installs it, and exits. Nothing new stays running: installing a program only puts its files on the disk.</p><p data-caption="4">You run <code>node -v</code>. Installed, Node.js is only files on the disk: it runs only when you start it, and here, it stops as soon as it has printed its version.</p></template>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, PostgreSQL is installed and running on your server, listening on port 5432. Node.js is installed, but nothing of it runs.</p><p data-caption="0">You start the exercise by connecting to your server over SSH. This diagram shows that connection already open. The following steps show what happens when you type commands on the server.</p><p data-caption="1">You run <code>sudo apt install postgresql</code>. APT downloads PostgreSQL, installs it, and exits.</p><p data-caption="2">Installing PostgreSQL also started it. It listens on port 5432, and on a Unix socket, a file through which programs on the same server can connect to it. Something started it automatically: more on that later in the course.</p><p data-caption="3">You install Node.js: you install <code>curl</code>, download and run NodeSource’s setup script with it, which adds their repository, then run <code>sudo apt-get install -y nodejs</code>. APT installs it, and exits. Nothing new stays running: installing a program only puts its files on the disk.</p><p data-caption="4">You run <code>node -v</code>. Installed, Node.js is only files on the disk: it runs only when you start it, and here, it stops as soon as it has printed its version.</p></template>
 </div>
 <div class="callout callout-more group/callout" data-callout="410-sftp-deployment:unix-sockets"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-410-sftp-deployment:unix-sockets" type="checkbox" class="peer hidden" /><div class="content"><p>PostgreSQL has a second listening point which is not a network port. It is a
 <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreferrer">Unix domain socket</a>. A Unix socket is a special kind of file
@@ -1024,9 +1060,8 @@ while the other one stays connected to your server.</p></div></div></div>
 <p>Install the dependencies in your local copy of the repository, even if you had
 already done it. The XSS vulnerability was fixed by adding the <code>mustache</code>
 dependency to escape user input, so you need to install it.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Install dependencies (do this in the &quot;guessit-ex&quot; directory on your computer)</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Install dependencies (do this in the &quot;guessit-ex&quot; directory on your computer)</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This reinstalls all dependencies, including the new <code>mustache</code> dependency, in
 the <code>node_modules</code> directory. You will upload that directory with the
 application, so you do not need to install them again on the server.</p></div></div>
@@ -1035,9 +1070,8 @@ application, so you do not need to install them again on the server.</p></div></
 the password <code>change-me-now</code>. If you have not changed it yet, replace it with a
 random password. This command generates one, made of 32 random hexadecimal
 digits:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">rand</span> <span class="l-variable-parameter">-hex</span> <span class="l-number">16</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">cc46a7fcd8dd9c0ce9bc6f0aaf63eb3a</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">rand</span> <span class="l-variable-parameter">-hex</span> <span class="l-number">16</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">cc46a7fcd8dd9c0ce9bc6f0aaf63eb3a</span></span></code></pre>
 <p>A password made only of letters and digits can go into the connection URL of
 <code>server.js</code> as it is. Put it in <code>schema.sql</code>, in your copy of the repository, in
 place of <code>change-me-now</code>.</p>
@@ -1045,9 +1079,8 @@ place of <code>change-me-now</code>.</p>
 <p>Still in your copy of the repository, on your computer, update the
 <code>DATABASE_URL</code> at the top of the <code>server.js</code> file with the password you put in
 <code>schema.sql</code>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span>
-</div><div class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:your-secret-password@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span></span>
+<span class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:your-secret-password@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <ul>
 <li>The password must be the same as the one in <code>schema.sql</code>.</li>
 <li>The port must be 5432. If you ran PostgreSQL with Docker Desktop on your
@@ -1059,8 +1092,7 @@ PostgreSQL listens on its default port, <code>5432</code>.</li>
 putting it in the connection URL of <code>server.js</code>. For example, if your password
 is <code>my$ecret</code>, you must replace the <code>$</code> with <code>%24</code>, so that the connection URL
 becomes</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my%24ecret@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my%24ecret@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre></div></div>
 <h2 id="upload-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Upload the application<a href="#upload-the-application" aria-label="Link to heading 'Upload the application'" data-heading-content="Upload the application" class="anchor"></a></h2>
 <p><strong>On your local machine</strong>, use the SFTP application you set up in <a href="/2026/course/104-hello-ssh/#copy-files-with-an-sftp-application">Hello
 SSH</a> to upload the application to your server: <a href="https://winscp.net" target="_blank" rel="noopener noreferrer">WinSCP</a>
@@ -1131,22 +1163,19 @@ the left) to your home directory on the server (on the right):</p>
 for this part, or reconnect if necessary.</p></div></div></div>
 <p>Your SFTP application shows the files on the server, but you can also check from
 your terminal. List the uploaded directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Make sure you&#39;re still connected to your server</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">jde.archidep.ch</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">README.md</span>  <span class="l-variable-parameter">node_modules</span>  <span class="l-variable-parameter">package-lock.json</span>  <span class="l-variable-parameter">package.json</span>  <span class="l-variable-parameter">schema.sql</span>  <span class="l-variable-parameter">server.js</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Make sure you&#39;re still connected to your server</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">jde.archidep.ch</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">README.md</span>  <span class="l-variable-parameter">node_modules</span>  <span class="l-variable-parameter">package-lock.json</span>  <span class="l-variable-parameter">package.json</span>  <span class="l-variable-parameter">schema.sql</span>  <span class="l-variable-parameter">server.js</span></span></code></pre>
 <p>Make sure the configuration you prepared on your computer made it too:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-string-special-path">postgresql://</span> <span class="l-string-special-path">~/guessit-ex/server.js</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-string-special-path">postgresql://</span> <span class="l-string-special-path">~/guessit-ex/server.js</span></span></code></pre>
 <p>It prints the line of the <code>DATABASE_URL</code>: check that it has your password and
 port <code>5432</code>.</p>
 <p><code>node_modules</code> is where an interrupted upload usually shows: some of its
 packages are missing. Count them on the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex/node_modules</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex/node_modules</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span></code></pre>
 <p>Then run <code>ls node_modules | wc -l</code> in your copy of the repository, on your
 computer. Both numbers should be the same.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>When its output goes into a <a href="/2026/course/408-unix-processes/#pipelines">pipe</a> rather than to your terminal,
@@ -1160,7 +1189,7 @@ connection open in your terminal.</p>
 <!-- Generated from diagrams/410-upload.svg and 410-upload.ts by "npm run diagrams": edit those instead. -->
 <div class="diagram-figure" data-diagram="410-upload">
 <div class="diagram-canvas">
-<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-upload-title">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-upload-title" data-diagram="410-upload">
 <title id="diagram-410-upload-title">Uploading an application to a server over SFTP</title>
 <style id="diagram-410-upload-diagram-styles">
 svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
@@ -1231,6 +1260,11 @@ display: none;
 }
 .diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
 display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
 }
 /* A short-lived process, and the control edge that started it, only while
 their step is the current one. */
@@ -1323,6 +1357,13 @@ svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
 animation: none;
 opacity: 0;
 }
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
 /* --- Torn down ----------------------------------------------------------- */
 /* Gone from a step on, such as a session closing; the fully drawn diagram still
 shows it. The motion script sets `gone`. */
@@ -1349,6 +1390,12 @@ animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
 /* A control edge appears, then the process it starts. */
 svg.diagram .fade-on.visible {
 animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
 }
 /* The cursor types, then disappears on Enter. */
 svg.diagram :is(.spawn, .input).visible .prompt .cursor {
@@ -1598,6 +1645,24 @@ display: none;
 .diagram-figure.in-deck svg.diagram {
 max-height: 520px;
 }
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
 /* A page stepping through the diagram does what reveal.js does in a deck:
 hides the steps not reached yet. The captions say what the legend would. */
 .diagram-figure.stepping svg.diagram .fragment {
@@ -1630,6 +1695,14 @@ border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 border-radius: 6px;
 padding: 0.2em 0.75em;
 cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
 }
 .diagram-figure .diagram-controls button:disabled {
 opacity: 0.4;
@@ -1762,23 +1835,21 @@ break-inside: avoid;
 </g>
 <g class="overlay packet fragment whole" data-fragment-index="5"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-47,-12 H37 L47,0 L37,12 H-47 Z"/><text x="-5" y="5">server.js</text></g></g><g class="overlay packet fragment whole" data-fragment-index="6"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-51,-12 H41 L51,0 L41,12 H-51 Z"/><text x="-5" y="5">schema.sql</text></g></g><g class="overlay packet fragment whole heavy" data-fragment-index="7"><g class="leg" style="offset-path: path('M350,343 H480 C540,343 540,343 600,343'); --from: 0%; --to: 100%"><path d="M-63,-12 H53 L63,0 L53,12 H-63 Z"/><text x="-5" y="5">node_modules/</text></g></g></svg>
 </div>
-<template class="diagram-captions"><p data-caption="rest">Your SFTP client is connected to your server, uploading the application, while your terminal is still connected over SSH.</p><p data-caption="0">Your terminal is still connected to your server over SSH, and PostgreSQL is running. You now upload the application from your computer.</p><p data-caption="1">You open your SFTP client: WinSCP on Windows, or Cyberduck on macOS.</p><p data-caption="2">It connects to port 22, where the SSH server is listening, as your SSH client did: SFTP works over SSH.</p><p data-caption="3">The SSH server accepts the connection, and starts a new SSH session for it. Your terminal’s session is still there: the SSH server is not tied up by one connection.</p><p data-caption="4">It hands the connection over to the new session, and goes back to waiting on port 22.</p><p data-caption="5">This session starts the SFTP server, <code>sftp-server</code>, rather than a shell, because this is an SFTP client connecting, not a human logging in.</p><p data-caption="6">You drag the application’s directory onto the server. Its files travel over the connection: <code>server.js</code>, the application…</p><p data-caption="7">…<code>schema.sql</code>, the structure of its database…</p><p data-caption="8">…and <code>node_modules</code>, the libraries it depends on, copied with it: hundreds of small files, which take a while.</p><p data-caption="9">The SFTP server writes the files to the disk of the server, in the directory you chose.</p><p data-caption="10">You close your SFTP client: its connection closes, and its session and the SFTP server exit. The SSH server is still waiting on port 22, and your terminal is still connected.</p></template>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, your SFTP client is connected to your server, uploading the application, while your terminal is still connected over SSH.</p><p data-caption="0">Your terminal is still connected to your server over SSH, and PostgreSQL is running. You now upload the application from your computer.</p><p data-caption="1">You open your SFTP client: WinSCP on Windows, or Cyberduck on macOS.</p><p data-caption="2">It connects to port 22, where the SSH server is listening, as your SSH client did: SFTP works over SSH.</p><p data-caption="3">The SSH server accepts the connection, and starts a new SSH session for it. Your terminal’s session is still there: the SSH server is not tied up by one connection.</p><p data-caption="4">It hands the connection over to the new session, and goes back to waiting on port 22.</p><p data-caption="5">This session starts the SFTP server, <code>sftp-server</code>, rather than a shell, because this is an SFTP client connecting, not a human logging in.</p><p data-caption="6">You drag the application’s directory onto the server. Its files travel over the connection: <code>server.js</code>, the application…</p><p data-caption="7">…<code>schema.sql</code>, the structure of its database…</p><p data-caption="8">…and <code>node_modules</code>, the libraries it depends on, copied with it: hundreds of small files, which take a while.</p><p data-caption="9">The SFTP server writes the files to the disk of the server, in the directory you chose.</p><p data-caption="10">You close your SFTP client: its connection closes, and its session and the SFTP server exit. The SSH server is still waiting on port 22, and your terminal is still connected.</p></template>
 </div>
 <h2 id="initialize-the-database"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Initialize the database<a href="#initialize-the-database" aria-label="Link to heading 'Initialize the database'" data-heading-content="Initialize the database" class="anchor"></a></h2>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Go back to your terminal that is still connected to your cloud server over SSH
 for this part, or reconnect if necessary.</p></div></div></div>
 <p>Go into the uploaded directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/guessit-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/guessit-ex</span></span></code></pre>
 <p>Run the project’s SQL file as the PostgreSQL superuser, <code>postgres</code>, to create
 the user, the database and its table:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">ROLE</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">DATABASE</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">now</span> <span class="l-variable-parameter">connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">as</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">TABLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">ROLE</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">DATABASE</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">now</span> <span class="l-variable-parameter">connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">as</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">TABLE</span></span></code></pre>
 <p>This uses the <a href="/2026/course/408-unix-processes/#stream-redirection">redirection operator <code>&lt;</code></a> to send the contents
 of the <code>schema.sql</code> file into the standard input stream of <code>psql</code>. When given
 SQL queries on its input stream, <code>psql</code> connects to the PostgreSQL server,
@@ -1796,19 +1867,18 @@ superuser. On your server, only you, the system administrator, can become the
 PostgreSQL superuser, with <code>sudo</code>.</p>
 <h3 id="optional-make-sure-it-worked"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: make sure it worked<a href="#optional-make-sure-it-worked" aria-label="Link to heading 'Optional: make sure it worked'" data-heading-content="Optional: make sure it worked" class="anchor"></a></h3>
 <p>To make sure everything worked, you can check that the table was created:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&#39;\d game&#39;</span> <span class="l-variable-parameter">guessit</span>
-</div><div class="l-line" data-line="2">                          <span class="l-function-call">Table</span> <span class="l-string">&quot;public.game&quot;</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>           <span class="l-function-call">Type</span>           <span class="l-operator">|</span> <span class="l-function-call">Collation</span> <span class="l-operator">|</span> <span class="l-function-call">Nullable</span> <span class="l-operator">|</span> <span class="l-function-call">Default</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">------------+--------------------------+-----------+----------+---------</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">name</span>       <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">secret</span>     <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">attempts</span>   <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-number">0</span>
-</div><div class="l-line" data-line="9"> <span class="l-function-call">found_at</span>   <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span>           <span class="l-operator">|</span>          <span class="l-operator">|</span>
-</div><div class="l-line" data-line="10"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span><span class="l-function-call"></span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-function-call">now</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="11">Indexes:
-</div><div class="l-line" data-line="12">    <span class="l-string">&quot;game_pkey&quot;</span> PRIMARY KEY, btree <span class="l-punctuation-bracket">(</span><span class="l-function-call">id</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&#39;\d game&#39;</span> <span class="l-variable-parameter">guessit</span></span>
+<span class="l-line" data-line="2">                          <span class="l-function-call">Table</span> <span class="l-string">&quot;public.game&quot;</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>           <span class="l-function-call">Type</span>           <span class="l-operator">|</span> <span class="l-function-call">Collation</span> <span class="l-operator">|</span> <span class="l-function-call">Nullable</span> <span class="l-operator">|</span> <span class="l-function-call">Default</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">------------+--------------------------+-----------+----------+---------</span></span>
+<span class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">name</span>       <span class="l-operator">|</span> <span class="l-function-call">text</span>                     <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span></span>
+<span class="l-line" data-line="7"> <span class="l-function-call">secret</span>     <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span></span>
+<span class="l-line" data-line="8"> <span class="l-function-call">attempts</span>   <span class="l-operator">|</span> <span class="l-function-call">integer</span>                  <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-number">0</span></span>
+<span class="l-line" data-line="9"> <span class="l-function-call">found_at</span>   <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span>           <span class="l-operator">|</span>          <span class="l-operator">|</span></span>
+<span class="l-line" data-line="10"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span>           <span class="l-operator">|</span> <span class="l-function-call">not</span> <span class="l-variable-parameter">null</span> <span class="l-operator">|</span> <span class="l-function-call">now</span><span class="l-punctuation-bracket">()</span></span>
+<span class="l-line" data-line="11">Indexes:</span>
+<span class="l-line" data-line="12">    <span class="l-string">&quot;game_pkey&quot;</span> PRIMARY KEY, btree <span class="l-punctuation-bracket">(</span><span class="l-function-call">id</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>If you see the table’s schema, it means it was successfully created and
 everything went well, since that is the last step of the <code>schema.sql</code> file.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The command above connects to the <code>guessit</code> database of the PostgreSQL server,
@@ -1817,13 +1887,12 @@ schema of a table.</p></div></div>
 <h2 id="run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application<a href="#run-the-application" aria-label="Link to heading 'Run the application'" data-heading-content="Run the application" class="anchor"></a></h2>
 <p>Also in the uploaded directory on the server, start the application, as you did
 on your computer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-operator">&gt;</span> <span class="l-string-special-path">guessit@1.0.0</span> <span class="l-function-call">dev</span>
-</div><div class="l-line" data-line="4"><span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--watch</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-operator">&gt;</span> <span class="l-string-special-path">guessit@1.0.0</span> <span class="l-function-call">dev</span></span>
+<span class="l-line" data-line="4"><span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--watch</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span></code></pre>
 <p>You (and everybody else) should be able to access the application in a browser
 at your server’s IP address and port 3000 (e.g. <code>http://W.X.Y.Z:3000</code>).</p>
 <p><img src="images/guessit-455612a9a69d4171026903f234be0c38.png" alt="Guess It’s home page, at the server’s IP address and port 3000" /></p>
@@ -1836,15 +1905,14 @@ likely, the password in <code>server.js</code> does not match the one in <code>s
 <h3 id="optional-see-who-listens-where"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: see who listens where<a href="#optional-see-who-listens-where" aria-label="Link to heading 'Optional: see who listens where'" data-heading-content="Optional: see who listens where" class="anchor"></a></h3>
 <p>In another SSH connection to your server, list the processes listening for TCP
 connections with <code>ss</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">State</span>   <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span>    <span class="l-variable-parameter">…</span>  <span class="l-variable-parameter">Process</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>         <span class="l-variable-parameter">0.0.0.0:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>      <span class="l-variable-parameter">127.0.0.54:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>       <span class="l-variable-parameter">127.0.0.1:5432</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;postgres&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">127.0.0.53%lo:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>            <span class="l-variable-parameter">[</span><span class="l-variable-parameter">::</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>               <span class="l-variable-parameter">*:3000</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;node-MainThread&quot;</span>,…<span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">State</span>   <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span>    <span class="l-variable-parameter">…</span>  <span class="l-variable-parameter">Process</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>         <span class="l-variable-parameter">0.0.0.0:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">))</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>      <span class="l-variable-parameter">127.0.0.54:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">))</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>       <span class="l-variable-parameter">127.0.0.1:5432</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;postgres&quot;</span>,…<span class="l-punctuation-bracket">))</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">127.0.0.53%lo:53</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;systemd-resolve&quot;</span>,…<span class="l-punctuation-bracket">))</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>            <span class="l-variable-parameter">[::]:22</span>      <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;sshd&quot;</span>,…<span class="l-punctuation-bracket">)</span>,<span class="l-punctuation-bracket">(</span><span class="l-string">&quot;systemd&quot;</span>,…<span class="l-punctuation-bracket">))</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">LISTEN</span>  <span class="l-variable-parameter">…</span>               <span class="l-variable-parameter">*:3000</span>    <span class="l-variable-parameter">…</span>   <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;node-MainThread&quot;</span>,…<span class="l-punctuation-bracket">))</span></span></code></pre>
 <p>PostgreSQL (<code>postgres</code>) listens on port 5432 of the <a href="https://en.wikipedia.org/wiki/Loopback#Virtual_loopback_interface" target="_blank" rel="noopener noreferrer">loopback
 address</a>, <code>127.0.0.1</code>: only programs running on your server can
 connect to it. Guess It (<code>node-MainThread</code>, the name Node.js gives its main
@@ -1900,7 +1968,7 @@ communication flow at the end of this exercise.</p>
 <!-- Generated from diagrams/410-running.svg and 410-running.ts by "npm run diagrams": edit those instead. -->
 <div class="diagram-figure" data-diagram="410-running">
 <div class="diagram-canvas">
-<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-running-title">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-running-title" data-diagram="410-running">
 <title id="diagram-410-running-title">A Node.js application deployed by hand over SSH</title>
 <style id="diagram-410-running-diagram-styles">
 svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
@@ -1971,6 +2039,11 @@ display: none;
 }
 .diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
 display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
 }
 /* A short-lived process, and the control edge that started it, only while
 their step is the current one. */
@@ -2063,6 +2136,13 @@ svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
 animation: none;
 opacity: 0;
 }
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
 /* --- Torn down ----------------------------------------------------------- */
 /* Gone from a step on, such as a session closing; the fully drawn diagram still
 shows it. The motion script sets `gone`. */
@@ -2089,6 +2169,12 @@ animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
 /* A control edge appears, then the process it starts. */
 svg.diagram .fade-on.visible {
 animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
 }
 /* The cursor types, then disappears on Enter. */
 svg.diagram :is(.spawn, .input).visible .prompt .cursor {
@@ -2338,6 +2424,24 @@ display: none;
 .diagram-figure.in-deck svg.diagram {
 max-height: 520px;
 }
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
 /* A page stepping through the diagram does what reveal.js does in a deck:
 hides the steps not reached yet. The captions say what the legend would. */
 .diagram-figure.stepping svg.diagram .fragment {
@@ -2370,6 +2474,14 @@ border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 border-radius: 6px;
 padding: 0.2em 0.75em;
 cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
 }
 .diagram-figure .diagram-controls button:disabled {
 opacity: 0.4;
@@ -2513,23 +2625,21 @@ break-inside: avoid;
 </g>
 <g class="overlay packet fragment whole" data-fragment-index="1"><g class="leg" style="offset-path: path('M820,366 V483 C820,497 826,503 840,503 H880'); --from: 0%; --to: 100%"><path d="M-23,-12 H13 L23,0 L13,12 H-23 Z"/><text x="-5" y="5">SQL</text></g></g><g class="overlay packet fragment whole" data-fragment-index="7"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 0%; --to: 100%"><path d="M-31,-12 H21 L31,0 L21,12 H-31 Z"/><text x="-5" y="5">GET /</text></g></g><g class="overlay packet fragment whole" data-fragment-index="10"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 0%; --to: 100%"><path d="M-38,-12 H38 V12 H8 L0,20 L-8,12 H-38 Z"/><text x="0" y="5">SELECT …</text></g></g><g class="overlay packet fragment whole" data-fragment-index="12"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 100%; --to: 0%"><path d="M-27,-12 H17 L27,0 L17,12 H-27 Z" transform="scale(-1,1)"/><text x="5" y="5">rows</text></g></g><g class="overlay packet fragment whole" data-fragment-index="14"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 100%; --to: 0%"><path d="M-55,-12 H45 L55,0 L45,12 H-55 Z" transform="scale(-1,1)"/><text x="5" y="5">HTML/CSS/JS</text></g></g></svg>
 </div>
-<template class="diagram-captions"><p data-caption="rest">Your browser talks to the Guess It application running on your server. Guess It talks to the PostgreSQL database server also running on your server. You started Guess It manually in your SSH session, in a shell running on the server.</p><p data-caption="0">Your terminal is still connected to your server over SSH, PostgreSQL is running, and the application’s files are on the server.</p><p data-caption="1">You run <code>sudo -u postgres psql &lt; schema.sql</code>. psql starts and connects to PostgreSQL through its Unix socket, as the <code>postgres</code> user.</p><p data-caption="2">Your shell opened <code>schema.sql</code> and gave its contents to the standard input of psql, which sends the SQL to PostgreSQL, and waits for it to be run.</p><p data-caption="3">PostgreSQL works: it creates the <code>guessit</code> user, its database and its table.</p><p data-caption="4">psql has nothing more to send, and exits.</p><p data-caption="5">You run <code>npm run dev</code>, as on your computer. Your shell starts Guess It, which listens on port 3000.</p><p data-caption="6">You open a browser on your computer.</p><p data-caption="7">You type your server’s public IP address and port into it. It connects to port 3000, where Guess It is listening.</p><p data-caption="8">It sends an HTTP request for the home page over the connection, and waits for the answer.</p><p data-caption="9">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="10">Guess It connects to PostgreSQL on port 5432, with the database URL you configured.</p><p data-caption="11">It sends its query over the connection.</p><p data-caption="12">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="13">The rows of the leaderboard travel back to Guess It.</p><p data-caption="14">Guess It works again, building the HTML page from the rows.</p><p data-caption="15">The page travels back over the connection to your browser, with its stylesheets and scripts.</p><p data-caption="16">Your browser works, displaying the page.</p></template>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, your browser talks to the Guess It application running on your server. Guess It talks to the PostgreSQL database server also running on your server. You started Guess It manually in your SSH session, in a shell running on the server.</p><p data-caption="0">Your terminal is still connected to your server over SSH, PostgreSQL is running, and the application’s files are on the server.</p><p data-caption="1">You run <code>sudo -u postgres psql &lt; schema.sql</code>. psql starts and connects to PostgreSQL through its Unix socket, as the <code>postgres</code> user.</p><p data-caption="2">Your shell opened <code>schema.sql</code> and gave its contents to the standard input of psql, which sends the SQL to PostgreSQL, and waits for it to be run.</p><p data-caption="3">PostgreSQL works: it creates the <code>guessit</code> user, its database and its table.</p><p data-caption="4">psql has nothing more to send, and exits.</p><p data-caption="5">You run <code>npm run dev</code>, as on your computer. Your shell starts Guess It, which listens on port 3000.</p><p data-caption="6">You open a browser on your computer.</p><p data-caption="7">You type your server’s public IP address and port into it. It connects to port 3000, where Guess It is listening.</p><p data-caption="8">It sends an HTTP request for the home page over the connection, and waits for the answer.</p><p data-caption="9">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="10">Guess It connects to PostgreSQL on port 5432, with the database URL you configured.</p><p data-caption="11">It sends its query over the connection.</p><p data-caption="12">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="13">The rows of the leaderboard travel back to Guess It.</p><p data-caption="14">Guess It works again, building the HTML page from the rows.</p><p data-caption="15">The page travels back over the connection to your browser, with its stylesheets and scripts.</p><p data-caption="16">Your browser works, displaying the page.</p></template>
 </div>
 <h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
 <p>Here’s a few tips about some problems you may encounter during this exercise.</p>
 <h3 id="destination-path-guessit-ex-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>destination path 'guessit-ex' already exists</code><a href="#destination-path-guessit-ex-already-exists" aria-label="Link to heading 'destination path 'guessit-ex' already exists'" data-heading-content="destination path 'guessit-ex' already exists" class="anchor"></a></h3>
 <p><code>git clone</code> refuses to clone your new fork:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">fatal:</span> <span class="l-variable-parameter">destination</span> <span class="l-variable-parameter">path</span> <span class="l-string">&#39;guessit-ex&#39;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">an</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">directory.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">fatal:</span> <span class="l-variable-parameter">destination</span> <span class="l-variable-parameter">path</span> <span class="l-string">&#39;guessit-ex&#39;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">an</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">directory.</span></span></code></pre>
 <p>You already have a <code>guessit-ex</code> directory where you are cloning, probably your
 clone of your group’s repository, or of your previous fork. Git will not clone
 into a directory that already has files in it.</p>
 <p>Move the old clone out of the way by renaming it, then clone again:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">guessit-ex</span> <span class="l-variable-parameter">guessit-ex-old</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">guessit-ex</span> <span class="l-variable-parameter">guessit-ex-old</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:YOUR_GITHUB_USERNAME/guessit-ex.git</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Your old clone is still there, in <code>guessit-ex-old</code>, if you need anything from
 it.</p></div></div>
 <h3 id="daemons-using-outdated-libraries"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Daemons using outdated libraries<a href="#daemons-using-outdated-libraries" aria-label="Link to heading 'Daemons using outdated libraries'" data-heading-content="Daemons using outdated libraries" class="anchor"></a></h3>
@@ -2560,14 +2670,13 @@ save the file: the application uploads it again.</li>
 </ul>
 <h3 id="cannot-find-module"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Cannot find module</code><a href="#cannot-find-module" aria-label="Link to heading 'Cannot find module'" data-heading-content="Cannot find module" class="anchor"></a></h3>
 <p>The application stops as soon as it starts, with an error like this one:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Error:</span> <span class="l-variable-parameter">Cannot</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">module</span> <span class="l-string">&#39;mustache&#39;</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Require</span> <span class="l-variable-parameter">stack:</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">-</span> <span class="l-variable-parameter">/home/jde/guessit-ex/server.js</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Failed</span> <span class="l-variable-parameter">running</span> <span class="l-string">&#39;server.js&#39;</span><span class="l-variable-parameter">.</span> <span class="l-variable-parameter">Waiting</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">restarting...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Error:</span> <span class="l-variable-parameter">Cannot</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">module</span> <span class="l-string">&#39;mustache&#39;</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Require</span> <span class="l-variable-parameter">stack:</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">-</span> <span class="l-variable-parameter">/home/jde/guessit-ex/server.js</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Failed</span> <span class="l-variable-parameter">running</span> <span class="l-string">&#39;server.js&#39;</span><span class="l-variable-parameter">.</span> <span class="l-variable-parameter">Waiting</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">restarting...</span></span></code></pre>
 <p>The <code>node_modules</code> directory on your server is missing, or incomplete. Either
 your copy did not have all the dependencies, or the upload did not finish. Run
 <code>npm ci</code> in your copy of the repository, on your computer, then upload its
@@ -2575,14 +2684,12 @@ your copy did not have all the dependencies, or the upload did not finish. Run
 <h3 id="the-leaderboard-could-not-be-loaded"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The leaderboard could not be loaded<a href="#the-leaderboard-could-not-be-loaded" aria-label="Link to heading 'The leaderboard could not be loaded'" data-heading-content="The leaderboard could not be loaded" class="anchor"></a></h3>
 <p>The home page says that the leaderboard could not be loaded from the database.
 Look at the terminal where the application runs, at the error below <code>Could not load the leaderboard</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span></code></pre>
 <p>Then find that error below.</p>
 <h3 id="password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code><a href="#password-authentication-failed-for-user-guessit" aria-label="Link to heading 'password authentication failed for user &quot;guessit&quot;'" data-heading-content="password authentication failed for user &quot;guessit&quot;" class="anchor"></a></h3>
 <p>The application cannot connect to PostgreSQL as the <code>guessit</code> user:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span></span></code></pre>
 <p>You may have missed the database initialization step. If you did, go back to
 <a href="#initialize-the-database">Initialize the database</a> to create the Guess It
 database and user.</p>
@@ -2591,54 +2698,47 @@ the same as the one in the <code>DATABASE_URL</code> at the top of <code>server.
 <p>If it is not, change the password in <code>server.js</code> to match the one in
 <code>schema.sql</code>, or change the password in PostgreSQL to match the one in
 <code>server.js</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;the-correct-password&#39;;&quot;</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;the-correct-password&#39;;&quot;</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span></span></code></pre>
 <p>The password in <code>server.js</code> must match the one that was defined in PostgreSQL
 <strong>at the time you ran <code>schema.sql</code></strong>. Changing the password in <code>schema.sql</code>
 after that does not change the password in PostgreSQL. This is what the <code>ALTER USER</code> query above does.</p>
 <h3 id="connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code><a href="#connect-econnrefused" aria-label="Link to heading 'connect ECONNREFUSED'" data-heading-content="connect ECONNREFUSED" class="anchor"></a></h3>
 <p>The application cannot reach PostgreSQL at all:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">Error:</span> <span class="l-variable-parameter">connect</span> <span class="l-variable-parameter">ECONNREFUSED</span> <span class="l-variable-parameter">127.0.0.1:5432</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">Error:</span> <span class="l-variable-parameter">connect</span> <span class="l-variable-parameter">ECONNREFUSED</span> <span class="l-variable-parameter">127.0.0.1:5432</span></span></code></pre>
 <p>Nothing listens on port 5432 of your server: PostgreSQL is not running. Check
 its status, and start it if it is stopped:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">postgresql</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">postgresql</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql</span></span></code></pre>
 <p>Also check that the <code>DATABASE_URL</code> in <code>server.js</code> on the server uses port
 <code>5432</code>, and not the port you may have used on your computer.</p>
 <h3 id="role-guessit-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>role &quot;guessit&quot; already exists</code><a href="#role-guessit-already-exists" aria-label="Link to heading 'role &quot;guessit&quot; already exists'" data-heading-content="role &quot;guessit&quot; already exists" class="anchor"></a></h3>
 <p><code>psql</code> prints these errors when you run <code>schema.sql</code> a second time:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">role</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">now</span> <span class="l-variable-parameter">connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">as</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">relation</span> <span class="l-string">&quot;game&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">TABLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">role</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">now</span> <span class="l-variable-parameter">connected</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">database</span> <span class="l-string">&quot;guessit&quot;</span> <span class="l-variable-parameter">as</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">ERROR:</span>  <span class="l-variable-parameter">relation</span> <span class="l-string">&quot;game&quot;</span> <span class="l-variable-parameter">already</span> <span class="l-variable-parameter">exists</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">TABLE</span></span></code></pre>
 <p>The first run created the user, the database and the table. The second run
 changed nothing: the user still has the password of the first run, even if you
 have changed it in <code>schema.sql</code> since.</p>
 <p>Give the <code>guessit</code> user the password of your <code>DATABASE_URL</code> (replacing
 <code>my-new-password</code> with that password):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span></span></code></pre>
 <h3 id="role-jde-does-not-exist"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>role &quot;jde&quot; does not exist</code><a href="#role-jde-does-not-exist" aria-label="Link to heading 'role &quot;jde&quot; does not exist'" data-heading-content="role &quot;jde&quot; does not exist" class="anchor"></a></h3>
 <p><code>psql</code> refuses to connect:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">psql:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">socket</span> <span class="l-string">&quot;/var/run/postgresql/.s.PGSQL.5432&quot;</span> <span class="l-variable-parameter">failed:</span> <span class="l-variable-parameter">FATAL:</span>  <span class="l-variable-parameter">role</span> <span class="l-string">&quot;jde&quot;</span> <span class="l-variable-parameter">does</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">exist</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">psql:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">socket</span> <span class="l-string">&quot;/var/run/postgresql/.s.PGSQL.5432&quot;</span> <span class="l-variable-parameter">failed:</span> <span class="l-variable-parameter">FATAL:</span>  <span class="l-variable-parameter">role</span> <span class="l-string">&quot;jde&quot;</span> <span class="l-variable-parameter">does</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">exist</span></span></code></pre>
 <p>You ran <code>psql</code> as yourself. By default, <code>psql</code> connects as the PostgreSQL user
 with the same name as your Unix user, and PostgreSQL has no such user. Run it as
 the <code>postgres</code> user of your server, with <code>sudo -u postgres psql</code>.</p>
 <h3 id="peer-authentication-failed-for-user-postgres"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Peer authentication failed for user &quot;postgres&quot;</code><a href="#peer-authentication-failed-for-user-postgres" aria-label="Link to heading 'Peer authentication failed for user &quot;postgres&quot;'" data-heading-content="Peer authentication failed for user &quot;postgres&quot;" class="anchor"></a></h3>
 <p><code>psql</code> refuses to connect:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">-U</span> <span class="l-variable-parameter">postgres</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">psql:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">socket</span> <span class="l-string">&quot;/var/run/postgresql/.s.PGSQL.5432&quot;</span> <span class="l-variable-parameter">failed:</span> <span class="l-variable-parameter">FATAL:</span>  <span class="l-variable-parameter">Peer</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">-U</span> <span class="l-variable-parameter">postgres</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">psql:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">socket</span> <span class="l-string">&quot;/var/run/postgresql/.s.PGSQL.5432&quot;</span> <span class="l-variable-parameter">failed:</span> <span class="l-variable-parameter">FATAL:</span>  <span class="l-variable-parameter">Peer</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;postgres&quot;</span></span></code></pre>
 <p>On Ubuntu, the PostgreSQL superuser, <code>postgres</code>, can only connect from the
 <code>postgres</code> user of your server. Use <code>sudo -u postgres psql</code>, not
 <code>psql -U postgres</code>.</p>
@@ -2653,9 +2753,10 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -2761,30 +2862,32 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-410-sftp-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-410-sftp-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/410-sftp-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/410-sftp-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      <div class="cloud-server-data" data-mode="details">
-      </div>
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="cloud-server-data" data-mode="details">
+        </div>
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -3066,7 +3169,7 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -3470,7 +3573,7 @@ the <code>postgres</code> user of your server, with <code>sudo -u postgres psql<
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

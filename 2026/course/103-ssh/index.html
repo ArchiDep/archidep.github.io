@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/103-ssh/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/103-ssh/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -255,8 +255,7 @@
 <h2 id="the-ssh-command">The <code>ssh</code> command<a href="#the-ssh-command" aria-label="Link to heading 'The ssh command'" data-heading-content="The ssh command" class="anchor"></a></h2>
 <p>The <code>ssh</code> command is available on most Unix-like systems (e.g. Linux &amp; macOS)
 and in the WSL on Windows. Its basic syntax is:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ssh [user@]hostname [command]
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">ssh [user@]hostname [command]</span></code></pre>
 <p>Here are a few examples:</p>
 <ul>
 <li><code>ssh example.com</code> - Connect to the SSH server at <code>example.com</code> and log in
@@ -270,11 +269,10 @@ on the SSH server at <code>192.168.50.4</code>.</li>
 <h2 id="ssh-known-hosts">SSH known hosts<a href="#ssh-known-hosts" aria-label="Link to heading 'SSH known hosts'" data-heading-content="SSH known hosts" class="anchor"></a></h2>
 <p>When you connect to an SSH server for the first time, you will most likely get a
 message similar to this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">example.com</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;example.com (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span>&#39;t be established.
-</div><div class="l-line" data-line="3">ED25519 key fingerprint is SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI.
-</div><div class="l-line" data-line="4">Are you sure you want to continue connecting (yes/no/[fingerprint])?
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">example.com</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;example.com (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span>&#39;t be established.</span>
+<span class="l-line" data-line="3">ED25519 key fingerprint is SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI.</span>
+<span class="l-line" data-line="4">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></code></pre>
 <p>What does this mean? <em>I thought SSH was <strong>secure</strong>?</em></p>
 <h3 id="are-you-really-the-ssh-server-im-looking-for">Are you really the SSH server I’m looking for?<a href="#are-you-really-the-ssh-server-im-looking-for" aria-label="Link to heading 'Are you really the SSH server I’m looking for?'" data-heading-content="Are you really the SSH server I’m looking for?" class="anchor"></a></h3>
 <p>As the slides explain, when SSH establishes a secure channel, a Diffie-Hellman
@@ -303,8 +301,7 @@ server’s public key is the correct one before connecting.</strong></p>
 <p>One way to do this is to use the <strong>key fingerprint</strong> that is shown to you when
 first connecting. The key fingerprint is a <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener noreferrer">cryptographic hash</a> of the
 public key:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ED25519 key fingerprint is SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI.
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">ED25519 key fingerprint is SHA256:colYVucS/YU0JSK7woiLAf5ChPgJYAR1BWJlET2EwDI.</span></code></pre>
 <p>Some services that allow you to connect over SSH, like GitHub, <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints" target="_blank" rel="noopener noreferrer">publish their
 SSH key fingerprints on their website</a> so that users may
 check them. In other cases, the key may be physically transmitted to you, or
@@ -320,9 +317,8 @@ and only continues the connection if they are the same.</p>
 <p>If you accept the connection, SSH will save the server’s address and public key
 in its <strong>known hosts file</strong>. You can see the contents of this file with the
 following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/known_hosts</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">example.com</span> <span class="l-variable-parameter">ssh-ed25519</span> <span class="l-variable-parameter">AAAAC3NzaC1lZDI1NTE5AAAAIJDLOpPWR7r89VjK9kPM...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/known_hosts</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">example.com</span> <span class="l-variable-parameter">ssh-ed25519</span> <span class="l-variable-parameter">AAAAC3NzaC1lZDI1NTE5AAAAIJDLOpPWR7r89VjK9kPM...</span></span></code></pre>
 <p>The format of each line in this file is <code>hostname algorithm pubkey</code>.</p>
 <p>The line above means that when SSH connects to <code>example.com</code>, it expects the
 server to send this specific public key (<code>AAAAC3NzaC1lZDI1NTE5AAAAIJDLOpPWR7r...</code>)
@@ -361,21 +357,20 @@ will not prompt you to accept the public key.</p>
 <p>The known hosts file has another purpose. Once SSH knows to expect a specific
 public key for a given domain or IP address, it will warn you if that public key
 changes:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; ssh 192.168.50.4
-</div><div class="l-line" data-line="2">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-</div><div class="l-line" data-line="3">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-</div><div class="l-line" data-line="4">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-</div><div class="l-line" data-line="5">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-</div><div class="l-line" data-line="6">Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-</div><div class="l-line" data-line="7">It is also possible that a host key has just been changed.
-</div><div class="l-line" data-line="8">The fingerprint for the ED25519 key sent by the remote host is
-</div><div class="l-line" data-line="9">SHA256:FUwFoK/hcqRAvJgDFmljwOur8t/mhfbm4tfIxdaVTQ8.
-</div><div class="l-line" data-line="10">Please contact your system administrator.
-</div><div class="l-line" data-line="11">Add correct host key in /path/to/.ssh/known_hosts to get rid of this message.
-</div><div class="l-line" data-line="12">Offending ED25519 key in /path/to/.ssh/known_hosts:33
-</div><div class="l-line" data-line="13">ED25519 host key for 192.168.50.4 has changed and you have requested strict checking.
-</div><div class="l-line" data-line="14">Host key verification failed.
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">$&gt; ssh 192.168.50.4</span>
+<span class="l-line" data-line="2">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span class="l-line" data-line="3">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span>
+<span class="l-line" data-line="4">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span class="l-line" data-line="5">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span>
+<span class="l-line" data-line="6">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span>
+<span class="l-line" data-line="7">It is also possible that a host key has just been changed.</span>
+<span class="l-line" data-line="8">The fingerprint for the ED25519 key sent by the remote host is</span>
+<span class="l-line" data-line="9">SHA256:FUwFoK/hcqRAvJgDFmljwOur8t/mhfbm4tfIxdaVTQ8.</span>
+<span class="l-line" data-line="10">Please contact your system administrator.</span>
+<span class="l-line" data-line="11">Add correct host key in /path/to/.ssh/known_hosts to get rid of this message.</span>
+<span class="l-line" data-line="12">Offending ED25519 key in /path/to/.ssh/known_hosts:33</span>
+<span class="l-line" data-line="13">ED25519 host key for 192.168.50.4 has changed and you have requested strict checking.</span>
+<span class="l-line" data-line="14">Host key verification failed.</span></code></pre>
 <p>As the message mentions, either the server changed its SSH key pair, or <strong>an
 attacker may be intercepting your communications</strong>.</p>
 <p>If you’re sure it’s not an attack, for example if you know the server actually
@@ -383,8 +378,7 @@ changed its key pair, you can eliminate this warning by putting the correct
 public key in the known hosts file, or by removing the offending line. The
 <code>ssh-keygen</code> command can remove all the lines for a server for you, using its
 <code>-R</code> (<strong>r</strong>emove) option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">192.168.50.4</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">192.168.50.4</span></span></code></pre>
 <p>The next time you connect, SSH will consider the server unknown again, and you
 will get the initial warning asking you to check its key fingerprint.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This happens often when a server is deleted and a new one is created with the
@@ -399,30 +393,28 @@ to log in as</strong>.</p>
 authentication</strong> is one method. When enabled, the SSH server will prompt you for
 the correct password; in this example, the password of the user named <code>jde</code> in
 the server’s user database:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;192.168.50.4 (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span><span class="l-string">&#39;t be established.</span>
-</div><div class="l-line" data-line="4"><span class="l-string">ED25519 key fingerprint is SHA256:E4GYJCEoz+G5wv+EdkPyRLytgP7aTj9BS9lr1d38Xg0.</span>
-</div><div class="l-line" data-line="5"><span class="l-string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span>
-</div><div class="l-line" data-line="6"><span class="l-string">Warning: Permanently added &#39;</span><span class="l-variable-parameter">192.168.50.4</span><span class="l-string">&#39; (ED25519) to the list of known hosts.</span>
-</div><div class="l-line" data-line="7"><span class="l-string"></span>
-</div><div class="l-line" data-line="8"><span class="l-string">jde@192.168.50.4&#39;</span><span class="l-variable-parameter">s</span> <span class="l-variable-parameter">password:</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-function-call">The</span> <span class="l-variable-parameter">authenticity</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">host</span> <span class="l-string">&#39;192.168.50.4 (192.168.50.4)&#39;</span> <span class="l-variable-parameter">can</span><span class="l-string">&#39;t be established.</span></span>
+<span class="l-line" data-line="4"><span class="l-string">ED25519 key fingerprint is SHA256:E4GYJCEoz+G5wv+EdkPyRLytgP7aTj9BS9lr1d38Xg0.</span></span>
+<span class="l-line" data-line="5"><span class="l-string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span>
+<span class="l-line" data-line="6"><span class="l-string">Warning: Permanently added &#39;</span><span class="l-variable-parameter">192.168.50.4</span><span class="l-string">&#39; (ED25519) to the list of known hosts.</span></span>
+<span class="l-line" data-line="7"><span class="l-string"></span></span>
+<span class="l-line" data-line="8"><span class="l-string">jde@192.168.50.4&#39;</span><span class="l-variable-parameter">s</span> <span class="l-variable-parameter">password:</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Most SSH clients will not display anything while you type your password. Simply
 press <code>Enter</code> when you’re done to submit it.</p></div></div>
 <h2 id="logging-in-with-ssh">Logging in with SSH<a href="#logging-in-with-ssh" aria-label="Link to heading 'Logging in with SSH'" data-heading-content="Logging in with SSH" class="anchor"></a></h2>
 <p>If you run the <code>ssh</code> command with no extra arguments and authenticate with your
 password, <strong>SSH will run the default <a href="https://en.wikipedia.org/wiki/Shell_(computing)" target="_blank" rel="noopener noreferrer">shell</a></strong> configured for that user,
 typically <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a> on Linux servers:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
-</div><div class="l-line" data-line="2"><span class="l-variable">jde</span><span class="l-function-call">@192.168.50.4</span>&#39;s password:
-</div><div class="l-line" data-line="3">Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-31-generic x86_64)
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">  System information as of Thu Sep 24 08:29:00 UTC 2026
-</div><div class="l-line" data-line="6">  ...
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">$
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span></span>
+<span class="l-line" data-line="2"><span class="l-variable">jde</span>@192.168.50.4&#39;s password:</span>
+<span class="l-line" data-line="3">Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-31-generic x86_64)</span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">  System information as of Thu Sep 24 08:29:00 UTC 2026</span>
+<span class="l-line" data-line="6">  ...</span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">$</span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Note that you may have a different command line prompt once you are connected,
 in this example <code>$</code> instead of <code>$&gt;</code>.</p></div></div>
 <h3 id="typing-commands-while-connected-through-ssh">Typing commands while connected through SSH<a href="#typing-commands-while-connected-through-ssh" aria-label="Link to heading 'Typing commands while connected through SSH'" data-heading-content="Typing commands while connected through SSH" class="anchor"></a></h3>
@@ -433,7 +425,7 @@ displayed in your terminal.</p>
 <!-- Generated from diagrams/103-ssh.svg and 103-ssh.ts by "npm run diagrams": edit those instead. -->
 <div class="diagram-figure" data-diagram="103-ssh">
 <div class="diagram-canvas">
-<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 670" role="img" aria-labelledby="diagram-103-ssh-title">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 670" role="img" aria-labelledby="diagram-103-ssh-title" data-diagram="103-ssh">
 <title id="diagram-103-ssh-title">An SSH connection and the processes at both ends</title>
 <style id="diagram-103-ssh-diagram-styles">
 svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
@@ -504,6 +496,11 @@ display: none;
 }
 .diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
 display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
 }
 /* A short-lived process, and the control edge that started it, only while
 their step is the current one. */
@@ -596,6 +593,13 @@ svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
 animation: none;
 opacity: 0;
 }
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
 /* --- Torn down ----------------------------------------------------------- */
 /* Gone from a step on, such as a session closing; the fully drawn diagram still
 shows it. The motion script sets `gone`. */
@@ -622,6 +626,12 @@ animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
 /* A control edge appears, then the process it starts. */
 svg.diagram .fade-on.visible {
 animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
 }
 /* The cursor types, then disappears on Enter. */
 svg.diagram :is(.spawn, .input).visible .prompt .cursor {
@@ -871,6 +881,24 @@ display: none;
 .diagram-figure.in-deck svg.diagram {
 max-height: 520px;
 }
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
 /* A page stepping through the diagram does what reveal.js does in a deck:
 hides the steps not reached yet. The captions say what the legend would. */
 .diagram-figure.stepping svg.diagram .fragment {
@@ -903,6 +931,14 @@ border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 border-radius: 6px;
 padding: 0.2em 0.75em;
 cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
 }
 .diagram-figure .diagram-controls button:disabled {
 opacity: 0.4;
@@ -1029,31 +1065,29 @@ break-inside: avoid;
 </g>
 <g class="overlay packet fragment whole" data-fragment-index="9"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">l</text></g></g><g class="overlay packet fragment whole" data-fragment-index="10"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">s</text></g></g><g class="overlay packet fragment whole" data-fragment-index="11"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">⏎</text></g></g><g class="overlay packet fragment whole" data-fragment-index="13"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 100%; --to: 0%"><path d="M-35,-12 H25 L35,0 L25,12 H-35 Z" transform="scale(-1,1)"/><text x="5" y="5">output</text></g></g></svg>
 </div>
-<template class="diagram-captions"><p data-caption="rest">Your terminal’s shell started the SSH client, which is connected to <code>example.com</code> on port 22. There, the SSH session started a shell, which runs your commands on the server.</p><p data-caption="0">Your computer.</p><p data-caption="1">You open a terminal, which starts a shell: Bash or Zsh.</p><p data-caption="2">You run a command, <code>ls</code> or any other: the shell starts it, and it runs on your computer.</p><p data-caption="3"><code>ls</code> works: it lists the files of the current directory, and prints them to your terminal.</p><p data-caption="4">It has finished, and exits.</p><p data-caption="5">Across the Internet, a server runs an SSH server, waiting for connections on port 22.</p><p data-caption="6">You run <code>ssh jde@example.com</code>: your shell starts the SSH client, which connects to port 22 on <code>example.com</code>.</p><p data-caption="7">The SSH server accepts the connection, and starts a new SSH session to take care of it.</p><p data-caption="8">It hands the connection over to the session, then goes back to waiting for the next one.</p><p data-caption="9">The session starts a shell on the server.</p><p data-caption="10">You type <code>l</code>. Your terminal hands it to the SSH client, which sends it over the connection at once, encrypted. On the server, the session hands it to the shell.</p><p data-caption="11">You type <code>s</code>: it travels the same way.</p><p data-caption="12">You press Enter, which travels too. Once it has arrived, the server’s shell runs <code>ls</code>, on the server.</p><p data-caption="13"><code>ls</code> works, on the server: it lists the files of the current directory there.</p><p data-caption="14">Its output travels back over the connection, and your terminal displays it.</p></template>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, your terminal’s shell started the SSH client, which is connected to <code>example.com</code> on port 22. There, the SSH session started a shell, which runs your commands on the server.</p><p data-caption="0">Your computer.</p><p data-caption="1">You open a terminal, which starts a shell: Bash or Zsh.</p><p data-caption="2">You run a command, <code>ls</code> or any other: the shell starts it, and it runs on your computer.</p><p data-caption="3"><code>ls</code> works: it lists the files of the current directory, and prints them to your terminal.</p><p data-caption="4">It has finished, and exits.</p><p data-caption="5">Across the Internet, a server runs an SSH server, waiting for connections on port 22.</p><p data-caption="6">You run <code>ssh jde@example.com</code>: your shell starts the SSH client, which connects to port 22 on <code>example.com</code>.</p><p data-caption="7">The SSH server accepts the connection, and starts a new SSH session to take care of it.</p><p data-caption="8">It hands the connection over to the session, then goes back to waiting for the next one.</p><p data-caption="9">The session starts a shell on the server.</p><p data-caption="10">You type <code>l</code>. Your terminal hands it to the SSH client, which sends it over the connection at once, encrypted. On the server, the session hands it to the shell.</p><p data-caption="11">You type <code>s</code>: it travels the same way.</p><p data-caption="12">You press Enter, which travels too. Once it has arrived, the server’s shell runs <code>ls</code>, on the server.</p><p data-caption="13"><code>ls</code> works, on the server: it lists the files of the current directory there.</p><p data-caption="14">Its output travels back over the connection, and your terminal displays it.</p></template>
 </div>
 <h3 id="disconnecting">Disconnecting<a href="#disconnecting" aria-label="Link to heading 'Disconnecting'" data-heading-content="Disconnecting" class="anchor"></a></h3>
 <p>Disconnect with the command <code>exit</code> (or with <code>Ctrl-D</code> on Linux or macOS). You
 should be back to the shell running on your local computer, with your usual
 prompt:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span> <span class="l-variable">exit</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">192.168.50.4</span> <span class="l-variable-parameter">closed.</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span> <span class="l-variable">exit</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">192.168.50.4</span> <span class="l-variable-parameter">closed.</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span></span></code></pre>
 <h3 id="where-am-i">Where am I?<a href="#where-am-i" aria-label="Link to heading 'Where am I?'" data-heading-content="Where am I?" class="anchor"></a></h3>
 <p>Sometimes, you might forget what shell your terminal is connected to. Is it a
 shell on your local machine or one running on the server?</p>
 <p>If you’re not sure, the <code>hostname</code> command may help you. It prints the network
 name of the current machine:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span>
-</div><div class="l-line" data-line="5"><span class="l-variable">jde</span><span class="l-function-call">@192.168.50.4</span>&#39;s password:
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$ hostname
-</div><div class="l-line" data-line="8">example.com
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span></span>
+<span class="l-line" data-line="5"><span class="l-variable">jde</span>@192.168.50.4&#39;s password:</span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$ hostname</span>
+<span class="l-line" data-line="8">example.com</span></code></pre>
 <p>In this example, the local computer is named <code>MyComputer.local</code>, while the
 server is named <code>example.com</code>.</p>
 <p>As you can see, the <code>hostname</code> command returns different results before and
@@ -1063,15 +1097,14 @@ machine the first time, but is running on the server the second time.</p>
 <p>When you execute <code>ssh</code> with the <code>[command]</code> option, it will execute the command
 and close the connection as soon as that command is done.</p>
 <p>Run this from your local shell:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span> <span class="l-string-special-path">echo</span> <span class="l-string-special-path">Hello</span> <span class="l-string-special-path">World</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">MyComputer.local</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">MyComputer.local</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@192.168.50.4</span> <span class="l-string-special-path">echo</span> <span class="l-string-special-path">Hello</span> <span class="l-string-special-path">World</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">MyComputer.local</span></span></code></pre>
 <p>As you can see, you are still in your local shell. The connection was closed as
 soon as the <code>echo</code> command completed.</p>
 <h2 id="public-key-authentication">Public key authentication<a href="#public-key-authentication" aria-label="Link to heading 'Public key authentication'" data-heading-content="Public key authentication" class="anchor"></a></h2>
@@ -1160,9 +1193,8 @@ an attacker might gain if one of them is compromised.</p>
 generating the key with the <code>ssh-keygen</code> command. To use a specific key pair,
 use the <code>ssh</code> command’s <code>-i</code> (<strong>i</strong>dentity) option, which allows you to choose
 the private key file you want to use:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">~/.ssh/custom_key</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">-i</span> <span class="l-variable-parameter">~/.ssh/custom_key</span> <span class="l-variable-parameter">jde@192.168.50.4</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">~/.ssh/custom_key</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-function-call">-i</span> <span class="l-variable-parameter">~/.ssh/custom_key</span> <span class="l-variable-parameter">jde@192.168.50.4</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -1292,27 +1324,24 @@ differently.</p></div></div>
 <h3 id="symmetric-encryption-with-aes">Symmetric encryption with AES<a href="#symmetric-encryption-with-aes" aria-label="Link to heading 'Symmetric encryption with AES'" data-heading-content="Symmetric encryption with AES" class="anchor"></a></h3>
 <p>Create a <a href="https://en.wikipedia.org/wiki/Plaintext" target="_blank" rel="noopener noreferrer"><strong>plaintext</strong></a> file containing the words “too many
 secrets”:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">aes-example</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">aes-example</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;too many secrets&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">plaintext.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">aes-example</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">aes-example</span></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;too many secrets&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">plaintext.txt</span></span></code></pre>
 <p>Encrypt that file with the <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank" rel="noopener noreferrer">AES</a> algorithm. The <code>-in</code> (<strong>in</strong>put) option
 is the file to encrypt, and the <code>-out</code> (<strong>out</strong>put) option is the file where the
 <a href="https://en.wikipedia.org/wiki/Ciphertext" target="_blank" rel="noopener noreferrer"><strong>ciphertext</strong></a> is written. The command prompts you for an
 encryption password, from which the secret key is computed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">aes-256-cbc</span> <span class="l-variable-parameter">-pbkdf2</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">ciphertext.aes</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">encryption</span> <span class="l-variable-parameter">password:</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Verifying</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">encryption</span> <span class="l-variable-parameter">password:</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">aes-256-cbc</span> <span class="l-variable-parameter">-pbkdf2</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">ciphertext.aes</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">encryption</span> <span class="l-variable-parameter">password:</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Verifying</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">encryption</span> <span class="l-variable-parameter">password:</span></span></code></pre>
 <p>Look at the ciphertext stored in the <code>ciphertext.aes</code> file. The <code>-v</code> option of
 the <code>cat</code> command makes it show <strong>non-printing characters</strong> as visible symbols
 like <code>^Q</code> or <code>M-^H</code>, instead of sending them to your terminal. You should see
 something like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">-v</span> <span class="l-variable-parameter">ciphertext.aes</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Salted__p7</span>`<span class="l-string">qM-^HM-Z^QM-cM-z^YM-^</span><span class="l-string">[</span><span class="l-string">M-^</span><span class="l-string">]</span><span class="l-string">M-PM-hM-</span><span class="l-string">{</span><span class="l-string">nM-</span> <span class="l-variable-parameter">/</span>
-</div><div class="l-line" data-line="3"><span class="l-string">dM-^WYM-?^CM-^DM-J^</span><span class="l-string">]</span><span class="l-string">YM-^K_t^@M-^QM-^Kbt/M-^M!M-^Q</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">-v</span> <span class="l-variable-parameter">ciphertext.aes</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Salted__p7</span>`<span class="l-string">qM-^HM-Z^QM-cM-z^YM-^[M-^]M-PM-hM-{nM-</span> <span class="l-variable-parameter">/</span></span>
+<span class="l-line" data-line="3"><span class="l-string">dM-^WYM-?^CM-^DM-J^]YM-^K_t^@M-^QM-^Kbt/M-^M!M-^Q</span></span></code></pre>
 <p>There is no trace of “too many secrets” in there.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The file starts with <code>Salted__</code>: this is not part of your message. It is a label
 followed by a random value, the <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank" rel="noopener noreferrer"><strong>salt</strong></a>, which OpenSSL combined with
@@ -1320,10 +1349,9 @@ your password to compute the secret key. It is stored in the file because the
 same salt is needed to compute the same key again when decrypting.</p></div></div>
 <p>The ciphertext cannot be decrypted without the key. The <code>-d</code> option makes the same command <strong>d</strong>ecrypt its input instead of
 encrypting it. Entering the same password as before decrypts the ciphertext:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">aes-256-cbc</span> <span class="l-variable-parameter">-pbkdf2</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.aes</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">decryption</span> <span class="l-variable-parameter">password:</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">too</span> <span class="l-variable-parameter">many</span> <span class="l-variable-parameter">secrets</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">aes-256-cbc</span> <span class="l-variable-parameter">-pbkdf2</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.aes</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">enter</span> <span class="l-variable-parameter">aes-256-cbc</span> <span class="l-variable-parameter">decryption</span> <span class="l-variable-parameter">password:</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">too</span> <span class="l-variable-parameter">many</span> <span class="l-variable-parameter">secrets</span></span></code></pre>
 <p>With a different password, the decryption fails.</p>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
@@ -1346,87 +1374,77 @@ displaying garbage. If that happens, the <code>reset</code> command restores it.
 <p>Asymmetric encryption with <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="noopener noreferrer">RSA</a> requires a <strong>key pair, i.e. a private and
 public key</strong>. The following commands generate a private key in a file named
 <code>private.pem</code>, then the corresponding public key in a file named <code>public.pem</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">rsa-example</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">rsa-example</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-comment"># Generate a private key</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">genrsa</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">private.pem</span> <span class="l-number">2048</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-comment"># Compute the public key from the private key (quick &amp; easy)</span>
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">rsa</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">private.pem</span> <span class="l-variable-parameter">-pubout</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">public.pem</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">writing</span> <span class="l-variable-parameter">RSA</span> <span class="l-variable-parameter">key</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">rsa-example</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">rsa-example</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-comment"># Generate a private key</span></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">genrsa</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">private.pem</span> <span class="l-number">2048</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8"><span class="l-comment"># Compute the public key from the private key (quick &amp; easy)</span></span>
+<span class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">rsa</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">private.pem</span> <span class="l-variable-parameter">-pubout</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">public.pem</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">writing</span> <span class="l-variable-parameter">RSA</span> <span class="l-variable-parameter">key</span></span></code></pre>
 <p>By convention, these files use the <code>.pem</code> extension after the <a href="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail" target="_blank" rel="noopener noreferrer">Privacy-Enhanced
 Mail (PEM) format</a>, a de facto standard format to store cryptographic data.</p>
 <p>Create a plaintext and <strong>encrypt it with the public key</strong>. The <code>-pubin</code>
 (<strong>pub</strong>lic <strong>in</strong>) and <code>-inkey</code> (<strong>in</strong>put <strong>key</strong>) options give the public key
 to use. The <code>-pkeyopt</code> option selects <a href="https://en.wikipedia.org/wiki/Optimal_asymmetric_encryption_padding" target="_blank" rel="noopener noreferrer">OAEP</a>, the recommended way of
 encrypting data with RSA:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;too many secrets&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">plaintext.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-encrypt</span> <span class="l-variable-parameter">-pubin</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">public.pem</span> \
-</div><div class="l-line" data-line="4">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> \
-</div><div class="l-line" data-line="5">   <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">ciphertext.rsa</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">ciphertext.rsa</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">private.pem</span> <span class="l-variable-parameter">public.pem</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;too many secrets&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">plaintext.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-encrypt</span> <span class="l-variable-parameter">-pubin</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">public.pem</span> \</span>
+<span class="l-line" data-line="4">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> \</span>
+<span class="l-line" data-line="5">   <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">ciphertext.rsa</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">ciphertext.rsa</span> <span class="l-variable-parameter">plaintext.txt</span> <span class="l-variable-parameter">private.pem</span> <span class="l-variable-parameter">public.pem</span></span></code></pre>
 <p>The ciphertext is unreadable as well, and much longer than the plaintext: RSA
 with a 2048-bit key always produces 256 bytes of ciphertext.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">-v</span> <span class="l-variable-parameter">ciphertext.rsa</span>
-</div><div class="l-line" data-line="2"><span class="l-string">M-^_M-rVM-BM-</span><span class="l-string">&quot;M-lXM-^XM-tM-il^MM-o*^TM-^EM-g9M-q^Q^BM-f^QM-no[...]</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">-v</span> <span class="l-variable-parameter">ciphertext.rsa</span></span>
+<span class="l-line" data-line="2"><span class="l-string">M-^_M-rVM-BM-&quot;M-lXM-^XM-tM-il^MM-o*^TM-^EM-g9M-q^Q^BM-f^QM-no[...]</span></span></code></pre>
 <p>The ciphertext can be <strong>decrypted with the corresponding private key</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">private.pem</span> \
-</div><div class="l-line" data-line="2">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">too</span> <span class="l-variable-parameter">many</span> <span class="l-variable-parameter">secrets</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">private.pem</span> \</span>
+<span class="l-line" data-line="2">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">too</span> <span class="l-variable-parameter">many</span> <span class="l-variable-parameter">secrets</span></span></code></pre>
 <p>You <strong>cannot decrypt the ciphertext using the public key</strong>, which is not a
 private key at all:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">public.pem</span> \
-</div><div class="l-line" data-line="2">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">private</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">public.pem</span>
-</div><div class="l-line" data-line="4"><span class="l-punctuation-bracket">[</span>...<span class="l-punctuation-bracket">]</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">public.pem</span> \</span>
+<span class="l-line" data-line="2">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">find</span> <span class="l-variable-parameter">private</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">public.pem</span></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-bracket">[</span>...<span class="l-punctuation-bracket">]</span></span></code></pre>
 <p>And of course, an attacker who has <strong>another private key cannot decrypt it
 either</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># Generate another private key</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">genrsa</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">hacker-private.pem</span> <span class="l-number">2048</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-comment"># Try to decrypt the ciphertext with it</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">hacker-private.pem</span> \
-</div><div class="l-line" data-line="6">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Public</span> <span class="l-variable-parameter">Key</span> <span class="l-variable-parameter">operation</span> <span class="l-variable-parameter">error</span>
-</div><div class="l-line" data-line="8"><span class="l-punctuation-bracket">[</span>...<span class="l-punctuation-bracket">]</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Generate another private key</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">genrsa</span> <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">hacker-private.pem</span> <span class="l-number">2048</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># Try to decrypt the ciphertext with it</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">pkeyutl</span> <span class="l-variable-parameter">-decrypt</span> <span class="l-variable-parameter">-inkey</span> <span class="l-variable-parameter">hacker-private.pem</span> \</span>
+<span class="l-line" data-line="6">   <span class="l-variable-parameter">-pkeyopt</span> <span class="l-variable-parameter">rsa_padding_mode:oaep</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">ciphertext.rsa</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Public</span> <span class="l-variable-parameter">Key</span> <span class="l-variable-parameter">operation</span> <span class="l-variable-parameter">error</span></span>
+<span class="l-line" data-line="8"><span class="l-punctuation-bracket">[</span>...<span class="l-punctuation-bracket">]</span></span></code></pre>
 <h3 id="digital-signature-with-rsa">Digital signature with RSA<a href="#digital-signature-with-rsa" aria-label="Link to heading 'Digital signature with RSA'" data-heading-content="Digital signature with RSA" class="anchor"></a></h3>
 <p>In the same directory as the previous example, create a <code>message.txt</code> file with
 a message to digitally sign. The following command uses the private key in
 <code>private.pem</code> to generate a digital signature for that message, and stores it
 in the <code>signature.rsa</code> file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I like you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-sign</span> <span class="l-variable-parameter">private.pem</span> \
-</div><div class="l-line" data-line="4">   <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I like you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-sign</span> <span class="l-variable-parameter">private.pem</span> \</span>
+<span class="l-line" data-line="4">   <span class="l-variable-parameter">-out</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span></span></code></pre>
 <p>The signature is binary data. You can see it encoded in <a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="noopener noreferrer">Base64</a>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">base64</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">signature.rsa</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">base64</span> <span class="l-variable-parameter">-in</span> <span class="l-variable-parameter">signature.rsa</span></span></code></pre>
 <p>Anyone with the public key can check that the signature is valid for the
 message:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-verify</span> <span class="l-variable-parameter">public.pem</span> \
-</div><div class="l-line" data-line="2">   <span class="l-variable-parameter">-signature</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Verified</span> <span class="l-variable-parameter">OK</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-verify</span> <span class="l-variable-parameter">public.pem</span> \</span>
+<span class="l-line" data-line="2">   <span class="l-variable-parameter">-signature</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Verified</span> <span class="l-variable-parameter">OK</span></span></code></pre>
 <p>If you modify the message file and check again, the signature no longer
 matches the message:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I hate you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-verify</span> <span class="l-variable-parameter">public.pem</span> \
-</div><div class="l-line" data-line="4">   <span class="l-variable-parameter">-signature</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Verification</span> <span class="l-variable-parameter">failure</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello Bob, I hate you&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">message.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">openssl</span> <span class="l-function-call">dgst</span> <span class="l-variable-parameter">-sha256</span> <span class="l-variable-parameter">-verify</span> <span class="l-variable-parameter">public.pem</span> \</span>
+<span class="l-line" data-line="4">   <span class="l-variable-parameter">-signature</span> <span class="l-variable-parameter">signature.rsa</span> <span class="l-variable-parameter">message.txt</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Verification</span> <span class="l-variable-parameter">failure</span></span></code></pre>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -1438,9 +1456,10 @@ matches the message:</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -1530,33 +1549,35 @@ matches the message:</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-103-ssh-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-103-ssh-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-103-ssh-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-103-ssh-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/103-ssh/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/103-ssh/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1838,7 +1859,7 @@ matches the message:</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -2242,7 +2263,7 @@ matches the message:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

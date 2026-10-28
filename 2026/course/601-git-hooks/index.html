@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/601-git-hooks/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/601-git-hooks/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -184,14 +184,13 @@ binary program, a shell script, a Ruby script, a Python script, etc.</p>
 inside a repository’s Git directory (inside the <code>.git</code> directory in a normal
 repository).</p>
 <p>You can find example hook files in most Git repositores:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/a/git/repository</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">.git/hooks/pre-commit.sample</span>
-</div><div class="l-line" data-line="4"><span class="l-comment">#!/bin/sh</span>
-</div><div class="l-line" data-line="5"><span class="l-comment">#</span>
-</div><div class="l-line" data-line="6"><span class="l-comment"># An example hook script to verify what is about to be committed.</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/a/git/repository</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">.git/hooks/pre-commit.sample</span></span>
+<span class="l-line" data-line="4"><span class="l-comment">#!/bin/sh</span></span>
+<span class="l-line" data-line="5"><span class="l-comment">#</span></span>
+<span class="l-line" data-line="6"><span class="l-comment"># An example hook script to verify what is about to be committed.</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">...</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>These example files are not triggered because they are not executable and do not
 have the right name.</p></div></div>
 <h3 id="what-kind-of-hooks-are-there">What kind of hooks are there?<a href="#what-kind-of-hooks-are-there" aria-label="Link to heading 'What kind of hooks are there?'" data-heading-content="What kind of hooks are there?" class="anchor"></a></h3>
@@ -228,46 +227,41 @@ Some example hook scripts include:</p>
 their documentation. A full list is also available <a href="https://githooks.com" target="_blank" rel="noopener noreferrer">here</a>.</p>
 <h3 id="how-can-i-create-a-hook">How can I create a hook?<a href="#how-can-i-create-a-hook" aria-label="Link to heading 'How can I create a hook?'" data-heading-content="How can I create a hook?" class="anchor"></a></h3>
 <p>Create a new repository:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">git-hook-example</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">git-hook-example</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">git-hook-example</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">git-hook-example</span></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span></span></code></pre>
 <p>Create a hook script named <code>pre-commit</code> that will be executed before every
 commit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;#!/bin/bash&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">.git/hooks/pre-commit</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;echo You are about to commit...&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">.git/hooks/pre-commit</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">.git/hooks/pre-commit</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;#!/bin/bash&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">.git/hooks/pre-commit</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;echo You are about to commit...&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">.git/hooks/pre-commit</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">.git/hooks/pre-commit</span></span></code></pre>
 <p>You now have a <code>pre-commit</code> hook script:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">.git/hooks/pre-commit</span>
-</div><div class="l-line" data-line="2"><span class="l-comment">#!/bin/bash</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">about</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">.git/hooks/pre-commit</span></span>
+<span class="l-line" data-line="2"><span class="l-comment">#!/bin/bash</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">about</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit...</span></span></code></pre>
 <h4 id="hooks-are-not-under-version-control">Hooks are not under version control<a href="#hooks-are-not-under-version-control" aria-label="Link to heading 'Hooks are not under version control'" data-heading-content="Hooks are not under version control" class="anchor"></a></h4>
 <p>Note that hooks are not part of the working tree and thus <strong>cannot be put under
 version control</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function-call">No</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">yet</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">create/copy</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-function-call">No</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">yet</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">create/copy</span> <span class="l-variable-parameter">files</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This is a good thing, as you don’t want people to be able to send malicious hook
 scripts to your machine every time you clone a repository from the Internet.</p></div></div>
 <h3 id="how-do-i-use-a-hook">How do I use a hook?<a href="#how-do-i-use-a-hook" aria-label="Link to heading 'How do I use a hook?'" data-heading-content="How do I use a hook?" class="anchor"></a></h3>
 <p>Following the previous example, make a commit and the <code>pre-commit</code> hook will be
 automatically triggered:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">content</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">file.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Test&quot;</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">about</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit...</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">14b306d</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">Test</span>
-</div><div class="l-line" data-line="8"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>, <span class="l-number">1</span> <span class="l-variable-parameter">deletion</span><span class="l-punctuation-bracket">(</span>-<span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">content</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">file.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Test&quot;</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-function-call">You</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">about</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit...</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">14b306d]</span> <span class="l-variable-parameter">Test</span></span>
+<span class="l-line" data-line="8"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>, <span class="l-number">1</span> <span class="l-variable-parameter">deletion</span><span class="l-punctuation-bracket">(</span>-<span class="l-punctuation-bracket">)</span></span></code></pre>
 <h3 id="what-are-hooks-good-for">What are hooks good for?<a href="#what-are-hooks-good-for" aria-label="Link to heading 'What are hooks good for?'" data-heading-content="What are hooks good for?" class="anchor"></a></h3>
 <p>Hooks can be a way to automate repetitive or mundane tasks, like removing
 trailing spaces at each commit.</p>
@@ -293,9 +287,10 @@ version of a server-side application every time new commits are pushed.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#what-is-a-git-hook">What is a Git hook?</a>
     <ul class="section-nav">
@@ -323,29 +318,31 @@ version of a server-side application every time new commits are pushed.</p>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-601-git-hooks-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-601-git-hooks-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/601-git-hooks/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/601-git-hooks/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -627,7 +624,7 @@ version of a server-side application every time new commits are pushed.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1031,7 +1028,7 @@ version of a server-side application every time new commits are pushed.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

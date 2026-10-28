@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/704-render-deployment/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/704-render-deployment/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -249,24 +249,19 @@ interface. The installation procedure differs on macOS and Windows.</p>
 <p>To install PostgreSQL, you will be using <a href="https://brew.sh/" target="_blank" rel="noopener noreferrer">Homebrew</a>, the leading
 package manager for Mac. You may install it directly from your terminal, by
 entering:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/bin/bash</span> <span class="l-function-call">-c</span> <span class="l-string">&quot;<span class="l-punctuation-special">$(</span><span class="l-function-call">curl</span> <span class="l-variable-parameter">-fsSL</span> <span class="l-variable-parameter">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span class="l-punctuation-special">)</span>&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/bin/bash</span> <span class="l-function-call">-c</span> <span class="l-string">&quot;<span class="l-punctuation-special">$(</span><span class="l-function-call">curl</span> <span class="l-variable-parameter">-fsSL</span> <span class="l-variable-parameter">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span class="l-punctuation-special">)</span>&quot;</span></span></code></pre>
 <p>Once this is done, you can easily install packages by writing <code>brew install</code>
 followed by the name of the package:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">postgresql@18</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">postgresql@18</span></span></code></pre>
 <p>Check that you have access to the <code>psql</code> command by entering:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">18.x</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">18.x</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <h3 id="windows">Windows<a href="#windows" aria-label="Link to heading 'Windows'" data-heading-content="Windows" class="anchor"></a></h3>
 <p>Open your WSL terminal and install PostgreSQL with APT:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql-client-16</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">postgresql-client-16</span></span></code></pre>
 <p>Check that you have access to the <code>psql</code> command by entering:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">16.x</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">PostgreSQL</span><span class="l-punctuation-bracket">)</span> 16.x</span></code></pre>
 <h2 id="getting-your-todolist-fork-up-to-date"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Getting your Todolist fork up-to-date.<a href="#getting-your-todolist-fork-up-to-date" aria-label="Link to heading 'Getting your Todolist fork up-to-date.'" data-heading-content="Getting your Todolist fork up-to-date." class="anchor"></a></h2>
 <p>When you started working on the Todolist application, you forked an existing
 codebase from a GitHub repository. While you were working on your configuration,
@@ -282,32 +277,29 @@ your GitHub username.</p></div></div>
 <p>From the terminal, move into your repository and add the upstream repository as
 a remote (this time, leave <code>ArchiDep</code> in the URL, you <em>want</em> to use the
 original URL and not your own):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">php-todo-ex</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">upstream</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">php-todo-ex</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">upstream</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Unlike the <a href="/2026/course/602-git-automated-deployment/">automated deployment exercise</a>, you will not be pushing to
 this remote. You couldn’t anyway, as you are not a collaborator on the upstream
 repository so you do not have the right to push. Instead, you will use it to
 fetch up-to-date code from a branch.</p></div></div>
 <h3 id="fetch-data-from-upstream"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Fetch data from upstream<a href="#fetch-data-from-upstream" aria-label="Link to heading 'Fetch data from upstream'" data-heading-content="Fetch data from upstream" class="anchor"></a></h3>
 <p>Fetch all commits from the upstream repository:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">upstream</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Enumerating</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">11,</span> <span class="l-variable-parameter">done.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Counting</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Compressing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">6/6</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Total</span> <span class="l-number">11</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, reused <span class="l-number">11</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">pack-reused</span> <span class="l-number">0</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">Unpacking</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">3.20</span> <span class="l-variable-parameter">KiB</span> <span class="l-operator">|</span> <span class="l-function-call">545.00</span> <span class="l-variable-parameter">KiB/s,</span> <span class="l-variable-parameter">done.</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">From</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/docker-postgres</span>
-</div><div class="l-line" data-line="9"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span>            <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">upstream</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Enumerating</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">11,</span> <span class="l-variable-parameter">done.</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Counting</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Compressing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">6/6</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Total</span> <span class="l-number">11</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, reused <span class="l-number">11</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">4</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">pack-reused</span> <span class="l-number">0</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Unpacking</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">11/11</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">3.20</span> <span class="l-variable-parameter">KiB</span> <span class="l-operator">|</span> <span class="l-function-call">545.00</span> <span class="l-variable-parameter">KiB/s,</span> <span class="l-variable-parameter">done.</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">From</span> <span class="l-variable-parameter">https://github.com/ArchiDep/php-todo-ex</span></span>
+<span class="l-line" data-line="8"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/docker-postgres</span></span>
+<span class="l-line" data-line="9"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">main</span>            <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">upstream/main</span></span></code></pre>
 <p>As you can see, this gives you access to upstream branches, including one called
 <code>upstream/docker-postgres</code>. With the next command you will copy the content of
 that upstream branch into your own branch.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">upstream/docker-postgres</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;upstream/docker-postgres&#39;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Switched</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">upstream/docker-postgres</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;upstream/docker-postgres&#39;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Switched</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;docker-postgres&#39;</span></span></code></pre>
 <p>This command will create a new branch in <strong>your</strong> local repository, based on the
 contents of the upstream branch. This command automatically switches you to the
 new branch. If you browse through the project in a code editor or by using
@@ -321,10 +313,9 @@ that contains instructions for how to build a Docker image. We will learn more
 about Docker later in the course, and you can of course learn more <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer">on the
 Docker website</a>.</p></div></div>
 <h3 id="push-the-new-branch-to-github"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Push the new branch to GitHub<a href="#push-the-new-branch-to-github" aria-label="Link to heading 'Push the new branch to GitHub'" data-heading-content="Push the new branch to GitHub" class="anchor"></a></h3>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">docker-postgres</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">docker-postgres</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">docker-postgres</span></span></code></pre>
 <p>You can go check on GitHub whether your new branch has been pushed, by
 displaying the branch dropdown:</p>
 <p><img src="./images/render-database-branch-4bd160d0cef8ba7d63c16f50d8873748.png" alt="Check branch is on GitHub" /></p>
@@ -383,9 +374,8 @@ create a database. As a matter of fact, this script is a bit simpler than the
 previous one.</p></div></div>
 <p>Go back to your terminal and make sure you are in your repository and on the
 <code>docker-postgres</code> branch:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">--show-current</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">docker-postgres</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">branch</span> <span class="l-variable-parameter">--show-current</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">docker-postgres</span></span></code></pre>
 <p>If not, check out the correct branch with the <code>git switch docker-postgres</code>
 command.</p>
 <p>Next, connect to your PostgreSQL database from the command line. On the Render
@@ -398,32 +388,29 @@ clicking the icons to the left of the hidden characters.</p>
 <p><img src="./images/render-database-postgres-connections-4391083c307e362101ba0f3164df62e8.png" alt="PostgreSQL Connection Information" /></p>
 <p>Copy and paste the command in your terminal. This will connect you directly to
 the remote database deployed by Render.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">PGPASSWORD=your_password</span> <span class="l-function-call">psql</span> <span class="l-variable-parameter">-h</span> <span class="l-variable-parameter">your_host.frankfurt-postgres.render.com</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">your_user</span> <span class="l-variable-parameter">your_database</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">14.6</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">server</span> <span class="l-variable-parameter">15.1</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">WARNING:</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16,</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16.</span>
-</div><div class="l-line" data-line="4">         <span class="l-function-call">Some</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">features</span> <span class="l-variable-parameter">might</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">work.</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">SSL</span> connection <span class="l-punctuation-bracket">(</span><span class="l-function-call">protocol:</span> <span class="l-variable-parameter">TLSv1.3,</span> <span class="l-variable-parameter">cipher:</span> <span class="l-variable-parameter">TLS_AES_128_GCM_SHA256,</span> <span class="l-variable-parameter">bits:</span> <span class="l-variable-parameter">128,</span> <span class="l-variable-parameter">compression:</span> <span class="l-variable-parameter">off</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">Type</span> <span class="l-string">&quot;help&quot;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">help.</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">PGPASSWORD=your_password</span> <span class="l-function-call">psql</span> <span class="l-variable-parameter">-h</span> <span class="l-variable-parameter">your_host.frankfurt-postgres.render.com</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">your_user</span> <span class="l-variable-parameter">your_database</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">psql</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">14.6</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Homebrew</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">server</span> <span class="l-variable-parameter">15.1</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">WARNING:</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16,</span> <span class="l-variable-parameter">server</span> <span class="l-variable-parameter">major</span> <span class="l-variable-parameter">version</span> <span class="l-variable-parameter">16.</span></span>
+<span class="l-line" data-line="4">         <span class="l-function-call">Some</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">features</span> <span class="l-variable-parameter">might</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">work.</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">SSL</span> connection <span class="l-punctuation-bracket">(</span><span class="l-function-call">protocol:</span> <span class="l-variable-parameter">TLSv1.3,</span> <span class="l-variable-parameter">cipher:</span> <span class="l-variable-parameter">TLS_AES_128_GCM_SHA256,</span> <span class="l-variable-parameter">bits:</span> <span class="l-variable-parameter">128,</span> <span class="l-variable-parameter">compression:</span> <span class="l-variable-parameter">off</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Type</span> <span class="l-string">&quot;help&quot;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">help.</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8"><span class="l-variable">your_database</span><span class="l-operator">=&gt;</span></span></code></pre>
 <p>You can now execute the <code>todolist.sql</code> file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span> <span class="l-function-call">\i</span> <span class="l-variable-parameter">todolist.sql</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=&gt;</span> <span class="l-function-call">\i</span> <span class="l-variable-parameter">todolist.sql</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can make sure the script worked by displaying all the <code>todo</code> table’s
 columns:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=</span><span class="l-operator">&gt;</span> <span class="l-function-call">\d+</span> <span class="l-variable-parameter">todo</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>            <span class="l-function-call">Type</span>             <span class="l-operator">|</span>             <span class="l-function-call">Default</span>              <span class="l-operator">|</span> <span class="l-function-call">Storage</span>  <span class="l-operator">|</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">------------+-----------------------------+----------------------------------+----------</span>
-</div><div class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">integer</span>                     <span class="l-operator">|</span> <span class="l-function-call">nextval</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;todo_id_seq&#39;</span><span class="l-string">::regclass</span><span class="l-punctuation-bracket">)</span> <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">title</span>      <span class="l-operator">|</span> <span class="l-function-call">character</span> varying<span class="l-punctuation-bracket">(</span><span class="l-number">2048</span><span class="l-punctuation-bracket">)</span>     <span class="l-operator">|</span><span class="l-function-call"></span>                                  <span class="l-operator">|</span> <span class="l-function-call">extended</span> <span class="l-operator">|</span>
-</div><div class="l-line" data-line="7"> <span class="l-function-call">done</span>       <span class="l-operator">|</span> <span class="l-function-call">boolean</span>                     <span class="l-operator">|</span> <span class="l-function-builtin">false</span>                            <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
-</div><div class="l-line" data-line="8"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">without</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span> <span class="l-function-call">CURRENT_TIMESTAMP</span>                <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span>
-</div><div class="l-line" data-line="9">
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-variable">your_database</span><span class="l-operator">=&gt;</span> <span class="l-function-call">\d+</span> <span class="l-variable-parameter">todo</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">Column</span>   <span class="l-operator">|</span>            <span class="l-function-call">Type</span>             <span class="l-operator">|</span>             <span class="l-function-call">Default</span>              <span class="l-operator">|</span> <span class="l-function-call">Storage</span>  <span class="l-operator">|</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">------------+-----------------------------+----------------------------------+----------</span></span>
+<span class="l-line" data-line="5"> <span class="l-function-call">id</span>         <span class="l-operator">|</span> <span class="l-function-call">integer</span>                     <span class="l-operator">|</span> <span class="l-function-call">nextval</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;todo_id_seq&#39;::regclass</span><span class="l-punctuation-bracket">)</span> <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">title</span>      <span class="l-operator">|</span> <span class="l-function-call">character</span> varying<span class="l-punctuation-bracket">(</span><span class="l-number">2048</span><span class="l-punctuation-bracket">)</span>     <span class="l-operator">|</span>                                  <span class="l-operator">|</span> <span class="l-function-call">extended</span> <span class="l-operator">|</span></span>
+<span class="l-line" data-line="7"> <span class="l-function-call">done</span>       <span class="l-operator">|</span> <span class="l-function-call">boolean</span>                     <span class="l-operator">|</span> <span class="l-function-builtin">false</span>                            <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span></span>
+<span class="l-line" data-line="8"> <span class="l-function-call">created_at</span> <span class="l-operator">|</span> <span class="l-function-call">timestamp</span> <span class="l-variable-parameter">without</span> <span class="l-variable-parameter">time</span> <span class="l-variable-parameter">zone</span> <span class="l-operator">|</span> <span class="l-function-call">CURRENT_TIMESTAMP</span>                <span class="l-operator">|</span> <span class="l-function-call">plain</span>    <span class="l-operator">|</span></span>
+<span class="l-line" data-line="9"></span></code></pre></div></div>
 <p>Now quit the PostgreSQL shell by entering <code>\q</code>.</p>
 <h2 id="deploy-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy the application<a href="#deploy-the-application" aria-label="Link to heading 'Deploy the application'" data-heading-content="Deploy the application" class="anchor"></a></h2>
 <p>Now that you have a database in place, it is time to deploy the web application
@@ -569,9 +556,10 @@ writing documentation or reporting bugs and issues.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -633,29 +621,31 @@ writing documentation or reporting bugs and issues.</p>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-704-render-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-704-render-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/704-render-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/704-render-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -937,7 +927,7 @@ writing documentation or reporting bugs and issues.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1341,7 +1331,7 @@ writing documentation or reporting bugs and issues.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

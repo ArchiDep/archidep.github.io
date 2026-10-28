@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_archidep_course=self.webpackChunk_archidep_course||[]).push([[5750],{5750(e,c,r){r.d(c,{createInfoServices:()=>s.v});var s=r(5653);r(9728)}}]);

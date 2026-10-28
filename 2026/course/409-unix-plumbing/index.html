@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/409-unix-plumbing/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/409-unix-plumbing/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -222,12 +222,10 @@ files that only exist on a server.</p></div></div></div></div>
       <h2 id="where-does-each-line-go"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where does each line go?<a href="#where-does-each-line-go" aria-label="Link to heading 'Where does each line go?'" data-heading-content="Where does each line go?" class="anchor"></a></h2>
 <p>Connect to your cloud server and go to your home directory, where the files of
 this exercise will be created:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span></code></pre>
 <p>Search the SSH configuration of your server for the word
 <code>PasswordAuthentication</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span></code></pre>
 <p>Some of the lines it displays are output data, and some are error messages.
 Which are which, and why are there errors?</p>
 <div class="callout callout-more group/callout" data-callout="409-unix-plumbing:ssh-config-dir"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-409-unix-plumbing:ssh-config-dir" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>/etc/ssh</code> directory holds the configuration of SSH on your server:</p>
@@ -259,35 +257,31 @@ file? Display the file with <code>cat</code> to see.</p>
 <h2 id="did-it-work"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Did it work?<a href="#did-it-work" aria-label="Link to heading 'Did it work?'" data-heading-content="Did it work?" class="anchor"></a></h2>
 <p>Every command ends with an exit status, which the shell keeps in the special
 variable <code>$?</code>. Display it with <code>echo $?</code> right after each of these commands:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">unicorn</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span>
-</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">unicorn</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span>
+<span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span></code></pre>
 <p>What does each exit status mean? The last command found lines: why is its exit
 status not <code>0</code>?</p>
 <h2 id="download-the-song"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Download the song<a href="#download-the-song" aria-label="Link to heading 'Download the song'" data-heading-content="Download the song" class="anchor"></a></h2>
 <p>In your home directory, download the song that the next pipelines work on:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">https://tinyurl.com/archidep-otr</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">rainbow.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">https://tinyurl.com/archidep-otr</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">rainbow.txt</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This command is already a redirection: <code>curl</code> prints what it downloads to its
 standard output stream, and <code>&gt;</code> sends it into the <code>rainbow.txt</code> file instead of
 your terminal.</p></div></div>
 <p>Display the file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span></code></pre>
 <h2 id="pipe-the-song"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pipe the song<a href="#pipe-the-song" aria-label="Link to heading 'Pipe the song'" data-heading-content="Pipe the song" class="anchor"></a></h2>
 <p>Use command pipelines to answer questions about the song. For example, how many
 lines are there in the text?</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-number">51</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span>
+<span class="l-line" data-line="2"><span class="l-number">51</span></span></code></pre>
 <p>Now it’s your turn:</p>
 <ul>
 <li>
@@ -373,8 +367,7 @@ song: its <code>-d</code> option gives the character that separates the fields (
 <h2 id="discard-the-errors"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Discard the errors<a href="#discard-the-errors" aria-label="Link to heading 'Discard the errors'" data-heading-content="Discard the errors" class="anchor"></a></h2>
 <p>In the first step, you ran this command, which displays both the lines it finds
 and error messages:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span></code></pre>
 <p>Find out how to run it so that it displays only the lines it found, without
 creating any file. The optional section of the subject on how to <a href="/2026/course/408-unix-processes/#appendix-discard-an-output-stream">discard an
 output stream</a> explains how.</p>
@@ -429,9 +422,10 @@ error messages, not their exact text.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -477,30 +471,32 @@ error messages, not their exact text.</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-409-unix-plumbing-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-409-unix-plumbing-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/409-unix-plumbing/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/409-unix-plumbing/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      <div class="cloud-server-data" data-mode="details">
-      </div>
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="cloud-server-data" data-mode="details">
+        </div>
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -782,7 +778,7 @@ error messages, not their exact text.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1186,7 +1182,7 @@ error messages, not their exact text.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

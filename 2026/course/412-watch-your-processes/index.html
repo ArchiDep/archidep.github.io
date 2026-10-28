@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Watch your processes · ArchiDep</title>
-<meta name="description" content="Small exercises on your cloud server to watch processes start, run and stop, and to see how they can and cannot communicate." />
+<meta name="description" content="Small exercises on your cloud server to watch processes start, run and stop, and to see how they can and cannot communicate. Do these exercises on your cloud server, through SSH, except where a step says to run a command on your own computer. Some of them need two terminals connected to your server at the same time." />
 <link rel="canonical" href="https://archidep.ch/2026/course/412-watch-your-processes/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Watch your processes" />
-<meta property="og:description" content="Small exercises on your cloud server to watch processes start, run and stop, and to see how they can and cannot communicate." />
+<meta property="og:description" content="Small exercises on your cloud server to watch processes start, run and stop, and to see how they can and cannot communicate. Do these exercises on your cloud server, through SSH, except where a step says to run a command on your own computer. Some of them need two terminals connected to your server at the same time." />
 <meta property="og:url" content="https://archidep.ch/2026/course/412-watch-your-processes/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/412-watch-your-processes/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/412-watch-your-processes/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -121,7 +121,10 @@
 </h1>
 
       <div class="my-4"><p>Small exercises on your cloud server to watch processes start, run and stop,
-and to see how they can and cannot communicate.</p></div>
+and to see how they can and cannot communicate.</p>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Do these exercises on your cloud server, through SSH, except where a step says
+to run a command on your own computer. Some of them need two terminals
+connected to your server at the same time.</p></div></div></div></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -134,6 +137,44 @@ and to see how they can and cannot communicate.</p></div>
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#watch-a-process-start-and-die"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Watch a process start and die</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#climb-the-process-tree"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Climb the process tree</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#two-shells-two-memories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Two shells, two memories</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#which-computer-runs-this"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which computer runs this?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#describe-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Describe your server</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#where-does-the-time-go"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where does the time go?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#take-turns-on-the-processor"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Take turns on the processor</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#answer-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>answer: command not found</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-sleep-process-is-not-in-the-list"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My <code>sleep</code> process is not in the list</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#error-listen-eaddrinuse-address-already-in-use-3000"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Error: listen EADDRINUSE: address already in use :::3000</code></a>
+    
+  </li>
+</ul>
   </li>
 </ul>
         </nav>
@@ -176,7 +217,406 @@ and to see how they can and cannot communicate.</p></div>
   </li>
 </ul>
 
-      <p>Their instructions will be published on this page before they are handed out.</p>
+      <p><a href="/2026/course/411-how-a-computer-works/">How a computer works</a> explained what a computer physically does when it
+runs a program, and what the processes of your deployment are. Each part of this
+page is a <strong>separate, short exercise</strong> that shows one of those ideas happening
+on your own server. They do not depend on each other: if one goes wrong, you can
+still do the next.</p>
+<p>Most parts ask you to predict what will happen before you run a command. Make
+your prediction, then run the command and check your answer. Each part ends with
+an explanation of what it showed.</p>
+<p>In the commands below, replace <code>jde</code> with your username, and <code>W.X.Y.Z</code> with
+your server’s public IP address.</p>
+<h2 id="watch-a-process-start-and-die"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Watch a process start and die<a href="#watch-a-process-start-and-die" aria-label="Link to heading 'Watch a process start and die'" data-heading-content="Watch a process start and die" class="anchor"></a></h2>
+<p>Open <strong>two terminals</strong>, and connect both to your server.</p>
+<p>In the first terminal, list your own processes:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span></span></code></pre>
+<p>In the second terminal, run a <code>sleep</code> command, which does nothing for 60
+seconds:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">60</span></span></code></pre>
+<p>While it is running, list your processes again in the first terminal. Note the
+PID of the <code>sleep</code> process.</p>
+<p>Wait for the 60 seconds to pass, or stop <code>sleep</code> with <code>Ctrl+C</code>, then list your
+processes once more. Is the <code>sleep</code> process still there?</p>
+<p>Now run <code>sleep 60</code> again in the second terminal, and list your processes in the
+first. Does the new <code>sleep</code> process have the same PID as the previous one?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answers</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">jde</span>        <span class="l-number">12034</span>   <span class="l-number">12033</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:02</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">jde</span>        <span class="l-number">12102</span>   <span class="l-number">12034</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:05</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sleep</span> <span class="l-number">60</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span></code></pre>
+<p>Once <code>sleep</code> has stopped, it is no longer in the list. The second <code>sleep</code> gets
+a <strong>different PID</strong>: it is a new process, not the first one coming back.</p></div></div>
+<p>Finally, look at the file of the <code>sleep</code> program:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-lL</span> <span class="l-variable-parameter">/usr/bin/sleep</span></span></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>/usr/bin/sleep</code> is a symbolic link, a reference to another file. The <code>-L</code>
+option makes <code>ls</code> describe the file it leads to, the program itself, instead of
+the link.</p></div></div>
+<p>It was there before you ran <code>sleep</code>, it was there while <code>sleep</code> was running, and
+it is still there now.</p>
+<p>That file is a <strong>program</strong>: inert instructions in the storage of your server.
+Each time you ran <code>sleep</code>, the operating system copied that program into memory
+and started executing it: a <strong>process</strong>, with its own PID and its own memory.
+When the process ended, the kernel freed its memory, and nothing of it was left,
+except the program’s file, ready to be run again.</p>
+<p>Running the same program twice gives two different processes. This is the
+difference between the program and the process described in <a href="/2026/course/411-how-a-computer-works/#programs-and-processes">How a computer
+works</a>.</p>
+<h2 id="climb-the-process-tree"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Climb the process tree<a href="#climb-the-process-tree" aria-label="Link to heading 'Climb the process tree'" data-heading-content="Climb the process tree" class="anchor"></a></h2>
+<p>Open <strong>two terminals</strong>, and connect both to your server.</p>
+<p>In the second terminal, display every process as a tree:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span></span></code></pre>
+<p>Find the <code>ps -ef --forest</code> command you just ran. Follow its parent process ID
+(<code>PPID</code>) to its parent, then to its parent’s parent, and so on. Where do you end
+up?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">root</span>           <span class="l-number">2</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[kthreadd]</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">root</span>           <span class="l-number">3</span>       <span class="l-number">2</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">[pool_workqueue_release]</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">root</span>           <span class="l-number">1</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:03</span> <span class="l-variable-parameter">/usr/lib/systemd/systemd</span> <span class="l-variable-parameter">--system</span> <span class="l-variable-parameter">--deserialize=99</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[listener]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">root</span>       <span class="l-number">12020</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">jde</span>        <span class="l-number">12033</span>   <span class="l-number">12020</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">jde</span>        <span class="l-number">12034</span>   <span class="l-number">12033</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>       <span class="l-function-call">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">root</span>       <span class="l-number">12390</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:08</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="13"><span class="l-function-call">jde</span>        <span class="l-number">12401</span>   <span class="l-number">12390</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:08</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/2</span></span>
+<span class="l-line" data-line="14"><span class="l-function-call">jde</span>        <span class="l-number">12402</span>   <span class="l-number">12401</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:08</span> <span class="l-variable-parameter">pts/2</span>    <span class="l-variable-parameter">00:00:00</span>          <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="15"><span class="l-function-call">jde</span>        <span class="l-number">12411</span>   <span class="l-number">12402</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:09</span> <span class="l-variable-parameter">pts/2</span>    <span class="l-variable-parameter">00:00:00</span>              <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="16"><span class="l-function-call">...</span></span></code></pre>
+<p>The PIDs on your server are different, but the chain is the same. In this
+example, your <code>ps</code>, PID 12411, has the PPID 12402: it was started by your shell
+(<code>-bash</code>). The shell’s PPID, 12401, leads to your SSH session, which is two
+<code>sshd-session</code> processes, 12401 and its parent 12390. The PPID of 12390 is 888,
+the SSH server (<code>sshd</code>), whose own PPID is 1: <strong>the init process, PID 1</strong>. On
+Ubuntu, the init process is systemd: its line may show <code>/sbin/init</code> instead, the
+traditional name of the init program.</p>
+<p>The names in square brackets at the top of the tree, below PID 2 (<code>kthreadd</code>),
+are not programs: they are parts of the kernel itself, which it runs as
+processes of its own.</p></div></div>
+<p>Now, in the first terminal, start Guess It, as you did in the <a href="/2026/course/410-sftp-deployment/#run-the-application">SFTP
+deployment</a>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/guessit-ex</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span></code></pre>
+<p>In the second terminal, display the tree again. Which processes did running
+Guess It create? Then find PostgreSQL in the tree (look for <code>postgres</code>). Who
+started it?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answers</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">jde</span>        <span class="l-number">12034</span>   <span class="l-number">12033</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>       <span class="l-function-call">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">jde</span>        <span class="l-number">12305</span>   <span class="l-number">12034</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:12</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>           <span class="l-function-call">\_</span> <span class="l-variable-parameter">npm</span> <span class="l-variable-parameter">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">jde</span>        <span class="l-number">12316</span>   <span class="l-number">12305</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:12</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>               <span class="l-function-call">\_</span> <span class="l-variable-parameter">sh</span> <span class="l-variable-parameter">-c</span> <span class="l-variable-parameter">node</span> <span class="l-variable-parameter">--watch</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">jde</span>        <span class="l-number">12317</span>   <span class="l-number">12316</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:12</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:01</span>  <span class="l-operator">|</span>                   <span class="l-function-call">\_</span> <span class="l-variable-parameter">node</span> <span class="l-variable-parameter">--watch</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">jde</span>        <span class="l-number">12328</span>   <span class="l-number">12317</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:12</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>                       <span class="l-function-call">\_</span> <span class="l-variable-parameter">/usr/bin/node</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">postgres</span>     <span class="l-number">951</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/lib/postgresql/.../bin/postgres</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">/var/lib/postgresql/...</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">postgres</span>     <span class="l-number">960</span>     <span class="l-number">951</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">postgres:</span> <span class="l-variable-parameter">...:</span> <span class="l-variable-parameter">checkpointer</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">postgres</span>     <span class="l-number">961</span>     <span class="l-number">951</span>  <span class="l-number">0</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">postgres:</span> <span class="l-variable-parameter">...:</span> <span class="l-variable-parameter">background</span> <span class="l-variable-parameter">writer</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">...</span></span></code></pre>
+<p><code>npm run dev</code> is not one process but several: <code>npm</code> starts a shell (<code>sh</code>), which
+starts Node.js, which starts another Node.js process to run <code>server.js</code> and
+start it again whenever the file changes. None of them is called “Guess It”: the
+program that runs is Node.js, and Guess It’s JavaScript is data that Node.js
+reads.</p>
+<p>PostgreSQL was not started by you, but by the init process (PID 1): when you
+installed it, and again each time your server boots. It is several processes
+too.</p></div></div>
+<p>Stop Guess It with <code>Ctrl+C</code> once you are done.</p>
+<p>Every program running on your server was started by another process, which is
+its parent. Climbing the tree always ends at <strong>the init process, PID 1</strong>: the
+first process the kernel starts once it has <a href="/2026/course/411-how-a-computer-works/#booting">booted</a>. It starts the
+services of the server, such as the SSH server and PostgreSQL, which start
+others in turn.</p>
+<p>What you start yourself hangs below your shell, which hangs below your SSH
+connection. That is why Guess It stops when you press <code>Ctrl+C</code> or disconnect,
+while PostgreSQL keeps running.</p>
+<h2 id="two-shells-two-memories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Two shells, two memories<a href="#two-shells-two-memories" aria-label="Link to heading 'Two shells, two memories'" data-heading-content="Two shells, two memories" class="anchor"></a></h2>
+<p>Open <strong>two terminals</strong>, and connect both to your server.</p>
+<p>In the first terminal, create a shell variable named <code>answer</code>, and display it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; answer=42</span>
+<span class="l-line" data-line="2">$&gt; echo <span class="l-constant">$</span><span class="l-string">answer</span></span>
+<span class="l-line" data-line="3"><span class="l-number">42</span></span></code></pre>
+<p>What will the same <code>echo</code> command display in the second terminal?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">answer</span></span>
+<span class="l-line" data-line="2"></span></code></pre>
+<p>Nothing: an empty line. The second shell has no variable named <code>answer</code>.</p></div></div>
+<p>List your processes with <code>ps -f -u jde</code>. How many <code>bash</code> processes do you see?
+Which one holds the variable <code>answer</code>?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">jde</span>        <span class="l-number">12010</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/lib/systemd/systemd</span> <span class="l-variable-parameter">--user</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">jde</span>        <span class="l-number">12012</span>   <span class="l-number">12010</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">sd-pam</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">jde</span>        <span class="l-number">12033</span>   <span class="l-number">12020</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">jde</span>        <span class="l-number">12034</span>   <span class="l-number">12033</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:01</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">jde</span>        <span class="l-number">12401</span>   <span class="l-number">12390</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:20</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/2</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">jde</span>        <span class="l-number">12402</span>   <span class="l-number">12401</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:20</span> <span class="l-variable-parameter">pts/2</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">jde</span>        <span class="l-number">12450</span>   <span class="l-number">12402</span>  <span class="l-number">0</span> <span class="l-variable-parameter">14:21</span> <span class="l-variable-parameter">pts/2</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span></span></code></pre>
+<p>Two <code>bash</code> processes, one per terminal, with different PIDs. Only the shell of
+the first terminal holds <code>answer</code>, in its own memory.</p></div></div>
+<p>To get the value from the first shell to the second, write it to a file in the
+first terminal:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">answer</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">answer.txt</span></span></code></pre>
+<p>Then read the file in the second terminal:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">answer.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-number">42</span></span></code></pre>
+<p>Both terminals run the same program, Bash, as two separate processes. Each one
+has <strong>its own memory</strong>, which the operating system gives it, and no process can
+read or write the memory of another. A shell variable lives in the memory of one
+shell, so the other shell cannot see it.</p>
+<p>To share anything, isolated processes need a channel that the operating system
+provides. A file is one: one process writes it, and another reads it. <a href="/2026/course/411-how-a-computer-works/#isolated-processes-communicate-through-channels">How a
+computer works</a> lists the others. You have already used two of
+them: a pipe, in a shell pipeline, and a socket, when you connected two <code>nc</code>
+processes over the network in <a href="/2026/course/407-tcp/">Make TCP connections</a>. Guess It and
+PostgreSQL use a socket too.</p>
+<h2 id="which-computer-runs-this"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which computer runs this?<a href="#which-computer-runs-this" aria-label="Link to heading 'Which computer runs this?'" data-heading-content="Which computer runs this?" class="anchor"></a></h2>
+<p>This part starts <strong>on your own computer</strong>, not on your server. Open a terminal
+without connecting to your server, and display the name of the computer:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hostname</span></span></code></pre>
+<p>Then ask your server for its name, through SSH:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@W.X.Y.Z</span> <span class="l-string-special-path">hostname</span></span></code></pre>
+<p>Every user has a home directory, whose path is in the variable <code>HOME</code>. Display
+it through SSH with these two commands, which look almost the same, one with
+double quotes and one with single quotes:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@W.X.Y.Z</span> <span class="l-string">&quot;echo <span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>&quot;</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/jdoe</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@W.X.Y.Z</span> <span class="l-string">&#39;echo $HOME&#39;</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/home/jde</span></span></code></pre>
+<p>The first command displays the home directory <strong>on your own computer</strong> (here, on
+a Mac), and the second the one <strong>on your server</strong>. Yet <code>echo</code> ran on your server
+both times. Can you guess why? Think of the processes involved in each command,
+and of the computer each one runs on.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p>Two shells took part in each command, on two different computers. Your shell, on
+your computer, read the command first and started <code>ssh</code>. The <code>ssh</code> process then
+had your server start a shell of its own, which ran <code>echo</code>.</p>
+<p>Inside double quotes, your shell replaces <code>$HOME</code> with its own value <strong>before</strong>
+it even starts <code>ssh</code>. The server received <code>echo /Users/jdoe</code>, and displayed it
+faithfully. Inside single quotes, your shell leaves <code>$HOME</code> as it is, so the
+server’s shell received <code>echo $HOME</code>, and replaced it with its own value.</p></div></div>
+<p>Both shells are processes with their own memory, on their own computer, with
+their own value for <code>HOME</code>. Whenever you run a command, ask <a href="/2026/course/411-how-a-computer-works/#a-particular-place-at-a-particular-time">which computer it
+runs on, and when</a>.</p>
+<h2 id="describe-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Describe your server<a href="#describe-your-server" aria-label="Link to heading 'Describe your server'" data-heading-content="Describe your server" class="anchor"></a></h2>
+<p>Back on your server, ask for a description of its processor with <code>lscpu</code>
+(<strong>l</strong>i<strong>s</strong>t <strong>CPU</strong>), which only displays information:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">lscpu</span></span></code></pre>
+<p>Then display its memory with <code>free -h</code> and its disk space with <code>df -h /</code>, as you
+did in <a href="/2026/course/402-unix-basics/#inspecting-volumes">Unix Basics</a> and when you <a href="/2026/course/404-run-virtual-server/#add-swap-space-to-your-virtual-server">ran your virtual
+server</a>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-h</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span> <span class="l-variable-parameter">/</span></span></code></pre>
+<p>These commands display a lot of information. Find the following figures in their
+output, and say which part of the machine of <a href="/2026/course/411-how-a-computer-works/#programs-and-processes">How a computer
+works</a> each one is about (the processor, its cores, its caches,
+the memory, the storage or the firmware):</p>
+<ul>
+<li><code>Architecture</code> and <code>CPU(s)</code>, in the output of <code>lscpu</code>.</li>
+<li>The lines starting with <code>L1d</code>, <code>L2</code> and <code>L3</code>, in the output of <code>lscpu</code>.</li>
+<li><code>Hypervisor vendor</code>, in the output of <code>lscpu</code>.</li>
+<li>The <code>Mem</code> and <code>Swap</code> lines of <code>free -h</code>.</li>
+<li>The <code>Size</code> of <code>df -h /</code>.</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answers</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">lscpu</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Architecture:</span>             <span class="l-variable-parameter">x86_64</span></span>
+<span class="l-line" data-line="3">  <span class="l-function-call">CPU</span> op-mode<span class="l-punctuation-bracket">(</span><span class="l-function-call">s</span><span class="l-punctuation-bracket">)</span>:         <span class="l-function-call">32-bit,</span> <span class="l-variable-parameter">64-bit</span></span>
+<span class="l-line" data-line="4">  <span class="l-function-call">...</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">CPU</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">s</span><span class="l-punctuation-bracket">)</span>:                   <span class="l-number">1</span></span>
+<span class="l-line" data-line="6">  <span class="l-function-call">...</span></span>
+<span class="l-line" data-line="7">  <span class="l-function-call">Model</span> <span class="l-variable-parameter">name:</span>             <span class="l-variable-parameter">Intel</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">R</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Xeon</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">R</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Platinum</span> <span class="l-variable-parameter">8370C</span> <span class="l-variable-parameter">CPU</span> <span class="l-variable-parameter">@</span> <span class="l-variable-parameter">2.80GHz</span></span>
+<span class="l-line" data-line="8">  <span class="l-function-call">...</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">Virtualization</span> <span class="l-variable-parameter">features:</span></span>
+<span class="l-line" data-line="10">  <span class="l-function-call">Hypervisor</span> <span class="l-variable-parameter">vendor:</span>      <span class="l-variable-parameter">Microsoft</span></span>
+<span class="l-line" data-line="11">  <span class="l-function-call">Virtualization</span> <span class="l-variable-parameter">type:</span>    <span class="l-variable-parameter">full</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">Caches</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">sum</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">all</span><span class="l-punctuation-bracket">)</span>:</span>
+<span class="l-line" data-line="13">  <span class="l-function-call">L1d:</span>                    <span class="l-number">48</span> <span class="l-variable-parameter">KiB</span> <span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">instance</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="14">  <span class="l-function-call">L1i:</span>                    <span class="l-number">32</span> <span class="l-variable-parameter">KiB</span> <span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">instance</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="15">  <span class="l-function-call">L2:</span>                     <span class="l-variable-parameter">1.3</span> <span class="l-variable-parameter">MiB</span> <span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">instance</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="16">  <span class="l-function-call">L3:</span>                     <span class="l-number">48</span> <span class="l-variable-parameter">MiB</span> <span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">instance</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="17"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="18"></span>
+<span class="l-line" data-line="19">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-h</span></span>
+<span class="l-line" data-line="20">               <span class="l-function-call">total</span>        <span class="l-variable-parameter">used</span>        <span class="l-variable-parameter">free</span>      <span class="l-variable-parameter">shared</span>  <span class="l-variable-parameter">buff/cache</span>   <span class="l-variable-parameter">available</span></span>
+<span class="l-line" data-line="21"><span class="l-function-call">Mem:</span>           <span class="l-variable-parameter">835Mi</span>       <span class="l-variable-parameter">271Mi</span>       <span class="l-variable-parameter">192Mi</span>        <span class="l-variable-parameter">18Mi</span>       <span class="l-variable-parameter">409Mi</span>       <span class="l-variable-parameter">563Mi</span></span>
+<span class="l-line" data-line="22"><span class="l-function-call">Swap:</span>          <span class="l-variable-parameter">2.0Gi</span>        <span class="l-variable-parameter">24Mi</span>       <span class="l-variable-parameter">2.0Gi</span></span>
+<span class="l-line" data-line="23"></span>
+<span class="l-line" data-line="24">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span> <span class="l-variable-parameter">/</span></span>
+<span class="l-line" data-line="25"><span class="l-function-call">Filesystem</span>      <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span></span>
+<span class="l-line" data-line="26"><span class="l-function-call">/dev/root</span>        <span class="l-variable-parameter">28G</span>  <span class="l-variable-parameter">5.1G</span>   <span class="l-variable-parameter">23G</span>  <span class="l-variable-parameter">18%</span> <span class="l-variable-parameter">/</span></span></code></pre>
+<p>Your figures may differ, depending on the size of the server you chose and on
+the machine Azure runs it on.</p>
+<ul>
+<li><code>x86_64</code> is the processor’s instruction set, the one of most cloud servers. It
+is a <strong>64-bit</strong> processor: its registers, and its addresses, are 64 bits wide,
+where <a href="/2026/course/411-how-a-computer-works/slides/#the-instruction-set">the machine of the presentation</a> had 8-bit values
+and 4-bit addresses.</li>
+<li><code>CPU(s)</code> is the number of <strong>cores</strong> the kernel can give work to: 1 or 2 on the
+servers of this course. On a server with 2, <code>Thread(s) per core: 2</code> means that
+they are two halves of one physical core, which executes the instructions of
+two processes at once by interleaving them. The kernel uses them as two cores,
+and so does this exercise.</li>
+<li>If the model name says <code>64-Core</code>, that is the processor of the machine Azure
+runs your server on, shared with many other virtual machines.</li>
+<li>If the model name ends with a speed in GHz, it is the speed of the processor’s
+<strong>clock</strong>: 2.8 billion ticks per second here.</li>
+<li><code>L1d</code>, <code>L2</code> and <code>L3</code> are the processor’s <strong>caches</strong>, small and fast memories
+inside the processor’s chip that keep copies of recently used memory.</li>
+<li><code>Hypervisor vendor: Microsoft</code> says that your server is a <strong>virtual machine</strong>:
+Azure’s software, not a chip on a motherboard, provides its firmware and its
+hardware.</li>
+<li><code>Mem</code> is the <strong>memory</strong> (RAM): less than 1 GiB in total. <code>Swap</code> is the swap
+space you created on the disk, where the kernel moves parts of the memory when
+it runs out.</li>
+<li><code>Size</code> is the <strong>storage</strong>, where the programs and files stay when the server
+is turned off: about 30 GB, more than thirty times the memory.</li>
+</ul></div></div>
+<p>Every figure of a computer’s description belongs to one part of the machine: the
+processor, with its instruction set, word size, clock, cores and caches; the
+memory; the storage. Your server has all of these parts, like your laptop, only
+smaller.</p>
+<p>Compare the size of the memory with the size of the disk. Every program running
+on your server, Guess It and PostgreSQL included, has to fit in less than 1 GiB
+of memory, while its files sit on the much larger disk. That is the difference
+between the program in the storage and the process in memory, once again.</p>
+<h2 id="where-does-the-time-go"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where does the time go?<a href="#where-does-the-time-go" aria-label="Link to heading 'Where does the time go?'" data-heading-content="Where does the time go?" class="anchor"></a></h2>
+<p>Put <code>time</code> in front of a command, and the shell reports how long it took when it
+is done. Try it on <code>sleep</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">time</span> <span class="l-function-call">sleep</span> <span class="l-number">2</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-function-call">real</span>    <span class="l-variable-parameter">0m2.003s</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">user</span>    <span class="l-variable-parameter">0m0.001s</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">sys</span>     <span class="l-variable-parameter">0m0.002s</span></span></code></pre>
+<p><code>time</code> reports three durations:</p>
+<ul>
+<li><code>real</code> is the time that passed on a clock, from the start of the command to
+its end.</li>
+<li><code>user</code> and <code>sys</code> are the time <strong>the processor spent running the process</strong>.
+What separates the two comes later in this part.</li>
+</ul>
+<p><code>sleep</code> ran for 2 seconds, yet the processor worked for it for only a few
+thousandths of a second. Why do you think <code>user</code> and <code>sys</code> are so small?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p><code>sleep</code> waited for 2 seconds, and a process that waits does not use the
+processor at all.</p></div></div>
+<p>Now give the processor some work. The following command basically performs
+computations during 10 seconds, and then stops. Time it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">time</span> <span class="l-function-call">timeout</span> <span class="l-number">10</span> <span class="l-variable-parameter">sha256sum</span> <span class="l-variable-parameter">/dev/zero</span></span></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>sha256sum</code> command computes a SHA-256 fingerprint of the data it reads, the
+same kind of fingerprint SSH showed you for your server’s key. <code>/dev/zero</code> is a
+device that gives an endless supply of zero bytes, so <code>sha256sum</code> would compute
+forever: <code>timeout 10</code> stops it after 10 seconds.</p></div></div>
+<p>How does <code>user</code> compare with <code>real</code> this time?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">real</span>    <span class="l-variable-parameter">0m10.006s</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">user</span>    <span class="l-variable-parameter">0m9.678s</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">sys</span>     <span class="l-variable-parameter">0m0.304s</span></span></code></pre>
+<p><code>user</code> is almost as long as <code>real</code>: the processor was busy executing this
+process for the whole time.</p></div></div>
+<p>Finally, time a command that lists every file under <code>/usr</code>, and throws the list
+away into the <a href="/2026/course/408-unix-processes/#the-devnull-device">null device</a>. It may take several seconds:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">time</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">/usr</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span></span></code></pre>
+<p>How does <code>sys</code> compare with <code>user</code> this time? And <code>real</code> with both of them?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answers</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">real</span>    <span class="l-variable-parameter">0m14.900s</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">user</span>    <span class="l-variable-parameter">0m0.241s</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">sys</span>     <span class="l-variable-parameter">0m0.518s</span></span></code></pre>
+<p>This time, <code>sys</code> is as large as <code>user</code>, or larger, where it was a small fraction
+of <code>user</code> for <code>sha256sum</code>. And <code>real</code> is much longer than both put together, at
+least the first time you run the command.</p></div></div>
+<p><code>real</code> is how long you waited. <code>user</code> and <code>sys</code> are how long the processor
+worked for the process, and they only count while it does:</p>
+<ul>
+<li><code>user</code> is the time the processor spent executing <strong>the program’s own
+instructions</strong>, such as the calculations of <code>sha256sum</code>. Computing a
+fingerprint is arithmetic on the bytes it reads, repeated in a loop: like <a href="/2026/course/411-how-a-computer-works/slides/#from-program-to-instructions">the
+multiplication of the presentation</a>, it comes down to
+instructions that compute, and jumps.</li>
+<li><code>sys</code> is the time the processor spent executing <strong>the kernel’s instructions</strong>,
+on behalf of the process. <code>ls</code> cannot read a disk by itself: it asks the
+operating system, with <a href="/2026/course/411-how-a-computer-works/#what-the-operating-system-does">system calls</a>, to read every directory under
+<code>/usr</code>, and the kernel does the work.</li>
+<li>The rest of <code>real</code> is time when the process <strong>waited</strong>, and the processor did
+something else, or nothing. <code>sleep</code> only waited, and <code>ls</code> spent most of its
+time waiting for the disk to answer.</li>
+</ul>
+<p>This is what the process boxes of an architecture diagram hide. A process that
+is “running”, such as Guess It waiting for a request, mostly waits, and uses no
+processor until something happens.</p>
+<h2 id="take-turns-on-the-processor"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Take turns on the processor<a href="#take-turns-on-the-processor" aria-label="Link to heading 'Take turns on the processor'" data-heading-content="Take turns on the processor" class="anchor"></a></h2>
+<p>This part reuses the <code>sha256sum</code> command of <a href="#where-does-the-time-go">Where does the time
+go?</a>. Check how many cores your server has: it is the
+<code>CPU(s)</code> line of <code>lscpu</code>, as in <a href="#describe-your-server">Describe your server</a>.</p>
+<p>Open <strong>one more terminal than your server has cores</strong>: two terminals if it has
+one core, three if it has two. Connect all of them to your server.</p>
+<p><strong>Before you run anything</strong>, predict: if you start the command in all of these
+terminals at the same time, how will their <code>real</code> and <code>user</code> durations compare
+with the ones you measured for a single command?</p>
+<p>Then run the command in every terminal, starting them as close together as you
+can:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">time</span> <span class="l-function-call">timeout</span> <span class="l-number">10</span> <span class="l-variable-parameter">sha256sum</span> <span class="l-variable-parameter">/dev/zero</span></span></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>On a server with one core, running two commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">real</span>    <span class="l-variable-parameter">0m10.005s</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">user</span>    <span class="l-variable-parameter">0m5.007s</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">sys</span>     <span class="l-variable-parameter">0m0.159s</span></span></code></pre>
+<p>On a server with two cores, running three commands:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">real</span>    <span class="l-variable-parameter">0m10.004s</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">user</span>    <span class="l-variable-parameter">0m6.552s</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">sys</span>     <span class="l-variable-parameter">0m0.213s</span></span></code></pre>
+<p><code>real</code> is still 10 seconds, since <code>timeout</code> stops each command after 10 seconds.
+But <code>user</code> is less than it was for a single command: about <strong>half</strong> of it with
+two commands on one core, and about <strong>two thirds</strong> with three commands on two
+cores.</p></div></div>
+<p>A core executes the instructions of one process at a time. With more busy
+processes than cores, the kernel makes them <strong>take turns</strong>: it switches the core
+from one process to another many times per second, so that all of them seem to
+run at once. This is <strong>concurrency</strong>, like two queues at a single coffee machine
+in <a href="/2026/course/411-how-a-computer-works/slides/#taking-turns">the presentation</a>. Each command ran for 10 seconds, but
+only got the processor for its share of them, and spent the rest waiting for its
+turn: it computed less in the same time.</p>
+<p>With as many cores as busy processes, they would run <strong>in parallel</strong>, one per
+core, and each would get the processor for the whole 10 seconds. More cores only
+help when there is work for each of them.</p>
+<h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
+<p>You watched the ideas of <a href="/2026/course/411-how-a-computer-works/">How a computer works</a> happen on your own server,
+with commands you already knew.</p>
+<p><strong>None of these ideas is specific to Linux.</strong> They are how computers work,
+whatever their operating system: your own computer runs programs as isolated
+processes in its memory, started one from another since it booted, in the same
+way. macOS and Windows do the same things, sometimes under other names and with
+other tools. Both list their processes with their PIDs, in the Activity Monitor
+on macOS and the Task Manager on Windows. On macOS, the init process is called
+<code>launchd</code>; on Windows, several programs share its job.</p>
+<p>A program is a file in the storage. A process is that program copied into memory
+and being executed, with its own PID. When the process ends, the kernel frees
+its memory, and only the file is left. Running the same program again gives a
+new process, with a new PID.</p>
+<p>Every process was started by another one. Climbing the process tree always ends
+at the init process, PID 1, which the kernel starts at the end of the boot.
+Services such as PostgreSQL hang from it. What you run yourself, such as Guess
+It, hangs from your shell, and stops with it.</p>
+<p>Each process has its own memory, which no other process can read. Two shells
+running the same program do not share their variables. Isolated processes can
+only communicate through channels the operating system provides: files, pipes,
+sockets, or shared memory. Guess It and PostgreSQL talk through a socket.</p>
+<p>A command does not run “somewhere”: it runs on one computer, in the memory of a
+process, at one moment. With SSH, two shells on two computers were involved,
+each with its own <code>HOME</code>, and the quotes decided which one read <code>$HOME</code>.</p>
+<p>Your server is a computer like the one in the presentation, only much faster: a
+64-bit processor with its cores, clock and caches, a memory of less than 1 GiB,
+and a disk far larger than the memory. It is a virtual machine, whose hardware
+Azure’s software provides.</p>
+<p>A process only uses the processor while it has instructions to execute: its own
+(<code>user</code>), or the kernel’s working for it through system calls (<code>sys</code>). A process
+that waits uses no processor at all.</p>
+<h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
+<h3 id="answer-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>answer: command not found</code><a href="#answer-command-not-found" aria-label="Link to heading 'answer: command not found'" data-heading-content="answer: command not found" class="anchor"></a></h3>
+<p>You put spaces around the <code>=</code> sign. A shell variable is created with no spaces:
+<code>answer=42</code>, not <code>answer = 42</code>.</p>
+<h3 id="my-sleep-process-is-not-in-the-list"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My <code>sleep</code> process is not in the list<a href="#my-sleep-process-is-not-in-the-list" aria-label="Link to heading 'My sleep process is not in the list'" data-heading-content="My sleep process is not in the list" class="anchor"></a></h3>
+<p>Check that both terminals are connected to the same server, with <code>hostname</code>, and
+that you replaced <code>jde</code> with your own username in the <code>ps</code> command.</p>
+<h3 id="error-listen-eaddrinuse-address-already-in-use-3000"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Error: listen EADDRINUSE: address already in use :::3000</code><a href="#error-listen-eaddrinuse-address-already-in-use-3000" aria-label="Link to heading 'Error: listen EADDRINUSE: address already in use :::3000'" data-heading-content="Error: listen EADDRINUSE: address already in use :::3000" class="anchor"></a></h3>
+<p>Guess It is already running, in another terminal. Use that one, or stop it with
+<code>Ctrl+C</code> in the terminal where it is running before you start it again.</p>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -188,38 +628,79 @@ and to see how they can and cannot communicate.</p></div>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
+  </li><li class="toc-entry toc-h2">
+    <a href="#watch-a-process-start-and-die"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Watch a process start and die</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#climb-the-process-tree"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Climb the process tree</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#two-shells-two-memories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Two shells, two memories</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#which-computer-runs-this"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Which computer runs this?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#describe-your-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Describe your server</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#where-does-the-time-go"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where does the time go?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#take-turns-on-the-processor"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Take turns on the processor</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#answer-command-not-found"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>answer: command not found</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#my-sleep-process-is-not-in-the-list"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> My <code>sleep</code> process is not in the list</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#error-listen-eaddrinuse-address-already-in-use-3000"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Error: listen EADDRINUSE: address already in use :::3000</code></a>
+    
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-412-watch-your-processes-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  </li>
+</ul>
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-412-watch-your-processes-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/412-watch-your-processes/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/412-watch-your-processes/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      <div class="cloud-server-data" data-mode="details">
-      </div>
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="cloud-server-data" data-mode="details">
+        </div>
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -501,7 +982,7 @@ and to see how they can and cannot communicate.</p></div>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next course-item-current">
@@ -905,7 +1386,7 @@ and to see how they can and cannot communicate.</p></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

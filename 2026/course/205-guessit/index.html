@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/205-guessit/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/205-guessit/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -285,9 +285,8 @@ back here:</p>
 <p>The rest of Hello GitHub is not needed for this exercise.</p>
 <h2 id="install-nodejs"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Node.js<a href="#install-nodejs" aria-label="Link to heading 'Install Node.js'" data-heading-content="Install Node.js" class="anchor"></a></h2>
 <p>Check whether you have Node.js 22 or newer:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">v26.x.y</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">v26.x.y</span></span></code></pre>
 <p>If the command is not found, or prints a version older than 22, install Node.js 26
 by following the instructions of its <a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">download page</a> for your
 system. On Windows, install it <strong>in the WSL</strong>, with the Linux instructions.</p>
@@ -345,15 +344,13 @@ starts, PostgreSQL creates the <code>guessit</code> user with that password, and
 <code>guessit</code> database.</p>
 <p>Check that the server answers on port 5434 (or the port you chose). Run this in
 your terminal on macOS, or in the WSL on Windows:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span> <span class="l-variable-parameter">port</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">tcp/*</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">succeeded!</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-number">5434</span> <span class="l-variable-parameter">port</span> <span class="l-variable-parameter">[tcp/*]</span> <span class="l-variable-parameter">succeeded!</span></span></code></pre>
 <p>Then connect to the database with <code>psql</code>, as the <code>guessit</code> user. It asks for the
 password you chose:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">-h</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-variable-parameter">-p</span> <span class="l-number">5434</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">guessit</span> <span class="l-variable-parameter">guessit</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-variable-parameter">guessit:</span>
-</div><div class="l-line" data-line="3"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">-h</span> <span class="l-variable-parameter">127.0.0.1</span> <span class="l-variable-parameter">-p</span> <span class="l-number">5434</span> <span class="l-variable-parameter">-U</span> <span class="l-variable-parameter">guessit</span> <span class="l-variable-parameter">guessit</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-variable-parameter">guessit:</span></span>
+<span class="l-line" data-line="3"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span></span></code></pre>
 <p><code>-h 127.0.0.1</code> makes <code>psql</code> connect over the network, to the port given by
 <code>-p</code>, rather than look for a server running on your computer itself. <code>-U</code> is the
 user, and the last argument the database.</p>
@@ -364,11 +361,10 @@ create the user and the database, which already exist, so only its
 <code>CREATE TABLE game (...)</code> statement is needed. Copy it from the file, from
 <code>CREATE TABLE</code> to the <code>;</code> that ends it, paste it at the <code>guessit=#</code> prompt, and
 press <code>Enter</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span> <span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span> <span class="l-variable-parameter">game</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-variable">guessit</span><span class="l-operator">=</span><span class="l-string">#</span> <span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span> <span class="l-variable-parameter">game</span> <span class="l-punctuation-bracket">(</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">CREATE</span> <span class="l-variable-parameter">TABLE</span></span></code></pre>
 <p>Quit <code>psql</code> with <code>\q</code>. Then go on to <a href="#configure-and-start-the-application">Configure and start the
 application</a>: you do not need the other PostgreSQL steps.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The container keeps its data while it exists, even when it is stopped. After you
@@ -385,19 +381,17 @@ servers on the same computer both want port 5432, and only one of them can have
 it.</p>
 <p>First, check whether a server already answers on port 5432. Run this in your
 terminal on macOS, or in the WSL on Windows:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">localhost</span> <span class="l-number">5432</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">localhost</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">127.0.0.1</span><span class="l-punctuation-bracket">)</span> <span class="l-number">5432</span> <span class="l-variable-parameter">port</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">tcp/postgresql</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">succeeded!</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nc</span> <span class="l-function-call">-zv</span> <span class="l-variable-parameter">localhost</span> <span class="l-number">5432</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Connection</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">localhost</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">127.0.0.1</span><span class="l-punctuation-bracket">)</span> <span class="l-number">5432</span> <span class="l-variable-parameter">port</span> <span class="l-variable-parameter">[tcp/postgresql]</span> <span class="l-variable-parameter">succeeded!</span></span></code></pre>
 <p>The message ends with <code>succeeded!</code> if a server answers, and with
 <code>Connection refused</code> if none does. It is slightly different on macOS, but it
 ends the same way.</p>
 <p>Then check which PostgreSQL servers are installed, and follow the table for your
 system.</p>
 <p><strong>In the WSL, or on Linux:</strong></p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pg_lsclusters</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Ver</span> <span class="l-variable-parameter">Cluster</span> <span class="l-variable-parameter">Port</span> <span class="l-variable-parameter">Status</span> <span class="l-variable-parameter">Owner</span>    <span class="l-variable-parameter">Data</span> <span class="l-variable-parameter">directory</span>              <span class="l-variable-parameter">Log</span> <span class="l-variable-parameter">file</span>
-</div><div class="l-line" data-line="3"><span class="l-number">16</span>  <span class="l-variable-parameter">main</span>    <span class="l-number">5432</span> <span class="l-variable-parameter">online</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">/var/lib/postgresql/16/main</span> <span class="l-variable-parameter">/var/log/postgresql/postgresql-16-main.log</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pg_lsclusters</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Ver</span> <span class="l-variable-parameter">Cluster</span> <span class="l-variable-parameter">Port</span> <span class="l-variable-parameter">Status</span> <span class="l-variable-parameter">Owner</span>    <span class="l-variable-parameter">Data</span> <span class="l-variable-parameter">directory</span>              <span class="l-variable-parameter">Log</span> <span class="l-variable-parameter">file</span></span>
+<span class="l-line" data-line="3"><span class="l-number">16</span>  <span class="l-variable-parameter">main</span>    <span class="l-number">5432</span> <span class="l-variable-parameter">online</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">/var/lib/postgresql/16/main</span> <span class="l-variable-parameter">/var/log/postgresql/postgresql-16-main.log</span></span></code></pre>
 <p>This lists the servers installed with <code>apt</code>, Ubuntu’s package manager. If the
 command is not found, there is none.</p>
 <table>
@@ -439,10 +433,9 @@ the WSL: you are in the last row. This is expected. The WSL has its own
 <code>localhost</code>, separate from Windows’. You can install another server in the WSL:
 the two do not interfere with each other.</p></div></div>
 <p><strong>On macOS:</strong></p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-d</span> <span class="l-variable-parameter">/Applications/Postgres.app</span>   <span class="l-comment"># Postgres.app</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">list</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">postgresql</span>        <span class="l-comment"># PostgreSQL installed with Homebrew</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/Library/PostgreSQL</span>             <span class="l-comment"># the installer of postgresql.org</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-d</span> <span class="l-variable-parameter">/Applications/Postgres.app</span>   <span class="l-comment"># Postgres.app</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">list</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">postgresql</span>        <span class="l-comment"># PostgreSQL installed with Homebrew</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/Library/PostgreSQL</span>             <span class="l-comment"># the installer of postgresql.org</span></span></code></pre>
 <p><code>No such file or directory</code>, or no output, means that it is not installed.
 <code>brew: command not found</code> means that you do not have Homebrew.</p>
 <table>
@@ -476,8 +469,7 @@ the two do not interfere with each other.</p></div></div>
 <ul>
 <li>
 <p><strong>Installed with <code>apt</code>, in the WSL or on Linux:</strong></p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">service</span> <span class="l-variable-parameter">postgresql</span> <span class="l-variable-parameter">start</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">service</span> <span class="l-variable-parameter">postgresql</span> <span class="l-variable-parameter">start</span></span></code></pre>
 <p>Some WSL installations do not start services by themselves. If the server is
 stopped again after you restart your computer, start it again the same way.</p>
 </li>
@@ -487,8 +479,7 @@ stopped again after you restart your computer, start it again the same way.</p>
 <li>
 <p><strong>Homebrew:</strong> start the version that <code>brew list</code> printed, for example
 <code>postgresql@17</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">services</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql@17</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">services</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql@17</span></span></code></pre>
 </li>
 </ul>
 <p>Run <code>nc -zv localhost 5432</code> again: it must now succeed. Then <a href="#connect-as-a-superuser">connect as a
@@ -503,16 +494,14 @@ Ubuntu</a>: <code>apt install postgresql</code> is enough.</p>
 superuser</a>.</p>
 <h2 id="install-postgresql-on-macos"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Install PostgreSQL on macOS<a href="#install-postgresql-on-macos" aria-label="Link to heading 'Install PostgreSQL on macOS'" data-heading-content="Install PostgreSQL on macOS" class="anchor"></a></h2>
 <p>Check whether you have <a href="https://brew.sh" target="_blank" rel="noopener noreferrer">Homebrew</a>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Homebrew</span> <span class="l-variable-parameter">5.0.0</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Homebrew</span> <span class="l-variable-parameter">5.0.0</span></span></code></pre>
 <ul>
 <li>
 <p><strong>If you have Homebrew</strong>, install <a href="https://formulae.brew.sh/formula/postgresql@18" target="_blank" rel="noopener noreferrer">PostgreSQL 18</a> with it, and
 start it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">postgresql@18</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">services</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql@18</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">install</span> <span class="l-variable-parameter">postgresql@18</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">brew</span> <span class="l-function-call">services</span> <span class="l-variable-parameter">start</span> <span class="l-variable-parameter">postgresql@18</span></span></code></pre>
 <p>At the end of its output, <code>brew install</code> says that <code>postgresql@18 is keg-only</code>, and gives an <code>echo 'export PATH=...' &gt;&gt; ~/.zshrc</code> command below.
 Run that command, then open a new terminal: it makes the <code>psql</code> command
 available.</p>
@@ -556,12 +545,11 @@ comes from:</p>
 which was chosen when that server was installed. If <code>psql</code> is not found in the
 WSL, install it with <code>sudo apt install postgresql-client</code>.</p>
 <p>Use your command to check the version of your server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&#39;SHOW server_version;&#39;</span>
-</div><div class="l-line" data-line="2">            <span class="l-function-call">server_version</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">---------------------------------------</span>
-</div><div class="l-line" data-line="4"> <span class="l-function-call">16.10</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Ubuntu</span> <span class="l-variable-parameter">16.10-0ubuntu0.24.04.1</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">row</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&#39;SHOW server_version;&#39;</span></span>
+<span class="l-line" data-line="2">            <span class="l-function-call">server_version</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">---------------------------------------</span></span>
+<span class="l-line" data-line="4"> <span class="l-function-call">16.10</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">Ubuntu</span> <span class="l-variable-parameter">16.10-0ubuntu0.24.04.1</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5"><span class="l-punctuation-bracket">(</span><span class="l-number">1</span> <span class="l-variable-parameter">row</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>It must be 14 or newer. With <code>apt</code>, you get the version of your Ubuntu: 14 on
 Ubuntu 22.04, 16 on 24.04, 18 on 26.04. If yours is older, use the <a href="https://www.postgresql.org/download/linux/ubuntu/" target="_blank" rel="noopener noreferrer">PostgreSQL
 Apt Repository</a> to install a newer one.</p>
@@ -579,9 +567,8 @@ goes into a URL in the next step, where other characters would have to be
 encoded. It is simpler if everyone in the group uses the same one.</p>
 <p>Then run it with your <a href="#connect-as-a-superuser">superuser command</a>, giving it the file with
 <code>&lt;</code>. For example:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>   <span class="l-comment"># installed with apt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">postgres</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>           <span class="l-comment"># Postgres.app, or Homebrew</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>   <span class="l-comment"># installed with apt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">postgres</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">schema.sql</span>           <span class="l-comment"># Postgres.app, or Homebrew</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>With <code>&lt;</code>, your shell reads the file and passes its content to <code>psql</code>. With
 <code>sudo -u postgres</code>, <code>psql</code> runs as another user, which is not allowed to read
 your files, so it could not open the file itself.</p></div></div>
@@ -595,22 +582,19 @@ it, it can only reach its own database.</p>
 <h2 id="configure-and-start-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Configure and start the application<a href="#configure-and-start-the-application" aria-label="Link to heading 'Configure and start the application'" data-heading-content="Configure and start the application" class="anchor"></a></h2>
 <p>Open your <code>guessit-ex</code> directory in your editor. At the top of <code>server.js</code>, put
 the password you chose into <code>DATABASE_URL</code>, in place of <code>change-me-now</code>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span>
-</div><div class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:change-me-now@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="3"><span class="l-comment">//                      ^^^^^^^^^^^^^</span>
-</div><div class="l-line" data-line="4"><span class="l-comment">//                       change this</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span></span>
+<span class="l-line" data-line="2">  <span class="l-string">&#39;postgresql://guessit:change-me-now@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3"><span class="l-comment">//                      ^^^^^^^^^^^^^</span></span>
+<span class="l-line" data-line="4"><span class="l-comment">//                       change this</span></span></code></pre>
 <p>If you run PostgreSQL with Docker Desktop, also replace the port <code>5432</code> with
 <code>5434</code>, the host port of your container:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my-password@localhost:5434/guessit&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span> <span class="l-string">&#39;postgresql://guessit:my-password@localhost:5434/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <p>If the application is still running from the <a href="/2026/course/204-hello-github/#everyone-run-the-application">optional step of Hello
 GitHub</a>, it has restarted by itself when you saved <code>server.js</code>.
 Otherwise, install its dependencies, and start it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span></code></pre>
 <p>Open <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser and you
 should see the application running with an empty leaderboard:</p>
 <p><img src="images/guessit-home-214ca13344a822b33d6bfb4ae586ee03.png" alt="Guess It home page" /></p>
@@ -644,13 +628,10 @@ member implements two.</p>
 your SQL, and use the solution to check it. Or take it as it is, if you prefer:
 this exercise is about working together with Git, not about SQL. Either way, the
 commit is yours.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The leaderboard query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">leaderboardQuery</span> <span class="l-operator">=</span>
-</div><div class="l-line" data-line="2">  <span class="l-string">&#39;SELECT name, attempts, found_at FROM game WHERE found_at IS NOT NULL ORDER BY attempts ASC, found_at ASC LIMIT 10&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The guess query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">updateQuery</span> <span class="l-operator">=</span> <span class="l-string">`UPDATE game SET attempts = attempts + 1, found_at = CASE WHEN secret = ${<span class="l-variable">guess</span><span class="l-punctuation-special">}</span> THEN NOW() ELSE found_at END WHERE id = &#39;${<span class="l-variable">game</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">id</span><span class="l-punctuation-special">}</span>&#39;`</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre></div></div>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The give-up query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">deleteQuery</span> <span class="l-operator">=</span> <span class="l-string">`DELETE FROM game WHERE id = &#39;${<span class="l-variable">game</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">id</span><span class="l-punctuation-special">}</span>&#39;`</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The leaderboard query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">leaderboardQuery</span> <span class="l-operator">=</span></span>
+<span class="l-line" data-line="2">  <span class="l-string">&#39;SELECT name, attempts, found_at FROM game WHERE found_at IS NOT NULL ORDER BY attempts ASC, found_at ASC LIMIT 10&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The guess query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">updateQuery</span> <span class="l-operator">=</span> <span class="l-string">`UPDATE game SET attempts = attempts + 1, found_at = CASE WHEN secret = <span class="l-punctuation-special">${</span><span class="l-variable">guess</span><span class="l-punctuation-special">}</span> THEN NOW() ELSE found_at END WHERE id = &#39;<span class="l-punctuation-special">${</span><span class="l-variable">game</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">id</span><span class="l-punctuation-special">}</span>&#39;`</span><span class="l-punctuation-delimiter">;</span></span></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>The give-up query</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-variable">deleteQuery</span> <span class="l-operator">=</span> <span class="l-string">`DELETE FROM game WHERE id = &#39;<span class="l-punctuation-special">${</span><span class="l-variable">game</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">id</span><span class="l-punctuation-special">}</span>&#39;`</span><span class="l-punctuation-delimiter">;</span></span></code></pre></div></div>
 <p>Check that your query works in your browser, then commit it and push it to the
 group’s repository. Pull the others’ work as they push theirs.</p>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>By the next session, your group’s repository on GitHub must hold a working
@@ -737,13 +718,11 @@ GitHub</a>.</p>
 <h3 id="libatomicso1-cannot-open-shared-object-file"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>libatomic.so.1: cannot open shared object file</code><a href="#libatomicso1-cannot-open-shared-object-file" aria-label="Link to heading 'libatomic.so.1: cannot open shared object file'" data-heading-content="libatomic.so.1: cannot open shared object file" class="anchor"></a></h3>
 <p>In the WSL, <code>node</code> fails right after you <a href="#install-nodejs">install it</a>, for
 example with nvm as its download page suggests:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">node:</span> <span class="l-variable-parameter">error</span> <span class="l-variable-parameter">while</span> <span class="l-variable-parameter">loading</span> <span class="l-variable-parameter">shared</span> <span class="l-variable-parameter">libraries:</span> <span class="l-variable-parameter">libatomic.so.1:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">shared</span> <span class="l-variable-parameter">object</span> <span class="l-variable-parameter">file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">node:</span> <span class="l-variable-parameter">error</span> <span class="l-variable-parameter">while</span> <span class="l-variable-parameter">loading</span> <span class="l-variable-parameter">shared</span> <span class="l-variable-parameter">libraries:</span> <span class="l-variable-parameter">libatomic.so.1:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">shared</span> <span class="l-variable-parameter">object</span> <span class="l-variable-parameter">file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span></span></code></pre>
 <p>Node.js needs the <code>libatomic1</code> library, which some WSL installations of Ubuntu
 do not have. Install it, then run <code>node --version</code> again:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">libatomic1</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">-y</span> <span class="l-variable-parameter">libatomic1</span></span></code></pre>
 <h3 id="password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code><a href="#password-authentication-failed-for-user-guessit" aria-label="Link to heading 'password authentication failed for user &quot;guessit&quot;'" data-heading-content="password authentication failed for user &quot;guessit&quot;" class="anchor"></a></h3>
 <p>The password in the <code>DATABASE_URL</code> at the top of <code>server.js</code> is not the one you
 set in <code>schema.sql</code> when you created the database. Put the same password in
@@ -757,14 +736,13 @@ the user still has the password of the first run, even if you have changed it in
 <code>schema.sql</code> since.</p>
 <p>Give the user the password of your <code>DATABASE_URL</code> with your <a href="#connect-as-a-superuser">superuser
 command</a>, for example:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># installed with apt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-comment"># Postgres.app, or Homebrew</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">postgres</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># installed with apt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">-u</span> <span class="l-variable-parameter">postgres</span> <span class="l-variable-parameter">psql</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-comment"># Postgres.app, or Homebrew</span></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">psql</span> <span class="l-function-call">postgres</span> <span class="l-variable-parameter">-c</span> <span class="l-string">&quot;ALTER USER guessit WITH PASSWORD &#39;my-new-password&#39;;&quot;</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">ALTER</span> <span class="l-variable-parameter">ROLE</span></span></code></pre>
 <h3 id="connect-econnrefused"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>connect ECONNREFUSED</code><a href="#connect-econnrefused" aria-label="Link to heading 'connect ECONNREFUSED'" data-heading-content="connect ECONNREFUSED" class="anchor"></a></h3>
 <p>The home page says that the leaderboard could not be loaded, and the terminal
 where the application runs shows <code>ECONNREFUSED</code> in the error below
@@ -804,9 +782,10 @@ again.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -883,29 +862,31 @@ again.</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-205-guessit-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-205-guessit-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/205-guessit/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1187,7 +1168,7 @@ again.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1591,7 +1572,7 @@ again.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

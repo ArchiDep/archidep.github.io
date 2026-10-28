@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/408-unix-processes/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/408-unix-processes/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -341,14 +341,13 @@ output, and how they can be chained together.</p></div>
 executed</strong>.</p>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>This is a C <strong>program</strong>. A program is a passive collection of <strong>instructions
 stored on disk</strong>:</p>
-<pre class="lumis"><code class="language-c" translate="no" tabindex="0"><div class="l-line" data-line="1"> <span class="l-keyword-import">#include</span> <span class="l-string">&lt;stdio.h&gt;</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-type-builtin">int</span> <span class="l-function">main</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="5">   <span class="l-function-call">printf</span><span class="l-punctuation-bracket">(</span><span class="l-string">&quot;Hello, World!&quot;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="6">   <span class="l-keyword-return">return</span> <span class="l-number">0</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span>
-</div></code></pre></div><div><p>A <strong>process</strong> is the actual <strong>execution of a program</strong> that has been loaded into
+<pre class="lumis"><code class="language-c" translate="no" tabindex="0"><span class="l-line" data-line="1"> <span class="l-keyword-import">#include</span> <span class="l-string">&lt;stdio.h&gt;</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-type-builtin">int</span> <span class="l-function">main</span><span class="l-punctuation-bracket">()</span></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="5">   <span class="l-function-call">printf</span><span class="l-punctuation-bracket">(</span><span class="l-string">&quot;Hello, World!&quot;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="6">   <span class="l-keyword-return">return</span> <span class="l-number">0</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span></span></code></pre></div><div><p>A <strong>process</strong> is the actual <strong>execution of a program</strong> that has been loaded into
 memory:</p>
 <div class='flex items-center gap-4'>
   <img class='w-1/2' src='images/cpu-096f388ceae6ad54fd1beba4fc8a5aa0.png' />
@@ -429,19 +428,17 @@ The ID of the parent process is commonly called <strong>PPID (parent process ID)
 </div>
 <h3 id="the-ps-command">The <code>ps</code> command<a href="#the-ps-command" aria-label="Link to heading 'The ps command'" data-heading-content="The ps command" class="anchor"></a></h3>
 <p>The <code>ps</code> (<strong>p</strong>rocess <strong>s</strong>tatus) command displays currently-running processes:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span>
-</div><div class="l-line" data-line="2">    <span class="l-function-call">PID</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
-</div><div class="l-line" data-line="3">   <span class="l-number">6654</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">bash</span>
-</div><div class="l-line" data-line="4">   <span class="l-number">6675</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span></span>
+<span class="l-line" data-line="2">    <span class="l-function-call">PID</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3">   <span class="l-number">6654</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">bash</span></span>
+<span class="l-line" data-line="4">   <span class="l-number">6675</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>By default, it only lists your user’s processes that have a controlling terminal
 (<code>TTY</code>).</p></div></div>
 <p>You can obtain more information with the <code>-f</code> (<strong>f</strong>ull format) option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">jde</span>         <span class="l-number">6688</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:18</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">jde</span>         <span class="l-number">6688</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:18</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>We are mostly interested in the <strong>P</strong>rocess <strong>ID</strong> (<code>PID</code>), the <strong>p</strong>arent
 <strong>P</strong>rocess <strong>ID</strong> (<code>PPID</code>) and of course the <strong>c</strong>o<strong>m</strong>man<strong>d</strong> (<code>CMD</code>) that
 is being run. But <a href="https://kb.iu.edu/d/afnv" target="_blank" rel="noopener noreferrer">the others</a> also provide useful
@@ -450,24 +447,23 @@ information.</p></div></div>
 <p>Of course, there are more than 2 processes running on your computer. Add the
 <code>-e</code> (<strong>e</strong>very) option to see all running processes. The list will be much
 longer. This is an abbreviated example:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>           <span class="l-number">1</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:30</span> <span class="l-variable-parameter">/sbin/init</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">root</span>           <span class="l-number">2</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">kthreadd</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">root</span>         <span class="l-number">402</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/lib/systemd/systemd-journald</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">syslog</span>       <span class="l-number">912</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/sbin/rsyslogd</span> <span class="l-variable-parameter">-n</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">root</span>        <span class="l-number">1006</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/sbin/cron</span> <span class="l-variable-parameter">-f</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span>
-</div><div class="l-line" data-line="13"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="14"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="15"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span>
-</div><div class="l-line" data-line="16"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="17"><span class="l-function-call">jde</span>         <span class="l-number">6702</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:19</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">root</span>           <span class="l-number">1</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:30</span> <span class="l-variable-parameter">/sbin/init</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">root</span>           <span class="l-number">2</span>       <span class="l-number">0</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">[kthreadd]</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">root</span>         <span class="l-number">402</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/lib/systemd/systemd-journald</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">syslog</span>       <span class="l-number">912</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/sbin/rsyslogd</span> <span class="l-variable-parameter">-n</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">root</span>        <span class="l-number">1006</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:30</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">/usr/sbin/cron</span> <span class="l-variable-parameter">-f</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[listener]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span></span>
+<span class="l-line" data-line="13"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="14"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="15"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span></span>
+<span class="l-line" data-line="16"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="17"><span class="l-function-call">jde</span>         <span class="l-number">6702</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:19</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Note that the command you just ran, <code>ps -ef</code>, is in the process list (at the
 bottom in this example). This is because it was running while it was listing the
 other processes.</p></div></div>
@@ -475,17 +471,16 @@ other processes.</p></div></div>
 <p>On some Linux distributions like Ubuntu, the <code>ps</code> command also accepts a
 <code>--forest</code> option which visually shows the relationship between processes and
 their parent:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>          <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">jde</span>         <span class="l-number">6731</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:20</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>              <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span> <span class="l-variable-parameter">--forest</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[listener]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>          <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">jde</span>         <span class="l-number">6731</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:20</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>              <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span> <span class="l-variable-parameter">--forest</span></span></code></pre>
 <p>You can clearly see that:</p>
 <ul>
 <li>Process 888, the SSH server (the <code>d</code> in <code>sshd</code> is for <a href="https://en.wikipedia.org/wiki/Daemon_(computing)" target="_blank" rel="noopener noreferrer">daemon</a>), was
@@ -510,37 +505,34 @@ course’s website, which stays connected to your server to check on it.
 <p>If you go back to the first terminal and run the <code>ps</code> command again, you should
 see two SSH sessions of yours, one for each terminal, as well as the two Bash
 shells running within them:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>       <span class="l-function-call">\_</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">jde</span>         <span class="l-number">8747</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:44</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>           <span class="l-function-call">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span> <span class="l-variable-parameter">--forest</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">root</span>        <span class="l-number">8063</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">jde</span>         <span class="l-number">8203</span>    <span class="l-number">8063</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">jde</span>         <span class="l-number">8204</span>    <span class="l-number">8203</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>          <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[listener]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>   <span class="l-function-call">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>       <span class="l-function-call">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">jde</span>         <span class="l-number">8747</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:44</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-operator">|</span>           <span class="l-function-call">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-ef</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">root</span>        <span class="l-number">8063</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">jde</span>         <span class="l-number">8203</span>    <span class="l-number">8063</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">jde</span>         <span class="l-number">8204</span>    <span class="l-number">8203</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>          <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span></span></code></pre>
 <h4 id="sleeping-process">Sleeping process<a href="#sleeping-process" aria-label="Link to heading 'Sleeping process'" data-heading-content="Sleeping process" class="anchor"></a></h4>
 <p>Run a <a href="https://linux.die.net/man/1/sleep" target="_blank" rel="noopener noreferrer"><code>sleep</code> command</a> in the second terminal:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">1000</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">1000</span></span></code></pre>
 <p>It launches a process that does nothing for 1000 seconds, but keeps running.</p>
 <p>It will block your terminal during that time, so go back to the other terminal
 and run the following <code>ps</code> command, with an additional <code>-u jde</code> option to filter
 only processes belonging to your <strong>u</strong>ser:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">--forest</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">jde</span>         <span class="l-number">8203</span>    <span class="l-number">8063</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">jde</span>         <span class="l-number">8204</span>    <span class="l-number">8203</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">jde</span>         <span class="l-number">8900</span>    <span class="l-number">8204</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:48</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sleep</span> <span class="l-number">1000</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">8907</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:48</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">--forest</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">UID</span>          <span class="l-variable-parameter">PID</span>    <span class="l-variable-parameter">PPID</span>  <span class="l-variable-parameter">C</span> <span class="l-variable-parameter">STIME</span> <span class="l-variable-parameter">TTY</span>          <span class="l-variable-parameter">TIME</span> <span class="l-variable-parameter">CMD</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">jde</span>         <span class="l-number">8203</span>    <span class="l-number">8063</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/1</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">jde</span>         <span class="l-number">8204</span>    <span class="l-number">8203</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:18</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">jde</span>         <span class="l-number">8900</span>    <span class="l-number">8204</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:48</span> <span class="l-variable-parameter">pts/1</span>    <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">sleep</span> <span class="l-number">1000</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">6654</span>    <span class="l-number">6653</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>  <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">-bash</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">jde</span>         <span class="l-number">8907</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">19:48</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span>      <span class="l-variable-parameter">\_</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">--forest</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">...</span></span></code></pre>
 <p>You can indeed see the running process started with the <code>sleep</code> command. It ends
 on its own once its 1000 seconds have passed, or you can stop it with <code>Ctrl+C</code>
 in the second terminal.</p>
@@ -554,11 +546,10 @@ consumption. It’s an interactive command you can exit with <code>q</code> (<st
 <li>The <a href="https://www.howtoforge.com/linux-free-command/" target="_blank" rel="noopener noreferrer"><code>free</code> command</a> is not directly related to processes,
 but it helps you know how much memory is remaining on your system.</li>
 </ul>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-m</span>
-</div><div class="l-line" data-line="2">              <span class="l-function-call">total</span>        <span class="l-variable-parameter">used</span>        <span class="l-variable-parameter">free</span>      <span class="l-variable-parameter">shared</span>  <span class="l-variable-parameter">buff/cache</span>   <span class="l-variable-parameter">available</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Mem:</span>            <span class="l-number">985</span>          <span class="l-number">90</span>         <span class="l-number">534</span>           <span class="l-number">0</span>         <span class="l-number">359</span>         <span class="l-number">751</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Swap:</span>             <span class="l-number">0</span>           <span class="l-number">0</span>           <span class="l-number">0</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">free</span> <span class="l-function-call">-m</span></span>
+<span class="l-line" data-line="2">              <span class="l-function-call">total</span>        <span class="l-variable-parameter">used</span>        <span class="l-variable-parameter">free</span>      <span class="l-variable-parameter">shared</span>  <span class="l-variable-parameter">buff/cache</span>   <span class="l-variable-parameter">available</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Mem:</span>            <span class="l-number">985</span>          <span class="l-number">90</span>         <span class="l-number">534</span>           <span class="l-number">0</span>         <span class="l-number">359</span>         <span class="l-number">751</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Swap:</span>             <span class="l-number">0</span>           <span class="l-number">0</span>           <span class="l-number">0</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-m</code> option of the <code>free</code> command displays memory size in
 <a href="https://simple.wikipedia.org/wiki/Mebibyte" target="_blank" rel="noopener noreferrer">mebibytes</a>, a more human-readable quantity, instead of bytes.</p></div></div>
 <h2 id="exit-status">Exit status<a href="#exit-status" aria-label="Link to heading 'Exit status'" data-heading-content="Exit status" class="anchor"></a></h2>
@@ -577,18 +568,17 @@ also called an <em>error level</em>).</p>
 <h3 id="retrieving-the-exit-status-in-a-shell">Retrieving the exit status in a shell<a href="#retrieving-the-exit-status-in-a-shell" aria-label="Link to heading 'Retrieving the exit status in a shell'" data-heading-content="Retrieving the exit status in a shell" class="anchor"></a></h3>
 <p>In a typical shell like <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>, you can retrieve the exit status of last
 executed command from the special variable <code>$?</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
-</div><div class="l-line" data-line="5"><span class="l-number">0</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">file-that-does-not-exist</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-string">&#39;file-that-does-not-exist&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span>
-</div><div class="l-line" data-line="11"><span class="l-number">2</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="5"><span class="l-number">0</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">file-that-does-not-exist</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-string">&#39;file-that-does-not-exist&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="11"><span class="l-number">2</span></span></code></pre>
 <h3 id="retrieving-the-exit-status-in-code">Retrieving the exit status in code<a href="#retrieving-the-exit-status-in-code" aria-label="Link to heading 'Retrieving the exit status in code'" data-heading-content="Retrieving the exit status in code" class="anchor"></a></h3>
 <p>Exit codes are not a feature that is limited to command line use. When running a
 program from an application, you can also obtain the exit status.</p>
@@ -604,11 +594,10 @@ function</a></li>
 <h3 id="meaning-of-exit-statuses">Meaning of exit statuses<a href="#meaning-of-exit-statuses" aria-label="Link to heading 'Meaning of exit statuses'" data-heading-content="Meaning of exit statuses" class="anchor"></a></h3>
 <p>The meaning of exit statuses is unique to the program you are running. For
 example, the manual of the <code>ls</code> command documents the following values:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">Exit</span> <span class="l-variable-parameter">status:</span>
-</div><div class="l-line" data-line="2">  <span class="l-number">0</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">OK,</span>
-</div><div class="l-line" data-line="3">  <span class="l-number">1</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">minor</span> <span class="l-variable-parameter">problems</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">e.g.,</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-variable-parameter">subdirectory</span><span class="l-punctuation-bracket">)</span>,
-</div><div class="l-line" data-line="4">  <span class="l-number">2</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">serious</span> <span class="l-variable-parameter">trouble</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">e.g.,</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-variable-parameter">command-line</span> <span class="l-variable-parameter">argument</span><span class="l-punctuation-bracket">)</span>.
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Exit</span> <span class="l-variable-parameter">status:</span></span>
+<span class="l-line" data-line="2">  <span class="l-number">0</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">OK,</span></span>
+<span class="l-line" data-line="3">  <span class="l-number">1</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">minor</span> <span class="l-variable-parameter">problems</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">e.g.,</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-variable-parameter">subdirectory</span><span class="l-punctuation-bracket">)</span>,</span>
+<span class="l-line" data-line="4">  <span class="l-number">2</span>      <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">serious</span> <span class="l-variable-parameter">trouble</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">e.g.,</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">access</span> <span class="l-variable-parameter">command-line</span> <span class="l-variable-parameter">argument</span><span class="l-punctuation-bracket">)</span>.</span></code></pre>
 <p>But this will be different for other programs or applications.</p>
 <p>The only thing you can rely on for the majority of programs is that <strong>0 is good,
 anything else is probably bad</strong>.</p>
@@ -685,7 +674,7 @@ input.</p>
 <!-- Generated from diagrams/408-streams.svg and 408-streams.ts by "npm run diagrams": edit those instead. -->
 <div class="diagram-figure" data-diagram="408-streams">
 <div class="diagram-canvas">
-<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 670" role="img" aria-labelledby="diagram-408-streams-title">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 670" role="img" aria-labelledby="diagram-408-streams-title" data-diagram="408-streams">
 <title id="diagram-408-streams-title">What you type and what a command prints, through an SSH connection</title>
 <style id="diagram-408-streams-diagram-styles">
 svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
@@ -756,6 +745,11 @@ display: none;
 }
 .diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
 display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
 }
 /* A short-lived process, and the control edge that started it, only while
 their step is the current one. */
@@ -848,6 +842,13 @@ svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
 animation: none;
 opacity: 0;
 }
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
 /* --- Torn down ----------------------------------------------------------- */
 /* Gone from a step on, such as a session closing; the fully drawn diagram still
 shows it. The motion script sets `gone`. */
@@ -874,6 +875,12 @@ animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
 /* A control edge appears, then the process it starts. */
 svg.diagram .fade-on.visible {
 animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
 }
 /* The cursor types, then disappears on Enter. */
 svg.diagram :is(.spawn, .input).visible .prompt .cursor {
@@ -1123,6 +1130,24 @@ display: none;
 .diagram-figure.in-deck svg.diagram {
 max-height: 520px;
 }
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
 /* A page stepping through the diagram does what reveal.js does in a deck:
 hides the steps not reached yet. The captions say what the legend would. */
 .diagram-figure.stepping svg.diagram .fragment {
@@ -1155,6 +1180,14 @@ border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 border-radius: 6px;
 padding: 0.2em 0.75em;
 cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
 }
 .diagram-figure .diagram-controls button:disabled {
 opacity: 0.4;
@@ -1273,7 +1306,7 @@ break-inside: avoid;
 </g>
 <g class="overlay packet fragment whole" data-fragment-index="0"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">l</text></g></g><g class="overlay packet fragment whole" data-fragment-index="1"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">s</text></g></g><g class="overlay packet fragment whole" data-fragment-index="2"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 0%; --to: 100%"><path d="M-15,-12 H5 L15,0 L5,12 H-15 Z"/><text x="-5" y="5">⏎</text></g></g><g class="overlay packet fragment whole" data-fragment-index="4"><g class="leg" style="offset-path: path('M490,209 H560 C640,209 640,209 760,209'); --from: 100%; --to: 0%"><path d="M-35,-12 H25 L35,0 L25,12 H-35 Z" transform="scale(-1,1)"/><text x="5" y="5">output</text></g></g></svg>
 </div>
-<template class="diagram-captions"><p data-caption="rest">The SSH client inherited the standard streams of your shell: it reads what you type, and writes to your terminal. On the server, the shell and the commands it starts read from and write to the SSH session.</p><p data-caption="0">You are connected to a server over SSH. Your shell started the SSH client, and on the server, the SSH session started a shell. The connection is open, waiting for you to type.</p><p data-caption="1">You type <code>l</code>. It goes to the standard input of the SSH client, which it inherited from your shell. The client sends it over the connection, and on the server, the session hands it to the standard input of the shell.</p><p data-caption="2">You type <code>s</code>: it travels the same way.</p><p data-caption="3">You press Enter, which travels too. Once it has arrived, the server’s shell starts <code>ls</code>, which inherits the shell’s standard streams.</p><p data-caption="4"><code>ls</code> lists the files of the current directory on the server, and writes them to its standard output. It does not know where that goes.</p><p data-caption="5">Its output goes to the SSH session, back over the connection, and out of the standard output of the SSH client: your terminal displays it.</p></template>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, the SSH client inherited the standard streams of your shell: it reads what you type, and writes to your terminal. On the server, the shell and the commands it starts read from and write to the SSH session.</p><p data-caption="0">You are connected to a server over SSH. Your shell started the SSH client, and on the server, the SSH session started a shell. The connection is open, waiting for you to type.</p><p data-caption="1">You type <code>l</code>. It goes to the standard input of the SSH client, which it inherited from your shell. The client sends it over the connection, and on the server, the session hands it to the standard input of the shell.</p><p data-caption="2">You type <code>s</code>: it travels the same way.</p><p data-caption="3">You press Enter, which travels too. Once it has arrived, the server’s shell starts <code>ls</code>, which inherits the shell’s standard streams.</p><p data-caption="4"><code>ls</code> lists the files of the current directory on the server, and writes them to its standard output. It does not know where that goes.</p><p data-caption="5">Its output goes to the SSH session, back over the connection, and out of the standard output of the SSH client: your terminal displays it.</p></template>
 </div>
 <h4 id="optional-input-stream">Optional input stream<a href="#optional-input-stream" aria-label="Link to heading 'Optional input stream'" data-heading-content="Optional input stream" class="anchor"></a></h4>
 <p>A process is not obligated to use its input or output streams. For example,
@@ -1286,14 +1319,12 @@ has arguments, but that does not come from the input data stream).</p>
 <p>Similarly, a process is not obligated to use its output streams. For example,
 when you <code>cat</code> a file, it outputs the content of the file to the standard output
 stream, but it does not use the standard error stream:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <p>Unless the file does not exist, in which case it will output an error message to
 the standard error stream, and nothing to the standard output stream.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">unknown-file</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">cat:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">unknown-file</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">cat:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span></span></code></pre>
 <h3 id="stream-redirection">Stream redirection<a href="#stream-redirection" aria-label="Link to heading 'Stream redirection'" data-heading-content="Stream redirection" class="anchor"></a></h3>
 <p>The standard streams can be <strong>redirected</strong>.</p>
 <p>Redirection means capturing output from a file or command,
@@ -1329,61 +1360,55 @@ indicator used to access a file or other input/output resource such as a
 <p>For example, the following line runs the <code>ls</code> command, but instead of displaying
 the result in the terminal, the <strong>standard output stream (file descriptor <code>1</code>)
 is redirected</strong> to the file <code>data.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">data.txt</span>  <span class="l-variable-parameter">directory1</span>  <span class="l-variable-parameter">file1</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="7"><span class="l-function-builtin">.</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">..</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">directory1</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">file1</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-operator">1&gt;</span> <span class="l-string-special-path">data.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">data.txt</span>  <span class="l-variable-parameter">directory1</span>  <span class="l-variable-parameter">file1</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="7"><span class="l-function-builtin">.</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">..</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">directory1</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">file1</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>data.txt</code> is in its own list: the shell creates the file before it starts
 <code>ls</code>, so that it can connect the standard output of <code>ls</code> to it.</p></div></div>
 <h4 id="how-to-use-standard-output-redirection">How to use standard output redirection<a href="#how-to-use-standard-output-redirection" aria-label="Link to heading 'How to use standard output redirection'" data-heading-content="How to use standard output redirection" class="anchor"></a></h4>
 <p>You can do the same with any command that produces output:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Hello</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">1&gt;</span> <span class="l-string-special-path">data.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Hello</span></span></code></pre>
 <p>Note that the <code>&gt;</code> operator <strong>overwrites the file</strong>. Use <code>&gt;&gt;</code> instead to <strong>append
 to the end of the file</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">1</span><span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">data.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Hello</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">1&gt;&gt;</span> <span class="l-string-special-path">data.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Hello</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">World</span></span></code></pre>
 <p>If you specify no file descriptor, <strong>standard output (<code>1</code>) is redirected by
 default</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Again</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">data.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Hello</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Again</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">data.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Again</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">data.txt</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">data.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Hello</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Again</span></span></code></pre>
 <h3 id="redirect-standard-error-stream">Redirect standard error stream<a href="#redirect-standard-error-stream" aria-label="Link to heading 'Redirect standard error stream'" data-heading-content="Redirect standard error stream" class="anchor"></a></h3>
 <p>Note that error messages are not redirected using the redirect operator (<code>&gt;</code>)
 like in the previous example. Errors are still displayed in the terminal and the
 file remains empty:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">unknown-file</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">error.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">error.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">unknown-file</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">error.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">error.txt</span></span></code></pre>
 <p>This is because <strong>most commands send errors to the standard error stream (file
 descriptor <code>2</code>)</strong> instead of the standard output stream.</p>
 <p>If you want to redirect the error message to a file, you must <strong>redirect the
 standard error stream instead</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">unknown-file</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">error.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">error.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">unknown-file</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">error.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">error.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">unknown-file:</span> <span class="l-variable-parameter">No</span> <span class="l-variable-parameter">such</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">directory</span></span></code></pre>
 <h3 id="both-standard-output-and-error-streams">Both standard output and error streams<a href="#both-standard-output-and-error-streams" aria-label="Link to heading 'Both standard output and error streams'" data-heading-content="Both standard output and error streams" class="anchor"></a></h3>
 <p>Some commands will <strong>send data to both output streams</strong> (standard output and
 standard error) in the same run. As we’ve seen, both are displayed in the
@@ -1395,90 +1420,85 @@ word <code>PasswordAuthentication</code>. Run as a regular user, it prints the l
 finds to the standard output stream, and an error to the standard error stream
 for each file it is not allowed to read, such as the server’s private SSH keys,
 which only <code>root</code> may read:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
 <p>Here, the lines starting with <code>/etc/ssh/</code> are the output data, while the lines
 starting with <code>grep:</code> are error messages on the standard error stream.</p>
 <h4 id="redirect-standard-output-stream-grep">Redirect standard output stream (grep)<a href="#redirect-standard-output-stream-grep" aria-label="Link to heading 'Redirect standard output stream (grep)'" data-heading-content="Redirect standard output stream (grep)" class="anchor"></a></h4>
 <p>This example demonstrates how the <strong>standard output and error streams</strong> can be
 <strong>redirected separately</strong>.</p>
 <p>The following version redirects standard output to the file <code>found.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
 <p>As you can see, the lines that were found are no longer displayed since they
 have been redirected to the file, but the error messages printed on the
 standard error stream are still displayed.</p>
 <h4 id="redirect-standard-error-stream-grep">Redirect standard error stream (grep)<a href="#redirect-standard-error-stream-grep" aria-label="Link to heading 'Redirect standard error stream (grep)'" data-heading-content="Redirect standard error stream (grep)" class="anchor"></a></h4>
 <p>The following version redirects standard error to the file <code>errors.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">errors.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">errors.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span></code></pre>
 <p>This time, the lines that were found are displayed in the terminal as with the
 initial command, but the error messages have been redirected to the file.</p>
 <h4 id="redirect-both-standard-output-and-error-streams-grep">Redirect both standard output and error streams (grep)<a href="#redirect-both-standard-output-and-error-streams-grep" aria-label="Link to heading 'Redirect both standard output and error streams (grep)'" data-heading-content="Redirect both standard output and error streams (grep)" class="anchor"></a></h4>
 <p>You can <strong>perform both redirections at once</strong> in one command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">1</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">errors.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="13"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="14"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">1&gt;</span> <span class="l-string-special-path">found.txt</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">errors.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="8"></span>
+<span class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="13"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="14"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
 <h4 id="combine-standard-output-and-error-streams-grep">Combine standard output and error streams (grep)<a href="#combine-standard-output-and-error-streams-grep" aria-label="Link to heading 'Combine standard output and error streams (grep)'" data-heading-content="Combine standard output and error streams (grep)" class="anchor"></a></h4>
 <p>In some situations, you might want to <strong>redirect all of a command’s output</strong>
 (both the standard output stream and error stream) to the same file.</p>
 <p>You can do that with the <code>&amp;&gt;</code> operator:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">all.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">all.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">all.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">all.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>&amp;&gt; file.txt</code> is equivalent to using both <code>1&gt; file.txt</code> and <code>2&gt; file.txt</code>.</p></div></div>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The lines are not in the same order as in the terminal. When its standard output
 is a file, <code>grep</code> collects the lines it finds and writes them in one go, while
@@ -1487,12 +1507,10 @@ it writes each error as soon as it happens.</p></div></div>
 <p>Just as a command’s output can be redirected to a file, its <strong>input can be
 redirected from a file</strong>.</p>
 <p>Let’s create a file for this example:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt</span></span></code></pre>
 <p>The <code>gzip</code> command <strong>reads data from its standard input stream</strong>, and with the
 <code>--stdout</code> option outputs the result to its standard output stream:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">gzip</span> <span class="l-variable-parameter">--stdout</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">bar.txt</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt.gz</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">gzip</span> <span class="l-variable-parameter">--stdout</span> <span class="l-operator">&lt;</span> <span class="l-string-special-path">bar.txt</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt.gz</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The above command combines two redirections to compress the contents of the
 <code>bar.txt</code> file and save the result into <code>bar.txt.gz</code>.</p></div></div>
 <h2 id="pipelines">Pipelines<a href="#pipelines" aria-label="Link to heading 'Pipelines'" data-heading-content="Pipelines" class="anchor"></a></h2>
@@ -1526,8 +1544,7 @@ as input:</p>
 <code>-l</code> option), characters or bytes in its input.</li>
 </ul>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p>You can pipe them together like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-number">-1</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-number">-1</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span></code></pre>
 <p>This <strong>redirects (pipes) the output of the <code>ls</code> command into the input of the
 <code>wc</code> command</strong>, which will tell us how many files there are in the listed
 directory.</p></div><div><div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
@@ -1537,14 +1554,13 @@ directory.</p></div><div><div class="w-full p-4 rounded-2xl flex justify-center 
 <code>ps -ef</code> command lists every process running on the system, and the <code>grep</code>
 command keeps only the lines of its input that contain a word. Together, they
 find the processes of the SSH server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">sshd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">listener</span><span class="l-variable-parameter">]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">priv</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">7379</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:47</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">grep</span> <span class="l-variable-parameter">--color=auto</span> <span class="l-variable-parameter">sshd</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">sshd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">root</span>         <span class="l-number">888</span>       <span class="l-number">1</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd:</span> <span class="l-variable-parameter">/usr/sbin/sshd</span> <span class="l-variable-parameter">-D</span> <span class="l-variable-parameter">[listener]</span> <span class="l-number">0</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">10-100</span> <span class="l-variable-parameter">startups</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">root</span>         <span class="l-number">952</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">archidep</span>    <span class="l-number">1211</span>     <span class="l-number">952</span>  <span class="l-number">0</span> <span class="l-variable-parameter">17:31</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">archidep@notty</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">root</span>        <span class="l-number">6596</span>     <span class="l-number">888</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">[priv]</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">jde</span>         <span class="l-number">6653</span>    <span class="l-number">6596</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:17</span> <span class="l-variable-parameter">?</span>        <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">sshd-session:</span> <span class="l-variable-parameter">jde@pts/0</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">jde</span>         <span class="l-number">7379</span>    <span class="l-number">6654</span>  <span class="l-number">0</span> <span class="l-variable-parameter">18:47</span> <span class="l-variable-parameter">pts/0</span>    <span class="l-variable-parameter">00:00:00</span> <span class="l-variable-parameter">grep</span> <span class="l-variable-parameter">--color=auto</span> <span class="l-variable-parameter">sshd</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The last line is <code>grep</code> itself. Both commands of a pipeline run at the same
 time, so <code>grep</code> was running while <code>ps</code> listed the processes, with <code>sshd</code> in its
 command line.</p></div></div>
@@ -1569,20 +1585,19 @@ For example, the <a href="https://en.wikipedia.org/wiki/ImageMagick" target="_bl
 <p>This command pipeline combines five different commands, processing the text data
 at each step and passing it along to the next command to arrive at the final
 result. <strong>Each of these commands only knows how to do one job</strong>:</p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-type</span> <span class="l-variable-parameter">f</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="2">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\///&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="3">   <span class="l-function-call">grep</span> <span class="l-variable-parameter">-E</span> <span class="l-string">&quot;.+\.[^\.]+$&quot;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="4">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\.//&#39;</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="5">   <span class="l-function-call">sort</span> <span class="l-operator">|</span> \
-</div><div class="l-line" data-line="6">   <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8">  <span class="l-number">147</span> <span class="l-variable-parameter">jpg</span>
-</div><div class="l-line" data-line="9"><span class="l-number">10925</span> <span class="l-variable-parameter">js</span>
-</div><div class="l-line" data-line="10"> <span class="l-number">2158</span> <span class="l-variable-parameter">json</span>
-</div><div class="l-line" data-line="11">   <span class="l-number">15</span> <span class="l-variable-parameter">less</span>
-</div><div class="l-line" data-line="12">   <span class="l-number">45</span> <span class="l-variable-parameter">map</span>
-</div><div class="l-line" data-line="13"> <span class="l-number">1515</span> <span class="l-variable-parameter">md</span>
-</div></code></pre>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-type</span> <span class="l-variable-parameter">f</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="2">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\///&#39;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="3">   <span class="l-function-call">grep</span> <span class="l-variable-parameter">-E</span> <span class="l-string">&quot;.+\.[^\.]+$&quot;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="4">   <span class="l-function-call">sed</span> <span class="l-string">&#39;s/.*\.//&#39;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="5">   <span class="l-function-call">sort</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="6">   <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">  <span class="l-number">147</span> <span class="l-variable-parameter">jpg</span></span>
+<span class="l-line" data-line="9"><span class="l-number">10925</span> <span class="l-variable-parameter">js</span></span>
+<span class="l-line" data-line="10"> <span class="l-number">2158</span> <span class="l-variable-parameter">json</span></span>
+<span class="l-line" data-line="11">   <span class="l-number">15</span> <span class="l-variable-parameter">less</span></span>
+<span class="l-line" data-line="12">   <span class="l-number">45</span> <span class="l-variable-parameter">map</span></span>
+<span class="l-line" data-line="13"> <span class="l-number">1515</span> <span class="l-variable-parameter">md</span></span></code></pre>
 <p>The final result is a list of file extensions and the number of files with that
 extension.</p></div><div><ul>
 <li><code>find</code> is used to recursively list all files in the current directory.</li>
@@ -1616,38 +1631,33 @@ device</strong></a> (sometimes also called a <em>black hole</em>). It’s a <a h
 device file</a> that you can write anything to, but that will discard
 all received data.</p>
 <p>It never contains anything:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span></span></code></pre>
 <p>Even after you write to it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/dev/null</span></span></code></pre>
 <h3 id="redirect-a-stream-to-the-null-device">Redirect a stream to the null device<a href="#redirect-a-stream-to-the-null-device" aria-label="Link to heading 'Redirect a stream to the null device'" data-heading-content="Redirect a stream to the null device" class="anchor"></a></h3>
 <p>When you don’t care about an output stream, you can simply <strong>redirect it to the
 null device</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span></code></pre>
 <p>In this example, the standard output stream is redirected to the null device,
 and therefore discarded, while the standard error stream is displayed normally.</p>
 <h3 id="other-redirections-to-the-null-device">Other redirections to the null device<a href="#other-redirections-to-the-null-device" aria-label="Link to heading 'Other redirections to the null device'" data-heading-content="Other redirections to the null device" class="anchor"></a></h3>
 <p>You can also redirect the standard error stream to the null device, to see only
 the lines that were found:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
 <p>Or you can redirect both output streams. In this case, all output and error
 messages will be discarded:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">/dev/null</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -1665,23 +1675,21 @@ messages will be discarded:</p>
 <h2 id="appendix-redirect-one-output-stream-to-another">Appendix: Redirect one output stream to another<a href="#appendix-redirect-one-output-stream-to-another" aria-label="Link to heading 'Appendix: Redirect one output stream to another'" data-heading-content="Appendix: Redirect one output stream to another" class="anchor"></a></h2>
 <p>You can also redirect one output stream into another output stream.</p>
 <div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>For example, the <code>echo</code> command prints its data to the standard output stream by
-default:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre></div></div>
+default:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre></div></div>
 <p>The <code>i&gt;&amp;j</code> operator redirects file descriptor <code>i</code> to file descriptor <code>j</code>.</p>
-<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>This <code>echo</code> command has its data redirected to the standard error stream:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1</span><span class="l-operator">&gt;&amp;</span><span class="l-number">2</span>
-</div></code></pre></div></div>
+<div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-2"><p>This <code>echo</code> command has its data redirected to the standard error stream:</p></div><div class="md:col-span-3"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">1&gt;&amp;</span><span class="l-number">2</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1&gt;&amp;</span><span class="l-number">2</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">/dev/null</span> <span class="l-operator">1&gt;&amp;</span><span class="l-number">2</span></span></code></pre></div></div>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>This can be useful if you’re writing a shell script and want to print error
 messages to the standard error stream.</p></div></div>
 <h2 id="appendix-here-documents">Appendix: Here documents<a href="#appendix-here-documents" aria-label="Link to heading 'Appendix: Here documents'" data-heading-content="Appendix: Here documents" class="anchor"></a></h2>
@@ -1692,13 +1700,12 @@ whitespace. For example, you could use it to send a list of names or a set of
 commands to be executed to a script.</p>
 <p>Typing the following <code>cat</code> command starts a here document delimited by the
 string <code>EOF</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-operator">&lt;&lt;</span> <span class="l-label">EOF</span>
-</div><div class="l-line" data-line="2"><span class="l-string">&gt; Hello</span>
-</div><div class="l-line" data-line="3"><span class="l-string">&gt; World</span>
-</div><div class="l-line" data-line="4"><span class="l-string">&gt; EOF</span>
-</div><div class="l-line" data-line="5"><span class="l-string">Hello</span>
-</div><div class="l-line" data-line="6"><span class="l-string"></span>World
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-operator">&lt;&lt;</span> <span class="l-label">EOF</span></span>
+<span class="l-line" data-line="2"><span class="l-string">&gt; Hello</span></span>
+<span class="l-line" data-line="3"><span class="l-string">&gt; World</span></span>
+<span class="l-line" data-line="4"><span class="l-string">&gt; EOF</span></span>
+<span class="l-line" data-line="5"><span class="l-string">Hello</span></span>
+<span class="l-line" data-line="6"><span class="l-string">World</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>After you type the first line, you won’t get your usual prompt back, only the
 <code>&gt;</code> prompt of a line still being typed. The here document remains open and you
 can type more text. Typing <code>EOF</code> again and pressing <code>Enter</code>
@@ -1726,9 +1733,10 @@ more features, also written in <a href="https://www.rust-lang.org" target="_blan
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -1897,33 +1905,35 @@ more features, also written in <a href="https://www.rust-lang.org" target="_blan
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-408-unix-processes-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/408-unix-processes/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/408-unix-processes/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -2205,7 +2215,7 @@ more features, also written in <a href="https://www.rust-lang.org" target="_blan
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -2609,7 +2619,7 @@ more features, also written in <a href="https://www.rust-lang.org" target="_blan
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

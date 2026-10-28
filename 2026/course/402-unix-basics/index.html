@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/402-unix-basics/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/402-unix-basics/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -363,15 +363,14 @@ the volume’s file system tree to appear as that directory in the larger tree.<
 <p>The <code>df</code> (<strong>d</strong>isk <strong>f</strong>ree) shows you all volumes and the available space on
 each of them (the <code>-h</code> option displays size in a human-readable format instead
 of the raw number of bytes):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Filesystem</span>      <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">tmpfs</span>            <span class="l-variable-parameter">99M</span>  <span class="l-variable-parameter">608K</span>   <span class="l-variable-parameter">98M</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/run</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">/dev/sda1</span>       <span class="l-variable-parameter">9.7G</span>  <span class="l-variable-parameter">1.4G</span>  <span class="l-variable-parameter">8.3G</span>  <span class="l-variable-parameter">15%</span> <span class="l-variable-parameter">/</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev/shm</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">5.0M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">5.0M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/run/lock</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/sys/fs/cgroup</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">/dev/sdb1</span>        <span class="l-variable-parameter">50G</span>   <span class="l-variable-parameter">19G</span>   <span class="l-variable-parameter">28G</span>  <span class="l-variable-parameter">41%</span> <span class="l-variable-parameter">/mnt/network-drive</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">df</span> <span class="l-function-call">-h</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Filesystem</span>      <span class="l-variable-parameter">Size</span>  <span class="l-variable-parameter">Used</span> <span class="l-variable-parameter">Avail</span> <span class="l-variable-parameter">Use%</span> <span class="l-variable-parameter">Mounted</span> <span class="l-variable-parameter">on</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">tmpfs</span>            <span class="l-variable-parameter">99M</span>  <span class="l-variable-parameter">608K</span>   <span class="l-variable-parameter">98M</span>   <span class="l-variable-parameter">1%</span> <span class="l-variable-parameter">/run</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/dev/sda1</span>       <span class="l-variable-parameter">9.7G</span>  <span class="l-variable-parameter">1.4G</span>  <span class="l-variable-parameter">8.3G</span>  <span class="l-variable-parameter">15%</span> <span class="l-variable-parameter">/</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/dev/shm</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">5.0M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">5.0M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/run/lock</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">tmpfs</span>           <span class="l-variable-parameter">493M</span>     <span class="l-number">0</span>  <span class="l-variable-parameter">493M</span>   <span class="l-variable-parameter">0%</span> <span class="l-variable-parameter">/sys/fs/cgroup</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/dev/sdb1</span>        <span class="l-variable-parameter">50G</span>   <span class="l-variable-parameter">19G</span>   <span class="l-variable-parameter">28G</span>  <span class="l-variable-parameter">41%</span> <span class="l-variable-parameter">/mnt/network-drive</span></span></code></pre>
 <p>You can see that <strong>there is only one root (<code>/</code>)</strong>, and that all other volumes
 are <strong>mounted</strong> somewhere in the file hierarchy.</p>
 <p>For example, the last line represents a network drive mounted under the
@@ -536,29 +535,27 @@ approach to give users administrative access.</p>
 <p>When <strong>trusted users</strong> precede an administrative command with <code>sudo</code>, they are
 generally prompted for <strong>their own password</strong>. Once authenticated, the
 administrative command is <strong>executed as if by the <code>root</code> user</strong>.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/root</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/root&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">-la</span> <span class="l-variable-parameter">/root</span>
-</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">jde:</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">drwx------</span>  <span class="l-number">4</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:53</span> <span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">24</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:44</span> <span class="l-variable-parameter">..</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">-rw-------</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">137</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">11</span> <span class="l-variable-parameter">09:51</span> <span class="l-variable-parameter">.bash_history</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">-rw-r--r--</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">3106</span> <span class="l-variable-parameter">Apr</span>  <span class="l-number">9</span> <span class="l-variable-parameter">11:10</span> <span class="l-variable-parameter">.bashrc</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/root</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/root&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">-la</span> <span class="l-variable-parameter">/root</span></span>
+<span class="l-line" data-line="5"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">jde:</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">drwx------</span>  <span class="l-number">4</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:53</span> <span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">24</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">12</span> <span class="l-variable-parameter">14:44</span> <span class="l-variable-parameter">..</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">-rw-------</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">137</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">11</span> <span class="l-variable-parameter">09:51</span> <span class="l-variable-parameter">.bash_history</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">-rw-r--r--</span>  <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">3106</span> <span class="l-variable-parameter">Apr</span>  <span class="l-number">9</span> <span class="l-variable-parameter">11:10</span> <span class="l-variable-parameter">.bashrc</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">...</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Only trusted users can use <code>sudo</code>. Unauthorized usage will be
 <a href="https://xkcd.com/838/" target="_blank" rel="noopener noreferrer">reported</a>. The relevant logs can be checked with <code>sudo journalctl $(which sudo)</code> (if you are a trusted user).</p></div></div>
 <h4 id="the-sudoers-file">The sudoers file<a href="#the-sudoers-file" aria-label="Link to heading 'The sudoers file'" data-heading-content="The sudoers file" class="anchor"></a></h4>
 <p>The <code>/etc/sudoers</code> file defines which users are trusted to use <code>sudo</code>. This is a
 classic example (the basic syntax is <a href="https://www.sudo.ws/docs/man/1.8.13/sudoers.man/#SUDOERS_FILE_FORMAT" target="_blank" rel="noopener noreferrer">described here</a>):</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Defaults        env_reset
-</div><div class="l-line" data-line="2">Defaults        secure_path=&quot;/usr/local/sbin:/usr/local/bin:...&quot;
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">root    ALL=(ALL:ALL) ALL
-</div><div class="l-line" data-line="5">%admin  ALL=(ALL) ALL
-</div><div class="l-line" data-line="6">%sudo   ALL=(ALL:ALL) ALL
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Defaults        env_reset</span>
+<span class="l-line" data-line="2">Defaults        secure_path=&quot;/usr/local/sbin:/usr/local/bin:...&quot;</span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">root    ALL=(ALL:ALL) ALL</span>
+<span class="l-line" data-line="5">%admin  ALL=(ALL) ALL</span>
+<span class="l-line" data-line="6">%sudo   ALL=(ALL:ALL) ALL</span></code></pre>
 <p>This configuration allows members of the <code>sudo</code> group to execute any command
 (i.e. they are trusted users).</p>
 <p>It’s also possible to allow a user or group to execute <code>sudo</code> without a password
@@ -587,24 +584,23 @@ user to the <code>sudo</code> group to make them trusted <code>sudo</code> users
 <p>The <code>su</code> command (which means “<strong>s</strong>witch <strong>u</strong>ser”) is also a common
 administrative tool. As its name indicates, it can be used to log in as another
 user. If you are a trusted sudoer, you can use it to become another user:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">bob</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/home/alice</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/home/alice&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">su</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">alice</span>
-</div><div class="l-line" data-line="8"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span><span class="l-punctuation-delimiter"></span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">bob:</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">alice</span>
-</div><div class="l-line" data-line="12">
-</div><div class="l-line" data-line="13"><span class="l-comment"># When you&#39;re done, exit the shell to return to your previous user:</span>
-</div><div class="l-line" data-line="14">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
-</div><div class="l-line" data-line="15">
-</div><div class="l-line" data-line="16">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
-</div><div class="l-line" data-line="17"><span class="l-function-call">bob</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bob</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-la</span> <span class="l-variable-parameter">/home/alice</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/home/alice&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">su</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">alice</span></span>
+<span class="l-line" data-line="8"><span class="l-punctuation-bracket">[</span>sudo<span class="l-punctuation-bracket">]</span> <span class="l-function-call">password</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">bob:</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">alice</span></span>
+<span class="l-line" data-line="12"></span>
+<span class="l-line" data-line="13"><span class="l-comment"># When you&#39;re done, exit the shell to return to your previous user:</span></span>
+<span class="l-line" data-line="14">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span></span>
+<span class="l-line" data-line="15"></span>
+<span class="l-line" data-line="16">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span></span>
+<span class="l-line" data-line="17"><span class="l-function-call">bob</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>-l</code> option of the <code>su</code> command makes sure you get a <strong>login shell</strong>, i.e.
 an environment similar to what you get when actually logging in. If you don’t
 use it, you will have a minimal shell environment that might be missing some
@@ -613,19 +609,18 @@ things.</p></div></div>
 <p>You can also use the <code>su</code> command to log in as <code>root</code>.
 You can perform any necessary administrative tasks without <code>sudo</code> (since you are <code>root</code>),
 then again go back to your previous shell with <code>exit</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$&gt; sudo su -l root
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$&gt; whoami
-</div><div class="l-line" data-line="4">root
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$&gt; journalctl <span class="l-punctuation-special">$(</span><span class="l-function-call">which</span> <span class="l-variable-parameter">sudo</span><span class="l-punctuation-special">)</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">bob</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$&gt; sudo su -l root</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$&gt; whoami</span>
+<span class="l-line" data-line="4">root</span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$&gt; journalctl <span class="l-punctuation-special">$(</span><span class="l-function-call">which</span> <span class="l-variable-parameter">sudo</span><span class="l-punctuation-special">)</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="8"></span>
+<span class="l-line" data-line="9">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">exit</span></span>
+<span class="l-line" data-line="10"></span>
+<span class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">whoami</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">bob</span></span></code></pre>
 <div class="callout callout-danger group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -703,22 +698,20 @@ users:</p>
 <h3 id="checking-file-permissions">Checking file permissions<a href="#checking-file-permissions" aria-label="Link to heading 'Checking file permissions'" data-heading-content="Checking file permissions" class="anchor"></a></h3>
 <p>When you run the <code>ls</code> command with the <code>-l</code> option (<strong>l</strong>ong format), you can
 see more information about files, including their <strong>type and permissions</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">2</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span>  <span class="l-number">7</span> <span class="l-variable-parameter">12:16</span> <span class="l-variable-parameter">some-directory</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">-rwxr-x---</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">vip</span>   <span class="l-number">755</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-executable</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">-rw-r-----</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">321</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-file</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">39</span>  <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-link</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">some-file</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">drwxr-xr-x</span> <span class="l-number">2</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">4096</span> <span class="l-variable-parameter">Sep</span>  <span class="l-number">7</span> <span class="l-variable-parameter">12:16</span> <span class="l-variable-parameter">some-directory</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">-rwxr-x---</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">vip</span>   <span class="l-number">755</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-executable</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">-rw-r-----</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">321</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-file</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">bob</span>  <span class="l-variable-parameter">bob</span>   <span class="l-number">39</span>  <span class="l-variable-parameter">Jan</span> <span class="l-number">18</span>  <span class="l-number">2018</span> <span class="l-variable-parameter">some-link</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">some-file</span></span></code></pre>
 <p>Column 1 represents the permissions assigned to the file, while columns 3 and 4
 represent their ownership (owner and group). The first 10-letter column can be
 separated into one letter for the type of file, and three 3-letter groups for
 owner, group and other permissions respectively:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">TYPE  OWNER PERM  GROUP PERM  OTHER PERM  OWNER  GROUP
-</div><div class="l-line" data-line="2">d     rwx         r-x         r-x         root   root  ... some-directory
-</div><div class="l-line" data-line="3">-     rwx         r-x         ---         root   vip   ... some-executable
-</div><div class="l-line" data-line="4">-     rw-         r--         ---         bob    bob   ... some-file
-</div><div class="l-line" data-line="5">l     rwx         rwx         rwx         bob    bob   ... some-link -&gt; some-file
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">TYPE  OWNER PERM  GROUP PERM  OTHER PERM  OWNER  GROUP</span>
+<span class="l-line" data-line="2">d     rwx         r-x         r-x         root   root  ... some-directory</span>
+<span class="l-line" data-line="3">-     rwx         r-x         ---         root   vip   ... some-executable</span>
+<span class="l-line" data-line="4">-     rw-         r--         ---         bob    bob   ... some-file</span>
+<span class="l-line" data-line="5">l     rwx         rwx         rwx         bob    bob   ... some-link -&gt; some-file</span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <a href="https://en.wikipedia.org/wiki/Unix_file_types" target="_blank" rel="noopener noreferrer">file types</a> you will most often handle are <code>-</code> for files,
 <code>d</code> for <strong>d</strong>irectories and <code>l</code> for <strong>l</strong>inks. There are others like <code>p</code> for
 <a href="https://en.wikipedia.org/wiki/Named_pipe" target="_blank" rel="noopener noreferrer">named <strong>p</strong>ipes</a>, <code>s</code> for <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener noreferrer"><strong>s</strong>ockets</a> and <code>b</code>
@@ -749,16 +742,13 @@ files:</p>
 <h3 id="the-chown-command">The <code>chown</code> command<a href="#the-chown-command" aria-label="Link to heading 'The chown command'" data-heading-content="The chown command" class="anchor"></a></h3>
 <p>The <a href="https://linux.die.net/man/1/chown" target="_blank" rel="noopener noreferrer"><code>chown</code> command</a> is quite simple to use. The following command
 changes the owner of <code>file.txt</code> to <code>alice</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">alice</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">alice</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <p>The following command changes the owner of <code>file.txt</code> to <code>bob</code> and its group to
 <code>vip</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">bob:vip</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">bob:vip</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <p>You can also recursively (with the <code>-R</code> option) change the owner and group of a
 directory and all its files:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">bob:bob</span> <span class="l-variable-parameter">/home/bob</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chown</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">bob:bob</span> <span class="l-variable-parameter">/home/bob</span></span></code></pre>
 <div class="callout callout-danger group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -782,19 +772,16 @@ more complicated. It has two syntaxes to specify which permissions you want:
 <p>With <strong>symbolic mode</strong>, you specify which permissions you want with letters
 similar to those shown by <code>ls -l</code>, and you have more control over which specific
 permissions you want to add or remove:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">ug+x</span> <span class="l-variable-parameter">script.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">a-w</span> <span class="l-variable-parameter">readonly.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">o-rwx</span> <span class="l-variable-parameter">secret.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">ug+x</span> <span class="l-variable-parameter">script.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">a-w</span> <span class="l-variable-parameter">readonly.txt</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">o-rwx</span> <span class="l-variable-parameter">secret.txt</span></span></code></pre>
 <p>With <strong>octal mode</strong>, you specify all of a file’s permissions at once.
 You cannot add or remove a specific permission without also setting the others:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">executable.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">executable.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span></span></code></pre>
 <h4 id="symbolic-mode">Symbolic mode<a href="#symbolic-mode" aria-label="Link to heading 'Symbolic mode'" data-heading-content="Symbolic mode" class="anchor"></a></h4>
 <p>The symbolic syntax of the <code>chmod</code> command is:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">chmod [reference...][operator][permission...] file
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">chmod [reference...][operator][permission...] file</span></code></pre>
 <p>Specify one or more references (<code>[reference...]</code>) to select user categories:</p>
 <table>
 <thead>
@@ -861,18 +848,15 @@ execution/traversal)</li>
 </ul>
 <p>For example, the following command adds read and write permissions to <code>u</code> (the
 owner of the file):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">u+rw</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">u+rw</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <p>The following command sets the permissions for <code>g</code> (the group of the file) to
 read and execute:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">g=rx</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">g=rx</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <h4 id="bases-one-number-several-ways-to-write-it">Bases: one number, several ways to write it<a href="#bases-one-number-several-ways-to-write-it" aria-label="Link to heading 'Bases: one number, several ways to write it'" data-heading-content="Bases: one number, several ways to write it" class="anchor"></a></h4>
 <p><strong>Octal mode</strong> writes permissions as numbers in base 8 (octal). The following
 <code>chmod</code> commands are equivalent:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">executable.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">u=rwx,g=rx,o=rx</span> <span class="l-variable-parameter">executable.sh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">executable.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-variable-parameter">u=rwx,g=rx,o=rx</span> <span class="l-variable-parameter">executable.sh</span></span></code></pre>
 <p>To see why, remember that a base is only a way of writing a number.</p>
 <p>In base 10, which we use every day, there are ten digits (0 to 9), and each
 position is worth ten times the position to its right:</p>
@@ -1067,11 +1051,9 @@ modes.</p>
 permission (e.g. <code>u+x</code>). However, it does allow you to easily change an entire
 file’s permissions in one command.</p>
 <p>For example, the following command sets permissions <code>rwxr-xr-x</code> to <code>script.sh</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">script.sh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">755</span> <span class="l-variable-parameter">script.sh</span></span></code></pre>
 <p>The following command sets permissions <code>rw-r-----</code> to <code>secret.txt</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">chmod</span> <span class="l-number">640</span> <span class="l-variable-parameter">secret.txt</span></span></code></pre>
 <h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <ul>
 <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux - Introduction to System Administration</a></li>
@@ -1151,8 +1133,7 @@ purpose, such as <code>useradd</code>, <code>passwd</code> and <code>groupadd</c
 <h3 id="the-etcpasswd-file">The <code>/etc/passwd</code> file<a href="#the-etcpasswd-file" aria-label="Link to heading 'The /etc/passwd file'" data-heading-content="The /etc/passwd file" class="anchor"></a></h3>
 <p>Each line in <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s2-acctsgrps-files.html" target="_blank" rel="noopener noreferrer"><code>/etc/passwd</code></a> defines a user account, with data
 separated by colons:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">jde:x:500:500:jde:/home/jde:/bin/bash
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">jde:x:500:500:jde:/home/jde:/bin/bash</span></code></pre>
 <ul>
 <li><strong>Username</strong> (<code>jde</code>) - The name of the user account (used to log in)</li>
 <li><strong>Password</strong> (<code>x</code>) - User password (or <code>x</code> if it is stored in <code>/etc/shadow</code>)</li>
@@ -1170,8 +1151,7 @@ logs in (e.g. on a terminal or through SSH)</li>
 logging in (e.g. by using <code>/bin/false</code> or <code>/usr/sbin/nologin</code>).</p></div></div>
 <h3 id="the-etcgroup-file">The <code>/etc/group</code> file<a href="#the-etcgroup-file" aria-label="Link to heading 'The /etc/group file'" data-heading-content="The /etc/group file" class="anchor"></a></h3>
 <p>Each line in <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Introduction_To_System_Administration/s3-acctspgrps-group.html" target="_blank" rel="noopener noreferrer"><code>/etc/group</code></a> defines a group, also colon-separated:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">vip:x:512:bob,eve
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">vip:x:512:bob,eve</span></code></pre>
 <ul>
 <li><strong>Group name</strong> (<code>vip</code>) - The name of the group</li>
 <li><strong>Group password</strong> (<code>x</code>) - Optional group password (or <code>x</code> if the password is
@@ -1244,9 +1224,10 @@ other than <code>0</code> and <code>1</code>.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -1374,33 +1355,35 @@ other than <code>0</code> and <code>1</code>.</p>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-402-unix-basics-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-402-unix-basics-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-402-unix-basics-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-402-unix-basics-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/402-unix-basics/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/402-unix-basics/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1682,7 +1665,7 @@ other than <code>0</code> and <code>1</code>.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -2086,7 +2069,7 @@ other than <code>0</code> and <code>1</code>.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

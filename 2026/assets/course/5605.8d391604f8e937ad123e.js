@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_archidep_course=self.webpackChunk_archidep_course||[]).push([[5605],{5605(e,c,r){r.d(c,{createEventModelingServices:()=>s.g});var s=r(8818);r(9728)}}]);

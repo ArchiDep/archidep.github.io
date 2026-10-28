@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/203-git-collaborating/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/203-git-collaborating/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -225,13 +225,12 @@ such as access control, <a href="https://docs.github.com/en/issues/tracking-your
 but the repositories themselves are ordinary Git repositories.</p>
 <h3 id="git-remote-name-your-remotes"><code>git remote</code>: name your remotes<a href="#git-remote-name-your-remotes" aria-label="Link to heading 'git remote: name your remotes'" data-heading-content="git remote: name your remotes" class="anchor"></a></h3>
 <p>A remote is known to your repository by a <strong>name</strong> and a <strong>URL</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># add a remote</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">git@github.com:jdoe/git-calculator.git</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">-v</span>                    <span class="l-comment"># list the remotes and their URLs</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rename</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">github</span>  <span class="l-comment"># rename a remote</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rm</span> <span class="l-variable-parameter">github</span>             <span class="l-comment"># remove a remote</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># add a remote</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">git@github.com:jdoe/git-calculator.git</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">-v</span>                    <span class="l-comment"># list the remotes and their URLs</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rename</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">github</span>  <span class="l-comment"># rename a remote</span></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">rm</span> <span class="l-variable-parameter">github</span>             <span class="l-comment"># remove a remote</span></span></code></pre>
 <p><code>git clone</code> automatically adds a remote named <code>origin</code>, pointing to the
 repository it cloned. “origin” is only a <strong>conventional name</strong>: a repository can
 have as many remotes as you want, each under a name of your choice.</p>
@@ -248,12 +247,11 @@ instead, remove the old remote with <code>git remote rm origin</code>, and add t
 <p><code>git push &lt;remote&gt; &lt;branch&gt;</code> sends the commit your branch points to, with every
 commit behind it that the remote does not have yet, and asks the remote to move
 its own branch there:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:jdoe/git-calculator.git</span>
-</div><div class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">branch</span> <span class="l-string">&#39;main&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:jdoe/git-calculator.git</span></span>
+<span class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">branch</span> <span class="l-string">&#39;main&#39;</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">track</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span></span></code></pre>
 <p><code>-u</code> (<code>--set-upstream</code>) makes <code>origin/main</code> the <strong>upstream</strong> of your <code>main</code>: the
 branch <code>git status</code> compares yours to, and the one <code>git push</code> and <code>git pull</code>
 use when you give them no arguments. You only need it for the first push of a
@@ -263,13 +261,12 @@ branch.</p>
 <strong>fast-forward</strong>. If someone else has pushed commits you do not have, moving the
 remote’s branch to your commit would throw their work away, so the remote
 refuses:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">team</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team.git</span>
-</div><div class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:ArchiDep/git-calculator-team.git&#39;</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">contains</span> <span class="l-variable-parameter">work</span> <span class="l-variable-parameter">that</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">not</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">locally.</span> <span class="l-variable-parameter">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">team</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team.git</span></span>
+<span class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:ArchiDep/git-calculator-team.git&#39;</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">contains</span> <span class="l-variable-parameter">work</span> <span class="l-variable-parameter">that</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">not</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">locally.</span> <span class="l-variable-parameter">...</span></span></code></pre>
 <p>The reason Git gives says why:</p>
 <ul>
 <li><strong><code>(fetch first)</code></strong>: the remote’s branch points to a commit your repository
@@ -286,10 +283,9 @@ their work, and pushing it is a fast-forward again.</p>
 were, as <strong>remote-tracking branches</strong> named after the remote: <code>origin/main</code> is
 your record of where <code>main</code> is on <code>origin</code>. <code>git graph</code> shows them next to your
 own branches:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">*</span>   e0711c3 <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main,</span> <span class="l-string-special-path">origin/main</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Merge</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;sub&#39;</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">*</span>   e0711c3 <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main,</span> <span class="l-string-special-path">origin/main</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Merge</span> <span class="l-variable-parameter">branch</span> <span class="l-string">&#39;sub&#39;</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span></code></pre>
 <p>A remote-tracking branch is <strong>not a live view</strong> of the remote. It only moves
 when you push, fetch or pull. When <code>git status</code> says that your branch is “up to
 date with ‘origin/main’”, it compares your branch to that record, not to what is
@@ -297,16 +293,14 @@ on the server now. You never commit on a remote-tracking branch yourself.</p>
 <h3 id="git-fetch-get-the-others-commits"><code>git fetch</code>: get the others’ commits<a href="#git-fetch-get-the-others-commits" aria-label="Link to heading 'git fetch: get the others’ commits'" data-heading-content="git fetch: get the others’ commits" class="anchor"></a></h3>
 <p><code>git fetch &lt;remote&gt;</code> downloads the commits of a remote that you do not have, and
 moves your remote-tracking branches to where the remote’s branches are:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">team</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team</span>
-</div><div class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">team/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">team</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:ArchiDep/git-calculator-team</span></span>
+<span class="l-line" data-line="4"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">team/main</span></span></code></pre>
 <p>A fetch changes <strong>neither your branches nor your files</strong>. It only lets you see
 what the others have done, with <code>git graph</code>, <code>git log team/main</code> or
 <code>git diff main team/main</code>, before you decide to merge it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span></span></code></pre>
 <p>Merging a remote-tracking branch works exactly like merging any other branch: a
 fast-forward if your branch has no commits of its own, a three-way merge if the
 histories have diverged.</p>
@@ -322,41 +316,38 @@ you merge it. <code>git pull</code> is the shortcut once you know what to expect
 ancestor. When both branches changed the <strong>same lines</strong> of the same file
 differently, Git cannot choose between the two versions, and stops in the middle
 of the merge. This is a <strong>merge conflict</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">subtraction.js</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">CONFLICT</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">content</span><span class="l-punctuation-bracket">)</span>: <span class="l-function-call">Merge</span> <span class="l-variable-parameter">conflict</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">subtraction.js</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Automatic</span> <span class="l-variable-parameter">merge</span> <span class="l-variable-parameter">failed</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">result.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">team/main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">subtraction.js</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">CONFLICT</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">content</span><span class="l-punctuation-bracket">)</span>: <span class="l-function-call">Merge</span> <span class="l-variable-parameter">conflict</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">subtraction.js</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Automatic</span> <span class="l-variable-parameter">merge</span> <span class="l-variable-parameter">failed</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">result.</span></span></code></pre>
 <p>A conflict is about lines, not whole files. Git merges everything it can, and
 <code>git status</code> lists what is left: the files it merged on its own are already
 staged, and the files in conflict are <strong>unmerged</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">unmerged</span> <span class="l-variable-parameter">paths.</span>
-</div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">run</span> <span class="l-string">&quot;git commit&quot;</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git merge --abort&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">abort</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span>
-</div><div class="l-line" data-line="8">        <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">index.html</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-call">Unmerged</span> <span class="l-variable-parameter">paths:</span>
-</div><div class="l-line" data-line="11">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">mark</span> <span class="l-variable-parameter">resolution</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="12">        <span class="l-function-call">both</span> <span class="l-variable-parameter">modified:</span>   <span class="l-variable-parameter">subtraction.js</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">unmerged</span> <span class="l-variable-parameter">paths.</span></span>
+<span class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">run</span> <span class="l-string">&quot;git commit&quot;</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git merge --abort&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">abort</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Changes</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">committed:</span></span>
+<span class="l-line" data-line="8">        <span class="l-function-call">modified:</span>   <span class="l-variable-parameter">index.html</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10"><span class="l-function-call">Unmerged</span> <span class="l-variable-parameter">paths:</span></span>
+<span class="l-line" data-line="11">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">mark</span> <span class="l-variable-parameter">resolution</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="12">        <span class="l-function-call">both</span> <span class="l-variable-parameter">modified:</span>   <span class="l-variable-parameter">subtraction.js</span></span></code></pre>
 <h3 id="resolving-a-conflict">Resolving a conflict<a href="#resolving-a-conflict" aria-label="Link to heading 'Resolving a conflict'" data-heading-content="Resolving a conflict" class="anchor"></a></h3>
 <p>In each file in conflict, Git has written both versions of the conflicting
 lines, between <strong>conflict markers</strong>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment">/**</span>
-</div><div class="l-line" data-line="2"><span class="l-comment"> * Takes two numbers, a and b, and returns their subtraction.</span>
-</div><div class="l-line" data-line="3"><span class="l-comment"> */</span>
-</div><div class="l-line" data-line="4"><span class="l-keyword-function">function</span> <span class="l-function">subtract</span><span class="l-punctuation-bracket">(</span><span class="l-variable-parameter">a</span><span class="l-punctuation-delimiter">,</span> <span class="l-variable-parameter">b</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="5"><span class="l-operator">&lt;</span><span class="l-operator">&lt;&lt;</span><span class="l-operator">&lt;&lt;</span><span class="l-operator">&lt;&lt;</span> <span class="l-constant">HEAD</span>
-</div><div class="l-line" data-line="6">  <span class="l-keyword-return">return</span> <span class="l-variable">a</span> <span class="l-operator">-</span> <span class="l-variable">b</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="7"><span class="l-operator">=</span><span class="l-operator">===</span><span class="l-operator">===</span>
-</div><div class="l-line" data-line="8">  <span class="l-keyword-return">return</span> <span class="l-operator">-</span><span class="l-variable">b</span> <span class="l-operator">+</span> <span class="l-variable">a</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="9"><span class="l-operator">&gt;</span><span class="l-operator">&gt;&gt;&gt;</span><span class="l-operator">&gt;&gt;&gt;</span> <span class="l-variable">team</span><span class="l-operator">/</span><span class="l-variable">main</span>
-</div><div class="l-line" data-line="10"><span class="l-punctuation-bracket">}</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment-documentation">/**</span></span>
+<span class="l-line" data-line="2"><span class="l-comment-documentation"> * Takes two numbers, a and b, and returns their subtraction.</span></span>
+<span class="l-line" data-line="3"><span class="l-comment-documentation"> */</span></span>
+<span class="l-line" data-line="4"><span class="l-keyword-function">function</span> <span class="l-function">subtract</span><span class="l-punctuation-bracket">(</span><span class="l-variable-parameter">a</span><span class="l-punctuation-delimiter">,</span> <span class="l-variable-parameter">b</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="5"><span class="l-operator">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="l-constant">HEAD</span></span>
+<span class="l-line" data-line="6">  <span class="l-keyword-return">return</span> <span class="l-variable">a</span> <span class="l-operator">-</span> <span class="l-variable">b</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="7"><span class="l-operator">=======</span></span>
+<span class="l-line" data-line="8">  <span class="l-keyword-return">return</span> <span class="l-operator">-</span><span class="l-variable">b</span> <span class="l-operator">+</span> <span class="l-variable">a</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="9"><span class="l-operator">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="l-variable">team</span><span class="l-operator">/</span><span class="l-variable">main</span></span>
+<span class="l-line" data-line="10"><span class="l-punctuation-bracket">}</span></span></code></pre>
 <ul>
 <li>Between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>=======</code> is <strong>your</strong> version, the one of the
 branch you are on.</li>
@@ -446,9 +437,10 @@ branch, and how to change it.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -490,33 +482,35 @@ branch, and how to change it.</p>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-203-git-collaborating-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/203-git-collaborating/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/203-git-collaborating/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -798,7 +792,7 @@ branch, and how to change it.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1202,7 +1196,7 @@ branch, and how to change it.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_archidep_course=self.webpackChunk_archidep_course||[]).push([[6894],{6894(e,c,r){r.d(c,{createPacketServices:()=>s.$});var s=r(2590);r(9728)}}]);

@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/101-command-line/subject.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/101-command-line/subject.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -450,9 +450,8 @@ reference.</li>
 <h3 id="windows-users-drives-and-copypaste">Windows users: drives and copy/paste<a href="#windows-users-drives-and-copypaste" aria-label="Link to heading 'Windows users: drives and copy/paste'" data-heading-content="Windows users: drives and copy/paste" class="anchor"></a></h3>
 <p>This is how you reference or use your <strong>drives</strong> (<code>C:</code>, <code>D:</code>, etc) in the
 Windows Subsystem for Linux (WSL):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/c/foo/bar</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/d/foo</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/c/foo/bar</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/mnt/d/foo</span></span></code></pre>
 <p><strong>Copy/Paste</strong></p>
 <p>In a terminal, <code>Ctrl-C</code> already means something else: it <strong>stops the command
 that is running</strong> (see <a href="#stopping-running-commands">stopping running
@@ -466,8 +465,7 @@ own:</p>
 </ul>
 <h2 id="how-to-use-the-cli">How to use the CLI<a href="#how-to-use-the-cli" aria-label="Link to heading 'How to use the CLI'" data-heading-content="How to use the CLI" class="anchor"></a></h2>
 <p>When you open the CLI you will find a blank screen that looks like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span></span></code></pre>
 <p>These symbols represent <strong>the prompt</strong> and are used to indicate that you have
 the lead. <strong>The computer is waiting for you to type something</strong> for it to
 execute.</p>
@@ -519,8 +517,7 @@ of seconds.</p></div></div>
 <h3 id="writing-commands">Writing commands<a href="#writing-commands" aria-label="Link to heading 'Writing commands'" data-heading-content="Writing commands" class="anchor"></a></h3>
 <p>A command is a <strong>word</strong> that you have to type in the CLI that will <strong>tell the computer what to do</strong>.</p>
 <p>The syntax for using commands looks like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">name</span> <span class="l-function-call">arg1</span> <span class="l-variable-parameter">arg2</span> <span class="l-variable-parameter">arg3</span> <span class="l-variable-parameter">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">name</span> <span class="l-function-call">arg1</span> <span class="l-variable-parameter">arg2</span> <span class="l-variable-parameter">arg3</span> <span class="l-variable-parameter">...</span></span></code></pre>
 <p>Note the use of <strong>spaces</strong> to separate the different <strong>arguments</strong> of a command.</p>
 <ul>
 <li><code>name</code> represents the <strong>command</strong> you want to execute.</li>
@@ -530,8 +527,7 @@ of seconds.</p></div></div>
 <p>There are two types of arguments to use with a command (if needed):</p>
 <p><strong>Options</strong> usually specify <strong>how</strong> the command will behave.
 By convention, they are preceded by <code>-</code> or <code>--</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span></span></code></pre>
 <p>We use the <code>ls</code> command to <strong>l</strong>i<strong>s</strong>t the content of the current directory.
 The options tell <code>ls</code> <strong>how</strong> it should do so:</p>
 <ul>
@@ -540,16 +536,14 @@ The options tell <code>ls</code> <strong>how</strong> it should do so:</p>
 </ul>
 <p><strong>Values</strong> not preceded by anything usually specify <strong>what</strong> will be used by the
 command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman</span></span></code></pre>
 <p>Here, we use the <code>cd</code> command to move to another directory (or <strong>c</strong>hange
 <strong>d</strong>irectory).</p>
 <p>And the argument <code>/Users/Batman</code> tells the command <strong>what</strong> directory we want to
 move to.</p>
 <h4 id="options-with-values">Options with values<a href="#options-with-values" aria-label="Link to heading 'Options with values'" data-heading-content="Options with values" class="anchor"></a></h4>
 <p><strong>Values</strong> can also be linked to an option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">5</span> <span class="l-variable-parameter">notes.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">5</span> <span class="l-variable-parameter">notes.txt</span></span></code></pre>
 <p>The <code>head</code> command prints the beginning of a file. In this example, it takes
 <strong>one option</strong>:</p>
 <ul>
@@ -570,13 +564,10 @@ used by the overall command.</p>
 </ul>
 <p>They can cause <strong>errors</strong> in some scripts or tools, and will inevitably complicate using the CLI.
 If you have a <code>Why So Serious</code> directory, this <strong>WILL NOT work</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why</span> <span class="l-variable-parameter">So</span> <span class="l-variable-parameter">Serious</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why</span> <span class="l-variable-parameter">So</span> <span class="l-variable-parameter">Serious</span></span></code></pre>
 <p>This command will be interpreted as a call to the <code>ls</code> command with <strong>three arguments</strong>: <code>Why</code>, <code>So</code> and <code>Serious</code>.</p>
 <p>You <strong>can</strong> use arguments containing spaces, but you have to <strong>escape</strong> them first, either with <strong>quotation marks</strong> or <strong>backslashes</strong>:</p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-string">&quot;Why So Serious&quot;</span>
-</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why\ So\ Serious</span>
-</div></code></pre></div></div>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-string">&quot;Why So Serious&quot;</span></span></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">Why\ So\ Serious</span></span></code></pre></div></div>
 <h3 id="auto-completion">Auto-completion<a href="#auto-completion" aria-label="Link to heading 'Auto-completion'" data-heading-content="Auto-completion" class="anchor"></a></h3>
 <p>It’s not fun to type directory names, especially when they have spaces you must escape in them,
 so the CLI has <strong>auto-completion</strong>. Type the first few characters of the file or directory you
@@ -620,9 +611,8 @@ You can “scroll” up and down line-by-line using the arrow keys or the <code>
 <h4 id="unix-command-syntax">Unix Command Syntax<a href="#unix-command-syntax" aria-label="Link to heading 'Unix Command Syntax'" data-heading-content="Unix Command Syntax" class="anchor"></a></h4>
 <p>When reading a command’s manual or documentation,
 you may find some strange syntax that make little sense to you, like:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">-L</span><span class="l-operator">|</span><span class="l-punctuation-bracket">[</span><span class="l-operator">-P</span> <span class="l-string">[</span><span class="l-string">-e</span><span class="l-punctuation-bracket">]</span><span class="l-function-call">] [</span><span class="l-variable-parameter">-@</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">dir</span><span class="l-variable-parameter">]</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ls</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">file</span> <span class="l-variable-parameter">...</span><span class="l-variable-parameter">]</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">[-L</span><span class="l-operator">|</span><span class="l-punctuation-bracket">[</span><span class="l-operator">-P</span> <span class="l-string">[-e</span><span class="l-punctuation-bracket">]</span><span class="l-function-call">] [</span><span class="l-variable-parameter">-@]]</span> <span class="l-variable-parameter">[dir]</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ls</span> <span class="l-variable-parameter">[-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1]</span> <span class="l-variable-parameter">[file</span> <span class="l-variable-parameter">...]</span></span></code></pre>
 <p>Here are some explanations:</p>
 <ul>
 <li><code>[]</code>: Whatever’s inside is <strong>optional</strong> (ex: <code>[-e]</code>).</li>
@@ -642,9 +632,8 @@ Replace it by an appropriate value for that option or argument.</p>
 can navigate your filesystem to go to other directories <em>(more on that later)</em>.</p>
 <p>But first, you might want to check <strong>where</strong> you currently are.
 Use the <code>pwd</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -663,9 +652,8 @@ path to the directory you’re currently in.</p></div></div>
 <h3 id="the-ls-command">The <code>ls</code> command<a href="#the-ls-command" aria-label="Link to heading 'The ls command'" data-heading-content="The ls command" class="anchor"></a></h3>
 <p>Now that you know where you are, you might want to know <strong>what your current directory is containing</strong>.</p>
 <p>Use the <code>ls</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -683,31 +671,28 @@ path to the directory you’re currently in.</p></div></div>
 <p>By default, <code>ls</code> doesn’t list <strong>hidden elements</strong>.
 By convention in Unix-like systems, files that start with <code>.</code> (a dot) are hidden.</p>
 <p>If you want it to do that, you need to pass the <code>-a</code> (<strong>a</strong>ll) option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files,</span> <span class="l-variable-parameter">including</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">hidden</span> <span class="l-variable-parameter">ones</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span></span>
+<span class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">lots</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">lots</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">files,</span> <span class="l-variable-parameter">including</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">hidden</span> <span class="l-variable-parameter">ones</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <h3 id="the-cd-command">The <code>cd</code> command<a href="#the-cd-command" aria-label="Link to heading 'The cd command'" data-heading-content="The cd command" class="anchor"></a></h3>
 <p>It’s time to go out a little and move to another directory.</p>
 <p>Suppose you have a <code>Documents</code> directory in your home directory, that contains
 another directory <code>TopSecret</code> where you want to go. Use the <code>cd</code> (<strong>c</strong>hange
 <strong>d</strong>irectory) command, passing it as argument <strong>the path to the directory</strong> you
 want to go to:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman/Documents/TopSecret</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">/Users/Batman/Documents/TopSecret</span></span></code></pre>
 <p>This is a <strong>relative path</strong>: it is relative to the current working directory.</p>
 <h4 id="absolute-paths">Absolute paths<a href="#absolute-paths" aria-label="Link to heading 'Absolute paths'" data-heading-content="Absolute paths" class="anchor"></a></h4>
 <p>You can also go to a specific directory anywhere on your filesystem like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Documents</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">/Users/Batman/Documents</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Documents</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/Users/Batman/Documents</span></span></code></pre>
 <p>This is an <strong>absolute path</strong> because it starts with a <code>/</code> character. It starts
 at the root of your filesystem so it does not matter where you are now.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You also have <strong>auto-completion</strong> with the <code>cd</code> command. Hit the <code>Tab</code> key after
@@ -715,51 +700,43 @@ entering some letters.</p></div></div>
 <h4 id="the--path">The <code>.</code> path<a href="#the--path" aria-label="Link to heading 'The . path'" data-heading-content="The . path" class="anchor"></a></h4>
 <p>The <code>.</code> path represents the current directory. The following commands are
 strictly equivalent:</p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span>
-</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">./Documents/TopSecret</span>
-</div></code></pre></div></div>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">Documents/TopSecret</span></span></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">./Documents/TopSecret</span></span></code></pre></div></div>
 <p>You can also <em>not go anywhere</em>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-builtin">.</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/Batman</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-builtin">.</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span></span></code></pre>
 <p>Or make a compressed archive of the current directory with the <a href="https://en.wikipedia.org/wiki/Tar_(computing)" target="_blank" rel="noopener noreferrer"><code>tar</code> (<strong>t</strong>ape
 <strong>ar</strong>chive)</a> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tar</span> <span class="l-function-call">-c</span> <span class="l-variable-parameter">-z</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/somewhere/archive.tar.gz</span> <span class="l-variable-parameter">.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tar</span> <span class="l-function-call">-c</span> <span class="l-variable-parameter">-z</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/somewhere/archive.tar.gz</span> <span class="l-variable-parameter">.</span></span></code></pre>
 <p>This does not seem very useful now, but it will be in further tutorials.</p>
 <h4 id="the--path-1">The <code>..</code> path<a href="#the--path-1" aria-label="Link to heading 'The .. path'" data-heading-content="The .. path" class="anchor"></a></h4>
 <p>To go up into the parent directory, use the <code>..</code> path (<strong>don’t forget the space between <code>cd</code> and <code>..</code></strong>):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/Batman/Documents</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">..</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/Batman/Documents</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line l-highlighted" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">..</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">/Users/Batman</span></span></code></pre>
 <p>On <strong>macOS</strong>, you can also drag and drop a directory from the Finder to the CLI
 to see its absolute path automatically written:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">Drag</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">drop</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">directory</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">Finder,</span> <span class="l-variable-parameter">and...</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Pictures/</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span>
+<span class="l-line" data-line="2"><span class="l-punctuation-bracket">(</span><span class="l-function-call">Drag</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">drop</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">directory</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">Finder,</span> <span class="l-variable-parameter">and...</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/Users/Batman/Pictures/</span></span></code></pre>
 <p>This does not work in the WSL: dropping a directory from the Explorer writes a
 Windows path such as <code>C:\Users\jde\Pictures</code>, which your Linux shell does not
 understand. Write the path yourself in the <code>/mnt/c/...</code> form instead.</p>
 <p>At any time and from anywhere, you can return to your <strong>home directory</strong> with
 the <code>cd</code> command, without any argument or with a <code>~</code> (tilde):</p>
-<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span>
-</div></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span>
-</div></code></pre></div></div>
+<div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span></span></code></pre></div><div><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/Users/Batman</span></span></code></pre></div></div>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To type the <code>~</code> character, use this combination:</p>
 <ul>
 <li><code>AltGr-^</code> on <strong>Windows</strong></li>
@@ -808,8 +785,7 @@ afterwards.</p></div></div>
 </table>
 <h4 id="your-projects-directory">Your projects directory<a href="#your-projects-directory" aria-label="Link to heading 'Your projects directory'" data-heading-content="Your projects directory" class="anchor"></a></h4>
 <p>Throughout this course, you will often see the following command (<em>or something resembling it</em>):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span></code></pre>
 <p>This means that you use <strong>the path to the directory in which you store your projects</strong>.
 For example, on John Doe’s macOS system, it could be <code>/Users/jde/Projects</code>.</p>
 <div class="note note-warning"><div class="title"><svg
@@ -848,65 +824,55 @@ and suffering</strong>.</p></div></div></div>
 <h3 id="the-mkdir-command">The <code>mkdir</code> command<a href="#the-mkdir-command" aria-label="Link to heading 'The mkdir command'" data-heading-content="The mkdir command" class="anchor"></a></h3>
 <p>You can create directories with the CLI.</p>
 <p>Use the <code>mkdir</code> (<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory) command to create a new directory in the current directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">BatmobileSchematics</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">BatmobileSchematics</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">BatmobileSchematics</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">BatmobileSchematics</span></span></code></pre>
 <p>You can also create a directory elsewhere:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">~/Documents/TopSecret/BatmobileSchematics</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">~/Documents/TopSecret/BatmobileSchematics</span></span></code></pre>
 <p>This will only work if all directories down to <code>TopSecret</code> already exist. To
 automatically create all intermediate directories, add the <code>-p</code> (<strong>p</strong>arents)
 option:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/Documents/TopSecret/BatmobileSchematics</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/Documents/TopSecret/BatmobileSchematics</span></span></code></pre>
 <h3 id="the-touch-command">The <code>touch</code> command<a href="#the-touch-command" aria-label="Link to heading 'The touch command'" data-heading-content="The touch command" class="anchor"></a></h3>
 <p>The <code>touch</code> command updates the last modification date of a file.
 It also has the useful property of creating the file if it doesn’t exist.</p>
 <p>Hence, it’s a <strong>quick way to create an empty file</strong> in the CLI:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">foo.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">foo.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">foo.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">foo.txt</span></span></code></pre>
 <h3 id="the-echo-command">The <code>echo</code> command<a href="#the-echo-command" aria-label="Link to heading 'The echo command'" data-heading-content="The echo command" class="anchor"></a></h3>
 <p>The <code>echo</code> command simply <strong>echo</strong>es its arguments back to you:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <p>This seems useless, but can be quite powerful when combined with Unix features like <a href="https://en.wikipedia.org/wiki/Redirection_(computing)" target="_blank" rel="noopener noreferrer">redirection</a>.
 For example, you can <strong>redirect the output to a file</strong>.</p>
 <p>The <code>&gt;</code> operator means <em>”<strong>write</strong> the output of the previous command into a file”</em>.
 This allows you to quickly create a simple text file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">bar.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">foo</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">bar.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">bar.txt</span></span></code></pre>
 <p>If the file already exists, it is overwritten.
 You can also use the <code>&gt;&gt;</code> operator, which means <em>”<strong>append</strong> the output of the previous command to the end of a file”</em>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">bar</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">bar.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">bar</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">bar.txt</span></span></code></pre>
 <h3 id="the-cat-command">The <code>cat</code> command<a href="#the-cat-command" aria-label="Link to heading 'The cat command'" data-heading-content="The cat command" class="anchor"></a></h3>
 <p>The <code>cat</code> command can display one file or con<strong>cat</strong>enate multiple files in the CLI.
 For example, this displays the contents of the previous example’s file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">foo</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">foo</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">bar</span></span></code></pre>
 <p>This creates a new <code>hello.txt</code> file and displays the result of concatenating the two files:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span> <span class="l-variable-parameter">hello.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">foo</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">bar</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">World</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">bar.txt</span> <span class="l-variable-parameter">hello.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">foo</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">bar</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">World</span></span></code></pre>
 <h3 id="stopping-running-commands">Stopping running commands<a href="#stopping-running-commands" aria-label="Link to heading 'Stopping running commands'" data-heading-content="Stopping running commands" class="anchor"></a></h3>
 <p>Sometimes a command will take too long to execute.</p>
 <p>As an example, run this command which will wait one hour before exiting:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span></span></code></pre>
 <p>As you can see, the command keeps executing and you <strong>no longer have a prompt</strong>.
 Anything you type is ignored, as it is no longer interpreted by the shell,
 but by the <code>sleep</code> command instead (which doesn’t do anything with it).</p>
@@ -942,8 +908,7 @@ need an editor that runs in the terminal.</p>
 systems (including the WSL). It is the one we suggest you use.</p>
 <p>Open a file by running the <code>nano</code> command with the path to the file you want to
 create or edit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.txt</span></span></code></pre>
 <h3 id="editing-files-with-nano">Editing files with nano<a href="#editing-files-with-nano" aria-label="Link to heading 'Editing files with nano'" data-heading-content="Editing files with nano" class="anchor"></a></h3>
 <p>Editing files is much more straightforward and intuitive with nano. Once the
 file is open, you can simply type your text and move around with arrow keys:</p>
@@ -974,16 +939,14 @@ systems), you have to set the <code>$EDITOR</code> environment variable. You can
 adding the line <code>export EDITOR=nano</code> to your <strong><code>~/.zshrc</code> or <code>~/.bashrc</code> file</strong>
 depending on which shell you are using. Run the command for your shell to add it
 at the end of the file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export EDITOR=nano&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.bashrc</span>  <span class="l-comment"># on WSL or Linux</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export EDITOR=nano&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.zshrc</span>   <span class="l-comment"># on macOS</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export EDITOR=nano&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.bashrc</span>  <span class="l-comment"># on WSL or Linux</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;export EDITOR=nano&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">~/.zshrc</span>   <span class="l-comment"># on macOS</span></span></code></pre>
 <p>Remember that you must <strong>relaunch your terminal</strong> for this change to take
 effect.</p>
 <p>If you are unsure of what shell you are using, type in the following
 command. The output will display the name of your current shell.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-number">0</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">bash</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-number">0</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bash</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Now that you know how to use nano, you can also edit your Bash profile file with
 the following command: <code>nano ~/.bashrc</code>.</p></div></div>
 <div class="note note-info"><div class="title"><svg
@@ -1001,8 +964,7 @@ the following command: <code>nano ~/.bashrc</code>.</p></div></div>
   />
 </svg><span>Note</span></div><div class="content"><p>On Ubuntu, you can list available editors and choose the default one with the
 following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">update-alternatives</span> <span class="l-variable-parameter">--config</span> <span class="l-variable-parameter">editor</span></span></code></pre></div></div>
 <h2 id="vim">Vim<a href="#vim" aria-label="Link to heading 'Vim'" data-heading-content="Vim" class="anchor"></a></h2>
 <p><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" rel="noopener noreferrer"><strong>Vim</strong></a> is an infamous CLI editor originally developed in 1991 for the
 Unix operating system.</p>
@@ -1054,26 +1016,22 @@ tutorial.</p>
 <p>When you type a command in the CLI, it will try to see <strong>if it knows this
 command</strong> by looking in some directories to see if there is an <strong>executable file
 that matches the command name</strong>.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rubbish</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">bash:</span> <span class="l-variable-parameter">rubbish:</span> <span class="l-variable-parameter">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rubbish</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bash:</span> <span class="l-variable-parameter">rubbish:</span> <span class="l-variable-parameter">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found</span></span></code></pre>
 <p>This means that the CLI failed to find the executable named <code>rubbish</code> in any of
 the directories where it looked.</p>
 <p>The list of the directories (and their paths) in which the CLI searches is
 stored in the <code>PATH</code> environment variable, each of them being separated with a
 <code>:</code>.</p>
 <p>You can print the content of your <code>PATH</code> variable to see this list:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span></span></code></pre>
 <h3 id="understanding-the-path">Understanding the <code>PATH</code><a href="#understanding-the-path" aria-label="Link to heading 'Understanding the PATH'" data-heading-content="Understanding the PATH" class="anchor"></a></h3>
 <p>Assuming your <code>PATH</code> looks like this:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/bin:/usr/bin:/custom/dir</span></span></code></pre>
 <p>What happens when you run the following command?</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">-l</span></span></code></pre>
 <ol>
 <li>The shell will look in the <code>/usr/local/bin</code> directory. <em>There is no
 executable named <code>ls</code> there, moving on…</em></li>
@@ -1085,15 +1043,13 @@ used</strong>.</li>
 </ol>
 <h3 id="finding-commands">Finding commands<a href="#finding-commands" aria-label="Link to heading 'Finding commands'" data-heading-content="Finding commands" class="anchor"></a></h3>
 <p>You can check where a command is with the <code>which</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">ls</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/bin/ls</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">ls</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/bin/ls</span></span></code></pre>
 <p>If there are multiple versions of a command in your <code>PATH</code>, you can add the <code>-a</code>
 option to list them <strong>a</strong>ll:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">git</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/opt/homebrew/bin/git</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/usr/bin/git</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">-a</span> <span class="l-variable-parameter">git</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/opt/homebrew/bin/git</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/usr/bin/git</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -1119,39 +1075,33 @@ Git and Node.js, for example, do this.</p>
 <h4 id="custom-command-example">Custom command example<a href="#custom-command-example" aria-label="Link to heading 'Custom command example'" data-heading-content="Custom command example" class="anchor"></a></h4>
 <p>Run the following commands to write a simple Hello World shell script and make
 it into an executable:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/hello-program/bin</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/sh\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">~/hello-program/bin</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/sh\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">~/hello-program/bin/hello</span></span></code></pre>
 <div class="callout callout-more group/callout" data-callout="101-command-line:custom-command-example"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-101-command-line:custom-command-example" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>printf</code> command prints its argument, here interpreting <code>\n</code> as a line
 break, and the <code>&gt;</code> operator writes that output into the file (as seen in <a href="#the-echo-command">the
 <code>echo</code> command</a>). The file you have just created contains
 these two lines:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/sh</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/sh</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <p>The first line tells the system which program should run the script. The second
 line is the script itself.</p>
 <p>A new file is not executable, so the <code>chmod</code> (<strong>ch</strong>ange <strong>mod</strong>e) command is
 used to add (<code>+</code>) the permission to e<strong>x</strong>ecute it.</p></div><label for="callout-101-command-line:custom-command-example" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-101-command-line:custom-command-example" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f680-748ff0e7b2f1f22adecad8463de25945.svg" alt="🚀" width="20" height="20" /></span> Cool!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>You should now be able to find it in the <code>~/hello-program/bin</code> directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/hello-program/bin</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hello</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/hello-program/bin</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">hello</span></span></code></pre>
 <p>It’s now installed, we can find it using the CLI, but it still cannot be run. Why?</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found:</span> <span class="l-variable-parameter">hello</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">command</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found:</span> <span class="l-variable-parameter">hello</span></span></code></pre>
 <h4 id="executing-a-command-in-a-directory-thats-not-in-the-path">Executing a command in a directory that’s not in the <code>PATH</code><a href="#executing-a-command-in-a-directory-thats-not-in-the-path" aria-label="Link to heading 'Executing a command in a directory that’s not in the PATH'" data-heading-content="Executing a command in a directory that’s not in the PATH" class="anchor"></a></h4>
 <p>You can run a command from anywhere by writing <strong>the absolute path to the executable</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/hello-program/bin/hello</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <p>You can also <strong>manually go to the directory</strong> containing the executable and <strong>run the command there</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/hello-program/bin</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/hello-program/bin</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>When the first word on the CLI starts with <code>/</code>, <code>~/</code>, <code>./</code> or <code>../</code>, the shell
 interprets it as a file path. Instead of looking for a command in the <code>PATH</code>,
 it simply executes that file.</p></div></div>
@@ -1180,12 +1130,10 @@ by your CLI interpreter (shell). This file depends upon the shell you are using:
 </table>
 <p>Open the adequate file (<code>.bashrc</code> for this example) from the CLI with <code>nano</code> or
 your favorite editor if it can display hidden files:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.bashrc</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">~/.bashrc</span></span></code></pre>
 <p>Add this line at the bottom of your file (use <code>i</code> to enter <strong>insert</strong> mode if
 using Vim):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span></span></code></pre>
 <p>If you’re in nano, press <code>Ctrl-X</code>, then answer <code>Yes</code> and confirm the filename.
 If you’re in Vim, press <code>Esc</code> when you’re done typing, then <code>:wq</code> and <code>Enter</code> to
 save and quit.</p>
@@ -1206,26 +1154,21 @@ save and quit.</p>
 </svg><span>Warning</span></div><div class="content"><p>Remember to <strong>close and re-open your CLI</strong> to have the shell reload its
 configuration file.</p></div></div>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div class="order-1 md:order-none flex items-end"><p>You should now be able to run the Hello World shell script as a command simply
-by typing <code>hello</code>:</p></div><div class="order-3 md:order-none flex items-end"><p>You don’t even have to be in the correct directory:</p></div><div class="order-2 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre></div><div class="order-4 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">/Users/jde</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre></div></div>
+by typing <code>hello</code>:</p></div><div class="order-3 md:order-none flex items-end"><p>You don’t even have to be in the correct directory:</p></div><div class="order-2 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre></div><div class="order-4 md:order-none"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/Users/jde</span></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">hello</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre></div></div>
 <p>And your CLI knows where it is:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">hello</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin/hello</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">hello</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin/hello</span></span></code></pre>
 <p>It knows this because the directory containing the script is now in your PATH:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/jde/hello-program/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span></span></code></pre>
 <h4 id="what-have-i-done">What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h4>
 <p>You have <strong>added a directory to the <code>PATH</code></strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-import">export</span> <span class="l-variable-builtin">PATH</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">HOME</span>/hello-program/bin:<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span></span></code></pre>
 <p>This line says:</p>
 <ul>
 <li>Modify the <code>PATH</code> variable.</li>
@@ -1275,8 +1218,7 @@ does everything the exercises ask for — but if you want to learn the editor
 rather than merely escape it, this is where to start.</p>
 <p>Open a file by running the <code>vim</code> command with the path to the file you want to
 create/edit:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vim</span> <span class="l-function-call">test.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vim</span> <span class="l-function-call">test.txt</span></span></code></pre>
 <h3 id="how-vim-works">How Vim works<a href="#how-vim-works" aria-label="Link to heading 'How Vim works'" data-heading-content="How Vim works" class="anchor"></a></h3>
 <p>Vim can be unsettling at first, until you know how it works.</p>
 <p><strong>Let go of your fear. And your mouse</strong>, it’s mostly useless in Vim. You control
@@ -1498,8 +1440,7 @@ of in your text. Press <code>Enter</code>: Vim saves the file and quits.</li>
 <p>You now know enough Vim to open a file, change it and get out again. To go
 further, Vim comes with its own interactive tutorial, which takes roughly half
 an hour:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vimtutor</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">vimtutor</span></span></code></pre>
 <p>It is installed together with Vim on most systems. If your own machine does not
 have it, the <a href="/2026/course/104-hello-ssh/">SSH exercise server</a> you will connect to later in this course does. <a href="https://openvim.com" target="_blank" rel="noopener noreferrer">Open
 Vim</a> is an equivalent tutorial that runs in your browser.</p>
@@ -1517,8 +1458,7 @@ this appendix</a> shows.</p>
 <h3 id="install-the-wsl-itself">Install the WSL itself<a href="#install-the-wsl-itself" aria-label="Link to heading 'Install the WSL itself'" data-heading-content="Install the WSL itself" class="anchor"></a></h3>
 <div class="cols grid grid-cols-1 md:grid-cols-5 gap-4"><div class="md:col-span-3"><p>Type <code>PowerShell</code> in the start menu and open <strong>Windows PowerShell</strong>.</p></div><div class="md:col-span-2"><p><img src="images/wsl-powershell-464f43e22380c81950dfb92db9c28b13.png" alt="The Windows PowerShell application" /></p></div></div>
 <p>Run the installation command in the window that opens:</p>
-<pre class="lumis"><code class="language-powershell" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">PS</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">C:\WINDOWS\system32&gt;</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">wsl</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">--install</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-powershell" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">PS</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">C:\WINDOWS\system32&gt;</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">wsl</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">--install</span></span></code></pre>
 <p><img src="images/wsl-install-0bb7a6f09fa9e81cbfa02f8078d017a8.png" alt="Installing the WSL" /></p>
 <p>It downloads and installs the Windows Subsystem for Linux, then enables the
 Windows components it needs:</p>
@@ -1528,8 +1468,7 @@ components that were just enabled are not active until you do.</p>
 <h3 id="install-ubuntu">Install Ubuntu<a href="#install-ubuntu" aria-label="Link to heading 'Install Ubuntu'" data-heading-content="Install Ubuntu" class="anchor"></a></h3>
 <p>After the reboot, open PowerShell again and install the Linux distribution used
 in this course:</p>
-<pre class="lumis"><code class="language-powershell" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">PS</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">C:\WINDOWS\system32&gt;</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">wsl</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">--install</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">-d</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">Ubuntu</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-powershell" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">PS</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">C:\WINDOWS\system32&gt;</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">wsl</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">--install</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter-builtin">-d</span><span class="l-punctuation-delimiter"> </span><span class="l-variable-parameter">Ubuntu</span></span></code></pre>
 <p>It asks you for the <strong>username</strong> and <strong>password</strong> of the Linux user account it
 creates. They have nothing to do with your Windows account: this is a user of
 the Linux system you just installed.</p>
@@ -1591,9 +1530,10 @@ save and reboot. Then run the installation command again.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#presentation">Presentation</a>
     
@@ -1829,33 +1769,35 @@ save and reboot. Then run the installation command again.</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          </a>
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-101-command-line-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
-      </a>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/101-command-line/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -2137,7 +2079,7 @@ save and reboot. Then run the installation command again.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -2541,7 +2483,7 @@ save and reboot. Then run the installation command again.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

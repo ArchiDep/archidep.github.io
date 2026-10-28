@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/403-permissions/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/403-permissions/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -246,9 +246,8 @@ command</a> in Unix Basics for how both modes work.</p></div>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to the SSH exercise server with your username, as you did in <a href="/2026/course/104-hello-ssh/">Hello
 SSH</a>.</p></div></div></div>
 <p>Create a directory for this exercise in your home directory, and go into it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">~/permissions</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/permissions</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">~/permissions</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/permissions</span></span></code></pre>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -272,76 +271,63 @@ most useful outcome: it shows you exactly what you had not understood yet.</p>
 own.</p>
 <h3 id="a-new-file"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> A new file<a href="#a-new-file" aria-label="Link to heading 'A new file'" data-heading-content="A new file" class="anchor"></a></h3>
 <p>Create a file and look at its permissions:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">notes.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">notes.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span></span></code></pre>
 <p>Look at the resulting line. What do the permissions mean? Who owns the file, and
 what can the owner, the group and others do with it?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">6</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:02</span> <span class="l-variable-parameter">notes.txt</span>
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">6</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:02</span> <span class="l-variable-parameter">notes.txt</span></span></code></pre>
 <p>You own the file (<code>jde</code>), and so does your group, also named <code>jde</code>, which only
 you belong to. The owner and the group can read and write (<code>rw-</code>), and others
 can only read (<code>r--</code>).</p></div></div>
 <h3 id="take-away-your-own-write-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away your own write permission<a href="#take-away-your-own-write-permission" aria-label="Link to heading 'Take away your own write permission'" data-heading-content="Take away your own write permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the write permission
 of the owner (you) from <code>notes.txt</code>.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">notes.txt</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">notes.txt</span></span></code></pre></div></div>
 <p>Then try to add a line to the file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;World&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">notes.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;World&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">notes.txt</span></span></code></pre>
 <p>Will it work? You are still the owner of the file, after all.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">-bash: notes.txt: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">-bash: notes.txt: Permission denied</span></code></pre>
 <p>The permissions of a file apply to its owner too. You can still read it, since
 you only removed the write permission:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">notes.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">notes.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span></span></code></pre></div></div>
 <h3 id="take-away-your-own-read-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away your own read permission<a href="#take-away-your-own-read-permission" aria-label="Link to heading 'Take away your own read permission'" data-heading-content="Take away your own read permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the read permission
 of the owner from <code>notes.txt</code> as well.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-r</span> <span class="l-variable-parameter">notes.txt</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-r</span> <span class="l-variable-parameter">notes.txt</span></span></code></pre></div></div>
 <p>Look at the permissions, then try to read the file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">notes.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">notes.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">notes.txt</span></span></code></pre>
 <p>The group <code>jde</code> can still read and write the file, and you are in that group.
 Can you read it?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">----rw-r-- 1 jde jde 6 Oct  8 14:02 notes.txt
-</div><div class="l-line" data-line="2">cat: notes.txt: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">----rw-r-- 1 jde jde 6 Oct  8 14:02 notes.txt</span>
+<span class="l-line" data-line="2">cat: notes.txt: Permission denied</span></code></pre>
 <p>Unix checks <strong>only one category</strong> of users: the first one that applies to you.
 You are the owner, so only the owner’s permissions (<code>---</code>) count, and the
 group’s permissions are never looked at, even though you are in the group.</p></div></div>
 <h3 id="set-the-permissions-back"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set the permissions back<a href="#set-the-permissions-back" aria-label="Link to heading 'Set the permissions back'" data-heading-content="Set the permissions back" class="anchor"></a></h3>
 <p>Give <code>notes.txt</code> its original permissions back, <code>rw-rw-r--</code>, using the <code>chmod</code>
 command either in symbolic or in octal mode.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">664</span> <span class="l-variable-parameter">notes.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-variable">u</span><span class="l-operator">=</span><span class="l-string">rw,g=rw,o=r</span> <span class="l-function-call">notes.txt</span>
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">664</span> <span class="l-variable-parameter">notes.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-variable">u</span><span class="l-operator">=</span><span class="l-string">rw,g=rw,o=r</span> <span class="l-function-call">notes.txt</span></span></code></pre>
 <p><code>rw-</code> is <code>110</code> in binary, which is 6, and <code>r--</code> is <code>100</code>, which is 4.</p></div></div>
 <h2 id="directories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Directories<a href="#directories" aria-label="Link to heading 'Directories'" data-heading-content="Directories" class="anchor"></a></h2>
 <p>Directories have the same three permissions as files, but they do not mean
 quite the same thing. See what each of them allows on a directory.</p>
 <h3 id="rename-a-file-you-cannot-write"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Rename a file you cannot write<a href="#rename-a-file-you-cannot-write" aria-label="Link to heading 'Rename a file you cannot write'" data-heading-content="Rename a file you cannot write" class="anchor"></a></h3>
 <p>Create a file that only its owner can read, and nobody can write:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Do not touch&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">locked.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">400</span> <span class="l-variable-parameter">locked.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">locked.txt</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">-r--------</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">13</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:05</span> <span class="l-variable-parameter">locked.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Do not touch&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">locked.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">400</span> <span class="l-variable-parameter">locked.txt</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">locked.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">-r--------</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">13</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:05</span> <span class="l-variable-parameter">locked.txt</span></span></code></pre>
 <p>Now try to rename it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">locked.txt</span> <span class="l-variable-parameter">renamed.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">locked.txt</span> <span class="l-variable-parameter">renamed.txt</span></span></code></pre>
 <p>Will it work?</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>It works:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span>  <span class="l-number">6</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:02</span> <span class="l-variable-parameter">notes.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">-r--------</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">13</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:05</span> <span class="l-variable-parameter">renamed.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span>  <span class="l-number">6</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:02</span> <span class="l-variable-parameter">notes.txt</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">-r--------</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">13</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:05</span> <span class="l-variable-parameter">renamed.txt</span></span></code></pre>
 <p>Renaming a file does not change the file itself: it changes the <strong>directory</strong>
 that lists its name. What counts is the <code>w</code> permission on the directory, and
 <code>~/permissions</code> is your directory, which you can write to. Deleting a file works
@@ -349,57 +335,47 @@ the same way.</p></div></div>
 <h3 id="take-away-the-directorys-write-permission"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Take away the directory’s write permission<a href="#take-away-the-directorys-write-permission" aria-label="Link to heading 'Take away the directory’s write permission'" data-heading-content="Take away the directory’s write permission" class="anchor"></a></h3>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the write permission
 of the owner from the <code>~/permissions</code> directory itself.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">~/permissions</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u-w</span> <span class="l-variable-parameter">~/permissions</span></span></code></pre></div></div>
 <p>Try to rename the file back, then to create a new file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">renamed.txt</span> <span class="l-variable-parameter">locked.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">new.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">renamed.txt</span> <span class="l-variable-parameter">locked.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">new.txt</span></span></code></pre>
 <p>Will either command work? You own both the directory and the file.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">mv: cannot move &#39;renamed.txt&#39; to &#39;locked.txt&#39;: Permission denied
-</div><div class="l-line" data-line="2">touch: cannot touch &#39;new.txt&#39;: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">mv: cannot move &#39;renamed.txt&#39; to &#39;locked.txt&#39;: Permission denied</span>
+<span class="l-line" data-line="2">touch: cannot touch &#39;new.txt&#39;: Permission denied</span></code></pre>
 <p>Without <code>w</code> on the directory, you can no longer add, rename or remove anything
 in it, even files that you own and could write to.</p></div></div>
 <p>Give the directory its write permission back.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+w</span> <span class="l-variable-parameter">~/permissions</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+w</span> <span class="l-variable-parameter">~/permissions</span></span></code></pre></div></div>
 <h3 id="go-through-a-directory-you-cannot-list"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Go through a directory you cannot list<a href="#go-through-a-directory-you-cannot-list" aria-label="Link to heading 'Go through a directory you cannot list'" data-heading-content="Go through a directory you cannot list" class="anchor"></a></h3>
 <p>Create a directory with a file in it, then leave the directory only the <code>x</code>
 permission, for its owner only:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">closed</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;You found me&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">closed/secret.txt</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">100</span> <span class="l-variable-parameter">closed</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">closed</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;You found me&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">closed/secret.txt</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-number">100</span> <span class="l-variable-parameter">closed</span></span></code></pre>
 <p>Try to list the directory, then to read the file inside it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">closed</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">closed/secret.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">closed</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">closed/secret.txt</span></span></code></pre>
 <p>Which of the two commands will work?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ls: cannot open directory &#39;closed&#39;: Permission denied
-</div><div class="l-line" data-line="2">You found me
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">ls: cannot open directory &#39;closed&#39;: Permission denied</span>
+<span class="l-line" data-line="2">You found me</span></code></pre>
 <p>The <code>r</code> permission of a directory lets you see the names of the files in it. The
 <code>x</code> permission lets you go through it to reach a file whose name you already
 know. <code>secret.txt</code> is readable by you, so <code>cat</code> works.</p></div></div>
 <h2 id="execute-a-script"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Execute a script<a href="#execute-a-script" aria-label="Link to heading 'Execute a script'" data-heading-content="Execute a script" class="anchor"></a></h2>
 <p>Create a small shell script and run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;echo &quot;Hello from a script&quot;&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&#39;echo &quot;Hello from a script&quot;&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">hello.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span></span></code></pre>
 <p>Will it run?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">-bash: ./hello.sh: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">-bash: ./hello.sh: Permission denied</span></code></pre>
 <p>New files are not executable: the server gave <code>hello.sh</code> the permissions
 <code>rw-rw-r--</code>, like <code>notes.txt</code>.</p></div></div>
 <p>Find and execute the appropriate <code>chmod</code> command to make the script executable
 by its owner only, until you can run it successfully.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+x</span> <span class="l-variable-parameter">hello.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">script</span>
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">hello.sh</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">-rwxrw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">27</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:10</span> <span class="l-variable-parameter">hello.sh</span>
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+x</span> <span class="l-variable-parameter">hello.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">script</span></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">hello.sh</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">-rwxrw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">27</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:10</span> <span class="l-variable-parameter">hello.sh</span></span></code></pre>
 <p><code>rwxrw-r--</code> is <code>764</code>.</p></div></div>
 <h2 id="where-you-are-other"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Where you are “other”<a href="#where-you-are-other" aria-label="Link to heading 'Where you are “other”'" data-heading-content="Where you are “other”" class="anchor"></a></h2>
 <p>So far, you have only worked with your own files. Most files on this server
@@ -407,36 +383,30 @@ belong to other users, and for them, you are “other”.</p>
 <h3 id="your-classmates-home-directories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Your classmates’ home directories<a href="#your-classmates-home-directories" aria-label="Link to heading 'Your classmates’ home directories'" data-heading-content="Your classmates’ home directories" class="anchor"></a></h3>
 <p>Look at the permissions of the home directories on the server, your own among
 them:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/home</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/home</span></span></code></pre>
 <p>Pick a classmate’s username in the list, and try to go into their home
 directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/home/</span><span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/home/</span><span class="l-operator">&lt;</span><span class="l-string-special-path">username</span><span class="l-operator">&gt;</span></span></code></pre>
 <p>Will it work?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">-bash: cd: /home/bob: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">-bash: cd: /home/bob: Permission denied</span></code></pre>
 <p>Every home directory is <code>drwxr-x---</code> (<code>750</code>), owned by its user and by that
 user’s own group. You are neither that user nor in their group, so you are
 “other”, and others have no permissions at all.</p></div></div>
 <h3 id="who-can-read-the-passwords"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Who can read the passwords?<a href="#who-can-read-the-passwords" aria-label="Link to heading 'Who can read the passwords?'" data-heading-content="Who can read the passwords?" class="anchor"></a></h3>
 <p>Look at the permissions of the two files that hold the accounts of the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/etc/passwd</span> <span class="l-variable-parameter">/etc/shadow</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">-rw-r--r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>   <span class="l-number">3466</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">23</span> <span class="l-variable-parameter">17:15</span> <span class="l-variable-parameter">/etc/passwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">-rw-r-----</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">shadow</span> <span class="l-number">7610</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">23</span> <span class="l-variable-parameter">17:15</span> <span class="l-variable-parameter">/etc/shadow</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/etc/passwd</span> <span class="l-variable-parameter">/etc/shadow</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">-rw-r--r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>   <span class="l-number">3466</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">23</span> <span class="l-variable-parameter">17:15</span> <span class="l-variable-parameter">/etc/passwd</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">-rw-r-----</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">shadow</span> <span class="l-number">7610</span> <span class="l-variable-parameter">Sep</span> <span class="l-number">23</span> <span class="l-variable-parameter">17:15</span> <span class="l-variable-parameter">/etc/shadow</span></span></code></pre>
 <p>Which of them can you read? Try to display the first lines of each:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/passwd</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/shadow</span>
-</div></code></pre>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/passwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">root:x:0:0:root:/root:/bin/bash</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">bin:x:2:2:bin:/bin:/usr/sbin/nologin</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/shadow</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">head:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-string">&#39;/etc/shadow&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">reading:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/passwd</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/shadow</span></span></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/passwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">root:x:0:0:root:/root:/bin/bash</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">bin:x:2:2:bin:/bin:/usr/sbin/nologin</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">3</span> <span class="l-variable-parameter">/etc/shadow</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">head:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-string">&#39;/etc/shadow&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">reading:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span></code></pre>
 <p>Everyone can read <code>/etc/passwd</code> (<code>644</code>), which many programs need to translate
 user names into UIDs and vice versa. The password hashes are in <code>/etc/shadow</code>
 instead, which only <code>root</code> can write and only the <code>shadow</code> group can read
@@ -447,28 +417,23 @@ the other can read it.</p></div></div></div>
 <p>Create a file in <code>/tmp</code>, the server’s directory for temporary files, which
 everyone can write to. Start its name with <strong>your username</strong>, since everyone
 can see the names of the files in <code>/tmp</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hi from jde&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/tmp/jde-note.txt</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">12</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:20</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hi from jde&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">/tmp/jde-note.txt</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">-rw-rw-r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">12</span> <span class="l-variable-parameter">Oct</span>  <span class="l-number">8</span> <span class="l-variable-parameter">14:20</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span></span></code></pre>
 <p>Ask your classmate to read your file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/tmp/jde-note.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/tmp/jde-note.txt</span></span></code></pre>
 <p>Will it work?</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>It works: your classmate is “other” for your file, and others can read it
 (<code>r--</code>).</p></div></div>
 <p>Find and execute the appropriate <code>chmod</code> command to remove the read permission
 of others from your file.</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">o-r</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span>
-</div></code></pre></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">o-r</span> <span class="l-variable-parameter">/tmp/jde-note.txt</span></span></code></pre></div></div>
 <p>Ask your classmate to read your file again. Will it work this time?</p>
-<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">cat: /tmp/jde-note.txt: Permission denied
-</div></code></pre>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">cat: /tmp/jde-note.txt: Permission denied</span></code></pre>
 <p>Your classmate is still “other”, and others no longer have any permission on
 your file (<code>---</code>).</p></div></div>
 <p>When you are done, delete your file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">/tmp/jde-note.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">/tmp/jde-note.txt</span></span></code></pre>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You controlled who can do what with your files on a server shared by the whole
 class. Your classmates were not hypothetical “other users”: they were logged in
@@ -509,14 +474,12 @@ how you limit the damage when something goes wrong.</p>
 <h3 id="permission-denied-when-i-go-back-into-a-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Permission denied</code> when I go back into a directory<a href="#permission-denied-when-i-go-back-into-a-directory" aria-label="Link to heading 'Permission denied when I go back into a directory'" data-heading-content="Permission denied when I go back into a directory" class="anchor"></a></h3>
 <p>You probably removed the <code>x</code> permission of a directory you own. Give it back,
 for example from your home directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+x</span> <span class="l-variable-parameter">~/permissions/closed</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+x</span> <span class="l-variable-parameter">~/permissions/closed</span></span></code></pre>
 <h3 id="i-cannot-create-or-rename-anything-in-permissions"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> I cannot create or rename anything in <code>~/permissions</code><a href="#i-cannot-create-or-rename-anything-in-permissions" aria-label="Link to heading 'I cannot create or rename anything in ~/permissions'" data-heading-content="I cannot create or rename anything in ~/permissions" class="anchor"></a></h3>
 <p>You probably removed the <code>w</code> permission of the directory and did not give it
 back:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+w</span> <span class="l-variable-parameter">~/permissions</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">u+w</span> <span class="l-variable-parameter">~/permissions</span></span></code></pre>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -528,9 +491,10 @@ back:</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -601,29 +565,31 @@ back:</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-403-permissions-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-403-permissions-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/403-permissions/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/403-permissions/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -905,7 +871,7 @@ back:</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1309,7 +1275,7 @@ back:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

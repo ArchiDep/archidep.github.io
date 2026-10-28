@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/805-docker-compose-deployment/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/805-docker-compose-deployment/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -295,27 +295,25 @@ Compose file format.</li>
 you have performed the <a href="/2026/course/802-docker-fibscale/">previous Docker exercise</a>.</p>
 <p>You need an up-to-date PHP todolist. Move to your PHP todolist repository <strong>on
 your local machine</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/todolist</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/todolist</span></span></code></pre>
 <p><strong>If you performed the <a href="/2026/course/704-render-deployment/">Render deployment exercise</a></strong>, switch back to the <code>main</code>
 branch:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">switch</span> <span class="l-variable-parameter">main</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>In the Render deployment exercise, a Dockerfile was provided for
 you. In this exercise, you will write one yourself, step by step.</p></div></div>
 <p>Make sure your <code>index.php</code> file supports configuration through environment
 variables. If you performed the <a href="/2026/course/504-config-through-environment/">relevant exercise</a> earlier in the course,
 the definition of the base URL and database connection parameters at the top
 should look something like this:</p>
-<pre class="lumis"><code class="language-php" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;BASE_URL&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_BASE_URL&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?</span><span class="l-keyword-conditional-ternary">:</span> <span class="l-string">&#39;/&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-comment">// Database connection parameters.</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_USER&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_USER&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?</span><span class="l-keyword-conditional-ternary">:</span> <span class="l-string">&#39;todolist&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_PASS&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_PASS&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_NAME&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_NAME&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?</span><span class="l-keyword-conditional-ternary">:</span> <span class="l-string">&#39;todolist&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_HOST&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_HOST&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?</span><span class="l-keyword-conditional-ternary">:</span> <span class="l-string">&#39;127.0.0.1&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_PORT&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_PORT&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?</span><span class="l-keyword-conditional-ternary">:</span> <span class="l-string">&#39;3306&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-php" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;?php</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;BASE_URL&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_BASE_URL&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;/&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment">// Database connection parameters.</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_USER&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_USER&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;todolist&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_PASS&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_PASS&#39;</span><span class="l-punctuation-bracket">))</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_NAME&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_NAME&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;todolist&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_HOST&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_HOST&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;127.0.0.1&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_PORT&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_PORT&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;3306&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <p>If that’s not the case, adapt the <code>index.php</code> file, then commit and push your
 changes.</p>
 <h2 id="create-a-compose-file-to-deploy-the-php-todolist-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a compose file to deploy the PHP todolist application<a href="#create-a-compose-file-to-deploy-the-php-todolist-application" aria-label="Link to heading 'Create a compose file to deploy the PHP todolist application'" data-heading-content="Create a compose file to deploy the PHP todolist application" class="anchor"></a></h2>
@@ -344,26 +342,24 @@ commands, e.g. <code>docker compose up app</code>, so <a href="https://martinfow
 wisely</a>. The rest of the
 instructions in this exercise will assume the second choice.</p></div></div>
 <p>The basic structure of your Compose file will be something like:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="4">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="5">    <span class="l-comment"># define the reverse proxy service</span>
-</div><div class="l-line" data-line="6">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="7">    <span class="l-comment"># define the application service</span>
-</div><div class="l-line" data-line="8">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="9">    <span class="l-comment"># define the database service</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="4">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="5">    <span class="l-comment"># define the reverse proxy service</span></span>
+<span class="l-line" data-line="6">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="7">    <span class="l-comment"># define the application service</span></span>
+<span class="l-line" data-line="8">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="9">    <span class="l-comment"># define the database service</span></span></code></pre>
 <h3 id="define-the-database-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Define the database service<a href="#define-the-database-service" aria-label="Link to heading 'Define the database service'" data-heading-content="Define the database service" class="anchor"></a></h3>
 <p>Let’s start from the bottom up: the first service you will define and the first
 container you will run is the <strong>database</strong>.</p>
 <p>Create a <code>compose.yml</code> file in the PHP todolist repository with the following
 (incomplete) contents for now:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="4">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="4">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span></code></pre>
 <p>If you remember the very first <a href="/2026/course/410-sftp-deployment/">PHP todolist SFTP deployment exercise</a>, you had to do a few things to set
 up the database:</p>
 <ol>
@@ -400,24 +396,22 @@ can be divided into two sections:</p>
 <li>
 <p>The <a href="https://github.com/ArchiDep/php-todo-ex/blob/e073e769c7c6eb0d8bf3c1fa7a55f174b5a262e4/todolist.sql#L1-L7" target="_blank" rel="noopener noreferrer">database creation, user creation &amp; privileges
 configuration</a>:</p>
-<pre class="lumis"><code class="language-sql" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">CREATE</span> <span class="l-keyword">DATABASE</span> <span class="l-keyword">IF</span> <span class="l-keyword-operator">NOT</span> <span class="l-keyword">EXISTS</span> todolist<span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="2"><span class="l-keyword">CREATE</span> <span class="l-keyword">USER</span> IF NOT EXISTS &#39;todolist&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;change-me-now&#39;<span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="3">GRANT <span class="l-keyword">ALL</span> PRIVILEGES <span class="l-keyword-operator">ON</span> todolist<span class="l-punctuation-delimiter">.</span><span class="l-operator">*</span> <span class="l-keyword">TO</span> &#39;todolist&#39;@&#39;localhost&#39;<span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-sql" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">CREATE</span> <span class="l-keyword">DATABASE</span> <span class="l-keyword">IF</span> <span class="l-keyword-operator">NOT</span> <span class="l-keyword">EXISTS</span> todolist<span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="2"><span class="l-keyword">CREATE</span> <span class="l-keyword">USER</span> IF NOT EXISTS &#39;todolist&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;change-me-now&#39;<span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3">GRANT <span class="l-keyword">ALL</span> PRIVILEGES <span class="l-keyword-operator">ON</span> todolist<span class="l-punctuation-delimiter">.</span><span class="l-operator">*</span> <span class="l-keyword">TO</span> &#39;todolist&#39;@&#39;localhost&#39;<span class="l-punctuation-delimiter">;</span></span></code></pre>
 </li>
 <li>
 <p>The <a href="https://github.com/ArchiDep/php-todo-ex/blob/e073e769c7c6eb0d8bf3c1fa7a55f174b5a262e4/todolist.sql#L9-L17" target="_blank" rel="noopener noreferrer">creation of the database
 structure</a>:</p>
-<pre class="lumis"><code class="language-sql" translate="no" tabindex="0"><div class="l-line" data-line="1">USE todolist<span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-keyword">CREATE</span> <span class="l-keyword">TABLE</span> <span class="l-keyword">IF</span> <span class="l-keyword-operator">NOT</span> <span class="l-keyword">EXISTS</span> <span class="l-type">`todo`</span> <span class="l-punctuation-bracket">(</span>
-</div><div class="l-line" data-line="4">  <span class="l-variable-member">`id`</span> <span class="l-type-builtin">bigint</span><span class="l-punctuation-bracket">(</span><span class="l-string">20</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">AUTO_INCREMENT</span><span class="l-punctuation-delimiter">,</span>
-</div><div class="l-line" data-line="5">  <span class="l-variable-member">`title`</span> <span class="l-type-builtin">varchar</span><span class="l-punctuation-bracket">(</span><span class="l-string">2048</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span><span class="l-punctuation-delimiter">,</span>
-</div><div class="l-line" data-line="6">  <span class="l-variable-member">`done`</span> <span class="l-type-builtin">tinyint</span><span class="l-punctuation-bracket">(</span><span class="l-string">1</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">DEFAULT</span> <span class="l-string">&#39;0&#39;</span><span class="l-punctuation-delimiter">,</span>
-</div><div class="l-line" data-line="7">  <span class="l-variable-member">`created_at`</span> <span class="l-type-builtin">timestamp</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">DEFAULT</span> <span class="l-attribute">CURRENT_TIMESTAMP</span><span class="l-punctuation-delimiter">,</span>
-</div><div class="l-line" data-line="8">  <span class="l-keyword">PRIMARY</span> <span class="l-keyword">KEY</span> <span class="l-punctuation-bracket">(</span>`id`<span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="9"><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-sql" translate="no" tabindex="0"><span class="l-line" data-line="1">USE todolist<span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-keyword">CREATE</span> <span class="l-keyword">TABLE</span> <span class="l-keyword">IF</span> <span class="l-keyword-operator">NOT</span> <span class="l-keyword">EXISTS</span> <span class="l-type">`todo`</span> <span class="l-punctuation-bracket">(</span></span>
+<span class="l-line" data-line="4">  <span class="l-variable-member">`id`</span> <span class="l-type-builtin">bigint</span><span class="l-punctuation-bracket">(</span><span class="l-number">20</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">AUTO_INCREMENT</span><span class="l-punctuation-delimiter">,</span></span>
+<span class="l-line" data-line="5">  <span class="l-variable-member">`title`</span> <span class="l-type-builtin">varchar</span><span class="l-punctuation-bracket">(</span><span class="l-number">2048</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span><span class="l-punctuation-delimiter">,</span></span>
+<span class="l-line" data-line="6">  <span class="l-variable-member">`done`</span> <span class="l-type-builtin">tinyint</span><span class="l-punctuation-bracket">(</span><span class="l-number">1</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">DEFAULT</span> <span class="l-string">&#39;0&#39;</span><span class="l-punctuation-delimiter">,</span></span>
+<span class="l-line" data-line="7">  <span class="l-variable-member">`created_at`</span> <span class="l-type-builtin">timestamp</span> <span class="l-keyword-operator">NOT</span> <span class="l-type-builtin">NULL</span> <span class="l-attribute">DEFAULT</span> <span class="l-attribute">CURRENT_TIMESTAMP</span><span class="l-punctuation-delimiter">,</span></span>
+<span class="l-line" data-line="8">  <span class="l-keyword">PRIMARY</span> <span class="l-keyword">KEY</span> <span class="l-punctuation-bracket">(</span>`id`<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="9"><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 </li>
 </ul>
 <p>If you read the <a href="https://hub.docker.com/_/mysql#environment-variables" target="_blank" rel="noopener noreferrer">“Environment Variables” section of the MySQL Docker image’s
@@ -499,15 +493,14 @@ few pointers:</p>
 </tbody>
 </table>
 <p>Read the documentation and fill in the definition for your <code>db</code> service:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="4">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="5">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="6">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="7">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span>
-</div><div class="l-line" data-line="8">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">name</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">todolist</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="4">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="5">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="6">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="7">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span></span>
+<span class="l-line" data-line="8">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span></code></pre>
 <p>Here are a few things you want to watch out for:</p>
 <ul>
 <li>
@@ -527,24 +520,21 @@ repositories is a bad security practice.</p>
 Compose</a>.
 One of the cleanest ways when it comes to your repository is to create a
 <code>.env</code> file with your sensitive variables:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1"># .env
-</div><div class="l-line" data-line="2">MYSQL_ROOT_PASSWORD=my-secret-root-password
-</div><div class="l-line" data-line="3">MYSQL_PASSWORD=my-secret-user-password
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1"># .env</span>
+<span class="l-line" data-line="2">MYSQL_ROOT_PASSWORD=my-secret-root-password</span>
+<span class="l-line" data-line="3">MYSQL_PASSWORD=my-secret-user-password</span></code></pre>
 <p><strong>Add this file to your repository’s <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener noreferrer"><code>.gitignore</code> file</a></strong> to make
 sure it is not committed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">.env</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">.gitignore</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.gitignore</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Ignore .env file&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-function-call">.env</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">.gitignore</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.gitignore</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Ignore .env file&quot;</span></span></code></pre>
 <p>Docker Compose will automatically read the <code>.env</code> file in the working
 directory and fill in the variables for you:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">example-service</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="4">      <span class="l-property">VAR1</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">value1</span> <span class="l-comment"># hardcoded value</span>
-</div><div class="l-line" data-line="5">      <span class="l-property">VAR2</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># no value, will be read from .env or the environment</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">example-service</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="4">      <span class="l-property">VAR1</span><span class="l-punctuation-delimiter">:</span> <span class="l-string">value1</span> <span class="l-comment"># hardcoded value</span></span>
+<span class="l-line" data-line="5">      <span class="l-property">VAR2</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># no value, will be read from .env or the environment</span></span></code></pre>
 </li>
 </ul>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>An even better way to manage sensitive information in a Compose project is to
@@ -555,11 +545,10 @@ exercise.</p></div></div>
 <li>
 <p>When specifying the host part of a bind mount in a Compose file, you can use
 <code>.</code> as a reference to the directory containing the Compose file, e.g.:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">example</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="4">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">./some-file.txt:/container/path/some-file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">example</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="4">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">./some-file.txt:/container/path/some-file.txt</span></span></code></pre>
 <p>This bind-mounts the <code>some-file.txt</code> file located in the same directory as the
 Compose file into the container in the <code>/container/path</code> directory.</p>
 </li>
@@ -576,16 +565,15 @@ of your container. Better safe than sorry.</p>
 </ul>
 <h4 id="run-the-database-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the database service<a href="#run-the-database-service" aria-label="Link to heading 'Run the database service'" data-heading-content="Run the database service" class="anchor"></a></h4>
 <p>Once you are done, you can run this service:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">db</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Attaching</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">db-1</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25</span> <span class="l-variable-parameter">18:38:13+00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Note</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Entrypoint</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Entrypoint</span> <span class="l-variable-parameter">script</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">9.5.0-1.el8</span> <span class="l-variable-parameter">started.</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25</span> <span class="l-variable-parameter">18:38:21+00:00</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Note</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Entrypoint</span><span class="l-variable-parameter">]</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">/usr/local/bin/docker-entrypoint.sh:</span> <span class="l-variable-parameter">running</span> <span class="l-variable-parameter">/docker-entrypoint-initdb.d/todolist.sql</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25T18:38:22.761176Z</span> <span class="l-number">0</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">System</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">MY-015015</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Server</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">start.</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25T18:38:23.262642Z</span> <span class="l-number">0</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">System</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">MY-010931</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">Server</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">/usr/sbin/mysqld:</span> <span class="l-variable-parameter">ready</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">connections.</span> <span class="l-variable-parameter">Version:</span> <span class="l-string">&#39;9.5.0&#39;</span>  <span class="l-variable-parameter">socket:</span> <span class="l-string">&#39;/var/run/mysqld/mysqld.sock&#39;</span>  <span class="l-variable-parameter">port:</span> <span class="l-number">3306</span>  <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Community</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">GPL.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">db</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Attaching</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">db-1</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25</span> <span class="l-variable-parameter">18:38:13+00:00</span> <span class="l-variable-parameter">[Note]</span> <span class="l-variable-parameter">[Entrypoint]:</span> <span class="l-variable-parameter">Entrypoint</span> <span class="l-variable-parameter">script</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">9.5.0-1.el8</span> <span class="l-variable-parameter">started.</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25</span> <span class="l-variable-parameter">18:38:21+00:00</span> <span class="l-variable-parameter">[Note]</span> <span class="l-variable-parameter">[Entrypoint]:</span> <span class="l-variable-parameter">/usr/local/bin/docker-entrypoint.sh:</span> <span class="l-variable-parameter">running</span> <span class="l-variable-parameter">/docker-entrypoint-initdb.d/todolist.sql</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25T18:38:22.761176Z</span> <span class="l-number">0</span> <span class="l-variable-parameter">[System]</span> <span class="l-variable-parameter">[MY-015015]</span> <span class="l-variable-parameter">[Server]</span> <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">start.</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">db-1</span>  <span class="l-operator">|</span> <span class="l-function-call">2024-01-25T18:38:23.262642Z</span> <span class="l-number">0</span> <span class="l-variable-parameter">[System]</span> <span class="l-variable-parameter">[MY-010931]</span> <span class="l-variable-parameter">[Server]</span> <span class="l-variable-parameter">/usr/sbin/mysqld:</span> <span class="l-variable-parameter">ready</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">connections.</span> <span class="l-variable-parameter">Version:</span> <span class="l-string">&#39;9.5.0&#39;</span>  <span class="l-variable-parameter">socket:</span> <span class="l-string">&#39;/var/run/mysqld/mysqld.sock&#39;</span>  <span class="l-variable-parameter">port:</span> <span class="l-number">3306</span>  <span class="l-variable-parameter">MySQL</span> <span class="l-variable-parameter">Community</span> <span class="l-variable-parameter">Server</span> <span class="l-variable-parameter">-</span> <span class="l-variable-parameter">GPL.</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>As you can see in the above example, the logs should indicate the execution of
 the <code>todolist.sql</code> script (without any errors after it), as well as the
 successful launch of the MySQL database server at the end (“ready for
@@ -618,8 +606,7 @@ the <code>docker push</code> command to publish the image under your account.</p
 image</a>. If you read its documentation, it is trivial to use; you
 simply need to load your PHP code under the <code>/app</code> directory in the container,
 and voilà:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">/path/to/app:/app</span> <span class="l-variable-parameter">bitnami/php-fpm</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">/path/to/app:/app</span> <span class="l-variable-parameter">bitnami/php-fpm</span></span></code></pre>
 <p>That’s <em>almost good enough</em> to run the PHP todolist. There’s just one catch: in
 the PHP-FPM deployment exercise, we had to <a href="/2026/course/512-nginx-php-fpm-deployment/#add-the-todolist_db_pass-environment-variable-to-php-fpm">add environment variables to FPM</a>.</p>
 <p>We have to do the same with Docker. But we don’t want to do exactly the same: we
@@ -628,14 +615,12 @@ would be the same as committing it into the repository! Anybody who got a hold
 of the image would find the password inside.</p>
 <p>In the FPM exercise, we added a line similar to this to FPM’s configuration
 file:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">env[TODOLIST_DB_PASS] = &quot;my-super-secret-password&quot;
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">env[TODOLIST_DB_PASS] = &quot;my-super-secret-password&quot;</span></code></pre>
 <p>It just so happens that if you read the comments in the section of FPM’s
 configuration file where we added that variable, it states that <em>“All $VARIABLEs
 are taken from the current environment.”</em> This means that we can reference
 environment variables in the file:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">env[TODOLIST_DB_PASS] = $TODOLIST_DB_PASS
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">env[TODOLIST_DB_PASS] = $TODOLIST_DB_PASS</span></code></pre>
 <p>If we add that line to FPM’s configuration file, FPM will read it on startup and
 make it available to the PHP code it interprets.</p>
 <p>So, let’s recap what you need in this PHP todolist Dockerfile:</p>
@@ -663,10 +648,9 @@ make it available to the PHP code it interprets.</p>
 </table>
 <p>Let’s write that file. Create a <code>Dockerfile</code> file in the PHP todolist repository
 and fill in the <code>FROM</code> and <code>COPY</code> commands with something appropriate:</p>
-<pre class="lumis"><code class="language-dockerfile" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">FROM</span> ...
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-keyword">COPY</span> ...
-</div></code></pre>
+<pre class="lumis"><code class="language-dockerfile" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">FROM</span> ...</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-keyword">COPY</span> ...</span></code></pre>
 <p>For the last step, you want to modify the FPM configuration file in the Bitnami
 PHP-FPM container and add the necessary lines to forward the todolist’s
 environment variables to the PHP code intepreted by FPM.</p>
@@ -685,13 +669,12 @@ sweeping changes throughout the whole file, it might be best to craft your own
 custom file with appropriate documentation in the form of comments.</p></div></div>
 <p>To keep things simple, let’s simply add the lines we need at the end. Add this
 to the Dockerfile after the <code>FROM</code> and <code>COPY</code> commands you already have:</p>
-<pre class="lumis"><code class="language-dockerfile" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">RUN</span> <span class="l-function-builtin">echo</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \
-</div><div class="l-line" data-line="2">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_USER&quot;] = $TODOLIST_DB_USER&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \
-</div><div class="l-line" data-line="3">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_PASS&quot;] = $TODOLIST_DB_PASS&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \
-</div><div class="l-line" data-line="4">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_NAME&quot;] = $TODOLIST_DB_NAME&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \
-</div><div class="l-line" data-line="5">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_HOST&quot;] = $TODOLIST_DB_HOST&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \
-</div><div class="l-line" data-line="6">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_PORT&quot;] = $TODOLIST_DB_PORT&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-dockerfile" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">RUN</span> <span class="l-function-builtin">echo</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \</span>
+<span class="l-line" data-line="2">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_USER&quot;] = $TODOLIST_DB_USER&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \</span>
+<span class="l-line" data-line="3">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_PASS&quot;] = $TODOLIST_DB_PASS&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \</span>
+<span class="l-line" data-line="4">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_NAME&quot;] = $TODOLIST_DB_NAME&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \</span>
+<span class="l-line" data-line="5">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_HOST&quot;] = $TODOLIST_DB_HOST&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span> <span class="l-operator">&amp;&amp;</span> \</span>
+<span class="l-line" data-line="6">    <span class="l-function-builtin">echo</span> <span class="l-string">&#39;env[&quot;TODOLIST_DB_PORT&quot;] = $TODOLIST_DB_PORT&#39;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string">&quot;/opt/bitnami/php/etc/php-fpm.d/www.conf&quot;</span></span></code></pre>
 <div class="callout callout-more group/callout" data-callout="805-docker-compose-deployment:bitnami-image-fpm-config"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-805-docker-compose-deployment:bitnami-image-fpm-config" type="checkbox" class="peer hidden" /><div class="content"><p>How could you have known that the FPM configuration file is stored under
 <code>/opt/bitnami/php/etc/php-fpm.d/www.conf</code> in this image?</p>
 <ul>
@@ -703,17 +686,15 @@ FPM’s configuration files, are stored.</p>
 </li>
 <li>
 <p>Run the image with a shell and explore its file system:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">bash</span> <span class="l-variable-parameter">bitnami/php-fpm</span>
-</div><div class="l-line" data-line="2"><span class="l-variable">root</span><span class="l-function-call">@ebc62d5fd3a1:/app#</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">/opt/bitnami/php/etc</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">bash</span> <span class="l-variable-parameter">bitnami/php-fpm</span></span>
+<span class="l-line" data-line="2"><span class="l-variable">root</span><span class="l-function-call">@ebc62d5fd3a1:/app#</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">/opt/bitnami/php/etc</span></span></code></pre>
 <p>By analogy with the FPM exercise, it’s not hard to find the same <code>www.conf</code>
 file we edited then.</p>
 </li>
 </ul></div><label for="callout-805-docker-compose-deployment:bitnami-image-fpm-config" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-805-docker-compose-deployment:bitnami-image-fpm-config" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Terrific!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>And you’re good to go! If you want to test that this Dockerfile is at least
 valid, you can try to build it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">build</span> <span class="l-variable-parameter">-t</span> <span class="l-variable-parameter">todolist/app</span> <span class="l-variable-parameter">.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">build</span> <span class="l-variable-parameter">-t</span> <span class="l-variable-parameter">todolist/app</span> <span class="l-variable-parameter">.</span></span></code></pre>
 <p>There should be no errors in the output.</p>
 <h4 id="write-the-application-service"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Write the application service<a href="#write-the-application-service" aria-label="Link to heading 'Write the application service'" data-heading-content="Write the application service" class="anchor"></a></h4>
 <p>It is now finally time to define the application service. Here’s what you want
@@ -771,15 +752,14 @@ Here’s a few pointers:</p>
 </tbody>
 </table>
 <p>Read the documentation and fill in the definition for your <code>app</code> service:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-property">build</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="4">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="5">    <span class="l-property">depends_on</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="6">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="7">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span>
-</div><div class="l-line" data-line="8">  <span class="l-comment"># ...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-property">build</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="4">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="5">    <span class="l-property">depends_on</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="6">    <span class="l-property">environment</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="7">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span></span>
+<span class="l-line" data-line="8">  <span class="l-comment"># ...</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You may set the <a href="https://docs.docker.com/compose/compose-file/05-services/#image" target="_blank" rel="noopener noreferrer"><code>image</code> key</a> or not in this case. It is
 optional when you also have a <code>build</code> key. Setting it is good practice, since it
 will <a href="https://kodekloud.com/blog/docker-image-tag/" target="_blank" rel="noopener noreferrer">tag your Docker image</a>, making it easier to find in the
@@ -807,12 +787,11 @@ service.</p>
 <p>You can run the application service the same way you did the database service,
 with one little addition. You need to add the <code>--build</code> option so that Docker
 Compose knows to build (or re-build) the Dockerfile for the application:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">app</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-operator">+</span>] Building 0.1s <span class="l-punctuation-bracket">(</span>8/8<span class="l-punctuation-bracket">)</span> <span class="l-constant">FINISHED</span>
-</div><div class="l-line" data-line="4">...
-</div><div class="l-line" data-line="5">Attaching to app-1
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">app</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-operator">+</span>] Building 0.1s <span class="l-punctuation-bracket">(</span>8/8<span class="l-punctuation-bracket">)</span> <span class="l-constant">FINISHED</span></span>
+<span class="l-line" data-line="4">...</span>
+<span class="l-line" data-line="5">Attaching to app-1</span></code></pre>
 <p>So that’s nice, the container is launched, but where are my logs?!
 Unfortunately, FPM is not very verbose there and there’s not a lot to see at the
 moment.</p>
@@ -842,19 +821,18 @@ isolation</a>, and as is indicated in the <a href="https://hub.docker.com/_/ngin
 documentation</a>, the setup of nginx is a little bit simpler
 than your cloud server’s full-fledged installation. You can see that by running
 a few commands to look around in the container:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># List the contents of the /etc/nginx directory</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">/etc/nginx</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">conf.d</span> <span class="l-variable-parameter">fastcgi.conf</span> <span class="l-variable-parameter">fastcgi_params</span> <span class="l-variable-parameter">mime.types</span> <span class="l-variable-parameter">modules</span> <span class="l-variable-parameter">nginx.conf</span> <span class="l-variable-parameter">scgi_params</span> <span class="l-variable-parameter">uwsgi_params</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-comment"># List the includes in nginx&#39;s main configuration file</span>
-</div><div class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">grep</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">include</span> <span class="l-variable-parameter">/etc/nginx/nginx.conf</span>
-</div><div class="l-line" data-line="7">    <span class="l-function-call">include</span>       <span class="l-variable-parameter">/etc/nginx/mime.types</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="8">    <span class="l-function-call">include</span> <span class="l-variable-parameter">/etc/nginx/conf.d/*.conf</span><span class="l-punctuation-delimiter">;</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-comment"># Display the contents of the default site configuration present in the image</span>
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">/etc/nginx/conf.d</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">default.conf</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># List the contents of the /etc/nginx directory</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">/etc/nginx</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">conf.d</span> <span class="l-variable-parameter">fastcgi.conf</span> <span class="l-variable-parameter">fastcgi_params</span> <span class="l-variable-parameter">mime.types</span> <span class="l-variable-parameter">modules</span> <span class="l-variable-parameter">nginx.conf</span> <span class="l-variable-parameter">scgi_params</span> <span class="l-variable-parameter">uwsgi_params</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-comment"># List the includes in nginx&#39;s main configuration file</span></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">grep</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">include</span> <span class="l-variable-parameter">/etc/nginx/nginx.conf</span></span>
+<span class="l-line" data-line="7">    <span class="l-function-call">include</span>       <span class="l-variable-parameter">/etc/nginx/mime.types</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="8">    <span class="l-function-call">include</span> <span class="l-variable-parameter">/etc/nginx/conf.d/*.conf</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10"><span class="l-comment"># Display the contents of the default site configuration present in the image</span></span>
+<span class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-it</span> <span class="l-variable-parameter">--entrypoint</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">nginx:1.29-alpine</span> <span class="l-variable-parameter">/etc/nginx/conf.d</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">default.conf</span></span></code></pre>
 <p>Instead of the <code>sites-available</code> and <code>sites-enabled</code> directories, there is
 simply a single <code>conf.d</code> directory with a <code>default.conf</code> site configuration
 there by default.</p>
@@ -872,23 +850,22 @@ point running this reverse proxy without the application service as well.</p>
 <p>Create a <code>site.conf</code> file in the PHP todolist repository.
 Since the goal of this exercise is to work on Docker Compose, in the interest of
 efficiency, here’s a configuration that will work:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">server {
-</div><div class="l-line" data-line="2">  listen 80;
-</div><div class="l-line" data-line="3">  server_name _;
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">  root /app;
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">  location / {
-</div><div class="l-line" data-line="8">    try_files $uri $uri/index.php;
-</div><div class="l-line" data-line="9">  }
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">  location ~ \.php$ {
-</div><div class="l-line" data-line="12">    fastcgi_pass app:9000;
-</div><div class="l-line" data-line="13">    fastcgi_index index.php;
-</div><div class="l-line" data-line="14">    include fastcgi.conf;
-</div><div class="l-line" data-line="15">  }
-</div><div class="l-line" data-line="16">}
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">server {</span>
+<span class="l-line" data-line="2">  listen 80;</span>
+<span class="l-line" data-line="3">  server_name _;</span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">  root /app;</span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">  location / {</span>
+<span class="l-line" data-line="8">    try_files $uri $uri/index.php;</span>
+<span class="l-line" data-line="9">  }</span>
+<span class="l-line" data-line="10"></span>
+<span class="l-line" data-line="11">  location ~ \.php$ {</span>
+<span class="l-line" data-line="12">    fastcgi_pass app:9000;</span>
+<span class="l-line" data-line="13">    fastcgi_index index.php;</span>
+<span class="l-line" data-line="14">    include fastcgi.conf;</span>
+<span class="l-line" data-line="15">  }</span>
+<span class="l-line" data-line="16">}</span></code></pre>
 <p>The main differences compared to the configuration that you wrote for the FPM
 deployment exercise are:</p>
 <ul>
@@ -953,15 +930,14 @@ Here’s a few pointers:</p>
 </tbody>
 </table>
 <p>Read the documentation and fill in the definition for your <code>rp</code> service:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="4">    <span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="5">    <span class="l-property">depends_on</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="6">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span>
-</div><div class="l-line" data-line="7">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span>
-</div><div class="l-line" data-line="8">  <span class="l-comment"># ...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-property">image</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="4">    <span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="5">    <span class="l-property">depends_on</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="6">    <span class="l-property">restart</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span></span>
+<span class="l-line" data-line="7">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span> <span class="l-comment">#...</span></span>
+<span class="l-line" data-line="8">  <span class="l-comment"># ...</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Note that nginx has images based on the lightweight and secure Alpine Linux
 distribution. Choose one of these for a smaller and more efficient Docker image,
 benefiting from Alpine’s minimalistic footprint.</p></div></div>
@@ -976,8 +952,7 @@ the <a href="https://docs.docker.com/compose/compose-file/05-services/#volumes" 
 <p>You now have the whole Compose architecture for this exercise: <del>the good, the
 bad, and the ugly</del>, the database, the application, and the reverse proxy.</p>
 <p>All that’s left to do is run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Running <code>docker compose up</code> without specifying a service name (like <code>app</code> or
 <code>rp</code>) will run all services and show the combined logs for all of them in your
 terminal.</p></div></div>
@@ -996,18 +971,16 @@ any more.</p>
 with a basic <code>up</code> command, you can add the <code>-d</code> or <code>--detach</code> option to let
 Compose hand over the services to the Docker daemon and handle everything for
 you:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span></span></code></pre>
 <p>Note that you gain back control of your terminal, and the PHP todolist is again
 available at <a href="http://localhost:12000" target="_blank" rel="noopener noreferrer">http://localhost:12000</a>.</p>
 <p>Docker Compose has other useful commands, like <code>ps</code> to list the status of the
 services defined in the Compose file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">ps</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">NAME</span>             <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>         <span class="l-variable-parameter">PORTS</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">todolist-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">9000/tcp</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">todolist-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">todolist-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">ps</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">NAME</span>             <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>         <span class="l-variable-parameter">PORTS</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">todolist-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">9000/tcp</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">todolist-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">todolist-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">28</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span></span></code></pre>
 <p>You can also use <code>docker compose stop [service]</code>, <code>docker compose start [service]</code>, <code>docker compose restart [service]</code>, and various other commands you
 can learn about by running <code>docker compose help</code>.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>When you run Compose services in production on a server, you generally want to
@@ -1018,11 +991,9 @@ the daemon itself).</p></div></div>
 <h2 id="make-it-persist"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Make it persist<a href="#make-it-persist" aria-label="Link to heading 'Make it persist'" data-heading-content="Make it persist" class="anchor"></a></h2>
 <p>Stop and remove all containers running in the background with the following
 command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">down</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">down</span></span></code></pre>
 <p>Now bring the whole thing back up:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span></span></code></pre>
 <p>Visit <a href="http://localhost:12000" target="_blank" rel="noopener noreferrer">http://localhost:12000</a> again. Oh no! All your
 todos are gone!</p>
 <p>Remember that Docker containers are supposed to be <strong>ephemeral</strong>: the MySQL
@@ -1043,30 +1014,28 @@ documentation</a>, you will see that the MySQL database
 server stores its data in the <code>/var/lib/mysql</code> directory inside the container’s
 file system.</p>
 <p>You can mount a directory of your host machine in place of that directory:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="4">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;./data:/var/lib/mysql&#39;</span>
-</div><div class="l-line" data-line="6">      <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="7">  <span class="l-comment">#...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="4">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;./data:/var/lib/mysql&#39;</span></span>
+<span class="l-line" data-line="6">      <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="7">  <span class="l-comment">#...</span></span></code></pre>
 <p>If you choose this solution, the data is stored directly on the host machine’s
 file system, in this case, the <code>data</code> directory relative to the Compose file (in
 the PHP todolist repository, so you might want to add <code>data</code> to your
 <code>.gitignore</code>).</p>
 <p>Or you can let Docker handle your data in a volume:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="4">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;db_data:/var/lib/mysql&#39;</span>
-</div><div class="l-line" data-line="6">      <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="7">  <span class="l-comment">#...</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9"><span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="10">  <span class="l-property">db_data</span><span class="l-punctuation-delimiter">:</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="4">    <span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;db_data:/var/lib/mysql&#39;</span></span>
+<span class="l-line" data-line="6">      <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="7">  <span class="l-comment">#...</span></span>
+<span class="l-line" data-line="8"></span>
+<span class="l-line" data-line="9"><span class="l-property">volumes</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="10">  <span class="l-property">db_data</span><span class="l-punctuation-delimiter">:</span></span></code></pre>
 <p>Note that you are using <code>db_data</code>, a name, instead of a path like <code>./data</code>
 above. This tells Compose that you want to mount a named volume in place of the
 <code>/var/lib/mysql</code> directory. This named volume must be defined under the
@@ -1079,39 +1048,34 @@ plugins</a>. For example,
 you could store volumes in a cloud storage service.</p></div></div>
 <p>Choose one of the 2 solutions, and re-run the Compose command to start your
 services:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span> <span class="l-variable-parameter">rp</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span> <span class="l-variable-parameter">rp</span></span></code></pre>
 <p>Docker Compose should automatically detect that the definition of the database
 service has changed, and restart that service’s containers. It may also restart
 the containers of services that depend on the database (all of them in this
 case, directly or indirectly).</p>
 <p>You may now use the PHP todolist (add a few todos) and gleefully destroy and
 recreate your containers without any data loss:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">down</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span> <span class="l-variable-parameter">rp</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">down</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span> <span class="l-variable-parameter">rp</span></span></code></pre>
 <p>If you’ve chosen to persist your data with a bind mount, you can list the
 contents of the <code>data</code> directory on your host machine to see the raw database
 files created by MySQL:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">data</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">auto.cnf</span> <span class="l-variable-parameter">ca-key.pem</span> <span class="l-variable-parameter">ib_buffer_pool</span> <span class="l-variable-parameter">mysql_upgrade_history</span> <span class="l-variable-parameter">private_key.pem</span> <span class="l-variable-parameter">sys</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">data</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">auto.cnf</span> <span class="l-variable-parameter">ca-key.pem</span> <span class="l-variable-parameter">ib_buffer_pool</span> <span class="l-variable-parameter">mysql_upgrade_history</span> <span class="l-variable-parameter">private_key.pem</span> <span class="l-variable-parameter">sys</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span></code></pre>
 <p>If instead you’ve chosen to use a named volume, you can list your Docker volumes
 with the <code>docker volume ls</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">volume</span> <span class="l-variable-parameter">ls</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">DRIVER</span>    <span class="l-variable-parameter">VOLUME</span> <span class="l-variable-parameter">NAME</span>
-</div><div class="l-line" data-line="3"><span class="l-keyword">local</span>     <span class="l-variable">todolist_db_data</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">volume</span> <span class="l-variable-parameter">ls</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">DRIVER</span>    <span class="l-variable-parameter">VOLUME</span> <span class="l-variable-parameter">NAME</span></span>
+<span class="l-line" data-line="3"><span class="l-keyword">local</span>     <span class="l-variable">todolist_db_data</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">...</span></span></code></pre>
 <p>You should see a volume named <code>todolist_db_data</code>, assuming your Compose project
 is named <code>todolist</code> (the volume name is prefixed with the project name by
 default). If you want to see what’s in it, you can spin off a temporary Alpine
 Linux container with that volume mounted and list its contents:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">todolist_db_data:/mnt/data</span> <span class="l-variable-parameter">alpine</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">/mnt/data</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">auto.cnf</span> <span class="l-variable-parameter">ca-key.pem</span> <span class="l-variable-parameter">ib_buffer_pool</span> <span class="l-variable-parameter">mysql_upgrade_history</span> <span class="l-variable-parameter">private_key.pem</span> <span class="l-variable-parameter">sys</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">--rm</span> <span class="l-variable-parameter">-v</span> <span class="l-variable-parameter">todolist_db_data:/mnt/data</span> <span class="l-variable-parameter">alpine</span> <span class="l-variable-parameter">ls</span> <span class="l-variable-parameter">/mnt/data</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">auto.cnf</span> <span class="l-variable-parameter">ca-key.pem</span> <span class="l-variable-parameter">ib_buffer_pool</span> <span class="l-variable-parameter">mysql_upgrade_history</span> <span class="l-variable-parameter">private_key.pem</span> <span class="l-variable-parameter">sys</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">...</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you’ve chosen host-based storage, you can still erase your data by simply
 deleting the <code>data</code> directory yourself (stop the containers first). If you’ve
 chosen volume-based storage, you can add the <code>-v</code> or <code>--volumes</code> option to the
@@ -1119,10 +1083,9 @@ chosen volume-based storage, you can add the <code>-v</code> or <code>--volumes<
 <h2 id="commit-and-push-your-changes"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Commit and push your changes<a href="#commit-and-push-your-changes" aria-label="Link to heading 'Commit and push your changes'" data-heading-content="Commit and push your changes" class="anchor"></a></h2>
 <p>Now that you have a working Docker Compose deployment ready, add, commit and
 push all the files you have created:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.gitignore</span> <span class="l-variable-parameter">Dockerfile</span> <span class="l-variable-parameter">compose.yml</span> <span class="l-variable-parameter">site.conf</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add docker compose file&quot;</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.gitignore</span> <span class="l-variable-parameter">Dockerfile</span> <span class="l-variable-parameter">compose.yml</span> <span class="l-variable-parameter">site.conf</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add docker compose file&quot;</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span></span></code></pre>
 <p>You should see those files appear in your repository on GitHub.</p>
 <h2 id="deploy-it-on-your-cloud-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Deploy it on your cloud server<a href="#deploy-it-on-your-cloud-server" aria-label="Link to heading 'Deploy it on your cloud server'" data-heading-content="Deploy it on your cloud server" class="anchor"></a></h2>
 <p>To demonstrate how portable Docker Compose is, you will now deploy your new
@@ -1133,9 +1096,8 @@ Compose project on your cloud server, based on the same Compose file.</p>
 repository on GitHub and a clone of it on your cloud server as well.</p>
 <p>Once you are connected to your cloud server, go into the PHP todolist repository
 and pull the changes you just pushed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">todolist-repo</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">todolist-repo</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Change <code>todolist-repo</code> if necessary. You might have named it something else on
 your server.</p></div></div>
 <h3 id="make-sure-docker-works-on-your-cloud-server"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Make sure Docker works on your cloud server<a href="#make-sure-docker-works-on-your-cloud-server" aria-label="Link to heading 'Make sure Docker works on your cloud server'" data-heading-content="Make sure Docker works on your cloud server" class="anchor"></a></h3>
@@ -1146,8 +1108,7 @@ error.</p>
 <h3 id="copy-your-env-file-to-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Copy your <code>.env</code> file to the server<a href="#copy-your-env-file-to-the-server" aria-label="Link to heading 'Copy your .env file to the server'" data-heading-content="Copy your .env file to the server" class="anchor"></a></h3>
 <p>Run the following command <strong>on your local machine</strong> in the PHP todolist
 repository to copy your local <code>.env</code> file to the server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">.env</span> <span class="l-variable-parameter">jde@W.X.Y.Z:todolist-repo</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">scp</span> <span class="l-function-call">.env</span> <span class="l-variable-parameter">jde@W.X.Y.Z:todolist-repo</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your username and <code>W.X.Y.Z</code> with your cloud server’s public
 IP address (the same information you use to connect to your server with SSH),
 and if necessary change <code>todolist-repo</code> to the directory where the todolist
@@ -1159,33 +1120,29 @@ todolist repository with <code>nano .env</code>, and paste and save the contents
 <p>Now run the application service <strong>on your cloud server</strong>. Assuming you are in
 the PHP todolist repository (the <code>todolist-repo</code> directory), where your
 <code>compose.yml</code> file is located, run the same command as before (with <code>sudo</code>):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span></span></code></pre>
 <p>The same containers should now be running on your server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">ps</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">NAME</span>             <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>          <span class="l-variable-parameter">PORTS</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">todolist-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span>    <span class="l-variable-parameter">9000/tcp</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">todolist-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">20</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">20</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">todolist-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span>    <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string-special-path">:::12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">ps</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">NAME</span>             <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>          <span class="l-variable-parameter">PORTS</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">todolist-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span>    <span class="l-variable-parameter">9000/tcp</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">todolist-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">20</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">20</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">todolist-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">minutes</span>    <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string-special-path">:::12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span></span></code></pre>
 <p>Create a new nginx site configuration file on your server with <code>sudo nano /etc/nginx/sites-available/todolist-docker</code> and save the following contents in
 it:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">server {
-</div><div class="l-line" data-line="2">  listen 80;
-</div><div class="l-line" data-line="3">  server_name todolist-docker.jde.archidep.ch;
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">  location / {
-</div><div class="l-line" data-line="6">    proxy_pass http://localhost:12000;
-</div><div class="l-line" data-line="7">  }
-</div><div class="l-line" data-line="8">}
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">server {</span>
+<span class="l-line" data-line="2">  listen 80;</span>
+<span class="l-line" data-line="3">  server_name todolist-docker.jde.archidep.ch;</span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">  location / {</span>
+<span class="l-line" data-line="6">    proxy_pass http://localhost:12000;</span>
+<span class="l-line" data-line="7">  }</span>
+<span class="l-line" data-line="8">}</span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your username and <code>archidep.ch</code> with your assigned domain for
 the course, as you did for previous deployment exercises.</p></div></div>
 <p>Link and enable that configuration:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/todolist-docker</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/todolist-docker</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span></span></code></pre>
 <p>You should now be able to visit http://todolist-docker.jde.archidep.ch in
 your browser and see your Compose deployment live online!</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Note that this deployment is using an isolated database from your previous
@@ -1265,13 +1222,11 @@ configurable, for example port <code>12000</code>.</p>
 meaning you can use environment variables (from the <code>.env</code> file or the actual
 host’s environment) basically anywhere in the file.</p>
 <p>So, instead of hardcoding the published port like you did before:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;12000:80&#39;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;12000:80&#39;</span></span></code></pre>
 <p>You might want to make it configurable:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;${TODOLIST_PORT:-12000}:80&#39;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">ports</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-punctuation-delimiter">-</span> <span class="l-string">&#39;${TODOLIST_PORT:-12000}:80&#39;</span></span></code></pre>
 <p>That way, it will use port <code>12000</code> by default, but you can also change it simply
 by adding <code>TODOLIST_PORT=...</code> to the <code>.env</code> file.</p>
 <h3 id="make-it-more-secure"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Make it more secure<a href="#make-it-more-secure" aria-label="Link to heading 'Make it more secure'" data-heading-content="Make it more secure" class="anchor"></a></h3>
@@ -1280,13 +1235,12 @@ previously learned.</p>
 <p>As you’ve seen in this exercise, Compose creates a default network to connect
 all the services defined in your Compose file. You can see this network with the
 <code>docker network ls</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">ls</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">NETWORK</span> <span class="l-variable-parameter">ID</span>     <span class="l-variable-parameter">NAME</span>               <span class="l-variable-parameter">DRIVER</span>    <span class="l-variable-parameter">SCOPE</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">79343837cf3b</span>   <span class="l-variable-parameter">bridge</span>             <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">0dca506f97c0</span>   <span class="l-variable-parameter">host</span>               <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">local</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">d54b832d124f</span>   <span class="l-variable-parameter">none</span>               <span class="l-variable-parameter">null</span>      <span class="l-variable-parameter">local</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">9e0c4d2551f4</span>   <span class="l-variable-parameter">todolist_default</span>   <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">network</span> <span class="l-variable-parameter">ls</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">NETWORK</span> <span class="l-variable-parameter">ID</span>     <span class="l-variable-parameter">NAME</span>               <span class="l-variable-parameter">DRIVER</span>    <span class="l-variable-parameter">SCOPE</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">79343837cf3b</span>   <span class="l-variable-parameter">bridge</span>             <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">0dca506f97c0</span>   <span class="l-variable-parameter">host</span>               <span class="l-variable-parameter">host</span>      <span class="l-variable-parameter">local</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">d54b832d124f</span>   <span class="l-variable-parameter">none</span>               <span class="l-variable-parameter">null</span>      <span class="l-variable-parameter">local</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">9e0c4d2551f4</span>   <span class="l-variable-parameter">todolist_default</span>   <span class="l-variable-parameter">bridge</span>    <span class="l-variable-parameter">local</span></span></code></pre>
 <p>The containers for the three services of your Compose project (<code>rp</code>, <code>app</code> and
 <code>db</code>) are in this <code>todolist_default</code> network, allowing them to communicate with
 each other.</p>
@@ -1299,30 +1253,27 @@ file, you can define isolated networks in your Compose project. For example, for
 the PHP todolist’s Compose file, you may define a backend network (for the
 application to communicate with the database), and a frontend network (for the
 reverse proxy to communicate with the application):</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">back_tier</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">  <span class="l-property">front_tier</span><span class="l-punctuation-delimiter">:</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">back_tier</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">  <span class="l-property">front_tier</span><span class="l-punctuation-delimiter">:</span></span></code></pre>
 <p>You can then connect the appropriate services into each network:</p>
-<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="2">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="3">    <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="4">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">front_tier</span>
-</div><div class="l-line" data-line="6">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="7">    <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="8">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="9">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">front_tier</span>
-</div><div class="l-line" data-line="10">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">back_tier</span>
-</div><div class="l-line" data-line="11">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="12">    <span class="l-comment"># ...</span>
-</div><div class="l-line" data-line="13">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span>
-</div><div class="l-line" data-line="14">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">back_tier</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-yaml" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-property">services</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="2">  <span class="l-property">rp</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="3">    <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="4">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="5">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">front_tier</span></span>
+<span class="l-line" data-line="6">  <span class="l-property">app</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="7">    <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="8">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="9">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">front_tier</span></span>
+<span class="l-line" data-line="10">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">back_tier</span></span>
+<span class="l-line" data-line="11">  <span class="l-property">db</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="12">    <span class="l-comment"># ...</span></span>
+<span class="l-line" data-line="13">    <span class="l-property">networks</span><span class="l-punctuation-delimiter">:</span></span>
+<span class="l-line" data-line="14">      <span class="l-punctuation-delimiter">-</span> <span class="l-string">back_tier</span></span></code></pre>
 <p>Simply re-run the Compose command to recreate the containers with the new
 networking setup:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">compose</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">--build</span> <span class="l-variable-parameter">--detach</span></span></code></pre>
 <p>This setup allows the reverse proxy and application to communicate since they
 are both in the frontend network. It also allows the application and database to
 communicate since they are both in the backend network. However, the reverse
@@ -1377,19 +1328,17 @@ recall that configuring horizontal scaling with systemd was fairly complex.</p>
 <p>Do you know what it takes to perform horizontal scaling on your machine or on
 your server with Docker Compose?</p>
 <p>One command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">scale</span> <span class="l-variable-parameter">app=3</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">scale</span> <span class="l-variable-parameter">app=3</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Drop the <code>sudo</code> if you are running this on your local machine.</p></div></div>
 <p>You now have 3 instances of the application service running in separate
 containers:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">ps</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">NAME</span>                  <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>          <span class="l-variable-parameter">PORTS</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">todolist-repo-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">14</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">13</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">9000/tcp</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">todolist-repo-app-2</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">5</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">seconds</span>    <span class="l-variable-parameter">9000/tcp</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">todolist-repo-app-3</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">5</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>    <span class="l-variable-parameter">9000/tcp</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">todolist-repo-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">51</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">51</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">todolist-repo-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">14</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">12</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string-special-path">:::12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">docker</span> <span class="l-variable-parameter">compose</span> <span class="l-variable-parameter">ps</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">NAME</span>                  <span class="l-variable-parameter">IMAGE</span>                 <span class="l-variable-parameter">COMMAND</span>                  <span class="l-variable-parameter">SERVICE</span>   <span class="l-variable-parameter">CREATED</span>          <span class="l-variable-parameter">STATUS</span>          <span class="l-variable-parameter">PORTS</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">todolist-repo-app-1</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">14</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">13</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">9000/tcp</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">todolist-repo-app-2</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">5</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">2</span> <span class="l-variable-parameter">seconds</span>    <span class="l-variable-parameter">9000/tcp</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">todolist-repo-app-3</span>   <span class="l-variable-parameter">todolist/app</span>          <span class="l-string">&quot;php-fpm -F --pid /o…&quot;</span>   <span class="l-variable-parameter">app</span>       <span class="l-number">5</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>    <span class="l-variable-parameter">Up</span> <span class="l-number">3</span> <span class="l-variable-parameter">seconds</span>    <span class="l-variable-parameter">9000/tcp</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">todolist-repo-db-1</span>    <span class="l-variable-parameter">mysql:9.5.0</span>           <span class="l-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="l-variable-parameter">db</span>        <span class="l-number">51</span> <span class="l-variable-parameter">minutes</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">51</span> <span class="l-variable-parameter">minutes</span>   <span class="l-variable-parameter">3306/tcp,</span> <span class="l-variable-parameter">33060/tcp</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">todolist-repo-rp-1</span>    <span class="l-variable-parameter">nginx:1.29-alpine</span>     <span class="l-string">&quot;/docker-entrypoint.…&quot;</span>   <span class="l-variable-parameter">rp</span>        <span class="l-number">14</span> <span class="l-variable-parameter">seconds</span> <span class="l-variable-parameter">ago</span>   <span class="l-variable-parameter">Up</span> <span class="l-number">12</span> <span class="l-variable-parameter">seconds</span>   <span class="l-variable-parameter">0.0.0.0:12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp,</span> <span class="l-string-special-path">:::12000-</span><span class="l-operator">&gt;</span><span class="l-string-special-path">80/tcp</span></span></code></pre>
 <p>Starting from the initial architecture of the exercise, the architecture of the
 main running processes and communication flow now looks like this:</p>
 <p><img src="./images/scaled-architecture-30dcc32c820d7e4c54f9ee925b53cc6e.png" alt="Diagram" /></p>
@@ -1450,9 +1399,10 @@ with Docker</a>.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -1562,30 +1512,32 @@ with Docker</a>.</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-805-docker-compose-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-805-docker-compose-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/805-docker-compose-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/805-docker-compose-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      <div class="cloud-server-data" data-mode="details">
-      </div>
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="cloud-server-data" data-mode="details">
+        </div>
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1867,7 +1819,7 @@ with Docker</a>.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -2271,7 +2223,7 @@ with Docker</a>.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

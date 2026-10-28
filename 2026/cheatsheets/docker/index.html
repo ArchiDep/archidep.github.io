@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/docker/cheatsheet.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/docker/cheatsheet.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -272,8 +272,7 @@ the image is based on the <a href="https://hub.docker.com/_/alpine/" target="_bl
 based on the <a href="https://alpinelinux.org" target="_blank" rel="noopener noreferrer">Alpine Linux</a> distribution. Alpine Linux is much smaller
 than most distribution base images (~5MB), and thus leads to much slimmer images
 in general.</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">FROM node:24-alpine
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">FROM node:24-alpine</span></code></pre>
 <p>Here we use the <code>node:24-alpine</code> tag instead of simply <code>node:24</code>.</p>
 <p>These variants are highly recommended when final image size being as small as
 possible is desired.</p>
@@ -295,14 +294,12 @@ influence the behavior of some commands, such as <code>docker ps</code>. You can
 from a Dockerfile with the <code>LABEL</code> instruction.</p>
 <p>A popular convention is to add a <code>org.opencontainers.image.authors</code> label to
 provide an author (and potential maintenance contact e-mail):</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">LABEL org.opencontainers.image.authors=&quot;john.doe@example.com&quot;
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">LABEL org.opencontainers.image.authors=&quot;john.doe@example.com&quot;</span></code></pre>
 <p>You may see the labels of an image or container with <code>docker inspect</code>.</p>
 <p>You may also filter containers by label. For example, to see all running
 containers that have the <code>foo</code> label set to the value <code>bar</code>, you can use the
 following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">docker</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">label=foo=bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">docker</span> <span class="l-variable-parameter">ps</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">label=foo=bar</span></span></code></pre>
 <h3 id="environment-variables">Environment variables<a href="#environment-variables" aria-label="Link to heading 'Environment variables'" data-heading-content="Environment variables" class="anchor"></a></h3>
 <p>The <code>ENV</code> instruction allows you to set environment variables. Many applications
 change their behavior in response to some variables. For example, a Node.js
@@ -310,9 +307,8 @@ application might run in production mode if the <code>$NODE_ENV</code> variable 
 <code>production</code>. Additionally, it might listen on the port specified by the <code>$PORT</code>
 variable.</p>
 <p>Here’s how you could set both variables:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">ENV NODE_ENV=production \
-</div><div class="l-line" data-line="2">    PORT=3000
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">ENV NODE_ENV=production \</span>
+<span class="l-line" data-line="2">    PORT=3000</span></code></pre>
 <h4 id="non-root-users">Non-root users<a href="#non-root-users" aria-label="Link to heading 'Non-root users'" data-heading-content="Non-root users" class="anchor"></a></h4>
 <p>All commands run by a Dockerfile (<code>RUN</code> and <code>CMD</code> instructions) are <strong>run by the
 <code>root</code> user</strong> of the container by default. This is not a good idea as any
@@ -325,18 +321,16 @@ depending on your container’s configuration.</p>
 application even in the container. Here we use Alpine Linux’s <code>addgroup</code> and
 <code>adduser</code> commands to create a user, and make sure that your application’s
 directory, e.g. <code>/app</code>, where you copy the application is owned by that user:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">RUN addgroup -S app &amp;&amp; \
-</div><div class="l-line" data-line="2">    adduser -S -G app app &amp;&amp; \
-</div><div class="l-line" data-line="3">    mkdir -p /app &amp;&amp; \
-</div><div class="l-line" data-line="4">    chown app:app /app
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">RUN addgroup -S app &amp;&amp; \</span>
+<span class="l-line" data-line="2">    adduser -S -G app app &amp;&amp; \</span>
+<span class="l-line" data-line="3">    mkdir -p /app &amp;&amp; \</span>
+<span class="l-line" data-line="4">    chown app:app /app</span></code></pre>
 <p>(Note that these commands are specific to Alpine Linux. You would use <code>groupadd</code>
 and <code>useradd</code> on Ubuntu, for example, which use different options.)</p>
 <p>Finally, we use the <code>USER</code> instruction to make sure that all further commands
 run in this Dockerfile (by <code>RUN</code> or <code>CMD</code> instructions) are executed as the new
 user instead of the root user:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">USER app:app
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">USER app:app</span></code></pre>
 <p>When using the <code>COPY</code> command, you can use the <code>--chown=app:app</code> flag to copy
 files and set their ownership in one go.</p>
 <h3 id="speeding-up-builds">Speeding up builds<a href="#speeding-up-builds" aria-label="Link to heading 'Speeding up builds'" data-heading-content="Speeding up builds" class="anchor"></a></h3>
@@ -346,10 +340,9 @@ package manager (e.g. npm, RubyGems, Composer).</p>
 applications, so we want to take advantage of Docker’s build cache as much as
 possible to avoid running it every time. Suppose you did this like in the
 Dockerfile for a Node.js application:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">COPY ./ /app/
-</div><div class="l-line" data-line="2">WORKDIR /app
-</div><div class="l-line" data-line="3">RUN npm ci
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">COPY ./ /app/</span>
+<span class="l-line" data-line="2">WORKDIR /app</span>
+<span class="l-line" data-line="3">RUN npm ci</span></code></pre>
 <p>Every time you make the slightest change in any of the application’s files, the
 <code>COPY</code> instruction’s cache, and all further commands’ caches will be
 invalidated, including the cache for the <code>RUN npm ci</code> instruction. Therefore,
@@ -358,10 +351,9 @@ any change will trigger a full installation of all dependencies from scratch.</p
 the container into two parts. The first part is to copy only the package
 manager’s files (in this case <code>package.json</code> and <code>package-lock.json</code>) into the
 application’s directory, and to run an <code>npm ci</code> command like before:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">COPY package.json package-lock.json /app/
-</div><div class="l-line" data-line="2">WORKDIR /app
-</div><div class="l-line" data-line="3">RUN npm ci
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">COPY package.json package-lock.json /app/</span>
+<span class="l-line" data-line="2">WORKDIR /app</span>
+<span class="l-line" data-line="3">RUN npm ci</span></code></pre>
 <p>Now, if a change is made to the <code>package.json</code> or <code>package-lock.json</code> files, the
 cache of the <code>RUN npm ci</code> instruction will be invalidated like before, and the
 dependencies will be re-installed, which we want since the change was probably a
@@ -369,8 +361,7 @@ dependency update. However, changes in any other file of the application will
 not invalidate the cache for those 3 instructions, so the result of the <code>RUN npm ci</code> instruction will remain cached.</p>
 <p>The second part of the installation process is to copy the rest of your
 application into the directory:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">COPY ./ /app/
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">COPY ./ /app/</span></code></pre>
 <p>Now, if any file in your application changes, the cache of further instructions
 will be invalidated, but since the <code>RUN npm ci</code> instruction comes before, it
 will remain in the cache and be skipped at build time (unless you modify the
@@ -378,8 +369,7 @@ will remain in the cache and be skipped at build time (unless you modify the
 <h3 id="documenting-exposed-ports">Documenting exposed ports<a href="#documenting-exposed-ports" aria-label="Link to heading 'Documenting exposed ports'" data-heading-content="Documenting exposed ports" class="anchor"></a></h3>
 <p>The <code>EXPOSE</code> instruction informs Docker that the container listens on the
 specified network ports at runtime.</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">EXPOSE 3000
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">EXPOSE 3000</span></code></pre>
 <p>The <code>EXPOSE</code> instruction does not actually publish the port. It functions as a
 type of documentation between the person who builds the image and the person who
 runs the container, about which ports are intended to be published. To actually
@@ -397,9 +387,10 @@ ports and map them to high-order ports.</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#common-docker-commands">Common Docker commands</a>
     
@@ -433,29 +424,31 @@ ports and map them to high-order ports.</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-docker.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-docker.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/docker/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/docker/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -737,7 +730,7 @@ ports and map them to high-order ports.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1141,7 +1134,7 @@ ports and map them to high-order ports.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

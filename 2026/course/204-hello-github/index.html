@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/204-hello-github/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/204-hello-github/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -339,9 +339,8 @@ is about.</p>
 your own. You may or may not have already added your public key to GitHub. Let’s
 check.</p>
 <p>Display the fingerprint of your public key:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-lf</span> <span class="l-variable-parameter">~/.ssh/id_ed25519.pub</span>
-</div><div class="l-line" data-line="2"><span class="l-number">256</span> <span class="l-variable-parameter">SHA256:+9n19lW3aaw4kfotwaDm7Gt3FO1x1EAwJi8CcUyY6oE</span> <span class="l-variable-parameter">name@host</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">ED25519</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-lf</span> <span class="l-variable-parameter">~/.ssh/id_ed25519.pub</span></span>
+<span class="l-line" data-line="2"><span class="l-number">256</span> <span class="l-variable-parameter">SHA256:+9n19lW3aaw4kfotwaDm7Gt3FO1x1EAwJi8CcUyY6oE</span> <span class="l-variable-parameter">name@host</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">ED25519</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Then, on GitHub, open the <strong>SSH and GPG keys</strong> section of your account settings:</p>
 <div class="cols grid grid-cols-1 md:grid-cols-2 gap-4"><div><p><img src="images/github-settings-2bc76f2f7f802f682069e7c40cc36d3b.png" alt="GitHub settings" /></p></div><div><p><img src="images/github-settings-ssh-cc1bea1d05c974cfb599cac268d804c3.png" alt="GitHub SSH settings" /></p></div></div>
 <p>Each key listed there is shown with its fingerprint.</p>
@@ -368,23 +367,21 @@ yet.</p></div></div>
 <h3 id="create-an-ssh-key"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Create an SSH key<a href="#create-an-ssh-key" aria-label="Link to heading 'Create an SSH key'" data-heading-content="Create an SSH key" class="anchor"></a></h3>
 <p>If you do not already have a key, create one with <code>ssh-keygen</code>, and press Enter
 at every prompt to keep the defaults:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Generating</span> <span class="l-variable-parameter">public/private</span> <span class="l-variable-parameter">ed25519</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">pair.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">which</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">save</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">key</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">/home/jdoe/.ssh/id_ed25519</span><span class="l-punctuation-bracket">)</span>:
-</div><div class="l-line" data-line="4"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">empty</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">no</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-bracket">)</span>:
-</div><div class="l-line" data-line="5"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">passphrase</span> <span class="l-variable-parameter">again:</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">Your</span> <span class="l-variable-parameter">identification</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jdoe/.ssh/id_ed25519</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Your</span> <span class="l-variable-parameter">public</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jdoe/.ssh/id_ed25519.pub</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">fingerprint</span> <span class="l-variable-parameter">is:</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">SHA256:+9n19lW3aaw4kfotwaDm7Gt3FO1x1EAwJi8CcUyY6oE</span> <span class="l-variable-parameter">name@host</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Generating</span> <span class="l-variable-parameter">public/private</span> <span class="l-variable-parameter">ed25519</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">pair.</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">which</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">save</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">key</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">/home/jdoe/.ssh/id_ed25519</span><span class="l-punctuation-bracket">)</span>:</span>
+<span class="l-line" data-line="4"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">passphrase</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">empty</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">no</span> <span class="l-variable-parameter">passphrase</span><span class="l-punctuation-bracket">)</span>:</span>
+<span class="l-line" data-line="5"><span class="l-function-call">Enter</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">passphrase</span> <span class="l-variable-parameter">again:</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Your</span> <span class="l-variable-parameter">identification</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jdoe/.ssh/id_ed25519</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Your</span> <span class="l-variable-parameter">public</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">has</span> <span class="l-variable-parameter">been</span> <span class="l-variable-parameter">saved</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jdoe/.ssh/id_ed25519.pub</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">The</span> <span class="l-variable-parameter">key</span> <span class="l-variable-parameter">fingerprint</span> <span class="l-variable-parameter">is:</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">SHA256:+9n19lW3aaw4kfotwaDm7Gt3FO1x1EAwJi8CcUyY6oE</span> <span class="l-variable-parameter">name@host</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Read <a href="/2026/course/103-ssh/#key-protection">SSH Key Protection</a>
 again as a reminder on whether or not to set a passphrase.</p></div></div>
 <h3 id="add-your-key-to-github"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Add your key to GitHub<a href="#add-your-key-to-github" aria-label="Link to heading 'Add your key to GitHub'" data-heading-content="Add your key to GitHub" class="anchor"></a></h3>
 <p>If your <strong>public key</strong> is not already on GitHub, display and copy it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/id_ed25519.pub</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">ssh-ed25519</span> <span class="l-variable-parameter">AAAAC3NzaC1...</span> <span class="l-variable-parameter">jde@example</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/id_ed25519.pub</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ssh-ed25519</span> <span class="l-variable-parameter">AAAAC3NzaC1...</span> <span class="l-variable-parameter">jde@example</span></span></code></pre>
 <div class="callout callout-warning group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -426,12 +423,10 @@ email, before they can push.</p>
 <p>Everyone does this step. Later on, <code>git pull</code> has to combine your work with
 someone else’s. Git refuses to do it until you have told it how, so check what
 yours is set to:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">pull.rebase</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">false</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">pull.rebase</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">false</span></span></code></pre>
 <p>If it prints nothing, set it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span></span></code></pre>
 <p>With this setting, <code>git pull</code> combines diverging work with a merge commit, as
 <code>git merge</code> does.</p>
 <h2 id="everyone-clone-the-fork"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Everyone: clone the fork<a href="#everyone-clone-the-fork" aria-label="Link to heading 'Everyone: clone the fork'" data-heading-content="Everyone: clone the fork" class="anchor"></a></h2>
@@ -455,19 +450,17 @@ its <strong>SSH</strong> URL, not the HTTPS one:</p>
 from the <code>ArchiDep</code> organization, or you will not be able to push your commits
 later.</p></div></div></div>
 <p>Clone it into your projects directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Cloning</span> <span class="l-variable-parameter">into</span> <span class="l-string">&#39;guessit-ex&#39;</span><span class="l-variable-parameter">...</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Cloning</span> <span class="l-variable-parameter">into</span> <span class="l-string">&#39;guessit-ex&#39;</span><span class="l-variable-parameter">...</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">guessit-ex</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If this is your first connection to GitHub over SSH, your SSH client warns you
 that it does not know this server, and shows you the fingerprint of its key
 before anything is transferred:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">The authenticity of host &#39;github.com (W.X.Y.Z)&#39; can&#39;t be established.
-</div><div class="l-line" data-line="2">ED25519 key fingerprint is SHA256:...
-</div><div class="l-line" data-line="3">Are you sure you want to continue connecting (yes/no/[fingerprint])?
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">The authenticity of host &#39;github.com (W.X.Y.Z)&#39; can&#39;t be established.</span>
+<span class="l-line" data-line="2">ED25519 key fingerprint is SHA256:...</span>
+<span class="l-line" data-line="3">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></code></pre>
 <p>GitHub is one of the services that <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints" target="_blank" rel="noopener noreferrer">publish their SSH key
 fingerprints</a>, so you have a trusted source to check
 against. Compare the fingerprint in the warning with the published one for the
@@ -480,10 +473,9 @@ shows Alice’s clone, and everyone’s is the same:</p>
 <p><simgit-story name='guessit' start-chapter='exercise' end-chapter='clone' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
 <p>A clone copies the <strong>whole history</strong> of the repository, and checks out its
 <code>main</code> branch. Check yours with <code>git graph</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">*</span> 5c0a0ed <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main,</span> <span class="l-string-special-path">origin/main,</span> <span class="l-string-special-path">origin/HEAD</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Show</span> <span class="l-variable-parameter">total</span> <span class="l-variable-parameter">games</span> <span class="l-variable-parameter">played</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">leaderboard</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">*</span> <span class="l-variable-parameter">6d114ee</span> <span class="l-variable-parameter">Initial</span> <span class="l-variable-parameter">commit</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">graph</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">*</span> 5c0a0ed <span class="l-punctuation-bracket">(</span><span class="l-function-call">HEAD</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main,</span> <span class="l-string-special-path">origin/main,</span> <span class="l-string-special-path">origin/HEAD</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">Show</span> <span class="l-variable-parameter">total</span> <span class="l-variable-parameter">games</span> <span class="l-variable-parameter">played</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">leaderboard</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">*</span> <span class="l-variable-parameter">6d114ee</span> <span class="l-variable-parameter">Initial</span> <span class="l-variable-parameter">commit</span></span></code></pre>
 <p>These are the commits of the <code>ArchiDep</code> repository, which the fork copied, so
 their hashes are the same for everyone.</p>
 <p><code>origin</code> is the name Git gave the repository you cloned from, Alice’s fork on
@@ -496,18 +488,16 @@ repository on GitHub; you can ignore it.</p>
 if Node.js is already installed on your computer, you can see your changes in
 your browser as you go.</p>
 <p>Check your version of Node.js:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">v26.x.y</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--version</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">v26.x.y</span></span></code></pre>
 <p>If the command is not found, or prints a version older than 22, skip this step:
 you will install Node.js in <a href="/2026/course/205-guessit/#install-nodejs">Guess It</a>.</p>
 <p>Otherwise, open a new terminal, install the application’s dependencies in your
 clone, and start it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/guessit-ex</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/guessit-ex</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">ci</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span></code></pre>
 <p>Open <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">http://localhost:3000</a> in your browser. There is no
 database yet, so the home page says that the leaderboard could not be loaded:
 that is ok and expected. You will install or configure PostgreSQL later, in
@@ -525,18 +515,16 @@ anything in the meantime, so nothing gets in the way.</p>
 <h3 id="alice-add-the-team-to-the-readme"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Alice: add the team to the README<a href="#alice-add-the-team-to-the-readme" aria-label="Link to heading 'Alice: add the team to the README'" data-heading-content="Alice: add the team to the README" class="anchor"></a></h3>
 <p><strong>Alice</strong> adds a “Team” section to <code>README.md</code>, after its first paragraph, with
 the names of the members of the group:</p>
-<pre class="lumis"><code class="language-markdown" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-markup-heading-2">## Team</span>
-</div><div class="l-line" data-line="2"><span class="l-markup-heading-2"></span>
-</div><div class="l-line" data-line="3"><span class="l-markup-list">- </span>Alice
-</div><div class="l-line" data-line="4"><span class="l-markup-list">- </span>Bob
-</div><div class="l-line" data-line="5"><span class="l-markup-list">- </span>Chuck
-</div></code></pre>
+<pre class="lumis"><code class="language-markdown" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-markup-heading-2">## Team</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-markup-list">- </span>Alice</span>
+<span class="l-line" data-line="4"><span class="l-markup-list">- </span>Bob</span>
+<span class="l-line" data-line="5"><span class="l-markup-list">- </span>Chuck</span></code></pre>
 <p>She commits the change:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">README.md</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add the team to the README&quot;</span>
-</div><div class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">6f658d5</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">Add</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">team</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">README</span>
-</div><div class="l-line" data-line="4"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">README.md</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Add the team to the README&quot;</span></span>
+<span class="l-line" data-line="3"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">6f658d5]</span> <span class="l-variable-parameter">Add</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">team</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">README</span></span>
+<span class="l-line" data-line="4"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span>+<span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Your commits will have hashes other than the ones quoted in this exercise, since
 they have your name and date in them.</p>
 <p><strong>Predict:</strong> predict how the commit changes Alice’s repository. Then play the
@@ -548,11 +536,10 @@ diagram to check your prediction:</p>
 Alice’s commit is directly ahead of it, so GitHub only has to move its <code>main</code>
 forward: a <strong>fast-forward</strong>.</p></div></div>
 <p><strong>Alice</strong> pushes:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="4">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="4">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <p><code>git push origin main</code> sends the commit your <code>main</code> points to, with the history
 behind it that the remote does not have yet, to the remote named <code>origin</code>, and
 asks it to move its own <code>main</code> there.</p>
@@ -569,15 +556,13 @@ accept the same push with any name in the commit.</p>
 <h3 id="bob-look-before-you-fetch"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Bob: look before you fetch<a href="#bob-look-before-you-fetch" aria-label="Link to heading 'Bob: look before you fetch'" data-heading-content="Bob: look before you fetch" class="anchor"></a></h3>
 <p>Wait until Alice has pushed. Alice’s commit is on GitHub now.</p>
 <p><strong>Predict:</strong> what will <code>git status</code> say in <strong>Bob</strong>’s repository? Then run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span></code></pre>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>Bob’s repository has not changed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date</span> <span class="l-variable-parameter">with</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date</span> <span class="l-variable-parameter">with</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span></span></code></pre>
 <p>“Up to date” is only true as far as Bob knows. <code>origin/main</code> is his record of
 where <code>main</code> was on GitHub the last time his Git talked to it, when he cloned.
 <strong>Git does not synchronise anything by itself</strong>: nothing tells Bob’s repository
@@ -590,26 +575,23 @@ section?</p>
 where <code>main</code> is on GitHub, <code>origin/main</code>. It changes neither his <code>main</code> nor the
 files in his working directory.</p></div></div>
 <p><strong>Bob</strong> fetches:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">origin</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">origin</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span></code></pre>
 <p>Check <code>README.md</code>: it has no “Team” section yet.</p>
 <p><strong>Predict:</strong> predict what the fetch changes in Bob’s repository. Then play the
 diagram to check your prediction:</p>
 <p><simgit-story name='guessit' start-chapter='bob-look' end-chapter='bob-fetch' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
 <p><strong>Predict:</strong> what will <code>git status</code> say now? Then run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span></code></pre>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>Now that Bob’s Git knows about Alice’s commit, it says that Bob’s branch is
 behind:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">behind</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">by</span> <span class="l-number">1</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">fast-forwarded.</span>
-</div><div class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">local</span> <span class="l-variable-parameter">branch</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="5">
-</div><div class="l-line" data-line="6"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">behind</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">by</span> <span class="l-number">1</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">fast-forwarded.</span></span>
+<span class="l-line" data-line="4">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">update</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">local</span> <span class="l-variable-parameter">branch</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span></span></code></pre></div></div>
 <h3 id="bob-merge"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Bob: merge<a href="#bob-merge" aria-label="Link to heading 'Bob: merge'" data-heading-content="Bob: merge" class="anchor"></a></h3>
 <p><strong>Bob</strong> is going to merge what he fetched into his <code>main</code>, with
 <code>git merge origin/main</code>.</p>
@@ -618,12 +600,11 @@ commit?</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>A fast-forward. <code>main</code> has not moved since Bob cloned, so Alice’s commit is
 directly ahead of it: Git only has to move <code>main</code> forward.</p></div></div>
 <p><strong>Bob</strong> merges:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">origin/main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">5c0a0ed..6f658d5</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Fast-forward</span>
-</div><div class="l-line" data-line="4"> <span class="l-function-call">README.md</span> <span class="l-operator">|</span> <span class="l-number">6</span> <span class="l-variable-parameter">++++++</span>
-</div><div class="l-line" data-line="5"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">merge</span> <span class="l-variable-parameter">origin/main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">5c0a0ed..6f658d5</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="4"> <span class="l-function-call">README.md</span> <span class="l-operator">|</span> <span class="l-number">6</span> <span class="l-variable-parameter">++++++</span></span>
+<span class="l-line" data-line="5"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p><code>README.md</code> now has the “Team” section.</p>
 <p><strong>Predict:</strong> predict what the merge changes in Bob’s repository. Then play the
 diagram to check your prediction:</p>
@@ -635,14 +616,13 @@ diagram to check your prediction:</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>A fast-forward, for the same reason as Bob’s merge: Chuck’s <code>main</code> has not moved
 since he cloned.</p></div></div>
 <p><strong>Chuck</strong> pulls:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">5c0a0ed..6f658d5</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">README.md</span> <span class="l-operator">|</span> <span class="l-number">6</span> <span class="l-variable-parameter">++++++</span>
-</div><div class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">5c0a0ed..6f658d5</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">5c0a0ed..6f658d5</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">README.md</span> <span class="l-operator">|</span> <span class="l-number">6</span> <span class="l-variable-parameter">++++++</span></span>
+<span class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">6</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p><strong>Predict:</strong> predict what the pull changes in Chuck’s repository. Then play the
 diagram to check your prediction:</p>
 <p><simgit-story name='guessitChuck' start-chapter='chuck-look' end-chapter='chuck-pull' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -654,31 +634,26 @@ will then push in order, see what happens, and resolve any conflicts. At the
 end, everyone will pull, and you will all have the same history again.</p>
 <h3 id="everyone-change-something"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Everyone: change something<a href="#everyone-change-something" aria-label="Link to heading 'Everyone: change something'" data-heading-content="Everyone: change something" class="anchor"></a></h3>
 <p>The accent colour of the page is set at the top of <code>server.js</code>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">ACCENT_COLOR</span> <span class="l-operator">=</span> <span class="l-string">&#39;#6c3ce9&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">ACCENT_COLOR</span> <span class="l-operator">=</span> <span class="l-string">&#39;#6c3ce9&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <p><strong>Alice</strong> and <strong>Bob</strong> each set it to a different colour, and commit, without
 pushing.</p>
 <p>For example, <strong>Alice</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># (Edit server.js and set ACCENT_COLOR to &#39;#e63946&#39;...)</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Make the accent red&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># (Edit server.js and set ACCENT_COLOR to &#39;#e63946&#39;...)</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Make the accent red&quot;</span></span></code></pre>
 <p>And <strong>Bob</strong>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-comment"># (Edit server.js and set ACCENT_COLOR to &#39;#2a9d8f&#39;...)</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Make the accent green&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># (Edit server.js and set ACCENT_COLOR to &#39;#2a9d8f&#39;...)</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Make the accent green&quot;</span></span></code></pre>
 <p>If <strong>Chuck</strong> is present in the group, he changes another line of the same file:
 the title in the navigation bar, in the part of <code>server.js</code> under the <code>HTML</code>
 heading comment. He signs it with the names of the group, and commits, without
 pushing:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-operator">&lt;</span><span class="l-variable">a</span> <span class="l-keyword-type">class</span><span class="l-operator">=</span><span class="l-string">&quot;navbar-brand&quot;</span> <span class="l-variable">href</span><span class="l-operator">=</span><span class="l-string">&quot;/&quot;</span><span class="l-operator">&gt;</span>
-</div><div class="l-line" data-line="2">  <span class="l-variable">🎯</span> <span class="l-type">Guess</span> <span class="l-type">It</span><span class="l-punctuation-delimiter">,</span> <span class="l-variable">by</span> <span class="l-type">Alice</span><span class="l-punctuation-delimiter">,</span> <span class="l-type">Bob</span> <span class="l-operator">&amp;</span><span class="l-variable">amp</span><span class="l-punctuation-delimiter">;</span> <span class="l-type">Chuck</span>
-</div><div class="l-line" data-line="3"><span class="l-operator">&lt;</span>/<span class="l-string-regexp">a&gt;</span>
-</div></code></pre>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Sign the navbar&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-operator">&lt;</span><span class="l-variable">a</span> <span class="l-keyword-type">class</span><span class="l-operator">=</span><span class="l-string">&quot;navbar-brand&quot;</span> <span class="l-variable">href</span><span class="l-operator">=</span><span class="l-string">&quot;/&quot;</span><span class="l-operator">&gt;</span></span>
+<span class="l-line" data-line="2">  <span class="l-variable">🎯</span> <span class="l-type">Guess</span> <span class="l-type">It</span><span class="l-punctuation-delimiter">,</span> <span class="l-variable">by</span> <span class="l-type">Alice</span><span class="l-punctuation-delimiter">,</span> <span class="l-type">Bob</span> <span class="l-operator">&amp;</span><span class="l-variable">amp</span><span class="l-punctuation-delimiter">;</span> <span class="l-type">Chuck</span></span>
+<span class="l-line" data-line="3"><span class="l-operator">&lt;</span>/<span class="l-string-regexp">a&gt;</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Sign the navbar&quot;</span></span></code></pre>
 <p>If you started the application in <a href="#everyone-run-the-application">the optional
 step</a>, reload the page to see your change.</p>
 <p><strong>Predict:</strong> predict what Alice’s repository, GitHub’s and Bob’s look like after
@@ -691,11 +666,10 @@ Alice’s and Bob’s commits. Then play the diagram to check your prediction:</
 commit of Alice’s latest commit, so moving <code>main</code> to Alice’s commit is a
 fast-forward.</p></div></div>
 <p><strong>Alice</strong> pushes:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="4">   <span class="l-function-call">6f658d5..f739362</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="4">   <span class="l-function-call">6f658d5..f739362</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <p><strong>Predict:</strong> predict what the push changes, in Alice’s repository, on GitHub and
 in Bob’s repository. Then play the diagram to check your prediction:</p>
 <p><simgit-story name='guessit' start-chapter='pair-commits' end-chapter='alice-push-red' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -706,25 +680,23 @@ in Bob’s repository. Then play the diagram to check your prediction:</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>No. GitHub’s <code>main</code> points to Alice’s newest commit, which Bob does not have.
 Moving it to Bob’s commit would throw Alice’s work away, so GitHub refuses.</p></div></div>
 <p><strong>Bob</strong> pushes, and reads the rejection:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:alice/guessit-ex.git&#39;</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">contains</span> <span class="l-variable-parameter">work</span> <span class="l-variable-parameter">that</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">not</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">locally.</span> <span class="l-variable-parameter">This</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">usually</span> <span class="l-variable-parameter">caused</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">another</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">to</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">ref.</span> <span class="l-variable-parameter">If</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">changes,</span> <span class="l-variable-parameter">use</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">hint:</span> <span class="l-string">&#39;git pull&#39;</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">again.</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">See</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;Note about fast-forwards&#39;</span> <span class="l-variable-parameter">in</span> <span class="l-string">&#39;git push --help&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">details.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:alice/guessit-ex.git&#39;</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">contains</span> <span class="l-variable-parameter">work</span> <span class="l-variable-parameter">that</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">not</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">locally.</span> <span class="l-variable-parameter">This</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">usually</span> <span class="l-variable-parameter">caused</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">another</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">to</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">same</span> <span class="l-variable-parameter">ref.</span> <span class="l-variable-parameter">If</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">changes,</span> <span class="l-variable-parameter">use</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">hint:</span> <span class="l-string">&#39;git pull&#39;</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">again.</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">See</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;Note about fast-forwards&#39;</span> <span class="l-variable-parameter">in</span> <span class="l-string">&#39;git push --help&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">details.</span></span></code></pre>
 <p>The reason Git gives, <code>(fetch first)</code>, says that GitHub has work Bob does not
 even know about yet. The hint suggests <code>git pull</code>, which fetches and then
 merges. Bob will do these one at a time, to see what each changes.</p>
 <h3 id="bob-fetch-and-push-again"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Bob: fetch, and push again<a href="#bob-fetch-and-push-again" aria-label="Link to heading 'Bob: fetch, and push again'" data-heading-content="Bob: fetch, and push again" class="anchor"></a></h3>
 <p><strong>Bob</strong> fetches:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">origin</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">6f658d5..f739362</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">fetch</span> <span class="l-variable-parameter">origin</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">6f658d5..f739362</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span></code></pre>
 <p><strong>Predict:</strong> predict what the fetch changes in Bob’s repository. Then play the
 diagram to check your prediction:</p>
 <p><simgit-story name='guessitBobFetch' start-chapter='bob-rejected' end-chapter='bob-fetch-red' through-chapter='github-layout' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -732,29 +704,27 @@ diagram to check your prediction:</p>
 each have a commit the other does not have, on top of the same commit. This is
 the shape of two branches that need a three-way merge, as in <a href="/2026/course/202-hello-git/#two-merges">Hello Git</a>.</p></div></div>
 <p><code>git status</code> should confirm your prediction:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span></span>
+<span class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span></span></code></pre>
 <p><strong>Predict:</strong> now that Bob has Alice’s commit, will GitHub accept his push? Why?</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>No. Fetching did not change Bob’s <code>main</code>: it still does not contain Alice’s
 commit, so moving GitHub’s <code>main</code> to it would still throw Alice’s work away. <strong>A
 remote only accepts a push that fast-forwards its branch.</strong> Bob has to merge
 Alice’s work into his first.</p></div></div>
 <p><strong>Bob</strong> pushes again, and reads the rejection:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">non-fast-forward</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:alice/guessit-ex.git&#39;</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">tip</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">current</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">behind</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">its</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">counterpart.</span> <span class="l-variable-parameter">If</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">changes,</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">use</span> <span class="l-string">&#39;git pull&#39;</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">again.</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">See</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;Note about fast-forwards&#39;</span> <span class="l-variable-parameter">in</span> <span class="l-string">&#39;git push --help&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">details.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">non-fast-forward</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">error:</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">push</span> <span class="l-variable-parameter">some</span> <span class="l-variable-parameter">refs</span> <span class="l-variable-parameter">to</span> <span class="l-string">&#39;github.com:alice/guessit-ex.git&#39;</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">Updates</span> <span class="l-variable-parameter">were</span> <span class="l-variable-parameter">rejected</span> <span class="l-variable-parameter">because</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">tip</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">current</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">behind</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">its</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">counterpart.</span> <span class="l-variable-parameter">If</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">changes,</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">use</span> <span class="l-string">&#39;git pull&#39;</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">pushing</span> <span class="l-variable-parameter">again.</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">See</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;Note about fast-forwards&#39;</span> <span class="l-variable-parameter">in</span> <span class="l-string">&#39;git push --help&#39;</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">details.</span></span></code></pre>
 <p>The reason is another one this time, <code>(non-fast-forward)</code>: Bob’s Git knows
 about Alice’s commit now, and the push would not move GitHub’s <code>main</code> forward.</p>
 <h3 id="bob-pull-and-resolve-the-conflict"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Bob: pull, and resolve the conflict<a href="#bob-pull-and-resolve-the-conflict" aria-label="Link to heading 'Bob: pull, and resolve the conflict'" data-heading-content="Bob: pull, and resolve the conflict" class="anchor"></a></h3>
@@ -764,59 +734,54 @@ about Alice’s commit now, and the push would not move GitHub’s <code>main</c
 cannot know which change to keep, so it stops in the middle of the merge, and
 asks Bob to choose.</p></div></div>
 <p><strong>Bob</strong> pulls:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">CONFLICT</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">content</span><span class="l-punctuation-bracket">)</span>: <span class="l-function-call">Merge</span> <span class="l-variable-parameter">conflict</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Automatic</span> <span class="l-variable-parameter">merge</span> <span class="l-variable-parameter">failed</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">result.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">CONFLICT</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">content</span><span class="l-punctuation-bracket">)</span>: <span class="l-function-call">Merge</span> <span class="l-variable-parameter">conflict</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Automatic</span> <span class="l-variable-parameter">merge</span> <span class="l-variable-parameter">failed</span><span class="l-punctuation-delimiter">;</span> <span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">commit</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">result.</span></span></code></pre>
 <p><code>git status</code> tells you where you are:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span>
-</div><div class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-function-call">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">unmerged</span> <span class="l-variable-parameter">paths.</span>
-</div><div class="l-line" data-line="8">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">run</span> <span class="l-string">&quot;git commit&quot;</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="9">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git merge --abort&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">abort</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11"><span class="l-function-call">Unmerged</span> <span class="l-variable-parameter">paths:</span>
-</div><div class="l-line" data-line="12">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">mark</span> <span class="l-variable-parameter">resolution</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="13">	<span class="l-function-call">both</span> <span class="l-variable-parameter">modified:</span>   <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="14">
-</div><div class="l-line" data-line="15"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span></span>
+<span class="l-line" data-line="5">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-function-call">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">unmerged</span> <span class="l-variable-parameter">paths.</span></span>
+<span class="l-line" data-line="8">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">fix</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">run</span> <span class="l-string">&quot;git commit&quot;</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="9">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git merge --abort&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">abort</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="10"></span>
+<span class="l-line" data-line="11"><span class="l-function-call">Unmerged</span> <span class="l-variable-parameter">paths:</span></span>
+<span class="l-line" data-line="12">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">mark</span> <span class="l-variable-parameter">resolution</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="13">	<span class="l-function-call">both</span> <span class="l-variable-parameter">modified:</span>   <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="14"></span>
+<span class="l-line" data-line="15"><span class="l-function-call">no</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">added</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git add&quot;</span> <span class="l-variable-parameter">and/or</span> <span class="l-string">&quot;git commit -a&quot;</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Open <code>server.js</code>. Git has written both versions of the line into the file,
 between <strong>conflict markers</strong>:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-</div><div class="l-line" data-line="2">const ACCENT_COLOR = &#39;#2a9d8f&#39;;
-</div><div class="l-line" data-line="3">=======
-</div><div class="l-line" data-line="4">const ACCENT_COLOR = &#39;#e63946&#39;;
-</div><div class="l-line" data-line="5">&gt;&gt;&gt;&gt;&gt;&gt;&gt; f739362c10033226a41a2fec7eb54ed0860fab48
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="l-line" data-line="2">const ACCENT_COLOR = &#39;#2a9d8f&#39;;</span>
+<span class="l-line" data-line="3">=======</span>
+<span class="l-line" data-line="4">const ACCENT_COLOR = &#39;#e63946&#39;;</span>
+<span class="l-line" data-line="5">&gt;&gt;&gt;&gt;&gt;&gt;&gt; f739362c10033226a41a2fec7eb54ed0860fab48</span></code></pre>
 <p>Between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>=======</code> is Bob’s version, the commit he is on.
 Between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> is the version he is merging, Alice’s commit.
 Only the line both of them changed is in conflict: the rest of the file was
 merged.</p>
 <p>Choosing is Bob’s job. He keeps one of the two colours, or writes a third, and
 <strong>removes the three marker lines</strong>:</p>
-<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">ACCENT_COLOR</span> <span class="l-operator">=</span> <span class="l-string">&#39;#2a9d8f&#39;</span><span class="l-punctuation-delimiter">;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">ACCENT_COLOR</span> <span class="l-operator">=</span> <span class="l-string">&#39;#2a9d8f&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <p>Then he marks the conflict as resolved by staging the file, and finishes the
 merge:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span>
-</div><div class="l-line" data-line="6">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-function-call">All</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">fixed</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">still</span> <span class="l-variable-parameter">merging.</span>
-</div><div class="l-line" data-line="9">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git commit&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">conclude</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Choose the right accent color&quot;</span>
-</div><div class="l-line" data-line="12"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">028ac6a</span><span class="l-variable-parameter">]</span> <span class="l-variable-parameter">Choose</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">right</span> <span class="l-variable-parameter">accent</span> <span class="l-variable-parameter">color</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">and</span> <span class="l-string">&#39;origin/main&#39;</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">diverged,</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">and</span> <span class="l-variable-parameter">have</span> <span class="l-number">1</span> <span class="l-variable-parameter">and</span> <span class="l-number">1</span> <span class="l-variable-parameter">different</span> <span class="l-variable-parameter">commits</span> <span class="l-variable-parameter">each,</span> <span class="l-variable-parameter">respectively.</span></span>
+<span class="l-line" data-line="6">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git pull&quot;</span> <span class="l-variable-parameter">if</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">want</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">integrate</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">remote</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">with</span> <span class="l-variable-parameter">yours</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8"><span class="l-function-call">All</span> <span class="l-variable-parameter">conflicts</span> <span class="l-variable-parameter">fixed</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">you</span> <span class="l-variable-parameter">are</span> <span class="l-variable-parameter">still</span> <span class="l-variable-parameter">merging.</span></span>
+<span class="l-line" data-line="9">  <span class="l-punctuation-bracket">(</span><span class="l-function-call">use</span> <span class="l-string">&quot;git commit&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">conclude</span> <span class="l-variable-parameter">merge</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="10"></span>
+<span class="l-line" data-line="11">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Choose the right accent color&quot;</span></span>
+<span class="l-line" data-line="12"><span class="l-punctuation-bracket">[</span><span class="l-function-call">main</span> <span class="l-variable-parameter">028ac6a]</span> <span class="l-variable-parameter">Choose</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">right</span> <span class="l-variable-parameter">accent</span> <span class="l-variable-parameter">color</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>-m</code> gives the commit message on the command line. If you do not give it, Git
 opens your editor to write the message.</p></div></div>
 <p><strong>Predict:</strong> predict what Bob’s repository looks like after the merge commit.
@@ -828,11 +793,10 @@ Then play the diagram to check your prediction:</p>
 point of view, moving <code>main</code> from Alice’s commit to Bob’s merge commit is moving
 it forward: a fast-forward.</p></div></div>
 <p><strong>Bob</strong> pushes:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="4">   <span class="l-function-call">f739362..028ac6a</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="4">   <span class="l-function-call">f739362..028ac6a</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <p><strong>Predict:</strong> predict what the push changes, on GitHub and in Alice’s repository.
 Then play the diagram to check your prediction:</p>
 <p><simgit-story name='guessitBobPushMerge' start-chapter='pair-merged' end-chapter='bob-push-merge' through-chapter='alice-layout' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -844,11 +808,10 @@ own push.</p></div></div>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>No, for the same reason as Bob’s first push: GitHub has commits that Chuck does
 not have.</p></div></div>
 <p><strong>Chuck</strong> pushes, and reads the rejection:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">...</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="3"> <span class="l-operator">!</span> <span class="l-punctuation-bracket">[</span>rejected<span class="l-punctuation-bracket">]</span>        <span class="l-function-call">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span> <span class="l-variable-parameter">first</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">...</span></span></code></pre>
 <h3 id="chuck-pull-1"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Chuck: pull<a href="#chuck-pull-1" aria-label="Link to heading 'Chuck: pull'" data-heading-content="Chuck: pull" class="anchor"></a></h3>
 <p>If <strong>Chuck</strong> is present in the group, it’s his turn to pull. Otherwise skip this
 step.</p>
@@ -861,14 +824,13 @@ and Git asks for its message.</p></div></div>
 <p><strong>Chuck</strong> pulls. The pull opens your editor, with a commit message that Git has
 written for you. Keep it as it is, and exit: in nano, press <code>Ctrl-X</code>. If you
 find yourself in Vim instead, see <a href="/2026/course/202-hello-git/#i-am-stuck-in-vim">I am stuck in Vim</a>.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">6f658d5..028ac6a</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">server.js</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Merge</span> <span class="l-variable-parameter">made</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;ort&#39;</span> <span class="l-variable-parameter">strategy.</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span>
-</div><div class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">6f658d5..028ac6a</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Auto-merging</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Merge</span> <span class="l-variable-parameter">made</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">the</span> <span class="l-string">&#39;ort&#39;</span> <span class="l-variable-parameter">strategy.</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span></span>
+<span class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p><strong>Predict:</strong> predict what Chuck’s repository looks like after the pull. Then
 play the diagram to check your prediction:</p>
 <p><simgit-story name='guessitChuck' start-chapter='chuck-title' end-chapter='chuck-pull-merge' through-chapter='chuck-push-merge' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -879,11 +841,10 @@ Otherwise skip this step.</p>
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your prediction</span></div></div><div class="collapse-content overflow-x-auto"><p>Yes: Chuck’s merge commit has GitHub’s <code>main</code> in its history, so moving <code>main</code>
 to it is a fast-forward.</p></div></div>
 <p><strong>Chuck</strong> pushes:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span>
-</div><div class="l-line" data-line="4">   <span class="l-function-call">028ac6a..04e6514</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">To</span> <span class="l-variable-parameter">github.com:alice/guessit-ex.git</span></span>
+<span class="l-line" data-line="4">   <span class="l-function-call">028ac6a..04e6514</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <p><strong>Predict:</strong> predict what the push changes on GitHub. Then play the diagram to
 check your prediction:</p>
 <p><simgit-story name='guessitChuck' start-chapter='chuck-pull-merge' end-chapter='chuck-push-merge' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
@@ -898,53 +859,48 @@ pushed last.</p></div></div>
 <p>Everyone pulls. What happens depends on the size of your group.</p>
 <h4 id="in-a-group-of-two"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> In a group of two<a href="#in-a-group-of-two" aria-label="Link to heading 'In a group of two'" data-heading-content="In a group of two" class="anchor"></a></h4>
 <p>Bob pushed last, so only Alice has anything to pull:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">f739362..028ac6a</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">f739362..028ac6a</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span>
-</div><div class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">f739362..028ac6a</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">f739362..028ac6a</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span></span>
+<span class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Bob’s repository is already up to date:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Already</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Already</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date.</span></span></code></pre>
 <p><strong>Predict:</strong> predict what Alice’s and Bob’s repositories look like after their
 pulls. Then play the diagram to check your prediction:</p>
 <p><simgit-story name='guessitPair' start-chapter='pair-behind' end-chapter='final-pulls' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
 <h4 id="in-a-group-of-three"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> In a group of three<a href="#in-a-group-of-three" aria-label="Link to heading 'In a group of three'" data-heading-content="In a group of three" class="anchor"></a></h4>
 <p>Chuck pushed last, so Alice and Bob both pull his merge.</p>
 <p><strong>Alice</strong>‘s pull brings Bob’s merge too:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">f739362..04e6514</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">f739362..04e6514</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">4</span> <span class="l-variable-parameter">++--</span>
-</div><div class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">2</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 2 <span class="l-function-call">deletions</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">f739362..04e6514</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">f739362..04e6514</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">4</span> <span class="l-variable-parameter">++--</span></span>
+<span class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">2</span> <span class="l-variable-parameter">insertions</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 2 <span class="l-function-call">deletions</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p><strong>Bob</strong>‘s brings Chuck’s:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span>
-</div><div class="l-line" data-line="3">   <span class="l-function-call">028ac6a..04e6514</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">028ac6a..04e6514</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span>
-</div><div class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span>
-</div><div class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-delimiter"></span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">From</span> <span class="l-variable-parameter">github.com:alice/guessit-ex</span></span>
+<span class="l-line" data-line="3">   <span class="l-function-call">028ac6a..04e6514</span>  <span class="l-variable-parameter">main</span>       <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">origin/main</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Updating</span> <span class="l-variable-parameter">028ac6a..04e6514</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="6"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-number">2</span> <span class="l-variable-parameter">+-</span></span>
+<span class="l-line" data-line="7"> <span class="l-number">1</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changed,</span> <span class="l-number">1</span> <span class="l-variable-parameter">insertion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">+</span><span class="l-punctuation-bracket">)</span>, 1 <span class="l-function-call">deletion</span><span class="l-punctuation-bracket">(</span><span class="l-function-call">-</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Chuck’s repository is already up to date.</p>
 <p><strong>Predict:</strong> predict what Alice’s and Bob’s repositories look like after their
 pulls. Then play the diagram to check your prediction:</p>
 <p><simgit-story name='guessit' start-chapter='pair-behind' end-chapter='bob-final-pull' sizing='auto-height' commit-representation='below' duration='1200' mode='manual' defer-until-visible='true'></simgit-story></p>
 <h4 id="everyone-check-your-status"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Everyone: check your status<a href="#everyone-check-your-status" aria-label="Link to heading 'Everyone: check your status'" data-heading-content="Everyone: check your status" class="anchor"></a></h4>
 <p>Everyone now has the same history, and <code>git status</code> says so:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date</span> <span class="l-variable-parameter">with</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date</span> <span class="l-variable-parameter">with</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span></span></code></pre>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You worked as a team on one project, each on your own computer, with your own
 copy of its whole history. GitHub was not where the project lived: it was one
@@ -997,41 +953,37 @@ left in a file are committed like any other text, so test before you commit.</p>
 <p>GitHub does not know your SSH key. <a href="#everyone-check-your-ssh-key-on-github">Check your SSH key on
 GitHub</a> again: the fingerprint of the key GitHub
 lists must be the one <code>ssh-keygen -lf</code> prints for your public key:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-lf</span> <span class="l-variable-parameter">~/.ssh/id_ed25519.pub</span>
-</div><div class="l-line" data-line="2"><span class="l-number">256</span> <span class="l-variable-parameter">SHA256:...</span> <span class="l-variable-parameter">jde@example</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">ED25519</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh-keygen</span> <span class="l-function-call">-lf</span> <span class="l-variable-parameter">~/.ssh/id_ed25519.pub</span></span>
+<span class="l-line" data-line="2"><span class="l-number">256</span> <span class="l-variable-parameter">SHA256:...</span> <span class="l-variable-parameter">jde@example</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">ED25519</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <h3 id="error-permission-to-aliceguessit-exgit-denied-to-bob"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>ERROR: Permission to alice/guessit-ex.git denied to bob</code><a href="#error-permission-to-aliceguessit-exgit-denied-to-bob" aria-label="Link to heading 'ERROR: Permission to alice/guessit-ex.git denied to bob'" data-heading-content="ERROR: Permission to alice/guessit-ex.git denied to bob" class="anchor"></a></h3>
 <p>You are not a collaborator of the repository yet. Check that Alice has invited
 you, and that you have accepted the invitation, which GitHub sent you by email.</p>
 <h3 id="error-permission-to-archidepguessit-exgit-denied"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>ERROR: Permission to ArchiDep/guessit-ex.git denied</code><a href="#error-permission-to-archidepguessit-exgit-denied" aria-label="Link to heading 'ERROR: Permission to ArchiDep/guessit-ex.git denied'" data-heading-content="ERROR: Permission to ArchiDep/guessit-ex.git denied" class="anchor"></a></h3>
 <p>You cloned the <code>ArchiDep</code> repository instead of Alice’s fork. Check where your
 <code>origin</code> points to:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">-v</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">origin</span>  <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">origin</span>  <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">push</span><span class="l-punctuation-bracket">)</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">-v</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">origin</span>  <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">fetch</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">origin</span>  <span class="l-variable-parameter">git@github.com:ArchiDep/guessit-ex.git</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">push</span><span class="l-punctuation-bracket">)</span></span></code></pre>
 <p>Delete your clone, and <a href="#everyone-clone-the-fork">clone Alice’s fork</a> instead.</p>
 <h3 id="fatal-need-to-specify-how-to-reconcile-divergent-branches"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>fatal: Need to specify how to reconcile divergent branches.</code><a href="#fatal-need-to-specify-how-to-reconcile-divergent-branches" aria-label="Link to heading 'fatal: Need to specify how to reconcile divergent branches.'" data-heading-content="fatal: Need to specify how to reconcile divergent branches." class="anchor"></a></h3>
 <p>If <code>git pull</code> fails with this message:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">divergent</span> <span class="l-variable-parameter">branches</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">need</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">specify</span> <span class="l-variable-parameter">how</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">reconcile</span> <span class="l-variable-parameter">them.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">running</span> <span class="l-variable-parameter">one</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">following</span> <span class="l-variable-parameter">commands</span> <span class="l-variable-parameter">sometime</span> <span class="l-variable-parameter">before</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">next</span> <span class="l-variable-parameter">pull:</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">hint:</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span>  <span class="l-comment"># merge</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">true</span>   <span class="l-comment"># rebase</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.ff</span> <span class="l-variable-parameter">only</span>       <span class="l-comment"># fast-forward only</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">hint:</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">replace</span> <span class="l-string">&quot;git config&quot;</span> <span class="l-variable-parameter">with</span> <span class="l-string">&quot;git config --global&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">default</span>
-</div><div class="l-line" data-line="11"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">preference</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">all</span> <span class="l-variable-parameter">repositories.</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">also</span> <span class="l-variable-parameter">pass</span> <span class="l-variable-parameter">--rebase,</span> <span class="l-variable-parameter">--no-rebase,</span>
-</div><div class="l-line" data-line="12"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">--ff-only</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">command</span> <span class="l-variable-parameter">line</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">override</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">configured</span> <span class="l-variable-parameter">default</span> <span class="l-variable-parameter">per</span>
-</div><div class="l-line" data-line="13"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">invocation.</span>
-</div><div class="l-line" data-line="14"><span class="l-function-call">fatal:</span> <span class="l-variable-parameter">Need</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">specify</span> <span class="l-variable-parameter">how</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">reconcile</span> <span class="l-variable-parameter">divergent</span> <span class="l-variable-parameter">branches.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">have</span> <span class="l-variable-parameter">divergent</span> <span class="l-variable-parameter">branches</span> <span class="l-variable-parameter">and</span> <span class="l-variable-parameter">need</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">specify</span> <span class="l-variable-parameter">how</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">reconcile</span> <span class="l-variable-parameter">them.</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">do</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">by</span> <span class="l-variable-parameter">running</span> <span class="l-variable-parameter">one</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">following</span> <span class="l-variable-parameter">commands</span> <span class="l-variable-parameter">sometime</span> <span class="l-variable-parameter">before</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">next</span> <span class="l-variable-parameter">pull:</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">hint:</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span>  <span class="l-comment"># merge</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">true</span>   <span class="l-comment"># rebase</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">hint:</span>   <span class="l-variable-parameter">git</span> <span class="l-variable-parameter">config</span> <span class="l-variable-parameter">pull.ff</span> <span class="l-variable-parameter">only</span>       <span class="l-comment"># fast-forward only</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">hint:</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">replace</span> <span class="l-string">&quot;git config&quot;</span> <span class="l-variable-parameter">with</span> <span class="l-string">&quot;git config --global&quot;</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">default</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">preference</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">all</span> <span class="l-variable-parameter">repositories.</span> <span class="l-variable-parameter">You</span> <span class="l-variable-parameter">can</span> <span class="l-variable-parameter">also</span> <span class="l-variable-parameter">pass</span> <span class="l-variable-parameter">--rebase,</span> <span class="l-variable-parameter">--no-rebase,</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">or</span> <span class="l-variable-parameter">--ff-only</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">command</span> <span class="l-variable-parameter">line</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">override</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">configured</span> <span class="l-variable-parameter">default</span> <span class="l-variable-parameter">per</span></span>
+<span class="l-line" data-line="13"><span class="l-function-call">hint:</span> <span class="l-variable-parameter">invocation.</span></span>
+<span class="l-line" data-line="14"><span class="l-function-call">fatal:</span> <span class="l-variable-parameter">Need</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">specify</span> <span class="l-variable-parameter">how</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">reconcile</span> <span class="l-variable-parameter">divergent</span> <span class="l-variable-parameter">branches.</span></span></code></pre>
 <p>You have skipped <a href="#everyone-configure-git-pull">configuring <code>git pull</code></a>. Run
 this command once:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">config</span> <span class="l-variable-parameter">--global</span> <span class="l-variable-parameter">pull.rebase</span> <span class="l-variable-parameter">false</span></span></code></pre>
 <p>Then run <code>git pull</code> again.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>With the <code>--global</code> option, this setting is saved in your global <code>~/.gitconfig</code>
 file, and applies to every repository on your computer.</p></div></div>
@@ -1050,9 +1002,10 @@ described in <a href="/2026/course/205-guessit/#libatomicso1-cannot-open-shared-
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -1182,29 +1135,31 @@ described in <a href="/2026/course/205-guessit/#libatomicso1-cannot-open-shared-
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-204-hello-github-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-204-hello-github-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/204-hello-github/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/204-hello-github/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1486,7 +1441,7 @@ described in <a href="/2026/course/205-guessit/#libatomicso1-cannot-open-shared-
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1890,7 +1845,7 @@ described in <a href="/2026/course/205-guessit/#libatomicso1-cannot-open-shared-
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

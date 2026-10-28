@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/shell-scripting/cheatsheet.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/shell-scripting/cheatsheet.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -217,8 +217,7 @@ shells like <a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank"
 machine code compiled from source, or a <strong>script</strong>, a text file that an
 interpreter reads and runs.</p>
 <p>The first line of a script, the <strong>shebang</strong>, names that interpreter:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span></code></pre>
 <p>This one says the file should be run by <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>. There must be no space
 between <code>#!</code> and the path.</p>
 <p>A script whose interpreter is a shell is a <strong>shell script</strong>. A script whose
@@ -281,67 +280,57 @@ differ from this table. <code>which bash</code> says where Bash is.</p></div></d
 <h2 id="writing-and-running-a-script">Writing and running a script<a href="#writing-and-running-a-script" aria-label="Link to heading 'Writing and running a script'" data-heading-content="Writing and running a script" class="anchor"></a></h2>
 <h3 id="create-a-script-printf-nano">Create a script (<code>printf</code>, <code>nano</code>)<a href="#create-a-script-printf-nano" aria-label="Link to heading 'Create a script (printf, nano)'" data-heading-content="Create a script (printf, nano)" class="anchor"></a></h3>
 <p>Write the whole thing in one command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/bash\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">test.sh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printf</span> <span class="l-string">&#39;#!/bin/bash\necho Hello World\n&#39;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">test.sh</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>printf</code> (<strong>print</strong> <strong>f</strong>ormat) command is similar to the <code>echo</code> command but
 it has better support for special characters like new lines (<code>\n</code>).</p></div></div>
 <p>Or open an editor and type it in:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.sh</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">test.sh</span></span></code></pre>
 <h3 id="run-a-script-chmod-x-script">Run a script (<code>chmod +x</code>, <code>./script</code>)<a href="#run-a-script-chmod-x-script" aria-label="Link to heading 'Run a script (chmod +x, ./script)'" data-heading-content="Run a script (chmod +x, ./script)" class="anchor"></a></h3>
 <p>A file you have just created is not executable. Make it so, then run it by its
 path:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">test.sh</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./test.sh</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">test.sh</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./test.sh</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The <code>./</code> matters: without it, the shell looks for <code>test.sh</code> in the directories
 of your <code>PATH</code> instead of in the current directory. See <a href="/2026/cheatsheets/command-line/#make-a-file-executable-chmod-x">make a file
 executable</a> and <a href="/2026/cheatsheets/command-line/#run-a-program-program">run a program</a>.</p></div></div>
 <h3 id="know-where-the-script-runs-cd">Know where the script runs (<code>cd</code>)<a href="#know-where-the-script-runs-cd" aria-label="Link to heading 'Know where the script runs (cd)'" data-heading-content="Know where the script runs (cd)" class="anchor"></a></h3>
 <p>A script starts in the directory it was run <strong>from</strong>, not the one it lives in.
 Use <code>cd</code> to move around:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">pwd</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">/home</span>
-</div><div class="l-line" data-line="4"><span class="l-function-builtin">pwd</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">pwd</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">cd</span> <span class="l-variable-parameter">/home</span></span>
+<span class="l-line" data-line="4"><span class="l-function-builtin">pwd</span></span></code></pre>
 <p>Run from <code>/some/where/over/the/rainbow</code>, this prints:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">/some/where/over/the/rainbow
-</div><div class="l-line" data-line="2">/home
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">/some/where/over/the/rainbow</span>
+<span class="l-line" data-line="2">/home</span></code></pre>
 <h2 id="variables">Variables<a href="#variables" aria-label="Link to heading 'Variables'" data-heading-content="Variables" class="anchor"></a></h2>
 <h3 id="use-a-variable">Use a variable<a href="#use-a-variable" aria-label="Link to heading 'Use a variable'" data-heading-content="Use a variable" class="anchor"></a></h3>
 <p>No spaces around the <code>=</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar&quot;</span></span></code></pre>
 <p>Quote the variable when you declare it and when you use it, so that a value
 containing whitespace (spaces, new lines, etc) stays one value:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar baz&quot;</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar baz&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar baz&quot;</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span>   <span class="l-comment"># prints &quot;bar baz&quot;</span></span></code></pre>
 <h3 id="store-the-output-of-a-command-">Store the output of a command (<code>$(...)</code>)<a href="#store-the-output-of-a-command-" aria-label="Link to heading 'Store the output of a command ($(...))'" data-heading-content="Store the output of a command ($(...))" class="anchor"></a></h3>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-constant">FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-call">ls</span> <span class="l-number">-1</span><span class="l-punctuation-special">)</span>
-</div><div class="l-line" data-line="3"><span class="l-constant">NUMBER_OF_FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILES</span>&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span><span class="l-punctuation-special">)</span>
-</div><div class="l-line" data-line="4"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;There are <span class="l-punctuation-special">$</span><span class="l-constant">NUMBER_OF_FILES</span> files&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-constant">FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-call">ls</span> <span class="l-number">-1</span><span class="l-punctuation-special">)</span></span>
+<span class="l-line" data-line="3"><span class="l-constant">NUMBER_OF_FILES</span><span class="l-operator">=</span><span class="l-punctuation-special">$(</span><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILES</span>&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span><span class="l-punctuation-special">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;There are <span class="l-punctuation-special">$</span><span class="l-constant">NUMBER_OF_FILES</span> files&quot;</span></span></code></pre>
 <p>This script would print <code>There are 10 files</code> if there are 10 files in the
 current directory.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You will also see the older backtick form, <code>FILES=`ls -1`</code>. It does the same
 thing, but unlike backticks, <code>$(...)</code> can be nested.</p></div></div>
 <h3 id="read-and-set-environment-variables-export">Read and set environment variables (<code>export</code>)<a href="#read-and-set-environment-variables-export" aria-label="Link to heading 'Read and set environment variables (export)'" data-heading-content="Read and set environment variables (export)" class="anchor"></a></h3>
 <p>Environment variables are ordinary variables in a script:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable-builtin">PATH</span>&quot;</span></span></code></pre>
 <p>Set one the way you would in any shell:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-keyword-import">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span></span></code></pre>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -387,26 +376,23 @@ available:</p>
 </tbody>
 </table>
 <p>For example, this script says hello to the name passed as the first argument:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
-</div></code></pre>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span> <span class="l-function-call">World</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./hello.sh</span> <span class="l-function-call">World</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <h2 id="logic">Logic<a href="#logic" aria-label="Link to heading 'Logic'" data-heading-content="Logic" class="anchor"></a></h2>
 <h3 id="test-a-condition-if">Test a condition (<code>if</code>)<a href="#test-a-condition-if" aria-label="Link to heading 'Test a condition (if)'" data-heading-content="Test a condition (if)" class="anchor"></a></h3>
 <p>Bash has a classic <code>if/then/else</code> construct:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar&quot;</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-keyword-conditional">if</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;foo&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
-</div><div class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is foo&quot;</span>
-</div><div class="l-line" data-line="6"><span class="l-keyword-conditional">elif</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;bar&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
-</div><div class="l-line" data-line="7">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is bar&quot;</span>
-</div><div class="l-line" data-line="8"><span class="l-keyword-conditional">else</span>
-</div><div class="l-line" data-line="9">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is something else&quot;</span>
-</div><div class="l-line" data-line="10"><span class="l-keyword-conditional">fi</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">&quot;bar&quot;</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-keyword-conditional">if</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;foo&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span></span>
+<span class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is foo&quot;</span></span>
+<span class="l-line" data-line="6"><span class="l-keyword-conditional">elif</span> <span class="l-punctuation-bracket">[[</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FOO</span>&quot;</span> <span class="l-operator">==</span> <span class="l-string">&quot;bar&quot;</span> <span class="l-punctuation-bracket">]]</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span></span>
+<span class="l-line" data-line="7">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is bar&quot;</span></span>
+<span class="l-line" data-line="8"><span class="l-keyword-conditional">else</span></span>
+<span class="l-line" data-line="9">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;FOO is something else&quot;</span></span>
+<span class="l-line" data-line="10"><span class="l-keyword-conditional">fi</span></span></code></pre>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -426,90 +412,81 @@ with <code>-eq</code> compares 0 to 0, so the first branch always matches.</p></
 Bash <a href="https://www.tldp.org/LDP/abs/html/comparison-ops.html" target="_blank" rel="noopener noreferrer">other comparison operators</a>.</p></div></div>
 <h3 id="test-a-file-or-an-empty-variable-test">Test a file or an empty variable (<code>test</code>)<a href="#test-a-file-or-an-empty-variable-test" aria-label="Link to heading 'Test a file or an empty variable (test)'" data-heading-content="Test a file or an empty variable (test)" class="anchor"></a></h3>
 <p>The <code>test</code> built-in command is another way to write some conditions:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-constant">EMPTY_VAR</span><span class="l-operator">=</span>
-</div><div class="l-line" data-line="4"><span class="l-constant">FULL_VAR</span><span class="l-operator">=</span><span class="l-string">&quot;full&quot;</span>
-</div><div class="l-line" data-line="5"><span class="l-constant">FILE</span><span class="l-operator">=</span><span class="l-string">&quot;/path/to/some/file&quot;</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-z</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">EMPTY_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
-</div><div class="l-line" data-line="8">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is empty&quot;</span>
-</div><div class="l-line" data-line="9"><span class="l-keyword-conditional">fi</span>
-</div><div class="l-line" data-line="10">
-</div><div class="l-line" data-line="11"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-n</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FULL_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
-</div><div class="l-line" data-line="12">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is not empty&quot;</span>
-</div><div class="l-line" data-line="13"><span class="l-keyword-conditional">fi</span>
-</div><div class="l-line" data-line="14">
-</div><div class="l-line" data-line="15"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-f</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILE</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span>
-</div><div class="l-line" data-line="16">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file exists&quot;</span>
-</div><div class="l-line" data-line="17"><span class="l-keyword-conditional">else</span>
-</div><div class="l-line" data-line="18">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file does not exist&quot;</span>
-</div><div class="l-line" data-line="19"><span class="l-keyword-conditional">fi</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-constant">EMPTY_VAR</span><span class="l-operator">=</span></span>
+<span class="l-line" data-line="4"><span class="l-constant">FULL_VAR</span><span class="l-operator">=</span><span class="l-string">&quot;full&quot;</span></span>
+<span class="l-line" data-line="5"><span class="l-constant">FILE</span><span class="l-operator">=</span><span class="l-string">&quot;/path/to/some/file&quot;</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-z</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">EMPTY_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span></span>
+<span class="l-line" data-line="8">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is empty&quot;</span></span>
+<span class="l-line" data-line="9"><span class="l-keyword-conditional">fi</span></span>
+<span class="l-line" data-line="10"></span>
+<span class="l-line" data-line="11"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-n</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FULL_VAR</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span></span>
+<span class="l-line" data-line="12">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;variable is not empty&quot;</span></span>
+<span class="l-line" data-line="13"><span class="l-keyword-conditional">fi</span></span>
+<span class="l-line" data-line="14"></span>
+<span class="l-line" data-line="15"><span class="l-keyword-conditional">if</span> <span class="l-function-builtin">test</span> <span class="l-variable-parameter">-f</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">FILE</span>&quot;</span><span class="l-punctuation-delimiter">;</span> <span class="l-keyword-conditional">then</span></span>
+<span class="l-line" data-line="16">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file exists&quot;</span></span>
+<span class="l-line" data-line="17"><span class="l-keyword-conditional">else</span></span>
+<span class="l-line" data-line="18">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;file does not exist&quot;</span></span>
+<span class="l-line" data-line="19"><span class="l-keyword-conditional">fi</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>See Bash <a href="https://www.tldp.org/LDP/abs/html/fto.html" target="_blank" rel="noopener noreferrer">file test operators</a> and <a href="https://www.tldp.org/LDP/abs/html/comparison-ops.html" target="_blank" rel="noopener noreferrer">other comparison
 operators</a>.</p></div></div>
 <h3 id="repeat-something-for">Repeat something (<code>for</code>)<a href="#repeat-something-for" aria-label="Link to heading 'Repeat something (for)'" data-heading-content="Repeat something (for)" class="anchor"></a></h3>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-repeat">for</span> <span class="l-variable">item</span> <span class="l-keyword-conditional">in</span> one two three<span class="l-punctuation-delimiter">;</span> <span class="l-keyword-repeat">do</span>
-</div><div class="l-line" data-line="2">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">item</span>&quot;</span>
-</div><div class="l-line" data-line="3"><span class="l-keyword-repeat">done</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-repeat">for</span> <span class="l-variable">item</span> <span class="l-keyword-conditional">in</span> one two three<span class="l-punctuation-delimiter">;</span> <span class="l-keyword-repeat">do</span></span>
+<span class="l-line" data-line="2">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">item</span>&quot;</span></span>
+<span class="l-line" data-line="3"><span class="l-keyword-repeat">done</span></span></code></pre>
 <p>The above code would print:</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">one
-</div><div class="l-line" data-line="2">two
-</div><div class="l-line" data-line="3">three
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">one</span>
+<span class="l-line" data-line="2">two</span>
+<span class="l-line" data-line="3">three</span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Bash also has <code>while</code> and <code>until</code>. See <a href="https://www.tldp.org/LDP/abs/html/loops.html" target="_blank" rel="noopener noreferrer">loops &amp; branches</a>.</p></div></div>
 <h3 id="reuse-a-piece-of-code-functions">Reuse a piece of code (functions)<a href="#reuse-a-piece-of-code-functions" aria-label="Link to heading 'Reuse a piece of code (functions)'" data-heading-content="Reuse a piece of code (functions)" class="anchor"></a></h3>
 <p>Isolate a piece of code in a function. Inside it, <code>$1</code>, <code>$2</code> and so on are the
 <strong>function’s</strong> arguments, not the script’s:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="4">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
-</div><div class="l-line" data-line="5"><span class="l-punctuation-bracket">}</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">()</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="4">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span></span>
+<span class="l-line" data-line="5"><span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 <p>This script would print <code>Hello World</code>.</p>
 <h3 id="keep-a-variable-inside-a-function-local">Keep a variable inside a function (<code>local</code>)<a href="#keep-a-variable-inside-a-function-local" aria-label="Link to heading 'Keep a variable inside a function (local)'" data-heading-content="Keep a variable inside a function (local)" class="anchor"></a></h3>
 <p>Normal Bash variables have no scope: one set anywhere is visible in the whole
 file and in every function. Use the <code>local</code> keyword to limit one to the function
 it is declared in:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">(</span><span class="l-punctuation-bracket">)</span> <span class="l-punctuation-bracket">{</span>
-</div><div class="l-line" data-line="4">  <span class="l-keyword">local</span> <span class="l-variable">name</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span>
-</div><div class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span>
-</div><div class="l-line" data-line="6"><span class="l-punctuation-bracket">}</span>
-</div><div class="l-line" data-line="7">
-</div><div class="l-line" data-line="8"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="9"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-function">print_hello</span><span class="l-punctuation-bracket">()</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="4">  <span class="l-keyword">local</span> <span class="l-variable">name</span><span class="l-operator">=</span><span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">1</span>&quot;</span></span>
+<span class="l-line" data-line="5">  <span class="l-function-builtin">echo</span> <span class="l-string">&quot;Hello <span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span></span>
+<span class="l-line" data-line="6"><span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8"><span class="l-function-call">print_hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="9"><span class="l-function-builtin">echo</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-variable">name</span>&quot;</span></span></code></pre>
 <p>This script would print <code>Hello World</code> and an empty line, since <code>$name</code> is only
 defined within the <code>print_hello</code> function.</p>
 <h2 id="when-it-goes-wrong">When it goes wrong<a href="#when-it-goes-wrong" aria-label="Link to heading 'When it goes wrong'" data-heading-content="When it goes wrong" class="anchor"></a></h2>
 <h3 id="stop-on-the-first-error-set--e">Stop on the first error (<code>set -e</code>)<a href="#stop-on-the-first-error-set--e" aria-label="Link to heading 'Stop on the first error (set -e)'" data-heading-content="Stop on the first error (set -e)" class="anchor"></a></h3>
 <p>A script keeps going after a command fails, which is <strong>not</strong> what you usually
 want. <code>set -e</code> aborts it instead:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-e</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">cat</span> <span class="l-variable-parameter">file-that-does-not-exist</span>
-</div><div class="l-line" data-line="5"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Done</span>
-</div></code></pre>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">Hello World
-</div><div class="l-line" data-line="2">cat: file-that-does-not-exist: No such file or directory
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-e</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">cat</span> <span class="l-variable-parameter">file-that-does-not-exist</span></span>
+<span class="l-line" data-line="5"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Done</span></span></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Hello World</span>
+<span class="l-line" data-line="2">cat: file-that-does-not-exist: No such file or directory</span></code></pre>
 <p><code>Done</code> is never printed.</p>
 <h3 id="see-what-the-script-is-doing-set--x">See what the script is doing (<code>set -x</code>)<a href="#see-what-the-script-is-doing-set--x" aria-label="Link to heading 'See what the script is doing (set -x)'" data-heading-content="See what the script is doing (set -x)" class="anchor"></a></h3>
 <p><code>set -x</code> prints each command, with a leading <code>+</code>, before running it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-x</span>
-</div><div class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1">+ echo Hello World
-</div><div class="l-line" data-line="2">Hello World
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/bin/bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-x</span></span>
+<span class="l-line" data-line="3"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">+ echo Hello World</span>
+<span class="l-line" data-line="2">Hello World</span></code></pre>
 <p>Combine the two with <code>set -ex</code>.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>-e</code> and <code>-x</code> are POSIX options and work in <code>sh</code> and Zsh too. See Bash <a href="https://www.tldp.org/LDP/abs/html/options.html#OPTIONSREF" target="_blank" rel="noopener noreferrer">option
 flags</a> for the rest.</p></div></div>
@@ -540,9 +517,10 @@ flags</a> for the rest.</p></div></div>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#what-is-a-script">What is a script?</a>
     
@@ -613,29 +591,31 @@ flags</a> for the rest.</p></div></div>
     
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-shell-scripting.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-shell-scripting.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/shell-scripting/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/shell-scripting/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -917,7 +897,7 @@ flags</a> for the rest.</p></div></div>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1321,7 +1301,7 @@ flags</a> for the rest.</p></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/602-git-automated-deployment/exercise.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/602-git-automated-deployment/exercise.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -216,10 +216,9 @@ commits to a server.</p></div>
 <h2 id="set-up-directories"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Set up directories<a href="#set-up-directories" aria-label="Link to heading 'Set up directories'" data-heading-content="Set up directories" class="anchor"></a></h2>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this part of the exercise.</p></div></div></div>
 <p>Create two directories, <code>todolist-automated</code> and <code>todolist-automated-repo</code>, in your home directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">todolist-automated</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">todolist-automated-repo</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">todolist-automated</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">todolist-automated-repo</span></span></code></pre>
 <p>The <code>todolist-automated-repo</code> directory will be the Git repository. Later you
 will add it as a remote in your local Git repository, so that you can push
 commits to it.</p>
@@ -229,23 +228,20 @@ this directory is automatically updated.</p>
 <h2 id="update-the-todolist-nginx-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the todolist nginx configuration<a href="#update-the-todolist-nginx-configuration" aria-label="Link to heading 'Update the todolist nginx configuration'" data-heading-content="Update the todolist nginx configuration" class="anchor"></a></h2>
 <p>In previous exercises you configured nginx to serve the PHP application from the
 <code>todolist-repo</code> directory. Edit that configuration:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/nginx/sites-available/todolist</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/nginx/sites-available/todolist</span></span></code></pre>
 <p>Change <code>todolist-repo</code> to <code>todolist-automated</code> so that nginx looks for files in
 the correct directory.</p>
 <p>Tell nginx to reload its configuration:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span></span></code></pre>
 <p>The site at http://todolist.jde.archidep.ch may not work anymore. You may get a
 <code>404 Not Found</code> error from nginx since there are no files in the
 <code>todolist-automated</code> directory yet.</p>
 <h2 id="create-a-bare-git-repository-on-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a bare Git repository on the server<a href="#create-a-bare-git-repository-on-the-server" aria-label="Link to heading 'Create a bare Git repository on the server'" data-heading-content="Create a bare Git repository on the server" class="anchor"></a></h2>
 <p>Git will not let you push commits to a normal repository with a working tree,
 so you need to use a bare repository instead, with only its Git directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/todolist-automated-repo</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span> <span class="l-variable-parameter">--bare</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Initialized</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">Git</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/todolist-automated-repo/</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">~/todolist-automated-repo</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">init</span> <span class="l-variable-parameter">--bare</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Initialized</span> <span class="l-variable-parameter">empty</span> <span class="l-variable-parameter">Git</span> <span class="l-variable-parameter">repository</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">/home/jde/todolist-automated-repo/</span></span></code></pre>
 <div class="callout callout-more group/callout" data-callout="602-git-automated-deployment:git-bare-repository"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-602-git-automated-deployment:git-bare-repository" type="checkbox" class="peer hidden" /><div class="content"><p>Remember that a Git repository has several parts: <a href="/2026/course/201-git/slides/#/11">the Git directory where the
 project’s history is stored, and the working tree which contains the current
 version of the files you are working on</a>.</p>
@@ -254,17 +250,16 @@ The project’s files are not checked out. It’s used mostly on servers for sha
 or automation. Read <a href="https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/" target="_blank" rel="noopener noreferrer">What is a bare repository?</a> for more information.</p></div><label for="callout-602-git-automated-deployment:git-bare-repository" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-602-git-automated-deployment:git-bare-repository" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f31f-030fc6691abd2ab36c1d90407e02505e.svg" alt="🌟" width="20" height="20" /></span> Amazing!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <h3 id="add-a-post-receive-hook-to-the-git-repository"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add a <code>post-receive</code> hook to the Git repository<a href="#add-a-post-receive-hook-to-the-git-repository" aria-label="Link to heading 'Add a post-receive hook to the Git repository'" data-heading-content="Add a post-receive hook to the Git repository" class="anchor"></a></h3>
 <p>Copy this script:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-keyword-directive">#!/usr/bin/env bash</span>
-</div><div class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-e</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span>
-</div><div class="l-line" data-line="5"><span class="l-keyword-import">export</span> <span class="l-constant">GIT_DIR</span><span class="l-operator">=</span><span class="l-string">/home/jde/todolist-automated-repo</span>
-</div><div class="l-line" data-line="6"><span class="l-keyword-import">export</span> <span class="l-constant">GIT_WORK_TREE</span><span class="l-operator">=</span><span class="l-string">/home/jde/todolist-automated</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">git</span> <span class="l-variable-parameter">checkout</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="8"><span class="l-function-builtin">cd</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">GIT_WORK_TREE</span>&quot;</span>
-</div><div class="l-line" data-line="9">
-</div><div class="l-line" data-line="10"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword-directive">#!/usr/bin/env bash</span></span>
+<span class="l-line" data-line="2"><span class="l-function-builtin">set</span> <span class="l-variable-parameter">-e</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span></span>
+<span class="l-line" data-line="5"><span class="l-keyword-import">export</span> <span class="l-constant">GIT_DIR</span><span class="l-operator">=</span><span class="l-string">/home/jde/todolist-automated-repo</span></span>
+<span class="l-line" data-line="6"><span class="l-keyword-import">export</span> <span class="l-constant">GIT_WORK_TREE</span><span class="l-operator">=</span><span class="l-string">/home/jde/todolist-automated</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">git</span> <span class="l-variable-parameter">checkout</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="8"><span class="l-function-builtin">cd</span> <span class="l-string">&quot;<span class="l-punctuation-special">$</span><span class="l-constant">GIT_WORK_TREE</span>&quot;</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10"><span class="l-function-builtin">echo</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span></span></code></pre>
 <p>This script will take the latest version of the code in the
 <code>todolist-automated-repo</code> repository and checkout a working tree in the
 <code>todolist-automated</code> directory (the one nginx is serving files out of).</p>
@@ -293,33 +288,28 @@ repository you created earlier).</p>
 use a different directory as the working tree. The files will be checked out
 there.</p></div><label for="callout-602-git-automated-deployment:git-hook-checkout" class="more tell-me-more">Would you like to know more?</label><div class="controls"><label for="callout-602-git-automated-deployment:git-hook-checkout" class="less join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f44d-08c0a077780263f3df97613e58e71744.svg" alt="👍" width="20" height="20" /></span> Outstanding!</label><button type="button" class="always-tell-me-more join-item"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></span> Always tell me more!</button></div><button type="button" class="stop-telling-me-more"><span class="mr-1"><img class="emoji" src="/2026/assets/emoji/1f635-200d-1f4ab-8a44746659bab9f133830029b166edff.svg" alt="😵‍💫" width="20" height="20" /></span> Stop telling me more...</button></div></div>
 <p>Open the <code>post-receive</code> file in the repository’s <code>hooks</code> directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">hooks/post-receive</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">hooks/post-receive</span></span></code></pre>
 <p>Paste the contents of the script your copied above.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your username in the <code>GIT_DIR</code> and <code>GIT_WORK_TREE</code> variables.</p></div></div>
 <p>Exit with <code>Ctrl-X</code> and save when prompted.</p>
 <p>Make the hook executable:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">hooks/post-receive</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">hooks/post-receive</span></span></code></pre>
 <p>Make sure the permissions of the hook are correct:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">hooks/post-receive</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">-rwxrwxr-x</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">239</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">10</span> <span class="l-variable-parameter">20:55</span> <span class="l-variable-parameter">hooks/post-receive</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-l</span> <span class="l-variable-parameter">hooks/post-receive</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">-rwxrwxr-x</span> <span class="l-number">1</span> <span class="l-variable-parameter">jde</span> <span class="l-variable-parameter">jde</span> <span class="l-number">239</span> <span class="l-variable-parameter">Jan</span> <span class="l-number">10</span> <span class="l-variable-parameter">20:55</span> <span class="l-variable-parameter">hooks/post-receive</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>It should have the <code>x</code> (e<strong>x</strong>ecute) permission for owner, group and others.</p></div></div>
 <h2 id="add-the-servers-git-repository-as-a-remote"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Add the server’s Git repository as a remote<a href="#add-the-servers-git-repository-as-a-remote" aria-label="Link to heading 'Add the server’s Git repository as a remote'" data-heading-content="Add the server’s Git repository as a remote" class="anchor"></a></h2>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Disconnect from your cloud server or open another terminal. The following steps
 happen on your local machine.</p></div></div></div>
 <p>Go to the PHP todolist repository on your local machine:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/php-todo-ex</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects/php-todo-ex</span></span></code></pre>
 <p>As you have already seen with GitHub, Git can communicate over SSH. This is not
 limited to GitHub: you can define a remote using an SSH URL that points to your
 own server.</p>
 <p>Add an <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols#_the_ssh_protocol" target="_blank" rel="noopener noreferrer">SSH remote</a> to the bare repository you created earlier
 (replace <code>jde</code> with your username and <code>W.X.Y.Z</code> with your server’s IP
 address):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">jde@W.X.Y.Z:todolist-automated-repo</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">remote</span> <span class="l-variable-parameter">add</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">jde@W.X.Y.Z:todolist-automated-repo</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Replace <code>jde</code> with your username and <code>W.X.Y.Z</code> with your server’s public IP
 address.</p></div></div>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The format of the remote URL is <code>&lt;user&gt;@&lt;ip-address&gt;:&lt;relative-path&gt;</code>.
@@ -328,20 +318,19 @@ like when you use the <code>ssh</code> command. It will then look for a reposito
 path you have specified, relative to your home directory.</p></div></div>
 <h2 id="trigger-an-automated-deployment"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Trigger an automated deployment<a href="#trigger-an-automated-deployment" aria-label="Link to heading 'Trigger an automated deployment'" data-heading-content="Trigger an automated deployment" class="anchor"></a></h2>
 <p>From your local machine, push the latest version of the <code>main</code> branch to the remote on your server:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Enumerating</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">36,</span> <span class="l-variable-parameter">done.</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">Counting</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">36/36</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Delta</span> <span class="l-variable-parameter">compression</span> <span class="l-variable-parameter">using</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-number">8</span> <span class="l-variable-parameter">threads</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">Compressing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">19/19</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">Writing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span><span class="l-punctuation-delimiter"></span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">36/36</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">15.09</span> <span class="l-variable-parameter">KiB</span> <span class="l-operator">|</span> <span class="l-function-call">15.09</span> <span class="l-variable-parameter">MiB/s,</span> <span class="l-variable-parameter">done.</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">Total</span> <span class="l-number">36</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">16</span><span class="l-punctuation-bracket">)</span>, reused <span class="l-number">36</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">16</span><span class="l-punctuation-bracket">)</span>
-</div><div class="l-line" data-line="8">
-</div><div class="l-line" data-line="9"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span>
-</div><div class="l-line" data-line="10"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span>
-</div><div class="l-line" data-line="11">
-</div><div class="l-line" data-line="12"><span class="l-function-call">To</span> <span class="l-variable-parameter">W.X.Y.Z:todolist-automated-repo</span>
-</div><div class="l-line" data-line="13"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[</span><span class="l-variable-parameter">new</span> <span class="l-variable-parameter">branch</span><span class="l-variable-parameter">]</span>      <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Enumerating</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">36,</span> <span class="l-variable-parameter">done.</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Counting</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">36/36</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Delta</span> <span class="l-variable-parameter">compression</span> <span class="l-variable-parameter">using</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-number">8</span> <span class="l-variable-parameter">threads</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">Compressing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">19/19</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">done.</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Writing</span> <span class="l-variable-parameter">objects:</span> <span class="l-variable-parameter">100%</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">36/36</span><span class="l-punctuation-bracket">)</span>, <span class="l-function-call">15.09</span> <span class="l-variable-parameter">KiB</span> <span class="l-operator">|</span> <span class="l-function-call">15.09</span> <span class="l-variable-parameter">MiB/s,</span> <span class="l-variable-parameter">done.</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">Total</span> <span class="l-number">36</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">16</span><span class="l-punctuation-bracket">)</span>, reused <span class="l-number">36</span> <span class="l-punctuation-bracket">(</span><span class="l-function-call">delta</span> <span class="l-number">16</span><span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="8"></span>
+<span class="l-line" data-line="9"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span></span>
+<span class="l-line" data-line="11"></span>
+<span class="l-line" data-line="12"><span class="l-function-call">To</span> <span class="l-variable-parameter">W.X.Y.Z:todolist-automated-repo</span></span>
+<span class="l-line" data-line="13"> <span class="l-function-call">*</span> <span class="l-variable-parameter">[new</span> <span class="l-variable-parameter">branch]</span>      <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <div class="note note-warning"><div class="title"><svg
   class="size-6"
   xmlns="http://www.w3.org/2000/svg"
@@ -366,9 +355,8 @@ they are the two lines starting with <code>remote:</code>.</p></div></div>
 connected.</p></div></div></div>
 <p>Additionally, the <code>todolist-automated</code> directory should contain the latest
 version of the project’s files, as checked out by the <code>post-receive</code> hook:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/todolist-automated</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">LICENSE.txt</span>  <span class="l-variable-parameter">README.md</span>  <span class="l-variable-parameter">index.php</span>  <span class="l-variable-parameter">todolist.sql</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/todolist-automated</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">LICENSE.txt</span>  <span class="l-variable-parameter">README.md</span>  <span class="l-variable-parameter">index.php</span>  <span class="l-variable-parameter">todolist.sql</span></span></code></pre>
 <h2 id="commit-a-change-to-the-project-and-deploy-it"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Commit a change to the project and deploy it<a href="#commit-a-change-to-the-project-and-deploy-it" aria-label="Link to heading 'Commit a change to the project and deploy it'" data-heading-content="Commit a change to the project and deploy it" class="anchor"></a></h2>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Back to your local machine again.</p></div></div></div>
 <p>Using your favorite editor, make a visible change to the project’s <code>index.php</code>
@@ -376,17 +364,16 @@ file.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>For example, look for the <code>&lt;strong&gt;TodoList&lt;/strong&gt;</code> tag in the <code>&lt;header&gt;</code> and
 change the title.</p></div></div>
 <p>Commit and push your changes to the <code>archidep</code> remote (i.e. your server):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Change title&quot;</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">main</span>
-</div><div class="l-line" data-line="6"><span class="l-function-call">...</span>
-</div><div class="l-line" data-line="7"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span>
-</div><div class="l-line" data-line="8"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span>
-</div><div class="l-line" data-line="9"><span class="l-function-call">To</span> <span class="l-variable-parameter">W.X.Y.Z:todolist-automated-repo</span>
-</div><div class="l-line" data-line="10">   <span class="l-function-call">4ea6994..2faf028</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Change title&quot;</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span> <span class="l-variable-parameter">archidep</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Checking</span> <span class="l-variable-parameter">out</span> <span class="l-variable-parameter">latest</span> <span class="l-variable-parameter">version...</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">remote:</span> <span class="l-variable-parameter">Deployment</span> <span class="l-variable-parameter">successful</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">To</span> <span class="l-variable-parameter">W.X.Y.Z:todolist-automated-repo</span></span>
+<span class="l-line" data-line="10">   <span class="l-function-call">4ea6994..2faf028</span>  <span class="l-variable-parameter">main</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">main</span></span></code></pre>
 <p>Visit http://todolist.jde.archidep.ch again. Your changes should have
 been deployed automatically!</p>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
@@ -446,9 +433,10 @@ processes nor changed how they communicate:</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
@@ -490,30 +478,32 @@ processes nor changed how they communicate:</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-602-git-automated-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-602-git-automated-deployment-exercise.pdf" class="tooltip" data-tip="Exercise PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/chapters/602-git-automated-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/chapters/602-git-automated-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      <div class="cloud-server-data" data-mode="details">
-      </div>
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="cloud-server-data" data-mode="details">
+        </div>
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -795,7 +785,7 @@ processes nor changed how they communicate:</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1199,7 +1189,7 @@ processes nor changed how they communicate:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       

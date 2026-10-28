@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-4d177cc75fe3af0130faf4483934aa65.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-9d2c6aeed6b08cc8c73f50d3d9696ea0.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-a7eb766a925f31425bbe2d10bc0c5b82.js" defer>
+    <script src="/2026/assets/course/course-64b19951464fc54a0e4547959ce68324.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/command-line/cheatsheet.md">Rev: d6dadf272e9faafbf6799db4d2410cd44b2784d2</a>
+      <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/command-line/cheatsheet.md">Rev: 8125f80a290a9f62fc344d5d220ba6bef029be91</a>
     </li>
   </ul>
 </div>
@@ -241,33 +241,29 @@ work with more advanced shells like <a href="https://en.wikipedia.org/wiki/Z_she
 
       <h2 id="i-dont-remember-anything">I don’t remember anything!<a href="#i-dont-remember-anything" aria-label="Link to heading 'I don’t remember anything!'" data-heading-content="I don’t remember anything!" class="anchor"></a></h2>
 <p>Use the <code>history</code> command to list all the commands you previously typed:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">history</span>
-</div><div class="l-line" data-line="2"><span class="l-number">24</span> <span class="l-variable-parameter">ls</span>
-</div><div class="l-line" data-line="3"><span class="l-number">25</span> <span class="l-variable-parameter">cd</span> <span class="l-variable-parameter">foo</span>
-</div><div class="l-line" data-line="4"><span class="l-number">26</span> <span class="l-variable-parameter">ssh</span> <span class="l-variable-parameter">jde@archidep.ch</span>
-</div><div class="l-line" data-line="5"><span class="l-number">27</span> <span class="l-variable-parameter">cat</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">history</span></span>
+<span class="l-line" data-line="2"><span class="l-number">24</span> <span class="l-variable-parameter">ls</span></span>
+<span class="l-line" data-line="3"><span class="l-number">25</span> <span class="l-variable-parameter">cd</span> <span class="l-variable-parameter">foo</span></span>
+<span class="l-line" data-line="4"><span class="l-number">26</span> <span class="l-variable-parameter">ssh</span> <span class="l-variable-parameter">jde@archidep.ch</span></span>
+<span class="l-line" data-line="5"><span class="l-number">27</span> <span class="l-variable-parameter">cat</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <p>Note that each command is prefixed by a number. Type an exclamation mark
 followed by that number to retrieve the command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">!26</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-special">$</span><span class="l-operator"><span class="l-constant"></span>&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@archidep.ch</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">!26</span></span>
+<span class="l-line" data-line="2"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">ssh</span> <span class="l-string-special-path">jde@archidep.ch</span></span></code></pre>
 <p>If you’re looking for a specific command, you can filter your command history by
 piping it into the <code>grep</code> command. For example, this will search for all
 commands containing the word “ssh” in your history:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">history</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">ssh</span>
-</div><div class="l-line" data-line="2"><span class="l-number">19</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">--help</span>
-</div><div class="l-line" data-line="3"><span class="l-number">20</span> <span class="l-variable-parameter">ssh-keygen</span>
-</div><div class="l-line" data-line="4"><span class="l-number">26</span> <span class="l-variable-parameter">ssh</span> <span class="l-variable-parameter">jde@archidep.ch</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">history</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">ssh</span></span>
+<span class="l-line" data-line="2"><span class="l-number">19</span> <span class="l-variable-parameter">ssh-keygen</span> <span class="l-variable-parameter">--help</span></span>
+<span class="l-line" data-line="3"><span class="l-number">20</span> <span class="l-variable-parameter">ssh-keygen</span></span>
+<span class="l-line" data-line="4"><span class="l-number">26</span> <span class="l-variable-parameter">ssh</span> <span class="l-variable-parameter">jde@archidep.ch</span></span></code></pre>
 <h2 id="stop-a-running-command-ctrl-c">Stop a running command (<code>Ctrl-C</code>)<a href="#stop-a-running-command-ctrl-c" aria-label="Link to heading 'Stop a running command (Ctrl-C)'" data-heading-content="Stop a running command (Ctrl-C)" class="anchor"></a></h2>
 <p>Some commands take a long time, and some never stop by themselves. While one is
 running, you have no prompt. Press <code>Ctrl-C</code> (hold the <strong>Control</strong> key and press
 <strong>C</strong>) to interrupt it and get your prompt back:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">^C</span>
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sleep</span> <span class="l-number">3600</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">^C</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span></span></code></pre>
 <p>On macOS too, it is the <code>Control</code> key, not <code>Command</code>. <code>Ctrl-C</code> forces the
 command to stop: it might not have finished what it was doing.</p>
 <h2 id="getting-help-man---help">Getting help (<code>man</code>, <code>--help</code>)<a href="#getting-help-man---help" aria-label="Link to heading 'Getting help (man, --help)'" data-heading-content="Getting help (man, --help)" class="anchor"></a></h2>
@@ -280,9 +276,8 @@ commands provide a help page.</li>
 <h2 id="navigating">Navigating<a href="#navigating" aria-label="Link to heading 'Navigating'" data-heading-content="Navigating" class="anchor"></a></h2>
 <h3 id="where-am-i-pwd">Where am I? (<code>pwd</code>)<a href="#where-am-i-pwd" aria-label="Link to heading 'Where am I? (pwd)'" data-heading-content="Where am I? (pwd)" class="anchor"></a></h3>
 <p>Use the <code>pwd</code> command, meaning <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/Users/jde/Downloads</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">pwd</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/Users/jde/Downloads</span></span></code></pre>
 <h3 id="what-is-there-ls">What is there? (<code>ls</code>)<a href="#what-is-there-ls" aria-label="Link to heading 'What is there? (ls)'" data-heading-content="What is there? (ls)" class="anchor"></a></h3>
 <p>Use the <code>ls</code> command, meaning <strong>l</strong>i<strong>s</strong>t:</p>
 <table>
@@ -394,91 +389,73 @@ commands provide a help page.</li>
 <h3 id="whats-in-this-file-cat-head-tail-less">What’s in this file? (<code>cat</code>, <code>head</code>, <code>tail</code>, <code>less</code>)<a href="#whats-in-this-file-cat-head-tail-less" aria-label="Link to heading 'What’s in this file? (cat, head, tail, less)'" data-heading-content="What’s in this file? (cat, head, tail, less)" class="anchor"></a></h3>
 <p>Display the <strong>entire contents</strong> of a file in the CLI with the <code>cat</code> command (as
 in con<strong>cat</strong>enate):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">file.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">Hello</span>
-</div><div class="l-line" data-line="3"><span class="l-function-call">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">file.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hello</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">World</span></span></code></pre>
 <p>Display the <strong>first or last N lines</strong> (10 by default) of a file with the <code>head</code>
 and <code>tail</code> commands, respectively:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">file.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">100</span> <span class="l-variable-parameter">file.txt</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">file.txt</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">50</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">file.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">head</span> <span class="l-function-call">-n</span> <span class="l-number">100</span> <span class="l-variable-parameter">file.txt</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">file.txt</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tail</span> <span class="l-function-call">-n</span> <span class="l-number">50</span> <span class="l-variable-parameter">file.txt</span></span></code></pre>
 <p>Display a large file in interactive mode, allowing you to scroll with the up and
 down arrow keys (exit this mode by typing the letter <code>q</code>, as in <strong>q</strong>uit):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">less</span> <span class="l-function-call">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">less</span> <span class="l-function-call">file.txt</span></span></code></pre>
 <p>In <code>less</code>, type <code>/</code> followed by a word and press <code>Enter</code> to search for that
 word. Press <code>n</code> to go to the next match.</p>
 <h2 id="writing">Writing<a href="#writing" aria-label="Link to heading 'Writing'" data-heading-content="Writing" class="anchor"></a></h2>
 <h3 id="create-a-directory-mkdir">Create a directory (<code>mkdir</code>)<a href="#create-a-directory-mkdir" aria-label="Link to heading 'Create a directory (mkdir)'" data-heading-content="Create a directory (mkdir)" class="anchor"></a></h3>
 <p><code>mkdir</code> stands for <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory.</p>
 <p>Create one directory in the current directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">foo</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">foo</span></span></code></pre>
 <p>Create a directory and all missing intermediate directories:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">foo/bar/baz/qux</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mkdir</span> <span class="l-function-call">-p</span> <span class="l-variable-parameter">foo/bar/baz/qux</span></span></code></pre>
 <h3 id="create-a-file-echo-touch">Create a file (<code>echo</code>, <code>touch</code>)<a href="#create-a-file-echo-touch" aria-label="Link to heading 'Create a file (echo, touch)'" data-heading-content="Create a file (echo, touch)" class="anchor"></a></h3>
 <p>Create an empty file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">touch</span> <span class="l-function-call">file.txt</span></span></code></pre>
 <p>Create (or overwrite) a file containing one line:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">file.txt</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Do the same with the <a href="https://en.wikipedia.org/wiki/Tee_(command)" target="_blank" rel="noopener noreferrer"><code>tee</code> command</a> if you need to create a file with
 administrative privileges:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">file.txt</span></span></code></pre></div></div>
 <p>Append one line at the end of a file (also creates the file if it does not
 exist):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">&gt;&gt;</span> <span class="l-string-special-path">file.txt</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Again with the <code>tee</code> command if you need to create a file with administrative
 privileges:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">-a</span> <span class="l-variable-parameter">file.txt</span>
-</div></code></pre></div></div>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-string">&quot;Hello World!&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">sudo</span> <span class="l-variable-parameter">tee</span> <span class="l-variable-parameter">-a</span> <span class="l-variable-parameter">file.txt</span></span></code></pre></div></div>
 <h3 id="edit-a-file-nano">Edit a file (<code>nano</code>)<a href="#edit-a-file-nano" aria-label="Link to heading 'Edit a file (nano)'" data-heading-content="Edit a file (nano)" class="anchor"></a></h3>
 <p>Edit a file with nano:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">/path/to/file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">nano</span> <span class="l-function-call">/path/to/file.txt</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Nano will always display available commands at the bottom of the screen.
 <code>Ctrl-X</code> is the one you will use most often, which saves and exits. Note that
 <strong>nano will ask you to confirm the file name</strong>. Just press Enter (unless you
 want to save your changes to another file, to keep the original one).</p></div></div>
 <p>If you need superuser privileges to access the file, you can use <code>sudo</code>:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/path/to/file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/path/to/file.txt</span></span></code></pre>
 <h3 id="copy-stuff-cp">Copy stuff (<code>cp</code>)<a href="#copy-stuff-cp" aria-label="Link to heading 'Copy stuff (cp)'" data-heading-content="Copy stuff (cp)" class="anchor"></a></h3>
 <p><strong>C</strong>o<strong>p</strong>y a file to another location:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">oldname.txt</span> <span class="l-variable-parameter">newname.txt</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">foo/oldname.txt</span> <span class="l-variable-parameter">bar/baz/newname.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">oldname.txt</span> <span class="l-variable-parameter">newname.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cp</span> <span class="l-function-call">foo/oldname.txt</span> <span class="l-variable-parameter">bar/baz/newname.txt</span></span></code></pre>
 <p>Recursively copy a directory and all its contents:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-function-call">cp</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">olddirectory</span> <span class="l-variable-parameter">newdirectory</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">cp</span> <span class="l-variable-parameter">-R</span> <span class="l-variable-parameter">olddirectory</span> <span class="l-variable-parameter">newdirectory</span></span></code></pre>
 <h3 id="move-stuff-mv">Move stuff (<code>mv</code>)<a href="#move-stuff-mv" aria-label="Link to heading 'Move stuff (mv)'" data-heading-content="Move stuff (mv)" class="anchor"></a></h3>
 <p>Move a file (or directory):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">file.txt</span> <span class="l-variable-parameter">/somewhere/else</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">directory</span> <span class="l-variable-parameter">/somewhere/else</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">file.txt</span> <span class="l-variable-parameter">/somewhere/else</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">directory</span> <span class="l-variable-parameter">/somewhere/else</span></span></code></pre>
 <p>Rename a file (or directory), by moving it to a new name:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">oldname.txt</span> <span class="l-variable-parameter">newname.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">mv</span> <span class="l-function-call">oldname.txt</span> <span class="l-variable-parameter">newname.txt</span></span></code></pre>
 <h3 id="delete-stuff-rm">Delete stuff (<code>rm</code>)<a href="#delete-stuff-rm" aria-label="Link to heading 'Delete stuff (rm)'" data-heading-content="Delete stuff (rm)" class="anchor"></a></h3>
 <p>Delete (or <strong>r</strong>e<strong>m</strong>ove) a file:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">file.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">file.txt</span></span></code></pre>
 <p>You can also delete a directory with <code>rm</code> by adding the <code>-r</code> (<strong>r</strong>ecursive)
 option.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">directory</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">rm</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">directory</span></span></code></pre>
 <div class="callout callout-danger group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -498,52 +475,44 @@ directory you want to delete).</p></div></div></div>
 <h2 id="finding-stuff">Finding stuff<a href="#finding-stuff" aria-label="Link to heading 'Finding stuff'" data-heading-content="Finding stuff" class="anchor"></a></h2>
 <h3 id="find-files-find">Find files (<code>find</code>)<a href="#find-files-find" aria-label="Link to heading 'Find files (find)'" data-heading-content="Find files (find)" class="anchor"></a></h3>
 <p>Recursively list all files in the current directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span></span></code></pre>
 <p>Recursively find a file by its exact name, however deep it is buried. <code>find</code>
 prints the path of each file it found, which you can then use with another
 command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-variable-parameter">notes.txt</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">./projects/archidep/notes.txt</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-variable-parameter">notes.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">./projects/archidep/notes.txt</span></span></code></pre>
 <p>Recursively list all JavaScript files in the current directory:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.js&quot;</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">find</span> <span class="l-function-builtin">.</span> <span class="l-variable-parameter">-name</span> <span class="l-string">&quot;*.js&quot;</span></span></code></pre>
 <h3 id="find-lines-in-files-grep">Find lines in files (<code>grep</code>)<a href="#find-lines-in-files-grep" aria-label="Link to heading 'Find lines in files (grep)'" data-heading-content="Find lines in files (grep)" class="anchor"></a></h3>
 <p>Recursively find all files in the current directory containing the word “foo”:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">foo</span> <span class="l-variable-parameter">.</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">foo</span> <span class="l-variable-parameter">.</span></span></code></pre>
 <h2 id="running-programs">Running programs<a href="#running-programs" aria-label="Link to heading 'Running programs'" data-heading-content="Running programs" class="anchor"></a></h2>
 <h3 id="run-a-program-program">Run a program (<code>./program</code>)<a href="#run-a-program-program" aria-label="Link to heading 'Run a program (./program)'" data-heading-content="Run a program (./program)" class="anchor"></a></h3>
 <p>When you are in the directory that contains a program, run it by writing <code>./</code>
 before its name:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span></span></code></pre>
 <p>The <code>./</code> is not decoration: it is a path to the program, since <code>.</code> is the
 current directory. Without it, the shell only looks for a command named
 <code>program</code> in the directories of your <a href="#path"><code>$PATH</code></a>, and answers <code>command not found</code>.</p>
 <p>Any other path to the program works too, relative or absolute, from wherever you
 are:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tools/program</span>
-</div><div class="l-line" data-line="2">
-</div><div class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">../tools/program</span>
-</div><div class="l-line" data-line="4">
-</div><div class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/tools/program</span>
-</div><div class="l-line" data-line="6">
-</div><div class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/home/jde/tools/program</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">tools/program</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">../tools/program</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">~/tools/program</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">/home/jde/tools/program</span></span></code></pre>
 <h3 id="make-a-file-executable-chmod-x">Make a file executable (<code>chmod +x</code>)<a href="#make-a-file-executable-chmod-x" aria-label="Link to heading 'Make a file executable (chmod +x)'" data-heading-content="Make a file executable (chmod +x)" class="anchor"></a></h3>
 <p>A file is only a program if it has the permission to be executed. A script you
 just wrote or downloaded often does not have it yet, and the shell refuses to
 run it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">permission</span> <span class="l-variable-parameter">denied:</span> <span class="l-variable-parameter">./program</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">permission</span> <span class="l-variable-parameter">denied:</span> <span class="l-variable-parameter">./program</span></span></code></pre>
 <p>Add that permission with the <code>chmod</code> command (<strong>ch</strong>ange <strong>mod</strong>e), <code>+x</code> meaning
 <strong>add</strong> the e<strong>x</strong>ecute permission:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">program</span>
-</div><div class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">chmod</span> <span class="l-function-call">+x</span> <span class="l-variable-parameter">program</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">./program</span></span></code></pre>
 <div class="callout callout-warning group/callout"><svg
   class="icon"
   xmlns="http://www.w3.org/2000/svg"
@@ -562,13 +531,11 @@ read, change or delete any of your files. Only make a file executable if you
 trust where it comes from.</p></div></div></div>
 <h2 id="environment-variables">Environment variables<a href="#environment-variables" aria-label="Link to heading 'Environment variables'" data-heading-content="Environment variables" class="anchor"></a></h2>
 <p>Display an environment variable:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span>
-</div><div class="l-line" data-line="2"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span></span>
+<span class="l-line" data-line="2"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span></code></pre>
 <p>Set an environment variable (it will be gone when you close the CLI):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export FOO=bar
-</div><div class="l-line" data-line="2">$&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export FOO=bar</span>
+<span class="l-line" data-line="2">$&gt; echo <span class="l-constant">$</span><span class="l-string">FOO</span></span></code></pre>
 <p>To be able to keep this environment variable in all future CLIs, save the
 <code>export FOO=bar</code> line to your shell configuration file: <code>~/.bashrc</code> for Bash
 (e.g. in the WSL or on Linux), or <code>~/.zshrc</code> for Zsh (the default on macOS).</p>
@@ -579,32 +546,28 @@ binary file named <code>git</code> in each of these directories one by one and e
 first one it finds.</p>
 <p>If it doesn’t find such an executable, it will return a <code>command not found</code>
 error.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; echo <span class="l-constant">$</span><span class="l-string">PATH</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</span></span></code></pre>
 <p>You can modify your path by adding <code>export</code> statements to your shell
 configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
-<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><div class="l-line" data-line="1"># Add the /foo directory to the beginning of $PATH
-</div><div class="l-line" data-line="2">export PATH=&quot;/foo:$PATH&quot;
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4"># Add the /opt/local/bin directory to the beginning of $PATH
-</div><div class="l-line" data-line="5">export PATH=&quot;/opt/local/bin:$PATH&quot;
-</div></code></pre>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1"># Add the /foo directory to the beginning of $PATH</span>
+<span class="l-line" data-line="2">export PATH=&quot;/foo:$PATH&quot;</span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"># Add the /opt/local/bin directory to the beginning of $PATH</span>
+<span class="l-line" data-line="5">export PATH=&quot;/opt/local/bin:$PATH&quot;</span></code></pre>
 <h3 id="do-i-have-that-command-which">Do I have that command? (<code>which</code>)<a href="#do-i-have-that-command-which" aria-label="Link to heading 'Do I have that command? (which)'" data-heading-content="Do I have that command? (which)" class="anchor"></a></h3>
 <p>Locate an executable in the <code>$PATH</code> with the <code>which</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">git</span>
-</div><div class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin/git</span>
-</div><div class="l-line" data-line="3">
-</div><div class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">foo</span>
-</div><div class="l-line" data-line="5"><span class="l-function-call">foo</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">git</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/usr/local/bin/git</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">which</span> <span class="l-function-call">foo</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">foo</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">found</span></span></code></pre>
 <h2 id="miscellaneous">Miscellaneous<a href="#miscellaneous" aria-label="Link to heading 'Miscellaneous'" data-heading-content="Miscellaneous" class="anchor"></a></h2>
 <h3 id="can-i-write-a-long-command-on-multiple-lines">Can I write a long command on multiple lines?<a href="#can-i-write-a-long-command-on-multiple-lines" aria-label="Link to heading 'Can I write a long command on multiple lines?'" data-heading-content="Can I write a long command on multiple lines?" class="anchor"></a></h3>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><div class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> \
-</div><div class="l-line" data-line="2">   <span class="l-string">&quot;Hello&quot;</span> \
-</div><div class="l-line" data-line="3">   <span class="l-string">&quot;World&quot;</span>
-</div><div class="l-line" data-line="4"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span>
-</div></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> \</span>
+<span class="l-line" data-line="2">   <span class="l-string">&quot;Hello&quot;</span> \</span>
+<span class="l-line" data-line="3">   <span class="l-string">&quot;World&quot;</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Hello</span> <span class="l-variable-parameter">World</span></span></code></pre>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -616,9 +579,10 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
     </main>
   </div>
   <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
-    <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
-    <nav class="toc" aria-labelledby="on-this-page-title">
-      <ul class="section-nav">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
   <li class="toc-entry toc-h2">
     <a href="#i-dont-remember-anything">I don’t remember anything!</a>
     
@@ -719,29 +683,31 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
 </ul>
   </li>
 </ul>
-    </nav>
-    <div class="my-4 pl-4 flex items-center gap-4">
-      <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-command-line.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      </nav>
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-12rem)] overflow-y-auto overscroll-contain">
+        <div class="my-4 pl-4 flex items-center gap-4">
+          <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-999-command-line.pdf" class="tooltip" data-tip="Cheatsheet PDF" download>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
-      </a>
-      
-      <a href="https://github.com/ArchiDep/website/blob/d6dadf272e9faafbf6799db4d2410cd44b2784d2/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
-        <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          </a>
+          
+          <a href="https://github.com/ArchiDep/website/blob/8125f80a290a9f62fc344d5d220ba6bef029be91/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+            <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
 </svg>
-      </a>
-    </div>
-    <div class="pt-2 sticky top-0">
-      
+          </a>
+        </div>
 
-      <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
 </svg> Back to top
-      </a>
+        </a>
+      </div>
     </div>
   </aside>
 </div>
@@ -1023,7 +989,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>How a computer works</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
@@ -1427,7 +1393,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d6dadf2</span>
+        <span class="tooltip-content">main@8125f80</span>
         <span class="font-title">0.1.0</span>
       </span>
       
