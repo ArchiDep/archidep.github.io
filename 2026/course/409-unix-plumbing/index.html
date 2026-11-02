@@ -228,6 +228,23 @@ this exercise will be created:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span></code></pre>
 <p>Some of the lines it displays are output data, and some are error messages.
 Which are which, and why are there errors?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
+<p>The lines starting with <code>/etc/ssh/</code> are the lines <code>grep</code> found, its output data,
+on its standard output stream. The lines starting with <code>grep:</code> are error
+messages, on its standard error stream: the server’s private SSH keys and one of
+its configuration files can only be read by <code>root</code>, and you are running <code>grep</code>
+as yourself.</p>
+<p>The lines on your server may differ slightly. What matters is which stream each
+one is on.</p></div></div>
 <div class="callout callout-more group/callout" data-callout="409-unix-plumbing:ssh-config-dir"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /></div><div class="container"><input id="callout-409-unix-plumbing:ssh-config-dir" type="checkbox" class="peer hidden" /><div class="content"><p>The <code>/etc/ssh</code> directory holds the configuration of SSH on your server:</p>
 <ul>
 <li><code>sshd_config</code> configures the SSH server, the program that accepts your
@@ -254,6 +271,46 @@ one that applies: your server refuses passwords.</p></div><label for="callout-40
 </ul>
 <p>Each time, what is still displayed in your terminal, and what ends up in the
 file? Display the file with <code>cat</code> to see.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">found.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">found.txt</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">errors.txt</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">errors.txt</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">&amp;&gt;</span> <span class="l-string-special-path">all.txt</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">all.txt</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/sshd_config.d/50-cloud-init.conf:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_rsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ecdsa_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">grep:</span> <span class="l-variable-parameter">/etc/ssh/ssh_host_ed25519_key:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="10"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="12"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre>
+<p>With <code>&amp;&gt;</code>, nothing is displayed, and the lines are not in the same order as in
+your terminal: when its standard output is a file, <code>grep</code> collects the lines it
+finds and writes them in one go, while it writes each error as soon as it
+happens.</p></div></div>
 <h2 id="did-it-work"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Did it work?<a href="#did-it-work" aria-label="Link to heading 'Did it work?'" data-heading-content="Did it work?" class="anchor"></a></h2>
 <p>Every command ends with an exit status, which the shell keeps in the special
 variable <code>$?</code>. Display it with <code>echo $?</code> right after each of these commands:</p>
@@ -267,6 +324,24 @@ variable <code>$?</code>. Display it with <code>echo $?</code> right after each 
 <span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span></code></pre>
 <p>What does each exit status mean? The last command found lines: why is its exit
 status not <code>0</code>?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="4"><span class="l-number">0</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">unicorn</span> <span class="l-variable-parameter">/etc/ssh/sshd_config</span></span>
+<span class="l-line" data-line="7">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="8"><span class="l-number">1</span></span>
+<span class="l-line" data-line="9"></span>
+<span class="l-line" data-line="10">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span></span>
+<span class="l-line" data-line="11"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="12">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">echo</span> <span class="l-punctuation-special">$</span><span class="l-constant">?</span></span>
+<span class="l-line" data-line="13"><span class="l-number">2</span></span></code></pre>
+<p><code>grep</code> exits with <code>0</code> when it found lines, with <code>1</code> when it found none, and with
+<code>2</code> when something went wrong. The last command found lines, but it could not
+read some files: the errors decide its exit status, whatever it found.</p>
+<p>The exit status is a separate answer from the output. A command can print a lot
+and still fail, or print nothing and succeed.</p></div></div>
 <h2 id="download-the-song"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Download the song<a href="#download-the-song" aria-label="Link to heading 'Download the song'" data-heading-content="Download the song" class="anchor"></a></h2>
 <p>In your home directory, download the song that the next pipelines work on:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-function-call">-L</span> <span class="l-variable-parameter">https://tinyurl.com/archidep-otr</span> <span class="l-operator">&gt;</span> <span class="l-string-special-path">rainbow.txt</span></span></code></pre>
@@ -284,22 +359,48 @@ lines are there in the text?</p>
 <span class="l-line" data-line="2"><span class="l-number">51</span></span></code></pre>
 <p>Now it’s your turn:</p>
 <ul>
-<li>
-<p>Count the number of words in the text</p>
-</li>
-<li>
-<p>Print the lines of the text containing the word <code>rainbow</code></p>
-</li>
-<li>
-<p>Do the same but without any duplicates</p>
-</li>
-<li>
-<p>Print the second word of each line in the text</p>
-</li>
-<li>
-<p>Count the number of times the letter <code>e</code> is used (case-insensitive)</p>
-</li>
+<li>Count the number of words in the text</li>
 </ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-w</span></span>
+<span class="l-line" data-line="2"><span class="l-number">255</span></span></code></pre></div></div>
+<ul>
+<li>Print the lines of the text containing the word <code>rainbow</code></li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">The</span> <span class="l-variable-parameter">colors</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">pretty</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">sky</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Oh,</span> <span class="l-variable-parameter">somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span></code></pre>
+<p>Note that this looks for occurrences of the word “rainbow” exactly like this, in
+lowercase. If you wanted to make a case-insensitive search, you would use the
+<code>grep</code> command’s <code>-i</code> or <code>--ignore-case</code> option.</p></div></div>
+<ul>
+<li>Do the same but without any duplicates</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">rainbow</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Oh,</span> <span class="l-variable-parameter">somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Somewhere</span> <span class="l-variable-parameter">over</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">The</span> <span class="l-variable-parameter">colors</span> <span class="l-variable-parameter">of</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">rainbow</span> <span class="l-variable-parameter">so</span> <span class="l-variable-parameter">pretty</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">sky</span></span></code></pre>
+<p><code>uniq</code> only filters out repeated lines that are next to each other, which is why
+the lines are sorted first.</p></div></div>
+<ul>
+<li>Print the second word of each line in the text</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">2</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">over</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">up</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">the</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">in</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-function-call">over</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">fly</span></span>
+<span class="l-line" data-line="9"><span class="l-function-call">...</span></span></code></pre></div></div>
+<ul>
+<li>Count the number of times the letter <code>e</code> is used (case-insensitive)</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> <span class="l-function-call">fold</span> <span class="l-variable-parameter">-w</span> <span class="l-number">1</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">-i</span> <span class="l-variable-parameter">e</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span>
+<span class="l-line" data-line="2"><span class="l-number">131</span></span></code></pre></div></div>
 <p>Here are a few commands you might find useful for these pipelines. They all read
 the data from their standard input stream (or from a file you name), and print
 the result on their standard output stream, so they can be piped into each
@@ -355,6 +456,20 @@ other:</p>
 <h3 id="challenge"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Challenge<a href="#challenge" aria-label="Link to heading 'Challenge'" data-heading-content="Challenge" class="anchor"></a></h3>
 <p>What are the five most used words in the song (case-insensitive), and how many
 times is each one used?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">rainbow.txt</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="2">     <span class="l-function-call">tr</span> <span class="l-string">&#39;[:upper:]&#39;</span> <span class="l-string">&#39;[:lower:]&#39;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="3">     <span class="l-function-call">tr</span> <span class="l-variable-parameter">-s</span> <span class="l-string">&#39;[[:punct:][:space:]]&#39;</span> <span class="l-string">&#39;\n&#39;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="4">     <span class="l-function-call">sort</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="5">     <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="6">     <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="7">     <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span>
+<span class="l-line" data-line="8">     <span class="l-number">18</span> <span class="l-variable-parameter">the</span></span>
+<span class="l-line" data-line="9">     <span class="l-number">17</span> <span class="l-variable-parameter">i</span></span>
+<span class="l-line" data-line="10">     <span class="l-number">13</span> <span class="l-variable-parameter">and</span></span>
+<span class="l-line" data-line="11">      <span class="l-number">9</span> <span class="l-variable-parameter">you</span></span>
+<span class="l-line" data-line="12">      <span class="l-number">8</span> <span class="l-variable-parameter">of</span></span></code></pre>
+<p>The second <code>sort</code> uses the <code>-n</code> option to sort the counts as numbers rather than
+as text, and <code>-r</code> to put the largest first.</p></div></div>
 <h2 id="pipe-your-servers-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pipe your server’s users<a href="#pipe-your-servers-users" aria-label="Link to heading 'Pipe your server’s users'" data-heading-content="Pipe your server’s users" class="anchor"></a></h2>
 <p>The file <code>/etc/passwd</code> lists the users of your server, one per line, with fields
 separated by colons (<code>:</code>). The seventh and last field of each line is the user’s
@@ -363,7 +478,16 @@ login shell, the program started when that user logs in.</p>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Remember the <code>cut</code> command you used to print the second word of each line of the
 song: its <code>-d</code> option gives the character that separates the fields (the
 <strong>d</strong>elimiter), and its <code>-f</code> option the number of the <strong>f</strong>ield to keep.</p></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/passwd</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">:</span> <span class="l-variable-parameter">-f</span> <span class="l-number">7</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span></span>
+<span class="l-line" data-line="2">      <span class="l-number">3</span> <span class="l-variable-parameter">/bin/bash</span></span>
+<span class="l-line" data-line="3">      <span class="l-number">1</span> <span class="l-variable-parameter">/bin/false</span></span>
+<span class="l-line" data-line="4">      <span class="l-number">1</span> <span class="l-variable-parameter">/bin/sync</span></span>
+<span class="l-line" data-line="5">     <span class="l-number">28</span> <span class="l-variable-parameter">/usr/sbin/nologin</span></span></code></pre>
+<p>The numbers on your server will differ.</p></div></div>
 <p>Most users have <code>/usr/sbin/nologin</code> as their login shell. Why?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>They are the system users you met in <a href="/2026/course/405-meet-your-server/">Meet your server</a>: users that run services rather
+than people. <code>/usr/sbin/nologin</code> or <code>/bin/false</code> refuses to log them in, so
+nobody can open a shell as one of them.</p></div></div>
 <h2 id="discard-the-errors"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Discard the errors<a href="#discard-the-errors" aria-label="Link to heading 'Discard the errors'" data-heading-content="Discard the errors" class="anchor"></a></h2>
 <p>In the first step, you ran this command, which displays both the lines it finds
 and error messages:</p>
@@ -371,6 +495,14 @@ and error messages:</p>
 <p>Find out how to run it so that it displays only the lines it found, without
 creating any file. The optional section of the subject on how to <a href="/2026/course/408-unix-processes/#appendix-discard-an-output-stream">discard an
 output stream</a> explains how.</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>Redirect its standard error stream to the null device, <code>/dev/null</code>, which
+discards everything written to it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">/etc/ssh</span> <span class="l-operator">2&gt;</span> <span class="l-string-special-path">/dev/null</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication</span> <span class="l-variable-parameter">no</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">/etc/ssh/sshd_config:#PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PasswordAuthentication.</span>  <span class="l-variable-parameter">Depending</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">your</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">configuration,</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">/etc/ssh/sshd_config:#</span> <span class="l-variable-parameter">PAM</span> <span class="l-variable-parameter">authentication,</span> <span class="l-variable-parameter">then</span> <span class="l-variable-parameter">enable</span> <span class="l-variable-parameter">this</span> <span class="l-variable-parameter">but</span> <span class="l-variable-parameter">set</span> <span class="l-variable-parameter">PasswordAuthentication</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">/etc/ssh/ssh_config:#</span>   <span class="l-variable-parameter">PasswordAuthentication</span> <span class="l-variable-parameter">yes</span></span></code></pre></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
 <p>You took commands that each do one small job, and decided where their input
 comes from and where their output goes: into a file, or straight into another
@@ -736,7 +868,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/407-tcp/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -754,7 +886,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due course-item-current">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done course-item-current">
         <a href="/2026/course/409-unix-plumbing/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -772,7 +904,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/411-how-a-computer-works/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -781,7 +913,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
         <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -790,7 +922,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
         <a href="/2026/course/413-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
