@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-5e80d43989746ac7561eb3b99c55efca.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-05c62340390b6bd8c4fc503cc9a66771.js" defer>
+    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/503-environment-variables/subject.md">Rev: 6a155d62523fa2a1fd901c81dd85d5e4deb8dee5</a>
+      <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/503-environment-variables/subject.md">Rev: e05bb4c06d87b427bf16e8b380708ea679fb4aa7</a>
     </li>
   </ul>
 </div>
@@ -161,6 +161,9 @@ processes in Unix-like operating systems, and how to manage them.</p></div>
     <a href="#setting-a-variable-for-a-shell-session">Setting a variable for a shell session</a>
     
   </li><li class="toc-entry toc-h4">
+    <a href="#shell-variables-and-environment-variables">Shell variables and environment variables</a>
+    
+  </li><li class="toc-entry toc-h4">
     <a href="#setting-a-variable-in-the-shell-configuration-file">Setting a variable in the shell configuration file</a>
     
   </li>
@@ -221,7 +224,7 @@ processes will behave</strong> on a computer.</p>
 <ul>
 <li><code>HOME</code> - The home directory of the user running the process.</li>
 <li><code>LANG</code> - The default locale.</li>
-<li><code>TMP</code> - The directory in which to store temporary files.</li>
+<li><code>TMPDIR</code> - The directory in which to store temporary files.</li>
 <li>And more.</li>
 </ul>
 <p>Another common example is the <a href="https://en.wikipedia.org/wiki/Path_(computing)" target="_blank" rel="noopener noreferrer"><code>PATH</code></a>, an environment variable that
@@ -277,42 +280,58 @@ variable depends on how you set it:</p>
 <li>You can set it for the current shell session.</li>
 <li>You can set it in your shell configuration file (e.g. <code>.bashrc</code>).</li>
 </ul>
-<p>In order to test these techniques, download this <a href="https://git.io/fpdar" target="_blank" rel="noopener noreferrer">simple
-script</a> which prints the value of an environment variable
-if set:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; curl -sL https://git.io/fpdar &gt; print-env-var.sh</span>
-<span class="l-line" data-line="2"></span>
-<span class="l-line" data-line="3">$&gt; chmod 755 print-env-var.sh</span>
-<span class="l-line" data-line="4"></span>
-<span class="l-line" data-line="5">$&gt; ./print-env-var.sh PATH</span>
-<span class="l-line" data-line="6">The value of <span class="l-constant">$</span><span class="l-string">PATH</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">/usr/local/sbin:/usr/local/bin:...</span></span>
-<span class="l-line" data-line="7"></span>
-<span class="l-line" data-line="8"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="9"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
+<p>To check what a program receives, use the <code>printenv</code> command. It prints the
+value of the environment variable you name, or nothing if it is not set:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">PATH</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span></code></pre>
+<p><code>printenv</code> is a separate program run by your shell, so it shows the environment
+that the shell gave it, like any other program you run. <code>echo $FOO</code> cannot do
+that: the shell replaces <code>$FOO</code> by its value <strong>before</strong> <code>echo</code> runs, so it shows
+what the shell knows, not what a program receives.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Give <code>printenv</code> the name of the variable, without the dollar sign. With
+<code>printenv $FOO</code>, the shell replaces <code>$FOO</code> by its value first, and <code>printenv</code>
+looks for a variable named after that value instead.</p></div></div>
 <h4 id="setting-a-variable-for-one-command">Setting a variable for one command<a href="#setting-a-variable-for-one-command" aria-label="Link to heading 'Setting a variable for one command'" data-heading-content="Setting a variable for one command" class="anchor"></a></h4>
-<p>You can prefix a command by an environment variable assigment:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; FOO=bar ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
+<p>You can prefix a command by an environment variable assignment:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">FOO=bar</span> <span class="l-function-call">printenv</span> <span class="l-variable-parameter">FOO</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bar</span></span></code></pre>
 <p>This only sets the variable <strong>for the process executed by that command</strong>. As you
 can see, the variable is still not set if we check later, even in the same shell
 session:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span></code></pre>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This is also why <code>FOO=bar echo $FOO</code> prints an empty line: the shell has already
+replaced <code>$FOO</code> by its value, which is empty, before the assignment applies to
+<code>echo</code>.</p></div></div>
 <h4 id="setting-a-variable-for-a-shell-session">Setting a variable for a shell session<a href="#setting-a-variable-for-a-shell-session" aria-label="Link to heading 'Setting a variable for a shell session'" data-heading-content="Setting a variable for a shell session" class="anchor"></a></h4>
 <p>The <code>export</code> command exports an environment variable to all the child processes
 running in the current shell session:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; export FOO=bar</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">export</span> <span class="l-constant">FOO</span><span class="l-operator">=</span><span class="l-string">bar</span></span>
 <span class="l-line" data-line="2"></span>
-<span class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">bar</span></span>
 <span class="l-line" data-line="5"></span>
-<span class="l-line" data-line="6"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="7">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">bar</span></span></code></pre>
 <p>As you can see, the variable remains set.</p>
 <p>However, if you close the shell and reopen a new one, the variable is no longer
 set:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="2"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span></code></pre>
+<h4 id="shell-variables-and-environment-variables">Shell variables and environment variables<a href="#shell-variables-and-environment-variables" aria-label="Link to heading 'Shell variables and environment variables'" data-heading-content="Shell variables and environment variables" class="anchor"></a></h4>
+<p>Without <code>export</code>, an assignment such as <code>BAZ=qux</code> only sets a <strong>shell
+variable</strong>. The shell knows it, but does not pass it to the programs it runs:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; BAZ=qux</span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$&gt; echo <span class="l-constant">$</span><span class="l-string">BAZ</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">qux</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">BAZ</span></span></code></pre>
+<p>Every process receives a copy of the environment of its <a href="/2026/course/408-unix-processes/#parent-processes">parent
+process</a>.
+<code>export</code> is what puts a variable into the environment of the shell, so that the
+processes it starts receive it. A program you run, such as a web application,
+can only read the variables that were exported to it.</p>
 <h4 id="setting-a-variable-in-the-shell-configuration-file">Setting a variable in the shell configuration file<a href="#setting-a-variable-in-the-shell-configuration-file" aria-label="Link to heading 'Setting a variable in the shell configuration file'" data-heading-content="Setting a variable in the shell configuration file" class="anchor"></a></h4>
 <p>If you add the <code>export</code> command to your shell configuration file (<code>.bashrc</code> for
 <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer">Bash</a>, <code>.zshrc</code> for Zsh), it will be run every time you start a new
@@ -324,22 +343,21 @@ shell:</p>
 <p>This will not immediately take effect in the current shell, as the configuration
 file is only evaluated when the shell starts. But you can evaluate it with the
 <code>source</code> command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; source ~/.bashrc</span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">source</span> <span class="l-function-call">~/.bashrc</span></span>
 <span class="l-line" data-line="2"></span>
-<span class="l-line" data-line="3">$&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="4">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">bar</span></span></code></pre>
 <p>The variable will still be set if you close this shell and launch another one:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span></code></pre>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bar</span></span></code></pre>
 <h3 id="removing-an-environment-variable">Removing an environment variable<a href="#removing-an-environment-variable" aria-label="Link to heading 'Removing an environment variable'" data-heading-content="Removing an environment variable" class="anchor"></a></h3>
 <p>The <code>unset</code> command removes a variable from the environment:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span>&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="2">The value of <span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">bar</span></span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">bar</span></span>
 <span class="l-line" data-line="3"></span>
-<span class="l-line" data-line="4"><span class="l-punctuation-special">$</span>&gt; unset FOO</span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">unset</span> <span class="l-function-call">FOO</span></span>
 <span class="l-line" data-line="5"></span>
-<span class="l-line" data-line="6">$&gt; ./print-env-var.sh FOO</span>
-<span class="l-line" data-line="7"><span class="l-constant">$</span><span class="l-string">FOO</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">set</span></span></code></pre>
+<span class="l-line" data-line="6">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">printenv</span> <span class="l-function-call">FOO</span></span></code></pre>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Of course, if the variable is exported in your shell configuration file, this
 will only remove it for the current shell session. You must remove the export
 from the configuration file to remove the variable from future shells.</p></div></div>
@@ -466,6 +484,9 @@ type, for example in Node.js:</p>
     <a href="#setting-a-variable-for-a-shell-session">Setting a variable for a shell session</a>
     
   </li><li class="toc-entry toc-h4">
+    <a href="#shell-variables-and-environment-variables">Shell variables and environment variables</a>
+    
+  </li><li class="toc-entry toc-h4">
     <a href="#setting-a-variable-in-the-shell-configuration-file">Setting a variable in the shell configuration file</a>
     
   </li>
@@ -498,7 +519,7 @@ type, for example in Node.js:</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
         </a>
-        <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/503-environment-variables/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/503-environment-variables/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -839,7 +860,7 @@ type, for example in Node.js:</p>
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP application with Git</span>
+  <span>Deploy a web application with Git</span>
 </span>
           
           
@@ -866,7 +887,7 @@ type, for example in Node.js:</p>
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Configure a PHP application through environment variables</span>
+  <span>Configure a web application through environment variables</span>
 </span>
           
           
@@ -877,14 +898,14 @@ type, for example in Node.js:</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Process Management on Linux</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Manage a PHP application with systemd as a Process Manager</span>
+  <span>Manage a web application with systemd as a Process Manager</span>
 </span>
           
           
@@ -1200,7 +1221,7 @@ type, for example in Node.js:</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@6a155d6</span>
+        <span class="tooltip-content">main@e05bb4c</span>
         <span class="font-title">0.1.0</span>
       </span>
       

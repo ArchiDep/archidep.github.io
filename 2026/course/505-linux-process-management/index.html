@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Process Management on Linux · ArchiDep</title>
-<meta name="description" content="Learn about process management on Linux and how to do it with systemd." />
+<meta name="description" content="Learn how processes are told to stop or reload with signals, and how to manage them on Linux with systemd." />
 <link rel="canonical" href="https://archidep.ch/2026/course/505-linux-process-management/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Process Management on Linux" />
-<meta property="og:description" content="Learn about process management on Linux and how to do it with systemd." />
+<meta property="og:description" content="Learn how processes are told to stop or reload with signals, and how to manage them on Linux with systemd." />
 <meta property="og:url" content="https://archidep.ch/2026/course/505-linux-process-management/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-5e80d43989746ac7561eb3b99c55efca.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-05c62340390b6bd8c4fc503cc9a66771.js" defer>
+    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/505-linux-process-management/subject.md">Rev: 6a155d62523fa2a1fd901c81dd85d5e4deb8dee5</a>
+      <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/505-linux-process-management/subject.md">Rev: e05bb4c06d87b427bf16e8b380708ea679fb4aa7</a>
     </li>
   </ul>
 </div>
@@ -120,7 +120,8 @@
   Process Management on Linux
 </h1>
 
-      <div class="my-4"><p>Learn about process management on Linux and how to do it with <a href="https://en.wikipedia.org/wiki/Systemd" target="_blank" rel="noopener noreferrer">systemd</a>.</p></div>
+      <div class="my-4"><p>Learn how processes are told to stop or reload with signals, and how to manage
+them on Linux with <a href="https://en.wikipedia.org/wiki/Systemd" target="_blank" rel="noopener noreferrer">systemd</a>.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -131,6 +132,9 @@
         <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
           <ul class="section-nav">
   <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#what-is-process-management">What is process management?</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -138,6 +142,36 @@
     
   </li><li class="toc-entry toc-h3">
     <a href="#lightweight-process-managers">Lightweight process managers</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#signals">Signals</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#what-is-a-signal">What is a signal?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#common-unix-signals">Common Unix signals</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-kill-command">The <code>kill</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#trapping-signals">Trapping signals</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-kill-signal">The <code>KILL</code> signal</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#unix-signals-in-the-real-world">Unix signals in the real world</a>
     
   </li>
 </ul>
@@ -174,23 +208,61 @@
 
       
 
-      
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/505-linux-process-management/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/505-linux-process-management/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
 
-      <h2 id="what-is-process-management">What is process management?<a href="#what-is-process-management" aria-label="Link to heading 'What is process management?'" data-heading-content="What is process management?" class="anchor"></a></h2>
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/505-linux-process-management/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <p><strong>You will need</strong></p>
+<ul>
+<li>A Unix CLI</li>
+<li>An Ubuntu server to connect to</li>
+</ul>
+<p><strong>Recommended reading</strong></p>
+<ul>
+<li><a href="/2026/course/408-unix-processes/">Unix Processes</a></li>
+<li><a href="/2026/course/411-how-a-computer-works/slides/#the-operating-system">How a computer works</a></li>
+</ul>
+<h2 id="what-is-process-management">What is process management?<a href="#what-is-process-management" aria-label="Link to heading 'What is process management?'" data-heading-content="What is process management?" class="anchor"></a></h2>
 <p>Many processes must run for a computer to do its job.</p>
 <p>Which processes to run and when to run them depends on the use case:</p>
 <ul>
-<li>On a desktop computer, you need processes to be launched to display the graphical user interface (GUI), for example.</li>
-<li>On a web-facing server, you probably need to run a database and a web server at least.</li>
+<li>On a desktop computer, you need processes to be launched to display the
+graphical user interface (GUI), for example.</li>
+<li>On a web-facing server, you probably need to run a database and a web server
+at least.</li>
 </ul>
-<p>Some processes may have <strong>dependencies</strong>:
-i.e. they might need other processes to be already running in order to run properly themselves.
-For example, a PHP application might need a MySQL database to store some data.</p>
-<p>Processes also need to be <strong>managed</strong>, i.e. it should be easy to start them, stop them, restart them,
-or to configure them to automatically restart if they crash.</p>
+<p>Some processes may have <strong>dependencies</strong>: i.e. they might need other processes
+to be already running in order to run properly themselves. For example, Guess It
+needs its PostgreSQL database to load and save the leaderboard.</p>
+<p>Processes also need to be <strong>managed</strong>, i.e. it should be easy to start them,
+stop them, restart them, or to configure them to automatically restart if they
+crash.</p>
 <h3 id="process-managers">Process managers<a href="#process-managers" aria-label="Link to heading 'Process managers'" data-heading-content="Process managers" class="anchor"></a></h3>
-<p><strong>Process managers</strong> are programs that fulfill this role:
-i.e. make sure that the correct processes are run in the correct order and are managed correctly thereafter.</p>
+<p><strong>Process managers</strong> are programs that fulfill this role: they make sure that
+the correct processes are run in the correct order, and keep managing them
+afterwards. A process manager is a process like any other, whose job is to
+start other processes, watch them, and restart them when they stop.</p>
+<p>The most important one is the first process of the machine. As you saw <a href="/2026/course/411-how-a-computer-works/slides/#booting">when
+the machine boots</a>, the kernel starts a single program, the <strong>init
+process</strong>, with process ID 1. Everything else the machine runs is started by the
+init process, or by a process that it started. This makes it the natural process
+manager of the whole system.</p>
 <p>Most operating systems have a process manager built in:</p>
 <table>
 <thead>
@@ -218,12 +290,10 @@ i.e. make sure that the correct processes are run in the correct order and are m
 </tr>
 </tbody>
 </table>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Some of these do more than just process management, like systemd which also
-manages the Linux init process to bootstrap the operating system.</p></div></div>
 <h3 id="lightweight-process-managers">Lightweight process managers<a href="#lightweight-process-managers" aria-label="Link to heading 'Lightweight process managers'" data-heading-content="Lightweight process managers" class="anchor"></a></h3>
-<p>Simpler process managers also exist,
-meant to be used to run and manage one application.
-Some of them are generic while others are specific to a programming language:</p>
+<p>Simpler process managers also exist, meant to be used to run and manage one
+application. Some of them are generic while others are specific to a
+programming language:</p>
 <table>
 <thead>
 <tr>
@@ -234,17 +304,12 @@ Some of them are generic while others are specific to a programming language:</p
 </thead>
 <tbody>
 <tr>
-<td align="left"><a href="http://godrb.com/" target="_blank" rel="noopener noreferrer">God</a></td>
-<td align="left"><a href="https://www.ruby-lang.org/" target="_blank" rel="noopener noreferrer">Ruby</a></td>
-<td align="left"><em>Any executable</em></td>
-</tr>
-<tr>
 <td align="left"><a href="http://php.net/manual/en/install.fpm.php" target="_blank" rel="noopener noreferrer">PHP FPM</a></td>
 <td align="left"><a href="http://www.php.net/" target="_blank" rel="noopener noreferrer">PHP</a></td>
 <td align="left">PHP programs</td>
 </tr>
 <tr>
-<td align="left"><a href="http://pm2.keymetrics.io/" target="_blank" rel="noopener noreferrer">PM2</a></td>
+<td align="left"><a href="https://pm2.keymetrics.io/" target="_blank" rel="noopener noreferrer">PM2</a></td>
 <td align="left"><a href="https://nodejs.org/en/" target="_blank" rel="noopener noreferrer">Node.js</a></td>
 <td align="left">Node.js programs</td>
 </tr>
@@ -255,14 +320,206 @@ Some of them are generic while others are specific to a programming language:</p
 </tr>
 </tbody>
 </table>
-<p>They are easier to use but have fewer features.
-For example, none of those can handle dependencies between processes.</p>
+<p>They are easier to use but have fewer features. For example, none of those can
+handle dependencies between processes.</p>
+<h2 id="signals">Signals<a href="#signals" aria-label="Link to heading 'Signals'" data-heading-content="Signals" class="anchor"></a></h2>
+<div class="w-full flex justify-center">
+  <img src='images/kill-9-54c5f672a726520371de2ea1ab0660ed.jpg' />
+</div>
+<p>To stop a process, restart it or tell it to reload its configuration, a process
+manager has to be able to tell the process so. Processes are isolated from each
+other, so it cannot simply reach into the other process’s memory. It uses the
+operating system to send it a <strong>signal</strong> instead.</p>
+<h3 id="what-is-a-signal">What is a signal?<a href="#what-is-a-signal" aria-label="Link to heading 'What is a signal?'" data-heading-content="What is a signal?" class="anchor"></a></h3>
+<p>A signal is an <strong><a href="https://en.wikipedia.org/wiki/Asynchrony_(computer_programming)" target="_blank" rel="noopener noreferrer">asynchronous</a> notification sent to a process</strong> to
+notify it that an event has occurred. The process may be doing anything at the
+time: it does not wait for the signal, or ask for it.</p>
+<p>Signals are always delivered by the kernel. A process sends one by asking the
+kernel to, with a <a href="/2026/course/411-how-a-computer-works/slides/#the-operating-system">system call</a>, and the kernel also sends signals of its
+own, for example when the terminal a process is running in is closed.</p>
+<div class="w-full p-4 rounded-2xl flex justify-center dark:bg-radial dark:from-gray-500 dark:from-40% dark:to-transparent">
+  <img src='images/sighup-diagram-c3264a93c24ea6894a5e20e793ff761f.png' />
+</div>
+<p>A signal does to a process what <a href="/2026/course/411-how-a-computer-works/slides/#the-machine-at-boot">an interrupt</a> does to a
+processor. The process stops whatever it was doing, and runs the code that
+handles that signal:</p>
+<ul>
+<li>If the program has registered a <strong>signal handler</strong> for that specific signal,
+that handler runs. When it is done, the process carries on where it stopped.</li>
+<li>Otherwise the <strong>default handler</strong> runs. For most signals, the default handler
+terminates the process.</li>
+</ul>
+<h3 id="common-unix-signals">Common Unix signals<a href="#common-unix-signals" aria-label="Link to heading 'Common Unix signals'" data-heading-content="Common Unix signals" class="anchor"></a></h3>
+<p>A signal is named with the <code>SIG</code> prefix followed by a short name. Most signals
+also have a number. Here are the ones you are most likely to meet:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Signal</th>
+<th align="right">Number</th>
+<th align="left">Default handler</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>SIGHUP</code></td>
+<td align="right">1</td>
+<td align="left">Terminate</td>
+<td align="left">Hangup (the terminal was closed)</td>
+</tr>
+<tr>
+<td align="left"><code>SIGINT</code></td>
+<td align="right">2</td>
+<td align="left">Terminate</td>
+<td align="left">Interrupt (sent when you press <code>Ctrl-C</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>SIGQUIT</code></td>
+<td align="right">3</td>
+<td align="left">Terminate (with <a href="https://en.wikipedia.org/wiki/Core_dump" target="_blank" rel="noopener noreferrer">core dump</a>)</td>
+<td align="left">Quit</td>
+</tr>
+<tr>
+<td align="left"><code>SIGKILL</code></td>
+<td align="right">9</td>
+<td align="left">Terminate</td>
+<td align="left">Kill (cannot be caught or ignored)</td>
+</tr>
+<tr>
+<td align="left"><code>SIGTERM</code></td>
+<td align="right">15</td>
+<td align="left">Terminate</td>
+<td align="left">Termination signal (default signal sent by the <code>kill</code> command)</td>
+</tr>
+<tr>
+<td align="left"><code>SIGUSR1</code></td>
+<td align="right">-</td>
+<td align="left">Terminate</td>
+<td align="left">User-defined signal 1</td>
+</tr>
+<tr>
+<td align="left"><code>SIGUSR2</code></td>
+<td align="right">-</td>
+<td align="left">Terminate</td>
+<td align="left">User-defined signal 2</td>
+</tr>
+<tr>
+<td align="left"><code>SIGWINCH</code></td>
+<td align="right">-</td>
+<td align="left">Ignore</td>
+<td align="left">Terminal window size changed</td>
+</tr>
+</tbody>
+</table>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can <strong>l</strong>ist the signals of your system by running <code>kill -l</code>. Here is a more
+complete list: <a href="https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals" target="_blank" rel="noopener noreferrer">POSIX signals</a>.</p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p><code>SIGUSR1</code>, <code>SIGUSR2</code> and <code>SIGWINCH</code> have a number too, but it is not the same on
+every system, so programs refer to them by name.</p></div></div>
+<h4 id="the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)<a href="#the-terminal-interrupt-signal-sigint" aria-label="Link to heading 'The terminal interrupt signal (SIGINT)'" data-heading-content="The terminal interrupt signal (SIGINT)" class="anchor"></a></h4>
+<p>When you press <code>Ctrl-C</code> to stop a command, you are using signals. You have done
+it since the start of the course, for example to stop Guess It when it was
+running in your terminal.</p>
+<p>The program does not read <code>Ctrl-C</code> as a key. The terminal is managed by the
+kernel, which recognizes the key combination and sends a <strong>terminal interrupt
+signal</strong>, or <strong><code>SIGINT</code></strong>, to the processes running in the foreground of that
+terminal. When you stopped <code>npm run dev</code>, both <code>npm</code> and the <code>node</code> processes it
+had started received it.</p>
+<p>Most programs handle that signal by terminating. Some interactive programs use
+it for something else instead. For example, <code>Ctrl-C</code> does not quit the pager of
+<code>man ls</code>: you have to press <code>q</code>.</p>
+<h3 id="the-kill-command">The <code>kill</code> command<a href="#the-kill-command" aria-label="Link to heading 'The kill command'" data-heading-content="The kill command" class="anchor"></a></h3>
+<p>The <code>kill</code> command <strong>sends a signal to a process</strong>, identified by its PID.</p>
+<p>Since the default handler for most signals is to terminate the process, it often
+has that effect, hence the name “kill”.</p>
+<p>Its syntax is:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">kill [-&lt;SIGNAL&gt;] &lt;PID&gt;</span>
+<span class="l-line" data-line="2">kill [-s &lt;SIGNAL&gt;] &lt;PID&gt;</span></code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>kill 10000</code></td>
+<td align="left">Send the <strong>default <code>SIGTERM</code> signal</strong> to the process with PID <code>10000</code></td>
+</tr>
+<tr>
+<td align="left"><code>kill -s HUP 10000</code></td>
+<td align="left">Send the <code>SIGHUP</code> signal to that same process</td>
+</tr>
+<tr>
+<td align="left"><code>kill -HUP 10000</code></td>
+<td align="left">Equivalent to the previous command</td>
+</tr>
+<tr>
+<td align="left"><code>kill -1 10000</code></td>
+<td align="left">Equivalent to the previous command (1 is the POSIX number of <code>SIGHUP</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can only send signals to your own processes. To send a signal to a process
+of another user, such as a service run by systemd, you need <code>sudo</code>.</p></div></div>
+<h4 id="trapping-signals">Trapping signals<a href="#trapping-signals" aria-label="Link to heading 'Trapping signals'" data-heading-content="Trapping signals" class="anchor"></a></h4>
+<p><a href="https://gist.github.com/AlphaHydrae/162f28e3e2bd9355a95914e04cd4dd0c/7ae3f17844809bee9423c412ef02390834221ee8" target="_blank" rel="noopener noreferrer">This script</a> is badly behaved on purpose: it registers a handler
+for every signal it can, which prints a message and does nothing else. You can
+run it like this:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">curl</span> <span class="l-string-special-path">-fsSL</span> <span class="l-string-special-path">https://tinyurl.com/archidep-trap</span> <span class="l-operator">|</span> <span class="l-function-call">sh</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Hi,</span> <span class="l-variable-parameter">I</span>&#39;m running with PID 10000</span>
+<span class="l-line" data-line="3">Try and kill me!</span></code></pre>
+<p>Since it handles the <code>SIGINT</code> signal itself, among others, <code>Ctrl-C</code> does not
+stop it. The script prints a message, and carries on.</p>
+<p>From another terminal, for example a second SSH connection to the same server,
+you can send it other signals with <code>kill</code>, using the PID it printed (<code>10000</code> in
+this example, which will be different on your machine):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-number">10000</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">HUP</span> <span class="l-number">10000</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">QUIT</span> <span class="l-number">10000</span></span>
+<span class="l-line" data-line="4">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">USR1</span> <span class="l-number">10000</span></span></code></pre>
+<p>The script handles each of them the same way, and stays alive:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Nice try, I am ignoring your SIGTERM signal</span>
+<span class="l-line" data-line="2">Nice try, I am ignoring your SIGHUP signal</span>
+<span class="l-line" data-line="3">Nice try, I am ignoring your SIGQUIT signal</span>
+<span class="l-line" data-line="4">Nice try, I am ignoring your SIGUSR1 signal</span></code></pre>
+<h4 id="the-kill-signal">The <code>KILL</code> signal<a href="#the-kill-signal" aria-label="Link to heading 'The KILL signal'" data-heading-content="The KILL signal" class="anchor"></a></h4>
+<p>There is one signal that cannot be handled or ignored: <strong><code>SIGKILL</code></strong>.</p>
+<p>The kernel does not deliver it to the process. It ends the process itself,
+without running any more of its code, so the program cannot prevent it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">kill</span> <span class="l-function-call">-s</span> <span class="l-variable-parameter">KILL</span> <span class="l-number">10000</span></span></code></pre>
+<p>The script finally dies, without printing anything.</p>
+<p>Because the program gets no chance to run any code, it cannot clean up before
+it ends: finish writing a file, answer the requests it is handling, or close its
+connection to a database. This is why you ask a process to stop with <code>SIGTERM</code>
+first, and only use <code>SIGKILL</code> on a process that does not stop.</p>
+<h3 id="unix-signals-in-the-real-world">Unix signals in the real world<a href="#unix-signals-in-the-real-world" aria-label="Link to heading 'Unix signals in the real world'" data-heading-content="Unix signals in the real world" class="anchor"></a></h3>
+<p>Many widely-used programs react to Unix signals, for example:</p>
+<ul>
+<li><a href="https://nginx.org/en/docs/control.html" target="_blank" rel="noopener noreferrer">Nginx</a></li>
+<li><a href="https://www.postgresql.org/docs/current/server-shutdown.html" target="_blank" rel="noopener noreferrer">PostgreSQL</a></li>
+<li><a href="https://man.openbsd.org/sshd" target="_blank" rel="noopener noreferrer">OpenSSH</a></li>
+</ul>
+<div class="cols grid grid-cols-1 md:grid-cols-3 gap-4"><div class="md:col-span-2"><p>A common example is the <code>SIGHUP</code> signal. Originally, it meant that the modem
+connecting a terminal to the computer had hung up.</p>
+<p>Terminals are no longer connected to computers by modem, but the kernel still
+sends <code>SIGHUP</code> to the processes of a terminal that is closed. When your SSH
+connection closes, the shell on the server and the programs it was running in
+the foreground receive it, and terminate. This is why an application you started
+in an SSH session stops when you disconnect.</p>
+<p>Programs that do not run in a terminal never receive it that way, so some of
+them repurposed it. Many background services like Nginx and PostgreSQL reload
+their configuration, without shutting down, when they receive a <code>SIGHUP</code>.</p></div><div><p><img src="images/sighup-04c39cccb6f2714ce0c0c2c2e8d43d5d.jpg" alt="SIGHUP" /></p></div></div>
 <h2 id="systemd">Systemd<a href="#systemd" aria-label="Link to heading 'Systemd'" data-heading-content="Systemd" class="anchor"></a></h2>
 <p><img src="images/systemd-38f1099d4dfd5c339928bfdcebaca5ba.png" alt="Systemd" /></p>
 <h3 id="what-is-systemd">What is systemd?<a href="#what-is-systemd" aria-label="Link to heading 'What is systemd?'" data-heading-content="What is systemd?" class="anchor"></a></h3>
-<p><a href="https://en.wikipedia.org/wiki/Systemd" target="_blank" rel="noopener noreferrer">Systemd</a> provides not only process management, but also the
-fundamental building blocks of a <a href="https://en.wikipedia.org/wiki/Linux" target="_blank" rel="noopener noreferrer">Linux</a> operating system, such as an
-<a href="https://en.wikipedia.org/wiki/Init" target="_blank" rel="noopener noreferrer">init system</a>.</p>
+<p>On most Linux distributions, including Ubuntu, <a href="https://en.wikipedia.org/wiki/Systemd" target="_blank" rel="noopener noreferrer">systemd</a> is the <a href="/2026/course/411-how-a-computer-works/slides/#booting">init
+process</a>: the first process the kernel starts, with PID 1. It is the
+process manager of the whole system.</p>
+<p>It also provides many of the other fundamental building blocks of a
+<a href="https://en.wikipedia.org/wiki/Linux" target="_blank" rel="noopener noreferrer">Linux</a> operating system, such as the logging of all the processes it
+runs:</p>
 <p><img src="images/systemd-components-2c6c370302d59d1d37ad1a21f90d2b04.png" alt="Systemd Components" /></p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Systemd is a replacement for the <a href="https://en.wikipedia.org/wiki/UNIX_System_V" target="_blank" rel="noopener noreferrer">Unix System V</a> init system and
 has been the de facto standard for most Linux distributions since 2015.</p></div></div>
@@ -270,19 +527,23 @@ has been the de facto standard for most Linux distributions since 2015.</p></div
 <p>Systemd records the instructions on how to launch and manage a process in a
 configuration file referred to as a <a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html" target="_blank" rel="noopener noreferrer"><strong>unit file</strong></a>. It supports
 many unit file types such as <code>service</code>, <code>socket</code>, <code>timer</code>, etc.</p>
-<p>The start of a unit file usually looks like this:</p>
+<p>A unit file usually looks like this:</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">[Unit]</span>
 <span class="l-line" data-line="2">Description=Something to run</span>
-<span class="l-line" data-line="3"></span>
-<span class="l-line" data-line="4">[Install]</span>
-<span class="l-line" data-line="5">WantedBy=something-else.target</span>
-<span class="l-line" data-line="6"></span>
-<span class="l-line" data-line="7">...</span></code></pre>
+<span class="l-line" data-line="3">After=something-else.service</span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">[Install]</span>
+<span class="l-line" data-line="6">WantedBy=multi-user.target</span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">...</span></code></pre>
 <p><code>[Unit]</code> is one section in the configuration file. There will be other sections
-depending on the type of unit file.</p>
-<p><code>[Install]</code> is an optional section that can be used to express dependencies
-between units. Here, the <code>WantedBy</code> option specifies that this unit will be
-started after the <code>something-else</code> unit has been started.</p>
+depending on the type of unit file. It holds the unit’s description and its
+dependencies. Here, the <code>After</code> option specifies that this unit must be started
+after the <code>something-else</code> unit, if both are to be started.</p>
+<p><code>[Install]</code> is an optional section that says when the unit should be started
+automatically, once it has been enabled. Here, the <code>WantedBy</code> option specifies
+that the unit is started when the system reaches the <code>multi-user.target</code>, which
+it does every time it boots.</p>
 <h3 id="service-unit-file">Service unit file<a href="#service-unit-file" aria-label="Link to heading 'Service unit file'" data-heading-content="Service unit file" class="anchor"></a></h3>
 <p>The unit file type that interests us is <a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html" target="_blank" rel="noopener noreferrer"><code>service</code></a>, which will
 configure, launch and manage a long-running process such as a database or
@@ -308,9 +569,22 @@ application.</p>
 <td align="left"><code>User</code></td>
 <td align="left">User to run the process as (can be used to limit access)</td>
 </tr>
+<tr>
+<td align="left"><code>EnvironmentFile</code></td>
+<td align="left">File of environment variables to set for the process</td>
+</tr>
+<tr>
+<td align="left"><code>Restart</code></td>
+<td align="left">When to restart the process automatically after it has ended</td>
+</tr>
 </tbody>
 </table>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>And <a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html#Options" target="_blank" rel="noopener noreferrer">many more</a>.</p></div></div>
+<p>With <code>Restart=on-failure</code>, systemd restarts the process when it fails: when it
+exits with an <a href="/2026/course/408-unix-processes/#exit-status">exit status</a> other than 0, or when it is terminated
+by a signal such as <code>SIGKILL</code>. A process that exits with a status of 0, or that
+is terminated by <code>SIGTERM</code>, <code>SIGINT</code> or <code>SIGHUP</code>, is considered to have stopped
+as it was asked to, and is not restarted.</p>
 <h3 id="location-of-unit-files">Location of unit files<a href="#location-of-unit-files" aria-label="Link to heading 'Location of unit files'" data-heading-content="Location of unit files" class="anchor"></a></h3>
 <p>Unit files are named after their type. For example, a <code>service</code> unit file will
 be named <code>something.service</code>.</p>
@@ -324,7 +598,7 @@ be named <code>something.service</code>.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>/lib/systemd/system</code></td>
+<td align="left"><code>/usr/lib/systemd/system</code></td>
 <td align="left">Unit files installed by the operating system or by packages (e.g. a database)</td>
 </tr>
 <tr>
@@ -333,6 +607,8 @@ be named <code>something.service</code>.</p>
 </tr>
 </tbody>
 </table>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>On Ubuntu, <code>/lib</code> is a link to <code>/usr/lib</code>, so you will also see the first
+directory written as <code>/lib/systemd/system</code>.</p></div></div>
 <h3 id="the-systemctl-command">The <code>systemctl</code> command<a href="#the-systemctl-command" aria-label="Link to heading 'The systemctl command'" data-heading-content="The systemctl command" class="anchor"></a></h3>
 <p>The <code>systemctl</code> or <strong>system</strong> <strong>c</strong>on<strong>t</strong>ro<strong>l</strong> command can be used to
 enable/disable and start/stop units once their configuration file is in place:</p>
@@ -345,12 +621,16 @@ enable/disable and start/stop units once their configuration file is in place:</
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>sudo systemctl status &lt;unit&gt;</code></td>
-<td align="left">Display the current status of a unit.</td>
+<td align="left"><code>systemctl status &lt;unit&gt;</code></td>
+<td align="left">Display the current status of a unit, including the PID of its main process.</td>
 </tr>
 <tr>
 <td align="left"><code>sudo systemctl enable &lt;unit&gt;</code></td>
-<td align="left">Enable a new unit file. This will enable it to start on boot if it has the correct dependencies.</td>
+<td align="left">Enable a unit, so that it starts automatically as its <code>[Install]</code> section says, e.g. on boot.</td>
+</tr>
+<tr>
+<td align="left"><code>sudo systemctl disable &lt;unit&gt;</code></td>
+<td align="left">Disable a unit, so that it no longer starts automatically.</td>
 </tr>
 <tr>
 <td align="left"><code>sudo systemctl start &lt;unit&gt;</code></td>
@@ -365,8 +645,12 @@ enable/disable and start/stop units once their configuration file is in place:</
 <td align="left">Restart (stop and start) a unit.</td>
 </tr>
 <tr>
+<td align="left"><code>sudo systemctl reload &lt;unit&gt;</code></td>
+<td align="left">Ask a unit to reload its configuration, without stopping it, if it supports it.</td>
+</tr>
+<tr>
 <td align="left"><code>sudo systemctl reenable &lt;unit&gt;</code></td>
-<td align="left">Re-enable an existing unit file after its dependencies have been modified.</td>
+<td align="left">Enable a unit again, after its <code>[Install]</code> section has been modified.</td>
 </tr>
 <tr>
 <td align="left"><code>sudo systemctl daemon-reload</code></td>
@@ -374,11 +658,15 @@ enable/disable and start/stop units once their configuration file is in place:</
 </tr>
 </tbody>
 </table>
+<p><code>systemctl</code> does not stop a service itself: it asks systemd, which sends the
+service’s process a <code>SIGTERM</code> signal. If the process is still running 90
+seconds later, systemd sends it a <code>SIGKILL</code>. Many services implement <code>reload</code>
+by having systemd send them a <code>SIGHUP</code>.</p>
 <h3 id="the-journalctl-command">The <code>journalctl</code> command<a href="#the-journalctl-command" aria-label="Link to heading 'The journalctl command'" data-heading-content="The journalctl command" class="anchor"></a></h3>
-<p>Services started with systemd have their standard output and standard error
-streams collected and logged by <a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html" target="_blank" rel="noopener noreferrer">journald</a>, one of the default
-services provided by systemd itself. The <code>systemctl status</code> command sometimes
-shows you an excerpt of these logs.</p>
+<p>Services started with systemd have their <a href="/2026/course/408-unix-processes/#standard-streams">standard output and standard
+error</a> streams collected and logged by <a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html" target="_blank" rel="noopener noreferrer">journald</a>,
+one of the default services provided by systemd itself. The <code>systemctl status</code>
+command sometimes shows you an excerpt of these logs.</p>
 <p>The <code>journalctl</code> command allows you to read the full logs:</p>
 <table>
 <thead>
@@ -398,12 +686,24 @@ shows you an excerpt of these logs.</p>
 </tr>
 </tbody>
 </table>
+<p>The logs are often the most useful thing to read when a service does not behave
+as expected. A service has no terminal to show you its errors in: if it fails to
+start, keeps restarting or does not answer, the error messages it printed are in
+its logs, along with what systemd did to it and when.</p>
 <h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <ul>
+<li><a href="http://www.opsschool.org/unix_signals.html" target="_blank" rel="noopener noreferrer">Signals - Unix fundamentals 201 - Ops School
+Curriculum</a></li>
+<li><a href="https://www.baeldung.com/linux/sigint-and-other-termination-signals" target="_blank" rel="noopener noreferrer">SIGINT And Other Termination Signals in
+Linux</a></li>
 <li><a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html" target="_blank" rel="noopener noreferrer">Systemd Unit Configuration</a></li>
 <li><a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html" target="_blank" rel="noopener noreferrer">Systemd Service Configuration</a></li>
 <li><a href="https://www.freedesktop.org/software/systemd/man/systemd.exec.html" target="_blank" rel="noopener noreferrer">Systemd Execution Environment Configuration</a></li>
-<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/chap-managing_services_with_systemd" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux - System Administrator’s Guide - Managing Services With Systemd</a></li>
+<li><a href="https://www.freedesktop.org/software/systemd/man/systemd.kill.html" target="_blank" rel="noopener noreferrer">Systemd Process Killing Procedure
+Configuration</a></li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/chap-managing_services_with_systemd" target="_blank" rel="noopener noreferrer">Red Hat Enterprise Linux - System Administrator’s Guide - Managing Services
+With
+Systemd</a></li>
 <li><a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html" target="_blank" rel="noopener noreferrer">Systemd journald Service</a></li>
 </ul>
 
@@ -422,6 +722,9 @@ shows you an excerpt of these logs.</p>
       <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
         <ul class="section-nav">
   <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#what-is-process-management">What is process management?</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -429,6 +732,36 @@ shows you an excerpt of these logs.</p>
     
   </li><li class="toc-entry toc-h3">
     <a href="#lightweight-process-managers">Lightweight process managers</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#signals">Signals</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#what-is-a-signal">What is a signal?</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#common-unix-signals">Common Unix signals</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#the-terminal-interrupt-signal-sigint">The terminal interrupt signal (<code>SIGINT</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-kill-command">The <code>kill</code> command</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#trapping-signals">Trapping signals</a>
+    
+  </li><li class="toc-entry toc-h4">
+    <a href="#the-kill-signal">The <code>KILL</code> signal</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h3">
+    <a href="#unix-signals-in-the-real-world">Unix signals in the real world</a>
     
   </li>
 </ul>
@@ -467,8 +800,12 @@ shows you an excerpt of these logs.</p>
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
 </svg>
         </a>
-        
-        <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/505-linux-process-management/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-505-linux-process-management-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+        </a>
+        <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/505-linux-process-management/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -809,7 +1146,7 @@ shows you an excerpt of these logs.</p>
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP application with Git</span>
+  <span>Deploy a web application with Git</span>
 </span>
           
           
@@ -836,7 +1173,7 @@ shows you an excerpt of these logs.</p>
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Configure a PHP application through environment variables</span>
+  <span>Configure a web application through environment variables</span>
 </span>
           
           
@@ -847,14 +1184,14 @@ shows you an excerpt of these logs.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Process Management on Linux</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Manage a PHP application with systemd as a Process Manager</span>
+  <span>Manage a web application with systemd as a Process Manager</span>
 </span>
           
           
@@ -1170,7 +1507,7 @@ shows you an excerpt of these logs.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@6a155d6</span>
+        <span class="tooltip-content">main@e05bb4c</span>
         <span class="font-title">0.1.0</span>
       </span>
       

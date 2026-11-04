@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Configure a PHP application through environment variables · ArchiDep</title>
-<meta name="description" content="The goal of this exercise is to improve the configuration step of the previous exercise by using environment variables instead of hardcoded configuration values." />
+    <title>Configure a web application through environment variables · ArchiDep</title>
+<meta name="description" content="The goal of this exercise is to improve the configuration step of the previous exercise: Guess It will take its configuration from environment variables, instead of having it written in server.js." />
 <link rel="canonical" href="https://archidep.ch/2026/course/504-config-through-environment/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Configure a PHP application through environment variables" />
-<meta property="og:description" content="The goal of this exercise is to improve the configuration step of the previous exercise by using environment variables instead of hardcoded configuration values." />
+<meta property="og:title" content="Configure a web application through environment variables" />
+<meta property="og:description" content="The goal of this exercise is to improve the configuration step of the previous exercise: Guess It will take its configuration from environment variables, instead of having it written in server.js." />
 <meta property="og:url" content="https://archidep.ch/2026/course/504-config-through-environment/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-5e80d43989746ac7561eb3b99c55efca.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-05c62340390b6bd8c4fc503cc9a66771.js" defer>
+    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/504-config-through-environment/exercise.md">Rev: 6a155d62523fa2a1fd901c81dd85d5e4deb8dee5</a>
+      <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/504-config-through-environment/exercise.md">Rev: e05bb4c06d87b427bf16e8b380708ea679fb4aa7</a>
     </li>
   </ul>
 </div>
@@ -117,12 +117,12 @@
   <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
     <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-exercise">
       <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
-  Configure a PHP application through environment variables
+  Configure a web application through environment variables
 </h1>
 
       <div class="my-4"><p>The goal of this exercise is to improve the configuration step of the <a href="/2026/course/501-git-clone-deployment/">previous
-exercise</a> by using
-environment variables instead of hardcoded configuration values.</p></div>
+exercise</a>: Guess It will take its configuration from environment
+variables, instead of having it written in <code>server.js</code>.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -136,22 +136,53 @@ environment variables instead of hardcoded configuration values.</p></div>
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#setup"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Setup</a>
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#why-are-we-doing-this"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Why are we doing this?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#stop-the-git-deployment"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Stop the Git deployment</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#update-the-readme"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the README</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#pull-the-latest-version-from-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version from the server</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#commit-and-push-your-changes"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Commit and push your changes</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#run-the-php-development-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the PHP development server</a>
+    <a href="#pull-the-latest-version-on-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version on the server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#optional-run-the-application-without-its-configuration"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: run the application without its configuration</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    <a href="#client-password-must-be-a-string"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>client password must be a string</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#completed-running-serverjs"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Completed running 'server.js'</code></a>
     
   </li>
 </ul>
@@ -197,125 +228,883 @@ environment variables instead of hardcoded configuration values.</p></div>
   </li>
 </ul>
 
-      <h2 id="setup"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Setup<a href="#setup" aria-label="Link to heading 'Setup'" data-heading-content="Setup" class="anchor"></a></h2>
-<p>Make sure you have completed the <a href="/2026/course/501-git-clone-deployment/">previous exercise</a> first.</p>
-<p>Stop your <code>php -S</code> command if it is still running.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can use <code>Ctrl-C</code> to stop any command currently running in your terminal.</p></div></div>
+      <h2 id="requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements<a href="#requirements" aria-label="Link to heading 'Requirements'" data-heading-content="Requirements" class="anchor"></a></h2>
+<p>Make sure you have completed the <a href="/2026/course/501-git-clone-deployment/">previous exercise</a> first. You
+will need its clone in <code>/srv/guessit</code>, and the <code>guessit-ex</code> directory of your
+SFTP deployment, which still holds the password of the <code>guessit</code> database user.</p>
+<h2 id="why-are-we-doing-this"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Why are we doing this?<a href="#why-are-we-doing-this" aria-label="Link to heading 'Why are we doing this?'" data-heading-content="Why are we doing this?" class="anchor"></a></h2>
+<p>At the end of the <a href="/2026/course/410-sftp-deployment/">previous SFTP deployment exercise</a>, the <code>server.js</code>
+file of your deployment had to contain the database password. If it was not
+already the right one, you edited it on your server, and left it uncommitted.
+Either way, the password is in the code.</p>
+<p>The third factor of The Twelve-Factor App, <a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Config</a>, asks for a
+strict separation of the configuration from the code. The configuration is what
+can change between deploys, such as the database password or the database port,
+while the code stays the same. An application that reads its configuration from
+environment variables can be deployed anywhere without changing a line of its
+code.</p>
+<h2 id="stop-the-git-deployment"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Stop the Git deployment<a href="#stop-the-git-deployment" aria-label="Link to heading 'Stop the Git deployment'" data-heading-content="Stop the Git deployment" class="anchor"></a></h2>
+<p>If Guess It is still running from the previous exercise, go to the terminal
+where it runs, and press <code>Ctrl-C</code>. Only one program at a time can listen on port 3000.</p>
+<p>If it is not running, there is nothing to stop: it stopped when the SSH
+connection you had started it in was closed.</p>
 <h2 id="update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration<a href="#update-the-configuration" aria-label="Link to heading 'Update the configuration'" data-heading-content="Update the configuration" class="anchor"></a></h2>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Do this part of the exercise on your local machine, not on the server.</p></div></div></div>
-<p>Clone the repository if you do not have it already:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
-<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:MyUser/php-todo-ex.git</span></span></code></pre>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Make sure to use your own <a href="https://guides.github.com/activities/forking/" target="_blank" rel="noopener noreferrer">fork</a>
-of the repository, the same as in the <a href="/2026/course/501-git-clone-deployment/">previous exercise</a>.</p></div></div>
-<p>Modify the first few lines of <code>index.php</code> to take configuration values from the
-environment if available.</p>
-<p>For example, instead of:</p>
-<pre class="lumis"><code class="language-php" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;?php</span></span>
-<span class="l-line" data-line="2"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;BASE_URL&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-string">&#39;/&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Do this part of the exercise on your computer, not on the server.</p></div></div></div>
+<p>Open the <code>guessit-ex</code> directory of your fork, on your computer, in your editor.
+The configuration is at the top of <code>server.js</code>:</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment">// The port the application listens on.</span></span>
+<span class="l-line" data-line="2"><span class="l-keyword">const</span> <span class="l-constant">PORT</span> <span class="l-operator">=</span> <span class="l-number">3000</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment">// The URL used to connect to the PostgreSQL database. It has the shape</span></span>
+<span class="l-line" data-line="5"><span class="l-comment">// postgresql://USER:PASSWORD@HOST:PORT/DATABASE. Change the password to match</span></span>
+<span class="l-line" data-line="6"><span class="l-comment">// the one you set when you ran schema.sql.</span></span>
+<span class="l-line" data-line="7"><span class="l-keyword">const</span> <span class="l-constant">DATABASE_URL</span> <span class="l-operator">=</span></span>
+<span class="l-line" data-line="8">  <span class="l-string">&#39;postgresql://guessit:change-me-now@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
+<p>Your <code>DATABASE_URL</code> may have another password, and another port, if you
+configured it for your computer or for your server.</p>
+<p>Modify these lines to take the configuration from the environment. In Node.js,
+the environment variables of the process are in <code>process.env</code>. For example,
+instead of:</p>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">PORT</span> <span class="l-operator">=</span> <span class="l-number">3000</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
 <p>Use this:</p>
-<pre class="lumis"><code class="language-php" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;?php</span></span>
-<span class="l-line" data-line="2"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;BASE_URL&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_BASE_URL&#39;</span><span class="l-punctuation-bracket">)</span> <span class="l-keyword-conditional-ternary">?:</span> <span class="l-string">&#39;/&#39;</span><span class="l-punctuation-bracket">)</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
-<p>With this code, the <code>BASE_URL</code> variable will be equal to the value of the
-<code>TODOLIST_BASE_URL</code> environment variable if it has been set, or it will default
-to <code>/</code> if the environment variable is not available.</p>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>This is accomplished using the <a href="https://stitcher.io/blog/shorthand-comparisons-in-php" target="_blank" rel="noopener noreferrer">PHP shorthand ternary operator
-<code>?:</code></a>.</p></div></div>
-<p><strong>DO NOT</strong> set a default value for the password, as it is a bad practice to
-hardcode sensitive values (as mentioned in the <a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Config section of The
-Twelve-Factor App</a>). The definition of the
-<code>DB_PASS</code> variable should have no default and look like this:</p>
-<pre class="lumis"><code class="language-php" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-bracket">&lt;?php</span></span>
-<span class="l-line" data-line="2"><span class="l-function-call">define</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;DB_PASS&#39;</span><span class="l-punctuation-delimiter">,</span> <span class="l-function-call">getenv</span><span class="l-punctuation-bracket">(</span><span class="l-string">&#39;TODOLIST_DB_PASS&#39;</span><span class="l-punctuation-bracket">))</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
-<p>Make sure to update the definitions of all other variables (<code>DB_USER</code>,
-<code>DB_NAME</code>, <code>DB_HOST</code> and <code>DB_PORT</code>) to take their value from the environment,
-with an appropriate default value.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Regarding the default values, you may assume that for a typical deployment, a
-MySQL database server is available on the host machine itself (<code>127.0.0.1</code>) and
-exposed on the default MySQL port (<code>3306</code>).</p></div></div>
-<p><strong>Commit and push your changes</strong> to the remote repository on GitHub.</p>
-<h2 id="pull-the-latest-version-from-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version from the server<a href="#pull-the-latest-version-from-the-server" aria-label="Link to heading 'Pull the latest version from the server'" data-heading-content="Pull the latest version from the server" class="anchor"></a></h2>
-<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>You may now connect to your server to perform the rest of the exercise.</p></div></div></div>
-<p>Go into the cloned repository from the previous exercise (<code>~/todolist-repo</code> if
-you followed the instructions to the letter).</p>
-<p>You may have made manual configuration changes during the previous exercise. You
-must discard them with the <code>git restore &lt;file&gt;</code> command. This will remove any
-uncommitted changes and restore the latest version of the file that was
-committed in the repository:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">index.php</span></span></code></pre>
-<p>You can now pull the latest version of the code from GitHub.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>The command to pull the latest changes is <code>git pull &lt;remote&gt; &lt;branch&gt;</code>. If you
-do not remember the name(s) of your remote(s), you can list them with the <code>git remote</code> command (or with <code>git remote -v</code> to also see their URLs).</p></div></div>
-<h2 id="run-the-php-development-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the PHP development server<a href="#run-the-php-development-server" aria-label="Link to heading 'Run the PHP development server'" data-heading-content="Run the PHP development server" class="anchor"></a></h2>
-<p>Still in the cloned repository, run a PHP development server on port 3000 like
-in the previous exercise. Note that this time you must provide the appropriate
-configuration through environment variables:</p>
-<ul>
-<li>You must provide the <code>TODOLIST_DB_PASS</code> environment variable which has no
-default value.</li>
-<li>If the default values you have hardcoded for other variables are not suitable
-for your server’s environment, you must also provide the corresponding
-environment variables with suitable values.</li>
-</ul>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>You can execute a command with additional environment variables using the
-following syntax: <code>EXAMPLE='value' ANOTHER='one' command arg1 arg2</code>.</p>
-<p>The single quotes around the variables’ values are optional if the value
-contains no spaces or special characters.</p></div></div>
+<pre class="lumis"><code class="language-javascript" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">const</span> <span class="l-constant">PORT</span> <span class="l-operator">=</span> <span class="l-variable">process</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">env</span><span class="l-punctuation-delimiter">.</span><span class="l-variable-member">PORT</span> <span class="l-operator">||</span> <span class="l-number">3000</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
+<p>With this code, <code>PORT</code> is the value of the <code>PORT</code> environment variable if it is
+set, or <code>3000</code> if it is not.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>||</code> operator returns its left side if it is truthy, and its right side
+otherwise. An environment variable that is not set is <code>undefined</code> in
+<code>process.env</code>, which is falsy.</p></div></div>
+<p>Do the same for <code>DATABASE_URL</code>, with the <code>DATABASE_URL</code> environment variable.
+Its default can be the same URL <strong>without the password</strong>:
+<code>postgresql://guessit@localhost:5432/guessit</code>.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p><strong>Do not</strong> put a password in the default value of <code>DATABASE_URL</code>. A password
+must not be written in the code, as the <a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Config section of The Twelve-Factor
+App</a> explains: anyone who can read your repository, or its
+history, could read it.</p></div></div>
+<p>Update the comments above both lines too, so that they say where the
+configuration comes from: “Change the password to match…” is no longer true.</p>
+<h3 id="update-the-readme"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the README<a href="#update-the-readme" aria-label="Link to heading 'Update the README'" data-heading-content="Update the README" class="anchor"></a></h3>
+<p>The <code>README.md</code> file of your fork explains how to set up Guess It. Its setup
+step 2 still says to put the password in <code>server.js</code>:</p>
+<pre class="lumis"><code class="language-markdown" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-markup-list">2. </span>Set the same password in the <span class="l-markup-raw">`DATABASE_URL`</span> at the top of <span class="l-markup-raw">`server.js`</span>.</span></code></pre>
+<p>Replace that step with this one:</p>
+<pre class="lumis"><code class="language-markdown" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-markup-list">2. </span>Whenever you run the application, set the <span class="l-markup-raw">`DATABASE_URL`</span> environment</span>
+<span class="l-line" data-line="2"><span class="l-punctuation-special">   </span>variable to the URL of the database, with the same password.</span></code></pre>
+<h3 id="commit-and-push-your-changes"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Commit and push your changes<a href="#commit-and-push-your-changes" aria-label="Link to heading 'Commit and push your changes'" data-heading-content="Commit and push your changes" class="anchor"></a></h3>
+<p>Check what you are about to commit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span> <span class="l-variable-parameter">server.js</span> <span class="l-variable-parameter">README.md</span></span></code></pre>
+<p>Your copy may have other changes that you have not committed, such as the
+password you put in <code>schema.sql</code> during the <a href="/2026/course/410-sftp-deployment/">SFTP deployment</a>. Make sure
+no password is left in <code>server.js</code>, then commit <strong>only</strong> <code>server.js</code> and
+<code>README.md</code>, and push them to your fork on GitHub:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">add</span> <span class="l-variable-parameter">server.js</span> <span class="l-variable-parameter">README.md</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">commit</span> <span class="l-variable-parameter">-m</span> <span class="l-string">&quot;Take the configuration from the environment&quot;</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">push</span></span></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>To run Guess It on your computer from now on, give it your local configuration
+in the environment, in the same way as on your server below: your local
+password, and the port <code>5434</code> if you run PostgreSQL with Docker Desktop.</p></div></div>
+<h2 id="pull-the-latest-version-on-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version on the server<a href="#pull-the-latest-version-on-the-server" aria-label="Link to heading 'Pull the latest version on the server'" data-heading-content="Pull the latest version on the server" class="anchor"></a></h2>
+<div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your server for the rest of the exercise.</p></div></div></div>
+<p>Go into your deployment, and check whether <code>server.js</code> has a change you have not
+committed:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/srv/guessit</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span></code></pre>
+<p>If Git lists <code>server.js</code> as modified, you edited its password during the
+previous exercise. You no longer need that change, since the configuration will
+come from the environment. Discard it with <code>git restore</code>, which puts back the
+version of the file from the last commit:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">restore</span> <span class="l-variable-parameter">server.js</span></span></code></pre>
+<p>The password is not lost: it is still in <code>~/guessit-ex/server.js</code>, in your SFTP
+deployment.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Git would not have let you pull with that change. The new commit changes
+<code>server.js</code> too, so pulling would replace your version of the file and lose your
+change, and Git never throws away a change you have not committed unless you ask
+it to.</p></div></div>
+<p>Then pull the latest version of the code from GitHub:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">pull</span> <span class="l-variable-parameter">origin</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Fast-forward</span></span>
+<span class="l-line" data-line="4"> <span class="l-function-call">README.md</span> <span class="l-operator">|</span> <span class="l-function-call">...</span></span>
+<span class="l-line" data-line="5"> <span class="l-function-call">server.js</span> <span class="l-operator">|</span> <span class="l-function-call">...</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If Git does not know the remote <code>origin</code>, list your remotes with the
+<code>git remote</code> command (or with <code>git remote -v</code> to also see their URLs), and use
+the name it prints instead.</p></div></div>
+<p>Your deployment should now have no uncommitted changes: <code>git status</code> should
+print “nothing to commit, working tree clean”.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">status</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">On</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">main</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Your</span> <span class="l-variable-parameter">branch</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">up</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">date</span> <span class="l-variable-parameter">with</span> <span class="l-string">&#39;origin/main&#39;</span><span class="l-variable-parameter">.</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-function-call">nothing</span> <span class="l-variable-parameter">to</span> <span class="l-variable-parameter">commit,</span> <span class="l-variable-parameter">working</span> <span class="l-variable-parameter">tree</span> <span class="l-variable-parameter">clean</span></span></code></pre>
+<h3 id="optional-run-the-application-without-its-configuration"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: run the application without its configuration<a href="#optional-run-the-application-without-its-configuration" aria-label="Link to heading 'Optional: run the application without its configuration'" data-heading-content="Optional: run the application without its configuration" class="anchor"></a></h3>
+<p>Start Guess It as in the previous exercise, without any environment variable:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">npm</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-operator">&gt;</span> <span class="l-string-special-path">guessit@1.0.0</span> <span class="l-function-call">dev</span></span>
+<span class="l-line" data-line="4"><span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--watch</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span></code></pre>
+<p>Open your server’s IP address and port 3000 in your browser (e.g.
+<code>http://W.X.Y.Z:3000</code>). The home page says that the leaderboard could not be
+loaded, and the terminal shows:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">Error:</span> <span class="l-variable-parameter">SASL:</span> <span class="l-variable-parameter">SCRAM-SERVER-FIRST-MESSAGE:</span> <span class="l-variable-parameter">client</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">must</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">string</span></span></code></pre>
+<p>The application started, and only failed when it tried to connect to the
+database. Why could it not connect?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p><code>DATABASE_URL</code> is not set, so the application used its default URL, which has
+no password. PostgreSQL asks the <code>guessit</code> user for one.</p></div></div>
+<p>Stop it with <code>Ctrl-C</code>.</p>
+<h2 id="run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application<a href="#run-the-application" aria-label="Link to heading 'Run the application'" data-heading-content="Run the application" class="anchor"></a></h2>
+<p>Still in <code>/srv/guessit</code>, start the application again, but this time give it its
+configuration through the environment. The database URL is the one of your SFTP
+deployment, which has the password of the <code>guessit</code> database user:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-punctuation-special">$</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-string-special-path">guessit:</span> <span class="l-string-special-path">~/guessit-ex/server.js</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">const</span> <span class="l-variable-parameter">DATABASE_URL</span> <span class="l-variable-parameter">=</span> <span class="l-string">&#39;postgresql://guessit:********************************@localhost:5432/guessit&#39;</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
+<p>Set it for the <code>npm run dev</code> command (replacing the URL with yours):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string">DATABASE_URL=&#39;postgresql://guessit:********************************@localhost:5432/guessit&#39;</span> <span class="l-function-call">npm</span> <span class="l-variable-parameter">run</span> <span class="l-variable-parameter">dev</span></span>
+<span class="l-line" data-line="2"></span>
+<span class="l-line" data-line="3"><span class="l-operator">&gt;</span> <span class="l-string-special-path">guessit@1.0.0</span> <span class="l-function-call">dev</span></span>
+<span class="l-line" data-line="4"><span class="l-operator">&gt;</span> <span class="l-string-special-path">node</span> <span class="l-function-call">--watch</span> <span class="l-variable-parameter">server.js</span></span>
+<span class="l-line" data-line="5"></span>
+<span class="l-line" data-line="6"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>NAME='value' command</code> runs a command with an additional environment variable.
+You can set several at once: <code>EXAMPLE='value' ANOTHER='one' command</code>.</p>
+<p>The single quotes around the value are optional if it contains no spaces or
+special characters.</p></div></div>
+<p>You do not need to set <code>PORT</code>: its default, <code>3000</code>, is the right port for your
+server.</p>
 <p>You (and everybody else) should be able to access the application in a browser
-at the correct IP address and port (e.g. <code>W.X.Y.Z:3000</code>) and it should work.</p>
+at your server’s IP address and port 3000 (e.g. <code>http://W.X.Y.Z:3000</code>), and its
+leaderboard should show the games won on your earlier deployments.</p>
+<p><img src="images/guessit-455612a9a69d4171026903f234be0c38.png" alt="Guess It’s home page, at the server’s IP address and port 3000" /></p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>You set the variable for <code>npm</code>, but it is <code>server.js</code> that reads it. <code>npm</code> runs
+<code>node --watch</code>, which runs <code>server.js</code> in another process. Each process gets a
+copy of the environment of the process that started it, so the variable reaches
+all of them.</p></div></div>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You have made your application configurable through the environment, as
-recommended in the <a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Config section of The Twelve-Factor
-App</a>.</p>
-<p>This means that you no longer need to make any changes to the code before
-deploying your application to any new environment. It can now be deployed
-<em>anywhere</em>, on any server or on any developer’s local machine, without changing
-a single line of code.</p>
-<p>You simply need to set the appropriate environment variables when running it,
-and the application will use that configuration instead of the hardcoded
-defaults. For example, if you are deploying the application on a server where
-the MySQL database server is exposed on a non-standard port like <code>5000</code>, simply
-set the <code>TODOLIST_DB_PORT</code> variable, and the application will happily connect to
-it.</p>
-<h3 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h3>
+<p>You have made Guess It configurable through the environment, as recommended in
+the <a href="https://12factor.net/config" target="_blank" rel="noopener noreferrer">Config section of The Twelve-Factor App</a>.</p>
+<p>The code no longer changes from one deploy to another. Your fork, your computer
+and your server have the same <code>server.js</code>, and each deploy gives it its own
+configuration when it starts it. A database on another port, or with another
+password, needs no change to the code.</p>
+<p>Your deployment is now exactly a commit of your repository, with nothing
+modified. Git can pull a new version without a local change in its way.</p>
+<p>Configuration can have default values, as long as they are not secrets. The port
+and the database URL have one, but the database URL’s has no password: a
+password in the code would be in the repository’s history, for anyone who can
+read it. Not setting a default password also forces the person who deploys the
+application to explicitly set one rather than rely on an insecure default.</p>
+<p>An environment variable set for a command exists only in the process that
+command starts, and in the processes it starts in turn. That is how
+<code>DATABASE_URL</code> reached <code>server.js</code>, through <code>npm</code> and <code>node --watch</code>.</p>
+<p>Your configuration now lives in the command you typed. You have to type it
+again every time you start the application, and your shell keeps it in its
+history, password included.</p>
+<h2 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h2>
 <p>This is a simplified architecture of the main running processes and
-communication flow at the end of this exercise. Note that it has not changed
-compared to <a href="/2026/course/501-git-clone-deployment/#architecture">the previous exercises</a>
-since we have neither created any new processes nor changed how they
-communicate.</p>
-<p><img src="./images/architecture-e59b0d126b8cdff4d8aea2ef9cf4468f.png" alt="Diagram" /></p>
-<div class="flex items-center gap-2">
-  <a href="./images/architecture-a17bbc40b8d4eb9e07e198cdf92b6987.pdf" download="Configuration Through Environment Architecture" class="tooltip" data-tip="Download PDF"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-  />
-</svg>
-  </a>
-  <a href="./images/architecture-e59b0d126b8cdff4d8aea2ef9cf4468f.png" download="Configuration Through Environment Architecture" class="tooltip" data-tip="Download PNG"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-  />
-</svg>
-  </a>
+communication flow at the end of this exercise. It has not changed since <a href="/2026/course/410-sftp-deployment/#architecture">the
+previous exercises</a>: you have neither created new processes
+nor changed how they communicate. Only where Guess It gets its configuration
+from is different.</p>
+<!-- Generated from diagrams/410-running-app.svg and 410-running-app.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="410-running-app">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1100 630" role="img" aria-labelledby="diagram-410-running-app-title" data-diagram="410-running-app">
+<title id="diagram-410-running-app-title">A Node.js application deployed by hand over SSH</title>
+<style id="diagram-410-running-app-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Waiting for an answer: a still clock, where the cog turns while working. */
+svg.diagram .process .clock :is(circle, path) {
+fill: none;
+stroke: #fff;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A detail: shown while the diagram is explained, in a page stepping through it
+or in a deck, but left out of the fully drawn diagram, at rest and in print,
+since students are not expected to draw it. */
+svg.diagram .detail {
+display: none;
+}
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
+display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+/* In the step that starts it, once it has appeared. */
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) &gt; .glow,
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) .cog path {
+animation-delay: var(--launch);
+}
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) .cog {
+animation:
+diagram-fade-in 0.3s ease-out var(--launch) both,
+diagram-fade-out 0.3s ease-in calc(var(--launch) + 2.3s) forwards;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+svg.diagram .packet.heavy.whole.visible .leg:not(.visible) {
+animation-duration: 6s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* A process starts waiting as its request sets off. */
+svg.diagram .clock.visible {
+animation: diagram-fade-in 0.4s ease-out 0.2s both;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-410-running-app-diagram-defs">
+<marker id="diagram-410-running-app-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-410-running-app-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs><g class="fragment teardown" data-fragment-index="10"/><g class="fragment teardown" data-fragment-index="8"/>
+<g id="diagram-410-running-app-lane-computer" class="lane"><text class="lane-heading" x="200" y="58">Your Computer</text></g>
+<g id="diagram-410-running-app-lane-server" class="lane"><text class="lane-heading" x="820" y="58">Server</text></g>
+<g id="diagram-410-running-app-boundary-internet" class="boundary">
+<line x1="400" y1="48" x2="400" y2="610"/>
+<line x1="540" y1="48" x2="540" y2="610"/>
+</g>
+<g id="diagram-410-running-app-cloud-internet" class="cloud">
+<path d="M438,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="470" y="80">Internet</text>
+</g>
+<g id="diagram-410-running-app-node-terminal" class="process">
+<rect x="92" y="182" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-app-node-local-shell" class="process">
+<rect x="96" y="186" width="250" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-app-node-ssh-client" class="process">
+<rect x="100" y="190" width="250" height="46" rx="8"/>
+<text class="label" x="225" y="218">Terminal, Shell &amp; SSH Client</text>
+</g>
+<g id="diagram-410-running-app-node-sshd" class="process">
+<rect x="600" y="96" width="160" height="46" rx="8"/>
+<text class="label" x="680" y="124">SSH Server</text>
+<g id="diagram-410-running-app-socket-sshd-22" class="socket">
+<path d="M600,112 L582,96 M600,126 L582,142"/>
+<text x="586" y="90">22</text>
+</g>
+</g>
+<g id="diagram-410-running-app-node-ssh-session" class="process">
+<rect x="594" y="184" width="200" height="46" rx="8"/>
+</g>
+<g id="diagram-410-running-app-node-remote-shell" class="process">
+<rect x="600" y="190" width="200" height="46" rx="8"/>
+<text class="label" x="700" y="218">SSH Session &amp; Shell</text>
+</g>
+<g id="diagram-410-running-app-node-browser" class="fragment process" data-fragment-index="1">
+<rect x="160" y="320" width="180" height="46" rx="8"/><rect x="160" y="320" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M332.35,331.72 L334.45,332.18 L334.45,333.82 L332.35,334.28 L331.69,335.87 L332.85,337.69 L331.69,338.85 L329.87,337.69 L328.28,338.35 L327.82,340.45 L326.18,340.45 L325.72,338.35 L324.13,337.69 L322.31,338.85 L321.15,337.69 L322.31,335.87 L321.65,334.28 L319.55,333.82 L319.55,332.18 L321.65,331.72 L322.31,330.13 L321.15,328.31 L322.31,327.15 L324.13,328.31 L325.72,327.65 L326.18,325.55 L327.82,325.55 L328.28,327.65 L329.87,328.31 L331.69,327.15 L332.85,328.31 L331.69,330.13 Z M329.3,333 A2.3,2.3 0 1 0 324.7,333 A2.3,2.3 0 1 0 329.3,333 Z"/></g>
+<text class="label" x="250" y="348">Browser</text>
+<g class="fragment input" data-fragment-index="2" style="--chars: 19; --t0: 0.3s; --type: 1.52s; --enter: 2.22s; --launch: 2.22s"><g class="prompt" style="--at: 0"><text class="typed" x="166" y="384">http://W.X.Y.Z:3000</text><text class="cursor" x="166" y="384">█</text></g></g><g class="fragment transient clock" data-fragment-index="3" data-gone-from="10" style="--gone-delay: 1.1s"><circle cx="327" cy="333" r="6.5"/><path d="M327,329 V333 H330"/></g><g class="fragment pulse" data-fragment-index="11"/></g>
+<g id="diagram-410-running-app-node-guessit" class="fragment spawn process" data-fragment-index="0" style="--chars: 11; --t0: 0.3s; --type: 0.88s; --enter: 1.58s; --launch: 2.18s"><g class="prompt" style="--at: 3"><text class="sign" x="606" y="254">$&gt;</text><text class="typed" x="606" y="254">npm run dev</text><text class="cursor" x="606" y="254">█</text></g>
+<rect x="600" y="320" width="180" height="46" rx="8"/><rect x="600" y="320" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M772.35,331.72 L774.45,332.18 L774.45,333.82 L772.35,334.28 L771.69,335.87 L772.85,337.69 L771.69,338.85 L769.87,337.69 L768.28,338.35 L767.82,340.45 L766.18,340.45 L765.72,338.35 L764.13,337.69 L762.31,338.85 L761.15,337.69 L762.31,335.87 L761.65,334.28 L759.55,333.82 L759.55,332.18 L761.65,331.72 L762.31,330.13 L761.15,328.31 L762.31,327.15 L764.13,328.31 L765.72,327.65 L766.18,325.55 L767.82,325.55 L768.28,327.65 L769.87,328.31 L771.69,327.15 L772.85,328.31 L771.69,330.13 Z M769.3,333 A2.3,2.3 0 1 0 764.7,333 A2.3,2.3 0 1 0 769.3,333 Z"/></g>
+<text class="label" x="690" y="340">Guess It</text>
+<text class="command" x="690" y="356">npm run dev</text>
+<g id="diagram-410-running-app-socket-guessit-3000" class="socket">
+<path d="M600,336 L582,320 M600,350 L582,366"/>
+<text x="586" y="314">3000</text>
+</g>
+<g class="fragment pulse" data-fragment-index="4"/><g class="fragment transient clock" data-fragment-index="6" data-gone-from="8" style="--gone-delay: 1.1s"><circle cx="767" cy="333" r="6.5"/><path d="M767,329 V333 H770"/></g><g class="fragment pulse" data-fragment-index="9"/></g>
+<g id="diagram-410-running-app-node-postgresql" class="process">
+<rect x="880" y="480" width="180" height="46" rx="8"/><rect x="880" y="480" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M1052.35,491.72 L1054.45,492.18 L1054.45,493.82 L1052.35,494.28 L1051.69,495.87 L1052.85,497.69 L1051.69,498.85 L1049.87,497.69 L1048.28,498.35 L1047.82,500.45 L1046.18,500.45 L1045.72,498.35 L1044.13,497.69 L1042.31,498.85 L1041.15,497.69 L1042.31,495.87 L1041.65,494.28 L1039.55,493.82 L1039.55,492.18 L1041.65,491.72 L1042.31,490.13 L1041.15,488.31 L1042.31,487.15 L1044.13,488.31 L1045.72,487.65 L1046.18,485.55 L1047.82,485.55 L1048.28,487.65 L1049.87,488.31 L1051.69,487.15 L1052.85,488.31 L1051.69,490.13 Z M1049.3,493 A2.3,2.3 0 1 0 1044.7,493 A2.3,2.3 0 1 0 1049.3,493 Z"/></g>
+<text class="label" x="970" y="500">PostgreSQL</text>
+<text class="subtitle" x="970" y="516">Started automatically, somehow?</text>
+<g id="diagram-410-running-app-socket-postgresql-5432" class="socket">
+<path d="M963,480 L947,462 M977,480 L993,462"/>
+<text x="942" y="466">5432</text>
+</g>
+<g class="fragment pulse" data-fragment-index="7"/></g>
+<g id="diagram-410-running-app-edge-ssh-client-ssh-session" class="edge comm">
+<path d="M350,213 H480 C540,213 540,213 594,213" marker-end="url(#diagram-410-running-app-arrow-comm)"/>
+<text x="440" y="218">W.X.Y.Z</text>
+</g>
+<g id="diagram-410-running-app-edge-sshd-ssh-session" class="edge control">
+<path d="M680,142 V184" marker-end="url(#diagram-410-running-app-arrow-control)"/>
+</g>
+<g id="diagram-410-running-app-edge-remote-shell-guessit" class="fragment fade-on edge control" data-fragment-index="0" style="--delay: 1.58s">
+<path d="M760,236 V320" marker-end="url(#diagram-410-running-app-arrow-control)"/>
+</g>
+<g id="diagram-410-running-app-edge-browser-guessit" class="fragment draw-on edge comm" data-fragment-index="2" style="--delay: 2.42s">
+<path d="M340,343 H600" marker-end="url(#diagram-410-running-app-arrow-comm)" pathLength="1"/>
+<text x="470" y="348">http://W.X.Y.Z:3000</text>
+</g>
+<g id="diagram-410-running-app-edge-guessit-postgresql" class="fragment draw-on edge comm" data-fragment-index="5" style="--delay: 0s">
+<path d="M780,343 H900 C950,343 970,363 970,413 V480" marker-end="url(#diagram-410-running-app-arrow-comm)" pathLength="1"/>
+<text class="beside" x="960" y="430">postgresql://guessit:pw@localhost:5432/guessit</text>
+</g>
+<g id="diagram-410-running-app-legend" class="legend" transform="translate(0,128)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-410-running-app-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-410-running-app-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+<g class="overlay packet fragment whole" data-fragment-index="3"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 0%; --to: 100%"><path d="M-31,-12 H21 L31,0 L21,12 H-31 Z"/><text x="-5" y="5">GET /</text></g></g><g class="overlay packet fragment whole" data-fragment-index="6"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 0%; --to: 100%"><path d="M-38,-12 H38 V12 H8 L0,20 L-8,12 H-38 Z"/><text x="0" y="5">SELECT …</text></g></g><g class="overlay packet fragment whole" data-fragment-index="8"><g class="leg" style="offset-path: path('M780,343 H900 C950,343 970,363 970,413 V480'); --from: 100%; --to: 0%"><path d="M-27,-12 H17 L27,0 L17,12 H-27 Z" transform="scale(-1,1)"/><text x="5" y="5">rows</text></g></g><g class="overlay packet fragment whole" data-fragment-index="10"><g class="leg" style="offset-path: path('M340,343 H600'); --from: 100%; --to: 0%"><path d="M-55,-12 H45 L55,0 L45,12 H-55 Z" transform="scale(-1,1)"/><text x="5" y="5">HTML/CSS/JS</text></g></g></svg>
 </div>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, your browser talks to the Guess It application running on your server. Guess It talks to the PostgreSQL database server also running on your server. You started Guess It manually in your SSH session, in a shell running on the server.</p><p data-caption="0">Your terminal is still connected to your server over SSH, PostgreSQL is running with the application’s database, and the application’s files are on the server.</p><p data-caption="1">You run <code>npm run dev</code>, as on your computer. Your shell starts Guess It, which listens on port 3000.</p><p data-caption="2">You open a browser on your computer.</p><p data-caption="3">You type your server’s public IP address and port into it. It connects to port 3000, where Guess It is listening.</p><p data-caption="4">It sends an HTTP request for the home page over the connection, and waits for the answer.</p><p data-caption="5">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="6">Guess It connects to PostgreSQL on port 5432, with the database URL you configured.</p><p data-caption="7">It sends its query over the connection.</p><p data-caption="8">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="9">The rows of the leaderboard travel back to Guess It.</p><p data-caption="10">Guess It works again, building the HTML page from the rows.</p><p data-caption="11">The page travels back over the connection to your browser, with its stylesheets and scripts.</p><p data-caption="12">Your browser works, displaying the page.</p></template>
+</div>
+<h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
+<p>Here’s a few tips about some problems you may encounter during this exercise.</p>
+<h3 id="client-password-must-be-a-string"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>client password must be a string</code><a href="#client-password-must-be-a-string" aria-label="Link to heading 'client password must be a string'" data-heading-content="client password must be a string" class="anchor"></a></h3>
+<p>The home page says that the leaderboard could not be loaded, and the terminal
+shows:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">Error:</span> <span class="l-variable-parameter">SASL:</span> <span class="l-variable-parameter">SCRAM-SERVER-FIRST-MESSAGE:</span> <span class="l-variable-parameter">client</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">must</span> <span class="l-variable-parameter">be</span> <span class="l-variable-parameter">a</span> <span class="l-variable-parameter">string</span></span></code></pre>
+<p>Guess It did not get a <code>DATABASE_URL</code>, and used its default URL, which has no
+password. Make sure you typed it on the same line as <code>npm run dev</code>, before it,
+as in <a href="#run-the-application">Run the application</a>. A variable set on a line of its own is a
+variable of your shell, which the commands you run next do not get.</p>
+<h3 id="password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code><a href="#password-authentication-failed-for-user-guessit" aria-label="Link to heading 'password authentication failed for user &quot;guessit&quot;'" data-heading-content="password authentication failed for user &quot;guessit&quot;" class="anchor"></a></h3>
+<p>The home page says that the leaderboard could not be loaded, and the terminal
+shows:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">Could</span> <span class="l-variable-parameter">not</span> <span class="l-variable-parameter">load</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">leaderboard:</span> <span class="l-variable-parameter">error:</span> <span class="l-variable-parameter">password</span> <span class="l-variable-parameter">authentication</span> <span class="l-variable-parameter">failed</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">user</span> <span class="l-string">&quot;guessit&quot;</span></span></code></pre>
+<p>The password in your <code>DATABASE_URL</code> is not the one of the <code>guessit</code> database
+user. Copy the URL from your SFTP deployment, in <code>~/guessit-ex/server.js</code>, as in
+<a href="#run-the-application">Run the application</a>.</p>
+<p>If your previous deployments did not work either, see the <a href="/2026/course/410-sftp-deployment/#password-authentication-failed-for-user-guessit">same problem in the
+SFTP deployment</a>.</p>
+<h3 id="completed-running-serverjs"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Completed running 'server.js'</code><a href="#completed-running-serverjs" aria-label="Link to heading 'Completed running 'server.js''" data-heading-content="Completed running 'server.js'" class="anchor"></a></h3>
+<p>The application says it is listening, then stops at once:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">Guess</span> <span class="l-variable-parameter">It</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">listening</span> <span class="l-variable-parameter">on</span> <span class="l-variable-parameter">http://localhost:3000</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Completed</span> <span class="l-variable-parameter">running</span> <span class="l-string">&#39;server.js&#39;</span><span class="l-variable-parameter">.</span> <span class="l-variable-parameter">Waiting</span> <span class="l-variable-parameter">for</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">changes</span> <span class="l-variable-parameter">before</span> <span class="l-variable-parameter">restarting...</span></span></code></pre>
+<p>Another program already listens on port 3000, most likely one of your previous
+deployments. Stop it as described in <a href="#stop-the-git-deployment">Stop the Git deployment</a>, then
+start Guess It again.</p>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -335,22 +1124,53 @@ communicate.</p>
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#setup"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Setup</a>
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#why-are-we-doing-this"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Why are we doing this?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#stop-the-git-deployment"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Stop the Git deployment</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#update-the-configuration"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#update-the-readme"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Update the README</a>
     
-  </li><li class="toc-entry toc-h2">
-    <a href="#pull-the-latest-version-from-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version from the server</a>
+  </li><li class="toc-entry toc-h3">
+    <a href="#commit-and-push-your-changes"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Commit and push your changes</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h2">
-    <a href="#run-the-php-development-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the PHP development server</a>
+    <a href="#pull-the-latest-version-on-the-server"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pull the latest version on the server</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#optional-run-the-application-without-its-configuration"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Optional: run the application without its configuration</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#run-the-application"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Run the application</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    <a href="#client-password-must-be-a-string"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>client password must be a string</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#password-authentication-failed-for-user-guessit"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>password authentication failed for user &quot;guessit&quot;</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#completed-running-serverjs"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Completed running 'server.js'</code></a>
     
   </li>
 </ul>
@@ -364,7 +1184,7 @@ communicate.</p>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/6a155d62523fa2a1fd901c81dd85d5e4deb8dee5/course/chapters/504-config-through-environment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/504-config-through-environment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -706,7 +1526,7 @@ communicate.</p>
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP application with Git</span>
+  <span>Deploy a web application with Git</span>
 </span>
           
           
@@ -733,7 +1553,7 @@ communicate.</p>
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Configure a PHP application through environment variables</span>
+  <span>Configure a web application through environment variables</span>
 </span>
           
           
@@ -744,14 +1564,14 @@ communicate.</p>
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>Process Management on Linux</span>
 </span>
-          
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Manage a PHP application with systemd as a Process Manager</span>
+  <span>Manage a web application with systemd as a Process Manager</span>
 </span>
           
           
@@ -1067,7 +1887,7 @@ communicate.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@6a155d6</span>
+        <span class="tooltip-content">main@e05bb4c</span>
         <span class="font-title">0.1.0</span>
       </span>
       

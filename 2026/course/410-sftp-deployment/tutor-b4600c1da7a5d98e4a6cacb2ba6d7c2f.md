@@ -58,11 +58,13 @@ flaws:
   runs where, and in which memory.
 - "How to improve our basic deployment" lists the flaws of this deployment,
   development mode and the upload of `node_modules` among them.
-- "Deploy a PHP application with Git" replaces the SFTP upload, and installs the
-  dependencies on the server.
-- "Configure a PHP application through environment variables" moves the
-  password out of `server.js`.
-- "Manage a PHP application with systemd as a Process Manager" keeps the
+- "Deploy a web application with Git" replaces the SFTP upload with a clone in
+  `/srv/guessit`, installs the dependencies on the server, and reuses this
+  deployment's database, its password and its `guessit-ex` directory.
+- "Configure a web application through environment variables" moves the password
+  out of `server.js`, into a `DATABASE_URL` environment variable copied from
+  this deployment's `server.js`.
+- "Manage a web application with systemd as a Process Manager" keeps the
   application running after the student logs out.
 
 ## Key steps
@@ -77,9 +79,9 @@ flaws:
   version is Ubuntu's own `nodejs` package, installed when a NodeSource command
   was skipped or failed.
 - **"What's running so far?"**. Installing PostgreSQL started it; installing
-  Node.js only put files on the disk, and `node -v` ran and exited. What
-  started PostgreSQL is left open on purpose, for "Manage a PHP application
-  with systemd as a Process Manager": do not explain it.
+  Node.js only put files on the disk, and `node -v` ran and exited. What started
+  PostgreSQL is left open on purpose, for "Manage a web application with systemd
+  as a Process Manager": do not explain it.
 - **"Install the dependencies".** Done on the student's computer, with the
   Node.js already installed there, not on the server. `npm ci` has to run again
   after the update: the fix of the cross-site scripting added the `mustache`
