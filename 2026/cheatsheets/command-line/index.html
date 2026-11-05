@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/cheatsheets/command-line/cheatsheet.md">Rev: e05bb4c06d87b427bf16e8b380708ea679fb4aa7</a>
+      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/cheatsheets/command-line/cheatsheet.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
     </li>
   </ul>
 </div>
@@ -197,6 +197,50 @@ work with more advanced shells like <a href="https://en.wikipedia.org/wiki/Z_she
     
   </li><li class="toc-entry toc-h3">
     <a href="#find-lines-in-files-grep">Find lines in files (<code>grep</code>)</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#combining-commands-with-pipes">Combining commands with pipes</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#is-it-in-there-grep">Is it in there? (<code>grep</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-many-wc--l">How many? (<code>wc -l</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#only-the-first-or-last-lines-head-tail">Only the first or last lines (<code>head</code>, <code>tail</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#just-the-column-i-want-cut">Just the column I want (<code>cut</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sorted-without-duplicates-sort-uniq">Sorted, without duplicates (<code>sort</code>, <code>uniq</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-comes-up-most-often-sort--uniq--c--sort--nr">What comes up most often? (<code>sort | uniq -c | sort -nr</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-fills-the-disk-du-sort--h">What fills the disk? (<code>du</code>, <code>sort -h</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#who-is-visiting-my-site-nginx-logs">Who is visiting my site? (nginx logs)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#too-long-to-read-less">Too long to read? (<code>less</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#watch-a-log-as-it-grows-tail--f">Watch a log as it grows (<code>tail -f</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#turn-lines-into-arguments-xargs">Turn lines into arguments (<code>xargs</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#copy-to-the-clipboard-pbcopy-clipexe">Copy to the clipboard (<code>pbcopy</code>, <code>clip.exe</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sudo-in-a-pipeline"><code>sudo</code> in a pipeline</a>
     
   </li>
 </ul>
@@ -486,6 +530,210 @@ command:</p>
 <h3 id="find-lines-in-files-grep">Find lines in files (<code>grep</code>)<a href="#find-lines-in-files-grep" aria-label="Link to heading 'Find lines in files (grep)'" data-heading-content="Find lines in files (grep)" class="anchor"></a></h3>
 <p>Recursively find all files in the current directory containing the word “foo”:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-R</span> <span class="l-variable-parameter">foo</span> <span class="l-variable-parameter">.</span></span></code></pre>
+<h2 id="combining-commands-with-pipes">Combining commands with pipes<a href="#combining-commands-with-pipes" aria-label="Link to heading 'Combining commands with pipes'" data-heading-content="Combining commands with pipes" class="anchor"></a></h2>
+<p>The pipe (<code>|</code>) sends what a command prints into the next command, instead of to
+your terminal. Most text commands read the lines you send them when you do not
+name a file, so you can chain them: each one does one small job on those lines,
+and passes the result on. The <a href="/2026/course/408-unix-processes/#pipelines">Unix Processes subject</a> explains how
+this works.</p>
+<div class="note note-warning"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><span>Warning</span></div><div class="content"><p>A pipe sends <strong>text</strong>, not arguments. <code>echo file.txt | cat</code> prints <code>file.txt</code>,
+not the contents of the file: <code>cat</code> reads the text it receives as if it were the
+contents of a file.</p></div></div>
+<h3 id="is-it-in-there-grep">Is it in there? (<code>grep</code>)<a href="#is-it-in-there-grep" aria-label="Link to heading 'Is it in there? (grep)'" data-heading-content="Is it in there? (grep)" class="anchor"></a></h3>
+<p>Keep only the lines that contain a word. This is the most common use of a pipe:
+make a long output short enough to read.</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">nginx</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/etc</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">ssh</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--installed</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">postgresql</span></span></code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>grep -i foo</code></td>
+<td align="left">Ignore case: also keep lines with <code>Foo</code> or <code>FOO</code></td>
+</tr>
+<tr>
+<td align="left"><code>grep -v foo</code></td>
+<td align="left">Invert: keep only the lines that do <strong>not</strong> contain <code>foo</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-many-wc--l">How many? (<code>wc -l</code>)<a href="#how-many-wc--l" aria-label="Link to heading 'How many? (wc -l)'" data-heading-content="How many? (wc -l)" class="anchor"></a></h3>
+<p>Count the lines a command prints:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">~/guessit-ex/node_modules</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/passwd</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span>
+<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-r</span> <span class="l-variable-parameter">TODO</span> <span class="l-variable-parameter">.</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span></code></pre>
+<p><code>wc -w</code> counts words instead of lines.</p>
+<h3 id="only-the-first-or-last-lines-head-tail">Only the first or last lines (<code>head</code>, <code>tail</code>)<a href="#only-the-first-or-last-lines-head-tail" aria-label="Link to heading 'Only the first or last lines (head, tail)'" data-heading-content="Only the first or last lines (head, tail)" class="anchor"></a></h3>
+<p>Keep the first or last lines of what a command prints (10 by default):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-t</span> <span class="l-variable-parameter">~/Downloads</span> <span class="l-operator">|</span> <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">ssh</span> <span class="l-operator">|</span> <span class="l-function-call">tail</span> <span class="l-variable-parameter">-n</span> <span class="l-number">20</span></span></code></pre>
+<p>The first command shows the five files of your <code>Downloads</code> directory that were
+modified last (<code>ls -t</code> sorts them by modification time, newest first).</p>
+<h3 id="just-the-column-i-want-cut">Just the column I want (<code>cut</code>)<a href="#just-the-column-i-want-cut" aria-label="Link to heading 'Just the column I want (cut)'" data-heading-content="Just the column I want (cut)" class="anchor"></a></h3>
+<p>Keep one or more columns of each line. <code>-d</code> gives the character that separates
+the columns (the <strong>d</strong>elimiter), and <code>-f</code> the numbers of the columns to keep
+(the <strong>f</strong>ields):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/passwd</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">:</span> <span class="l-variable-parameter">-f</span> <span class="l-number">1</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">root</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">daemon</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">...</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/passwd</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">:</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">1,7</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">root:/bin/bash</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">daemon:/usr/sbin/nologin</span></span>
+<span class="l-line" data-line="8"><span class="l-function-call">...</span></span></code></pre>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p><code>cut</code> uses exactly one character as the delimiter. When the columns are
+separated by several spaces, as in the output of <code>ps</code> or <code>ls -l</code>, each space
+counts as a separator, and the field numbers do not match the columns you see.</p></div></div>
+<h3 id="sorted-without-duplicates-sort-uniq">Sorted, without duplicates (<code>sort</code>, <code>uniq</code>)<a href="#sorted-without-duplicates-sort-uniq" aria-label="Link to heading 'Sorted, without duplicates (sort, uniq)'" data-heading-content="Sorted, without duplicates (sort, uniq)" class="anchor"></a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>sort</code></td>
+<td align="left">Sort the lines alphabetically</td>
+</tr>
+<tr>
+<td align="left"><code>sort -n</code></td>
+<td align="left">Sort the lines as numbers (<code>9</code> before <code>18</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>sort -r</code></td>
+<td align="left">Sort the lines in reverse order (combine with <code>-n</code>: <code>-nr</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>sort -h</code></td>
+<td align="left">Sort sizes like <code>du -h</code> prints them (<code>900K</code> before <code>1.2G</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>sort | uniq</code></td>
+<td align="left">Sort the lines and remove duplicates</td>
+</tr>
+<tr>
+<td align="left"><code>uniq -c</code></td>
+<td align="left">Remove duplicates and count how many times each line came</td>
+</tr>
+</tbody>
+</table>
+<p><code>uniq</code> only removes duplicates that are next to each other. That is why it
+almost always comes after <code>sort</code>.</p>
+<h3 id="what-comes-up-most-often-sort--uniq--c--sort--nr">What comes up most often? (<code>sort | uniq -c | sort -nr</code>)<a href="#what-comes-up-most-often-sort--uniq--c--sort--nr" aria-label="Link to heading 'What comes up most often? (sort | uniq -c | sort -nr)'" data-heading-content="What comes up most often? (sort | uniq -c | sort -nr)" class="anchor"></a></h3>
+<p>This pipeline answers “which ones, and how many of each?” about any list:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/passwd</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-variable-parameter">:</span> <span class="l-variable-parameter">-f</span> <span class="l-number">7</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span></span>
+<span class="l-line" data-line="2">     <span class="l-number">28</span> <span class="l-variable-parameter">/usr/sbin/nologin</span></span>
+<span class="l-line" data-line="3">      <span class="l-number">3</span> <span class="l-variable-parameter">/bin/bash</span></span>
+<span class="l-line" data-line="4">      <span class="l-number">1</span> <span class="l-variable-parameter">/bin/sync</span></span>
+<span class="l-line" data-line="5">      <span class="l-number">1</span> <span class="l-variable-parameter">/bin/false</span></span></code></pre>
+<ol>
+<li><code>cut</code> keeps the column you want to count, here the login shell of each user.</li>
+<li><code>sort</code> puts identical lines next to each other.</li>
+<li><code>uniq -c</code> replaces each group of identical lines by one line, with its count.</li>
+<li><code>sort -nr</code> puts the largest count first.</li>
+</ol>
+<p>Add <code>| head -n 5</code> at the end to keep only the top five. The <a href="/2026/course/409-unix-plumbing/#who-is-knocking-at-your-door">Unix plumbing
+exercise</a> uses it to find which usernames attackers try most
+often on your server.</p>
+<h3 id="what-fills-the-disk-du-sort--h">What fills the disk? (<code>du</code>, <code>sort -h</code>)<a href="#what-fills-the-disk-du-sort--h" aria-label="Link to heading 'What fills the disk? (du, sort -h)'" data-heading-content="What fills the disk? (du, sort -h)" class="anchor"></a></h3>
+<p><code>du</code> (<strong>d</strong>isk <strong>u</strong>sage) shows how much space files and directories take. <code>-s</code>
+prints one total per directory instead of a line for every file inside it, and
+<code>-h</code> prints sizes a human can read, like <code>68M</code> or <code>1.1G</code>. <code>sort -h</code> sorts those
+sizes in the right order:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">du</span> <span class="l-variable-parameter">-sh</span> <span class="l-variable-parameter">/var/*</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-variable-parameter">-h</span> <span class="l-operator">|</span> <span class="l-function-call">tail</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">4.0M</span>    <span class="l-variable-parameter">/var/backups</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">24M</span>     <span class="l-variable-parameter">/var/www</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">68M</span>     <span class="l-variable-parameter">/var/cache</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">312M</span>    <span class="l-variable-parameter">/var/log</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">1.1G</span>    <span class="l-variable-parameter">/var/lib</span></span></code></pre>
+<p>The biggest directory comes last. Run the same command on it (<code>sudo du -sh /var/lib/* | ...</code>) to find out what inside it takes the space.</p>
+<h3 id="who-is-visiting-my-site-nginx-logs">Who is visiting my site? (nginx logs)<a href="#who-is-visiting-my-site-nginx-logs" aria-label="Link to heading 'Who is visiting my site? (nginx logs)'" data-heading-content="Who is visiting my site? (nginx logs)" class="anchor"></a></h3>
+<p>nginx writes one line per request it answers in <code>/var/log/nginx/access.log</code>:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">203.0.113.42 - - [05/Nov/2026:14:03:12 +0100] &quot;GET /about HTTP/1.1&quot; 200 1534 &quot;-&quot; &quot;Mozilla/5.0 ...&quot;</span></code></pre>
+<p>Separated by spaces, column 1 is the IP address of the client, column 7 the path
+it asked for, and column 9 the status code of the response (the date counts as
+two columns, because it contains a space). With
+<a href="#just-the-column-i-want-cut"><code>cut</code></a> and the <a href="#what-comes-up-most-often-sort--uniq--c--sort--nr">counting
+pipeline</a>, you can ask:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Which IP addresses send the most requests?</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">cat</span> <span class="l-variable-parameter">/var/log/nginx/access.log</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">1</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span> <span class="l-operator">|</span> <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># Which status codes does the server answer with, and how often?</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-string-special-path">cat</span> <span class="l-string-special-path">/var/log/nginx/access.log</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">9</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span></span>
+<span class="l-line" data-line="6"></span>
+<span class="l-line" data-line="7"><span class="l-comment"># Which paths are asked for but not found?</span></span>
+<span class="l-line" data-line="8">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-string-special-path">cat</span> <span class="l-string-special-path">/var/log/nginx/access.log</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-string">&#39; 404 &#39;</span> <span class="l-operator">|</span> <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">7</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-operator">|</span> <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span> <span class="l-operator">|</span> <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span></code></pre>
+<p>Bots sometimes send requests that nginx cannot read, and their lines have fewer
+columns. A few odd values in the counts usually come from those lines.</p>
+<h3 id="too-long-to-read-less">Too long to read? (<code>less</code>)<a href="#too-long-to-read-less" aria-label="Link to heading 'Too long to read? (less)'" data-heading-content="Too long to read? (less)" class="anchor"></a></h3>
+<p>Read a long output page by page, as with a file (type <code>q</code> to quit):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ps</span> <span class="l-function-call">-ef</span> <span class="l-operator">|</span> <span class="l-function-call">less</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">apt</span> <span class="l-function-call">list</span> <span class="l-variable-parameter">--installed</span> <span class="l-operator">|</span> <span class="l-function-call">less</span></span></code></pre>
+<h3 id="watch-a-log-as-it-grows-tail--f">Watch a log as it grows (<code>tail -f</code>)<a href="#watch-a-log-as-it-grows-tail--f" aria-label="Link to heading 'Watch a log as it grows (tail -f)'" data-heading-content="Watch a log as it grows (tail -f)" class="anchor"></a></h3>
+<p><code>tail -f</code> prints the last lines of a file, then keeps printing new lines as they
+are added, until you press <a href="#stop-a-running-command-ctrl-c"><code>Ctrl-C</code></a>. Pipe it
+into <code>grep</code> to only see the lines you care about:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">tail</span> <span class="l-variable-parameter">-f</span> <span class="l-variable-parameter">/var/log/nginx/access.log</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-number">404</span></span></code></pre>
+<h3 id="turn-lines-into-arguments-xargs">Turn lines into arguments (<code>xargs</code>)<a href="#turn-lines-into-arguments-xargs" aria-label="Link to heading 'Turn lines into arguments (xargs)'" data-heading-content="Turn lines into arguments (xargs)" class="anchor"></a></h3>
+<p>A pipe sends text, not arguments. Some commands only use their arguments and
+ignore the text you send them: <code>code</code> opens the files you name, in Visual Studio
+Code. <code>xargs</code> reads the lines it receives, and runs the command you give it with
+those lines added as arguments:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">diff</span> <span class="l-variable-parameter">--name-only</span> <span class="l-operator">|</span> <span class="l-function-call">xargs</span> <span class="l-variable-parameter">code</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">grep</span> <span class="l-function-call">-Rl</span> <span class="l-variable-parameter">TODO</span> <span class="l-variable-parameter">.</span> <span class="l-operator">|</span> <span class="l-function-call">xargs</span> <span class="l-variable-parameter">code</span></span></code></pre>
+<p>The first command opens every file you have modified but not yet staged with
+<code>git add</code>: <code>git diff --name-only</code> prints their paths, one per line. The second
+opens every file containing the word “TODO”: <code>grep -l</code> prints the name of each
+file that matches instead of the matching lines.</p>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><ul>
+<li>Run the <code>git diff</code> example from the root directory of your repository: the
+paths Git prints start from there.</li>
+<li><code>xargs</code> splits what it receives on spaces too, so a file name containing a
+space becomes two arguments, neither of which exists.</li>
+<li>On macOS, the <code>code</code> command must first be installed from Visual Studio Code:
+open the Command Palette and run <em>Shell Command: Install ‘code’ command in
+PATH</em>.</li>
+</ul></div></div>
+<h3 id="copy-to-the-clipboard-pbcopy-clipexe">Copy to the clipboard (<code>pbcopy</code>, <code>clip.exe</code>)<a href="#copy-to-the-clipboard-pbcopy-clipexe" aria-label="Link to heading 'Copy to the clipboard (pbcopy, clip.exe)'" data-heading-content="Copy to the clipboard (pbcopy, clip.exe)" class="anchor"></a></h3>
+<p>Send what a command prints to your clipboard, then paste it anywhere with
+<code>Cmd-V</code> (macOS) or <code>Ctrl-V</code> (Windows):</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># On macOS</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/id_ed25519.pub</span> <span class="l-operator">|</span> <span class="l-function-call">pbcopy</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># In the WSL on Windows</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">~/.ssh/id_ed25519.pub</span> <span class="l-operator">|</span> <span class="l-function-call">clip.exe</span></span></code></pre>
+<p>This is the safest way to copy a long value, such as a public key: selecting it
+with the mouse in the terminal can miss a character or add a line break.</p>
+<h3 id="sudo-in-a-pipeline"><code>sudo</code> in a pipeline<a href="#sudo-in-a-pipeline" aria-label="Link to heading 'sudo in a pipeline'" data-heading-content="sudo in a pipeline" class="anchor"></a></h3>
+<p><code>sudo</code> only applies to the command right after it, not to the whole pipeline.
+Put it before the command that needs it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">ssh</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-variable-parameter">Invalid</span></span></code></pre>
+<p>Here, <code>journalctl</code> runs as <code>root</code> because it needs to read the system logs, and
+<code>grep</code> runs as you, which is enough to filter what it receives.</p>
+<p>A redirection (<code>&gt;</code>) is done by your shell, which runs as you, so
+<code>sudo echo foo &gt; /etc/foo</code> fails with <code>Permission denied</code>. Use
+<a href="#create-a-file-echo-touch"><code>tee</code></a> instead.</p>
 <h2 id="running-programs">Running programs<a href="#running-programs" aria-label="Link to heading 'Running programs'" data-heading-content="Running programs" class="anchor"></a></h2>
 <h3 id="run-a-program-program">Run a program (<code>./program</code>)<a href="#run-a-program-program" aria-label="Link to heading 'Run a program (./program)'" data-heading-content="Run a program (./program)" class="anchor"></a></h3>
 <p>When you are in the directory that contains a program, run it by writing <code>./</code>
@@ -652,6 +900,50 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#combining-commands-with-pipes">Combining commands with pipes</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#is-it-in-there-grep">Is it in there? (<code>grep</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#how-many-wc--l">How many? (<code>wc -l</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#only-the-first-or-last-lines-head-tail">Only the first or last lines (<code>head</code>, <code>tail</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#just-the-column-i-want-cut">Just the column I want (<code>cut</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sorted-without-duplicates-sort-uniq">Sorted, without duplicates (<code>sort</code>, <code>uniq</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-comes-up-most-often-sort--uniq--c--sort--nr">What comes up most often? (<code>sort | uniq -c | sort -nr</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#what-fills-the-disk-du-sort--h">What fills the disk? (<code>du</code>, <code>sort -h</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#who-is-visiting-my-site-nginx-logs">Who is visiting my site? (nginx logs)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#too-long-to-read-less">Too long to read? (<code>less</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#watch-a-log-as-it-grows-tail--f">Watch a log as it grows (<code>tail -f</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#turn-lines-into-arguments-xargs">Turn lines into arguments (<code>xargs</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#copy-to-the-clipboard-pbcopy-clipexe">Copy to the clipboard (<code>pbcopy</code>, <code>clip.exe</code>)</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#sudo-in-a-pipeline"><code>sudo</code> in a pipeline</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
     <a href="#running-programs">Running programs</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -691,7 +983,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/cheatsheets/command-line/cheatsheet.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -888,9 +1180,17 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
       <li class="peer/section-3 group/section-3 course-section-done">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
-          
-          
-          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked disabled>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
         </label>
       </li>
       <li class="group hidden peer-has-checked/section-3:flex course-item-done">
@@ -974,7 +1274,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -992,7 +1292,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1001,7 +1301,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/413-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1012,23 +1312,15 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-future">
+      <li class="peer/section-4 group/section-4 course-section-next">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
-          <span class="group-has-checked/section-4:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-4:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+          
+          
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1037,7 +1329,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1046,7 +1338,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1055,7 +1347,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1064,7 +1356,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -1073,7 +1365,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1393,7 +1685,7 @@ configuration file (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@e05bb4c</span>
+        <span class="tooltip-content">main@d504faf</span>
         <span class="font-title">0.1.0</span>
       </span>
       

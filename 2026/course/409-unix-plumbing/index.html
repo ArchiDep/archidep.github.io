@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/409-unix-plumbing/exercise.md">Rev: e05bb4c06d87b427bf16e8b380708ea679fb4aa7</a>
+      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/409-unix-plumbing/exercise.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
     </li>
   </ul>
 </div>
@@ -158,6 +158,9 @@ files that only exist on a server.</p></div></div></div></div>
     <a href="#pipe-your-servers-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pipe your server’s users</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#who-is-knocking-at-your-door"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Who is knocking at your door?</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#discard-the-errors"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Discard the errors</a>
     
   </li><li class="toc-entry toc-h2">
@@ -171,6 +174,9 @@ files that only exist on a server.</p></div></div></div></div>
     
   </li><li class="toc-entry toc-h3">
     <a href="#rainbowtxt-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>rainbow.txt: No such file or directory</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#grep-user-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>grep: user: No such file or directory</code></a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#the-grep-lines-on-my-server-are-not-the-same-as-the-solutions"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The <code>grep</code> lines on my server are not the same as the solution’s</a>
@@ -453,6 +459,8 @@ other:</p>
 </table>
 <div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>If you want to know more about any of these commands or their options, type
 <code>man &lt;command&gt;</code>, e.g. <code>man cut</code>.</p></div></div>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <a href="/2026/cheatsheets/command-line/#combining-commands-with-pipes">command line cheatsheet</a> lists pipelines you will often use on a
+server, by the question they answer.</p></div></div>
 <h3 id="challenge"><img class="emoji" src="/2026/assets/emoji/1f47e-f061fbca366aace47d711c09ee19d26b.svg" alt="👾" width="20" height="20" /> Challenge<a href="#challenge" aria-label="Link to heading 'Challenge'" data-heading-content="Challenge" class="anchor"></a></h3>
 <p>What are the five most used words in the song (case-insensitive), and how many
 times is each one used?</p>
@@ -488,6 +496,57 @@ song: its <code>-d</code> option gives the character that separates the fields (
 <div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>They are the system users you met in <a href="/2026/course/405-meet-your-server/">Meet your server</a>: users that run services rather
 than people. <code>/usr/sbin/nologin</code> or <code>/bin/false</code> refuses to log them in, so
 nobody can open a shell as one of them.</p></div></div>
+<h2 id="who-is-knocking-at-your-door"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Who is knocking at your door?<a href="#who-is-knocking-at-your-door" aria-label="Link to heading 'Who is knocking at your door?'" data-heading-content="Who is knocking at your door?" class="anchor"></a></h2>
+<p>Your server is on the internet, and its SSH port is open to anyone. Programs
+scan the internet for such servers all day long, and try to log in to them with
+common usernames and passwords.</p>
+<p>The SSH server writes each attempt in its log. The <code>journalctl</code> command displays
+what a service has logged; you will use it again later in the course. Reading
+the logs of the system requires administrative privileges, so run it with
+<code>sudo</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">ssh</span></span></code></pre>
+<p>The log opens page by page, like a file in <code>less</code>: type <code>q</code> to quit. Many of its
+lines look like this one, an attempt to log in with a username that does not
+exist on your server:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Nov 04 10:12:33 jde sshd-session[48213]: Invalid user admin from 203.0.113.42 port 51234</span></code></pre>
+<p>Use pipelines to answer these questions about your server’s log:</p>
+<ul>
+<li>How many attempts to log in with a username that does not exist has your
+server received?</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">ssh</span> <span class="l-operator">|</span> <span class="l-function-call">grep</span> <span class="l-string">&quot;Invalid user&quot;</span> <span class="l-operator">|</span> <span class="l-function-call">wc</span> <span class="l-variable-parameter">-l</span></span>
+<span class="l-line" data-line="2"><span class="l-number">347</span></span></code></pre>
+<p>The quotes make <code>Invalid user</code> a single argument, the text that <code>grep</code> looks
+for. Your number will differ.</p></div></div>
+<ul>
+<li>Which five usernames do they try most often?</li>
+</ul>
+<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>Count the words of the line above to find which field holds the username. They
+are separated by single spaces.</p></div></div>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">journalctl</span> <span class="l-variable-parameter">-u</span> <span class="l-variable-parameter">ssh</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="2">     <span class="l-function-call">grep</span> <span class="l-string">&quot;Invalid user&quot;</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="3">     <span class="l-function-call">cut</span> <span class="l-variable-parameter">-d</span> <span class="l-string">&#39; &#39;</span> <span class="l-variable-parameter">-f</span> <span class="l-number">8</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="4">     <span class="l-function-call">sort</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="5">     <span class="l-function-call">uniq</span> <span class="l-variable-parameter">-c</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="6">     <span class="l-function-call">sort</span> <span class="l-variable-parameter">-nr</span> <span class="l-operator">|</span> \</span>
+<span class="l-line" data-line="7">     <span class="l-function-call">head</span> <span class="l-variable-parameter">-n</span> <span class="l-number">5</span></span>
+<span class="l-line" data-line="8"><span class="l-number">52</span> <span class="l-variable-parameter">admin</span></span>
+<span class="l-line" data-line="9"><span class="l-number">31</span> <span class="l-variable-parameter">user</span></span>
+<span class="l-line" data-line="10"><span class="l-number">18</span> <span class="l-variable-parameter">test</span></span>
+<span class="l-line" data-line="11"><span class="l-number">12</span> <span class="l-variable-parameter">ubuntu</span></span>
+<span class="l-line" data-line="12"> <span class="l-number">9</span> <span class="l-variable-parameter">oracle</span></span></code></pre>
+<p>The username is the eighth field. The end of this pipeline is the same as in the
+challenge on the song: <code>sort | uniq -c | sort -nr</code> counts each line and puts the
+most frequent first. Your usernames and numbers will differ.</p>
+<p>Attempts with usernames that do exist on your server, such as <code>root</code>, are
+logged with other messages: they are not counted here.</p></div></div>
+<ul>
+<li>None of these attempts has succeeded. Why?</li>
+</ul>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f511-f8bae833e841f69bd5d5bd23568f9a09.svg" alt="🔑" width="20" height="20" /><span>Solution</span></div></div><div class="collapse-content overflow-x-auto"><p>Your server refuses passwords: you saw the <code>PasswordAuthentication no</code> setting
+in the first step. Only a client holding a private key whose public key is in a
+user’s <code>authorized_keys</code> file can log in, and these programs are guessing
+passwords. Most of the usernames they try do not even exist on your server.</p></div></div>
 <h2 id="discard-the-errors"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Discard the errors<a href="#discard-the-errors" aria-label="Link to heading 'Discard the errors'" data-heading-content="Discard the errors" class="anchor"></a></h2>
 <p>In the first step, you ran this command, which displays both the lines it finds
 and error messages:</p>
@@ -539,6 +598,10 @@ Go back to your home directory with <code>cd</code> or <code>cd ~</code> and run
 <h3 id="rainbowtxt-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>rainbow.txt: No such file or directory</code><a href="#rainbowtxt-no-such-file-or-directory" aria-label="Link to heading 'rainbow.txt: No such file or directory'" data-heading-content="rainbow.txt: No such file or directory" class="anchor"></a></h3>
 <p>You are not in the directory where you downloaded the file. Go back to your home
 directory with <code>cd</code> or <code>cd ~</code>, or download it again as in <a href="#download-the-song">Download the song</a>.</p>
+<h3 id="grep-user-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>grep: user: No such file or directory</code><a href="#grep-user-no-such-file-or-directory" aria-label="Link to heading 'grep: user: No such file or directory'" data-heading-content="grep: user: No such file or directory" class="anchor"></a></h3>
+<p>You wrote <code>grep Invalid user</code> without quotes. The shell then gives <code>grep</code> two
+arguments: <code>Invalid</code>, the text to look for, and <code>user</code>, a file to search, which
+does not exist. Put quotes around the text: <code>grep &quot;Invalid user&quot;</code>.</p>
 <h3 id="the-grep-lines-on-my-server-are-not-the-same-as-the-solutions"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The <code>grep</code> lines on my server are not the same as the solution’s<a href="#the-grep-lines-on-my-server-are-not-the-same-as-the-solutions" aria-label="Link to heading 'The grep lines on my server are not the same as the solution’s'" data-heading-content="The grep lines on my server are not the same as the solution’s" class="anchor"></a></h3>
 <p>The SSH configuration of your server may differ slightly from the one used to
 write the solution. What matters is which lines are output data and which are
@@ -582,6 +645,9 @@ error messages, not their exact text.</p>
     <a href="#pipe-your-servers-users"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Pipe your server’s users</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#who-is-knocking-at-your-door"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Who is knocking at your door?</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#discard-the-errors"><img class="emoji" src="/2026/assets/emoji/2753-3e531d8e171629e9433db0bb431b2e12.svg" alt="❓" width="20" height="20" /> Discard the errors</a>
     
   </li><li class="toc-entry toc-h2">
@@ -595,6 +661,9 @@ error messages, not their exact text.</p>
     
   </li><li class="toc-entry toc-h3">
     <a href="#rainbowtxt-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>rainbow.txt: No such file or directory</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#grep-user-no-such-file-or-directory"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>grep: user: No such file or directory</code></a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#the-grep-lines-on-my-server-are-not-the-same-as-the-solutions"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The <code>grep</code> lines on my server are not the same as the solution’s</a>
@@ -611,7 +680,7 @@ error messages, not their exact text.</p>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/e05bb4c06d87b427bf16e8b380708ea679fb4aa7/course/chapters/409-unix-plumbing/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/409-unix-plumbing/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -809,9 +878,17 @@ error messages, not their exact text.</p>
       <li class="peer/section-3 group/section-3 course-section-done">
         <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Basic Deployment</span>
-          
-          
-          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked disabled>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden" checked>
         </label>
       </li>
       <li class="group hidden peer-has-checked/section-3:flex course-item-done">
@@ -895,7 +972,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -913,7 +990,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-due">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -922,7 +999,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-3:flex course-item-next">
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
         <a href="/2026/course/413-how-to-improve/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -933,23 +1010,15 @@ error messages, not their exact text.</p>
         </a>
       </li>
     
-      <li class="peer/section-4 group/section-4 course-section-future">
+      <li class="peer/section-4 group/section-4 course-section-next">
         <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
           <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
-          <span class="group-has-checked/section-4:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-          </span>
-          <span class="hidden group-has-checked/section-4:inline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg>
-          </span>
-          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden">
+          
+          
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked disabled>
         </label>
       </li>
-      <li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      <li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -958,7 +1027,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -967,7 +1036,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -976,7 +1045,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -985,7 +1054,7 @@ error messages, not their exact text.</p>
           
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
@@ -994,7 +1063,7 @@ error messages, not their exact text.</p>
           <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
         </a>
-      </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
         <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
@@ -1314,7 +1383,7 @@ error messages, not their exact text.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@e05bb4c</span>
+        <span class="tooltip-content">main@d504faf</span>
         <span class="font-title">0.1.0</span>
       </span>
       
