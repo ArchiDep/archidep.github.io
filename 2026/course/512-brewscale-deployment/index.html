@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/512-brewscale-deployment/exercise.md">Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc</a>
+      <a href="https://github.com/ArchiDep/website/blob/4de0d879c61a741278a2befadc4654703fc9bd18/course/chapters/512-brewscale-deployment/exercise.md">Rev: 4de0d879c61a741278a2befadc4654703fc9bd18</a>
     </li>
   </ul>
 </div>
@@ -511,11 +511,18 @@ server, you will need it again later.</p></div></div></div>
 <p>You will use Docker Desktop to run Locust, as you did for PostgreSQL in the
 <a href="/2026/course/205-guessit/#run-postgresql-with-docker-desktop">Guess It exercise</a>. If you did not install Docker Desktop then,
 install it as that exercise explains. Make sure Docker Desktop is running.</p>
+<p><strong>On Windows</strong>, you must also check that Docker Desktop is integrated with the
+WSL, otherwise the <code>docker</code> command is not available there. Open Docker
+Desktop’s settings with the gear icon at the top, and find the <strong>WSL
+integration</strong> section. <strong>Enable integration with my default WSL distro</strong> must be
+on. If you had to turn it on, click <strong>Apply &amp; Restart Engine</strong>, then open a new
+WSL terminal:</p>
+<p><img src="./images/docker-wsl-integration-359c1a2c8e67d2bd1e962cf2aa41c716.png" alt="Docker Desktop’s WSL integration settings, with the integration with the default WSL distro enabled" /></p>
 <p>To use Locust, you would normally <a href="https://docs.locust.io/en/stable/writing-a-locustfile.html" target="_blank" rel="noopener noreferrer">write a locustfile</a> describing a
 load testing scenario: the users, and what they do with your application.
 Brewscale’s repository already has <a href="https://github.com/ArchiDep/brewscale/blob/main/locustfile.py" target="_blank" rel="noopener noreferrer">one</a>, named
 <code>locustfile.py</code>. Clone the repository on your computer to get it:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span></span>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">/path/to/projects</span></span>
 <span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">https://github.com/ArchiDep/brewscale.git</span></span>
 <span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cd</span> <span class="l-function-call">brewscale</span></span></code></pre>
 <p>You do not have to write anything: the file is already in your clone:</p>
@@ -1859,9 +1866,8 @@ build as long as it ends with <code>BUILD SUCCESS</code>.</p>
 <h3 id="the-command-docker-could-not-be-found-in-this-wsl-2-distro"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>The command 'docker' could not be found in this WSL 2 distro</code><a href="#the-command-docker-could-not-be-found-in-this-wsl-2-distro" aria-label="Link to heading 'The command 'docker' could not be found in this WSL 2 distro'" data-heading-content="The command 'docker' could not be found in this WSL 2 distro" class="anchor"></a></h3>
 <p>Docker Desktop provides the <code>docker</code> command in the WSL only while it is
 running, and only in the WSL distributions it is integrated with. Start Docker
-Desktop, then open a new terminal. If the command is still missing, open Docker
-Desktop’s settings, and under <strong>Resources</strong>, then <strong>WSL integration</strong>, enable
-the integration with Ubuntu.</p>
+Desktop, then open a new terminal. If the command is still missing, enable the
+WSL integration as shown in <a href="#run-locust-with-docker-desktop">Run Locust with Docker Desktop</a>.</p>
 <h3 id="cannot-connect-to-the-docker-daemon"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Cannot connect to the Docker daemon</code><a href="#cannot-connect-to-the-docker-daemon" aria-label="Link to heading 'Cannot connect to the Docker daemon'" data-heading-content="Cannot connect to the Docker daemon" class="anchor"></a></h3>
 <p>Docker Desktop is not running. Start it, wait until it says that it is running,
 and run your command again.</p>
@@ -2028,7 +2034,7 @@ each barista’s status.</li>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/512-brewscale-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/4de0d879c61a741278a2befadc4654703fc9bd18/course/chapters/512-brewscale-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -2731,7 +2737,7 @@ each barista’s status.</li>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@f9fa1a7</span>
+        <span class="tooltip-content">main@4de0d87</span>
         <span class="font-title">0.1.0</span>
       </span>
       
