@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260">
+  <title>A tunneling proxy: an SSH connection from a client in one network passes through the proxy, a pipe between the networks, unchanged, to a server in the other network</title>
+  <style>
+    svg { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+    .card { fill: #fff; }
+    .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+    .process text { fill: #fff; text-anchor: middle; }
+    .process .label { font-size: 20px; font-weight: 700; }
+    .process .sub { font-size: 15px; font-style: italic; }
+    .machine rect { fill: #e6e6ee; stroke: #2b2b3a; stroke-width: 2.5; }
+    .machine line { stroke: #2b2b3a; stroke-width: 2.5; }
+    .edge path { fill: none; stroke: #000; stroke-width: 1.5; }
+    .edge.control path { stroke-dasharray: 4 5; }
+    .edge text { font-size: 16px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+    .marker-comm { fill: #000; }
+    .marker-control { fill: #fff; stroke: #000; stroke-width: 1.5; }
+    .socket path { fill: none; stroke: #000; stroke-width: 1.75; stroke-linecap: round; }
+    .socket text { font-size: 16px; fill: #000; text-anchor: end; }
+    .region rect { fill: none; stroke: #2b2b3a; stroke-width: 2; stroke-dasharray: 10 8; }
+    .region text { font-size: 18px; font-style: italic; fill: #2b2b3a; text-anchor: middle; }
+    .boundary line { stroke: #000; stroke-width: 3; stroke-dasharray: 12 10; }
+    .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+    .cloud text { font-size: 16px; fill: #666; text-anchor: middle; }
+    .heading { font-size: 22px; font-weight: 700; fill: #000; text-anchor: middle; }
+    .note { font-size: 17px; font-style: italic; fill: #000; text-anchor: middle; }
+    .cross { stroke: #c93a43; stroke-width: 5; stroke-linecap: round; opacity: 0.35; }
+    .divider { stroke: #999; stroke-width: 1.5; }
+    .pipe .body { fill: #d0d4da; stroke: #2b2b3a; stroke-width: 2; }
+    .pipe .opening { fill: #474d55; stroke: #2b2b3a; stroke-width: 2; }
+    .pipe text { font-size: 20px; font-weight: 700; fill: #2b2b3a; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="arrow-comm" viewBox="0 0 14 10" refX="14" refY="5" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="marker-comm" d="M0,0 L14,5 L0,10 z"/>
+    </marker>
+    <marker id="arrow-control" viewBox="-1 -1 16 12" refX="14" refY="5" markerWidth="16" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="marker-control" d="M0,0 L14,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="card" width="900" height="260" rx="12"/>
+
+  <text class="heading" x="225" y="46">Network A</text>
+  <text class="heading" x="675" y="46">Network B</text>
+  <g class="boundary">
+    <line x1="450" y1="24" x2="450" y2="236"/>
+  </g>
+
+  <g class="process">
+    <rect x="40" y="130" width="180" height="56" rx="8"/>
+    <text class="label" x="130" y="165">SSH Client</text>
+  </g>
+
+  <g class="process">
+    <rect x="680" y="130" width="180" height="56" rx="8"/>
+    <text class="label" x="770" y="165">SSH Server</text>
+  </g>
+
+  <!-- The connection runs through the pipe: drawn whole first, then hidden by
+       the pipe's body, and drawn again where it comes out of the opening. -->
+  <g class="edge comm">
+    <path d="M220,158 L676,158" marker-end="url(#arrow-comm)"/>
+    <text x="280" y="146">SSH</text>
+  </g>
+
+  <g class="pipe">
+    <path class="body" d="M340,118 L560,118 L560,198 L340,198 A14,40 0 0 1 340,118 z"/>
+    <ellipse class="opening" cx="560" cy="158" rx="14" ry="40"/>
+    <text x="448" y="165">Tunneling proxy</text>
+  </g>
+
+  <g class="edge comm">
+    <path d="M560,158 L600,158"/>
+    <text x="628" y="146">SSH</text>
+  </g>
+</svg>

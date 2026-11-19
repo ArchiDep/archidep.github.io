@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-940eb979bd223be9b42860b5ee22039e.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-0d7677ed45757d465a5a49e3470b71e7.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-d8ff4936beee13d2e66f63270466071a.css">
   </head>
   <body data-theme="light">
     <div class="reveal">
@@ -31,7 +31,7 @@ Architecture & Deployment <!-- .element: class="subtitle" -->
 
 ## What is a proxy?
 
-<img class='w70' src='images/proxy-db3c45efb3710346ed3485e759574ccd.png' />
+<img class="w-10/12" src="./images/proxy-3c16e7e8233479cf26451dea662f3dd2.svg" alt="A client connects to a proxy, which connects to the website on the client's behalf" />
 
 A [**proxy server**](https://en.wikipedia.org/wiki/Proxy_server) is a computer or application that acts as an
 **intermediary** for requests from clients seeking resources from other servers.
@@ -50,7 +50,7 @@ There are 3 main kinds:
 
 ## Tunneling proxy
 
-<img class='w-8/10' src='images/tunneling-proxy-3fb613e320e151bb1108a9624d957038.png' />
+<img class="w-10/12" src="./images/tunneling-proxy-f65d42a3b6657b6af16d8819c7de33cd.svg" alt="An SSH connection from an SSH client in network A passes through a tunneling proxy, drawn as a pipe between the networks, unchanged, to an SSH server in network B" />
 
 A [tunneling proxy](https://en.wikipedia.org/wiki/Tunneling_protocol) can pass **unmodified requests and
 responses** from one network to another.
@@ -69,16 +69,71 @@ an additional layer of encryption.
 
 ## Forward proxy
 
-<p class='center'><img class='w80' src='images/forward-proxy-d75dc66d6fc473f039d180e86b81f240.jpg' /></p>
+<img class="w-10/12" src="./images/forward-proxy-703cd42a65748fdffb1b65c16c48b6b3.svg" alt="A client connects to a forward proxy in its own network, which connects to a website on the Internet on its behalf" />
 
 A **forward proxy** retrieves data from a server on behalf of a client. It is
 said to be [**open**](https://en.wikipedia.org/wiki/Open_proxy) if it is accessible by any Internet user.
+
+**Notes:**
+
+A forward proxy works for its clients. It sits on their side, often in their own
+network, and they go through it to reach any server on the Internet.
 
 ---
 
 ### Anonymous forward proxy
 
-<img class="w-1/2" src='images/anonymous-proxy-7698cfff02f97a761b37b3c23eda5487.png' />
+<!-- The fragment shows what the website sees: the client and its connection
+     disappear, and the website is left seeing only the proxy. -->
+<svg class="proxy-diagram mx-auto block w-10/12" viewBox="0 0 960 225" role="img" aria-label="A client connects to an anonymous proxy, which connects across the Internet to the website; the website sees only the proxy">
+  <style>
+    svg.proxy-diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+    svg.proxy-diagram .card { fill: #fff; }
+    svg.proxy-diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+    svg.proxy-diagram .process text { fill: #fff; text-anchor: middle; font-size: 20px; font-weight: 700; }
+    svg.proxy-diagram .edge path { fill: none; stroke: #000; stroke-width: 1.5; }
+    svg.proxy-diagram .marker-comm { fill: #000; }
+    svg.proxy-diagram .boundary line { stroke: #000; stroke-width: 3; stroke-dasharray: 12 10; }
+    svg.proxy-diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+    svg.proxy-diagram .cloud text { font-size: 16px; fill: #666; text-anchor: middle; }
+    svg.proxy-diagram .note { font-size: 17px; font-style: italic; fill: #000; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="anonymous-proxy-arrow" viewBox="0 0 14 10" refX="14" refY="5" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="marker-comm" d="M0,0 L14,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <rect class="card" width="960" height="225" rx="12"/>
+  <g class="boundary">
+    <line x1="480" y1="24" x2="480" y2="190"/>
+    <line x1="620" y1="24" x2="620" y2="190"/>
+  </g>
+  <g class="cloud">
+    <path d="M518,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+    <text x="550" y="80">Internet</text>
+  </g>
+  <g class="fragment fade-out" data-fragment-index="1">
+    <g class="process">
+      <rect x="30" y="120" width="160" height="56" rx="8"/>
+      <text x="110" y="155">Client</text>
+    </g>
+    <g class="edge">
+      <path d="M190,148 L246,148" marker-end="url(#anonymous-proxy-arrow)"/>
+    </g>
+  </g>
+  <g class="process">
+    <rect x="250" y="120" width="200" height="56" rx="8"/>
+    <text x="350" y="155">Anonymous proxy</text>
+  </g>
+  <g class="process">
+    <rect x="700" y="120" width="200" height="56" rx="8"/>
+    <text x="800" y="155">Website</text>
+  </g>
+  <g class="edge">
+    <path d="M450,148 L696,148" marker-end="url(#anonymous-proxy-arrow)"/>
+  </g>
+  <text class="note fragment" data-fragment-index="1" x="800" y="208">sees only the proxy</text>
+</svg>
 
 Conceals the identity of the client.
 
@@ -93,16 +148,24 @@ combination with this type of proxy server.
 
 ### Transparent forward proxy
 
-<img class="w-1/2" src='images/open-proxy-bc55d2b76d5f7fce594825e0ac3e59e1.png' />
+<img class="w-10/12" src="./images/transparent-proxy-6686540de0a4c0ddf07da9eb5bea7067.svg" alt="In a school network, a client's requests go through a transparent proxy without the client having configured anything; the website sees both the proxy and the client" />
 
-Identifies both itself and the original client.
+Intercepts the client's requests without the client having to configure
+anything, and does not hide the client.
 
 **Notes:**
 
-A **transparent forward proxy** identifies both itself and the original client
-through the use of HTTP headers. It can be used to cache websites. Schools often
-use this kind of proxy to restrict access to particular websites (e.g.
+A **transparent forward proxy** is transparent to its clients: they do not
+configure it, and may not even know it is there. The network they are connected
+to sends their requests through it. Schools and companies often use this kind of
+proxy to cache websites, or to restrict access to particular websites (e.g.
 Facebook).
+
+It does not hide the clients: it usually tells the server who the original
+client is, through HTTP headers.
+
+The word is not used consistently. Some only mean a proxy that reveals the
+original client, whether the client configured it or not.
 
 When many clients go through the same forward proxy server, its IP address may
 get banned, since the target server only sees one computer (the proxy) making
@@ -112,7 +175,7 @@ too many requests at the same time.
 
 ## Reverse proxy
 
-<p class='center'><img class='w80' src='images/reverse-proxy-823968d4d88d93fb9688b19bf060fc03.jpg' /></p>
+<img class="w-10/12" src="./images/reverse-proxy-8ec8dbf3aceb457d997ad6e82fbcf050.svg" alt="A client on the Internet connects to a reverse proxy in the servers' private network, which forwards the requests to the three websites behind it" />
 
 A [**reverse proxy**](https://en.wikipedia.org/wiki/Reverse_proxy) is an **internal-facing proxy** used to
 control and protect access to servers in a **private network**.
@@ -120,22 +183,11 @@ control and protect access to servers in a **private network**.
 **Notes:**
 
 A reverse proxy **appears to clients to be an ordinary server**, but actually
-**transmit their requests to** one or more **other servers in an internal
+**transmits their requests to** one or more **other servers in an internal
 private network** which handle the requests.
 
----
-
-### Hiding internal architecture
-
-<img class='w100' src='images/reverse-proxy-internal-network-5241596f1335e3044ab694b63d56a9e7.png' />
-
-The client only sees the proxy server.
-
-**Notes:**
-
-The response from the private server is returned as if it was coming from the
-proxy server itself, leaving the client with no knowledge of the structure of
-the internal network.
+It is the mirror image of a forward proxy: it works for the servers, and sits
+on their side.
 
 ---
 
@@ -147,27 +199,221 @@ the internal network.
 
 ---
 
+### Sharing a port
+
+<img class="w-10/12" src="./images/reverse-proxy-port-9b769628193b21adf459e11f7482fac5.svg" alt="Two browsers ask for guessit.example.com and other.example.com; the reverse proxy, alone on port 80, forwards each request to the application listening on a port of its own, 3000 or 3001" />
+
+Only **one process** can listen on a port: the reverse proxy listens on port 80
+**for every site**, and forwards each request **by the name of the site**.
+
+**Notes:**
+
+A port is a number the kernel uses to hand incoming data to the one process
+listening on it. If two processes could listen on the same port, the kernel
+would not know which of them to hand the data to. So it refuses to let a second
+process listen on a port that is already taken.
+
+When an address has no port, browsers connect to port 80 for HTTP, and 443 for
+HTTPS. If an application listens on port 80 itself, no other application on the
+same server can be reached without a port in its address.
+
+A reverse proxy is one more process between the browser and the application,
+with a connection on each side. It is the only process listening on port 80.
+Each application listens on a port of its own, which nobody needs to type.
+
+The DNS gives all the names of the sites on the server the same IP address, so
+the name is the only thing that tells the sites apart. The browser sends it in
+the `Host` header of every HTTP request, and the reverse proxy forwards the
+request to the application configured for that name. This is called
+[**name-based virtual hosting**](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+
+---
+
 ### Hiding internal architecture
 
-![Hiding internal architecture](images/reverse-proxy-hide-origin-605ceb64a71bb0e1c7e5ec6f8de04986.gif)
+<!-- The slide opens on what the client knows: example.com, which is the reverse
+     proxy. The fragment reveals what is behind it, which the client never
+     sees. -->
+<svg class="proxy-diagram mx-auto block w-10/12" viewBox="0 0 1040 300" role="img" aria-label="A client connects to example.com, which is a reverse proxy; behind it, out of the client's sight, the proxy forwards requests to two websites of its private network and to a third in another network">
+  <style>
+    svg.proxy-diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+    svg.proxy-diagram .card { fill: #fff; }
+    svg.proxy-diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+    svg.proxy-diagram .process text { fill: #fff; text-anchor: middle; font-size: 20px; font-weight: 700; }
+    svg.proxy-diagram .edge path { fill: none; stroke: #000; stroke-width: 1.5; }
+    svg.proxy-diagram .edge text { font-size: 16px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+    svg.proxy-diagram .marker-comm { fill: #000; }
+    svg.proxy-diagram .boundary line { stroke: #000; stroke-width: 3; stroke-dasharray: 12 10; }
+    svg.proxy-diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+    svg.proxy-diagram .cloud text { font-size: 16px; fill: #666; text-anchor: middle; }
+    svg.proxy-diagram .heading { font-size: 22px; font-weight: 700; fill: #000; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="hidden-architecture-arrow" viewBox="0 0 14 10" refX="14" refY="5" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="marker-comm" d="M0,0 L14,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <rect class="card" width="1040" height="300" rx="12"/>
+  <text class="heading" x="110" y="46">Client</text>
+  <g class="boundary">
+    <line x1="230" y1="24" x2="230" y2="276"/>
+    <line x1="370" y1="24" x2="370" y2="276"/>
+  </g>
+  <g class="cloud">
+    <path d="M268,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+    <text x="300" y="80">Internet</text>
+  </g>
+  <g class="process">
+    <rect x="30" y="132" width="160" height="56" rx="8"/>
+    <text x="110" y="167">Client</text>
+  </g>
+  <g class="process">
+    <rect x="400" y="132" width="160" height="56" rx="8"/>
+    <text x="480" y="167">Reverse proxy</text>
+  </g>
+  <g class="edge">
+    <path d="M190,160 L396,160" marker-end="url(#hidden-architecture-arrow)"/>
+    <text x="300" y="148">example.com</text>
+  </g>
+  <g class="fragment">
+    <text class="heading" x="610" y="46">Private network</text>
+    <text class="heading" x="945" y="46">Another network</text>
+    <g class="boundary">
+      <line x1="850" y1="24" x2="850" y2="276"/>
+    </g>
+    <g class="process">
+      <rect x="660" y="62" width="150" height="56" rx="8"/>
+      <text x="735" y="97">Website A</text>
+    </g>
+    <g class="process">
+      <rect x="660" y="202" width="150" height="56" rx="8"/>
+      <text x="735" y="237">Website B</text>
+    </g>
+    <g class="process">
+      <rect x="875" y="132" width="150" height="56" rx="8"/>
+      <text x="950" y="167">Website C</text>
+    </g>
+    <g class="edge">
+      <path d="M560,160 C600,160 600,90 640,90 L656,90" marker-end="url(#hidden-architecture-arrow)"/>
+    </g>
+    <g class="edge">
+      <path d="M560,160 C600,160 600,230 640,230 L656,230" marker-end="url(#hidden-architecture-arrow)"/>
+    </g>
+    <g class="edge">
+      <path d="M560,160 L871,160" marker-end="url(#hidden-architecture-arrow)"/>
+    </g>
+  </g>
+</svg>
 
 Reverse proxies can **hide the existence and characteristics of an internal
 network's private servers**.
 
 **Notes:**
 
-Since the client only sees the proxy server, it is unaware of the complexity of
-the internal architecture and does not have to worry about it.
+The client only sees the proxy server. The response from the private server is
+returned as if it was coming from the proxy server itself, leaving the client
+with no knowledge of the structure of the internal network. It is unaware of the
+complexity of the internal architecture, and does not have to worry about it:
+the proxy can hide anything from a single application to many servers, in
+several networks.
 
 In a scenario where you have only a single public IP address available, a
 reverse proxy allows you to make multiple private servers accessible on that IP
 address through the proxy server.
 
+The other way round, the servers behind the proxy only see the proxy. For them,
+it is a client like any other: every connection they receive comes from the
+proxy, not from the original client. If a server needs to know who the original
+client is, for example to record their IP address, the proxy has to tell it, by
+adding HTTP headers to the requests it forwards. The [appendix of the
+subject](/2026/course/509-reverse-proxy/#appendix-what-the-application-sees) shows how.
+
 ---
 
 ### Hiding multi-component websites
 
-<img class='w-7/10' src='images/reverse-proxy-cors-883356cc82485f4dd1ba7e19eaa9c446.jpg' />
+<!-- The slide opens on two origins: the browser talks to the frontend and to the
+     backend at a name of their own. The first fragment puts a reverse proxy in
+     front of both, at one name, and the second leaves only what the browser
+     sees of it.
+
+     A PDF prints the slide once, which shows the fragments that fade out but
+     not those that fade in then out. It is made to print the reverse proxy
+     with the frontend and the backend behind it: without the arrows of the two
+     origins, and with those from the proxy. -->
+<svg class="proxy-diagram mx-auto block w-10/12" viewBox="0 0 960 300" role="img" aria-label="Without a reverse proxy, the browser talks to the frontend at www.example.com and to the backend at api.example.com, two origins; with a reverse proxy, the browser talks to example.com only, which forwards to both, and the browser no longer sees them">
+  <style>
+    svg.proxy-diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+    svg.proxy-diagram .card { fill: #fff; }
+    svg.proxy-diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+    svg.proxy-diagram .process text { fill: #fff; text-anchor: middle; font-size: 20px; font-weight: 700; }
+    svg.proxy-diagram .edge path { fill: none; stroke: #000; stroke-width: 1.5; }
+    svg.proxy-diagram .edge text { font-size: 16px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+    svg.proxy-diagram .marker-comm { fill: #000; }
+    svg.proxy-diagram .boundary line { stroke: #000; stroke-width: 3; stroke-dasharray: 12 10; }
+    svg.proxy-diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+    svg.proxy-diagram .cloud text { font-size: 16px; fill: #666; text-anchor: middle; }
+    svg.proxy-diagram .heading { font-size: 22px; font-weight: 700; fill: #000; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="multi-component-arrow" viewBox="0 0 14 10" refX="14" refY="5" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="marker-comm" d="M0,0 L14,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <rect class="card" width="960" height="300" rx="12"/>
+  <text class="heading" x="150" y="46">Client</text>
+  <text class="heading" x="700" y="46">Servers' network</text>
+  <g class="boundary">
+    <line x1="300" y1="24" x2="300" y2="276"/>
+    <line x1="440" y1="24" x2="440" y2="276"/>
+  </g>
+  <g class="cloud">
+    <path d="M338,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+    <text x="370" y="80">Internet</text>
+  </g>
+  <g class="process">
+    <rect x="70" y="132" width="160" height="56" rx="8"/>
+    <text x="150" y="167">Browser</text>
+  </g>
+  <g class="fragment fade-out" data-fragment-index="2">
+    <g class="process">
+      <rect x="740" y="72" width="180" height="56" rx="8"/>
+      <text x="830" y="107">Frontend</text>
+    </g>
+    <g class="process">
+      <rect x="740" y="192" width="180" height="56" rx="8"/>
+      <text x="830" y="227">Backend</text>
+    </g>
+  </g>
+  <g class="fragment fade-out print:hidden" data-fragment-index="1">
+    <g class="edge">
+      <path d="M230,160 C480,160 480,100 736,100" marker-end="url(#multi-component-arrow)"/>
+      <text x="610" y="90">www.example.com</text>
+    </g>
+    <g class="edge">
+      <path d="M230,160 C480,160 480,220 736,220" marker-end="url(#multi-component-arrow)"/>
+      <text x="610" y="242">api.example.com</text>
+    </g>
+  </g>
+  <g class="fragment" data-fragment-index="1">
+    <g class="process">
+      <rect x="470" y="132" width="170" height="56" rx="8"/>
+      <text x="555" y="167">Reverse proxy</text>
+    </g>
+    <g class="edge">
+      <path d="M230,160 L466,160" marker-end="url(#multi-component-arrow)"/>
+      <text x="370" y="148">example.com</text>
+    </g>
+  </g>
+  <g class="fragment fade-in-then-out print:visible! print:opacity-100!" data-fragment-index="1">
+    <g class="edge">
+      <path d="M640,160 C675,160 675,100 710,100 L736,100" marker-end="url(#multi-component-arrow)"/>
+    </g>
+    <g class="edge">
+      <path d="M640,160 C675,160 675,220 710,220 L736,220" marker-end="url(#multi-component-arrow)"/>
+    </g>
+  </g>
+</svg>
 
 **Notes:**
 
@@ -178,29 +424,25 @@ single domain name, avoiding [CORS](https://en.wikipedia.org/wiki/Cross-origin_r
 
 ---
 
-### SSL termination or authentication
+### SSL/TLS termination
 
-![SSL terminal with a reverse proxy](images/reverse-proxy-ssl-290fe79e666280db241fbe35dbdb0b2a.png)
+<img class="w-10/12" src="./images/reverse-proxy-ssl-c4522aee9829ba27847010d863b3ae75.svg" alt="The browser talks HTTPS across the Internet to the reverse proxy, which talks plain HTTP to the two applications of its private network" />
 
-A reverse proxy can be the **secure endpoint** with all the SSL certificates,
-then **forwarding unencrypted requests** to other servers in the private
-network.
+A reverse proxy can be the **secure endpoint** with all the SSL/TLS
+certificates, then **forwarding unencrypted requests** to other servers in the
+private network.
 
 **Notes:**
 
-Managing SSL certificates to provide websites over HTTPS is rather complex. It
-can be hard to configure some frameworks or tools to ensure they are only using
-secure communications.
-
-Similarly, a reverse proxy could also require **authentication** before letting
-a client access an insecure application, adding security without having to
-modify the application itself.
+Managing SSL/TLS certificates to provide websites over HTTPS is rather complex.
+It can be hard to configure some frameworks or tools to ensure they are only
+using secure communications.
 
 ---
 
 ### Scalability
 
-<img class="w-6/10" src="./images/horizontal-vs-vertical-scaling-8828b46a8aca59b23a7c4cb62c4cfc93.png" alt="Horizontal vs. vertical scaling" />
+<img class="w-10/12" src="./images/horizontal-vs-vertical-scaling-473da2c6c72f458a511d5b6db8b29dcd.svg" alt="Vertical scaling makes one server bigger; horizontal scaling adds more servers of the same size" />
 
 [Scalability](https://en.wikipedia.org/wiki/Scalability) is the capability of a computer system to handle a
 growing amount of work (e.g. client requests).
@@ -223,11 +465,11 @@ clients at the same time. Computers or applications can be combined in
 
 #### Load balancing
 
-<img class='w-8/10' src='images/load-balancing-28d845628084ea1bd89adb5665be6149.png' />
+<img class="w-10/12" src="./images/load-balancing-d767f76a9ace60ff0fe43768e5c9a9eb.svg" alt="The requests of three clients reach one load balancer, which spreads them across three instances of the same application" />
 
 A common function of reverse proxies is to perform [**load
 balancing**](https://en.wikipedia.org/wiki/Load_balancing_(computing)), i.e. the distribution of workloads across multiple
-servers to achieve **horizontal scaling**.
+applications or servers to achieve **horizontal scaling**.
 
 **Notes:**
 
@@ -243,6 +485,7 @@ requests to different servers, spreading the load between them.
 - Spoon-feeding
 - [Denial-of-service (DoS)](https://en.wikipedia.org/wiki/Denial-of-service_attack) protection
 - [A/B testing](https://en.wikipedia.org/wiki/A/B_testing)
+- Authentication
 
 **Notes:**
 
@@ -253,6 +496,9 @@ requests to different servers, spreading the load between them.
   dynamically generated page, then serves it to the client a little bit at a
   time. This avoids the internal server having to wait for slow clients such as
   mobile applications.
+- A reverse proxy can require **authentication** before letting a client access
+  an insecure application, adding security without having to modify the
+  application itself.
 - And [more](https://en.wikipedia.org/wiki/Reverse_proxy#Uses_of_reverse_proxies)
 
 ---
@@ -269,52 +515,74 @@ requests to different servers, spreading the load between them.
 
 <img class='w-8/10' src='images/apache-vs-nginx-3c299c6c8944a3f3c70dbce49d6748a0.png' />
 
-[nginx](http://nginx.org/) is a concurrent of the well-known [Apache HTTP server](https://httpd.apache.org/)
-developed in 2004 to solve the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem).
+[nginx](https://nginx.org/) is a competitor of the well-known [Apache HTTP server](https://httpd.apache.org/),
+first released in 2004 to solve the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem).
 
 **Notes:**
 
-[nginx](http://nginx.org/) is an HTTP and reverse proxy server used by more than 25% of the
-busiest sites in December 2018. It was developed to solve the [C10k
-problem](https://en.wikipedia.org/wiki/C10k_problem), i.e. the capability of a computer system to handle ten thousand
-concurrent connections, thanks to its [event-driven
-architecture](https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/). It also has [many other
-features](http://nginx.org/en/#basic_http_features) to serve modern web applications.
+[nginx](https://nginx.org/) is an HTTP and reverse proxy server, and one of the most used
+web servers in the world. It was developed to solve the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem),
+i.e. the capability of a computer system to handle ten thousand concurrent
+connections, thanks to its [event-driven architecture](https://blog.nginx.org/blog/inside-nginx-how-we-designed-for-performance-scale). It
+also has [many other features](https://nginx.org/en/#basic_http_features) to serve modern web
+applications.
+
+---
+
+### How nginx runs
+
+<img class="w-10/12" src="./images/nginx-processes-e69151fd74cf72589bf729be462f5661.svg" alt="A master process, running as root, holds port 80 and starts worker processes, running as www-data" />
+
+A **master** process, started as `root`, opens the ports. **Worker** processes,
+running as an unprivileged user, handle the requests.
+
+**Notes:**
+
+On Linux, only `root` may listen on a port below 1024, such as 80 or 443. An
+application that listened on port 80 itself would have to run as `root`, and so
+would anyone who found a vulnerability in it.
+
+nginx starts as `root` only to open its ports. Its master process then starts
+worker processes, usually one per processor core, which run as an unprivileged
+user, `www-data` on Ubuntu, and handle all the requests. Each worker can handle
+many connections at once. The applications behind nginx listen on ports above
+1024, which any user may do, so each can run as a dedicated user of its own.
+
+The master process also reacts to signals. When it receives the `HUP` signal, it
+reads its configuration again, starts new workers with it, and lets the old ones
+finish the requests they are handling. The configuration changes without nginx
+ever stopping listening. If the new configuration has an error, nginx keeps the
+old one.
 
 ---
 
 #### Apache vs. nginx
 
-<p class='center'><img class='w60' src='images/nginx-market-share-1a98886b4be2b0260d963ce219954e9e.png' /></p>
+<p class='center'><img class='w60' src='images/nginx-market-share-66acb39c160f10703de732694164b9c0.png' /></p>
 
 **Notes:**
 
-Although Apache is still used to serve more websites, nginx leads the pack in
-web performance, and is used more for the busiest websites.
+nginx is used by more websites than Apache, and by more high-traffic websites.
+In November 2026, [W3Techs](https://w3techs.com/technologies/overview/web_server) found nginx on 30.0% of the
+websites whose web server it knows, and Apache on 20.9%.
+
+Cloudflare Server, used by even more websites (33.8%), is not a server you
+install: it is Cloudflare's own network of reverse proxies, which many websites
+put in front of their own servers.
 
 [ab-testing]: https://en.wikipedia.org/wiki/A/B_testing
 [apache]: https://httpd.apache.org/
 [c10k]: https://en.wikipedia.org/wiki/C10k_problem
 [cluster]: https://en.wikipedia.org/wiki/Computer_cluster
 [cors]: https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
-[digital-ocean]: https://www.digitalocean.com/
 [dos]: https://en.wikipedia.org/wiki/Denial-of-service_attack
 [gateway]: https://en.wikipedia.org/wiki/Gateway_(telecommunications)
 [horizontal-and-vertical-scaling]: https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling
 [load-balancing]: https://en.wikipedia.org/wiki/Load_balancing_(computing)
-[nginx]: http://nginx.org/
-[nginx-directive-index]: http://nginx.org/en/docs/http/ngx_http_index_module.html#index
-[nginx-directive-listen]: http://nginx.org/en/docs/http/ngx_http_core_module.html#listen
-[nginx-directive-location]: http://nginx.org/en/docs/http/ngx_http_core_module.html#location
-[nginx-directive-root]: http://nginx.org/en/docs/http/ngx_http_core_module.html#root
-[nginx-directives]: http://nginx.org/en/docs/dirindex.html
-[nginx-docs]: http://nginx.org/en/docs/
-[nginx-features]: http://nginx.org/en/#basic_http_features
-[nginx-include]: http://nginx.org/en/docs/ngx_core_module.html#include
-[nginx-performance]: https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/
-[nginx-server-names]: http://nginx.org/en/docs/http/server_names.html
-[nginx-signals]: http://nginx.org/en/docs/control.html
-[nginx-upstream]: http://nginx.org/en/docs/http/ngx_http_upstream_module.html
+[name-based-virtual-hosting]: https://en.wikipedia.org/wiki/Virtual_hosting#Name-based
+[nginx]: https://nginx.org/
+[nginx-features]: https://nginx.org/en/#basic_http_features
+[nginx-performance]: https://blog.nginx.org/blog/inside-nginx-how-we-designed-for-performance-scale
 [open-proxy]: https://en.wikipedia.org/wiki/Open_proxy
 [proxy]: https://en.wikipedia.org/wiki/Proxy_server
 [reverse-proxy]: https://en.wikipedia.org/wiki/Reverse_proxy
@@ -322,14 +590,16 @@ web performance, and is used more for the busiest websites.
 [scalability]: https://en.wikipedia.org/wiki/Scalability
 [tunneling-proxy]: https://en.wikipedia.org/wiki/Tunneling_protocol
 [vpn]: https://en.wikipedia.org/wiki/Virtual_private_network
+[w3techs-web-servers]: https://w3techs.com/technologies/overview/web_server
 [web-acceleration]: https://en.wikipedia.org/wiki/Web_accelerator
-[weighted-round-robin]: https://en.wikipedia.org/wiki/Weighted_round_robin
+
+[what-the-application-sees]: /2026/course/509-reverse-proxy/#appendix-what-the-application-sees
 </textarea>
         </section>
       </div>
     </div>
 
-    <script src="/2026/assets/course/slides-3dc3a82e1a9722c7bb35b52fd12e5cb5.js">
+    <script src="/2026/assets/course/slides-17754702405b7e9d47ec306150de9671.js">
     </script>
 
     <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
@@ -337,7 +607,7 @@ web performance, and is used more for the busiest websites.
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/509-reverse-proxy/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/509-reverse-proxy/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -364,12 +634,12 @@ web performance, and is used more for the busiest websites.
           </li>
           
           <li class="text-xs">
-            Rev: d504faf9db2c04eccb2b800a981590c1d489cf96
+            Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@d504faf
+        ArchiDep 26-27 main@f9fa1a7
       </a>
     </div>
   </body>

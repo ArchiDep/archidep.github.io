@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e0bad4c36d5f649315449dc000cc495f.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
+    <script src="/2026/assets/course/course-e11bec045207e8c9aabcf134d0bd2695.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/501-git-clone-deployment/exercise.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
+      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/501-git-clone-deployment/exercise.md">Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc</a>
     </li>
   </ul>
 </div>
@@ -179,6 +179,9 @@ uploading them.</p>
     
   </li><li class="toc-entry toc-h2">
     <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
@@ -1188,6 +1191,70 @@ break-inside: avoid;
 </div>
 <template class="diagram-captions"><p data-caption="rest">In this diagram, your browser talks to the Guess It application running on your server. Guess It talks to the PostgreSQL database server also running on your server. You started Guess It manually in your SSH session, in a shell running on the server.</p><p data-caption="0">Your terminal is still connected to your server over SSH, PostgreSQL is running with the application’s database, and the application’s files are on the server.</p><p data-caption="1">You run <code>npm run dev</code>, as on your computer. Your shell starts Guess It, which listens on port 3000.</p><p data-caption="2">You open a browser on your computer.</p><p data-caption="3">You type your server’s public IP address and port into it. It connects to port 3000, where Guess It is listening.</p><p data-caption="4">It sends an HTTP request for the home page over the connection, and waits for the answer.</p><p data-caption="5">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="6">Guess It connects to PostgreSQL on port 5432, with the database URL you configured.</p><p data-caption="7">It sends its query over the connection.</p><p data-caption="8">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="9">The rows of the leaderboard travel back to Guess It.</p><p data-caption="10">Guess It works again, building the HTML page from the rows.</p><p data-caption="11">The page travels back over the connection to your browser, with its stylesheets and scripts.</p><p data-caption="12">Your browser works, displaying the page.</p></template>
 </div>
+<h2 id="where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?<a href="#where-is-everything" aria-label="Link to heading 'Where is everything?'" data-heading-content="Where is everything?" class="anchor"></a></h2>
+<p>These are the files and directories of your server that matter for this
+deployment.</p>
+<div class="file-map">
+<table>
+<thead>
+<tr>
+<th align="left">Path</th>
+<th align="left">What it is</th>
+<th align="left">What you did</th>
+<th align="left">Who uses it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> <code>/srv/guessit</code> <span class="new">new</span></td>
+<td align="left">Your deployment: a clone of your repository</td>
+<td align="left">Created it with <code>sudo mkdir</code>, gave it to yourself with <code>sudo chown</code>, and cloned your fork into it with <code>git clone</code></td>
+<td align="left">You, to deploy and start the application</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>/srv/guessit/server.js</code> <span class="new">new</span></td>
+<td align="left">The code of the application, with the database password</td>
+<td align="left">Cloned it with <code>git clone</code>, then gave it your password with <code>nano</code> or <code>vim</code> if it did not have it</td>
+<td align="left"><code>node</code>, which runs it. Git sees your change as a modification of the code</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>/srv/guessit/package-lock.json</code> <span class="new">new</span></td>
+<td align="left">The exact versions of the dependencies</td>
+<td align="left">Cloned it with <code>git clone</code></td>
+<td align="left"><code>npm ci</code>, to install those versions</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> <code>/srv/guessit/node_modules</code> <span class="new">new</span></td>
+<td align="left">The dependencies of the application</td>
+<td align="left">Installed them with <code>npm ci</code>, on the server</td>
+<td align="left"><code>node</code>, when the code loads a dependency</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> <code>/var/lib/postgresql</code></td>
+<td align="left">The data of PostgreSQL, including the <code>guessit</code> database and its games</td>
+<td align="left">Created the database in it with <code>schema.sql</code>, in the <a href="/2026/course/410-sftp-deployment/#initialize-the-database">SFTP deployment</a></td>
+<td align="left">PostgreSQL, for both of your deployments</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>~/guessit-ex/server.js</code></td>
+<td align="left">The code of the original SFTP deployment, with the password</td>
+<td align="left">Uploaded it in the <a href="/2026/course/410-sftp-deployment/#upload-the-application">SFTP deployment</a></td>
+<td align="left">You, to copy the password. Nothing runs it any more</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Two directories of the <a href="/2026/course/402-unix-basics/#common-unix-directories">file hierarchy</a> matter most here: <code>/srv</code>
+holds what the server serves, and <code>/var</code> the files that change while it runs,
+such as the database your two deployments share.</p>
+<p>You can explore all of this yourself: <code>ls -l</code> shows what a directory contains,
+with its permissions, and <code>cat</code>, <code>head</code> and <code>tail</code> what a file contains, as in the
+<a href="/2026/cheatsheets/command-line/#whats-in-this-file-cat-head-tail-less">command line cheatsheet</a>. For example:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># /srv belongs to root, your deployment to you.</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">-ld</span> <span class="l-variable-parameter">/srv</span> <span class="l-variable-parameter">/srv/guessit</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># The dependencies of your deployment, which Git did not clone.</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/srv/guessit/node_modules</span></span></code></pre>
 <h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
 <p>Here’s a few tips about some problems you may encounter during this exercise.</p>
 <h3 id="destination-path-srvguessit-already-exists"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>destination path '/srv/guessit' already exists</code><a href="#destination-path-srvguessit-already-exists" aria-label="Link to heading 'destination path '/srv/guessit' already exists'" data-heading-content="destination path '/srv/guessit' already exists" class="anchor"></a></h3>
@@ -1301,6 +1368,9 @@ previous exercise</a>.</p>
     <a href="#architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -1330,7 +1400,7 @@ previous exercise</a>.</p>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/501-git-clone-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/501-git-clone-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1759,19 +1829,19 @@ previous exercise</a>.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
-        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/511-nginx-reverse-proxy-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a multi-component web application with nginx</span>
+  <span>Deploy a web application with nginx as a reverse proxy</span>
 </span>
           
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/512-brewscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
 </span>
           
           
@@ -1797,10 +1867,10 @@ previous exercise</a>.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/515-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Horizontally scale a web application with nginx as a load balancer</span>
+  <span>Deploy a multi-component web application with nginx</span>
 </span>
           
           
@@ -2033,7 +2103,7 @@ previous exercise</a>.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d504faf</span>
+        <span class="tooltip-content">main@f9fa1a7</span>
         <span class="font-title">0.1.0</span>
       </span>
       

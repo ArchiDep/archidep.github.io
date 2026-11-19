@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e0bad4c36d5f649315449dc000cc495f.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
+    <script src="/2026/assets/course/course-e11bec045207e8c9aabcf134d0bd2695.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/802-docker-fibscale/exercise.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
+      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/802-docker-fibscale/exercise.md">Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc</a>
     </li>
   </ul>
 </div>
@@ -123,7 +123,7 @@
       <div class="my-4"><p>In this exercise, you will apply your knowledge of Docker and Linux
 administration to containerize a standalone web application (without a
 database). The application you will be containerizing is
-<a href="https://github.com/ArchiDep/fibscale" target="_blank" rel="noopener noreferrer">FibScale</a> from the <a href="/2026/course/515-fibscale-deployment/">horizontal scaling exercise</a>.</p></div>
+<a href="https://github.com/ArchiDep/fibscale" target="_blank" rel="noopener noreferrer">FibScale</a> from the <a href="/2026/course/512-brewscale-deployment/">horizontal scaling exercise</a>.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -261,7 +261,7 @@ repository</a>:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">git</span> <span class="l-function-call">clone</span> <span class="l-variable-parameter">git@github.com:</span><span class="l-operator">&lt;</span><span class="l-string-special-path">YourGitHubUser</span><span class="l-operator">&gt;</span><span class="l-string-special-path">/fibscale.git</span></span></code></pre>
 <p>Open the project in your favorite text editor.</p>
 <h3 id="create-a-dockerignore-file"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Create a <code>.dockerignore</code> file<a href="#create-a-dockerignore-file" aria-label="Link to heading 'Create a .dockerignore file'" data-heading-content="Create a .dockerignore file" class="anchor"></a></h3>
-<p>If you look at the FibScale repository from the <a href="/2026/course/515-fibscale-deployment/">horizontal scaling exercise</a> (on your cloud server), you
+<p>If you look at the FibScale repository from the <a href="/2026/course/512-brewscale-deployment/">horizontal scaling exercise</a> (on your cloud server), you
 may notice that a bunch of folders were created when running various commands
 like <code>bundle install</code> during the course of the exercise:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-function-call">└──</span> <span class="l-variable-parameter">fibscale</span></span>
@@ -539,9 +539,9 @@ running:</p>
 <p>You can now run the image by running:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">docker</span> <span class="l-function-call">run</span> <span class="l-variable-parameter">fibscale</span></span>
 <span class="l-line" data-line="2"></span>
-<span class="l-line" data-line="3"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span>]  <span class="l-comment-note">INFO</span> -- : Worker: 0 (color: success)</span></span>
-<span class="l-line" data-line="4"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span>]  <span class="l-comment-note">INFO</span> -- : Max number: 10000 (recursive: 40)</span></span>
-<span class="l-line" data-line="5"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span>]  <span class="l-comment-note">INFO</span> -- : Default delay: 0.0</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span></span><span class="l-comment">]  <span class="l-comment-note">INFO</span> -- : Worker: 0 (color: success)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span></span><span class="l-comment">]  <span class="l-comment-note">INFO</span> -- : Max number: 10000 (recursive: 40)</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">I,</span> <span class="l-variable-parameter">[2025-12-11T21:49:34</span> <span class="l-number"><span class="l-comment">#1</span></span><span class="l-comment">]  <span class="l-comment-note">INFO</span> -- : Default delay: 0.0</span></span>
 <span class="l-line" data-line="6"><span class="l-function-call">==</span> Sinatra <span class="l-punctuation-bracket">(</span><span class="l-function-call">v4.2.1</span><span class="l-punctuation-bracket">)</span> <span class="l-function-call">has</span> <span class="l-variable-parameter">taken</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">stage</span> <span class="l-variable-parameter">on</span> <span class="l-number">3000</span></span>
 <span class="l-line" data-line="7">   <span class="l-keyword-repeat">for</span> <span class="l-variable">production</span> <span class="l-function-call">with</span> <span class="l-variable-parameter">backup</span> <span class="l-variable-parameter">from</span> <span class="l-variable-parameter">Puma</span></span>
 <span class="l-line" data-line="8"><span class="l-function-call">Puma</span> <span class="l-variable-parameter">starting</span> <span class="l-variable-parameter">in</span> <span class="l-variable-parameter">single</span> <span class="l-variable-parameter">mode...</span></span>
@@ -838,7 +838,7 @@ offers.</p>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/802-docker-fibscale/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/802-docker-fibscale/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -1267,19 +1267,19 @@ offers.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
-        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/511-nginx-reverse-proxy-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a multi-component web application with nginx</span>
+  <span>Deploy a web application with nginx as a reverse proxy</span>
 </span>
           
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/512-brewscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
 </span>
           
           
@@ -1305,10 +1305,10 @@ offers.</p>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/515-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Horizontally scale a web application with nginx as a load balancer</span>
+  <span>Deploy a multi-component web application with nginx</span>
 </span>
           
           
@@ -1541,7 +1541,7 @@ offers.</p>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d504faf</span>
+        <span class="tooltip-content">main@f9fa1a7</span>
         <span class="font-title">0.1.0</span>
       </span>
       

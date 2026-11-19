@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reverse Proxying · ArchiDep</title>
-<meta name="description" content="Learn what a reverse proxy is, and put it in practice using nginx." />
+<meta name="description" content="Learn what a reverse proxy is, and how to configure nginx to be one." />
 <link rel="canonical" href="https://archidep.ch/2026/course/509-reverse-proxy/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Reverse Proxying" />
-<meta property="og:description" content="Learn what a reverse proxy is, and put it in practice using nginx." />
+<meta property="og:description" content="Learn what a reverse proxy is, and how to configure nginx to be one." />
 <meta property="og:url" content="https://archidep.ch/2026/course/509-reverse-proxy/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e0bad4c36d5f649315449dc000cc495f.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
+    <script src="/2026/assets/course/course-e11bec045207e8c9aabcf134d0bd2695.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/509-reverse-proxy/subject.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
+      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/509-reverse-proxy/subject.md">Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc</a>
     </li>
   </ul>
 </div>
@@ -120,7 +120,7 @@
   Reverse Proxying
 </h1>
 
-      <div class="my-4"><p>Learn what a reverse proxy is, and put it in practice using nginx.</p></div>
+      <div class="my-4"><p>Learn what a reverse proxy is, and how to configure nginx to be one.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -134,15 +134,7 @@
     <a href="#presentation">Presentation</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#installing-nginx">Installing nginx</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#making-sure-its-working">Making sure it’s working</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#nginx-configuration">Nginx configuration</a>
+    <a href="#nginx-configuration">nginx configuration</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#the-main-configuration-file">The main configuration file</a>
@@ -157,6 +149,9 @@
     <a href="#reloading-nginxs-configuration">Reloading nginx’s configuration</a>
     
   </li><li class="toc-entry toc-h3">
+    <a href="#how-nginx-chooses-a-configuration">How nginx chooses a configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#common-nginx-directives">Common nginx directives</a>
     
   </li>
@@ -165,19 +160,24 @@
     <a href="#nginx-configuration-examples">nginx configuration examples</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#how-to-use-these-examples">How to use these examples</a>
-    
-  </li><li class="toc-entry toc-h3">
     <a href="#static-website-configuration">Static website configuration</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#reverse-proxy-configuration">Reverse proxy configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#when-the-application-does-not-answer">When the application does not answer</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h3">
     <a href="#load-balancing-configuration">Load balancing configuration</a>
     
   </li>
 </ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-what-the-application-sees">Appendix: what the application sees</a>
+    
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
@@ -208,32 +208,12 @@
   <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/509-reverse-proxy/slides/?view=scroll" title="Slides"></iframe>
 </div>
 
-      <p><strong>You will need</strong></p>
-<ul>
-<li>A Unix CLI</li>
-<li>A server with an Ubuntu operating system and a public IP address</li>
-</ul>
-<p><strong>Recommended reading</strong></p>
+      <p><strong>Recommended reading</strong></p>
 <ul>
 <li><a href="/2026/course/402-unix-basics/">Unix Administration</a></li>
 <li><a href="/2026/course/406-unix-networking/">Unix Networking</a></li>
 </ul>
-<h2 id="installing-nginx">Installing nginx<a href="#installing-nginx" aria-label="Link to heading 'Installing nginx'" data-heading-content="Installing nginx" class="anchor"></a></h2>
-<p><img src="images/nginx-install-85cec457dc769d90716c4f4379bd93d6.png" alt="Installing nginx" /></p>
-<p>It’s as simple as installing it with APT:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">nginx</span></span></code></pre>
-<h3 id="making-sure-its-working">Making sure it’s working<a href="#making-sure-its-working" aria-label="Link to heading 'Making sure it’s working'" data-heading-content="Making sure it’s working" class="anchor"></a></h3>
-<p>APT should automatically launch nginx, which will start listening on port 80 right away.</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ss</span> <span class="l-function-call">-tlpn</span></span>
-<span class="l-line" data-line="2"><span class="l-function-call">State</span>  <span class="l-variable-parameter">Recv-Q</span> <span class="l-variable-parameter">Send-Q</span> <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span></span>
-<span class="l-line" data-line="3"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">128</span>          <span class="l-variable-parameter">0.0.0.0:</span>`<span class="l-number">80</span>`   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;`<span class="l-function-call">nginx</span>`&quot;</span>,...<span class="l-punctuation-bracket">)</span></span>
-<span class="l-line" data-line="4"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">128</span>             <span class="l-variable-parameter">[::]:</span>`<span class="l-number">80</span>`   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;`<span class="l-function-call">nginx</span>`&quot;</span>,...<span class="l-punctuation-bracket">)</span></span>
-<span class="l-line" data-line="5"><span class="l-function-call">...</span></span></code></pre>
-<p>You can check that the service is running with the following command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">status</span> <span class="l-variable-parameter">nginx</span></span></code></pre>
-<p>You should be able to access your server’s public IP address in a browser and see nginx’s welcome message:</p>
-<img class='w100' src='images/nginx-welcome-5afb49a932a985de062ae5d9ffbc8501.png' />
-<h2 id="nginx-configuration">Nginx configuration<a href="#nginx-configuration" aria-label="Link to heading 'Nginx configuration'" data-heading-content="Nginx configuration" class="anchor"></a></h2>
+<h2 id="nginx-configuration">nginx configuration<a href="#nginx-configuration" aria-label="Link to heading 'nginx configuration'" data-heading-content="nginx configuration" class="anchor"></a></h2>
 <p>Nginx stores its configuration in the <code>/etc/nginx</code> directory.</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-number">-1</span> <span class="l-variable-parameter">/etc/nginx</span></span>
 <span class="l-line" data-line="2"><span class="l-function-call">conf.d</span></span>
@@ -255,10 +235,13 @@
 <p>The most important files are:</p>
 <ul>
 <li><code>nginx.conf</code> is the main configuration file. Everything starts from there.</li>
-<li><code>conf.d</code> is a directory to store reusable configuration fragments.</li>
 <li><code>sites-available</code> is a directory where website configuration files are stored.</li>
 <li><code>sites-enabled</code> is a directory containing symbolic links to the configurations
 in <code>sites-available</code>.</li>
+<li><code>conf.d</code> is another directory for reusable configuration files, included in
+the same place as <code>sites-enabled</code>.</li>
+<li><code>snippets</code> is a directory to store reusable configuration fragments, which
+other configuration files can include.</li>
 </ul>
 <h3 id="the-main-configuration-file">The main configuration file<a href="#the-main-configuration-file" aria-label="Link to heading 'The main configuration file'" data-heading-content="The main configuration file" class="anchor"></a></h3>
 <p>The main <code>/etc/nginx/nginx.conf</code> file is a tree-like structure formed of
@@ -282,9 +265,9 @@ configuration related to a specific area of concern.</p>
 <span class="l-line" data-line="15">    <span class="l-comment"># Another server...</span></span>
 <span class="l-line" data-line="16">  <span class="l-punctuation-bracket">}</span></span>
 <span class="l-line" data-line="17"><span class="l-punctuation-bracket">}</span></span></code></pre>
-<p>These contexts can contain a number of <a href="http://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a>.</p>
+<p>These contexts can contain a number of <a href="https://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a>.</p>
 <h3 id="includes">Includes<a href="#includes" aria-label="Link to heading 'Includes'" data-heading-content="Includes" class="anchor"></a></h3>
-<p>Nginx has an <a href="http://nginx.org/en/docs/ngx_core_module.html#include" target="_blank" rel="noopener noreferrer"><code>include</code> directive</a> which allows you to split the
+<p>Nginx has an <a href="https://nginx.org/en/docs/ngx_core_module.html#include" target="_blank" rel="noopener noreferrer"><code>include</code> directive</a> which allows you to split the
 configuration into several files instead of having one big file. As you can see,
 nginx already includes several other files out of the box:</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">$&gt; grep include /etc/nginx/nginx.conf</span>
@@ -293,15 +276,17 @@ nginx already includes several other files out of the box:</p>
 <span class="l-line" data-line="4">include /etc/nginx/conf.d/*.conf;</span>
 <span class="l-line" data-line="5">include /etc/nginx/sites-enabled/*;</span></code></pre>
 <p>The most important include is <code>/etc/nginx/sites-enabled/*</code>. Any file in there
-will be loaded in the <code>http</code> context, which means they a good place to define
+will be loaded in the <code>http</code> context, which makes it a good place to define
 <code>server</code> contexts in.</p>
 <h3 id="sites-available-vs-sites-enabled"><code>sites-available</code> vs. <code>sites-enabled</code><a href="#sites-available-vs-sites-enabled" aria-label="Link to heading 'sites-available vs. sites-enabled'" data-heading-content="sites-available vs. sites-enabled" class="anchor"></a></h3>
-<p>By convention, nginx has two directories for website configuration files:</p>
+<p>The nginx package of Ubuntu (and of Debian, which Ubuntu is based on) has two
+directories for website configuration files. This is a convention of these
+distributions:</p>
 <ul>
 <li>
 <p><strong><code>sites-available</code></strong> contains the actual configuration files. For example,
-you could create a file at <code>/etc/nginx/sites-available/example-site</code> to
-configure nginx to serve your website.</p>
+you could create a file at <code>/etc/nginx/sites-available/example</code> to configure
+nginx to serve your website.</p>
 <p>This directory is <strong>not</strong> included by nginx, so configuration files in it are
 not automatically picked up.</p>
 </li>
@@ -315,30 +300,50 @@ configuration files) are automatically loaded.</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">/etc/nginx/sites-enabled/example -&gt; /etc/nginx/sites-available/example</span></code></pre>
 <p>Things are set up like this so that you can work on configuration files in
 <code>sites-available</code> but not actually enable them until you put the symbolic link
-in <code>sites-enabled</code>. It also allows you to <strong>quickly disable</strong> a website without
-deleting its configuration file.</p>
-<p>For example, you could quickly disable a site by deleting its symbolic link:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">rm</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/example</span></span></code></pre>
-<p>And re-enable it whenever you want by re-creating the link:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Create a symbolic link in sites-enabled, pointing to sites-available:</span></span>
-<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">/etc/nginx/sites-available/example</span> <span class="l-variable-parameter">/etc/nginx/sites-enabled/</span></span></code></pre>
-<p>All this without touching the actual configuration file:
-<code>/etc/nginx/sites-available/example</code>.</p>
+in <code>sites-enabled</code>. It also allows you to <strong>quickly disable</strong> a website by
+removing its symbolic link, while its configuration file stays in
+<code>sites-available</code>, ready to be enabled again with a new link.</p>
 <h3 id="reloading-nginxs-configuration">Reloading nginx’s configuration<a href="#reloading-nginxs-configuration" aria-label="Link to heading 'Reloading nginx’s configuration'" data-heading-content="Reloading nginx’s configuration" class="anchor"></a></h3>
 <p>When you put new symbolic links in <code>sites-enabled</code>, or modify configurations in
 <code>sites-available</code>, nginx will not automatically reload them.</p>
-<p>You can restart nginx, which will make it reload the configuration, but you can
-also tell it to <strong>reload its configuration without shutting down</strong>. Nginx reacts
-to <a href="http://nginx.org/en/docs/control.html" target="_blank" rel="noopener noreferrer">some Unix signals</a> in certain ways. Notably, it reloads its
-configuration when receiving a <code>HUP</code> signal.</p>
-<p>You can send the signal to the nginx master process yourself with the <code>kill</code>
-command, or you can simply reload the associated systemd service, which will
-send the signal for you:</p>
+<p>First, check that the configuration is valid. The <code>nginx -t</code> command (as in
+<strong>t</strong>est) loads the whole configuration, including the files it includes, and
+reports any error:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">nginx:</span> <span class="l-variable-parameter">the</span> <span class="l-variable-parameter">configuration</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">/etc/nginx/nginx.conf</span> <span class="l-variable-parameter">syntax</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">ok</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">nginx:</span> <span class="l-variable-parameter">configuration</span> <span class="l-variable-parameter">file</span> <span class="l-variable-parameter">/etc/nginx/nginx.conf</span> <span class="l-variable-parameter">test</span> <span class="l-variable-parameter">is</span> <span class="l-variable-parameter">successful</span></span></code></pre>
+<p>You could then restart nginx, but you can also tell it to <strong>reload its
+configuration without shutting down</strong>. Nginx reacts to <a href="https://nginx.org/en/docs/control.html" target="_blank" rel="noopener noreferrer">some Unix
+signals</a> in certain ways. Notably, it reloads its configuration
+when its master process receives a <code>HUP</code> signal. The <code>nginx -s reload</code> command
+sends it for you:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-s</span> <span class="l-variable-parameter">reload</span></span></code></pre>
+<p>The systemd service of nginx runs that same command when you reload it. This is
+how you will reload nginx in this course, the same way you manage any other
+service:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">reload</span> <span class="l-variable-parameter">nginx</span></span></code></pre>
+<p>If the new configuration has an error, nginx keeps running with the old one.</p>
+<h3 id="how-nginx-chooses-a-configuration">How nginx chooses a configuration<a href="#how-nginx-chooses-a-configuration" aria-label="Link to heading 'How nginx chooses a configuration'" data-heading-content="How nginx chooses a configuration" class="anchor"></a></h3>
+<p>A request reaches nginx on a port, such as 80. Among the <code>server</code> blocks that
+<a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="noopener noreferrer"><code>listen</code></a> on that port, nginx picks the one whose
+<a href="https://nginx.org/en/docs/http/server_names.html" target="_blank" rel="noopener noreferrer"><code>server_name</code></a> is the name in the <code>Host</code> header of the
+request: the name of the site the browser was asked for. If none has that name,
+it uses the <strong>default server</strong> of that port: the one marked <code>default_server</code> in
+its <code>listen</code> directive, or else the first one. On Ubuntu, that is the <code>default</code>
+site, nginx’s welcome page.</p>
+<p>Within the chosen <code>server</code> block, nginx picks the
+<a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer"><code>location</code></a> block that matches the path of the
+request. A <code>location /api</code> block matches any path starting with <code>/api</code>, and when
+several such locations match, the one with the longest prefix wins. A location
+can also be a regular expression (<code>location ~* \.png$</code>). nginx checks these
+after the prefixes, in order, and the first one that matches wins over the
+longest prefix. <a href="https://nginx.org/en/docs/http/request_processing.html" target="_blank" rel="noopener noreferrer">How nginx processes a request</a> gives
+the exact rules.</p>
 <h3 id="common-nginx-directives">Common nginx directives<a href="#common-nginx-directives" aria-label="Link to heading 'Common nginx directives'" data-heading-content="Common nginx directives" class="anchor"></a></h3>
-<p>Nginx has many <a href="http://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a> that can be put in various contexts.</p>
-<p>These are the most commonly used ones in the <code>server</code> context,
-used to serve websites (static or dynamic):</p>
+<p>Nginx has many <a href="https://nginx.org/en/docs/dirindex.html" target="_blank" rel="noopener noreferrer">directives</a> that can be put in various
+contexts.</p>
+<p>These are the most commonly used ones in the <code>server</code> context, used to serve
+websites (static or dynamic):</p>
 <table>
 <thead>
 <tr>
@@ -349,81 +354,71 @@ used to serve websites (static or dynamic):</p>
 </thead>
 <tbody>
 <tr>
-<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="noopener noreferrer"><code>listen</code></a></td>
+<td align="left"><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="noopener noreferrer"><code>listen</code></a></td>
 <td align="left"><code>80</code>, <code>localhost:8000</code></td>
 <td align="left">Port (and optional address) on which to listen and accept requests from.</td>
 </tr>
 <tr>
-<td align="left"><a href="http://nginx.org/en/docs/http/server_names.html" target="_blank" rel="noopener noreferrer"><code>server_name</code></a></td>
-<td align="left"><code>example.com, www.example.com</code></td>
-<td align="left">Comma-separated list of domain names. Determine which <code>server</code> block handles client requests.</td>
+<td align="left"><a href="https://nginx.org/en/docs/http/server_names.html" target="_blank" rel="noopener noreferrer"><code>server_name</code></a></td>
+<td align="left"><code>example.com www.example.com</code></td>
+<td align="left">Space-separated list of domain names. Determine which <code>server</code> block handles client requests.</td>
 </tr>
 <tr>
-<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#root" target="_blank" rel="noopener noreferrer"><code>root</code></a></td>
-<td align="left"><code>/home/jde/www/site</code>, <code>/var/www/site</code></td>
+<td align="left"><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#root" target="_blank" rel="noopener noreferrer"><code>root</code></a></td>
+<td align="left"><code>/srv/site</code>, <code>/var/www/site</code></td>
 <td align="left">The root directory for requests.</td>
 </tr>
 <tr>
-<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_index_module.html#index" target="_blank" rel="noopener noreferrer"><code>index</code></a></td>
+<td align="left"><a href="https://nginx.org/en/docs/http/ngx_http_index_module.html#index" target="_blank" rel="noopener noreferrer"><code>index</code></a></td>
 <td align="left"><code>index.html</code></td>
 <td align="left">Define files that will be used as an index, i.e. served by default if there is no URL path.</td>
 </tr>
 <tr>
-<td align="left"><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer"><code>location</code></a></td>
+<td align="left"><a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_blank" rel="noopener noreferrer"><code>location</code></a></td>
 <td align="left"><code>/api</code>, <code>~* \.jpg$</code></td>
 <td align="left">Vary configuration based on the URL.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass" target="_blank" rel="noopener noreferrer"><code>proxy_pass</code></a></td>
+<td align="left"><code>http://127.0.0.1:3000</code></td>
+<td align="left">Forward requests to another server or application, as a reverse proxy.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://nginx.org/en/docs/ngx_core_module.html#include" target="_blank" rel="noopener noreferrer"><code>include</code></a></td>
+<td align="left"><code>proxy_params</code>, <code>snippets/x.conf</code></td>
+<td align="left">Load another configuration file at this point.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="nginx-configuration-examples">nginx configuration examples<a href="#nginx-configuration-examples" aria-label="Link to heading 'nginx configuration examples'" data-heading-content="nginx configuration examples" class="anchor"></a></h2>
-<!-- slide-front-matter class: center, middle -->
-<img class='w80' src='images/nginx-configuration-e45594b310b0abfe2ed494ea3b93ac1d.png' />
-<h3 id="how-to-use-these-examples">How to use these examples<a href="#how-to-use-these-examples" aria-label="Link to heading 'How to use these examples'" data-heading-content="How to use these examples" class="anchor"></a></h3>
-<p>Each of the following examples can be put in a separate file in the <code>/etc/nginx/sites-available</code> directory:</p>
-<ul>
-<li>
-<p>Copy a website configuration example.</p>
-</li>
-<li>
-<p>Save it in <code>/etc/nginx/sites-available/example</code>. (Replace <code>example</code> with
-whatever name you want to name your site.)</p>
-</li>
-<li>
-<p>Create a symbolic link to it in <code>/etc/nginx/sites-enabled</code> with this command
-(this is one command on 3 lines):</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ln</span> <span class="l-variable-parameter">-s</span> \</span>
-<span class="l-line" data-line="2">     <span class="l-variable-parameter">/etc/nginx/sites-available/example</span> \</span>
-<span class="l-line" data-line="3">     <span class="l-variable-parameter">/etc/nginx/sites-enabled/example</span></span></code></pre>
-</li>
-<li>
-<p>Check that you have not made a mistake:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span></span></code></pre>
-</li>
-<li>
-<p>Instruct nginx to reload its configuration with this command:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">nginx</span> <span class="l-variable-parameter">reload</span></span></code></pre>
-</li>
-</ul>
+<p>Each of the following examples configures one site. Put it in a file of its own
+in <code>/etc/nginx/sites-available</code>, enable it with a symbolic link in
+<code>/etc/nginx/sites-enabled</code>, then check and reload nginx’s configuration, as
+described above.</p>
 <h3 id="static-website-configuration">Static website configuration<a href="#static-website-configuration" aria-label="Link to heading 'Static website configuration'" data-heading-content="Static website configuration" class="anchor"></a></h3>
 <p>This configuration tells nginx to serve the static files in the directory
-<code>/home/jde/example</code> when a request arrives on port 80 for the domain
-<code>example.com</code>. This demonstrates nginx’s capabilities as a basic <strong>web server</strong>.</p>
+<code>/srv/example</code> when a request arrives on port 80 for the domain <code>example.com</code>.
+This demonstrates nginx’s capabilities as a basic <strong>web server</strong>.</p>
 <pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span></span>
 <span class="l-line" data-line="2">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span></span>
 <span class="l-line" data-line="3">  <span class="l-keyword">server_name</span> <span class="l-variable">example.com</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/home/jde/example</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/srv/example</span><span class="l-punctuation-delimiter">;</span></span>
 <span class="l-line" data-line="5">  <span class="l-keyword">index</span> <span class="l-variable">index.html</span><span class="l-punctuation-delimiter">;</span></span>
 <span class="l-line" data-line="6"></span>
 <span class="l-line" data-line="7">  <span class="l-comment"># Instruct the browser to cache images, icons,</span></span>
-<span class="l-line" data-line="8">  <span class="l-comment"># video, audio, HTC, etc for 30 days.</span></span>
-<span class="l-line" data-line="9">  <span class="l-keyword">location</span> <span class="l-operator">~*</span> <span class="l-string-special">\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|mp4|ogg|ogv|webm|htc)$ </span><span class="l-punctuation-bracket">{</span></span>
-<span class="l-line" data-line="10">    <span class="l-keyword">access_log</span> <span class="l-boolean">off</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="11">    <span class="l-keyword">add_header</span> <span class="l-variable">Cache-Control</span> <span class="l-string">&quot;max-age=2592000&quot;</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="12">  <span class="l-punctuation-bracket">}</span></span>
-<span class="l-line" data-line="13"><span class="l-punctuation-bracket">}</span></span></code></pre>
+<span class="l-line" data-line="8">  <span class="l-comment"># video and audio for 30 days, and do not log</span></span>
+<span class="l-line" data-line="9">  <span class="l-comment"># requests for them.</span></span>
+<span class="l-line" data-line="10">  <span class="l-keyword">location</span> <span class="l-operator">~*</span> <span class="l-string-special">\.(?:jpg|jpeg|gif|png|ico|gz|svg|mp4|ogg|ogv|webm)$ </span><span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="11">    <span class="l-keyword">access_log</span> <span class="l-boolean">off</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="12">    <span class="l-keyword">add_header</span> <span class="l-variable">Cache-Control</span> <span class="l-string">&quot;max-age=2592000&quot;</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="13">  <span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="14"><span class="l-punctuation-bracket">}</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>The <code>Cache-Control</code> header is sent to the client’s browser to tell it that these
 media files (<code>jpg</code>, <code>png</code>, etc) can be cached, i.e. there’s no need to
-redownload them the next time.</p></div></div>
+redownload them the next time.</p>
+<p><code>access_log off</code> tells nginx not to record these requests in its access log,
+<code>/var/log/nginx/access.log</code>, which would otherwise list every image of every
+page.</p></div></div>
 <h3 id="reverse-proxy-configuration">Reverse proxy configuration<a href="#reverse-proxy-configuration" aria-label="Link to heading 'Reverse proxy configuration'" data-heading-content="Reverse proxy configuration" class="anchor"></a></h3>
 <p>This configuration tells nginx to forward any request on port 80 for the domain
 <code>dynamic.example.com</code> to the application or server at address
@@ -431,24 +426,36 @@ redownload them the next time.</p></div></div>
 <pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span></span>
 <span class="l-line" data-line="2">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span></span>
 <span class="l-line" data-line="3">  <span class="l-keyword">server_name</span> <span class="l-variable">dynamic.example.com</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="4">  <span class="l-keyword">root</span> <span class="l-variable">/path/to/static/files</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="5"></span>
-<span class="l-line" data-line="6">  <span class="l-comment"># Proxy requests for dynamic content to another server/application.</span></span>
-<span class="l-line" data-line="7">  <span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span></span>
-<span class="l-line" data-line="8">    <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://127.0.0.1:3000</span><span class="l-punctuation-delimiter">;</span></span>
-<span class="l-line" data-line="9">  <span class="l-punctuation-bracket">}</span></span>
-<span class="l-line" data-line="10"><span class="l-punctuation-bracket">}</span></span></code></pre>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5">  <span class="l-comment"># Proxy requests for dynamic content to another server/application.</span></span>
+<span class="l-line" data-line="6">  <span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="7">    <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://127.0.0.1:3000</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="8">  <span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="9"><span class="l-punctuation-bracket">}</span></span></code></pre>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>In this example, the <code>proxy_pass</code> address is a local address, but it could well
 be the IP address of another server in an internal network.</p></div></div>
+<h4 id="when-the-application-does-not-answer">When the application does not answer<a href="#when-the-application-does-not-answer" aria-label="Link to heading 'When the application does not answer'" data-heading-content="When the application does not answer" class="anchor"></a></h4>
+<p>nginx and the application it proxies to are separate processes. When the
+application fails, nginx is still there to receive the request, and answers it
+with an error of its own:</p>
+<ul>
+<li><strong>502 Bad Gateway</strong> when nginx cannot get an answer from the application, for
+example because nothing listens at the address of <code>proxy_pass</code>: the
+application is stopped, or listens on another port.</li>
+<li><strong>504 Gateway Timeout</strong> when the application accepts the connection, but takes
+too long to answer: 60 seconds by default.</li>
+</ul>
+<p>nginx’s error log, <code>/var/log/nginx/error.log</code>, says what went wrong. The
+application the requests are proxied to is called the <strong>upstream</strong> there.</p>
 <h3 id="load-balancing-configuration">Load balancing configuration<a href="#load-balancing-configuration" aria-label="Link to heading 'Load balancing configuration'" data-heading-content="Load balancing configuration" class="anchor"></a></h3>
 <p>This configuration tells nginx to perform <strong>load balancing</strong> on incoming
-requests on port 80 for the domain <code>big.example.com</code>. With the <a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer"><code>upstream</code>
+requests on port 80 for the domain <code>big.example.com</code>. With the <a href="https://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer"><code>upstream</code>
 directive</a>, it defines a cluster of 4 servers among which to
 distribute the load.</p>
 <pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># Cluster of applications or servers to handle requests.</span></span>
 <span class="l-line" data-line="2"><span class="l-keyword">upstream</span> <span class="l-variable">big_server_com</span> <span class="l-variable">{</span></span>
-<span class="l-line" data-line="3">  <span class="l-variable">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.3<span class="l-variable">:8000</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span></span>
-<span class="l-line" data-line="4">  <span class="l-keyword">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.3<span class="l-variable">:8001</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span></span>
+<span class="l-line" data-line="3">  <span class="l-variable">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.<span class="l-number">1</span><span class="l-variable">:8000</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span></span>
+<span class="l-line" data-line="4">  <span class="l-keyword">server</span> <span class="l-number">127.0</span>.<span class="l-number">0</span>.<span class="l-number">1</span><span class="l-variable">:8001</span> <span class="l-variable">weight=5</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># local application</span></span>
 <span class="l-line" data-line="5">  <span class="l-keyword">server</span> <span class="l-number">10.192</span>.67.3<span class="l-variable">:8000</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># separate server</span></span>
 <span class="l-line" data-line="6">  <span class="l-keyword">server</span> <span class="l-number">10.192</span>.56.<span class="l-number">1</span>2<span class="l-variable">:8001</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># separate server</span></span>
 <span class="l-line" data-line="7"><span class="l-punctuation-bracket">}</span></span>
@@ -465,6 +472,41 @@ distribute the load.</p>
 <div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>By default, nginx uses a <a href="https://en.wikipedia.org/wiki/Weighted_round_robin" target="_blank" rel="noopener noreferrer">weighted round robin</a> algorithm
 to decide to which server each request is proxied. A <code>weight</code> parameter can be
 specified to direct more requests to specific servers.</p></div></div>
+<h2 id="appendix-what-the-application-sees">Appendix: what the application sees<a href="#appendix-what-the-application-sees" aria-label="Link to heading 'Appendix: what the application sees'" data-heading-content="Appendix: what the application sees" class="anchor"></a></h2>
+<p>For the application behind it, nginx is a client like any other. Every request
+the application receives comes from nginx, over a connection nginx opened. With
+the <a href="#reverse-proxy-configuration">reverse proxy configuration</a> above:</p>
+<ul>
+<li>The address of the client is <code>127.0.0.1</code>, nginx’s own, not the address of the
+browser.</li>
+<li>The <code>Host</code> header is <code>127.0.0.1:3000</code>, the address of <code>proxy_pass</code>, not the
+name the browser was asked for.</li>
+<li>Nothing says whether the browser used HTTP or HTTPS.</li>
+</ul>
+<p>An application that needs the original values, to record the address of its
+visitors or to build links with its own name, must be told them. The
+<a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header" target="_blank" rel="noopener noreferrer"><code>proxy_set_header</code></a> directive adds or replaces a header
+of the requests nginx forwards. Ubuntu’s nginx package comes with a file that
+sets the usual ones, <code>/etc/nginx/proxy_params</code>:</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">proxy_set_header</span> <span class="l-variable">Host</span> <span class="l-variable">$host$is_request_port$request_port</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="2"><span class="l-keyword">proxy_set_header</span> <span class="l-variable">X-Real-IP</span> <span class="l-variable">$remote_addr</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3"><span class="l-keyword">proxy_set_header</span> <span class="l-variable">X-Forwarded-For</span> <span class="l-variable">$proxy_add_x_forwarded_for</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="4"><span class="l-keyword">proxy_set_header</span> <span class="l-variable">X-Forwarded-Proto</span> <span class="l-variable">$scheme</span><span class="l-punctuation-delimiter">;</span></span></code></pre>
+<ul>
+<li><code>Host</code> passes on the name the browser asked for.</li>
+<li><code>X-Real-IP</code> and <code>X-Forwarded-For</code> give the address of the client. The latter
+is a list, which each proxy along the way adds to.</li>
+<li><code>X-Forwarded-Proto</code> says whether the browser used <code>http</code> or <code>https</code>.</li>
+</ul>
+<p>Include it in the <code>location</code> that proxies requests:</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="2">  <span class="l-keyword">include</span> <span class="l-string-special-path">proxy_params</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3">  <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://127.0.0.1:3000</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="4"><span class="l-punctuation-bracket">}</span></span></code></pre>
+<p>The application still has to read these headers, and should only trust them
+when the request comes from the proxy: any client can send an <code>X-Forwarded-For</code>
+header of its own. Web frameworks usually have a setting for this, often called
+“trust proxy”.</p>
 <h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Proxy_server" target="_blank" rel="noopener noreferrer">Proxy server</a>
@@ -479,14 +521,14 @@ specified to direct more requests to specific servers.</p></div></div>
 </li>
 </ul>
 </li>
-<li><a href="http://nginx.org/en/docs/" target="_blank" rel="noopener noreferrer">Nginx Documentation</a>
+<li><a href="https://nginx.org/en/docs/" target="_blank" rel="noopener noreferrer">Nginx Documentation</a>
 <ul>
-<li><a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener noreferrer">Nginx Beginner’s Guide</a></li>
+<li><a href="https://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener noreferrer">Nginx Beginner’s Guide</a></li>
+<li><a href="https://nginx.org/en/docs/http/request_processing.html" target="_blank" rel="noopener noreferrer">How nginx processes a request</a></li>
 </ul>
 </li>
 <li><a href="https://www.digitalocean.com/" target="_blank" rel="noopener noreferrer">Digital Ocean</a>
 <ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04" target="_blank" rel="noopener noreferrer">How to Install Nginx on Ubuntu 18.04</a></li>
 <li><a href="https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts" target="_blank" rel="noopener noreferrer">Understanding the Nginx Configuration File Structure and Configuration Contexts</a></li>
 </ul>
 </li>
@@ -510,15 +552,7 @@ specified to direct more requests to specific servers.</p></div></div>
     <a href="#presentation">Presentation</a>
     
   </li><li class="toc-entry toc-h2">
-    <a href="#installing-nginx">Installing nginx</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h3">
-    <a href="#making-sure-its-working">Making sure it’s working</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h2">
-    <a href="#nginx-configuration">Nginx configuration</a>
+    <a href="#nginx-configuration">nginx configuration</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
     <a href="#the-main-configuration-file">The main configuration file</a>
@@ -533,6 +567,9 @@ specified to direct more requests to specific servers.</p></div></div>
     <a href="#reloading-nginxs-configuration">Reloading nginx’s configuration</a>
     
   </li><li class="toc-entry toc-h3">
+    <a href="#how-nginx-chooses-a-configuration">How nginx chooses a configuration</a>
+    
+  </li><li class="toc-entry toc-h3">
     <a href="#common-nginx-directives">Common nginx directives</a>
     
   </li>
@@ -541,19 +578,24 @@ specified to direct more requests to specific servers.</p></div></div>
     <a href="#nginx-configuration-examples">nginx configuration examples</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#how-to-use-these-examples">How to use these examples</a>
-    
-  </li><li class="toc-entry toc-h3">
     <a href="#static-website-configuration">Static website configuration</a>
     
   </li><li class="toc-entry toc-h3">
     <a href="#reverse-proxy-configuration">Reverse proxy configuration</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h4">
+    <a href="#when-the-application-does-not-answer">When the application does not answer</a>
     
+  </li>
+</ul>
   </li><li class="toc-entry toc-h3">
     <a href="#load-balancing-configuration">Load balancing configuration</a>
     
   </li>
 </ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#appendix-what-the-application-sees">Appendix: what the application sees</a>
+    
   </li><li class="toc-entry toc-h2">
     <a href="#references">References</a>
     
@@ -571,7 +613,7 @@ specified to direct more requests to specific servers.</p></div></div>
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
         </a>
-        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/509-reverse-proxy/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/509-reverse-proxy/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -999,19 +1041,19 @@ specified to direct more requests to specific servers.</p></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
-        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/511-nginx-reverse-proxy-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a multi-component web application with nginx</span>
+  <span>Deploy a web application with nginx as a reverse proxy</span>
 </span>
           
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/512-brewscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
 </span>
           
           
@@ -1037,10 +1079,10 @@ specified to direct more requests to specific servers.</p></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/515-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Horizontally scale a web application with nginx as a load balancer</span>
+  <span>Deploy a multi-component web application with nginx</span>
 </span>
           
           
@@ -1273,7 +1315,7 @@ specified to direct more requests to specific servers.</p></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d504faf</span>
+        <span class="tooltip-content">main@f9fa1a7</span>
         <span class="font-title">0.1.0</span>
       </span>
       

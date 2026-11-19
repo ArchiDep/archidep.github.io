@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Domain Name System (DNS) · ArchiDep</title>
-<meta name="description" content="Learn the basics of the Domain Name System (DNS) and configure a domain name for your server with Gandi.net." />
+<meta name="description" content="Learn the basics of the Domain Name System (DNS), and how a DNS zone maps domain names to IP addresses." />
 <link rel="canonical" href="https://archidep.ch/2026/course/507-dns/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content="Domain Name System (DNS)" />
-<meta property="og:description" content="Learn the basics of the Domain Name System (DNS) and configure a domain name for your server with Gandi.net." />
+<meta property="og:description" content="Learn the basics of the Domain Name System (DNS), and how a DNS zone maps domain names to IP addresses." />
 <meta property="og:url" content="https://archidep.ch/2026/course/507-dns/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-55c61a8bd58261434279fecf49688964.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e0bad4c36d5f649315449dc000cc495f.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-bc601ec56f4b369dad749329656ae25b.js" defer>
+    <script src="/2026/assets/course/course-e11bec045207e8c9aabcf134d0bd2695.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/507-dns/subject.md">Rev: d504faf9db2c04eccb2b800a981590c1d489cf96</a>
+      <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/507-dns/subject.md">Rev: f9fa1a75921d18b087ca20af4580b99a25ed26fc</a>
     </li>
   </ul>
 </div>
@@ -120,8 +120,8 @@
   Domain Name System (DNS)
 </h1>
 
-      <div class="my-4"><p>Learn the basics of the <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">Domain Name System (DNS)</a> and configure a domain
-name for your server with <a href="https://www.gandi.net/" target="_blank" rel="noopener noreferrer">Gandi.net</a>.</p></div>
+      <div class="my-4"><p>Learn the basics of the <a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">Domain Name System (DNS)</a>, and how a DNS zone
+maps domain names to IP addresses.</p></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
         <input type="checkbox">
@@ -152,6 +152,9 @@ name for your server with <a href="https://www.gandi.net/" target="_blank" rel="
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#resolving-a-domain-name">Resolving a domain name</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#managing-dns-on-gandinet">Managing DNS on Gandi.net</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -159,17 +162,6 @@ name for your server with <a href="https://www.gandi.net/" target="_blank" rel="
     
   </li><li class="toc-entry toc-h3">
     <a href="#configuring-a-domain">Configuring a domain</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#configuring-the-domains-dns-zone">Configuring the domain’s DNS zone</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#seeing-the-raw-dns-zone-text">Seeing the raw DNS zone text</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#adding-a-dns-record">Adding a DNS record</a>
     
   </li>
 </ul>
@@ -200,12 +192,7 @@ name for your server with <a href="https://www.gandi.net/" target="_blank" rel="
   <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/507-dns/slides/?view=scroll" title="Slides"></iframe>
 </div>
 
-      <p><strong>You will need</strong></p>
-<ul>
-<li>A server with a public IP address</li>
-<li>A Gandi account that is the administrator or technical contact for a domain</li>
-</ul>
-<p><strong>Recommended reading</strong></p>
+      <p><strong>Recommended reading</strong></p>
 <ul>
 <li><a href="/2026/course/406-unix-networking/">Unix Networking</a></li>
 </ul>
@@ -215,13 +202,14 @@ administrative responsibility has been delegated to a single manager.</p>
 <h3 id="dns-zone-file">DNS zone file<a href="#dns-zone-file" aria-label="Link to heading 'DNS zone file'" data-heading-content="DNS zone file" class="anchor"></a></h3>
 <p>As the manager of a DNS zone, you can modify the <a href="https://en.wikipedia.org/wiki/Zone_file" target="_blank" rel="noopener noreferrer">DNS zone file</a>,
 a text file which describes that zone. It contains <strong>mappings between domain
-name and IP addresses</strong> and other resources, in the form of resource records.</p>
+names and IP addresses</strong> and other resources, in the form of resource records.</p>
 <p>A <strong>resource record</strong> is described by one line in the following format:</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">name   ttl   record class   record type   record data</span></code></pre>
 <p>The meaning of each field is:</p>
 <ul>
 <li><code>name</code> - Subdomain name (or <code>@</code> for the domain itself).</li>
-<li><code>ttl</code> - Time during which DNS resolution of this record should be cached.</li>
+<li><code>ttl</code> - Time to live: how many seconds the answer for this record may be
+cached.</li>
 <li><code>record class</code> - Namespace of the record information, usually <code>IN</code> for the Internet.</li>
 <li><code>record type</code> - Type of record.</li>
 <li><code>record data</code> - Record data (depending on the record type).</li>
@@ -259,6 +247,11 @@ most common:</p>
 <td align="left">Maps a domain name to a list of message transfer agents.</td>
 </tr>
 <tr>
+<td align="left"><code>NS</code></td>
+<td align="left">Name server record</td>
+<td align="left">Names the DNS servers that answer for a zone.</td>
+</tr>
+<tr>
 <td align="left"><code>SOA</code></td>
 <td align="left">Start of authority</td>
 <td align="left">Authoritative information about the zone, e.g. primary name server &amp; email of the domain administrator.</td>
@@ -271,7 +264,8 @@ most common:</p>
 </tbody>
 </table>
 <h3 id="dns-record-example">DNS record example<a href="#dns-record-example" aria-label="Link to heading 'DNS record example'" data-heading-content="DNS record example" class="anchor"></a></h3>
-<p>Let’s look at a real example which you might find in a zone file:</p>
+<p>Let’s look at a real example which you might find in a zone file. The first
+line only names the fields: it is not part of the zone file.</p>
 <pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">name   ttl   record class   record type   record data</span>
 <span class="l-line" data-line="2">@      1800  IN             A             18.213.200.101</span></code></pre>
 <p>Assuming this is the zone file for the domain <code>example.com</code>,
@@ -298,8 +292,31 @@ address <code>3.120.180.32</code>.</li>
 <li>It defines a cache time of 300 seconds (5 minutes) during which clients will
 not perform DNS resolution again if they have the mapping already.</li>
 </ul>
+<h2 id="resolving-a-domain-name">Resolving a domain name<a href="#resolving-a-domain-name" aria-label="Link to heading 'Resolving a domain name'" data-heading-content="Resolving a domain name" class="anchor"></a></h2>
+<p>You have probably seen how DNS resolution works before. This is a reminder,
+since it explains why the TTL of a record matters.</p>
+<p>When your browser needs the IP address of <code>blog.example.com</code>:</p>
+<ol>
+<li>Your computer asks a <strong>DNS resolver</strong>, a server whose job is to find the
+answer for you. It is usually run by your Internet provider, or by the
+organization whose network you are on.</li>
+<li>If the resolver has no answer in its cache, it asks one of the <strong>root name
+servers</strong>. They do not know the address of <code>blog.example.com</code>, but they know
+which name servers are responsible for <code>.com</code>.</li>
+<li>The resolver asks one of the name servers of <code>.com</code>. They do not know the
+address either, but they know which name servers are responsible for the
+zone of <code>example.com</code>: the zone of <code>.com</code> has <code>NS</code> records for it.</li>
+<li>The resolver asks one of the name servers of <code>example.com</code>. They are
+<strong>authoritative</strong> for that zone: they answer from its zone file, with the <code>A</code>
+record of <code>blog.example.com</code>.</li>
+<li>The resolver gives the answer to your computer.</li>
+</ol>
+<p>Each answer is kept in a cache for as long as its TTL allows: by the resolver,
+and also by your computer. Until it expires, the next question for the same name
+is answered from a cache, without asking the authoritative name servers again.
+This makes the DNS fast, and it is why a changed record takes time to be seen by
+everyone: a cache may still hold the old answer until its TTL runs out.</p>
 <h2 id="managing-dns-on-gandinet">Managing DNS on Gandi.net<a href="#managing-dns-on-gandinet" aria-label="Link to heading 'Managing DNS on Gandi.net'" data-heading-content="Managing DNS on Gandi.net" class="anchor"></a></h2>
-<!-- slide-front-matter class: center, middle -->
 <img class='w80' src='images/gandi-0a637af781c36a4dfefcd80da5fd6884.jpg' />
 <h3 id="buying-a-domain-name">Buying a domain name<a href="#buying-a-domain-name" aria-label="Link to heading 'Buying a domain name'" data-heading-content="Buying a domain name" class="anchor"></a></h3>
 <p>Most web hosting companies like <a href="https://www.gandi.net/" target="_blank" rel="noopener noreferrer">Gandi</a> allow you to easily check whether a domain name is available,
@@ -307,22 +324,9 @@ i.e. whether there is already a manager for that subset of the DNS hierarchy, or
 <p>Check out <a href="https://shop.gandi.net/" target="_blank" rel="noopener noreferrer">their shop</a> to see if your dream domain name is available.</p>
 <p class='center'><img class='w70' src='images/gandi-shop-06cc2babd2605f2d78e339241164151b.png' /></p>
 <h3 id="configuring-a-domain">Configuring a domain<a href="#configuring-a-domain" aria-label="Link to heading 'Configuring a domain'" data-heading-content="Configuring a domain" class="anchor"></a></h3>
-<p>Once you have bought a domain name, you access its management interface from your account:</p>
-<p class='center'><img class='w80' src='images/gandi-domains-46ad30a4e1dd19d05778ac3e3d066407.png' /></p>
-<h3 id="configuring-the-domains-dns-zone">Configuring the domain’s DNS zone<a href="#configuring-the-domains-dns-zone" aria-label="Link to heading 'Configuring the domain’s DNS zone'" data-heading-content="Configuring the domain’s DNS zone" class="anchor"></a></h3>
-<p>Gandi offers many services such as email accounts or SSL certificates.
-The one that interests us is the management of the domain’s <strong>DNS zone</strong>:</p>
-<p class='center'><img class='w80' src='images/gandi-dns-zone-b37c1919df1c513adf567de2c53276c2.png' /></p>
-<blockquote>
-<p>By default, Gandi displays the DNS zone in a human-readable table.</p>
-</blockquote>
-<h4 id="seeing-the-raw-dns-zone-text">Seeing the raw DNS zone text<a href="#seeing-the-raw-dns-zone-text" aria-label="Link to heading 'Seeing the raw DNS zone text'" data-heading-content="Seeing the raw DNS zone text" class="anchor"></a></h4>
-<p>Advanced users can also see and edit the real DNS zone file:</p>
-<p class='center'><img class='w80' src='images/gandi-dns-zone-text-1f8d5930a9ab78d6660bd4a504381343.png' /></p>
-<h3 id="adding-a-dns-record">Adding a DNS record<a href="#adding-a-dns-record" aria-label="Link to heading 'Adding a DNS record'" data-heading-content="Adding a DNS record" class="anchor"></a></h3>
-<p>The interface allows you to very easily add a DNS record.
-For example, this screenshot shows how to add an <code>example</code> subdomain pointing to the IP address <code>1.1.1.1</code>:</p>
-<p class='center'><img class='w75' src='images/gandi-dns-record-003489c1a3dbcfa6111b5b48d9bb8fbc.png' /></p>
+<p>Once you have bought a domain name, you access its management interface from
+your account. There, you can manage the domain’s DNS zone: you will do so in the
+<a href="/2026/course/508-dns-config/">next exercise</a>.</p>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -359,6 +363,9 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#resolving-a-domain-name">Resolving a domain name</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#managing-dns-on-gandinet">Managing DNS on Gandi.net</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
@@ -366,17 +373,6 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
     
   </li><li class="toc-entry toc-h3">
     <a href="#configuring-a-domain">Configuring a domain</a>
-    
-  </li><li class="toc-entry toc-h3">
-    <a href="#configuring-the-domains-dns-zone">Configuring the domain’s DNS zone</a>
-    <ul class="section-nav">
-  <li class="toc-entry toc-h4">
-    <a href="#seeing-the-raw-dns-zone-text">Seeing the raw DNS zone text</a>
-    
-  </li>
-</ul>
-  </li><li class="toc-entry toc-h3">
-    <a href="#adding-a-dns-record">Adding a DNS record</a>
     
   </li>
 </ul>
@@ -394,7 +390,7 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
 </svg>
         </a>
-        <a href="https://github.com/ArchiDep/website/blob/d504faf9db2c04eccb2b800a981590c1d489cf96/course/chapters/507-dns/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/f9fa1a75921d18b087ca20af4580b99a25ed26fc/course/chapters/507-dns/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -822,19 +818,19 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
-        <a href="/2026/course/511-revprod-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/511-nginx-reverse-proxy-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a multi-component web application with nginx</span>
+  <span>Deploy a web application with nginx as a reverse proxy</span>
 </span>
           
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/512-nginx-php-fpm-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/512-brewscale-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Deploy a PHP website with nginx and the FastCGI process manager</span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
 </span>
           
           
@@ -860,10 +856,10 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-future">
-        <a href="/2026/course/515-fibscale-deployment/" target="_self" class="flex items-center gap-2">
+        <a href="/2026/course/515-revprod-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Horizontally scale a web application with nginx as a load balancer</span>
+  <span>Deploy a multi-component web application with nginx</span>
 </span>
           
           
@@ -1096,7 +1092,7 @@ For example, this screenshot shows how to add an <code>example</code> subdomain 
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d504faf</span>
+        <span class="tooltip-content">main@f9fa1a7</span>
         <span class="font-title">0.1.0</span>
       </span>
       
