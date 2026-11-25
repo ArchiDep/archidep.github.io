@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/2026/assets/course/slides-940eb979bd223be9b42860b5ee22039e.css">
-    <link rel="stylesheet" href="/2026/assets/theme/slides-d8ff4936beee13d2e66f63270466071a.css">
+    <link rel="stylesheet" href="/2026/assets/theme/slides-029cfde3e58e2a9d97005adc3dd43651.css">
   </head>
   <body data-theme="light">
     <div class="reveal">
@@ -29,8 +29,13 @@ Architecture & Deployment <!-- .element: class="subtitle" -->
 
 **Notes:**
 
-Learn about SSL certificates, how to create your own and how to request some
-from [Let's Encrypt](https://letsencrypt.org/).
+Learn what a TLS certificate is, why a browser trusts one, and how to obtain one
+for free from [Let's Encrypt](https://letsencrypt.org/).
+
+**Recommended reading**
+
+- [Secure Shell (SSH)](/2026/course/103-ssh/)
+- [Reverse Proxying](/2026/course/509-reverse-proxy/)
 
 ---
 
@@ -38,14 +43,28 @@ from [Let's Encrypt](https://letsencrypt.org/).
 
 <!-- slide-front-matter class: center, middle -->
 
-<img class='w-40' src='../images/certificate-title-f3b70277c99ea8c79bceae516c310dfa.png' />
+<img class='w-40' src='images/certificate-title-f3b70277c99ea8c79bceae516c310dfa.png' />
 
 ---
 
 ## Public key certificates
 
 A [**public key certificate**](https://en.wikipedia.org/wiki/Public_key_certificate) is an electronic document
-that proves the ownership of a public key using [public key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography).
+that proves the ownership of a public key using [public key
+cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography).
+
+**Notes:**
+
+A certificate binds a **name** to a **public key**. Someone else, the
+**issuer**, vouches for that binding by signing the certificate.
+
+A certificate contains:
+
+- The name or names it is valid for.
+- The owner's public key.
+- The dates between which it is valid.
+- The issuer's name.
+- The issuer's digital signature of all of the above.
 
 ---
 
@@ -63,15 +82,15 @@ owns a public key. Its validity is linked to one or multiple **domain names**.
 
 **Notes:**
 
-SSL is the original **S**ecure **S**ockets **L**ayer protocol first published in
-1995 and which is now deprecated. TLS is the newer and more secure
-[**T**ransport **L**ayer **S**ecurity](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol first published in 1999,
-its latest version being TLS 1.3 published in 2018 (at the time of writing).
-Although TLS is used today, TLS certificates are sometimes still called "SSL
-certificates".
+SSL is the original **S**ecure **S**ockets **L**ayer protocol, first published
+in 1995 and now deprecated. TLS is the newer and more secure [**T**ransport
+**L**ayer **S**ecurity](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol, first published in 1999. Its latest
+version is TLS 1.3, published in 2018. Although TLS is used today, TLS
+certificates are often still called "SSL certificates".
 
-A TLS certificate can be linked to one or multiple domain names. It can also be
-a wildcard certificate valid for all subdomains of a given domain.
+A TLS certificate can be valid for one or multiple domain names. It can also be
+a wildcard certificate, valid for all the subdomains of a domain:
+`*.example.com` is valid for `foo.example.com` and `bar.example.com`.
 
 ---
 
@@ -80,142 +99,106 @@ a wildcard certificate valid for all subdomains of a given domain.
 A TLS certificate is one of the components that allows a server to **communicate
 securely over HTTPS** using the TLS protocol.
 
-<img class='w-7/10' src='../images/certificate-20ec73d73104f72a0ee52cfdf58661fd.png' />
+<img class='w-7/10' src='images/certificate-20ec73d73104f72a0ee52cfdf58661fd.png' />
 
 **Notes:**
 
-- The client and server agree on a [cipher suite](https://en.wikipedia.org/wiki/Cipher_suite) (cipher and hash
-  functions) they both support.
-- The server provides its TLS certificate and the client confirms its validity.
-- A symmetric encryption key is exchanged using the asymmetric [Diffie-Hellman
-  key exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange).
-- The client and server can now communicate securely by using symmetric
-  encryption to encrypt all traffic.
+When a browser connects to a server over HTTPS, simplified:
+
+- The browser and the server agree on a [cipher suite](https://en.wikipedia.org/wiki/Cipher_suite): the
+  algorithms they both support.
+- They agree on a shared secret key with a [Diffie-Hellman key exchange](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange), as
+  SSH does. The key itself never travels over the network.
+- The server sends its certificate, and **signs** the handshake with its
+  private key.
+- The browser checks the certificate: the name, the dates, and the issuer's
+  signature. It then checks the server's signature with the public key in the
+  certificate.
+- Both use the shared key to encrypt all traffic with fast symmetric
+  encryption.
+
+---
+
+### A certificate is public
+
+Anyone can download a server's certificate. What proves the server's identity is
+its **private key**, which never leaves the server.
+
+**Notes:**
+
+A certificate is not a secret: the server sends it to every client. An attacker
+can copy it and send it to your browser, but cannot sign the handshake without
+the private key that goes with it. Your browser checks that signature with the
+public key in the certificate, so the copied certificate is useless.
+
+This is the same mechanism as SSH's host key: the server signs with its private
+key, the client checks with the public key. The difference is how the client
+knows that the public key is the right one. In SSH, you checked the
+fingerprint yourself. In TLS, a certificate authority vouches for it.
 
 ---
 
 ## Validity of TLS certificates
 
-Your browser will not simply accept any TLS certificate.
-You can generate your own TLS certificate to test this.
+Your browser will not simply accept any TLS certificate. You can generate your
+own TLS certificate to test this.
 
 --v
 
-### Generating a TLS certificate
+### Generating a self-signed certificate
 
 ```bash
-$> mkdir ~/certificate
-$> cd ~/certificate
-$> openssl req -newkey rsa:2048 -nodes -keyout key.pem \
-   -x509 -days 365 -out certificate.pem
-
-Generating a 2048 bit RSA private key
-...
-Country Name (2 letter code) [AU]:CH
-State or Province Name (full name) [Some-State]:Vaud
-Locality Name (eg, city) []:Yverdon
-Organization Name (eg, company) [...]:HEIG-VD
-Organizational Unit Name (eg, section) []:
-Common Name (e.g. server FQDN or YOUR name) []:jde.archidep.ch
-Email Address []:john.doe@heig-vd.ch
+$> sudo openssl req -x509 -newkey rsa:2048 -noenc -days 365 \
+     -subj "/CN=clock.jde.archidep2.ch" \
+     -addext "subjectAltName=DNS:clock.jde.archidep2.ch" \
+     -keyout /etc/ssl/private/clock.jde.archidep2.ch.key \
+     -out /etc/ssl/certs/clock.jde.archidep2.ch.pem
 ```
-
---v
-
-### What's in a TLS certificate?
-
-```bash
-$> ls
-certificate.pem key.pem
-
-$> cat certificate/certificate.pem
------BEGIN CERTIFICATE-----
-MIID7jCCAtagAwIBAgIJAPPUhT7FLeLRMA0GCSqGSIb3DQEBCwUAMIGLMQswCQYD
-VQQGEwJDSDENMAsGA1UECAwEVmF1ZDEQMA4GA1UEBwwHWXZlcmRvbjEQMA4GA1UE
-...
-```
-
-**Notes:**
-
-The previous command generated two files:
-
-- A **TLS certificate** in the `certificate.pem` file.
-- A **private key** in the `key.pem` file.
-
-The `certificate.pem` file is simply a Base64-encoded plain text file.
-
---v
-
-### Decode a TLS certificate
-
-```bash
-$> openssl x509 -text -noout -in certificate.pem
-Certificate:
-    Data:
-        Version: 3 (0x2)
-        Serial Number:
-            ef:ea:3a:93:c5:74:a8:e7
-    Signature Algorithm: sha256WithRSAEncryption
-        Issuer: C = CH, ST = Vaud, L = Yverdon, O = HEIG-VD,
-                CN = jde.archidep.ch,
-                emailAddress = jde@heig-vd.ch
-        Validity
-            Not Before: Jan 15 14:28:11 2019 GMT
-            Not After : Jan 15 14:28:11 2020 GMT
-...
-```
-
-**Notes:**
-
-A TLS certificate is not encrypted. You can decode its contents with the
-following command.
-
---v
-
-### Configure nginx to use a TLS certificate
 
 ```nginx
-server {
-  listen 80;
-  listen 443 ssl;
-  ssl_certificate /home/jde/certificate/certificate.pem;
-  ssl_certificate_key /home/jde/certificate/key.pem;
-  ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers HIGH:!aNULL:!MD5;
-
-  server_name jde.archidep.ch;
-  root /home/jde/my-website;
-  index index.html;
-}
+listen 443 ssl;
+ssl_certificate /etc/ssl/certs/clock.jde.archidep2.ch.pem;
+ssl_certificate_key /etc/ssl/private/clock.jde.archidep2.ch.key;
 ```
-
-See Mozilla's [SSL Configuration Generator](https://ssl-config.mozilla.org).
 
 **Notes:**
 
-Assuming you already have a website deployed with nginx, add the following lines
-to its configuration file. Reload nginx's configuration with `sudo systemctl
-reload nginx`.
+This command generates a new key pair and a certificate for the public key,
+signed with the private key of the same pair: a **self-signed** certificate.
 
-- The `listen 443 ssl` directive instructs nginx to also listen on port 443
-  (HTTPS) for this site.
-- The [`ssl_certificate`](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate) directive makes it
-  serve the specified TLS certificate file to clients.
-- The [`ssl_certificate_key`](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate_key) directive
-  makes it use the private key in the specified file to perform the asymmetric
-  cryptography in the TLS protocol.
+- `-x509` makes a certificate rather than a request for one.
+- `-newkey rsa:2048` generates a new 2048-bit RSA key pair.
+- `-noenc` does not encrypt the private key with a password, so that nginx can
+  read it without asking anyone for one.
+- `-days 365` makes the certificate valid for a year.
+- `-subj` and `-addext` give the name the certificate is valid for. Browsers
+  read the name in the _subject alternative name_ extension.
+- `-keyout` and `-out` are where the private key and the certificate are saved.
+
+`/etc/ssl/private` is only accessible to `root`, hence the `sudo`: nobody else
+may read the private key. The certificate goes in `/etc/ssl/certs`, which
+everyone may read, since a certificate is public anyway.
+
+The second block holds the lines to add to the `server` block of a site's nginx
+configuration, to serve it over HTTPS with this certificate:
+
+- `listen 443 ssl` makes nginx listen on port 443, the port of HTTPS, and use
+  TLS on it.
+- `ssl_certificate` is the certificate nginx sends to the browser.
+- `ssl_certificate_key` is the private key nginx signs with. nginx reads it when
+  it starts, as `root`.
 
 --v
 
 ### Invalid certificate authority
 
-<img class='w-8/10' src='../images/invalid-certificate-046b32aef411100695311b5bb6307442.png' />
+<img class='w-8/10' src='images/invalid-certificate-046b32aef411100695311b5bb6307442.png' />
 
 **Notes:**
 
-If you access your website with this configuration, Chrome indicates that there
-is an error of type `NET::ERR_CERT_AUTHORITY_INVALID`. This means that there is
-no valid **certificate authority** that guarantees that this certificate is
+If you configure nginx to serve a site over HTTPS with this certificate and visit
+it, Chrome shows an error of type `NET::ERR_CERT_AUTHORITY_INVALID`. This means
+that no valid **certificate authority** guarantees that this certificate is
 valid.
 
 --v
@@ -224,14 +207,14 @@ valid.
 
 This **self-signed root certificate** is invalid.
 
-<img class='w-8/10' src='../images/invalid-certificate-details-4f8f5fca2deebddc28d8bbc02ff3f048.png' />
+<img class='w-8/10' src='images/invalid-certificate-details-4f8f5fca2deebddc28d8bbc02ff3f048.png' />
 
 **Notes:**
 
-The certificate details indicates that it is a **root certificate**, meaning
+The certificate details indicate that it is a **root certificate**, meaning
 that no other certificate authority guarantees its validity. Since you signed it
-yourself (by running the earlier `openssl req` command), and you are not a valid
-certificate authority, it is considered invalid by your browser.
+yourself, and you are not a trusted certificate authority, your browser
+considers it invalid.
 
 ---
 
@@ -244,9 +227,9 @@ authority**. This signature is a [digital signature](https://en.wikipedia.org/wi
 **Notes:**
 
 - The certificate authority has a **private and public key pair**.
-- They will **use their private key to create a signature** of your certificate.
-- They will **distribute their public key** so that anyone in possession of your
-  certificate and their public key can **verify the signature**.
+- It **uses its private key to sign** your certificate.
+- It **distributes its public key** so that anyone in possession of your
+  certificate and its public key can **verify the signature**.
 
 ---
 
@@ -260,22 +243,24 @@ certificate of its own**.
 
 ## Chain of trust
 
-<img class='w-7/10' src='../images/chain-of-trust-20d68775c24f3d2bd768c0bc1bb9c662.png' />
+<img class='w-7/10' src='images/chain-of-trust-20d68775c24f3d2bd768c0bc1bb9c662.png' />
 
 **Notes:**
 
-Your TLS certificate and various other public key certificates are thus linked
-together in a **chain of trust**.
+Your TLS certificate and other public key certificates are thus linked together
+in a **chain of trust**.
 
-Each certificate, starting with your own **end-user certificate** (or end-entity
-certificate) is signed by the next certificate authority, proving its validity
-to the client. This is a type of [public key infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure).
+Each certificate, starting with your own **end-entity certificate**, is signed
+by the next certificate authority, proving its validity to the client. This is a
+type of [public key infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure).
+
+_Diagram by Yanpas, CC BY-SA 4.0, from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Chain_of_trust.svg)_
 
 ---
 
 ### Viewing a certificate's chain of trust
 
-<img class='w-7/10' src='../images/certificate-details-1705e43470963ec00df5a01c13fcf11e.png' />
+<img class='w-7/10' src='images/certificate-details-1705e43470963ec00df5a01c13fcf11e.png' />
 
 **Notes:**
 
@@ -285,18 +270,23 @@ Browsers allow you to view a TLS certificate's chain of trust.
 
 ### Intermediate certificates
 
-<img class='w-7/10' src='../images/intermediate-certificate-details-e7cbfb97cd871b026fab30e9500e8ad3.png' />
+<img class='w-7/10' src='images/intermediate-certificate-details-e7cbfb97cd871b026fab30e9500e8ad3.png' />
 
 **Notes:**
 
 In this example, there are 3 certificates in the chain, but there could be more.
 All certificates in the middle are **intermediate certificate authorities**.
 
+A certificate authority keeps the private key of its root certificate offline,
+and signs the certificates of its customers with the keys of its intermediate
+certificates. If an intermediate key is compromised, it can be replaced without
+replacing the root.
+
 ---
 
 ### Root certificate authorities
 
-<img class='w-7/10' src='../images/root-certificate-details-3bfa4deee2788627f6bc1a66cbcaa191.png' />
+<img class='w-7/10' src='images/root-certificate-details-3bfa4deee2788627f6bc1a66cbcaa191.png' />
 
 **Notes:**
 
@@ -308,7 +298,7 @@ The **root certificate authority** is the one at the top of the chain.
 
 How then does the browser know that a root certificate authority is valid?
 
-<img class='w-6/10' src='../images/chain-of-trust-20d68775c24f3d2bd768c0bc1bb9c662.png' />
+<img class='w-6/10' src='images/chain-of-trust-20d68775c24f3d2bd768c0bc1bb9c662.png' />
 
 **Notes:**
 
@@ -316,74 +306,99 @@ As you can see in the chain of trust diagram, the **root certificate** is
 self-signed: there is no inherent difference between it and a certificate you
 have generated yourself with `openssl req`.
 
+_Diagram by Yanpas, CC BY-SA 4.0, from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Chain_of_trust.svg)_
+
 ---
 
-### Trusted CA Certificate Lists
+### Trusted CA certificate lists
 
-Browsers and operating systems have **hardcoded lists of root certificates**
-that are considered to be **trusted**.
+Browsers and operating systems have **lists of root certificates** that are
+considered to be **trusted**, installed with them.
 
-- [Trusted Root Certificates in iOS](https://support.apple.com/en-gb/HT204132)
+- [Trusted Root Certificates in Apple operating systems](https://support.apple.com/en-us/103272)
 - [Trusted Root Certificates in Mozilla Firefox](https://wiki.mozilla.org/CA/Included_Certificates)
 
 **Notes:**
 
-When your browser checks a TLS's certificate chain of trust,
-it expects the chain's root certificate to be one of the **already trusted** ones;
-otherwise, the TLS certificate is deemed invalid.
+When your browser checks a certificate's chain of trust, it expects the chain's
+root certificate to be one of the **already trusted** ones; otherwise, the TLS
+certificate is deemed invalid.
+
+These lists are updated with the browser or the operating system. A root
+certificate can also be removed from them, if its certificate authority stops
+being trustworthy.
 
 ---
 
 ### Becoming a trusted CA
 
-To launch a new company to issue valid TLS certificates, browser/computer
-vendors must include your new root certificate in their programs:
+To launch a new company to issue valid TLS certificates, browser and operating
+system vendors must include your new root certificate in their programs:
 
-- [Apple Root Program](https://www.apple.com/certificateauthority/ca_program.html)
-- [Microsoft Root Program](https://docs.microsoft.com/en-us/previous-versions//cc751157(v=technet.10))
-- [Mozilla Root Program](https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/policy/)
-- [Oracle Root Program](https://www.oracle.com/technetwork/java/javase/javasecarootcertsprogram-1876540.html)
+- [Apple Root Certificate Program](https://www.apple.com/certificateauthority/ca_program.html)
+- [Chrome Root Program](https://www.chromium.org/Home/chromium-security/root-ca-policy/)
+- [Microsoft Trusted Root Program](https://learn.microsoft.com/en-us/security/trusted-root/program-requirements)
+- [Mozilla Root Store Policy](https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/policy/)
+
+**Notes:**
+
+Each program has strict requirements, such as regular audits. Most of them are
+shared, and written by the [CA/Browser Forum](https://cabforum.org), where certificate
+authorities and browser vendors agree on them.
 
 ---
 
 ## Obtaining a TLS certificate
 
 To obtain a valid TLS certificate, you need to request one from a
-[**certification authority (CA)**](https://en.wikipedia.org/wiki/Certificate_authority):
+[**certificate authority (CA)**](https://en.wikipedia.org/wiki/Certificate_authority):
 
-- [IdenTrust](https://www.identrust.com)
-- [Comodo](https://www.comodo.com)
+- [Let's Encrypt](https://letsencrypt.org/)
 - [DigiCert](https://www.digicert.com)
+- [Sectigo](https://www.sectigo.com)
 
 ---
 
 ### Domain validation
 
-You must **prove that you are the legitimate owner of the domain** before a CA
-will issue you a valid TLS certificate. There are various techniques to do this.
+You must **prove that you control the domain** before a CA will issue you a
+valid TLS certificate. There are various techniques to do this.
 
 --v
 
 ### HTTP validation
 
-The CA can ask you to put a file at `http://example.com/abc.txt` containing a
-random validation token. Doing this **proves that you control the server** which
-serves the content for the domain.
+The CA asks you to put a file at
+`http://example.com/.well-known/acme-challenge/<token>` containing a random
+validation token. Doing this **proves that you control the server** which serves
+the content for the domain.
+
+**Notes:**
+
+The CA then connects to the domain on port 80 from its own servers, on the
+Internet, and checks that it gets the token back. The domain must therefore
+already point to your server, and your server must answer on port 80.
 
 --v
 
 ### DNS validation
 
-The CA can ask you to create a custom DNS record for your domain. Doing this
-**proves that you control the DNS zone file** for the domain.
+The CA asks you to create a `TXT` record with a random token in your domain's
+DNS zone. Doing this **proves that you control the DNS zone** of the domain.
+
+**Notes:**
+
+A wildcard certificate, such as `*.example.com`, can only be obtained with DNS
+validation: a file on one server does not prove that you control every name
+under the domain.
 
 --v
 
 ### Email validation
 
-The CA can send you a mail with a validation link at `admin@example.com`.
-Following the link **proves that you are the administrator of the domain**,
-since only you could manage that email address.
+The CA sends you an email with a validation link at an address such as
+`admin@example.com`. Following the link **proves that you are the administrator
+of the domain**, since only you should receive email at that address.
 
 ---
 
@@ -396,33 +411,61 @@ Some certificate authorities sell you TLS certificates.
 ### Paying for compatibility
 
 Not all root certificates are as widespread. Some may be present in more
-browsers and operating systems. By paying more, you may get a certificate that
-is certified to be **compatible with more clients**.
+browsers and operating systems, including older ones. By paying more, you may
+get a certificate that is **compatible with more clients**.
 
 --v
 
 ### Paying for warranty
 
-Many certificate authorities will pay you a given sum of money if your security
-is compromised because of a weakness in their TLS certificate. You may increase
-that warranty by purchasing a more expensive certificate.
+Many certificate authorities will pay you a given sum of money if your users
+suffer losses because the certificate authority made a mistake in issuing a
+certificate. You may increase that warranty by purchasing a more expensive
+certificate.
 
 --v
 
 ### Paying for extended validation
 
 **[Extended Validation Certificate (EV)](https://en.wikipedia.org/wiki/Extended_Validation_Certificate):** Certificate
-authorities can validate that a legal entity is the owner of a domain,
-enabling the browser to display a so-called "green-bar certificate".
+authorities can validate that a legal entity is the owner of a domain.
 
-![Extended Validation Certificate](../images/ev-certificate-3a2ad9d812ce43617e20313e26750775.png)
+**Notes:**
+
+Browsers used to display the name of the organization next to the address of a
+site with an EV certificate, in a "green bar". They stopped in 2019, since
+studies showed that users did not notice it. An EV certificate encrypts
+connections exactly like any other.
+
+---
+
+## Certificate lifetimes
+
+Certificates expire, and their maximum lifetime is getting shorter.
+
+| Since      | Maximum lifetime |
+| :--------- | ---------------: |
+| 2020       |         398 days |
+| March 2026 |         200 days |
+| March 2027 |         100 days |
+| March 2029 |          47 days |
+
+**Notes:**
+
+A certificate has an end date, after which browsers refuse it. The shorter its
+lifetime, the shorter the time a stolen private key or a wrongly issued
+certificate can be abused.
+
+The [CA/Browser Forum](https://cabforum.org) voted in 2025 to reduce the maximum lifetime
+of certificates step by step, down to 47 days in 2029. At that point, nobody can
+renew certificates by hand anymore: renewal must be automated.
 
 ---
 
 ## Let's Encrypt
 
 [Let's Encrypt](https://letsencrypt.org/) is a **certificate authority (CA)** run for the
-public's benefit by the [Internet Security Research Group (ISRG)](https://letsencrypt.org/isrg/):
+public's benefit by the [Internet Security Research Group (ISRG)](https://www.abetterinternet.org):
 
 - **Free**, **Automatic**, **Secure**
 - **Transparent**, **Open**, **Cooperative**
@@ -431,19 +474,19 @@ public's benefit by the [Internet Security Research Group (ISRG)](https://letsen
 
 - **Free:** Anyone who owns a domain name can use Let's Encrypt to obtain a
   valid TLS certificate at zero cost.
-- **Automatic:** Software running on a web server can painlessly obtain a
-  certificate, securely configure it for use, and automatically take care of
-  renewal.
-- **Secure:** Let's Encrypt will serve as a platform for advancing TLS security
-  best practices, both on the CA side and by helping site operators properly
-  secure their servers.
-- **Transparent:** All certificates issued or revoked will be publicly recorded
-  and available for anyone to inspect.
-- **Open:** The automatic issuance and renewal protocol will be published as an
-  open standard that others can adopt.
-- **Cooperative:** Much like the underlying Internet protocols themselves, Let's
-  Encrypt is a joint effort to benefit the community, beyond the control of any
-  one organization.
+- **Automatic:** Software running on a web server can obtain a certificate,
+  configure the server to use it, and renew it, with no human involved.
+- **Secure:** Let's Encrypt promotes TLS security best practices, both on the CA
+  side and by helping site operators properly secure their servers.
+- **Transparent:** All the certificates it issues or revokes are publicly
+  recorded and available for anyone to inspect.
+- **Open:** The issuance and renewal protocol, [ACME](https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment), is an open standard
+  that other certificate authorities and tools also use.
+- **Cooperative:** Let's Encrypt is a joint effort to benefit the community,
+  beyond the control of any one organization.
+
+Let's Encrypt has issued certificates since 2015, and has become the largest
+certificate authority in the world. Its certificates are valid for 90 days.
 
 ---
 
@@ -453,8 +496,33 @@ public's benefit by the [Internet Security Research Group (ISRG)](https://letsen
 (EFF)](https://www.eff.org):
 
 - Helps you **obtain Let's Encrypt certificates**
-- **Configures your web server** ([Apache](https://www.apache.org), [nginx](http://nginx.org/))
+- **Configures your web server** ([Apache](https://httpd.apache.org), [nginx](https://nginx.org/))
 - Sets up **automatic renewal**
+
+**Notes:**
+
+Certbot is an ACME client: it talks to Let's Encrypt's servers for you, proves
+that you control your domains with HTTP validation, and saves the certificate
+and its private key on your server. On Ubuntu, a systemd timer runs it twice a
+day to renew the certificates that are about to expire.
+
+---
+
+## Where TLS ends
+
+<!-- slide-front-matter class: center, middle -->
+
+Browser —**HTTPS**→ nginx —**HTTP**→ application
+
+**Notes:**
+
+When nginx is a reverse proxy, it is nginx that holds the certificate and its
+private key, and that encrypts and decrypts the traffic: it **terminates** TLS.
+It forwards the requests to the application over plain HTTP, on the server's
+loopback address, which never leaves the server.
+
+The application does not change at all to be served over HTTPS, and one nginx
+can do it for every site on the server.
 
 ---
 
@@ -465,47 +533,45 @@ public's benefit by the [Internet Security Research Group (ISRG)](https://letsen
   - [Chain of Trust](https://en.wikipedia.org/wiki/Chain_of_trust)
 - [Certificate Authority (CA)](https://en.wikipedia.org/wiki/Certificate_authority)
   - [Let's Encrypt](https://letsencrypt.org/)
-- [Generating a self-signed certificate using OpenSSL](https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/com.ibm.apic.cmc.doc/task_apionprem_gernerate_self_signed_openSSL.html)
-- [Nginx - Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html)
+  - [How It Works (Let's Encrypt)](https://letsencrypt.org/how-it-works/)
+- [Nginx - Configuring HTTPS servers](https://nginx.org/en/docs/http/configuring_https_servers.html)
 
-[apache]: https://www.apache.org
+[acme]: https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment
+[apache]: https://httpd.apache.org
 [apple-root-ca]: https://www.apple.com/certificateauthority/ca_program.html
+[apple-root-ca-list]: https://support.apple.com/en-us/103272
 [ca]: https://en.wikipedia.org/wiki/Certificate_authority
+[cab-forum]: https://cabforum.org
 [certbot]: https://certbot.eff.org/
 [chain-of-trust]: https://en.wikipedia.org/wiki/Chain_of_trust
+[commons-chain]: https://commons.wikimedia.org/wiki/File:Chain_of_trust.svg
+[chrome-root-ca]: https://www.chromium.org/Home/chromium-security/root-ca-policy/
 [cipher-suite]: https://en.wikipedia.org/wiki/Cipher_suite
-[comodo]: https://www.comodo.com
 [dh]: https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange
 [digicert]: https://www.digicert.com
 [digital-signature]: https://en.wikipedia.org/wiki/Digital_signature
 [eff]: https://www.eff.org
 [ev-certificate]: https://en.wikipedia.org/wiki/Extended_Validation_Certificate
-[identrust]: https://www.identrust.com
-[ios-root-ca-list]: https://support.apple.com/en-gb/HT204132
-[isrg]: https://letsencrypt.org/isrg/
+[isrg]: https://www.abetterinternet.org
 [letsencrypt]: https://letsencrypt.org/
-[microsoft-root-ca]: https://docs.microsoft.com/en-us/previous-versions//cc751157(v=technet.10)
+[letsencrypt-how-it-works]: https://letsencrypt.org/how-it-works/
+[microsoft-root-ca]: https://learn.microsoft.com/en-us/security/trusted-root/program-requirements
 [mozilla-root-ca]: https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/policy/
 [mozilla-root-ca-list]: https://wiki.mozilla.org/CA/Included_Certificates
-[mozilla-ssl-config]: https://ssl-config.mozilla.org
-[nginx]: http://nginx.org/
-[nginx-ssl]: http://nginx.org/en/docs/http/configuring_https_servers.html
-[nginx-ssl-certificate-directive]: http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate
-[nginx-ssl-certificate-key-directive]: http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate_key
-[oracle-root-ca]: https://www.oracle.com/technetwork/java/javase/javasecarootcertsprogram-1876540.html
+[nginx]: https://nginx.org/
+[nginx-ssl]: https://nginx.org/en/docs/http/configuring_https_servers.html
 [pki]: https://en.wikipedia.org/wiki/Public_key_infrastructure
 [pubkey]: https://en.wikipedia.org/wiki/Public-key_cryptography
 [pubkey-certificate]: https://en.wikipedia.org/wiki/Public_key_certificate
-[self-signed]: https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/com.ibm.apic.cmc.doc/task_apionprem_gernerate_self_signed_openSSL.html
+[sectigo]: https://www.sectigo.com
 [tls]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [tls-certificate]: https://en.wikipedia.org/wiki/Public_key_certificate#TLS/SSL_server_certificate
-[tls-procedure]: https://en.wikipedia.org/wiki/Transport_Layer_Security#Description
 </textarea>
         </section>
       </div>
     </div>
 
-    <script src="/2026/assets/course/slides-17754702405b7e9d47ec306150de9671.js">
+    <script src="/2026/assets/course/slides-2c72572e9136d3599f72d77b37c5d8d6.js">
     </script>
 
     <div id="meta" class="absolute bottom-4 left-4 z-10 flex items-end gap-2 font-meta">
@@ -513,7 +579,7 @@ public's benefit by the [Internet Security Research Group (ISRG)](https://letsen
         <img src="/favicons/heig.png" alt="HEIG-VD logo" width="40" height="40">
       </a>
 
-      <a href="https://github.com/ArchiDep/website/blob/d3c90e21443153ebfdceb1cfbecf36b20fe21212/course/chapters/513-tls/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/ArchiDep/website/blob/62313a5b1de204e981c7e717c48a268f6f60099f/course/chapters/513-tls/slides/slides.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
         <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -540,12 +606,12 @@ public's benefit by the [Internet Security Research Group (ISRG)](https://letsen
           </li>
           
           <li class="text-xs">
-            Rev: d3c90e21443153ebfdceb1cfbecf36b20fe21212
+            Rev: 62313a5b1de204e981c7e717c48a268f6f60099f
           </li>
         </ul>
       </div>
       <a href="https://archidep.ch" class="!no-underline hover:!underline">
-        ArchiDep 26-27 main@d3c90e2
+        ArchiDep 26-27 main@62313a5
       </a>
     </div>
   </body>

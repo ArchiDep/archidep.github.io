@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Provision an SSL certificate using Certbot by Let's Encrypt · ArchiDep</title>
-<meta name="description" content="The goal of this exercise is to provision a Let’s Encrypt SSL certificate for an application deployed in previous exercises using Certbot. This exercise assumes that you have deployed at least one web site or application during previous exercises, and that you have configured nginx to serve it. Connect to your cloud server with SSH for this exercise." />
+    <title>Provision a TLS certificate with Certbot and Let's Encrypt · ArchiDep</title>
+<meta name="description" content="The goal of this exercise is to serve the sites you have deployed with nginx over HTTPS, with a TLS certificate from Let’s Encrypt, obtained with Certbot. Connect to your cloud server with SSH for this exercise." />
 <link rel="canonical" href="https://archidep.ch/2026/course/514-certbot-deployment/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ArchiDep" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Provision an SSL certificate using Certbot by Let's Encrypt" />
-<meta property="og:description" content="The goal of this exercise is to provision a Let’s Encrypt SSL certificate for an application deployed in previous exercises using Certbot. This exercise assumes that you have deployed at least one web site or application during previous exercises, and that you have configured nginx to serve it. Connect to your cloud server with SSH for this exercise." />
+<meta property="og:title" content="Provision a TLS certificate with Certbot and Let's Encrypt" />
+<meta property="og:description" content="The goal of this exercise is to serve the sites you have deployed with nginx over HTTPS, with a TLS certificate from Let’s Encrypt, obtained with Certbot. Connect to your cloud server with SSH for this exercise." />
 <meta property="og:url" content="https://archidep.ch/2026/course/514-certbot-deployment/" />
 <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/2026/assets/theme/theme-e0bad4c36d5f649315449dc000cc495f.css">
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e4fbb657e89b62b43538877a53c95f17.css">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <script src="/2026/assets/course/course-e11bec045207e8c9aabcf134d0bd2695.js" defer>
+    <script src="/2026/assets/course/course-3e904c6e36aaab304d56a7d09cf7e1a9.js" defer>
     </script>
   </head>
 
@@ -97,7 +97,7 @@
       </span>
     </li>
     <li>
-      <a href="https://github.com/ArchiDep/website/blob/d3c90e21443153ebfdceb1cfbecf36b20fe21212/course/chapters/514-certbot-deployment/exercise.md">Rev: d3c90e21443153ebfdceb1cfbecf36b20fe21212</a>
+      <a href="https://github.com/ArchiDep/website/blob/62313a5b1de204e981c7e717c48a268f6f60099f/course/chapters/514-certbot-deployment/exercise.md">Rev: 62313a5b1de204e981c7e717c48a268f6f60099f</a>
     </li>
   </ul>
 </div>
@@ -117,15 +117,12 @@
   <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
     <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-exercise">
       <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
-  Provision an SSL certificate using Certbot by Let&#39;s Encrypt
+  Provision a TLS certificate with Certbot and Let&#39;s Encrypt
 </h1>
 
-      <div class="my-4"><p>The goal of this exercise is to provision a <a href="https://letsencrypt.org" target="_blank" rel="noopener noreferrer">Let’s Encrypt</a> <a href="https://en.wikipedia.org/wiki/Public_key_certificate" target="_blank" rel="noopener noreferrer">SSL
-certificate</a> for an application deployed in previous exercises
-using <a href="https://certbot.eff.org" target="_blank" rel="noopener noreferrer">Certbot</a>.</p>
-<p>This exercise assumes that you have deployed at least one web site or
-application during previous exercises, and that you have configured nginx to
-serve it.</p>
+      <div class="my-4"><p>The goal of this exercise is to serve the sites you have deployed with nginx
+over HTTPS, with a <a href="/2026/course/513-tls/">TLS certificate</a> from <a href="https://letsencrypt.org" target="_blank" rel="noopener noreferrer">Let’s
+Encrypt</a>, obtained with <a href="https://certbot.eff.org" target="_blank" rel="noopener noreferrer">Certbot</a>.</p>
 <div class="callout callout-exercise group/callout"><div class="icon image"><img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" /></div><div class="container"><div class="content"><p>Connect to your cloud server with SSH for this exercise.</p></div></div></div></div>
 
       <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
@@ -140,10 +137,31 @@ serve it.</p>
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#try-https-before-you-start"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Try HTTPS before you start</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#install-certbot"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Certbot</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#obtain-a-tls-certificate-from-lets-encrypt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Obtain a TLS certificate from Let’s Encrypt</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#see-it-in-action"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> See it in action</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#look-at-what-certbot-changed"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Look at what Certbot changed</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#is-everything-encrypted-now"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is everything encrypted now?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#find-out-who-can-read-the-private-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find out who can read the private key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#check-the-automatic-renewal"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check the automatic renewal</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
@@ -154,10 +172,19 @@ serve it.</p>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#no-names-were-found-in-your-configuration-files"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> No names were found in your configuration files</a>
+    <a href="#certbot-failed-to-authenticate-some-domains"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Certbot failed to authenticate some domains</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#certbot-does-not-list-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Certbot does not list one of my sites</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-browser-says-the-certificate-is-not-valid-for-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The browser says the certificate is not valid for one of my sites</a>
     
   </li>
 </ul>
@@ -203,73 +230,884 @@ serve it.</p>
   </li>
 </ul>
 
-      <h2 id="install-certbot"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Certbot<a href="#install-certbot" aria-label="Link to heading 'Install Certbot'" data-heading-content="Install Certbot" class="anchor"></a></h2>
-<p>Install Certbot with the following command:</p>
+      <h2 id="requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements<a href="#requirements" aria-label="Link to heading 'Requirements'" data-heading-content="Requirements" class="anchor"></a></h2>
+<p>Make sure you have completed the <a href="/2026/course/511-nginx-reverse-proxy-deployment/">reverse proxy exercise</a>
+first: nginx must serve the clock and Guess It, each at a name of its own, such
+as <code>clock.jde.archidepN.ch</code> and <code>guessit.jde.archidepN.ch</code>. Brewscale too, if
+you have deployed it in the <a href="/2026/course/512-brewscale-deployment/">horizontal scaling exercise</a>.</p>
+<p>Visit each of your sites in your browser with <code>http://</code>, e.g.
+<code>http://guessit.jde.archidepN.ch</code>, and check that it works. Let’s Encrypt will
+check that your server answers at each name: a site that does not work over HTTP
+will not get a certificate.</p>
+<h2 id="try-https-before-you-start"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Try HTTPS before you start<a href="#try-https-before-you-start" aria-label="Link to heading 'Try HTTPS before you start'" data-heading-content="Try HTTPS before you start" class="anchor"></a></h2>
+<p>Visit one of your sites with <code>https://</code> instead of <code>http://</code>, e.g.
+<code>https://guessit.jde.archidepN.ch</code>. What do you think will happen, and why?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p>Your browser cannot connect: it shows an error such as
+<code>ERR_CONNECTION_REFUSED</code>. With <code>https://</code> and no port in the address, the
+browser connects to port 443, the default port of HTTPS. Nothing listens on
+that port on your server: nginx only listens on port 80, as you can see with
+the command you used in the <a href="/2026/course/510-nginx-static-deployment/#install-nginx-on-the-server">static site exercise</a>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">State</span>  <span class="l-variable-parameter">Recv-Q</span> <span class="l-variable-parameter">Send-Q</span> <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span> <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">Process</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>          <span class="l-variable-parameter">0.0.0.0:80</span>   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;nginx&quot;</span>,<span class="l-variable">pid</span><span class="l-operator">=</span><span class="l-number">812</span>,<span class="l-variable">fd</span><span class="l-operator">=</span><span class="l-number">5</span><span class="l-punctuation-bracket">)</span>,...<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>             <span class="l-variable-parameter">[::]:80</span>   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;nginx&quot;</span>,<span class="l-variable">pid</span><span class="l-operator">=</span><span class="l-number">812</span>,<span class="l-variable">fd</span><span class="l-operator">=</span><span class="l-number">6</span><span class="l-punctuation-bracket">)</span>,...<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">...</span></span></code></pre></div></div>
+<h2 id="install-certbot"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Certbot<a href="#install-certbot" aria-label="Link to heading 'Install Certbot'" data-heading-content="Install Certbot" class="anchor"></a></h2>
+<p>Install Certbot, and its plugin to configure nginx:</p>
 <pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">apt</span> <span class="l-variable-parameter">install</span> <span class="l-variable-parameter">certbot</span> <span class="l-variable-parameter">python3-certbot-nginx</span></span></code></pre>
 <h2 id="obtain-a-tls-certificate-from-lets-encrypt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Obtain a TLS certificate from Let’s Encrypt<a href="#obtain-a-tls-certificate-from-lets-encrypt" aria-label="Link to heading 'Obtain a TLS certificate from Let’s Encrypt'" data-heading-content="Obtain a TLS certificate from Let’s Encrypt" class="anchor"></a></h2>
-<p>Follow the <a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=snap" target="_blank" rel="noopener noreferrer">instructions for nginx and Linux
-(snap)</a> <strong>starting
-at step 6</strong>:</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>When the instructions ask you to “Choose how you’d like to run Certbot”, you can
-choose the simplest option which is to “get a certificate and have Certbot edit
-your Nginx configuration automatically to serve it”.</p></div></div>
-<p>Once you are done, your web site or application should be accessible over HTTPS.</p>
-<p>You should take a look at your nginx site configuration file(s) in the
-<code>/etc/nginx/sites-available</code> directory, to see the changes Certbot has made.</p>
+<div class="callout callout-warning group/callout"><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+  />
+</svg><div class="container"><div class="content"><p>Run Certbot <strong>once</strong>, and select <strong>all</strong> your sites when it asks which names to
+activate HTTPS for. You will then get a single certificate valid for all of
+them.</p>
+<p>Let’s Encrypt limits how many certificates the same domain may get per week, and
+your whole class shares the same domain, <code>archidepN.ch</code>. Do not run Certbot
+again to experiment.</p></div></div></div>
+<p>Run Certbot with its nginx plugin:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">certbot</span> <span class="l-variable-parameter">--nginx</span></span></code></pre>
+<p>Certbot asks you a few questions:</p>
+<ul>
+<li>
+<p><strong>An email address.</strong> Let’s Encrypt uses it to contact you about your account.
+You may give one, or press Enter to skip. If you give one, Certbot also asks
+whether you want to share it with the Electronic Frontier Foundation, which
+makes Certbot: answer as you like.</p>
+</li>
+<li>
+<p><strong>The terms of service.</strong> You must agree to them to get a certificate: answer
+<code>Y</code>.</p>
+</li>
+<li>
+<p><strong>Which names to activate HTTPS for.</strong> Certbot lists the names it found in
+the <code>server_name</code> directives of your enabled nginx configurations, such as:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Which names would you like to activate HTTPS for?</span>
+<span class="l-line" data-line="2">We recommend selecting either all domains, or all domains in a VirtualHost/server block.</span>
+<span class="l-line" data-line="3">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+<span class="l-line" data-line="4">1: brewscale.jde.archidepN.ch</span>
+<span class="l-line" data-line="5">2: clock.jde.archidepN.ch</span>
+<span class="l-line" data-line="6">3: guessit.jde.archidepN.ch</span>
+<span class="l-line" data-line="7">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+<span class="l-line" data-line="8">Select the appropriate numbers separated by commas and/or spaces, or leave input</span>
+<span class="l-line" data-line="9">blank to select all options shown (Enter &#39;c&#39; to cancel):</span></code></pre>
+<p>Press Enter without typing anything, to select them all.</p>
+</li>
+</ul>
+<p>Certbot then requests the certificate from Let’s Encrypt, and installs it in
+nginx. It should end with something like this:</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Successfully received certificate.</span>
+<span class="l-line" data-line="2">Certificate is saved at: /etc/letsencrypt/live/brewscale.jde.archidepN.ch/fullchain.pem</span>
+<span class="l-line" data-line="3">Key is saved at:         /etc/letsencrypt/live/brewscale.jde.archidepN.ch/privkey.pem</span>
+<span class="l-line" data-line="4">This certificate expires on 2027-02-24.</span>
+<span class="l-line" data-line="5">These files will be updated when the certificate renews.</span>
+<span class="l-line" data-line="6">Certbot has set up a scheduled task to automatically renew this certificate in the background.</span>
+<span class="l-line" data-line="7"></span>
+<span class="l-line" data-line="8">Deploying certificate</span>
+<span class="l-line" data-line="9">Successfully deployed certificate for brewscale.jde.archidepN.ch to /etc/nginx/sites-enabled/brewscale</span>
+<span class="l-line" data-line="10">Successfully deployed certificate for clock.jde.archidepN.ch to /etc/nginx/sites-enabled/clock</span>
+<span class="l-line" data-line="11">Successfully deployed certificate for guessit.jde.archidepN.ch to /etc/nginx/sites-enabled/guessit</span>
+<span class="l-line" data-line="12">Congratulations! You have successfully enabled HTTPS on https://brewscale.jde.archidepN.ch, https://clock.jde.archidepN.ch, and https://guessit.jde.archidepN.ch</span></code></pre>
+<p>The directory of the certificate is named after the first name it is valid for,
+which may be a different site of yours.</p>
+<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Before Let’s Encrypt issued the certificate, it checked that you control each of
+these names, with the <a href="/2026/course/513-tls/#domain-validation">HTTP validation</a> described in the
+subject. Certbot temporarily configured nginx to serve a token for each name,
+and Let’s Encrypt’s servers fetched it from your server on port 80.</p></div></div>
+<h2 id="see-it-in-action"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> See it in action<a href="#see-it-in-action" aria-label="Link to heading 'See it in action'" data-heading-content="See it in action" class="anchor"></a></h2>
+<p>Visit your sites with <code>https://</code>, e.g. <code>https://guessit.jde.archidepN.ch</code>. They
+now work, and your browser shows no warning.</p>
+<p>Look at the certificate in your browser, from the icon on the left of the
+address bar. It is issued by Let’s Encrypt, and is valid for all your sites’
+names. It expires in about 90 days.</p>
+<h2 id="look-at-what-certbot-changed"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Look at what Certbot changed<a href="#look-at-what-certbot-changed" aria-label="Link to heading 'Look at what Certbot changed'" data-heading-content="Look at what Certbot changed" class="anchor"></a></h2>
+<p>Certbot has modified your sites’ configurations. Look at Guess It’s:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">cat</span> <span class="l-function-call">/etc/nginx/sites-available/guessit</span></span></code></pre>
+<p>It should look like this, with the name of your certificate’s directory:</p>
+<pre class="lumis"><code class="language-nginx" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="2">  <span class="l-keyword">server_name</span> <span class="l-variable">guessit.jde.archidepN.ch</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4">  <span class="l-comment"># Forward every request to Guess It.</span></span>
+<span class="l-line" data-line="5">  <span class="l-keyword">location</span> <span class="l-string-special">/ </span><span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="6">    <span class="l-keyword">proxy_pass</span> <span class="l-variable">http://127.0.0.1:3000</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="7">  <span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="8"></span>
+<span class="l-line" data-line="9">    <span class="l-keyword">listen</span> <span class="l-number">443</span> <span class="l-variable">ssl</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="10">    <span class="l-keyword">ssl_certificate</span> <span class="l-variable">/etc/letsencrypt/live/brewscale.jde.archidepN.ch/fullchain.pem</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="11">    <span class="l-keyword">ssl_certificate_key</span> <span class="l-variable">/etc/letsencrypt/live/brewscale.jde.archidepN.ch/privkey.pem</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="12">    <span class="l-keyword">include</span> <span class="l-string-special-path">/etc/letsencrypt/options-ssl-nginx.conf</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="13">    <span class="l-keyword">ssl_dhparam</span> <span class="l-variable">/etc/letsencrypt/ssl-dhparams.pem</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="14"></span>
+<span class="l-line" data-line="15"><span class="l-punctuation-bracket">}</span></span>
+<span class="l-line" data-line="16"><span class="l-keyword">server</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="17">    <span class="l-keyword-conditional">if</span> <span class="l-variable-builtin">($host = guessit.jde.archidepN.ch)</span> <span class="l-punctuation-bracket">{</span></span>
+<span class="l-line" data-line="18">        <span class="l-keyword">return</span> <span class="l-number">301</span> <span class="l-variable">https://$host$request_uri</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="19">    <span class="l-punctuation-bracket">}</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="20"></span>
+<span class="l-line" data-line="21"></span>
+<span class="l-line" data-line="22">  <span class="l-keyword">listen</span> <span class="l-number">80</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="23">  <span class="l-keyword">server_name</span> <span class="l-variable">guessit.jde.archidepN.ch</span><span class="l-punctuation-delimiter">;</span></span>
+<span class="l-line" data-line="24">    <span class="l-keyword">return</span> <span class="l-number">404</span><span class="l-punctuation-delimiter">;</span> <span class="l-comment"># managed by Certbot</span></span>
+<span class="l-line" data-line="25"></span>
+<span class="l-line" data-line="26"></span>
+<span class="l-line" data-line="27"><span class="l-punctuation-bracket">}</span></span></code></pre>
+<p>The file now has two <code>server</code> blocks:</p>
+<ul>
+<li>The first one is your site, which now listens on port 443, for HTTPS, instead
+of port 80. <code>ssl_certificate</code> is the certificate, with the intermediate
+certificate of Let’s Encrypt (the <strong>full chain</strong>), and <code>ssl_certificate_key</code>
+its private key. The included file and <code>ssl_dhparam</code> are settings for the TLS
+protocol that Certbot provides.</li>
+<li>The second one listens on port 80, for HTTP, and answers every request with a
+<code>301 Moved Permanently</code> status, a <strong>redirection</strong> that tells the browser to go
+to the same address with <code>https://</code> instead. A browser follows it without
+asking you.</li>
+</ul>
+<p>Your <code>clock</code> and <code>brewscale</code> files have changed in the same way, with the same
+certificate.</p>
+<p>Check that nginx now listens on port 443 as well:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ss</span> <span class="l-variable-parameter">-tlpn</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">State</span>  <span class="l-variable-parameter">Recv-Q</span> <span class="l-variable-parameter">Send-Q</span> <span class="l-variable-parameter">Local</span> <span class="l-variable-parameter">Address:Port</span> <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">Process</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>          <span class="l-variable-parameter">0.0.0.0:443</span>  <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;nginx&quot;</span>,<span class="l-variable">pid</span><span class="l-operator">=</span><span class="l-number">812</span>,<span class="l-variable">fd</span><span class="l-operator">=</span><span class="l-number">7</span><span class="l-punctuation-bracket">)</span>,...<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>          <span class="l-variable-parameter">0.0.0.0:80</span>   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;nginx&quot;</span>,<span class="l-variable">pid</span><span class="l-operator">=</span><span class="l-number">812</span>,<span class="l-variable">fd</span><span class="l-operator">=</span><span class="l-number">5</span><span class="l-punctuation-bracket">)</span>,...<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">LISTEN</span> <span class="l-number">0</span>      <span class="l-number">511</span>             <span class="l-variable-parameter">[::]:80</span>   <span class="l-variable-parameter">...</span> <span class="l-variable-parameter">users:</span><span class="l-punctuation-bracket">((</span><span class="l-string">&quot;nginx&quot;</span>,<span class="l-variable">pid</span><span class="l-operator">=</span><span class="l-number">812</span>,<span class="l-variable">fd</span><span class="l-operator">=</span><span class="l-number">6</span><span class="l-punctuation-bracket">)</span>,...<span class="l-punctuation-bracket">)</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">...</span></span></code></pre>
+<h2 id="is-everything-encrypted-now"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is everything encrypted now?<a href="#is-everything-encrypted-now" aria-label="Link to heading 'Is everything encrypted now?'" data-heading-content="Is everything encrypted now?" class="anchor"></a></h2>
+<p>Your browser now talks to your server over HTTPS. Is the connection between nginx
+and Guess It encrypted too?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p>No. The <code>proxy_pass</code> directive has not changed: nginx still forwards requests to
+<code>http://127.0.0.1:3000</code>, in plain HTTP. nginx decrypts the browser’s request,
+forwards it to Guess It unencrypted, and encrypts Guess It’s answer for the
+browser. This is called <strong>TLS termination</strong>: the TLS connection ends at nginx.</p>
+<p>This connection does not need to be encrypted, since it never leaves the
+server: <code>127.0.0.1</code> is the server’s loopback address. Guess It has not changed
+at all, and does not know that the browser used HTTPS.</p></div></div>
+<h2 id="find-out-who-can-read-the-private-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find out who can read the private key<a href="#find-out-who-can-read-the-private-key" aria-label="Link to heading 'Find out who can read the private key'" data-heading-content="Find out who can read the private key" class="anchor"></a></h2>
+<p>Try to list the directory where Certbot saved your certificate, without <code>sudo</code>:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">ls</span> <span class="l-function-call">/etc/letsencrypt/live</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">ls:</span> <span class="l-variable-parameter">cannot</span> <span class="l-variable-parameter">open</span> <span class="l-variable-parameter">directory</span> <span class="l-string">&#39;/etc/letsencrypt/live&#39;</span><span class="l-variable-parameter">:</span> <span class="l-variable-parameter">Permission</span> <span class="l-variable-parameter">denied</span></span></code></pre>
+<p>Then with <code>sudo</code>, replacing the name with the one of your certificate’s
+directory:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">-l</span> <span class="l-variable-parameter">/etc/letsencrypt/live/brewscale.jde.archidepN.ch</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">total</span> <span class="l-number">4</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">-rw-r--r--</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span> <span class="l-number">692</span> <span class="l-variable-parameter">Nov</span> <span class="l-number">26</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">README</span></span>
+<span class="l-line" data-line="4"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">51</span> <span class="l-variable-parameter">Nov</span> <span class="l-number">26</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">cert.pem</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">../../archive/brewscale.jde.archidepN.ch/cert1.pem</span></span>
+<span class="l-line" data-line="5"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">52</span> <span class="l-variable-parameter">Nov</span> <span class="l-number">26</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">chain.pem</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">../../archive/brewscale.jde.archidepN.ch/chain1.pem</span></span>
+<span class="l-line" data-line="6"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">56</span> <span class="l-variable-parameter">Nov</span> <span class="l-number">26</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">fullchain.pem</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">../../archive/brewscale.jde.archidepN.ch/fullchain1.pem</span></span>
+<span class="l-line" data-line="7"><span class="l-function-call">lrwxrwxrwx</span> <span class="l-number">1</span> <span class="l-variable-parameter">root</span> <span class="l-variable-parameter">root</span>  <span class="l-number">54</span> <span class="l-variable-parameter">Nov</span> <span class="l-number">26</span> <span class="l-variable-parameter">09:12</span> <span class="l-variable-parameter">privkey.pem</span> <span class="l-variable-parameter">-</span><span class="l-operator">&gt;</span> <span class="l-string-special-path">../../archive/brewscale.jde.archidepN.ch/privkey1.pem</span></span></code></pre>
+<p>The files are symbolic links to the actual files, in the <code>archive</code> directory.
+Each renewal adds new files there, and Certbot points the links to them, so that
+nginx’s configuration never has to change.</p>
+<p>Only <code>root</code> can read the private key. In the <a href="/2026/course/511-nginx-reverse-proxy-deployment/#find-out-who-listens-on-port-80">reverse proxy
+exercise</a>, you saw that nginx has a master process, which runs
+as <code>root</code>, and worker processes, which run as <code>www-data</code> and handle the
+requests. Which of them reads the private key?</p>
+<div class="solution collapse screen:collapse-arrow print:collapse-open border border-neutral"><input type="checkbox" class="peer" /><div class="collapse-title font-semibold peer-hover:bg-primary/25"><div class="flex items-center gap-2"><img class="emoji" src="/2026/assets/emoji/1f914-263a7f4eeb6f69e46d969fa479188592.svg" alt="🤔" width="20" height="20" /><span>Check your answer</span></div></div><div class="collapse-content overflow-x-auto"><p>The master process, which runs as <code>root</code>. It reads the certificate and the
+private key when nginx starts, or when its configuration is reloaded, along with
+the rest of the configuration, and its worker processes inherit them. The
+worker processes cannot read the files themselves, so a vulnerability in the
+code that handles requests cannot be used to read the private key from the
+disk.</p></div></div>
+<h2 id="check-the-automatic-renewal"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check the automatic renewal<a href="#check-the-automatic-renewal" aria-label="Link to heading 'Check the automatic renewal'" data-heading-content="Check the automatic renewal" class="anchor"></a></h2>
+<p>Your certificate expires in about 90 days. When you installed Certbot, it also
+installed a systemd <strong>timer</strong>: a unit that starts another unit, here Certbot’s
+service, at given times. List it:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">systemctl</span> <span class="l-function-call">list-timers</span> <span class="l-string">&#39;certbot*&#39;</span></span>
+<span class="l-line" data-line="2"><span class="l-function-call">NEXT</span>                            <span class="l-variable-parameter">LEFT</span> <span class="l-variable-parameter">LAST</span> <span class="l-variable-parameter">PASSED</span> <span class="l-variable-parameter">UNIT</span>          <span class="l-variable-parameter">ACTIVATES</span></span>
+<span class="l-line" data-line="3"><span class="l-function-call">Thu</span> <span class="l-variable-parameter">2026-11-26</span> <span class="l-variable-parameter">21:43:10</span> <span class="l-variable-parameter">UTC</span> <span class="l-variable-parameter">9h</span> <span class="l-variable-parameter">left</span> <span class="l-variable-parameter">-</span>       <span class="l-variable-parameter">-</span>    <span class="l-variable-parameter">certbot.timer</span> <span class="l-variable-parameter">certbot.service</span></span>
+<span class="l-line" data-line="4"></span>
+<span class="l-line" data-line="5"><span class="l-number">1</span> <span class="l-variable-parameter">timers</span> <span class="l-variable-parameter">listed.</span></span></code></pre>
+<p>The timer runs <code>certbot renew</code> twice a day. It renews every certificate that has
+less than a third of its lifetime left, 30 days for yours, and reloads nginx so
+that it uses the new one.</p>
 <h2 id="what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?<a href="#what-have-i-done" aria-label="Link to heading 'What have I done?'" data-heading-content="What have I done?" class="anchor"></a></h2>
-<p>You have run Certbot to request a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank" rel="noopener noreferrer">TLS</a> certificate from the Let’s Encrypt
-<a href="https://en.wikipedia.org/wiki/Certificate_authority" target="_blank" rel="noopener noreferrer">certificate authority (CA)</a>.</p>
-<p>Before issuing a certificate, Let’s Encrypt (or any other certificate authority)
-requires <a href="https://en.wikipedia.org/wiki/Domain-validated_certificate" target="_blank" rel="noopener noreferrer">domain validation</a>, i.e. you must provide some
-proof that you control the server reachable at the certificate’s domain name.
-Since you have run Certbot on your server, it has automatically provided that
-proof by asking Let’s Encrypt to perform an <a href="https://letsencrypt.org/docs/challenge-types/#http-01-challenge" target="_blank" rel="noopener noreferrer">HTTP challenge</a>,
-and then completing the challenge by providing the appropriate file through
-nginx.</p>
-<p>Certbot saved the certificate it obtained from Let’s Encrypt somewhere into the
-<code>/etc/letsencrypt</code> directory. It then modified your nginx site’s configuration
-file to use that certificate.</p>
-<div class="note note-more"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f4da-9515c498b6c2e3d2e3e3b5ad73b6c22f.svg" alt="📚" width="20" height="20" /><span>More information</span></div><div class="content"><p>Certbot has been able to automatically do all these things for you because you
-have run it with administrative privileges by prefixing it with <code>sudo</code>.</p></div></div>
-<p>Because the modified nginx configuration for your site now listens on port 443
-for HTTPS and provides a valid TLS certificate, your todolist is now accessible
-with an <code>https://</code> instead of an <code>http://</code> URL, and the TLS protocol is used to
-encrypt communications between your browser and the server.</p>
+<p>You have served your sites over HTTPS, with a certificate from Let’s Encrypt,
+which every browser trusts. Your browser now talks to your server over an
+encrypted connection, and knows it is talking to your server.</p>
+<p>The certificate binds your sites’ names to a public key. The private key that
+goes with it was generated on your server and never left it. The certificate
+itself is public: nginx sends it to every browser that connects. What proves
+your server’s identity is that nginx signs each connection with the private
+key.</p>
+<p>Your browser trusts the certificate because it is signed by Let’s Encrypt, and
+Let’s Encrypt’s root certificate is in the list your browser already trusts.
+Nobody had to send your browser anything for your sites in particular.</p>
+<p>Let’s Encrypt issued the certificate only once it had checked that you control
+the names. Certbot and Let’s Encrypt’s servers did this for you, automatically:
+Certbot had nginx serve a token on port 80 at each name, and Let’s Encrypt’s
+servers fetched it from your server. This is why your DNS records and nginx had
+to work over HTTP before you started.</p>
+<p>nginx <strong>terminates</strong> TLS. It decrypts the browser’s requests, and forwards them
+to Guess It over plain HTTP, on the server’s loopback address. Guess It has not
+changed, and one certificate in nginx serves all your sites.</p>
+<p>The certificate expires in about 90 days. A systemd timer periodically renews it
+for you, with no one involved.</p>
+<p>Deploying a new version of an application, however, is still done by hand, over
+SSH.</p>
 <h3 id="architecture"><img class="emoji" src="/2026/assets/emoji/1f3db-dbe34f53028e0d3a38ebb7d3c1af041e.svg" alt="🏛️" width="20" height="20" /> Architecture<a href="#architecture" aria-label="Link to heading 'Architecture'" data-heading-content="Architecture" class="anchor"></a></h3>
 <p>This is a simplified architecture of the main running processes and
-communication flow at the end of this exercise:</p>
-<p><img src="./images/architecture-5902486eafe96df3bf93c0504334c2f3.png" alt="Diagram" /></p>
-<div class="flex items-center gap-2">
-  <a href="./images/architecture-9208f0f525c3c40a397b0b53119785af.pdf" download="Certbot Deployment Architecture" class="tooltip" data-tip="Download PDF"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-  />
-</svg>
-  </a>
-  <a href="./images/architecture-5902486eafe96df3bf93c0504334c2f3.png" download="Certbot Deployment Architecture" class="tooltip" data-tip="Download PNG"><svg
-  class="size-12 opacity-50 hover:opacity-100"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-  />
-</svg>
-  </a>
+communication flow at the end of this exercise. The processes are those of the
+<a href="/2026/course/511-nginx-reverse-proxy-deployment/#architecture">reverse proxy exercise</a>, but the browser connects
+to nginx on port 443, and checks its certificate before sending its request.
+Step through the diagram to see what happens when a browser requests Guess It’s
+home page over HTTPS.</p>
+<!-- Generated from diagrams/514-certbot.svg and 514-certbot.ts by "npm run diagrams": edit those instead. -->
+<div class="diagram-figure" data-diagram="514-certbot">
+<div class="diagram-canvas">
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" viewBox="0 0 1380 620" role="img" aria-labelledby="diagram-514-certbot-title" data-diagram="514-certbot">
+<title id="diagram-514-certbot-title">Guess It served over HTTPS by nginx</title>
+<style id="diagram-514-certbot-diagram-styles">
+svg.diagram { font-family: 'PT Sans', Helvetica, Arial, sans-serif; }
+svg.diagram .lane-heading { font-size: 24px; font-weight: 700; fill: #000; text-anchor: middle; }
+svg.diagram .boundary line { stroke: #000; stroke-width: 5; stroke-dasharray: 14 12; }
+svg.diagram .cloud path { fill: #fff; stroke: #aaa; stroke-width: 2; }
+svg.diagram .cloud text { font-size: 15px; fill: #666; text-anchor: middle; }
+svg.diagram .process rect { fill: #f9505a; stroke: #c93a43; stroke-width: 1; }
+svg.diagram .process text { fill: #fff; text-anchor: middle; }
+svg.diagram .process .label { font-size: 16px; font-weight: 700; }
+svg.diagram .process .subtitle { font-size: 12px; font-style: italic; }
+svg.diagram .process .command { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; font-weight: 700; }
+svg.diagram .edge path { fill: none; stroke: #000; stroke-width: 1.25; }
+svg.diagram .edge.control path { stroke-dasharray: 3 4; }
+svg.diagram .edge text { font-size: 14px; fill: #000; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 8px; stroke-linejoin: round; }
+svg.diagram .edge text.beside { text-anchor: end; }
+svg.diagram .socket path { fill: none; stroke: #000; stroke-width: 1.5; stroke-linecap: round; }
+svg.diagram .process .socket text, svg.diagram .socket text { font-size: 14px; fill: #000; text-anchor: end; }
+svg.diagram .marker-comm { fill: #000; }
+svg.diagram .marker-control { fill: #fff; stroke: #000; stroke-width: 1.25; }
+svg.diagram .legend .frame { fill: none; stroke: #999; stroke-dasharray: 2 2; }
+svg.diagram .legend .title { font-size: 18px; font-style: italic; text-anchor: middle; }
+svg.diagram .legend .entry { font-size: 12px; text-anchor: end; }
+</style><style class="diagram-motion">/* The steps of a diagram: what they hide, show and move, in a deck and in a
+page alike. The generator copies this file into every diagram it generates,
+after the diagram's own look, so that an included diagram needs no stylesheet
+of the site's. The motion script and the page stepper only change classes.
+A diagram is "fully drawn" when no step is reached: what was drawn in the
+file, without what only a step shows. That is the state a page opens with,
+the one a deck prints, and the one shown without JavaScript. */
+/* --- At rest ------------------------------------------------------------- */
+svg.diagram .prompt,
+svg.diagram .process .cog {
+display: none;
+}
+svg.diagram .process rect.glow {
+fill: #fff;
+stroke: none;
+opacity: 0;
+}
+svg.diagram .process .cog path {
+fill: #fff;
+fill-rule: evenodd;
+stroke: none;
+}
+/* Waiting for an answer: a still clock, where the cog turns while working. */
+svg.diagram .process .clock :is(circle, path) {
+fill: none;
+stroke: #fff;
+stroke-width: 1.5;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+/* Travelling data exists only while it travels. */
+svg.diagram .overlay:not(.visible) {
+display: none;
+}
+/* Transient: shown from its step until it is torn down, but not when fully
+drawn, such as a command that has finished by the end of the story. */
+svg.diagram .transient:not(.visible) {
+display: none;
+}
+/* A detail: shown while the diagram is explained, in a page stepping through it
+or in a deck, but left out of the fully drawn diagram, at rest and in print,
+since students are not expected to draw it. */
+svg.diagram .detail {
+display: none;
+}
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .detail {
+display: inline;
+}
+/* The other way round: only in the fully drawn diagram, and hidden while
+stepping through it, such as what no step of the story shows. */
+.diagram-figure:is(.stepping, .in-deck:not(.printed)) svg.diagram .at-rest {
+display: none;
+}
+/* A short-lived process, and the control edge that started it, only while
+their step is the current one. */
+svg.diagram .passing:not(.current-fragment) {
+opacity: 0;
+visibility: hidden;
+}
+/* --- Typing -------------------------------------------------------------- */
+/* The typed text and the cursor are placed after the prompt in characters of
+the monospace font, whichever one shows them. */
+svg.diagram .prompt text,
+svg.diagram .process .prompt text,
+svg.diagram .prompt-line text {
+font-family:
+ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+'Courier New', monospace;
+font-size: 12px;
+font-weight: 700;
+fill: #000;
+text-anchor: start;
+}
+svg.diagram .prompt .typed,
+svg.diagram .prompt .cursor {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+svg.diagram .prompt .cursor {
+display: none;
+}
+/* --- Folding ------------------------------------------------------------- */
+/* Until the fold, each folded process shows its own label, and the edges
+between them are drawn; after it, the stack's label. The motion script moves
+the processes and sets `unfolded`. */
+svg.diagram .process .own {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .own {
+opacity: 1;
+}
+svg.diagram .process .stack-label {
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .process .stack-label {
+opacity: 0;
+}
+svg.diagram .folds-away path {
+opacity: 0;
+transition: opacity 0.4s;
+}
+svg.diagram.unfolded .folds-away path {
+opacity: 1;
+}
+/* --- Data ---------------------------------------------------------------- */
+/* A trip in two clicks: to the middle, where it waits, then the rest of the
+way. Along the edge from --from to --to, which run backwards when it travels
+against the arrow. */
+svg.diagram .packet path {
+fill: #1f6feb;
+stroke: #1f6feb;
+stroke-width: 3;
+stroke-linejoin: round;
+}
+svg.diagram .packet text {
+fill: #fff;
+font-size: 13px;
+font-weight: 700;
+text-anchor: middle;
+}
+svg.diagram .packet .leg {
+offset-rotate: 0deg;
+offset-distance: 50%;
+}
+/* The second click must not hide the data before it is reached. */
+svg.diagram .packet .leg.fragment {
+opacity: 1;
+visibility: inherit;
+}
+svg.diagram .packet .leg.fragment.visible {
+offset-distance: var(--to);
+opacity: 0;
+}
+/* In one click: gone once the next step is reached. */
+svg.diagram .packet.whole.visible:not(.current-fragment) .leg:not(.visible) {
+animation: none;
+opacity: 0;
+}
+/* Nor does the second half of a trip outlive its step, such as a slow one cut
+short by a click. */
+svg.diagram .packet .leg.fragment.visible:not(.current-fragment) {
+animation: none;
+opacity: 0;
+}
+/* A part of the drawing a diagram becomes, arrived: drawn as that drawing
+draws it, which reveal.js's `will-change` on its steps would not, keeping it
+on a layer of its own. */
+svg.diagram .arrive.visible {
+/* Important: reveal.js's rules for fragments are more specific. */
+will-change: auto !important;
+}
+/* --- Torn down ----------------------------------------------------------- */
+/* Gone from a step on, such as a session closing; the fully drawn diagram still
+shows it. The motion script sets `gone`. */
+svg.diagram .gone {
+/* Important: reveal.js's rules for visible fragments are more specific. */
+opacity: 0 !important;
+visibility: hidden !important;
+transition:
+opacity 0.6s,
+visibility 0s 0.6s !important;
+}
+/* --- Motion -------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+/* A connection draws itself from the side that opened it: the path's length
+is 1 (`pathLength`), whatever its shape. */
+svg.diagram .draw-on.visible path {
+stroke-dasharray: 1 1;
+animation: diagram-draw 0.7s ease-out var(--delay, 0s) both;
+}
+/* Its label arrives with the line, not before. */
+svg.diagram .draw-on.visible text {
+animation: diagram-fade-in 0.3s ease-out calc(var(--delay, 0s) + 0.5s) both;
+}
+/* A control edge appears, then the process it starts. */
+svg.diagram .fade-on.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) both;
+}
+/* A part of the drawing a diagram becomes, once the rest is in place. The
+animation lets go of it once over, so that it is then drawn exactly as in
+that drawing. */
+svg.diagram .arrive.visible {
+animation: diagram-fade-in 0.4s ease-out var(--delay, 0s) backwards;
+}
+/* The cursor types, then disappears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt .cursor {
+display: inline;
+animation:
+diagram-cursor-move var(--type) steps(var(--chars), end) var(--t0) both,
+diagram-cursor-blink 0.5s step-end infinite,
+diagram-cursor-off 0.01s var(--enter) both;
+}
+/* Typed at a shell's prompt or into an application, which clears on Enter. */
+svg.diagram :is(.spawn, .input).visible .prompt {
+display: inline;
+animation: diagram-cursor-off 0.01s var(--enter) both;
+}
+svg.diagram :is(.spawn, .input).visible .prompt .typed {
+animation: diagram-type var(--type) steps(var(--chars), end) var(--t0) both;
+}
+/* The process starts: its box, its text, then its listening port. */
+svg.diagram :is(.spawn, .child).visible &gt; rect:not(.glow) {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-box-in 0.35s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible &gt; text {
+animation: diagram-fade-in 0.3s ease-out var(--launch) both;
+}
+svg.diagram :is(.spawn, .child).visible .socket {
+animation: diagram-fade-in 0.3s ease-out calc(var(--launch) + 0.4s) both;
+}
+/* A process working while its step is the current one: its box brightens
+three times while a cog turns in its top right corner, then both settle,
+the cog slowing to a stop as the last pulse ends. A still cog means
+settings, so it fades out as it stops. */
+svg.diagram .process:has(&gt; .pulse.current-fragment) &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out 3;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in 2.3s both;
+}
+svg.diagram .process:has(&gt; .pulse.current-fragment) .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) both;
+}
+/* In the step that starts it, once it has appeared. */
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) &gt; .glow,
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) .cog path {
+animation-delay: var(--launch);
+}
+svg.diagram .process:has(&gt; .pulse.starting.current-fragment) .cog {
+animation:
+diagram-fade-in 0.3s ease-out var(--launch) both,
+diagram-fade-out 0.3s ease-in calc(var(--launch) + 2.3s) forwards;
+}
+svg.diagram .packet.visible .leg:not(.visible) {
+animation: diagram-leg-1 0.9s ease-in-out both;
+}
+svg.diagram .packet.whole.visible .leg:not(.visible) {
+animation: diagram-trip 1.8s ease-in-out both;
+}
+svg.diagram .packet.visible .leg.visible {
+animation: diagram-leg-2 1.6s ease-in-out both;
+}
+/* Heavy data, such as the hundreds of files of node_modules, is slower. */
+svg.diagram .packet.heavy.visible .leg:not(.visible) {
+animation-duration: 2.7s;
+}
+svg.diagram .packet.heavy.visible .leg.visible {
+animation-duration: 4.8s;
+}
+svg.diagram .packet.heavy.whole.visible .leg:not(.visible) {
+animation-duration: 6s;
+}
+/* A short-lived process works once started, then exits after a moment to
+read it: its box and its edge fade out. No transition into its step:
+Firefox would hold the box at the start of the transition, transparent,
+while its exit animation waits to begin. */
+svg.diagram .process.passing.current-fragment,
+svg.diagram .edge.passing.current-fragment {
+transition: none;
+}
+svg.diagram .passing.current-fragment &gt; .glow {
+animation: diagram-glow 0.8s ease-in-out var(--work) 3;
+}
+svg.diagram .passing.current-fragment .cog {
+display: inline;
+animation: diagram-fade-out 0.3s ease-in calc(var(--work) + 2.3s) both;
+}
+svg.diagram .passing.current-fragment .cog path {
+transform-box: fill-box;
+transform-origin: center;
+animation: diagram-spin 2.4s cubic-bezier(0.3, 0.5, 0.5, 1) var(--work) both;
+}
+svg.diagram .process.passing.current-fragment {
+animation: diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+svg.diagram .edge.passing.current-fragment {
+animation:
+diagram-fade-in 0.4s ease-out var(--delay, 0s) both,
+diagram-exit 0.8s ease-in calc(var(--work) + 3.9s) forwards;
+}
+/* A process starts waiting as its request sets off. */
+svg.diagram .clock.visible {
+animation: diagram-fade-in 0.4s ease-out 0.2s both;
+}
+/* Shown once the data that brings it has arrived. */
+svg.diagram .arrives.visible {
+animation: diagram-fade-in 0.2s ease-out 1.1s both;
+}
+}
+@keyframes diagram-draw {
+/* The arrowhead waits for the line to reach it. */
+from {
+stroke-dashoffset: 1;
+marker-end: none;
+}
+99% {
+marker-end: none;
+}
+to {
+stroke-dashoffset: 0;
+}
+}
+@keyframes diagram-leg-1 {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+20% {
+opacity: 1;
+}
+to {
+offset-distance: 50%;
+opacity: 1;
+}
+}
+/* Delivered: it sits on the box a moment, then fades. */
+@keyframes diagram-leg-2 {
+from {
+offset-distance: 50%;
+opacity: 1;
+}
+55% {
+offset-distance: var(--to);
+opacity: 1;
+}
+80% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-trip {
+from {
+offset-distance: var(--from);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+60% {
+offset-distance: var(--to);
+opacity: 1;
+}
+85% {
+opacity: 1;
+}
+to {
+offset-distance: var(--to);
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-move {
+from {
+transform: translateX(calc(var(--at, 0) * 1ch));
+}
+to {
+transform: translateX(calc((var(--at, 0) + var(--chars)) * 1ch));
+}
+}
+@keyframes diagram-cursor-blink {
+50% {
+opacity: 0;
+}
+}
+@keyframes diagram-cursor-off {
+to {
+visibility: hidden;
+}
+}
+@keyframes diagram-type {
+from {
+clip-path: inset(0 100% 0 0);
+}
+to {
+clip-path: inset(0);
+}
+}
+@keyframes diagram-box-in {
+from {
+opacity: 0;
+transform: scale(0.8, 0.5);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@keyframes diagram-fade-in {
+from {
+opacity: 0;
+}
+}
+@keyframes diagram-glow {
+50% {
+opacity: 0.3;
+}
+}
+@keyframes diagram-spin {
+to {
+transform: rotate(1turn);
+}
+}
+@keyframes diagram-fade-out {
+to {
+opacity: 0;
+}
+}
+@keyframes diagram-exit {
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
+}
+/* --- Around the diagram -------------------------------------------------- */
+/* Drawn for a white background, in a dark page and on a slide alike. */
+.diagram-figure .diagram-canvas {
+background: #fff;
+border-radius: 8px;
+padding: 8px;
+}
+.diagram-figure svg.diagram {
+display: block;
+width: 100%;
+height: auto;
+}
+/* A deck hides the legend, the teacher being there to explain, except in
+print, which shows the diagram fully drawn. */
+.diagram-figure.in-deck:not(.printed) .legend {
+display: none;
+}
+.diagram-figure.in-deck svg.diagram {
+max-height: 520px;
+}
+/* A slide of its own, marked `full-diagram`, makes the figure the whole window
+but for the strip of the logos and controls: the card is as large as the
+drawing's proportions allow in it, which the deck gives as --diagram-aspect,
+since CSS cannot read a view box. The drawing's own margin is the card's
+padding. */
+section.full-diagram .diagram-figure.in-deck {
+container-type: size;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+section.full-diagram .diagram-figure.in-deck .diagram-canvas {
+padding: 0;
+width: min(100cqw, 100cqh * var(--diagram-aspect, 2));
+}
+section.full-diagram .diagram-figure.in-deck svg.diagram {
+max-height: none;
+}
+/* A page stepping through the diagram does what reveal.js does in a deck:
+hides the steps not reached yet. The captions say what the legend would. */
+.diagram-figure.stepping svg.diagram .fragment {
+transition: opacity 0.2s;
+}
+.diagram-figure.stepping svg.diagram .fragment:not(.visible):not(.leg) {
+opacity: 0;
+visibility: hidden;
+}
+.diagram-figure.stepping .legend {
+display: none;
+}
+/* The page's controls, in whatever colours the page is in. */
+.diagram-figure .diagram-caption {
+margin: 0.5em 0.25em 0;
+}
+.diagram-figure .diagram-controls {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.5em;
+margin-top: 0.5em;
+}
+.diagram-figure .diagram-controls button {
+font: inherit;
+font-size: 0.9em;
+color: inherit;
+background: color-mix(in srgb, currentColor 8%, transparent);
+border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+border-radius: 6px;
+padding: 0.2em 0.75em;
+cursor: pointer;
+}
+.diagram-figure .diagram-controls button:hover:not(:disabled) {
+background: color-mix(in srgb, currentColor 16%, transparent);
+border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.diagram-figure .diagram-controls button.primary:hover:not(:disabled) {
+background: #1a5fcc;
+border-color: #1a5fcc;
+}
+.diagram-figure .diagram-controls button:disabled {
+opacity: 0.4;
+cursor: default;
+}
+.diagram-figure .diagram-controls button.primary {
+background: #1f6feb;
+border-color: #1f6feb;
+color: #fff;
+}
+.diagram-figure .diagram-controls .counter {
+min-width: 7em;
+text-align: center;
+font-size: 0.9em;
+opacity: 0.7;
+}
+/* Printed fully drawn, with the caption that goes with it. */
+@media print {
+.diagram-figure .diagram-controls {
+display: none;
+}
+.diagram-figure .diagram-canvas {
+break-inside: avoid;
+}
+}
+</style>
+<defs id="diagram-514-certbot-diagram-defs">
+<marker id="diagram-514-certbot-arrow-comm" viewBox="0 0 12 8" refX="12" refY="4" markerWidth="12" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-comm" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+<marker id="diagram-514-certbot-arrow-control" viewBox="-1 -1 14 10" refX="12" refY="4" markerWidth="14" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+<path class="marker-control" d="M0,0 L12,4 L0,8 z"/>
+</marker>
+</defs><g class="fragment teardown" data-fragment-index="14"/><g class="fragment teardown" data-fragment-index="13"/><g class="fragment teardown" data-fragment-index="11"/>
+<g id="diagram-514-certbot-lane-computer" class="lane"><text class="lane-heading" x="200" y="58">Your Computer</text></g>
+<g id="diagram-514-certbot-lane-server" class="lane"><text class="lane-heading" x="960" y="58">Server</text></g>
+<g id="diagram-514-certbot-boundary-internet" class="boundary">
+<line x1="400" y1="48" x2="400" y2="600"/>
+<line x1="540" y1="48" x2="540" y2="600"/>
+</g>
+<g id="diagram-514-certbot-cloud-internet" class="cloud">
+<path d="M438,96 a14,14 0 0 1 -2,-28 a20,20 0 0 1 34,-14 a18,18 0 0 1 32,8 a14,14 0 0 1 4,34 z"/>
+<text x="470" y="80">Internet</text>
+</g>
+<g id="diagram-514-certbot-node-systemd" class="process">
+<rect x="1160" y="120" width="160" height="46" rx="8"/>
+<text class="label" x="1240" y="140">systemd</text>
+<text class="subtitle" x="1240" y="156">Init process, PID 1</text>
+</g>
+<g id="diagram-514-certbot-node-browser" class="fragment process" data-fragment-index="0">
+<rect x="160" y="240" width="180" height="46" rx="8"/><rect x="160" y="240" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M332.35,251.72 L334.45,252.18 L334.45,253.82 L332.35,254.28 L331.69,255.87 L332.85,257.69 L331.69,258.85 L329.87,257.69 L328.28,258.35 L327.82,260.45 L326.18,260.45 L325.72,258.35 L324.13,257.69 L322.31,258.85 L321.15,257.69 L322.31,255.87 L321.65,254.28 L319.55,253.82 L319.55,252.18 L321.65,251.72 L322.31,250.13 L321.15,248.31 L322.31,247.15 L324.13,248.31 L325.72,247.65 L326.18,245.55 L327.82,245.55 L328.28,247.65 L329.87,248.31 L331.69,247.15 L332.85,248.31 L331.69,250.13 Z M329.3,253 A2.3,2.3 0 1 0 324.7,253 A2.3,2.3 0 1 0 329.3,253 Z"/></g>
+<text class="label" x="250" y="268">Browser</text>
+<g class="fragment input" data-fragment-index="1" style="--chars: 32; --t0: 0.3s; --type: 2s; --enter: 2.7s; --launch: 2.7s"><g class="prompt" style="--at: 0"><text class="typed" x="166" y="304">https://guessit.jde.archidep2.ch</text><text class="cursor" x="166" y="304">█</text></g></g><g class="fragment transient clock" data-fragment-index="3" data-gone-from="14" style="--gone-delay: 1.1s"><circle cx="327" cy="253" r="6.5"/><path d="M327,249 V253 H330"/></g><g class="fragment pulse" data-fragment-index="15"/></g>
+<g id="diagram-514-certbot-node-nginx" class="process">
+<rect x="600" y="240" width="180" height="46" rx="8"/><rect x="600" y="240" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M772.35,251.72 L774.45,252.18 L774.45,253.82 L772.35,254.28 L771.69,255.87 L772.85,257.69 L771.69,258.85 L769.87,257.69 L768.28,258.35 L767.82,260.45 L766.18,260.45 L765.72,258.35 L764.13,257.69 L762.31,258.85 L761.15,257.69 L762.31,255.87 L761.65,254.28 L759.55,253.82 L759.55,252.18 L761.65,251.72 L762.31,250.13 L761.15,248.31 L762.31,247.15 L764.13,248.31 L765.72,247.65 L766.18,245.55 L767.82,245.55 L768.28,247.65 L769.87,248.31 L771.69,247.15 L772.85,248.31 L771.69,250.13 Z M769.3,253 A2.3,2.3 0 1 0 764.7,253 A2.3,2.3 0 1 0 769.3,253 Z"/></g>
+<text class="label" x="690" y="260">nginx</text>
+<text class="subtitle" x="690" y="276">Reverse proxy</text>
+<g id="diagram-514-certbot-socket-nginx-443" class="socket">
+<path d="M600,256 L582,240 M600,270 L582,286"/>
+<text x="586" y="234">443</text>
+</g>
+<g class="fragment pulse" data-fragment-index="4"/><g class="fragment transient clock" data-fragment-index="6" data-gone-from="13" style="--gone-delay: 1.1s"><circle cx="767" cy="253" r="6.5"/><path d="M767,249 V253 H770"/></g></g>
+<g id="diagram-514-certbot-node-guessit" class="process">
+<rect x="880" y="380" width="180" height="46" rx="8"/><rect x="880" y="380" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M1052.35,391.72 L1054.45,392.18 L1054.45,393.82 L1052.35,394.28 L1051.69,395.87 L1052.85,397.69 L1051.69,398.85 L1049.87,397.69 L1048.28,398.35 L1047.82,400.45 L1046.18,400.45 L1045.72,398.35 L1044.13,397.69 L1042.31,398.85 L1041.15,397.69 L1042.31,395.87 L1041.65,394.28 L1039.55,393.82 L1039.55,392.18 L1041.65,391.72 L1042.31,390.13 L1041.15,388.31 L1042.31,387.15 L1044.13,388.31 L1045.72,387.65 L1046.18,385.55 L1047.82,385.55 L1048.28,387.65 L1049.87,388.31 L1051.69,387.15 L1052.85,388.31 L1051.69,390.13 Z M1049.3,393 A2.3,2.3 0 1 0 1044.7,393 A2.3,2.3 0 1 0 1049.3,393 Z"/></g>
+<text class="label" x="970" y="400">Guess It</text>
+<text class="command" x="970" y="416">node server.js</text>
+<g id="diagram-514-certbot-socket-guessit-3000" class="socket">
+<path d="M880,396 L862,380 M880,410 L862,426"/>
+<text x="866" y="374">3000</text>
+</g>
+<g class="fragment pulse" data-fragment-index="7"/><g class="fragment transient clock" data-fragment-index="9" data-gone-from="11" style="--gone-delay: 1.1s"><circle cx="1047" cy="393" r="6.5"/><path d="M1047,389 V393 H1050"/></g><g class="fragment pulse" data-fragment-index="12"/></g>
+<g id="diagram-514-certbot-node-postgresql" class="process">
+<rect x="1160" y="520" width="180" height="46" rx="8"/><rect x="1160" y="520" width="180" height="46" rx="8" class="glow"/><g class="cog"><path d="M1332.35,531.72 L1334.45,532.18 L1334.45,533.82 L1332.35,534.28 L1331.69,535.87 L1332.85,537.69 L1331.69,538.85 L1329.87,537.69 L1328.28,538.35 L1327.82,540.45 L1326.18,540.45 L1325.72,538.35 L1324.13,537.69 L1322.31,538.85 L1321.15,537.69 L1322.31,535.87 L1321.65,534.28 L1319.55,533.82 L1319.55,532.18 L1321.65,531.72 L1322.31,530.13 L1321.15,528.31 L1322.31,527.15 L1324.13,528.31 L1325.72,527.65 L1326.18,525.55 L1327.82,525.55 L1328.28,527.65 L1329.87,528.31 L1331.69,527.15 L1332.85,528.31 L1331.69,530.13 Z M1329.3,533 A2.3,2.3 0 1 0 1324.7,533 A2.3,2.3 0 1 0 1329.3,533 Z"/></g>
+<text class="label" x="1250" y="548">PostgreSQL</text>
+<g id="diagram-514-certbot-socket-postgresql-5432" class="socket">
+<path d="M1160,536 L1142,520 M1160,550 L1142,566"/>
+<text x="1146" y="514">5432</text>
+</g>
+<g class="fragment pulse" data-fragment-index="10"/></g>
+<g id="diagram-514-certbot-edge-systemd-nginx" class="edge control">
+<path d="M1160,143 H700 Q690,143 690,153 V240" marker-end="url(#diagram-514-certbot-arrow-control)"/>
+</g>
+<g id="diagram-514-certbot-edge-systemd-guessit" class="edge control">
+<path d="M1200,166 V393 Q1200,403 1190,403 H1060" marker-end="url(#diagram-514-certbot-arrow-control)"/>
+</g>
+<g id="diagram-514-certbot-edge-systemd-postgresql" class="edge control">
+<path d="M1290,166 V520" marker-end="url(#diagram-514-certbot-arrow-control)"/>
+</g>
+<g id="diagram-514-certbot-edge-browser-nginx" class="fragment draw-on edge comm" data-fragment-index="2" style="--delay: 0s">
+<path d="M340,263 H600" marker-end="url(#diagram-514-certbot-arrow-comm)" pathLength="1"/>
+<text x="464" y="268">https://guessit.jde.archidep2.ch</text>
+</g>
+<g id="diagram-514-certbot-edge-nginx-guessit" class="fragment draw-on edge comm" data-fragment-index="5" style="--delay: 0s">
+<path d="M690,286 V393 Q690,403 700,403 H880" marker-end="url(#diagram-514-certbot-arrow-comm)" pathLength="1"/>
+<text x="780" y="444">http://127.0.0.1:3000</text>
+</g>
+<g id="diagram-514-certbot-edge-guessit-postgresql" class="fragment draw-on edge comm" data-fragment-index="8" style="--delay: 0s">
+<path d="M970,426 V533 Q970,543 980,543 H1160" marker-end="url(#diagram-514-certbot-arrow-comm)" pathLength="1"/>
+<text x="1070" y="590">postgresql://guessit:pw@localhost:5432/guessit</text>
+</g>
+<g id="diagram-514-certbot-legend" class="legend" transform="translate(0,98)">
+<rect class="frame" x="32" y="292" width="308" height="190"/>
+<text class="title" x="186" y="318">Legend</text>
+<g class="process">
+<rect x="94" y="337" width="182" height="31" rx="6"/>
+<text class="label" x="185" y="358">Process</text>
+</g>
+<text class="entry" x="147" y="397">Communication</text>
+<g class="edge comm"><path d="M157,393 H320" marker-end="url(#diagram-514-certbot-arrow-comm)"/></g>
+<text class="entry" x="147" y="419">Control</text>
+<g class="edge control"><path d="M157,415 H320" marker-end="url(#diagram-514-certbot-arrow-control)"/></g>
+<text class="entry" x="147" y="441">Network Boundary</text>
+<g class="boundary"><line x1="157" y1="437" x2="322" y2="437"/></g>
+<text class="entry" x="147" y="465">Listening Port</text>
+<g class="process"><rect x="304" y="452" width="22" height="18" rx="3"/></g>
+<g class="socket"><path d="M304,457 L291,448 M304,465 L291,474"/></g>
+</g>
+<g class="overlay packet fragment whole" data-fragment-index="3"><g class="leg" style="offset-path: path('M340,263 H600'); --from: 0%; --to: 100%"><path d="M-31,-12 H21 L31,0 L21,12 H-31 Z"/><text x="-5" y="5">GET /</text></g></g><g class="overlay packet fragment whole" data-fragment-index="6"><g class="leg" style="offset-path: path('M690,286 V393 Q690,403 700,403 H880'); --from: 0%; --to: 100%"><path d="M-31,-12 H21 L31,0 L21,12 H-31 Z"/><text x="-5" y="5">GET /</text></g></g><g class="overlay packet fragment whole" data-fragment-index="9"><g class="leg" style="offset-path: path('M970,426 V533 Q970,543 980,543 H1160'); --from: 0%; --to: 100%"><path d="M-43,-12 H33 L43,0 L33,12 H-43 Z"/><text x="-5" y="5">SELECT …</text></g></g><g class="overlay packet fragment whole" data-fragment-index="11"><g class="leg" style="offset-path: path('M970,426 V533 Q970,543 980,543 H1160'); --from: 100%; --to: 0%"><path d="M-22,-12 H22 V12 H8 L0,20 L-8,12 H-22 Z" transform="scale(1,-1)"/><text x="0" y="5">rows</text></g></g><g class="overlay packet fragment whole" data-fragment-index="13"><g class="leg" style="offset-path: path('M690,286 V393 Q690,403 700,403 H880'); --from: 100%; --to: 0%"><path d="M-22,-12 H22 V12 H8 L0,20 L-8,12 H-22 Z" transform="scale(1,-1)"/><text x="0" y="5">HTML</text></g></g><g class="overlay packet fragment whole" data-fragment-index="14"><g class="leg" style="offset-path: path('M340,263 H600'); --from: 100%; --to: 0%"><path d="M-27,-12 H17 L27,0 L17,12 H-27 Z" transform="scale(-1,1)"/><text x="5" y="5">HTML</text></g></g></svg>
+</div>
+<template class="diagram-captions"><p data-caption="rest">In this diagram, a browser reaches Guess It over HTTPS, at <code>https://guessit.jde.archidep2.ch</code>. nginx listens on port 443, holds the certificate and its private key, and decrypts the request before forwarding it to Guess It on port 3000 over plain HTTP. systemd, the init process, started all three when the server booted.</p><p data-caption="0">systemd, the init process, started PostgreSQL, Guess It and nginx when the server booted. nginx listens on port 443 for HTTPS, and on port 80 to redirect to HTTPS. Guess It listens on port 3000.</p><p data-caption="1">Someone opens a browser on their computer.</p><p data-caption="2">They type Guess It’s address into the browser, starting with <code>https://</code>. The browser looks up <code>guessit.jde.archidep2.ch</code> in the DNS, which answers with your server’s public IP address.</p><p data-caption="3">The browser connects to port 443, the default port of HTTPS, where nginx listens. nginx sends its certificate, which the browser checks, and they agree on a key to encrypt the connection.</p><p data-caption="4">The browser sends an HTTP request for the home page over the connection, encrypted, and waits for the answer. Nobody between your computer and the server can read it.</p><p data-caption="5">nginx works: it decrypts the request, and picks the configuration whose <code>server_name</code> is the name in the <code>Host</code> header. That configuration says to proxy the request to <code>http://127.0.0.1:3000</code>, as before.</p><p data-caption="6">nginx connects to Guess It on port 3000, at <code>127.0.0.1</code>, the server’s own loopback address. This connection is not encrypted, but it never leaves the server.</p><p data-caption="7">nginx sends the request on to Guess It, in plain HTTP, and waits for the answer. Guess It does not know that the browser used HTTPS.</p><p data-caption="8">Guess It works: Node.js runs its JavaScript code, which needs the leaderboard from the database.</p><p data-caption="9">Guess It connects to PostgreSQL on port 5432, with the database URL systemd gave it from its configuration file.</p><p data-caption="10">Guess It sends its query over the connection.</p><p data-caption="11">PostgreSQL works, running the query, while Guess It waits for the answer.</p><p data-caption="12">The rows of the leaderboard travel back to Guess It.</p><p data-caption="13">Guess It works again, building the HTML page from the rows.</p><p data-caption="14">The page travels back to nginx, in plain HTTP, over the connection nginx opened.</p><p data-caption="15">nginx encrypts the page and sends it on to the browser, over the browser’s connection.</p><p data-caption="16">The browser works, decrypting and displaying the page.</p></template>
 </div>
 <div class="note note-info"><div class="title"><svg
   class="size-6"
@@ -284,46 +1122,93 @@ communication flow at the end of this exercise:</p>
     stroke-linejoin="round"
     d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
   />
-</svg><span>Note</span></div><div class="content"><p>This diagram shows the processes involved in all previous exercises, meaning
-those related to the PHP todolist and the revprod applications.</p>
-<p>The only thing that has changed in this exercise is that you are now accessing
-your applications over an encrypted HTTPS/TLS connection instead of insecure
-HTTP.</p></div></div>
+</svg><span>Note</span></div><div class="content"><p>Note that this diagram simplifies nginx by showing only one process, while in
+reality it has a master process and several worker processes, but this is
+sufficient to understand the architecture.</p></div></div>
+<h2 id="where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?<a href="#where-is-everything" aria-label="Link to heading 'Where is everything?'" data-heading-content="Where is everything?" class="anchor"></a></h2>
+<p>These are the files and directories of your server that matter for this
+deployment.</p>
+<div class="file-map">
+<table>
+<thead>
+<tr>
+<th align="left">Path</th>
+<th align="left">What it is</th>
+<th align="left">What you did</th>
+<th align="left">Who uses it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> <code>/etc/letsencrypt</code> <span class="new">new</span></td>
+<td align="left">Certbot’s directory: your Let’s Encrypt account, your certificates, and how to renew them</td>
+<td align="left">Nothing: Certbot created it when you ran it</td>
+<td align="left">Certbot, to renew the certificate</td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> <code>/etc/letsencrypt/live/…</code> <span class="new">new</span></td>
+<td align="left">Your certificate, with its intermediate certificate, and its private key, readable by <code>root</code> only</td>
+<td align="left">Nothing: Certbot saved them there</td>
+<td align="left">nginx’s master process, which runs as <code>root</code></td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>/etc/nginx/sites-available/guessit</code> <span class="changed">changed</span></td>
+<td align="left">The configuration of Guess It, now on port 443 with the certificate, and redirecting port 80 to HTTPS</td>
+<td align="left">Nothing: Certbot changed it, and you read it with <code>cat</code></td>
+<td align="left">nginx, through the link in <code>sites-enabled</code></td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>/etc/nginx/sites-available/clock</code> <span class="changed">changed</span></td>
+<td align="left">The configuration of the clock, changed in the same way</td>
+<td align="left">Nothing: Certbot changed it</td>
+<td align="left">nginx, through the link in <code>sites-enabled</code></td>
+</tr>
+<tr>
+<td align="left"><img class="emoji" src="/2026/assets/emoji/1f4c4-eedd4bd948a0da6d75bf5304bff4e17f.svg" alt="📄" width="20" height="20" /> <code>/usr/lib/systemd/system/certbot.timer</code> <span class="new">new</span></td>
+<td align="left">The timer that runs Certbot twice a day, to renew the certificates that expire soon</td>
+<td align="left">Installed it with <code>apt install</code>, and listed it with <code>systemctl list-timers</code></td>
+<td align="left">systemd, to start <code>certbot.service</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The configuration of Brewscale, if you have deployed it, has changed like those
+of Guess It and the clock.</p>
+<p>You can explore all of this yourself: <code>ls -l</code> shows what a directory contains,
+with its permissions, and <code>cat</code>, <code>head</code> and <code>tail</code> what a file contains, as in
+the <a href="/2026/cheatsheets/command-line/#whats-in-this-file-cat-head-tail-less">command line cheatsheet</a>. Use <code>sudo</code> for what only
+<code>root</code> can read. For example:</p>
+<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1"><span class="l-comment"># The certificates Certbot manages, their names and their expiry dates.</span></span>
+<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">certbot</span> <span class="l-variable-parameter">certificates</span></span>
+<span class="l-line" data-line="3"></span>
+<span class="l-line" data-line="4"><span class="l-comment"># How Certbot will renew your certificate.</span></span>
+<span class="l-line" data-line="5">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">ls</span> <span class="l-variable-parameter">/etc/letsencrypt/renewal</span></span></code></pre>
 <h2 id="troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting<a href="#troubleshooting" aria-label="Link to heading 'Troubleshooting'" data-heading-content="Troubleshooting" class="anchor"></a></h2>
 <p>Here’s a few tips about some problems you may encounter during this exercise.</p>
-<h3 id="no-names-were-found-in-your-configuration-files"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> No names were found in your configuration files<a href="#no-names-were-found-in-your-configuration-files" aria-label="Link to heading 'No names were found in your configuration files'" data-heading-content="No names were found in your configuration files" class="anchor"></a></h3>
-<p>If Certbot tells you that “No names were found in your configuration files” but
-you have nginx sites that are configured, this may be because you have an
-underscore character (<code>_</code>) in your subdomains, e.g. <code>jde.archidep.ch</code>.</p>
-<p>Although many tools support it, <a href="https://www.ssl.com/faqs/underscores-not-allowed-in-domain-names/" target="_blank" rel="noopener noreferrer">underscore are technically not allowed in
-domain
-names</a>. You
-will have to change your subdomain for Certbot to recognize it as valid.</p>
-<p>There are two things you need to do:</p>
+<h3 id="certbot-failed-to-authenticate-some-domains"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Certbot failed to authenticate some domains</code><a href="#certbot-failed-to-authenticate-some-domains" aria-label="Link to heading 'Certbot failed to authenticate some domains'" data-heading-content="Certbot failed to authenticate some domains" class="anchor"></a></h3>
+<p>Let’s Encrypt could not check that you control one of the names. Certbot lists
+each name that failed, with the problem Let’s Encrypt reported, for example:</p>
 <ul>
-<li>
-<p>Log back into <a href="https://www.gandi.net" target="_blank" rel="noopener noreferrer">Gandi.net</a> and add a new A record for your Azure VM just
-like you did during the <a href="/2026/course/508-dns-config/">Domain name configuration</a> exercise.</p>
-<p>Use something short like <code>jde</code> and <code>*.jde</code> (as long as it does not conflict
-with anyone else’s subdomain), with the same IP address as before (the public
-IP address of your Azure VM).</p>
-</li>
-<li>
-<p>Replace your old subdomain by the new one in all your nginx configuration
-files, for example:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/nginx/sites-available/clock</span></span>
-<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/nginx/sites-available/revprod</span></span>
-<span class="l-line" data-line="3">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nano</span> <span class="l-variable-parameter">/etc/nginx/sites-available/todolist</span></span></code></pre>
-<p>Then test and reload the nginx configuration with:</p>
-<pre class="lumis"><code class="language-bash" translate="no" tabindex="0"><span class="l-line" data-line="1">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">nginx</span> <span class="l-variable-parameter">-t</span></span>
-<span class="l-line" data-line="2">$<span class="l-operator">&gt;</span> <span class="l-string-special-path">sudo</span> <span class="l-function-call">systemctl</span> <span class="l-variable-parameter">reload</span> <span class="l-variable-parameter">nginx</span></span></code></pre>
-</li>
+<li><code>DNS problem: NXDOMAIN looking up A for …</code>: the name does not exist in the
+DNS. Check your records as in the <a href="/2026/course/508-dns-config/">DNS exercise</a>.</li>
+<li><code>Timeout during connect (likely firewall problem)</code>: Let’s Encrypt could not
+connect to your server on port 80.</li>
 </ul>
-<p>Make sure your sites work at their new address. If they do, the <code>certbot</code>
-command should now also detect them.</p>
-<div class="note note-tip"><div class="title"><img class="emoji" src="/2026/assets/emoji/1f48e-5a8d9af8b5b3922097b2cccfce844630.svg" alt="💎" width="20" height="20" /><span>Tip</span></div><div class="content"><p>It may take a few minutes for the new DNS entries to propagate. If you are sure
-the new DNS entries are correct but it doesn’t work, try again a little while
-later.</p></div></div>
+<p>In every case, check that each of your sites works over HTTP, e.g.
+<code>http://guessit.jde.archidepN.ch</code>, from your computer, as in the
+<a href="#requirements">requirements</a>. Fix the site that does not work before running
+Certbot again.</p>
+<h3 id="certbot-does-not-list-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Certbot does not list one of my sites<a href="#certbot-does-not-list-one-of-my-sites" aria-label="Link to heading 'Certbot does not list one of my sites'" data-heading-content="Certbot does not list one of my sites" class="anchor"></a></h3>
+<p>Certbot lists the names in the <code>server_name</code> directives of the configurations
+in <code>/etc/nginx/sites-enabled</code>. Check that the site’s configuration is enabled,
+with <code>ls -l /etc/nginx/sites-enabled</code>, and that <code>sudo nginx -t</code> reports no
+error.</p>
+<h3 id="the-browser-says-the-certificate-is-not-valid-for-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The browser says the certificate is not valid for one of my sites<a href="#the-browser-says-the-certificate-is-not-valid-for-one-of-my-sites" aria-label="Link to heading 'The browser says the certificate is not valid for one of my sites'" data-heading-content="The browser says the certificate is not valid for one of my sites" class="anchor"></a></h3>
+<p>You did not select that site’s name when you ran Certbot, so your certificate is
+not valid for it. Run <code>sudo certbot --nginx</code> again, and select all your names.
+Certbot tells you that you have an existing certificate with some of these names,
+and asks whether to expand it: answer <code>E</code> to replace it with a certificate valid
+for all of them.</p>
 
       <div class="@toc:hidden w-full flex justify-center items-center">
         <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
@@ -343,10 +1228,31 @@ later.</p></div></div>
     <a href="#legend"><img class="emoji" src="/2026/assets/emoji/1f4dc-5f8aee4f266854e41de9778beaf7abca.svg" alt="📜" width="20" height="20" /> Legend</a>
     
   </li><li class="toc-entry toc-h2">
+    <a href="#requirements"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Requirements</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#try-https-before-you-start"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Try HTTPS before you start</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#install-certbot"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Install Certbot</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#obtain-a-tls-certificate-from-lets-encrypt"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Obtain a TLS certificate from Let’s Encrypt</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#see-it-in-action"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> See it in action</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#look-at-what-certbot-changed"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Look at what Certbot changed</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#is-everything-encrypted-now"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Is everything encrypted now?</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#find-out-who-can-read-the-private-key"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Find out who can read the private key</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#check-the-automatic-renewal"><img class="emoji" src="/2026/assets/emoji/2757-4467f392af6cb1ad2acd20ae416a69ab.svg" alt="❗" width="20" height="20" /> Check the automatic renewal</a>
     
   </li><li class="toc-entry toc-h2">
     <a href="#what-have-i-done"><img class="emoji" src="/2026/assets/emoji/1f3c1-8e9a2d7ef44c1052a246e062e4c3f796.svg" alt="🏁" width="20" height="20" /> What have I done?</a>
@@ -357,10 +1263,19 @@ later.</p></div></div>
   </li>
 </ul>
   </li><li class="toc-entry toc-h2">
+    <a href="#where-is-everything"><img class="emoji" src="/2026/assets/emoji/1f4c1-ecf869302151b7838aff2f2125920206.svg" alt="📁" width="20" height="20" /> Where is everything?</a>
+    
+  </li><li class="toc-entry toc-h2">
     <a href="#troubleshooting"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Troubleshooting</a>
     <ul class="section-nav">
   <li class="toc-entry toc-h3">
-    <a href="#no-names-were-found-in-your-configuration-files"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> No names were found in your configuration files</a>
+    <a href="#certbot-failed-to-authenticate-some-domains"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> <code>Certbot failed to authenticate some domains</code></a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#certbot-does-not-list-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> Certbot does not list one of my sites</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#the-browser-says-the-certificate-is-not-valid-for-one-of-my-sites"><img class="emoji" src="/2026/assets/emoji/1f4a5-d198f92b9911c7fdbb12baa694a819a2.svg" alt="💥" width="20" height="20" /> The browser says the certificate is not valid for one of my sites</a>
     
   </li>
 </ul>
@@ -374,7 +1289,7 @@ later.</p></div></div>
 </svg>
         </a>
         
-        <a href="https://github.com/ArchiDep/website/blob/d3c90e21443153ebfdceb1cfbecf36b20fe21212/course/chapters/514-certbot-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/ArchiDep/website/blob/62313a5b1de204e981c7e717c48a268f6f60099f/course/chapters/514-certbot-deployment/exercise.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
           <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <title>GitHub</title>
   <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
@@ -821,21 +1736,19 @@ later.</p></div></div>
           
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
-        <a href="/2026/course/513-tls/slides/" target="_blank" class="flex items-center gap-2">
+        <a href="/2026/course/513-tls/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
-  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
   <span>TLS/SSL Certificates</span>
 </span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
           
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/25 group-hover:text-base-content/75" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-</svg>
         </a>
       </li><li class="group hidden peer-has-checked/section-4:flex course-item-next course-item-current">
         <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
           <span class="flex items-center gap-x-2">
   <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
-  <span>Provision an SSL certificate using Certbot by Let&#39;s Encrypt</span>
+  <span>Provision a TLS certificate with Certbot and Let&#39;s Encrypt</span>
 </span>
           
           
@@ -1077,7 +1990,7 @@ later.</p></div></div>
         <span class="font-title">ArchiDep</span>
       </a>
       <span class="tooltip tooltip-left">
-        <span class="tooltip-content">main@d3c90e2</span>
+        <span class="tooltip-content">main@62313a5</span>
         <span class="font-title">0.1.0</span>
       </span>
       

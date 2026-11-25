@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head data-search-data-url="/2026/search-build.json" data-archidep-standalone="true">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TLS/SSL Certificates · ArchiDep</title>
+<meta name="description" content="Learn what a TLS certificate is, why a browser trusts one, and how to obtain one for free from Let’s Encrypt." />
+<link rel="canonical" href="https://archidep.ch/2026/course/513-tls/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ArchiDep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="TLS/SSL Certificates" />
+<meta property="og:description" content="Learn what a TLS certificate is, why a browser trusts one, and how to obtain one for free from Let’s Encrypt." />
+<meta property="og:url" content="https://archidep.ch/2026/course/513-tls/" />
+<meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/2026/assets/theme/theme-e4fbb657e89b62b43538877a53c95f17.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/archidep-rocket-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/archidep-rocket-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicons/archidep-rocket-48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/archidep-rocket-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/archidep-rocket-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/archidep-rocket-180.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="/2026/assets/course/course-3e904c6e36aaab304d56a7d09cf7e1a9.js" defer>
+    </script>
+  </head>
+
+  <body class="group/body">
+    <div id="top" class="top-0 h-0"></div>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('archidep.alwaysTellMeMore')) {
+        const alwaysTellMeMore = document.createElement('div');
+        alwaysTellMeMore.id = 'always-tell-me-more';
+        alwaysTellMeMore.classList.add('hidden');
+        document.body.prepend(alwaysTellMeMore);
+      }
+    </script>
+
+    <div id="search-emoji" hidden>
+      <span data-emoji="book">
+        <img class="emoji" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="📖" width="20" height="20" />
+      </span><span data-emoji="clapper">
+        <img class="emoji" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="🎬" width="20" height="20" />
+      </span><span data-emoji="hammer_and_wrench">
+        <img class="emoji" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="🛠️" width="20" height="20" />
+      </span><span data-emoji="house">
+        <img class="emoji" src="/2026/assets/emoji/1f3e0-deea117ff9db07e31d8658a505394d01.svg" alt="🏠" width="20" height="20" />
+      </span><span data-emoji="memo">
+        <img class="emoji" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="📝" width="20" height="20" />
+      </span><span data-emoji="shrug">
+        <img class="emoji" src="/2026/assets/emoji/1f937-a6f0125bda828e86ccba6c5b64c74100.svg" alt="🤷" width="20" height="20" />
+      </span><span data-emoji="trophy">
+        <img class="emoji" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="🏆" width="20" height="20" />
+      </span>
+    </div>
+
+    <header class="navbar bg-base-300 screen:shadow-sm w-full">
+  <div class="navbar-start">
+    <label for="sidebar" class="lg:hidden print:hidden btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </label>
+    <a class="btn btn-ghost text-xl print:text-3xl print:pl-0" href="/">
+      <div class="flex items-center gap-x-2">
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
+        <h1 class="print:hidden">ArchiDep</h1>
+        <h1 class="hidden print:block">Architecture &amp; Deployment</h1>
+      </div>
+    </a>
+  </div>
+
+  <div class="navbar-end flex gap-2 print:hidden">
+    <button type="button" id="search-button" class="hidden btn btn-ghost max-sm:btn-circle hover:bg-neutral">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 sm:size-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+</svg>
+      <kbd class="kbd kbd-xs sm:kbd-sm macos hidden">⌘K</kbd>
+      <kbd class="kbd kbd-xs sm:kbd-sm hidden sm:inline">Ctrl K</kbd>
+    </button>
+    
+    
+  </div>
+</header>
+
+<div class="hidden print:block w-full">
+  <ul class="list-none m-0 p-0 flex flex-wrap gap-2 text-xs text-base-content/50">
+    <li>2026-2027</li>
+    <li>
+      v0.1.0
+      <span>
+        on branch <a href="https://github.com/ArchiDep/website/tree/main">main</a>
+      </span>
+    </li>
+    <li>
+      <a href="https://github.com/ArchiDep/website/blob/62313a5b1de204e981c7e717c48a268f6f60099f/course/chapters/513-tls/subject.md">Rev: 62313a5b1de204e981c7e717c48a268f6f60099f</a>
+    </li>
+  </ul>
+</div>
+
+    <div role="alert" class="alert alert-warning alert-soft rounded-none flex flex-wrap justify-center text-center gap-x-2 print:hidden">
+  <span>You are reading the backup copy of the ArchiDep website.</span>
+  <a href="https://archidep.ch/2026/course/513-tls/" class="link font-semibold transition-colors hover:text-base-content">
+    Go to the live site.
+  </a>
+</div>
+
+    <div class="drawer lg:drawer-open">
+      <input id="sidebar" type="checkbox" class="drawer-toggle">
+      <div class="drawer-content">
+        <div class="md:p-4">
+          <div class="@container flex justify-center-safe gap-4">
+  <div class="[--content-pad:--spacing(4)] @3xl:[--content-pad:--spacing(6)] @prose-xl:[--content-pad:--spacing(8)] p-(--content-pad) min-w-0 rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl w-full bg-linear-to-br from-transparent to-zinc-200 dark:from-transparent dark:to-zinc-800/40 @3xl:w-auto">
+    <main class="prose prose-lg @prose-xl:prose-xl @prose-2xl:prose-2xl @max-3xl:max-w-none course-subject">
+      <h1 class="text-2xl @2xl:text-3xl @3xl:text-4xl @prose-xl:text-5xl !mb-0">
+  TLS/SSL Certificates
+</h1>
+
+      <div class="my-4"><p>Learn what a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank" rel="noopener noreferrer">TLS</a> certificate is, why a browser trusts one, and how to
+obtain one for free from <a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">Let’s Encrypt</a>.</p></div>
+
+      <div class="my-4 toc collapse screen:collapse-arrow print:collapse-open bg-neutral/25 dark:bg-neutral border-base-300 border @toc:hidden">
+        <input type="checkbox">
+        <div id="on-this-page-inline-title" class="collapse-title text-xl font-bold">
+          <span class="print:hidden">On this page</span>
+          <span class="hidden print:inline">Table of contents</span>
+        </div>
+        <nav class="toc collapse-content text-sm" aria-labelledby="on-this-page-inline-title">
+          <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-problem-tls-solves">The problem TLS solves</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#you-have-seen-this-problem-before">You have seen this problem before</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-a-certificate-is">What a certificate is</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-a-browser-connects-over-https">How a browser connects over HTTPS</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-chain-of-trust">The chain of trust</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#certificate-authorities">Certificate authorities</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#intermediate-and-root-certificates">Intermediate and root certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#trusted-root-certificates">Trusted root certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#self-signed-certificates">Self-signed certificates</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#obtaining-a-certificate">Obtaining a certificate</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#domain-validation">Domain validation</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#free-and-paid-certificates">Free and paid certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#certificate-lifetimes">Certificate lifetimes</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#lets-encrypt">Let’s Encrypt</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#certificate-transparency">Certificate Transparency</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#where-tls-ends">Where TLS ends</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+        </nav>
+      </div>
+
+      
+
+      <div class="not-prose print:hidden">
+  <div class="mt-4 mb-2 flex justify-between items-end gap-x-2">
+    <h2 id="presentation" class="text-4xl font-bold">Presentation</h2>
+    <div class="flex items-center gap-2">
+      <a href="/2026/course/513-tls/slides/?show-notes=true" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open with speaker notes">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+      </a>
+      <a href="/2026/course/513-tls/slides/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-x-2 opacity-75 hover:opacity-100 tooltip" data-tip="Open">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-8" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+      </a>
+    </div>
+  </div>
+
+  <iframe class="w-full aspect-video dark:opacity-85" src="/2026/course/513-tls/slides/?view=scroll" title="Slides"></iframe>
+</div>
+
+      <p><strong>Recommended reading</strong></p>
+<ul>
+<li><a href="/2026/course/103-ssh/">Secure Shell (SSH)</a></li>
+<li><a href="/2026/course/509-reverse-proxy/">Reverse Proxying</a></li>
+</ul>
+<h2 id="the-problem-tls-solves">The problem TLS solves<a href="#the-problem-tls-solves" aria-label="Link to heading 'The problem TLS solves'" data-heading-content="The problem TLS solves" class="anchor"></a></h2>
+<p>Plain HTTP sends everything in clear text. Between your browser and a server,
+your requests cross many machines that you do not control: the Wi-Fi access
+point, your Internet provider’s routers, and others along the way. Anyone in
+control of one of them can:</p>
+<ul>
+<li><strong>Read</strong> what you send and receive, such as a password or the contents of a
+page.</li>
+<li><strong>Modify</strong> it, for example to insert something into a page.</li>
+<li><strong>Pretend to be the server</strong>, and answer in its place. This is a
+man-in-the-middle attack.</li>
+</ul>
+<p><img src="images/man-in-the-middle-33c5acb8263948ad29f1fe0a7179d8ad.png" alt="Alice and Bob think they talk to each other, but Mallory sits between them and relays, reads or changes everything they send" /></p>
+<p><em>Diagram by Miraceti, CC BY-SA 3.0, from <a href="https://commons.wikimedia.org/wiki/File:Man_in_the_middle_attack.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</em></p>
+<p>The <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" target="_blank" rel="noopener noreferrer">Transport Layer Security (TLS)</a> protocol solves these problems. It
+<strong>encrypts</strong> the traffic so that nobody else can read or modify it, and it
+<strong>authenticates</strong> the server so that you know who you are talking to. HTTPS is
+HTTP sent through a TLS connection, by default on port 443 instead of 80.</p>
+<div class="note note-info"><div class="title"><svg
+  class="size-6"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg><span>Note</span></div><div class="content"><p>SSL, the original <strong>S</strong>ecure <strong>S</strong>ockets <strong>L</strong>ayer protocol, was first published
+in 1995 and is now deprecated. TLS replaced it in 1999, and its latest version
+is TLS 1.3, published in 2018. TLS certificates are often still called “SSL
+certificates”.</p></div></div>
+<h2 id="you-have-seen-this-problem-before">You have seen this problem before<a href="#you-have-seen-this-problem-before" aria-label="Link to heading 'You have seen this problem before'" data-heading-content="You have seen this problem before" class="anchor"></a></h2>
+<p>SSH solves the same problem. When it establishes a secure channel, the client
+and the server agree on a secret encryption key with a <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank" rel="noopener noreferrer">Diffie-Hellman key
+exchange</a>, and the server <strong>signs</strong> the exchange with its private key. Your
+SSH client checks the signature with the server’s public key.</p>
+<p>The difficulty is knowing that this public key is really the server’s. As
+<a href="/2026/course/103-ssh/#are-you-really-the-ssh-server-im-looking-for">explained in the SSH subject</a>, the first time you connect, an
+attacker could send you their own public key instead. You solved this yourself,
+by comparing the key’s fingerprint with one obtained from a trusted source.</p>
+<p>A browser cannot ask you to check a fingerprint for every site you visit. TLS
+solves this differently: a third party that your browser already trusts, a
+<strong>certificate authority</strong>, vouches that the public key belongs to the site.
+It does so in a <strong>certificate</strong>.</p>
+<h2 id="what-a-certificate-is">What a certificate is<a href="#what-a-certificate-is" aria-label="Link to heading 'What a certificate is'" data-heading-content="What a certificate is" class="anchor"></a></h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Public_key_certificate" target="_blank" rel="noopener noreferrer">public key certificate</a> binds a <strong>name</strong> to a <strong>public
+key</strong>, and is signed by someone who vouches for that binding, its <strong>issuer</strong>. A
+TLS certificate contains:</p>
+<ul>
+<li>The domain names it is valid for, such as <code>example.com</code> and <code>www.example.com</code>,
+or a wildcard such as <code>*.example.com</code>, which is valid for every subdomain of
+<code>example.com</code>.</li>
+<li>The server’s public key.</li>
+<li>The dates between which it is valid.</li>
+<li>The name of its issuer.</li>
+<li>The issuer’s <a href="https://en.wikipedia.org/wiki/Digital_signature" target="_blank" rel="noopener noreferrer">digital signature</a> of all of the above.</li>
+</ul>
+<p>A certificate is <strong>not a secret</strong>. The server sends it to every client that
+connects, and anyone can download it. The secret is the <strong>private key</strong> that
+goes with the public key in the certificate, and it never leaves the server.</p>
+<h2 id="how-a-browser-connects-over-https">How a browser connects over HTTPS<a href="#how-a-browser-connects-over-https" aria-label="Link to heading 'How a browser connects over HTTPS'" data-heading-content="How a browser connects over HTTPS" class="anchor"></a></h2>
+<p>Simplified, this is what happens when your browser opens a connection to
+<code>https://example.com</code>:</p>
+<ol>
+<li>The browser connects to the server on port 443.</li>
+<li>The browser and the server agree on a <a href="https://en.wikipedia.org/wiki/Cipher_suite" target="_blank" rel="noopener noreferrer">cipher suite</a>: the
+algorithms they both support.</li>
+<li>They agree on a shared secret key with a Diffie-Hellman key exchange, as SSH
+does. The key itself never travels over the network.</li>
+<li>The server sends its certificate, and <strong>signs</strong> the handshake with its
+private key.</li>
+<li>The browser checks the certificate: that it is valid for <code>example.com</code>, that
+it has not expired, and that it is signed by an issuer the browser trusts.
+It then checks the server’s signature with the public key in the
+certificate.</li>
+<li>Both use the shared key to encrypt all the HTTP traffic, with fast
+symmetric encryption.</li>
+</ol>
+<p>The certificate alone proves nothing, since anyone can copy it. An attacker
+could send your browser a copy of <code>example.com</code>’s certificate, but could not
+sign the handshake without <code>example.com</code>’s private key. The signature is what
+proves that the server holds that private key, and the certificate is what
+proves that this key belongs to <code>example.com</code>.</p>
+<p><img src="images/digital-signature-a211ed65f1b99a77ecb7d8530007d0de.png" alt="Alice signs a message with her private key, and Bob verifies the signature with Alice’s public key" /></p>
+<p><em>Diagram by FlippyFlink, CC BY-SA 4.0, from <a href="https://commons.wikimedia.org/wiki/File:Private_key_signing.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</em></p>
+<p>A digital signature works as in this diagram, with the server as Alice and the
+browser as Bob: only the holder of the private key can sign, and anyone with the
+public key can verify the signature.</p>
+<p>If any check fails, the browser refuses to show the page, and shows a warning
+instead.</p>
+<h2 id="the-chain-of-trust">The chain of trust<a href="#the-chain-of-trust" aria-label="Link to heading 'The chain of trust'" data-heading-content="The chain of trust" class="anchor"></a></h2>
+<p>A browser trusts a certificate because of who signed it, and trusts that signer
+because of who signed its own certificate, and so on, up to a certificate that
+the browser already has.</p>
+<p><img src="slides/images/chain-of-trust-20d68775c24f3d2bd768c0bc1bb9c662.png" alt="Three certificates, each pointing to the one of its issuer: the end-entity certificate is signed by an intermediate certificate, which is signed by a self-signed root certificate" /></p>
+<p><em>Diagram by Yanpas, CC BY-SA 4.0, from <a href="https://commons.wikimedia.org/wiki/File:Chain_of_trust.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</em></p>
+<h3 id="certificate-authorities">Certificate authorities<a href="#certificate-authorities" aria-label="Link to heading 'Certificate authorities'" data-heading-content="Certificate authorities" class="anchor"></a></h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Certificate_authority" target="_blank" rel="noopener noreferrer">certificate authority (CA)</a> is an organization that issues certificates.
+It has a key pair of its own. It signs your certificate with its private key,
+and anyone who has its public key can check the signature.</p>
+<p>But how does the browser get the public key of the certificate authority, and
+know that it is really the authority’s? From another certificate: the
+certificate authority has one of its own, which contains its public key.</p>
+<h3 id="intermediate-and-root-certificates">Intermediate and root certificates<a href="#intermediate-and-root-certificates" aria-label="Link to heading 'Intermediate and root certificates'" data-heading-content="Intermediate and root certificates" class="anchor"></a></h3>
+<p>This leads to a <a href="https://en.wikipedia.org/wiki/Chain_of_trust" target="_blank" rel="noopener noreferrer"><strong>chain of trust</strong></a>:</p>
+<ul>
+<li>Your certificate, the <strong>end-entity certificate</strong>, is signed by an
+<strong>intermediate certificate authority</strong>.</li>
+<li>The intermediate certificate is signed by a <strong>root certificate authority</strong>.
+There may be more than one intermediate certificate in between.</li>
+<li>The root certificate is <strong>self-signed</strong>: it is signed with its own private key.</li>
+</ul>
+<p>A certificate authority keeps the private key of its root certificate offline,
+and signs its customers’ certificates with the keys of its intermediate
+certificates. If an intermediate key is compromised, it can be replaced without
+replacing the root.</p>
+<p>The server sends its own certificate and the intermediate certificates to the
+browser. The root certificate is not needed: the browser already has it.</p>
+<h3 id="trusted-root-certificates">Trusted root certificates<a href="#trusted-root-certificates" aria-label="Link to heading 'Trusted root certificates'" data-heading-content="Trusted root certificates" class="anchor"></a></h3>
+<p>A self-signed root certificate is technically no different from a certificate
+you could generate yourself on your own computer. What makes it trusted is that
+it is in a <strong>list of trusted root certificates</strong> installed with your browser or
+your operating system.</p>
+<p>To be included in these lists, a certificate authority must be accepted by the
+programs of the vendors, such as the <a href="https://www.chromium.org/Home/chromium-security/root-ca-policy/" target="_blank" rel="noopener noreferrer">Chrome Root Program</a> or
+<a href="https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/policy/" target="_blank" rel="noopener noreferrer">Mozilla’s</a>. They require regular audits, and follow rules
+written by the <a href="https://cabforum.org" target="_blank" rel="noopener noreferrer">CA/Browser Forum</a>, where certificate authorities and
+browser vendors agree on them. A certificate authority that breaks these rules
+can be removed from the lists, and the certificates it issued stop being
+trusted.</p>
+<p>When your browser checks a certificate, it follows the chain up to a root
+certificate, and the certificate is valid only if that root is in its list.</p>
+<h3 id="self-signed-certificates">Self-signed certificates<a href="#self-signed-certificates" aria-label="Link to heading 'Self-signed certificates'" data-heading-content="Self-signed certificates" class="anchor"></a></h3>
+<p>A certificate you generate and sign yourself, with a tool such as <code>openssl</code>, is
+a <strong>self-signed</strong> certificate. It encrypts the traffic like any other, but no
+browser trusts it, since it is not in any list: your browser shows a warning
+such as <code>NET::ERR_CERT_AUTHORITY_INVALID</code>. Self-signed certificates are useful
+for testing, or between machines that you configure to trust them, but not for a
+public website.</p>
+<h2 id="obtaining-a-certificate">Obtaining a certificate<a href="#obtaining-a-certificate" aria-label="Link to heading 'Obtaining a certificate'" data-heading-content="Obtaining a certificate" class="anchor"></a></h2>
+<p>A certificate authority does not issue a certificate to just anyone. This
+section describes what it checks before it does, what you may pay it for, and
+how long a certificate lasts.</p>
+<h3 id="domain-validation">Domain validation<a href="#domain-validation" aria-label="Link to heading 'Domain validation'" data-heading-content="Domain validation" class="anchor"></a></h3>
+<p>Before a certificate authority issues a certificate for a domain name, you must
+<strong>prove that you control that domain</strong>. The most common methods are:</p>
+<ul>
+<li><strong>HTTP validation:</strong> The certificate authority gives you a random token, and
+asks you to make it available at
+<code>http://example.com/.well-known/acme-challenge/&lt;token&gt;</code>. It then connects to
+<code>example.com</code> on port 80, from its own servers on the Internet, and checks
+that it gets the token back. This proves that you control the server that the
+domain points to. The domain must therefore already point to your server, and
+your server must already answer on port 80.</li>
+<li><strong>DNS validation:</strong> The certificate authority asks you to put the token in a
+<code>TXT</code> record of the domain’s DNS zone. This proves that you control the DNS
+zone of the domain. It is the only way to obtain a wildcard certificate: a
+file on one server does not prove that you control every name under the
+domain.</li>
+<li><strong>Email validation:</strong> The certificate authority sends a validation link to an
+address such as <code>admin@example.com</code>, which only the administrator of the
+domain should receive.</li>
+</ul>
+<p>These prove that you control the domain, not who you are. That is all a browser
+needs to know that it is talking to the right server.</p>
+<h3 id="free-and-paid-certificates">Free and paid certificates<a href="#free-and-paid-certificates" aria-label="Link to heading 'Free and paid certificates'" data-heading-content="Free and paid certificates" class="anchor"></a></h3>
+<p>Some certificate authorities, such as <a href="https://www.digicert.com" target="_blank" rel="noopener noreferrer">DigiCert</a> or
+<a href="https://www.sectigo.com" target="_blank" rel="noopener noreferrer">Sectigo</a>, sell certificates. Paying can get you a certificate that is
+compatible with older clients, or a warranty if the certificate authority makes
+a mistake.</p>
+<p>You can also pay for an <a href="https://en.wikipedia.org/wiki/Extended_Validation_Certificate" target="_blank" rel="noopener noreferrer">Extended Validation (EV) certificate</a>,
+for which the certificate authority also checks the legal identity of the
+organization that owns the domain. Browsers used to show that organization’s
+name in a “green bar” next to the address, but stopped in 2019, since studies
+showed that users did not notice it. An EV certificate encrypts connections
+exactly like any other.</p>
+<h3 id="certificate-lifetimes">Certificate lifetimes<a href="#certificate-lifetimes" aria-label="Link to heading 'Certificate lifetimes'" data-heading-content="Certificate lifetimes" class="anchor"></a></h3>
+<p>Every certificate has an end date. The shorter its lifetime, the shorter the
+time a stolen private key or a wrongly issued certificate can be abused. The
+CA/Browser Forum voted in 2025 to shorten the maximum lifetime of certificates
+step by step:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Since</th>
+<th align="right">Maximum lifetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2020</td>
+<td align="right">398 days</td>
+</tr>
+<tr>
+<td align="left">March 2026</td>
+<td align="right">200 days</td>
+</tr>
+<tr>
+<td align="left">March 2027</td>
+<td align="right">100 days</td>
+</tr>
+<tr>
+<td align="left">March 2029</td>
+<td align="right">47 days</td>
+</tr>
+</tbody>
+</table>
+<p>A certificate must be renewed before it expires, or browsers refuse it. With
+lifetimes this short, nobody can renew certificates by hand: renewal must be
+automated.</p>
+<h2 id="lets-encrypt">Let’s Encrypt<a href="#lets-encrypt" aria-label="Link to heading 'Let’s Encrypt'" data-heading-content="Let’s Encrypt" class="anchor"></a></h2>
+<p><a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">Let’s Encrypt</a> is a free certificate authority, run for the
+public’s benefit by the <a href="https://www.abetterinternet.org" target="_blank" rel="noopener noreferrer">Internet Security Research Group (ISRG)</a>. It has
+issued certificates since 2015, and has become the largest certificate authority
+in the world. Its root certificate is in the lists of every major browser and
+operating system.</p>
+<p>Let’s Encrypt is <strong>automatic</strong>: nobody at Let’s Encrypt ever looks at a request.
+A program on your server requests a certificate, proves that you control the
+domain, and renews the certificate before it expires, through an open protocol,
+<a href="https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment" target="_blank" rel="noopener noreferrer">ACME</a> (Automatic Certificate Management Environment). Its certificates
+are valid for 90 days, and <a href="https://letsencrypt.org/2025/12/02/from-90-to-45/" target="_blank" rel="noopener noreferrer">will be valid for 45</a> by 2028.</p>
+<p><a href="https://certbot.eff.org/" target="_blank" rel="noopener noreferrer">Certbot</a>, made by the <a href="https://www.eff.org" target="_blank" rel="noopener noreferrer">Electronic Frontier Foundation (EFF)</a>, is
+one such program. It talks to Let’s Encrypt for you, completes the HTTP
+validation through your web server, saves the certificate and its private key on
+your server, and can configure <a href="https://nginx.org/" target="_blank" rel="noopener noreferrer">nginx</a> to use them. On Ubuntu, a systemd
+timer runs it regularly to renew the certificates that are about to expire.</p>
+<h3 id="certificate-transparency">Certificate Transparency<a href="#certificate-transparency" aria-label="Link to heading 'Certificate Transparency'" data-heading-content="Certificate Transparency" class="anchor"></a></h3>
+<p>Let’s Encrypt, like every trusted certificate authority, publishes every
+certificate it issues in public <a href="https://en.wikipedia.org/wiki/Certificate_Transparency" target="_blank" rel="noopener noreferrer">Certificate Transparency</a> logs, which anyone
+can search, for example with <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>. Browsers require it: this way, a
+certificate issued by mistake, or by an attacker, for a domain that is not
+theirs, cannot go unnoticed.</p>
+<p>A consequence is that the names you obtain certificates for are public as soon
+as they are issued. Bots read these logs and start probing new names within
+minutes.</p>
+<h2 id="where-tls-ends">Where TLS ends<a href="#where-tls-ends" aria-label="Link to heading 'Where TLS ends'" data-heading-content="Where TLS ends" class="anchor"></a></h2>
+<p>When <a href="/2026/course/509-reverse-proxy/">nginx is used as a reverse proxy</a> in front of an
+application, the browser’s TLS connection ends at nginx. nginx holds the
+certificate and its private key, decrypts the browser’s requests, and forwards
+them to the application over plain HTTP, on the server’s loopback address. It
+then encrypts the application’s answers for the browser. This is called <strong>TLS
+termination</strong>.</p>
+<pre class="lumis"><code class="language-plaintext" translate="no" tabindex="0"><span class="l-line" data-line="1">Browser ---HTTPS (port 443)---&gt; nginx ---HTTP (127.0.0.1)---&gt; application</span></code></pre>
+<p>The traffic between nginx and the application is not encrypted, but it never
+leaves the server. The application does not change at all to be served over
+HTTPS, and a single nginx can do this for every site on the server.</p>
+<h2 id="references">References<a href="#references" aria-label="Link to heading 'References'" data-heading-content="References" class="anchor"></a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Public_key_certificate" target="_blank" rel="noopener noreferrer">Public-key Certificate</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Public-key_cryptography" target="_blank" rel="noopener noreferrer">Public Key Cryptography</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chain_of_trust" target="_blank" rel="noopener noreferrer">Chain of Trust</a></li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Certificate_authority" target="_blank" rel="noopener noreferrer">Certificate Authority (CA)</a>
+<ul>
+<li><a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">Let’s Encrypt</a></li>
+<li><a href="https://letsencrypt.org/how-it-works/" target="_blank" rel="noopener noreferrer">How It Works (Let’s Encrypt)</a></li>
+<li><a href="https://letsencrypt.org/docs/challenge-types/" target="_blank" rel="noopener noreferrer">Challenge Types (Let’s Encrypt)</a></li>
+</ul>
+</li>
+<li><a href="https://nginx.org/en/docs/http/configuring_https_servers.html" target="_blank" rel="noopener noreferrer">Nginx - Configuring HTTPS servers</a></li>
+</ul>
+
+      <div class="@toc:hidden w-full flex justify-center items-center">
+        <a href="#top" id="back-to-top-bottom" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </main>
+  </div>
+  <aside class="hidden @toc:block w-64 @prose-2xl:w-xs shrink-0">
+    <div id="on-this-page-aside" class="sticky top-0 max-h-[calc(100dvh-var(--aside-top,0px))] py-2 flex flex-col">
+      <h2 id="on-this-page-title" class="text-xl font-bold">On this page</h2>
+      <nav class="toc min-h-0 overflow-y-auto overscroll-contain" aria-labelledby="on-this-page-title">
+        <ul class="section-nav">
+  <li class="toc-entry toc-h2">
+    <a href="#presentation">Presentation</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-problem-tls-solves">The problem TLS solves</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#you-have-seen-this-problem-before">You have seen this problem before</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#what-a-certificate-is">What a certificate is</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#how-a-browser-connects-over-https">How a browser connects over HTTPS</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#the-chain-of-trust">The chain of trust</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#certificate-authorities">Certificate authorities</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#intermediate-and-root-certificates">Intermediate and root certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#trusted-root-certificates">Trusted root certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#self-signed-certificates">Self-signed certificates</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#obtaining-a-certificate">Obtaining a certificate</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#domain-validation">Domain validation</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#free-and-paid-certificates">Free and paid certificates</a>
+    
+  </li><li class="toc-entry toc-h3">
+    <a href="#certificate-lifetimes">Certificate lifetimes</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#lets-encrypt">Let’s Encrypt</a>
+    <ul class="section-nav">
+  <li class="toc-entry toc-h3">
+    <a href="#certificate-transparency">Certificate Transparency</a>
+    
+  </li>
+</ul>
+  </li><li class="toc-entry toc-h2">
+    <a href="#where-tls-ends">Where TLS ends</a>
+    
+  </li><li class="toc-entry toc-h2">
+    <a href="#references">References</a>
+    
+  </li>
+</ul>
+      </nav>
+      <div class="shrink-0 my-4 pl-4 flex items-center gap-4">
+        <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-513-tls-subject.pdf" class="tooltip" data-tip="Subject PDF" download>
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>
+        </a>
+        <a href="https://github.com/ArchiDep/archidep.github.io/releases/download/pdf/2026/archidep-513-tls-slides.pdf" class="tooltip" data-tip="Slides PDF" download>
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 opacity-50 hover:opacity-100" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+</svg>
+        </a>
+        <a href="https://github.com/ArchiDep/website/blob/62313a5b1de204e981c7e717c48a268f6f60099f/course/chapters/513-tls/subject.md" class="tooltip" data-tip="Source code" target="_blank" rel="noopener noreferrer">
+          <svg class="size-6 opacity-50 hover:opacity-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+        </a>
+      </div>
+
+      <div class="shrink-0 max-h-[calc(100dvh-var(--aside-top,0px)-15.5rem)] overflow-y-auto overscroll-contain">
+        
+
+        <a href="#top" id="back-to-top-side" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/>
+</svg> Back to top
+        </a>
+      </div>
+    </div>
+  </aside>
+</div>
+        </div>
+      </div>
+      <div class="drawer-side z-20">
+        <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="w-80 max-w-full bg-base-200 text-base-content min-h-full pb-16">
+  <div class="lg:hidden w-full flex justify-between items-center pl-6 pr-2 pt-4">
+    <a href="/" class="text-xl font-bold inline">
+      <div class="flex items-center gap-x-2">
+        <img src="/favicons/archidep-rocket-1x.png" srcset="/favicons/archidep-rocket-1x.png 1x, /favicons/archidep-rocket-2x.png 2x, /favicons/archidep-rocket-3x.png 3x" width="41" height="28" alt="ArchiDep logo" class="w-[41px] [image-rendering:pixelated]">
+        <span class="font-title">ArchiDep</span>
+      </div>
+    </a>
+    <label for="sidebar" class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+    </label>
+  </div>
+  
+  <ul id="course-material-menu" class="w-full menu px-4 pt-0 pb-4">
+    
+      <li class="peer/section-0 group/section-0 course-section-done">
+        <label for="section-introduction-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Introduction</span>
+          <span class="group-has-checked/section-0:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-0:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-introduction-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/101-command-line/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/102-hello-shell/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Shell</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/103-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Secure Shell (SSH)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-0:flex course-item-done">
+        <a href="/2026/course/104-hello-ssh/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello SSH</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-1 group/section-1 course-section-done">
+        <label for="section-version-control-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Version Control</span>
+          <span class="group-has-checked/section-1:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-1:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-version-control-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/201-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Version Control with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/202-hello-git/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/203-git-collaborating/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Collaborating with Git</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/204-hello-github/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Hello GitHub</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-1:flex course-item-done">
+        <a href="/2026/course/205-guessit/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Guess It</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-2 group/section-2 course-section-done">
+        <label for="section-security-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Security</span>
+          <span class="group-has-checked/section-2:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-2:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-security-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/301-security/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Security</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-2:flex course-item-done">
+        <a href="/2026/course/302-image-gallery/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>The Image Gallery</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-3 group/section-3 course-section-done">
+        <label for="section-basic-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Basic Deployment</span>
+          <span class="group-has-checked/section-3:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-3:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-basic-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/401-cloud-computing/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Cloud Computing</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/402-unix-basics/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Basics</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/403-permissions/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix Permissions</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/404-run-virtual-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Run your own virtual server on Microsoft Azure</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/405-meet-your-server/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Meet your server</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/406-unix-networking/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Networking</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/407-tcp/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Make TCP connections</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/408-unix-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Processes</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/409-unix-plumbing/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Unix plumbing</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/410-sftp-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a web application with SFTP</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/411-how-a-computer-works/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How a computer works</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/412-watch-your-processes/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Watch your processes</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-3:flex course-item-done">
+        <a href="/2026/course/413-how-to-improve/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>How to improve our basic deployment</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-4 group/section-4 course-section-done">
+        <label for="section-advanced-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Advanced Deployment</span>
+          
+          
+          <input type="checkbox" id="section-advanced-deployment-toggle" class="hidden" checked disabled>
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/501-git-clone-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a web application with Git</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/502-twelve-factor/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>The Twelve-Factor App</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/503-environment-variables/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Unix Environment Variables</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/504-config-through-environment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Configure a web application through environment variables</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/505-linux-process-management/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Process Management on Linux</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/506-systemd-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Manage a web application with systemd as a Process Manager</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/507-dns/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Domain Name System (DNS)</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-due">
+        <a href="/2026/course/508-dns-config/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Domain name configuration</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-done">
+        <a href="/2026/course/509-reverse-proxy/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Reverse Proxying</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-due">
+        <a href="/2026/course/510-nginx-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a static site with nginx</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-due">
+        <a href="/2026/course/511-nginx-reverse-proxy-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a web application with nginx as a reverse proxy</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-due">
+        <a href="/2026/course/512-brewscale-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Horizontally scale a web application with nginx as a load balancer</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next course-item-current">
+        <a href="/2026/course/513-tls/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>TLS/SSL Certificates</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
+        <a href="/2026/course/514-certbot-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Provision a TLS certificate with Certbot and Let&#39;s Encrypt</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-4:flex course-item-next">
+        <a href="/2026/course/515-revprod-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a multi-component web application with nginx</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-5 group/section-5 course-section-future">
+        <label for="section-automated-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Automated Deployment</span>
+          <span class="group-has-checked/section-5:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-5:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-automated-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/601-git-hooks/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Git Hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/602-git-automated-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Set up an automated deployment with Git hooks</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-5:flex course-item-future">
+        <a href="/2026/course/603-graded-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f3c6-0a00e865c445d42dfb9f64bedfab8cf8.svg" alt="Graded exercise" width="20" height="20" /></span>
+  <span>Graded deployment exercise</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-6 group/section-6 course-section-future">
+        <label for="section-managed-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Managed Deployment</span>
+          <span class="group-has-checked/section-6:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-6:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-managed-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/701-paas/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Platform-as-a-Service (PaaS)</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/702-github-pages-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to GitHub Pages</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/703-netlify-static-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy static sites to Netlify</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-6:flex course-item-future">
+        <a href="/2026/course/704-render-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy web applications with a database to Render</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+      <li class="peer/section-7 group/section-7 course-section-future">
+        <label for="section-docker-deployment-toggle" class="flex justify-between items-center">
+          <span class="text-base-content/50 cursor-default">Docker Deployment</span>
+          <span class="group-has-checked/section-7:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+</svg>
+          </span>
+          <span class="hidden group-has-checked/section-7:inline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-base-content/50" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+          </span>
+          <input type="checkbox" id="section-docker-deployment-toggle" class="hidden">
+        </label>
+      </li>
+      <li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/801-docker/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/802-docker-fibscale/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Containerize a web application using Docker</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/803-docker-isolation/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Isolation</span>
+</span>
+          
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/804-docker-compose/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4d6-794df59352a0aab153763ae7c1a4b67c.svg" alt="Subject" width="20" height="20" /></span>
+  <span>Docker Compose</span>
+</span>
+          <span><img class="emoji size-4" src="/2026/assets/emoji/1f3ac-78279ce9b1bc7be03b83aec31c42b4ee.svg" alt="Slides" width="20" height="20" /></span>
+          
+        </a>
+      </li><li class="group hidden peer-has-checked/section-7:flex course-item-future">
+        <a href="/2026/course/805-docker-compose-deployment/" target="_self" class="flex items-center gap-2">
+          <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f6e0-28a6206f93399999d1a908d5c45232ad.svg" alt="Exercise" width="20" height="20" /></span>
+  <span>Deploy a PHP application with Docker Compose</span>
+</span>
+          
+          
+        </a>
+      </li>
+    
+    <li>
+      <span class="text-base-content/50 cursor-default">Cheatsheets</span>
+    </li>
+    <li class="">
+      <a href="/2026/cheatsheets/command-line/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Command Line</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/shell-scripting/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Shell Scripting</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/git/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Git</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/sysadmin/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>System Administration</span>
+</span>
+      </a>
+    </li><li class="">
+      <a href="/2026/cheatsheets/docker/" class="flex items-center gap-2">
+        <span class="flex items-center gap-x-2">
+  <span class="size-4"><img class="emoji size-4" src="/2026/assets/emoji/1f4dd-e1ec53c5d89c0291001989a36716aa9a.svg" alt="Cheatsheet" width="20" height="20" /></span>
+  <span>Docker</span>
+</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer class="p-4 absolute bottom-0 left-0 right-0 border-t border-black/10 dark:border-white/10">
+  <div class="flex justify-between items-center gap-2">
+    <p class="flex items-center gap-2">
+      <a href="https://heig-vd.ch/" target="_blank" rel="noopener noreferrer">
+        <img src="/favicons/heig.png" alt="HEIG-VD logo" class="!m-0 w-8">
+      </a>
+      
+      <a href="https://github.com/ArchiDep/website" target="_blank" rel="noopener noreferrer">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <title>GitHub</title>
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+</svg>
+      </a>
+    </p>
+    <p class="flex items-center gap-x-1 text-xs">
+      <a href="/" class="hover:text-accent flex items-center gap-1.5">
+        <picture class="-mt-1">
+          <source media="(prefers-reduced-motion: reduce)" type="image/png" srcset="/favicons/archidep-coffee-1x.png 1x, /favicons/archidep-coffee-2x.png 2x, /favicons/archidep-coffee-3x.png 3x">
+          <img src="/favicons/archidep-coffee-1x.png" srcset="/favicons/archidep-coffee-1x.webp 1x, /favicons/archidep-coffee-2x.webp 2x, /favicons/archidep-coffee-3x.webp 3x" width="27" height="31" alt="ArchiDep logo" class="w-[27px] [image-rendering:pixelated]">
+        </picture>
+        <span class="font-title">ArchiDep</span>
+      </a>
+      <span class="tooltip tooltip-left">
+        <span class="tooltip-content">main@62313a5</span>
+        <span class="font-title">0.1.0</span>
+      </span>
+      
+    </p>
+  </div>
+</footer>
+</div>
+      </div>
+    </div>
+  </body>
+</html>
